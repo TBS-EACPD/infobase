@@ -11,7 +11,10 @@ import {
   LeafSpinner,
 } from "src/components/index";
 
-import { useOrgPeopleSummary, useGovPeopleSummary } from "src/models/people/queries";
+import {
+  useOrgPeopleSummary,
+  useGovPeopleSummary,
+} from "src/models/people/queries";
 import { run_template } from "src/models/text";
 import { year_templates } from "src/models/years";
 
@@ -40,9 +43,9 @@ const EmployeeProvPanel = ({
   const { data: orgData, loading: orgLoading } = useOrgPeopleSummary({
     org_id: subject.id,
   });
-  
+
   const { data: govData, loading: govLoading } = useGovPeopleSummary({});
-  
+
   // Select the appropriate data based on subject_type
   const data = subject_type === "gov" ? govData : orgData;
   const loading = subject_type === "gov" ? govLoading : orgLoading;
@@ -56,15 +59,15 @@ const EmployeeProvPanel = ({
   }
 
   const formatted_data = data.region
-    .filter(region => region && region.yearly_data)
+    .filter((region) => region && region.yearly_data)
     .map((region) => ({
       label: region.dimension,
       data: region.yearly_data
-        .filter(entry => entry)
+        .filter((entry) => entry)
         .map((year) => year.value),
       five_year_percent: region.avg_share,
     }))
-    .filter(item => _.some(item.data, val => val !== null && val !== 0));
+    .filter((item) => _.some(item.data, (val) => val !== null && val !== 0));
 
   // Map of full province names to dimension codes
   const regionToProvinceCode = {
@@ -129,10 +132,7 @@ const EmployeeProvPanel = ({
   return (
     <StdPanel {...{ title, footnotes, sources, datasets }}>
       <Col size={12} isText>
-        <TM
-          k={subject_type + "_employee_prov_text"}
-          args={text_calculations}
-        />
+        <TM k={subject_type + "_employee_prov_text"} args={text_calculations} />
       </Col>
       {!is_a11y_mode && (
         <Col size={12} isGraph>

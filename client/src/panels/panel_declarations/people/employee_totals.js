@@ -7,7 +7,10 @@ import { declare_panel } from "src/panels/PanelRegistry";
 import { create_text_maker_component, LeafSpinner } from "src/components/index";
 
 import { businessConstants } from "src/models/businessConstants";
-import { useOrgPeopleSummary, useGovPeopleSummary } from "src/models/people/queries";
+import {
+  useOrgPeopleSummary,
+  useGovPeopleSummary,
+} from "src/models/people/queries";
 import { run_template } from "src/models/text";
 import { year_templates } from "src/models/years";
 
@@ -39,9 +42,9 @@ const EmployeeTotalsPanel = ({
   const { data: orgData, loading: orgLoading } = useOrgPeopleSummary({
     org_id: subject.id,
   });
-  
+
   const { data: govData, loading: govLoading } = useGovPeopleSummary({});
-  
+
   // Select the appropriate data based on subject_type
   const data = subject_type === "gov" ? govData : orgData;
   const loading = subject_type === "gov" ? govLoading : orgLoading;
@@ -51,7 +54,7 @@ const EmployeeTotalsPanel = ({
 
     // Sum all employee types for each year to get total employees
     const series = [];
-    
+
     // If we have type data, use it to calculate totals
     if (data.type && data.type.length > 0) {
       // Initialize array with zeros
@@ -59,9 +62,9 @@ const EmployeeTotalsPanel = ({
       for (let i = 0; i < yearCount; i++) {
         series[i] = 0;
       }
-      
+
       // Sum all employee types for each year
-      data.type.forEach(typeData => {
+      data.type.forEach((typeData) => {
         if (typeData.yearly_data) {
           typeData.yearly_data.forEach((yearData, index) => {
             if (yearData && yearData.value !== null) {
@@ -71,7 +74,7 @@ const EmployeeTotalsPanel = ({
         }
       });
     }
-    
+
     return {
       series,
       ticks: _.map(people_years_short_second, (y) => `${run_template(y)}`),
@@ -82,17 +85,18 @@ const EmployeeTotalsPanel = ({
     return <LeafSpinner config_name="subroute" />;
   }
 
-  if (!calculations || !calculations.series || calculations.series.length === 0) {
+  if (
+    !calculations ||
+    !calculations.series ||
+    calculations.series.length === 0
+  ) {
     return null;
   }
 
   const { series, ticks } = calculations;
 
   const first_active_year_index = _.findIndex(series, (pop) => pop !== 0);
-  const last_active_year_index = _.findLastIndex(
-    series,
-    (pop) => pop !== 0
-  );
+  const last_active_year_index = _.findLastIndex(series, (pop) => pop !== 0);
   const first_active_year = run_template(
     `${people_years[first_active_year_index]}`
   );
@@ -100,8 +104,7 @@ const EmployeeTotalsPanel = ({
     `${people_years[last_active_year_index]}`
   );
   const avg_num_emp =
-    _.sum(series) /
-    (last_active_year_index - first_active_year_index + 1);
+    _.sum(series) / (last_active_year_index - first_active_year_index + 1);
   const last_year_num_emp = series[last_active_year_index];
 
   const text_calculations = {
@@ -147,9 +150,7 @@ const EmployeeTotalsPanel = ({
                 boxShadow: "rgb(0 0 0 / 25%) 0px 1px 2px",
               }}
             >
-              <table
-                style={{ width: "100%", borderCollapse: "collapse" }}
-              >
+              <table style={{ width: "100%", borderCollapse: "collapse" }}>
                 <tbody>
                   {slice.points.map((tooltip_item) => (
                     <tr key={tooltip_item.serieId}>
