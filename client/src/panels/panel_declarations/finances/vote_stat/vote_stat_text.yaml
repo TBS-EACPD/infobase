@@ -32,7 +32,7 @@ program_vote_stat_split_text:
   en: |
     Organizations receive authority to spend from Parliament through {{gl_sidebar_link "statutory" "STAT"}} and {{gl_sidebar_link "voted" "VOTED"}} authorities. Of the **{{fmt_compact1_written total_exp}}** spent on this program in {{pa_last_year}}, **{{fmt_percentage1 stat_pct}} ({{fmt_compact1_written stat_exp}})** came from statutory authorities and  **{{fmt_percentage1 voted_pct}} ({{fmt_compact1_written voted_exp}})** came from voted authorities.
   fr: |
-    Le Parlement accorde des autorisations de dépenser aux ministères au moyen de d’autorisations {{gl_sidebar_link "législatives" "STAT"}} et {{gl_sidebar_link "votées" "VOTED"}}. Des **{{fmt_compact1_written total_exp}}** consacrés à ce programme en {{pa_last_year}}, **{{fmt_percentage1 stat_pct}} ({{fmt_compact1_written stat_exp}})** proviennent d’autorisations législatives et **{{fmt_percentage1 voted_pct}} ({{fmt_compact1_written voted_exp}})** d’autorisations votées.
+    Le Parlement accorde des autorisations de dépenser aux ministères au moyen de d'autorisations {{gl_sidebar_link "législatives" "STAT"}} et {{gl_sidebar_link "votées" "VOTED"}}. Des **{{fmt_compact1_written total_exp}}** consacrés à ce programme en {{pa_last_year}}, **{{fmt_percentage1 stat_pct}} ({{fmt_compact1_written stat_exp}})** proviennent d'autorisations législatives et **{{fmt_percentage1 voted_pct}} ({{fmt_compact1_written voted_exp}})** d'autorisations votées.
 
 
 vote_stat_split_title:
@@ -87,14 +87,14 @@ gov_in_year_estimates_split_text:
   transform: [handlebars,markdown]
   en: |
     This fiscal year ({{est_in_year}}), a total of **{{fmt_compact1_written tabled_est_in_year}}** in planned budgetary expenditures have been presented in the 
-    following {{gl_sidebar_link "estimates processes" "EST_PROC"}} and {{gl_sidebar_link "adjustments and transfers" "ADJUS"}}:
+    following {{gl_sidebar_link "Funding Sources" "EST_PROC"}} (Main Estimates, Supplementary Estimates A, B, C, and Special Warrants) and {{gl_sidebar_link "adjustments and transfers" "ADJUS"}}:
     {{#each in_year_estimates_split}}
     * {{ this.[0]}}: **{{fmt_compact1_written this.[1] }}** 
     {{/each}}
     
   fr: |
-    Pour l’exercice courant ({{est_in_year}}), le total de dépenses budgétaires prévues s’élève à 
-    **{{fmt_compact1_written tabled_est_in_year}}** dans le(s) {{gl_sidebar_link "processus budgétaire(s)" "EST_PROC"}} et {{gl_sidebar_link "redressements et virements" "ADJUS"}} suivants:
+    Pour l'exercice courant ({{est_in_year}}), le total de dépenses budgétaires prévues s'élève à 
+    **{{fmt_compact1_written tabled_est_in_year}}** dans le(s) {{gl_sidebar_link "sources de financement" "EST_PROC"}} (Budget principal des dépenses, Budget supplémentaire des dépenses A, B, C, et Mandats spéciaux) et {{gl_sidebar_link "redressements et virements" "ADJUS"}} suivants:
     {{#each in_year_estimates_split}}
     * {{ this.[0]}}: **{{fmt_compact1_written this.[1] }}** 
     {{/each}}
@@ -103,13 +103,13 @@ dept_in_year_estimates_split_text:
   transform: [handlebars,markdown]
   en: |
    As of the {{est_in_year}} {{gt "last_estimates"}}, **{{subject.name}}**'s planned budgetary expenditures of **{{fmt_compact1_written tabled_est_in_year}}** were presented in the following
-   {{gl_sidebar_link "Estimates processes" "EST_PROC"}} and {{gl_sidebar_link "adjustments and transfers" "ADJUS"}}: 
+   {{gl_sidebar_link "Funding Sources" "EST_PROC"}} and {{gl_sidebar_link "adjustments and transfers" "ADJUS"}}: 
    {{#each in_year_estimates_split}}
    * {{ this.[0]}}: **{{fmt_compact1 this.[1] }}** 
    {{/each}}
   fr: |
    En date du {{est_in_year}} {{gt "last_estimates"}}, pour **{{le_dept subject}}**, les dépenses budgétaires prévues de **{{fmt_compact1_written tabled_est_in_year}}** figurent 
-   dans le(s) {{gl_sidebar_link "processus budgétaire(s)" "EST_PROC"}}  et {{gl_sidebar_link "redressements et virements" "ADJUS"}} suivants: 
+   dans le(s) {{gl_sidebar_link "sources de financement" "EST_PROC"}}  et {{gl_sidebar_link "redressements et virements" "ADJUS"}} suivants: 
    {{#each in_year_estimates_split}}
    * {{ this.[0]}}: **{{fmt_compact1 this.[1] }}** 
    {{/each}}

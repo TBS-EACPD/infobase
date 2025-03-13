@@ -10,7 +10,7 @@ inventory_of_government_organizations_name:
     {{gt "igoc"}}
 inventory_of_government_organizations_desc:
   en: The Inventory of Federal Organizations and Interests provides a comprehensive listing of federal organizations and interests that can be grouped by various categories (e.g., by portfolio).
-  fr: Le Répertoire des organisations et intérêts fédéraux dresse la liste complète des organisations fédérales et des sociétés dans lesquelles le Canada détient des intérêts, que l’on peut regrouper en diverses catégories (p. ex. par portefeuille). 
+  fr: Le Répertoire des organisations et intérêts fédéraux dresse la liste complète des organisations fédérales et des sociétés dans lesquelles le Canada détient des intérêts, que l'on peut regrouper en diverses catégories (p. ex. par portefeuille). 
 
 public_accounts_name:
   en: Public Accounts of Canada
@@ -42,37 +42,40 @@ public_accounts_authoritative_link:
   fr: https://www.tpsgc-pwgsc.gc.ca/recgen/cpc-pac/apropos-about-fra.html
 
 estimates_name:
-  en: Main Estimates and Supplementary Estimates (A, B and C)
-  fr: Budget principal de dépenses et budgets supplémentaires de dépenses (A, B et C)
-estimates_desc: # TODO duplicated against glossary entry, consider plainer language rewrite
+  en: Main Estimates, Supplementary Estimates (A, B and C) and Special Warrants
+  fr: Budget principal de dépenses, budgets supplémentaires de dépenses (A, B et C) et mandats spéciaux
+estimates_desc:
   transform: [markdown]
   en: |
     The Main Estimates is a document that directly supports the appropriation act for the beginning of a fiscal year. It provides a listing of
     the resources required by individual departments and agencies for the upcoming fiscal year in order to deliver the programs for which they
     are responsible. It identifies the spending authorities (votes) and the amounts to be included in subsequent appropriation bills that
-    Parliament will be asked to approve to enable the government to proceed with its spending plans. It is traditionally known as the “Blue Book”.  
+    Parliament will be asked to approve to enable the government to proceed with its spending plans. It is traditionally known as the "Blue Book".  
 
     Supplementary Estimates are part of the normal parliamentary approval process to ensure that previously planned government initiatives
     receive the necessary funding to move them forward, therefore meeting the needs of Canadians. They present information to Parliament on
-    the Government of Canada’s spending requirements that were not sufficiently developed in time for inclusion in the Main Estimates, and
+    the Government of Canada's spending requirements that were not sufficiently developed in time for inclusion in the Main Estimates, and
     will from time to time include urgent but unforeseen expenditures, such as natural disasters (an ice storm, H1N1, etc.). Supplementary
     Estimates directly support an appropriation act.  
 
     Supplementary Estimates are published throughout the year; each release is identified alphabetically (A, B, C, etc.).
+    
+    Special Warrants are a mechanism used to authorize urgent expenditures when Parliament is not in session. They are issued by the Governor General, on the recommendation of the Cabinet, when there is no appropriation act to authorize the expenditure. Like Supplementary Estimates, Special Warrants provide additional spending authorities after the initial Main Estimates. They are temporary in nature and must be replaced by an appropriation act once Parliament reconvenes.
   fr: |
-    Le budget principal des dépenses est le document qui appuie directement la loi de crédits adoptée pour commencer un exercice. On y trouve une liste
-    des ressources dont les ministères et organismes auront besoin pour l’exécution des programmes dont ils sont responsables au cours du prochain exercice.
-    Il fait état des autorisations de dépenser (crédits) et des montants qui figureront dans les prochains projets de loi de crédits que le gouvernement
-    cherchera à faire approuver par le Parlement pour mettre en œuvre ses plans de dépenses. Ce document est traditionnellement appelé « Livre bleu ».  
+    Le Budget principal des dépenses est un document qui appuie directement la loi de crédits pour le début d'un exercice financier. Il présente une liste des
+    ressources requises par les ministères et organismes individuels pour l'exercice à venir afin de réaliser les programmes dont ils sont
+    responsables. Il identifie les autorisations de dépenser (crédits) et les montants à inclure dans les projets de loi de crédits subséquents que
+    le Parlement sera invité à approuver pour permettre au gouvernement de procéder à ses plans de dépenses. Il est traditionnellement connu sous le nom de "Livre bleu".
 
-    Les budgets supplémentaires des dépenses font partie du processus normal d'approbation parlementaire qui permet de veiller à ce que les initiatives
-    gouvernementales planifiées au préalable reçoivent le financement nécessaire pour aller de l'avant et répondre aux besoins des Canadiens. Ils présentent
-    au Parlement de l'information sur les besoins en matière de dépenses du gouvernement du Canada qui n'étaient pas suffisamment élaborés au moment du dépôt
-    du budget principal des dépenses, et de temps à autre, ils incluent des dépenses urgentes, mais imprévues comme les dépenses engagées en cas de catastrophes
-    naturelles (p. ex. une tempête de verglas et H1N1). Les budgets supplémentaires des dépenses appuient directement une loi de crédits.
+    Les Budgets supplémentaires des dépenses font partie du processus normal d'approbation parlementaire pour s'assurer que les initiatives gouvernementales
+    précédemment planifiées reçoivent le financement nécessaire pour les faire avancer, répondant ainsi aux besoins des Canadiens. Ils présentent au Parlement des informations sur
+    les besoins de dépenses du gouvernement du Canada qui n'étaient pas suffisamment développés à temps pour être inclus dans le Budget principal des dépenses, et
+    comprendront de temps à autre des dépenses urgentes mais imprévues, comme des catastrophes naturelles (une tempête de verglas, H1N1, etc.). Les Budgets supplémentaires
+    des dépenses appuient directement une loi de crédits.
 
-    Les budgets supplémentaires des dépenses sont publiés à différents moments au cours de l'exercice. Ces publications sont désignées en ordre alphabétique
-    croissant (A, B, C, etc.).
+    Les Budgets supplémentaires des dépenses sont publiés tout au long de l'année; chaque publication est identifiée alphabétiquement (A, B, C, etc.).
+    
+    Les mandats spéciaux sont un mécanisme utilisé pour autoriser des dépenses urgentes lorsque le Parlement n'est pas en session. Ils sont émis par le gouverneur général, sur recommandation du Cabinet, lorsqu'il n'y a pas de loi de crédits pour autoriser la dépense. Comme les budgets supplémentaires des dépenses, les mandats spéciaux fournissent des autorisations de dépenser supplémentaires après le Budget principal des dépenses initial. Les mandats spéciaux sont de nature temporaire et doivent être remplacés par une loi de crédits une fois que le Parlement se réunit à nouveau.
 estimates_authoritative_link:
   en: https://www.canada.ca/en/treasury-board-secretariat/services/planned-government-spending/government-expenditure-plan-main-estimates.html
   fr: https://www.canada.ca/fr/secretariat-conseil-tresor/services/depenses-prevues/plan-depenses-budget-principal.html
@@ -102,12 +105,12 @@ departmental_plans_desc: # TODO duplicated against glossary entry, consider plai
     (Departmental Expenditure Plans) of the Estimates process, along with the Departmental Results Reports.
   fr: |
     Les plans ministériels (PM) – anciennement appelés « rapports sur les plans et les priorités (RPP) » – sont des documents prospectifs sur ce que compte
-    faire les ministères et organismes (sauf les sociétés d’État). On y décrit les priorités ministérielles, les résultats escomptés et les besoins connexes
-    en ressources pour trois exercices financiers. Les renseignements concernant le premier exercice complètent l’information figurant au budget principa
+    faire les ministères et organismes (sauf les sociétés d'État). On y décrit les priorités ministérielles, les résultats escomptés et les besoins connexes
+    en ressources pour trois exercices financiers. Les renseignements concernant le premier exercice complètent l'information figurant au budget principa
     des dépenses.  
 
     Les PM sont déposés au Parlement par le président du Conseil du Trésor pour le compte des ministres responsables des ministères et organismes dépendant
-    des crédits votés qui sont désignés aux annexes I, I.1 et II de la _Loi sur la gestion des finances publiques_, au plus tard le 31 mars. À l’instar des
+    des crédits votés qui sont désignés aux annexes I, I.1 et II de la _Loi sur la gestion des finances publiques_, au plus tard le 31 mars. À l'instar des
     rapports ministériels sur le rendement, ils sont une composante de la partie III (Plans de dépenses des ministères) des budgets des dépenses.
 departmental_plans_authoritative_link:
   en: https://www.canada.ca/en/treasury-board-secretariat/services/planned-government-spending/reports-plans-priorities.html
@@ -130,8 +133,8 @@ departmental_results_reports_desc: # TODO duplicated against glossary entry, con
     compte des réalisations des ministères et organismes par rapport aux plans, priorités et résultats escomptés établis dans leur plan ministériel (PM).
     Les PM et les RRM forment la partie III (Plans de dépenses des ministères) des budgets des dépenses.  
 
-    Dans le RRM, les ministères et organismes donnent de l’information sur les progrès accomplis vers l’atteinte de leurs objectifs stratégiques.
-    Les RRM couvrent l’exercice précédent et sont habituellement déposés à l’automne.
+    Dans le RRM, les ministères et organismes donnent de l'information sur les progrès accomplis vers l'atteinte de leurs objectifs stratégiques.
+    Les RRM couvrent l'exercice précédent et sont habituellement déposés à l'automne.
 departmental_results_reports_authoritative_link:
   en: https://www.canada.ca/en/treasury-board-secretariat/services/departmental-performance-reports.html
   fr: https://www.canada.ca/fr/secretariat-conseil-tresor/services/rapports-ministeriels-rendement.html
@@ -171,12 +174,12 @@ covid_desc:
 
     Les autorisations de dépenser au titre de la COVID-19 sont inscrites dans les budgets des dépenses selon les mesures annoncées dans le
     {{ext_link "Plan d'intervention économique du Canada pour répondre à la COVID-19" "https://www.canada.ca/fr/ministere-finances/plan-intervention-economique.html"}},
-    tel qu’indiqué aux chapitres 1 et 2 de l'{{ext_link "Énoncé économique de l'automne 2020" "https://www.budget.gc.ca/fes-eea/2020/report-rapport/toc-tdm-fr.html"}}.  
+    tel qu'indiqué aux chapitres 1 et 2 de l'{{ext_link "Énoncé économique de l'automne 2020" "https://www.budget.gc.ca/fes-eea/2020/report-rapport/toc-tdm-fr.html"}}.  
 
     Depuis mars 2020, les ministères, les organismes et les sociétés d'État du gouvernement fédéral estiment et déclarent les dépenses en réponse à la COVID-19.  
 
     L'estimation des dépenses correspond aux paiements en espèces effectués aux fournisseurs de biens et de services, ou aux bénéficiaires de subventions et de
-    contributions. Les données déclarées n'ont pas été vérifiées. Un rapprochement des dépenses estimées sera effectué à la fin de l’exercice pour qu'elles
+    contributions. Les données déclarées n'ont pas été vérifiées. Un rapprochement des dépenses estimées sera effectué à la fin de l'exercice pour qu'elles
     concordent avec le calcul définitif des dépenses finales déclarée dans les Comptes publics du Canada 2021, qui seront probablement déposés au Parlement à
     l'automne 2021.
 covid_open_data_link:
@@ -189,7 +192,7 @@ service_inventory_name:
   fr: Répertoire de services
 service_inventory_desc:
   en: Provision of a specific final output that addresses one or more needs of an intended recipient and contributes to the achievement of an outcome.
-  fr: Extrant final précis qui comble un ou plusieurs besoins d’un bénéficiaire visé et qui contribue à l’obtention d’un résultat.
+  fr: Extrant final précis qui comble un ou plusieurs besoins d'un bénéficiaire visé et qui contribue à l'obtention d'un résultat.
 service_inventory_open_data_link:
   en: https://open.canada.ca/data/en/dataset/3ac0d080-6149-499a-8b06-7ce5f00ec56c
   fr: https://ouvert.canada.ca/data/fr/dataset/3ac0d080-6149-499a-8b06-7ce5f00ec56c

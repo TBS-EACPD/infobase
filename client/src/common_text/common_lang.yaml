@@ -201,13 +201,13 @@ legal_title:
   fr: Titre légal
 applied_title:
   en: Applied Title
-  fr: Titre d’usage
+  fr: Titre d'usage
 acronym:
   en: Acronym
   fr: Acronyme
 previous_applied_title:
   en: Previous Applied Title
-  fr: Titre d’usage précédent
+  fr: Titre d'usage précédent
 approp_by_auth:
   en: Appropriation by Authority
   fr: Crédit par autorisation
@@ -253,10 +253,10 @@ employed_up_to:
 data_table_instructions:
   en: |
     Any number in the table below can be selected to produce a government-wide table for the selected element.
-    Alternatively, <a class='horizontal_compare'>click here</a> for a comparison of this organization’s totals with all others.
+    Alternatively, <a class='horizontal_compare'>click here</a> for a comparison of this organization's totals with all others.
   fr: |
     Sélectionnez les éléments de votre choix dans le tableau ci-dessous pour produire un tableau de ceux-ci pour
-    l’ensemble du gouvernement. Vous pouvez également <a class='horizontal_compare'>consulter</a> la comparaison des totaux de cet organisme avec ceux de
+    l'ensemble du gouvernement. Vous pouvez également <a class='horizontal_compare'>consulter</a> la comparaison des totaux de cet organisme avec ceux de
     tous les autres organismes.
 select_period:
   en: Select the period to display below
@@ -448,7 +448,7 @@ pie_filtered_groups_note:
 
 see_the_infographic:
   en: See the Infographic
-  fr: Voir l’infographie
+  fr: Voir l'infographie
 available:
   en: Available
   fr: Disponible
@@ -572,7 +572,7 @@ fte_written:
 
 horizontal_footnotes:
   en: Footnotes (denoted by * in front of organization name)
-  fr: Notes de bas de page (indiquées par un * devant le nom de l’organisation)
+  fr: Notes de bas de page (indiquées par un * devant le nom de l'organisation)
 footnotes:
   en: Footnote(s)
   fr: Note(s) de bas de page
@@ -682,7 +682,7 @@ vstype6:
   fr: Crédit central du CT
 vstype7:
   en: Budget Implementation Vote
-  fr: Crédit d’exécution du budget
+  fr: Crédit d'exécution du budget
 vstype9:
   en: Other
   fr: Autre
@@ -709,12 +709,12 @@ voted_stat:
   fr: Crédit / poste législatif
 
 estimates_doc:
-  en: Estimates Mechanism
-  fr: Instrument des dépenses
+  en: Funding Source
+  fr: Source de financement
 
 by_estimates_doc:
-  en: By Estimates Mechanism
-  fr: Par instrument des dépenses
+  en: By Funding Source
+  fr: Par source de financement
 stat_items:
   en: Statutory Items
   fr: Postes législatifs
@@ -788,7 +788,7 @@ all_fps:
   fr: Tous les fonctionnaires fédéraux
 other_port_cpa:
   en: Other Portions of the Core Public Administration
-  fr: Autres secteurs de l’administration publique centrale
+  fr: Autres secteurs de l'administration publique centrale
 separate_agencies:
   en: Separate Agencies
   fr: Organismes distincts
@@ -877,21 +877,21 @@ MtoM_tag_warning_reporting_level_q:
   fr: Le rapport est fait uniquement au niveau du Programme et non par étiquettes
 MtoM_tag_warning_reporting_level_a:
   en: Tags provide an easy way to search information and get a sense of how government resources are being allocated across key areas. However, it is important to keep in mind that funding associated with tags presented in GC InfoBase represents the maximum amount that may have or will be spent on that particular tag, and that there is a risk of double counting if you try to combine tags.  This is because federal organizations only report how much they have spent, or plan to spend, on a particular Program not on a particular tag.
-  fr: Les étiquettes constituent un moyen facile de rechercher des renseignements et d’avoir une idée de la façon dont les ressources gouvernementales sont attribuées dans des secteurs clés. Cependant, il est important de garder à l’esprit que le financement associé aux étiquettes présentées dans GC InfoBase est un montant maximal qui a peut‑être été dépensé ou qui le sera. Il existe un risque de double comptage si vous tentez de combiner des étiquettes, car les organismes fédéraux déclarent seulement le montant qu’ils ont dépensé ou prévoient dépenser pour un programme donné et non pour une étiquette donnée.
+  fr: Les étiquettes constituent un moyen facile de rechercher des renseignements et d'avoir une idée de la façon dont les ressources gouvernementales sont attribuées dans des secteurs clés. Cependant, il est important de garder à l'esprit que le financement associé aux étiquettes présentées dans GC InfoBase est un montant maximal qui a peut‑être été dépensé ou qui le sera. Il existe un risque de double comptage si vous tentez de combiner des étiquettes, car les organismes fédéraux déclarent seulement le montant qu'ils ont dépensé ou prévoient dépenser pour un programme donné et non pour une étiquette donnée.
 
 MtoM_tag_warning_resource_splitting_q:
-  en: Splitting program resources by its tags isn’t possible
-  fr: Fractionner les ressources d’un programme par ses étiquettes n’est pas possible
+  en: Splitting program resources by its tags isn't possible
+  fr: Fractionner les ressources d'un programme par ses étiquettes n'est pas possible
 MtoM_tag_warning_resource_splitting_a:
   en: Government programs are designed to be efficient and multi-purposed. They can help more than one population group, economic segment, or organization and can be delivered through different mechanisms (e.g. regulations, transfer payments, etc.) to achieve a desired outcome. This design makes it nearly impossible to know the exact split of resources used to help one particular group (in this case "tag").  So, if a program is delivered via services and regulations, it will not be possible to split the proportion of funds assigned to only one of the two tags. The full amount of funding spent on that Program would be reported under both tags.
-  fr: Les programmes gouvernementaux sont conçus pour être efficients et polyvalents. Ils peuvent aider plus d’un groupe de population, plus d’un segment économique ou plus d’une organisation, et peuvent être exécutés par des mécanismes différents (par exemple, un règlement ou un paiement de transfert) pour obtenir un résultat souhaité. Avec ce modèle, il est presque impossible de connaître le fractionnement exact des ressources utilisées pour aider un groupe en particulier (c'est-à-dire « l'étiquette »). Donc, si un programme est mis en oeuvre au moyen de services et de règlements, il ne sera pas possible de fractionner la partie des fonds attribués à chacune des étiquettes. La somme totale des fonds dépensé pour ce programme serait déclarée sous les deux étiquettes.
+  fr: Les programmes gouvernementaux sont conçus pour être efficients et polyvalents. Ils peuvent aider plus d'un groupe de population, plus d'un segment économique ou plus d'une organisation, et peuvent être exécutés par des mécanismes différents (par exemple, un règlement ou un paiement de transfert) pour obtenir un résultat souhaité. Avec ce modèle, il est presque impossible de connaître le fractionnement exact des ressources utilisées pour aider un groupe en particulier (c'est-à-dire « l'étiquette »). Donc, si un programme est mis en oeuvre au moyen de services et de règlements, il ne sera pas possible de fractionner la partie des fonds attribués à chacune des étiquettes. La somme totale des fonds dépensé pour ce programme serait déclarée sous les deux étiquettes.
 
 MtoM_tag_warning_double_counting_q:
   en: Double counting will occur
   fr: La double comptabilisation se produira
 MtoM_tag_warning_double_counting_a:
   en: Where the risk of double counting exists, GC InfoBase will clearly list all relevant tags assigned to a program. More specifically, when you explore a particular program you will find under the description a section named "programs under this tag are also associated with the following tags" which will list all the tags this specific program is also linked to.
-  fr: S’il y a risque de double comptabilisation, InfoBase du GC dressera clairement la liste des étiquettes attribuées au programme. Plus précisément, lorsque vous explorez un programme, vous trouverez la description dans la section intitulée « Les programmes sous cette étiquette figurent également sous les étiquettes suivantes » où sont énumérées toutes les étiquettes auxquelles le programme est également associé.
+  fr: S'il y a risque de double comptabilisation, InfoBase du GC dressera clairement la liste des étiquettes attribuées au programme. Plus précisément, lorsque vous explorez un programme, vous trouverez la description dans la section intitulée « Les programmes sous cette étiquette figurent également sous les étiquettes suivantes » où sont énumérées toutes les étiquettes auxquelles le programme est également associé.
 
 MtoM_tag_warning:
   transform: [handlebars]
@@ -907,7 +907,7 @@ MtoM_tag_warning:
       </div>
       <div>
         <div class="key_concept_term">
-          Splitting program resources by its tags isn’t possible
+          Splitting program resources by its tags isn't possible
         </div>
         <div class="key_concept_def"> 
           Government programs are designed to be efficient and multi-purposed. They can help more than one population group, economic segment, or organization and can be delivered through different mechanisms (e.g. regulations, transfer payments, etc.) to achieve a desired outcome. This design makes it nearly impossible to know the exact split of resources used to help one particular group (in this case "tag").  So, if a program is delivered via services and loans, it will not be possible to split the proportion of funds assigned to only one of the two tags. The full amount of funding spent on that Program would be reported under both tags.
@@ -929,15 +929,15 @@ MtoM_tag_warning:
            Le rapport est fait uniquement au niveau du Programme et non par étiquettes
         </div>
         <div class="key_concept_def"> 
-           Les étiquettes constituent un moyen facile de rechercher des renseignements et d’avoir une idée de la façon dont les ressources gouvernementales sont attribuées dans des secteurs clés. Cependant, il est important de garder à l’esprit que le financement associé aux étiquettes présentées dans InfoBase du GC est un montant maximal qui a peut‑être été dépensé ou qui le sera. Il existe un risque de double comptage si vous tentez de combiner des étiquettes, car les organismes fédéraux déclarent seulement le montant qu’ils ont dépensé ou prévoient dépenser pour un programme donné et non pour une étiquette donnée.  
+           Les étiquettes constituent un moyen facile de rechercher des renseignements et d'avoir une idée de la façon dont les ressources gouvernementales sont attribuées dans des secteurs clés. Cependant, il est important de garder à l'esprit que le financement associé aux étiquettes présentées dans InfoBase du GC est un montant maximal qui a peut‑être été dépensé ou qui le sera. Il existe un risque de double comptage si vous tentez de combiner des étiquettes, car les organismes fédéraux déclarent seulement le montant qu'ils ont dépensé ou prévoient dépenser pour un programme donné et non pour une étiquette donnée.  
         </div>
       </div>
       <div>
         <div class="key_concept_term">
-           Fractionner les ressources d’un programme par ses étiquettes n’est pas possible
+           Fractionner les ressources d'un programme par ses étiquettes n'est pas possible
         </div>
         <div class="key_concept_def"> 
-            Les programmes gouvernementaux sont conçus pour être efficients et polyvalents. Ils peuvent aider plus d’un groupe de population, plus d’un segment économique ou plus d’une organisation, et peuvent être exécutés par des mécanismes différents (par exemple, un règlement ou un paiement de transfert) pour obtenir un résultat souhaité. Avec ce modèle, il est presque impossible de connaître le fractionnement exact des ressources utilisées pour aider un groupe en particulier (c'est-à-dire « l'étiquette »). Donc, si un programme est mis en oeuvre au moyen de services et de prêts, il ne sera pas possible de fractionner la partie des fonds attribués à chacune des étiquettes. La somme totale des fonds dépensé pour ce programme serait déclarée sous les deux étiquettes.   
+            Les programmes gouvernementaux sont conçus pour être efficients et polyvalents. Ils peuvent aider plus d'un groupe de population, plus d'un segment économique ou plus d'une organisation, et peuvent être exécutés par des mécanismes différents (par exemple, un règlement ou un paiement de transfert) pour obtenir un résultat souhaité. Avec ce modèle, il est presque impossible de connaître le fractionnement exact des ressources utilisées pour aider un groupe en particulier (c'est-à-dire « l'étiquette »). Donc, si un programme est mis en oeuvre au moyen de services et de prêts, il ne sera pas possible de fractionner la partie des fonds attribués à chacune des étiquettes. La somme totale des fonds dépensé pour ce programme serait déclarée sous les deux étiquettes.   
         </div>
       </div>
       <div>
@@ -945,7 +945,7 @@ MtoM_tag_warning:
           La double comptabilisation se produira
         </div>
         <div class="key_concept_def"> 
-            S’il y a risque de double comptabilisation, InfoBase du GC dressera clairement la liste des étiquettes attribuées au programme. Plus précisément, lorsque vous explorez un programme, vous trouverez la description dans la section intitulée « Les programmes sous cette étiquette figurent également sous les étiquettes suivantes » où sont énumérées toutes les étiquettes auxquelles le programme est également associé.
+            S'il y a risque de double comptabilisation, InfoBase du GC dressera clairement la liste des étiquettes attribuées au programme. Plus précisément, lorsque vous explorez un programme, vous trouverez la description dans la section intitulée « Les programmes sous cette étiquette figurent également sous les étiquettes suivantes » où sont énumérées toutes les étiquettes auxquelles le programme est également associé.
         </div>
       </div>
     </div>
