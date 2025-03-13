@@ -5,11 +5,10 @@ import { declare_panel } from "src/panels/PanelRegistry";
 
 import { create_text_maker_component, LeafSpinner } from "src/components/index";
 
-import { 
+import {
   useOrgPeopleSummary,
-  useGovPeopleSummary 
+  useGovPeopleSummary,
 } from "src/models/people/queries";
-import { year_templates } from "src/models/years";
 
 import { is_a11y_mode } from "src/core/injected_build_constants";
 
@@ -18,7 +17,6 @@ import { CircleProportionGraph } from "src/charts/wrapped_nivo/index";
 import text2 from "src/common_text/common_lang.yaml";
 
 import text1 from "./employee_last_year_totals.yaml";
-const { people_years } = year_templates;
 
 const { text_maker, TM } = create_text_maker_component([text1, text2]);
 
@@ -32,7 +30,7 @@ const EmployeeLastYearTotalsPanel = ({
   const { data: orgData, loading: orgLoading } = useOrgPeopleSummary({
     org_id: subject.id,
   });
-  
+
   const { data: govData, loading: govLoading } = useGovPeopleSummary({});
 
   const calculations = useMemo(() => {
@@ -40,13 +38,14 @@ const EmployeeLastYearTotalsPanel = ({
 
     // Calculate department's last year employee count
     let dept_last_year_emp = 0;
-    
+
     // Get the last year's data for each employee type and sum them
     orgData.type
-      .filter(typeData => typeData && typeData.yearly_data)
-      .forEach(typeData => {
+      .filter((typeData) => typeData && typeData.yearly_data)
+      .forEach((typeData) => {
         if (typeData.yearly_data && typeData.yearly_data.length > 0) {
-          const lastYearData = typeData.yearly_data[typeData.yearly_data.length - 1];
+          const lastYearData =
+            typeData.yearly_data[typeData.yearly_data.length - 1];
           if (lastYearData && lastYearData.value !== null) {
             dept_last_year_emp += lastYearData.value;
           }
@@ -55,13 +54,14 @@ const EmployeeLastYearTotalsPanel = ({
 
     // Calculate government's last year employee count
     let gov_last_year_emp = 0;
-    
+
     // Get the last year's data for each employee type and sum them
     govData.type
-      .filter(typeData => typeData && typeData.yearly_data)
-      .forEach(typeData => {
+      .filter((typeData) => typeData && typeData.yearly_data)
+      .forEach((typeData) => {
         if (typeData.yearly_data && typeData.yearly_data.length > 0) {
-          const lastYearData = typeData.yearly_data[typeData.yearly_data.length - 1];
+          const lastYearData =
+            typeData.yearly_data[typeData.yearly_data.length - 1];
           if (lastYearData && lastYearData.value !== null) {
             gov_last_year_emp += lastYearData.value;
           }
@@ -87,7 +87,11 @@ const EmployeeLastYearTotalsPanel = ({
     return <LeafSpinner config_name="subroute" />;
   }
 
-  if (!calculations || calculations.vals[0].value === 0 || calculations.vals[1].value === 0) {
+  if (
+    !calculations ||
+    calculations.vals[0].value === 0 ||
+    calculations.vals[1].value === 0
+  ) {
     return null;
   }
 
@@ -99,15 +103,9 @@ const EmployeeLastYearTotalsPanel = ({
   const text_calculations = { dept_emp_value, dept_emp_pct, subject };
 
   return (
-    <StdPanel
-      {...{ title, footnotes, sources, datasets }}
-      allowOverflow={true}
-    >
+    <StdPanel {...{ title, footnotes, sources, datasets }} allowOverflow={true}>
       <Col size={!is_a11y_mode ? 5 : 12} isText>
-        <TM
-          k="dept_employee_last_year_totals_text"
-          args={text_calculations}
-        />
+        <TM k="dept_employee_last_year_totals_text" args={text_calculations} />
       </Col>
       {!is_a11y_mode && (
         <Col size={7} isGraph>
