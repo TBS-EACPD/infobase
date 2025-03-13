@@ -171,3 +171,7 @@ AVG_SOBJ10:
 ACTUAL_SOBJ10:
   en: Variance explanation - actual transfer payments
   fr: Explication de l'écart - paiements de transfert réelles
+
+SPECIAL_WARRANTS:
+  en: Special Warrants
+  fr: Mandats spéciaux
