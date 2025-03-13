@@ -3,3 +3,5 @@ export {
   suspendedOrgPeopleSummary,
   useOrgPeopleSummary,
 } from "./OrgPeopleSummary/OrgPeopleSummary";
+
+export { useGovPeopleSummary } from "./GovPeopleSummary/GovPeopleSummary";
