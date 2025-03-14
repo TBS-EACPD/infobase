@@ -77,6 +77,19 @@ const get_years_from_service_standards = (services) =>
     .reverse()
     .value();
 
+function isvalidURL(str) {
+  var pattern = new RegExp(
+    "^(https?:\\/\\/)?" + // protocol
+      "((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|" + // domain name
+      "((\\d{1,3}\\.){3}\\d{1,3}))" + // OR ip (v4) address
+      "(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*" + // port and path
+      "(\\?[;&a-z\\d%_.~+=-]*)?" + // query string
+      "(\\#[-a-z\\d_]*)?$",
+    "i"
+  ); // fragment locator
+  return pattern.test(str);
+}
+
 export default async function ({ models }) {
   const {
     Service,
@@ -115,8 +128,8 @@ export default async function ({ models }) {
       }) => ({
         submission_year: get_fiscal_yr(submission_year),
         service_id,
-        value_en,
-        value_fr,
+        value_en: _.filter(_.split(value_en, "<>"), (url) => isvalidURL(url)),
+        value_fr: _.filter(_.split(value_fr, "<>"), (url) => isvalidURL(url)),
       })
     )
     .groupBy("service_id")
@@ -132,8 +145,8 @@ export default async function ({ models }) {
       }) => ({
         submission_year: get_fiscal_yr(submission_year),
         service_id,
-        value_en,
-        value_fr,
+        value_en: _.filter(_.split(value_en, "<>"), (url) => isvalidURL(url)),
+        value_fr: _.filter(_.split(value_fr, "<>"), (url) => isvalidURL(url)),
       })
     )
     .groupBy("service_id")
@@ -145,8 +158,8 @@ export default async function ({ models }) {
       (url) => url.submission_year === submission_year
     );
     return {
-      [`${column_name}_en`]: _.map(corresponding_urls, "value_en"),
-      [`${column_name}_fr`]: _.map(corresponding_urls, "value_fr"),
+      [`${column_name}_en`]: _.flatMap(corresponding_urls, "value_en"),
+      [`${column_name}_fr`]: _.flatMap(corresponding_urls, "value_fr"),
     };
   };
 
