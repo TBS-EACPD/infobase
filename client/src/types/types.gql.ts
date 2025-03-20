@@ -286,6 +286,7 @@ export type Org = SubjectI & {
   notes?: Maybe<Scalars['String']>;
   old_applied_title?: Maybe<Scalars['String']>;
   org_id?: Maybe<Scalars['String']>;
+  org_recipients?: Maybe<RecipientsSummary>;
   org_transfer_payments?: Maybe<Array<Maybe<OrgTransferPayments>>>;
   org_vote_stat_estimates?: Maybe<Array<Maybe<OrgVoteStatEstimates>>>;
   org_vote_stat_pa?: Maybe<Array<Maybe<OrgVoteStatPa>>>;
@@ -492,6 +493,35 @@ export type Query = {
 
 export type QueryRootArgs = {
   lang: Scalars['String'];
+};
+
+export type Recipients = {
+  __typename?: 'Recipients';
+  city?: Maybe<Scalars['String']>;
+  country?: Maybe<Scalars['String']>;
+  department?: Maybe<Scalars['String']>;
+  expenditure?: Maybe<Scalars['Float']>;
+  org_id?: Maybe<Scalars['String']>;
+  program?: Maybe<Scalars['String']>;
+  province?: Maybe<Scalars['String']>;
+  recipient?: Maybe<Scalars['String']>;
+  record_type?: Maybe<Scalars['String']>;
+  year?: Maybe<Scalars['String']>;
+};
+
+export type RecipientsGeneralStats = {
+  __typename?: 'RecipientsGeneralStats';
+  org_id?: Maybe<Scalars['String']>;
+  program?: Maybe<Scalars['String']>;
+  total?: Maybe<Scalars['Float']>;
+  year?: Maybe<Scalars['String']>;
+};
+
+export type RecipientsSummary = {
+  __typename?: 'RecipientsSummary';
+  id?: Maybe<Scalars['String']>;
+  recipients?: Maybe<Array<Maybe<Recipients>>>;
+  recipients_general_stats?: Maybe<Array<Maybe<RecipientsGeneralStats>>>;
 };
 
 export type Result = {

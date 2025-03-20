@@ -9,6 +9,7 @@ import people from "./people/index.js";
 import results from "./results/index.js";
 import root_schema from "./schema_root.js";
 import services from "./services/index.js";
+import recipients from "./recipients/index.js";
 
 // unused models, mostly still using the pre-mongoDB approach
 // import sobjs from './standard_objects/index.js';
@@ -24,6 +25,7 @@ const sub_module_defs = _.compact([
   covid,
   services,
   people,
+  recipients,
   // pses,
   // sobjs,
   // search,
