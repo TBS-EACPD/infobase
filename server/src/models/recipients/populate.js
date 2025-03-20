@@ -49,12 +49,12 @@ export default async function ({ models }) {
 
   const get_general_stats = (recipients) =>
     _.chain(recipients)
-      .groupBy("program")
-      .flatMap((rows, program) =>
+      .groupBy("recipient")
+      .flatMap((rows, recipient) =>
         _.map(report_years, (year) => ({
           year,
           org_id: rows[0].org_id,
-          program,
+          recipient,
           total: _.reduce(
             _.filter(rows, (row) => row.year === year),
             (sum, row) => sum + _.toNumber(row.expenditure) || 0,

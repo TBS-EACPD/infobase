@@ -25,7 +25,7 @@ const schema = `
   type RecipientsGeneralStats {
     year: String
     org_id: String
-    program: String
+    recipient: String
     total: Float
   }
 `;

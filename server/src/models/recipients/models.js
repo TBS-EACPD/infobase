@@ -36,7 +36,7 @@ export default function (model_singleton) {
       {
         year: str_type,
         org_id: str_type,
-        program: str_type,
+        recipient: str_type,
         total: { type: Number },
       },
     ],

@@ -512,7 +512,7 @@ export type Recipients = {
 export type RecipientsGeneralStats = {
   __typename?: 'RecipientsGeneralStats';
   org_id?: Maybe<Scalars['String']>;
-  program?: Maybe<Scalars['String']>;
+  recipient?: Maybe<Scalars['String']>;
   total?: Maybe<Scalars['Float']>;
   year?: Maybe<Scalars['String']>;
 };
