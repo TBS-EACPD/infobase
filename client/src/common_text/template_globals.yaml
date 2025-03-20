@@ -53,23 +53,24 @@ fte_last_year_planned:
   fr: 2023-2024
 
 est_in_year:
+  en: 2025-26
+  fr: 2025-2026
+est_last_year:
   en: 2024-25
   fr: 2024-2025
-est_last_year:
+est_last_year_2:
   en: 2023-24
   fr: 2023-2024
-est_last_year_2:
+est_last_year_3:
   en: 2022-23
   fr: 2022-2023
-est_last_year_3:
+est_last_year_4:
   en: 2021-22
   fr: 2021-2022
-est_last_year_4:
+est_last_year_5:
   en: 2020-21
   fr: 2020-2021
-est_last_year_5:
-  en: 2019-20
-  fr: 2019-2020
+
 
 planning_year_1:
   en: 2024-25
