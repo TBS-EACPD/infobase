@@ -38,6 +38,7 @@ const schema = `
   type SummaryHeadcountData {
     dimension: String
     yearly_data: [YearlyData]
+    avg_share: Float
   }
 
   type YearlyData {

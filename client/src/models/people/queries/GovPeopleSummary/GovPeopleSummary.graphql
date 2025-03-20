@@ -1,0 +1,61 @@
+query GovPeopleSummary($lang: String!) {
+  root(lang: $lang) {
+    gov {
+      people_data {
+        id
+        average_age {
+          year
+          value
+        }
+        type {
+          dimension
+          yearly_data {
+            year
+            value
+          }
+          avg_share
+        }
+        region {
+          dimension
+          yearly_data {
+            year
+            value
+          }
+          avg_share
+        }
+        age_group {
+          dimension
+          yearly_data {
+            year
+            value
+          }
+          avg_share
+        }
+        ex_lvl {
+          dimension
+          yearly_data {
+            year
+            value
+          }
+          avg_share
+        }
+        gender {
+          dimension
+          yearly_data {
+            year
+            value
+          }
+          avg_share
+        }
+        fol {
+          dimension
+          yearly_data {
+            year
+            value
+          }
+          avg_share
+        }
+      }
+    }
+  }
+}
