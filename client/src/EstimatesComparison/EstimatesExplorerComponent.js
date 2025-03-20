@@ -190,6 +190,7 @@ export default class EstimatesExplorerComponent extends React.Component {
     const q_a_key_pairs = [
       ["what_are_mains_q", "what_are_mains_a"],
       ["what_are_supps_q", "what_are_supps_a"],
+      ["what_are_sw_q", "what_are_sw_a"],
       ["what_are_voted_auth_q", "what_are_voted_auth_a"],
       ["what_are_stat_auth_q", "what_are_stat_auth_a"],
       ["different_org_names_q", "different_org_names_a"],
