@@ -459,7 +459,7 @@ const get_column_defs = (use_legal_titles) => [
     header_display: (
       <TM
         k="current_doc_this_year"
-        args={{ current_doc_is_mains, current_sups_letter }}
+        args={{ current_doc_is_mains, current_sups_letter, current_doc_is_sw }}
       />
     ),
     get_val: (node) => _.get(node, "data.current_value"),
