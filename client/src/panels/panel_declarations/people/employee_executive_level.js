@@ -63,12 +63,10 @@ const EmployeeExecutiveLevelPanel = ({
   const loading = subject_type === "gov" ? govLoading : orgLoading;
 
   if (!data || !data.ex_lvl) {
-    console.log("Missing data or ex_lvl:", { data });
     return null;
   }
 
   if (data.ex_lvl.length === 0) {
-    console.log("ex_lvl is empty");
     return null;
   }
 
