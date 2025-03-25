@@ -8,6 +8,7 @@ import { declare_panel } from "src/panels/PanelRegistry";
 
 import { DisplayTable } from "src/components/index";
 
+import { isSpecialWarrants } from "src/models/estimates";
 import { Dept } from "src/models/subjects";
 
 import { newIBLightCategoryColors } from "src/core/color_schemes";
@@ -230,7 +231,15 @@ const declare_in_year_stat_breakdown_panel = () =>
       legacy_table_dependencies: ["orgVoteStatEstimates"],
       get_dataset_keys: () => ["tabled_estimates"],
       get_title: () => text_maker("in_year_stat_breakdown_title"),
-      calculate: planned_vote_or_stat_calculate("stat"),
+      calculate: ({ subject, tables }) => {
+        // Don't show the panel for Special Warrants
+        if (isSpecialWarrants()) {
+          return false;
+        }
+
+        // Continue with the original calculation
+        return planned_vote_or_stat_calculate("stat")({ subject, tables });
+      },
       render: planned_vote_or_stat_render("stat"),
     }),
   });

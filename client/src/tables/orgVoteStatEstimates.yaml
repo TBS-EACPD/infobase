@@ -1,10 +1,10 @@
 orgVoteStatEstimates_short:
   transform: [handlebars,embeded-markdown, markdown]
   en: |
-   This table presents net budgetary {{gl_sidebar_link "authorities" "AUTH"}} ({{gl_sidebar_link "voted" "VOTED"}} and {{gl_sidebar_link "statutory" "STAT"}}) by {{gl_sidebar_link "Estimates documents" "EST_DOC"}} and by {{gl_sidebar_link "adjustments and transfers" "ADJUS"}}.
+   This table presents net budgetary {{gl_sidebar_link "authorities" "AUTH"}} ({{gl_sidebar_link "voted" "VOTED"}} and {{gl_sidebar_link "statutory" "STAT"}}) by {{gl_sidebar_link "Funding Source" "EST_DOC"}} and by {{gl_sidebar_link "adjustments and transfers" "ADJUS"}}.
   
   fr: |
-   Ce tableau présente les {{gl_sidebar_link "autorisations" "AUTH"}} ({{gl_sidebar_link "votées" "VOTED"}} and {{gl_sidebar_link "législatives" "STAT"}}) par {{gl_sidebar_link "documents budgétaires" "EST_DOC"}} et par {{gl_sidebar_link "réajustements et transferts" "ADJUS"}}.
+   Ce tableau présente les {{gl_sidebar_link "autorisations" "AUTH"}} ({{gl_sidebar_link "votées" "VOTED"}} and {{gl_sidebar_link "législatives" "STAT"}}) par {{gl_sidebar_link "Source de financement" "EST_DOC"}} et par {{gl_sidebar_link "réajustements et transferts" "ADJUS"}}.
 
 
 orgVoteStatEstimates:
@@ -16,11 +16,13 @@ orgVoteStatEstimates:
    Expenditures made by the government require the authority of Parliament. This authority is provided in two ways:
    * Annual appropriation acts for voted amounts; and
    * Other specific legislative authorities for statutory payments.
-   Estimates documents are prepared to support appropriation acts.
+   Funding Source documents are prepared to support appropriation acts.
+   
+   In exceptional circumstances when Parliament is not in session, {{gl_sidebar_link "Special Warrants" "SPEC_WARR"}} may be issued to authorize urgent expenditures. These warrants are temporary in nature and must be replaced by an appropriation act once Parliament reconvenes.
 
 
    **Notes**:
-   * Further details on the composition of Main Estimates may be found in Part I of the Estimates process ({{gl_sidebar_link "Government Expenditure Plan" "PART1"}}).
+   * Further details on the composition of Main Estimates may be found in Part I of the Funding Source process ({{gl_sidebar_link "Government Expenditure Plan" "PART1"}}).
    * The tabling of an estimate does not guarantee its approval by Parliament. Only after an appropriation act is introduced to Parliament, approved and granted royal assent, does it become law.
    * Note that for comparison purposes, voted and statutory items' labels in this table were modified to align with the most recently published estimates document. 
    * Please note that allocations from Treasury Board Vote 40, Budget 2018 Implementation, during 2018-19 are reported on GC InfoBase [Budget Implementation Votes](https://www.tbs-sct.gc.ca/ems-sgd/edb-bdd/index-eng.html#budget-tracker/budget-measure/overview/budget-2018) page          
@@ -32,16 +34,18 @@ orgVoteStatEstimates:
    Les dépenses effectuées par le gouvernement doivent être autorisées par le Parlement. Cette {{gl_sidebar_link "approbation" "AUTH"}} est donnée de deux façons :
    * {{gl_sidebar_link "lois annuelles de crédits" "APP_ACT"}} pour les montants {{gl_sidebar_link "votés" "VOTED"}}; 
    * autres autorisations particulières prévues par la loi pour les paiements {{gl_sidebar_link "législatifs" "STAT"}}. 
-   Les documents budgétaires sont préparés pour appuyer les lois de crédits.
+   Les documents de source de financement sont préparés pour appuyer les lois de crédits.
+   
+   Dans des circonstances exceptionnelles, lorsque le Parlement n'est pas en session, des mandats spéciaux peuvent être émis pour autoriser des dépenses urgentes. Ces mandats sont de nature temporaire et doivent être remplacés par une loi de crédits une fois que le Parlement se réunit à nouveau.
 
 
    **Remarques:**
-   * De plus amples détails sur la composition du Budget principal des dépenses se trouvent dans la partie I du processus budgétaire 
+   * De plus amples détails sur la composition du Budget principal des dépenses se trouvent dans la partie I du processus de source de financement 
    {{gl_sidebar_link "(Plan de dépenses du gouvernement)" "PART1"}}. 
-   * Le dépôt d'un budget des dépenses ne signifie pas qu'il est approuvé par le Parlement. Une loi de crédits n’entre en vigueur qu’après avoir été présentée 
+   * Le dépôt d'un budget des dépenses ne signifie pas qu'il est approuvé par le Parlement. Une loi de crédits n'entre en vigueur qu'après avoir été présentée 
    et dûment adoptée par le Parlement, et reçue la sanction royale. 
    * Notez que, pour faciliter la comparaison des données entres des années différentes, les descriptions et les numéros des items votés et statutaires ont été modifiés afin qu'ils correspondent au document budgétaire le plus récemment publié. 
-   * Veuillez prendre note que les affectations de 2018-2019 du crédit 40 du Conseil du Trésor, Exécution du budget de 2018, figurent dans InfoBase du GC [voir Crédits d’exécution du budget](https://www.tbs-sct.gc.ca/ems-sgd/edb-bdd/index-fra.html#budget-tracker/budget-measure/overview/budget-2018)
+   * Veuillez prendre note que les affectations de 2018-2019 du crédit 40 du Conseil du Trésor, Exécution du budget de 2018, figurent dans InfoBase du GC [voir Crédits d'exécution du budget](https://www.tbs-sct.gc.ca/ems-sgd/edb-bdd/index-fra.html#budget-tracker/budget-measure/overview/budget-2018)
 
 
 

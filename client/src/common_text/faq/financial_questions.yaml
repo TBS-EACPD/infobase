@@ -2,7 +2,7 @@ where_does_authority_come_from_q:
   en: |
     Where does the authority to spend public funds come from?
   fr: |
-    D’où vient l’autorisation de dépenser du gouvernement?
+    D'où vient l'autorisation de dépenser du gouvernement?
 
 where_does_authority_come_from_a:
   transform: [markdown]
@@ -12,7 +12,7 @@ where_does_authority_come_from_a:
 
     **Expenditures made by government are authorized by an Act of Parliament.**
   fr: |
-    La plupart des gens associent les dépenses du gouvernement du Canada à son Budget annuel. Bien que le Budget fasse état des politiques et des priorités budgétaires, sociales et économiques du gouvernement du Canada pour le prochain exercice financier, il n’autorise pas celui-ci à dépenser. 
+    La plupart des gens associent les dépenses du gouvernement du Canada à son Budget annuel. Bien que le Budget fasse état des politiques et des priorités budgétaires, sociales et économiques du gouvernement du Canada pour le prochain exercice financier, il n'autorise pas celui-ci à dépenser. 
 
 
     **Les dépenses du gouvernement sont autorisées par une loi du Parlement.**
@@ -27,7 +27,7 @@ what_are_voted_auth_a:
   en: |
     Voted spending authorities are sought through appropriation (or "supply") acts tabled in Parliament.
   fr: |
-    Les autorisations de dépenses votées sont demandées par l’entremise des lois de crédits déposées au Parlement. 
+    Les autorisations de dépenses votées sont demandées par l'entremise des lois de crédits déposées au Parlement. 
 
 
 what_are_stat_auth_q:
@@ -46,28 +46,28 @@ what_are_mains_q:
   en: |
     What are the Main Estimates?
   fr: |
-    Qu’est-ce que le Budget principal des dépenses?
+    Qu'est-ce que le Budget principal des dépenses?
 
 what_are_mains_a:
   en: |
     Tabled on or before March 1, they present each organization's planned spending (voted and statutory) for the coming fiscal year (April to March 31). The government seeks the authority to spend the non-statutory planned spending 
     outlined in the Main Estimates, and any subsequent supplementary estimates through associated appropriation acts.
   fr: |
-    Déposé le 1er mars ou avant, il présente les dépenses prévues (votées et législatives) de chaque organisme pour le prochain exercice (d’avril au 31 mars). Le gouvernement demande alors le pouvoir d'effectuer les dépenses non législatives prévues dans le Budget 
+    Déposé le 1er mars ou avant, il présente les dépenses prévues (votées et législatives) de chaque organisme pour le prochain exercice (d'avril au 31 mars). Le gouvernement demande alors le pouvoir d'effectuer les dépenses non législatives prévues dans le Budget 
     principal des dépenses, et dans tout Budget supplémentaire des dépenses subséquent, en vertu de lois de crédits.
 what_are_supps_q:
   en: |
     What are Supplementary Estimates?
   fr: |
-    Qu’est-ce que le Budget supplémentaire des dépenses?
+    Qu'est-ce que le Budget supplémentaire des dépenses?
   
 what_are_supps_a:
   en: |
     Changes and updates to planned spending outlined in the Main Estimates are presented in supplementary estimates, which are identified in alphabetical sequence (A, B, C, etc.). The government seeks the authority to spend non-statutory 
-    planned spending outlined in the Main Estimates and any subsequent supplementary estimates through associated appropriation acts.
+    planned spending outlined in the Main Estimates and any subsequent supplementary estimates through associated appropriation acts. In exceptional circumstances, Special Warrants (SW) may be issued when Parliament is not in session to authorize urgent expenditures.
   fr: |
     Les changements et les mises à jour des dépenses prévues du Budget principal des dépenses sont indiqués dans le Budget supplémentaire des dépenses, et sont classés par ordre alphabétique (A, B, C, etc.). Le gouvernement demande alors le pouvoir d'effectuer les dépenses non législatives prévues dans le Budget 
-    principal des dépenses, et dans tout Budget supplémentaire des dépenses subséquent.
+    principal des dépenses, et dans tout Budget supplémentaire des dépenses subséquent. Dans des circonstances exceptionnelles, des mandats spéciaux (SW) peuvent être émis lorsque le Parlement n'est pas en session pour autoriser des dépenses urgentes.
 
 what_are_exps_q:
   en: |
@@ -79,25 +79,25 @@ what_are_exps_a:
   en: |
     Authorities from Parliament represent how much the government is allowed to spend. Expenditures represent how much the government actually spent and are reported through the Public Accounts of Canada.
   fr: |
-    Les autorisations parlementaires représentent les montants que le gouvernement est autorisé à dépenser.  Les dépenses correspondent aux montants que le gouvernement a réellement dépensés et qui sont reportés chaque année par l’intermédiaire des Comptes publics du Canada.
+    Les autorisations parlementaires représentent les montants que le gouvernement est autorisé à dépenser.  Les dépenses correspondent aux montants que le gouvernement a réellement dépensés et qui sont reportés chaque année par l'intermédiaire des Comptes publics du Canada.
 
 what_is_prog_q:
   en: |
     What is a Program?
   fr: |
-    Qu’est-ce qu’un Programme?
+    Qu'est-ce qu'un Programme?
 
 what_is_prog_a:
   en: |
     A Program is a group of related activities and resource inputs within a federal organization that are reported on as a budgetary unit.
   fr: |
-    Un Programme constitue un groupe de ressources et d’activités connexes au sein d’une organisation fédérale, lesquelles sont déclarées comme une unité budgétaire.
+    Un Programme constitue un groupe de ressources et d'activités connexes au sein d'une organisation fédérale, lesquelles sont déclarées comme une unité budgétaire.
 
 what_is_so_q:
   en: |
     What is a standard object?
   fr: |
-    Qu’est-ce qu’un article courant?
+    Qu'est-ce qu'un article courant?
 
 what_is_so_a:
   transform: [handlebars,markdown]
@@ -137,14 +137,14 @@ what_is_so_a:
 
 what_is_fy_q:
   en: Why does a year seem to span over two in GC InfoBase (e.g. 2017-18)?
-  fr: Pourquoi une année semble s’étendre sur deux dans InfoBase du GC (p. ex. 2017-2018)?
+  fr: Pourquoi une année semble s'étendre sur deux dans InfoBase du GC (p. ex. 2017-2018)?
 
 what_is_fy_a:
   transform: [handlebars,markdown]
   en: |
     The Government of Canada fiscal year runs from April 1 to March 31 of the following year. So for the fiscal year beginning April 1, 2017 and ending March 31, 2018, GC InfoBase would label the year as 2017-18.
   fr: |
-    L’exercice du Gouvernement du Canada s'étend du 1er avril au 31 mars. Ainsi, pour l’exercice commençant le 1er avril 2017 et se terminant le 31 mars 2018, InfoBase du GC va présenter l’année comme 2017-2018.
+    L'exercice du Gouvernement du Canada s'étend du 1er avril au 31 mars. Ainsi, pour l'exercice commençant le 1er avril 2017 et se terminant le 31 mars 2018, InfoBase du GC va présenter l'année comme 2017-2018.
 
 
   
@@ -172,10 +172,23 @@ what_spending_is_included_a:
     GC InfoBase contains information on planned and actual budgetary expenditures. Budgetary expenditures consist of the cost of servicing the public debt; operating and capital
     expenditures; transfer payments to other levels of government, organizations or individuals; and payments to Crown corporations. Budgetary expenditures are expenditures made in
     accordance with specific votes, statutory appropriations or other authorities. Non-budgetary expenditures – or loans, investments
-    and advances – are outlays that represent changes in the composition of the Government’s financial assets, and are not included.
+    and advances – are outlays that represent changes in the composition of the Government's financial assets, and are not included.
   fr: |
     InfoBase du GC contient des renseignements sur les dépenses budgétaires prévues et réelles. Les dépenses budgétaires comprennent les dépenses liées au service de la dette publique,
     les dépenses de fonctionnement et en capital, les paiements de transfert versés à d'autres ordres de gouvernement, à des organisations ou à des personnes, ainsi que les paiements
-    versés à des sociétés d'État. Les dépenses budgétaires faites conformément à des crédits précis ou à d’autres autorisations figurant aux budgets des dépenses, ou encore à des
+    versés à des sociétés d'État. Les dépenses budgétaires faites conformément à des crédits précis ou à d'autres autorisations figurant aux budgets des dépenses, ou encore à des
     crédits législatifs ou à d'autres autorisations figurant dans diverses lois et ailleurs. Les dépenses non budgétaires, ou les prêts, placements et avances, sont des dépenses qui correspondent à des modifications de la valeur des actifs
     financiers du gouvernement, et ne sont pas inclus.
+
+# Add a new FAQ entry specifically for Special Warrants
+what_are_sw_q:
+  en: |
+    What are Special Warrants?
+  fr: |
+    Que sont les mandats spéciaux?
+
+what_are_sw_a:
+  en: |
+    Special Warrants are a mechanism used to authorize urgent expenditures when Parliament is not in session. They are issued by the Governor General, on the recommendation of the Cabinet, when there is no appropriation act to authorize the expenditure. Like Supplementary Estimates, Special Warrants provide additional spending authorities after the initial Main Estimates. They are temporary in nature and must be replaced by an appropriation act once Parliament reconvenes.
+  fr: |
+    Les mandats spéciaux sont un mécanisme utilisé pour autoriser des dépenses urgentes lorsque le Parlement n'est pas en session. Ils sont émis par le gouverneur général, sur recommandation du Cabinet, lorsqu'il n'y a pas de loi de crédits pour autoriser la dépense. Comme les budgets supplémentaires des dépenses, les mandats spéciaux fournissent des autorisations de dépenser supplémentaires après le Budget principal des dépenses initial. Les mandats spéciaux sont de nature temporaire et doivent être remplacés par une loi de crédits une fois que le Parlement se réunit à nouveau.

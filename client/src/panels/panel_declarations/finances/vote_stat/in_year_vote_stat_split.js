@@ -4,6 +4,8 @@ import React from "react";
 import { StdPanel, Col } from "src/panels/panel_declarations/InfographicPanel";
 import { declare_panel } from "src/panels/PanelRegistry";
 
+import { isSpecialWarrants } from "src/models/estimates";
+
 import { is_a11y_mode } from "src/core/injected_build_constants";
 
 import { WrappedNivoPie } from "src/charts/wrapped_nivo/index";
@@ -85,6 +87,10 @@ export const declare_in_year_voted_stat_split_panel = () =>
           return {
             ...common_panel_config,
             calculate: ({ subject, tables }) => {
+              if (isSpecialWarrants()) {
+                return false;
+              }
+
               const { orgVoteStatEstimates } = tables;
               const vote_stat_est_in_year = get_vote_stat_est_in_year(
                 orgVoteStatEstimates,
@@ -109,6 +115,10 @@ export const declare_in_year_voted_stat_split_panel = () =>
           return {
             ...common_panel_config,
             calculate: ({ subject, tables }) => {
+              if (isSpecialWarrants()) {
+                return false;
+              }
+
               const { orgVoteStatEstimates } = tables;
               const vote_stat_est_in_year = get_vote_stat_est_in_year(
                 orgVoteStatEstimates,
