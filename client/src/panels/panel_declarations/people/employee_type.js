@@ -85,9 +85,6 @@ const EmployeeTypePanel = ({
 
   const MemoizedNivoLineBarToggle = memo(NivoLineBarToggle);
 
-  console.log(data);
-  console.log(calculations);
-
   return (
     <StdPanel {...{ title, footnotes, sources, datasets, glossary_keys }}>
       <Col size={12} isText>
