@@ -4,6 +4,7 @@ FROM archlinux:base-devel
 RUN sudo pacman --noconfirm -Syu \
   git \
   python \
+  chrpath \
   bash \
   openssh \
   nodejs-lts-iron \
@@ -13,13 +14,13 @@ RUN sudo pacman --noconfirm -Syu \
 # get mongo packages from the extended Arch User Repository. Using the :base-devel base image gives us the
 # necessary install dependencies, don't need an aur helper because these are distributed in the .deb format
 ENV MAKE_USR non-root
-RUN useradd -s /sbin/bash -u 1000 ${MAKE_USR}
-RUN for aur_package in mongodb-bin mongosh-bin; do \
+RUN useradd -m -s /sbin/bash -u 1000 ${MAKE_USR}
+RUN for aur_package in mongosh-bin mongodb-bin google-cloud-cli; do \
     git clone https://aur.archlinux.org/${aur_package}.git \
       && cd ${aur_package} \
       && chown ${MAKE_USR} . \
       && sudo -u ${MAKE_USR} makepkg -s --noconfirm \
-      && sudo pacman -U ${aur_package}*.tar.* --noconfirm \
+      && sudo pacman -U ${aur_package}*.tar.*zst --noconfirm \
       && cd .. && rm -rf ${aur_package}; \
   done
 RUN userdel ${MAKE_USR}
