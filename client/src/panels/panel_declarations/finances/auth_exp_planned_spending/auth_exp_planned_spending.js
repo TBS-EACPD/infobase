@@ -15,6 +15,7 @@ import {
   SelectAllControl,
 } from "src/components/index";
 
+import { isSpecialWarrants } from "src/models/estimates";
 import { create_footnote } from "src/models/footnotes/footnotes";
 import { run_template } from "src/models/text";
 import { year_templates, actual_to_planned_gap_year } from "src/models/years";
@@ -468,7 +469,8 @@ const render = function ({
   datasets,
   glossary_keys,
 }) {
-  const { data_series, additional_info, queried_votes } = calculations;
+  const { data_series, additional_info, queried_votes, is_special_warrants } =
+    calculations;
 
   const final_info = {
     ...additional_info,
@@ -513,6 +515,14 @@ const render = function ({
               />
             </div>
           )}
+          {is_special_warrants && (
+            <div>
+              <TM
+                className="medium-panel-text"
+                k="auth_special_warrants_note"
+              />
+            </div>
+          )}
         </div>
         <div className="fcol-xs-12 fcol-md-8">
           <AuthExpPlannedSpendingGraph
@@ -553,7 +563,9 @@ const calculate = ({ subject, tables }) => {
   const historical_auth_values = queried_subject.sum(auth_cols, {
     as_object: false,
   });
-  const future_auth_values = _.map(
+
+  // Get future authority values
+  let future_auth_values = _.map(
     future_auth_year_templates,
     (future_auth_year_template) =>
       orgVoteStatEstimates
@@ -562,6 +574,15 @@ const calculate = ({ subject, tables }) => {
           as_object: false,
         })
   );
+
+  // Check if we're in Special Warrants mode
+  const is_special_warrants = isSpecialWarrants();
+
+  // If in Special Warrants mode and future values exist, remove the latest year
+  // since it would only contain voted authorities (not statutory)
+  if (is_special_warrants && future_auth_values.length > 0) {
+    future_auth_values = future_auth_values.slice(0, -1);
+  }
 
   const auth_values = _.concat(historical_auth_values, future_auth_values);
 
@@ -735,6 +756,7 @@ const calculate = ({ subject, tables }) => {
     data_series,
     additional_info,
     queried_votes,
+    is_special_warrants,
   };
 };
 

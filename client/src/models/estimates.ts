@@ -6,6 +6,9 @@ import { smart_sort_func } from "src/sort_utils";
 // For now, needs to be manually updated on new estimates publication!
 export const CURRENT_EST_DOC: "MAINS" | "SEA" | "SEB" | "SEC" | "SW1" = "SW1";
 
+// Add a new helper function to check for Special Warrants
+export const isSpecialWarrants = () => CURRENT_EST_DOC.startsWith("SW");
+
 export const estimates_docs = {
   MAINS: {
     en: "Main Estimates",
