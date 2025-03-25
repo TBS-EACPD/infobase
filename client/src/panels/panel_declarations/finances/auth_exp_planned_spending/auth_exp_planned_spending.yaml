@@ -19,7 +19,7 @@ dept_gap_explain_body:
   en: |
     Actual expenditures for all organizations are sourced from the {{gl_sidebar_link "Public Accounts of Canada" "PA"}}. Planned expenditures for most organizations are sourced from {{gl_sidebar_link "Departmental Plans" "DP"}}.
 
-    Planned expenditures for {{est_in_year}} to {{last_planned_year}} have been published in {{dept.name}}’s latest Departmental Plan, but the {{gap_year}} {{gl_sidebar_link "Public Accounts of Canada" "PA"}} are not yet available.
+    Planned expenditures for {{est_in_year}} to {{last_planned_year}} have been published in {{dept.name}}'s latest Departmental Plan, but the {{gap_year}} {{gl_sidebar_link "Public Accounts of Canada" "PA"}} are not yet available.
   fr: |
     Les dépenses réelles de toutes les organisations correspondent à celle publiées dans les {{gl_sidebar_link "Comptes publics du Canada" "PA"}}. Les dépenses prévues pour la plupart des organisations proviennent des {{gl_sidebar_link "plans ministériels" "DP"}}.
 
@@ -92,3 +92,10 @@ dept_lapse_by_votes_text:
   transform: [handlebars, markdown]
   en: Over the past five years, **{{subject.name}}** {{gl_sidebar_link "lapsed" "LAPSE"}} an average of **{{fmt_compact1_written avg_lapsed_by_votes}}** from **{{num_of_votes}} {{gl_sidebar_link "votes" "VOTED"}}**. On average, **{{fmt_percentage1 avg_lapsed_by_votes_pct}}** of the spending {{gl_sidebar_link "authorities" "AUTH"}} granted by Parliament to **{{subject.name}}** through an appropriation act have lapsed compared to an average government-wide lapse of **{{fmt_percentage1 gov_avg_lapsed_by_votes_pct}}**. Lapsing funds is a normal and expected part of any budgetary process.
   fr: Au cours des cinq dernières années, pour trois **{{num_of_votes}} {{gl_sidebar_link "votés" "VOTED"}}**, la {{gl_sidebar_link "péremption" "LAPSE"}} moyenne **{{subject.name}}** s'est élevée à **{{fmt_compact1_written avg_lapsed_by_votes}}**. En moyenne, **{{fmt_percentage1 avg_lapsed_by_votes_pct}}** des {{gl_sidebar_link "autorisations" "AUTH"}} de dépenses accordées par le Parlement par le biais d'une loi de crédit sont devenues périmées, contre **{{fmt_percentage1 gov_avg_lapsed_by_votes_pct}}** en moyenne pour l'ensemble du gouvernement. Dans tout processus budgétaire, il est normal que les fonds ne soient pas tous dépensés.
+
+auth_special_warrants_note:
+  transform: [handlebars, markdown]
+  en: |
+    **Note:** The current fiscal year (2025-26) authorities data point is not included in this graph because it only includes voted authorities from Special Warrants, and not statutory authorities. Including this data point would not provide a meaningful comparison with previous years, which include both voted and statutory authorities.
+  fr: |
+    **Remarque :** Le point de données sur les autorisations de l'exercice en cours (2025-2026) n'est pas inclus dans ce graphique car il ne comprend que les autorisations votées des mandats spéciaux, et non les autorisations législatives. L'inclusion de ce point de données ne fournirait pas une comparaison significative avec les années précédentes, qui comprennent à la fois les autorisations votées et législatives.
