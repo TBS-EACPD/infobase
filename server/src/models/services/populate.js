@@ -741,7 +741,7 @@ export default async function ({ models }) {
       },
       list_of_missing_dept: get_missing_departments_per_year(),
       service_channels_summary: get_service_channels_summary(
-        absolute_most_recent_year_filtered_services
+        filtered_service_rows
       ),
       service_digital_status_summary: _.flatMap(digital_status_keys, (key) =>
         populate_digital_summary_key(
@@ -800,8 +800,7 @@ export default async function ({ models }) {
             .size()
             .value(),
         },
-        service_channels_summary:
-          get_service_channels_summary(filtered_services),
+        service_channels_summary: get_service_channels_summary(services),
         service_digital_status_summary: _.flatMap(digital_status_keys, (key) =>
           populate_digital_summary_key(filtered_services, org_id, "dept", key)
         ),
@@ -841,8 +840,7 @@ export default async function ({ models }) {
           pct_of_online_client_interaction_pts:
             get_pct_of_online_client_interaction_pts(filtered_services),
         },
-        service_channels_summary:
-          get_service_channels_summary(filtered_services),
+        service_channels_summary: get_service_channels_summary(services),
         service_digital_status_summary: _.flatMap(digital_status_keys, (key) =>
           populate_digital_summary_key(
             filtered_services,
