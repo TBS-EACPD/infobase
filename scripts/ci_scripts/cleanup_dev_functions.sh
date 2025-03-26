@@ -21,7 +21,7 @@ else
     echo "no functions to delete"
 fi
 
-if [[ ! -z "$to_delete_functions" ]]; then
+if [[ ! -z "$to_delete_services" ]]; then
     echo "start deleting run services"
     while IFS= read -r branch_name; do
         echo $branch_name
