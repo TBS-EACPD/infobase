@@ -141,7 +141,7 @@ jobs:
 
   cleanup_dev_links:
     docker:
-      - image: eaadtbs/ib-ci:1.4
+      - image: eaadtbs/ib-ci:1.5
         <<: *dockerhub_auth
     working_directory: "~/InfoBase"
     steps:
@@ -164,6 +164,7 @@ jobs:
             if [ ! -f "./dev-dbs-clean-for-these-branches" ]; then
               ./scripts/ci_scripts/cleanup_dev_dbs.sh
               ./scripts/ci_scripts/cleanup_dev_links.sh
+              ./scripts/ci_scripts/cleanup_dev_functions.sh
             fi
       - run: touch ./dev-dbs-clean-for-these-branches
       - save_cache:
