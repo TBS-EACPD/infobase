@@ -30,6 +30,9 @@ const schema = `
     service_channels_summary: [ServiceChannelsSummary]
     service_digital_status_summary: [ServiceDigitalStatusSummary]
     service_standards_summary: [ServiceStandardsSummary]
+    services_count: [ServicesCount]
+    service_standards_performance: [ServiceStandardsPerformance]
+    services_w_standards: [ServicesWithStandards]
     subject_offering_services_summary: [OrgsOfferingServicesSummary]
     list_of_missing_dept: [MissingDept]
   }
@@ -72,6 +75,19 @@ const schema = `
     services_w_standards_count: Float
     standards_count: Float
     met_standards_count: Float
+  }
+  type ServicesCount{
+    year: String
+    services_count: Float
+  }
+  type ServiceStandardsPerformance{
+    year: String
+    standards_w_target_met: Float
+    standards_w_target_not_met: Float
+  }
+  type ServicesWithStandards{
+    year: String
+    services_w_standards: Float
   }
   type OrgsOfferingServicesSummary{
     subject_id: String

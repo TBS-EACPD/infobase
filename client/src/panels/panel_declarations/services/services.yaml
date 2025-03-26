@@ -480,7 +480,7 @@ target_met_table_text:
 gauge_has_standards_text:
   transform: [handlebars, markdown]
   en: |
-    **{{fmt_percentage1 has_standards_pct}}** of services have service standards for a total of **{{fmt_big_int standards_count}}** service standards
+    **{{fmt_percentage1 has_standards_pct}}** of services have service standards for a total of **{{fmt_big_int num_standards}}** service standards
   fr: |
     **{{fmt_percentage1 has_standards_pct}}** des services ont des normes de service, soit un total de **{{fmt_big_int standards_count}}** normes de service
 gauge_standards_met_text:

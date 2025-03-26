@@ -157,6 +157,25 @@ export default function (model_singleton) {
         met_standards_count: { type: Number },
       },
     ],
+    services_count: [
+      {
+        year: str_type,
+        services_count: { type: Number },
+      },
+    ],
+    service_standards_performance: [
+      {
+        year: str_type,
+        standards_w_target_met: { type: Number },
+        standards_w_target_not_met: { type: Number },
+      },
+    ],
+    services_w_standards: [
+      {
+        year: str_type,
+        services_w_standards: { type: Number },
+      },
+    ],
     list_of_missing_dept: [
       {
         org_id: str_type,

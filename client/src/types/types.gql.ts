@@ -730,6 +730,13 @@ export type ServiceStandard = {
   type?: Maybe<Scalars['String']>;
 };
 
+export type ServiceStandardsPerformance = {
+  __typename?: 'ServiceStandardsPerformance';
+  standards_w_target_met?: Maybe<Scalars['Float']>;
+  standards_w_target_not_met?: Maybe<Scalars['Float']>;
+  year?: Maybe<Scalars['String']>;
+};
+
 export type ServiceStandardsSummary = {
   __typename?: 'ServiceStandardsSummary';
   met_standards_count?: Maybe<Scalars['Float']>;
@@ -747,9 +754,18 @@ export type ServiceSummary = {
   service_channels_summary?: Maybe<Array<Maybe<ServiceChannelsSummary>>>;
   service_digital_status_summary?: Maybe<Array<Maybe<ServiceDigitalStatusSummary>>>;
   service_general_stats?: Maybe<ServiceGeneralStats>;
+  service_standards_performance?: Maybe<Array<Maybe<ServiceStandardsPerformance>>>;
   service_standards_summary?: Maybe<Array<Maybe<ServiceStandardsSummary>>>;
+  services_count?: Maybe<Array<Maybe<ServicesCount>>>;
   services_missing_program_ids?: Maybe<Array<Maybe<ServicesMissingProgramIds>>>;
+  services_w_standards?: Maybe<Array<Maybe<ServicesWithStandards>>>;
   subject_offering_services_summary?: Maybe<Array<Maybe<OrgsOfferingServicesSummary>>>;
+};
+
+export type ServicesCount = {
+  __typename?: 'ServicesCount';
+  services_count?: Maybe<Scalars['Float']>;
+  year?: Maybe<Scalars['String']>;
 };
 
 export type ServicesMissingProgramIds = {
@@ -759,6 +775,12 @@ export type ServicesMissingProgramIds = {
   name?: Maybe<Scalars['String']>;
   program_activity_codes?: Maybe<Array<Maybe<Scalars['String']>>>;
   submission_year?: Maybe<Scalars['String']>;
+};
+
+export type ServicesWithStandards = {
+  __typename?: 'ServicesWithStandards';
+  services_w_standards?: Maybe<Scalars['Float']>;
+  year?: Maybe<Scalars['String']>;
 };
 
 export type StandardReport = {

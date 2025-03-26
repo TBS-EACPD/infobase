@@ -58,7 +58,29 @@ const ServicesStandardsPanel = ({ subject }) => {
   const {
     service_general_stats: { number_of_services, standard_years },
     service_standards_summary,
+    services_count,
+    services_w_standards,
+    service_standards_performance,
   } = data;
+
+  const num_services = _.chain(services_count)
+    .find(({ year }) => year === active_year)
+    .value().services_count;
+
+  const num_services_w_standards = _.chain(services_w_standards)
+    .find(({ year }) => year === active_year)
+    .value().services_w_standards;
+
+  const num_standards_w_target_met = _.chain(service_standards_performance)
+    .find(({ year }) => year === active_year)
+    .value().standards_w_target_met;
+
+  const num_standards_w_target_not_met = _.chain(service_standards_performance)
+    .find(({ year }) => year === active_year)
+    .value().standards_w_target_not_met;
+
+  const num_standards =
+    num_standards_w_target_met + num_standards_w_target_not_met;
 
   const { services_w_standards_count, standards_count, met_standards_count } =
     _.find(service_standards_summary, { year: active_year });
@@ -103,15 +125,15 @@ const ServicesStandardsPanel = ({ subject }) => {
               data={[
                 {
                   id: text_maker("no_standards"),
-                  value: number_of_services - services_w_standards_count,
+                  value: num_services - num_services_w_standards,
                   pct:
-                    (number_of_services - services_w_standards_count) /
-                      number_of_services || 0,
+                    (num_services - num_services_w_standards) / num_services ||
+                    0,
                 },
                 {
                   id: text_maker("has_standards"),
-                  value: services_w_standards_count,
-                  pct: services_w_standards_count / number_of_services || 0,
+                  value: num_services_w_standards,
+                  pct: num_services_w_standards / num_services || 0,
                 },
               ]}
               column_configs={{
@@ -124,8 +146,8 @@ const ServicesStandardsPanel = ({ subject }) => {
             />
           ) : (
             <Gauge
-              value={services_w_standards_count}
-              total_value={number_of_services}
+              value={num_services_w_standards}
+              total_value={num_services}
               show_pct={false}
             />
           )}
@@ -133,9 +155,8 @@ const ServicesStandardsPanel = ({ subject }) => {
             <TM
               k="gauge_has_standards_text"
               args={{
-                standards_count,
-                has_standards_pct:
-                  services_w_standards_count / number_of_services || 0,
+                num_standards,
+                has_standards_pct: num_services_w_standards / num_services || 0,
               }}
             />
           </h2>
@@ -154,20 +175,20 @@ const ServicesStandardsPanel = ({ subject }) => {
               data={[
                 {
                   id: text_maker("target_met_false"),
-                  value: not_met_standards_count,
-                  pct: not_met_standards_count / standards_count || 0,
+                  value: num_standards_w_target_not_met,
+                  pct: num_standards_w_target_not_met / num_standards || 0,
                 },
                 {
                   id: text_maker("target_met_true"),
-                  value: met_standards_count || 0,
-                  pct: (met_standards_count || 0) / standards_count || 0,
+                  value: num_standards_w_target_met || 0,
+                  pct: (num_standards_w_target_met || 0) / num_standards || 0,
                 },
               ]}
             />
           ) : (
             <Gauge
-              value={met_standards_count || 0}
-              total_value={standards_count}
+              value={num_standards_w_target_met || 0}
+              total_value={num_standards}
               show_pct={false}
             />
           )}
@@ -176,7 +197,7 @@ const ServicesStandardsPanel = ({ subject }) => {
               k="gauge_standards_met_text"
               args={{
                 standards_met_pct:
-                  (met_standards_count || 0) / standards_count || 0,
+                  (num_standards_w_target_met || 0) / num_standards || 0,
               }}
             />
           </h2>

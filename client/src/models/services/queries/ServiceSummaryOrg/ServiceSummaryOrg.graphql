@@ -44,6 +44,19 @@ query ServiceSummaryOrg($lang: String!, $id: String!) {
           standards_count
           met_standards_count
         }
+        services_count {
+          year
+          services_count
+        }
+        services_w_standards {
+          year
+          services_w_standards
+        }
+        service_standards_performance {
+          year
+          standards_w_target_not_met
+          standards_w_target_met
+        }
         subject_offering_services_summary {
           subject_id
           number_of_services
