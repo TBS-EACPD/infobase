@@ -80,7 +80,7 @@ export class ServiceOverview extends React.Component {
           </dd>
           <dt>{text_maker("programs")}</dt>
           <dd>
-            {service.is_missing_program_activity_codes ? (
+            {_.isEmpty(service.program_activity_codes) ? (
               <TM k={"program_information_unavailable"} />
             ) : (
               <ul>

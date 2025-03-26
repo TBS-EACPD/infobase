@@ -408,13 +408,10 @@ export default async function ({ models }) {
           program_activity_codes,
           org_id
         ),
-        program_activity_codes:
-          _.difference(
-            program_activity_codes_formatter(program_activity_codes, org_id),
-            program_ids
-          ).length == 0
-            ? program_activity_codes_formatter(program_activity_codes, org_id)
-            : [],
+        program_activity_codes: program_activity_codes_formatter(
+          program_activity_codes,
+          org_id
+        ).filter((value) => program_ids.includes(value)),
         is_missing_program_activity_codes: services_missing_program_ids.some(
           (service) => service["id"] === id
         ),
