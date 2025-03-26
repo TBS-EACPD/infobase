@@ -457,6 +457,55 @@ export default async function ({ models }) {
     })
     .value();
 
+  const get_services_count = (services) =>
+    _.chain(services)
+      .flatMap(({ service_report }) => _.map(service_report, "year"))
+      .countBy()
+      .map((value, key) => ({ year: key, services_count: value }))
+      .value();
+
+  const get_standard_targets_counts = (services) =>
+    _.chain(services)
+      .flatMap("standards")
+      .groupBy("standard_id")
+      .map((standards_across_years) =>
+        _.chain(standards_across_years)
+          .sortBy(({ submission_year }) => _.toInteger(submission_year))
+          .last()
+          .value()
+      )
+      .flatMap(({ standard_report }) =>
+        _.map(standard_report, ({ year, is_target_met }) => ({
+          year,
+          is_target_met,
+        }))
+      )
+      .groupBy("year")
+      .map((rows, year) => ({
+        year,
+        standards_w_target_met: rows.filter((row) => row.is_target_met === true)
+          .length,
+        standards_w_target_not_met: rows.filter(
+          (row) => row.is_target_met === false
+        ).length,
+      }))
+      .value();
+
+  const get_services_w_standards = (services) =>
+    _.chain(services)
+      .flatMap(({ standards }) =>
+        _.map(standards, ({ service_id, submission_year }) => ({
+          service_id,
+          submission_year,
+        }))
+      )
+      .groupBy("submission_year")
+      .map((rows, year) => ({
+        year,
+        services_w_standards: _.uniq(_.map(rows, "service_id")).length,
+      }))
+      .value();
+
   const org_w_services_missing_program_ids = _.chain(
     services_missing_program_ids
   )
@@ -755,6 +804,11 @@ export default async function ({ models }) {
         absolute_most_recent_year_filtered_services,
         "gov"
       ),
+      services_count: get_services_count(filtered_service_rows),
+      service_standards_performance: get_standard_targets_counts(
+        filtered_service_rows
+      ),
+      services_w_standards: get_services_w_standards(filtered_service_rows),
       subject_offering_services_summary: get_subject_offering_services_summary(
         _.groupBy(absolute_most_recent_year_filtered_services, "org_id")
       ),
@@ -808,6 +862,9 @@ export default async function ({ models }) {
           filtered_services,
           org_id
         ),
+        services_count: get_services_count(services),
+        service_standards_performance: get_standard_targets_counts(services),
+        services_w_standards: get_services_w_standards(services),
         subject_offering_services_summary:
           get_subject_offering_services_summary(
             _.reduce(filtered_services, group_by_program_id, {})
@@ -853,6 +910,9 @@ export default async function ({ models }) {
           filtered_services,
           program_id
         ),
+        services_count: get_services_count(services),
+        service_standards_performance: get_standard_targets_counts(services),
+        services_w_standards: get_services_w_standards(services),
         list_of_missing_dept: get_missing_departments_per_year(),
       };
     })
