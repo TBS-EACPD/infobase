@@ -68,6 +68,28 @@ const ServicesDigitalStatusPanel = ({ subject }) => {
     [not_applicable]: row.not_applicable,
   }));
 
+  const graph_data = processed_data.toReversed();
+
+  const column_configs = {
+    key_desc: {
+      index: 0,
+      is_searchable: true,
+      header: "Label",
+    },
+    [can_online]: {
+      index: 1,
+      header: can_online,
+    },
+    [cannot_online]: {
+      index: 2,
+      header: cannot_online,
+    },
+    [not_applicable]: {
+      index: 3,
+      header: not_applicable,
+    },
+  };
+
   return (
     <div>
       <TM
@@ -87,28 +109,7 @@ const ServicesDigitalStatusPanel = ({ subject }) => {
         }}
       />
       {is_a11y_mode ? (
-        <DisplayTable
-          data={processed_data}
-          column_configs={{
-            key_desc: {
-              index: 0,
-              is_searchable: true,
-              header: text_maker("client_interaction_point"),
-            },
-            [can_online]: {
-              index: 1,
-              header: can_online,
-            },
-            [cannot_online]: {
-              index: 2,
-              header: cannot_online,
-            },
-            [not_applicable]: {
-              index: 3,
-              header: not_applicable,
-            },
-          }}
-        />
+        <DisplayTable data={processed_data} column_configs={column_configs} />
       ) : (
         <Fragment>
           <StandardLegend
@@ -125,7 +126,7 @@ const ServicesDigitalStatusPanel = ({ subject }) => {
             }}
           />
           <WrappedNivoHBar
-            data={processed_data}
+            data={graph_data}
             is_money={false}
             indexBy={"key_desc"}
             keys={[can_online, cannot_online, not_applicable]}
@@ -190,6 +191,12 @@ const ServicesDigitalStatusPanel = ({ subject }) => {
               bottom: 50,
               left: 190,
             }}
+            custom_table={
+              <DisplayTable
+                data={processed_data}
+                column_configs={column_configs}
+              />
+            }
           />
         </Fragment>
       )}

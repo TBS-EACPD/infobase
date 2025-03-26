@@ -1,10 +1,10 @@
 const digital_status_keys = [
-  "issue_res_digital",
-  "issuance_digital",
-  "decision_digital",
-  "application_digital",
-  "authentication",
   "account_reg_digital",
+  "authentication",
+  "application_digital",
+  "decision_digital",
+  "issuance_digital",
+  "issue_res_digital",
 ];
 const application_channels_keys = [
   "other_application_count",
