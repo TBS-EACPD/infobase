@@ -222,6 +222,7 @@ export default async function ({ models }) {
       target: lower,
       volume_meeting_target: met_count,
       total_volume: count,
+      org_id,
     }) => ({
       is_target_met: convert_to_bool_or_null(is_target_met, "Y", "N"),
       standard_id,
@@ -231,6 +232,7 @@ export default async function ({ models }) {
       lower: lower * 100,
       met_count,
       count,
+      org_id,
     })
   );
 
@@ -244,6 +246,7 @@ export default async function ({ models }) {
       type,
       service_standard_en: name_en,
       service_standard_fr: name_fr,
+      org_id,
     }) => ({
       standard_id,
       service_id,
@@ -263,7 +266,9 @@ export default async function ({ models }) {
       ),
       standard_report: _.filter(
         standard_report_rows,
-        (standard_report) => standard_report.standard_id === standard_id
+        (standard_report) =>
+          standard_report.standard_id === standard_id &&
+          standard_report.org_id === org_id
       ),
     })
   );
