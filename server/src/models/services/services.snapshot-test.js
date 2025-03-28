@@ -132,7 +132,7 @@ service_summary{
 const all_services_and_standards_for_org = `
 query{
   root(lang: "en"){
-    org(org_id: "114"){
+    org(org_id: "305"){
       services{
         ${service_fields}
       }
@@ -143,7 +143,7 @@ query{
 const all_services_and_standards_for_program = `
 query{
   root(lang: "en"){
-    program(id: "CB-BEZ01"){
+    program(id: "SHARE-BYE06"){
       services{
         ${service_fields}
       }
@@ -154,7 +154,7 @@ query{
 const all_summary_for_org = `
 query{
   root(lang: "en"){
-    org(org_id: "114"){
+    org(org_id: "305"){
       ${summary_fields}
     }
   }
@@ -163,7 +163,7 @@ query{
 const all_summary_for_program = `
 query{
   root(lang: "en"){
-    program(id: "CB-BEZ01"){
+    program(id: "SHARE-BYE06"){
       ${summary_fields}
     }
   }
@@ -172,7 +172,7 @@ query{
 const single_service = `
 query{
   root(lang: "en"){
-    service(id: "1120"){
+    service(id: "47"){
       ${service_fields}
     }
   }
@@ -181,11 +181,11 @@ query{
 const search_services_en = `
 query{
   en_root: root(lang: "en"){
-    search_by_french_word: search_services(search_phrase: "Établissement"){
+    search_by_french_word: search_services(search_phrase: "classifiée"){
       id,
       name
     }
-    search_by_english_word: search_services(search_phrase: "Copyright"){
+    search_by_english_word: search_services(search_phrase: "Classified"){
       id,
       name
     }
@@ -194,19 +194,19 @@ query{
 const search_services_fr = `
 query{
   fr_root: root(lang: "fr"){
-    diacritical_search: search_services(search_phrase: "Établissement"){
+    diacritical_search: search_services(search_phrase: "classifiée"){
       id,
       name
     }
-    diacritical_free_search: search_services(search_phrase: "Etablissement"){
+    diacritical_free_search: search_services(search_phrase: "classifiée"){
       id,
       name
     }
-    multi_word_search: search_services(search_phrase: "tarifs droit"){
+    multi_word_search: search_services(search_phrase: "Infrastructure classifiée"){
       id,
       name
     }
-    partial_word_search: search_services(search_phrase: "es"){
+    partial_word_search: search_services(search_phrase: "ée"){
       id,
       name
     }

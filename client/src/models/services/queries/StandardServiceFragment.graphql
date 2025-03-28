@@ -5,7 +5,9 @@ fragment StandardServiceFragment on Service {
   submission_year
   is_active
   report_years
+  all_program_activity_codes
   program_activity_codes
+  is_missing_program_activity_codes
   first_active_year
   last_active_year
 

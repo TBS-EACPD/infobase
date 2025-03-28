@@ -20,7 +20,9 @@ export default function (model_singleton) {
     {
       id: pkey_type(),
       org_id: parent_fkey_type(),
+      all_program_activity_codes: [sparse_parent_fkey_type()],
       program_activity_codes: [sparse_parent_fkey_type()],
+      is_missing_program_activity_codes: { type: Boolean },
       submission_year: str_type,
       is_active: { type: Boolean },
       report_years: [str_type],
@@ -106,10 +108,22 @@ export default function (model_singleton) {
 
   const common_service_fields = {
     id: pkey_type(),
+    depts_missing_program_ids: [str_type],
+    services_missing_program_ids: [
+      {
+        id: str_type,
+        ...bilingual_str("name"),
+        submission_year: str_type,
+        dept_code: str_type,
+        program_activity_codes: [str_type],
+      },
+    ],
     service_general_stats: {
       report_years: [str_type],
+      all_report_years: [str_type],
       standard_years: [str_type],
       number_of_services: { type: Number },
+      number_of_services_w_program: { type: Number },
       number_of_online_enabled_services: { type: Number },
       pct_of_online_client_interaction_pts: { type: Number },
       pct_of_standards_met_high_vol_services: { type: Number },
@@ -141,6 +155,31 @@ export default function (model_singleton) {
         services_w_standards_count: { type: Number },
         standards_count: { type: Number },
         met_standards_count: { type: Number },
+      },
+    ],
+    services_count: [
+      {
+        year: str_type,
+        services_count: { type: Number },
+      },
+    ],
+    service_standards_performance: [
+      {
+        year: str_type,
+        standards_w_target_met: { type: Number },
+        standards_w_target_not_met: { type: Number },
+      },
+    ],
+    services_w_standards: [
+      {
+        year: str_type,
+        services_w_standards: { type: Number },
+      },
+    ],
+    list_of_missing_dept: [
+      {
+        org_id: str_type,
+        report_years: [str_type],
       },
     ],
   };

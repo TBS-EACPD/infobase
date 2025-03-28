@@ -46,6 +46,7 @@ export class ServiceOverview extends React.Component {
       standard_url: get_uniq_flat_standard_urls("standard_urls"),
       rtp_url: get_uniq_flat_standard_urls("rtp_urls"),
     };
+
     return (
       <TextPanel title={title} sources={sources} datasets={datasets}>
         {!service.is_active && (
@@ -79,20 +80,29 @@ export class ServiceOverview extends React.Component {
           </dd>
           <dt>{text_maker("programs")}</dt>
           <dd>
-            <ul>
-              {_.map(service.program_activity_codes, (program_id) => {
-                const program = Program.store.lookup(program_id);
-                return (
-                  program && (
-                    <li key={program_id}>
-                      <a href={infographic_href_template(program, "services")}>
-                        {program.name}
-                      </a>
-                    </li>
-                  )
-                );
-              })}
-            </ul>
+            {_.isEmpty(service.program_activity_codes) ? (
+              <TM k={"program_information_unavailable"} />
+            ) : (
+              <ul>
+                {_.map(service.program_activity_codes, (program_id) => {
+                  const program = Program.store.lookup(program_id);
+                  return (
+                    program && (
+                      <li key={program_id}>
+                        <a
+                          href={infographic_href_template(
+                            Program.store.lookup(program_id),
+                            "services"
+                          )}
+                        >
+                          {Program.store.lookup(program_id).name}
+                        </a>
+                      </li>
+                    )
+                  );
+                })}
+              </ul>
+            )}
           </dd>
           <dt>{text_maker("service_types")}</dt>
           <dd>
