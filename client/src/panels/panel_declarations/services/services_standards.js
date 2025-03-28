@@ -56,8 +56,7 @@ const ServicesStandardsPanel = ({ subject }) => {
   }
 
   const {
-    service_general_stats: { number_of_services, standard_years },
-    service_standards_summary,
+    service_general_stats: { standard_years },
     services_count,
     services_w_standards,
     service_standards_performance,
@@ -81,10 +80,6 @@ const ServicesStandardsPanel = ({ subject }) => {
 
   const num_standards =
     num_standards_w_target_met + num_standards_w_target_not_met;
-
-  const { services_w_standards_count, standards_count, met_standards_count } =
-    _.find(service_standards_summary, { year: active_year });
-  const not_met_standards_count = standards_count - met_standards_count;
 
   const common_column_configs = {
     value: {
