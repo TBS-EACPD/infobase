@@ -772,64 +772,44 @@ export default async function ({ models }) {
   );
 
   const get_program_service_counts = (services, program_code) =>
-    _.chain(services)
-      .filter((services, program_id) => program_id === program_code)
-      .flatMap((services, program_id) =>
-        _.chain(services)
-          .groupBy("submission_year")
-          .flatMap((rows, year) => ({ year, services_count: rows.length }))
-          .value()
-      )
+    _.chain(services[program_code])
+      .groupBy("submission_year")
+      .flatMap((rows, year) => ({ year, services_count: rows.length }))
       .value();
 
   const get_program_services_w_standards = (services, program_code) =>
-    _.chain(services)
-      .filter((services, program_id) => program_id === program_code)
-      .flatMap((services, program_id) =>
-        _.chain(services)
-          .groupBy("submission_year")
-          .flatMap((rows, year) =>
-            _.chain(get_services_w_standards(rows))
-              .filter((row) => row.year === year)
-              .first()
-              .value()
-          )
-          .compact()
+    _.chain(services[program_code])
+      .groupBy("submission_year")
+      .flatMap((rows, year) =>
+        _.chain(get_services_w_standards(rows))
+          .filter((row) => row.year === year)
+          .first()
           .value()
       )
+      .compact()
       .value();
 
   const get_program_standard_targets_count = (services, program_code) =>
-    _.chain(services)
-      .filter((services, program_id) => program_id === program_code)
-      .flatMap((services, program_id) =>
-        _.chain(services)
-          .groupBy("submission_year")
-          .flatMap((rows, year) =>
-            _.chain(get_standard_targets_counts(rows))
-              .filter((row) => row.year === year)
-              .first()
-              .value()
-          )
-          .compact()
+    _.chain(services[program_code])
+      .groupBy("submission_year")
+      .flatMap((rows, year) =>
+        _.chain(get_standard_targets_counts(rows))
+          .filter((row) => row.year === year)
+          .first()
           .value()
       )
+      .compact()
       .value();
 
   const get_program_service_channels_summary = (services, program_code) =>
-    _.chain(services)
-      .filter((services, program_id) => program_id === program_code)
-      .flatMap((services, program_id) =>
-        _.chain(services)
-          .groupBy("submission_year")
-          .flatMap((rows, year) =>
-            _.chain(get_service_channels_summary(rows))
-              .filter((row) => row.year === year)
-              .value()
-          )
-          .compact()
+    _.chain(services[program_code])
+      .groupBy("submission_year")
+      .flatMap((rows, year) =>
+        _.chain(get_service_channels_summary(rows))
+          .filter((row) => row.year === year)
           .value()
       )
+      .compact()
       .value();
 
   const gov_summary = [
