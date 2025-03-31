@@ -7,7 +7,6 @@ import { declare_panel } from "src/panels/PanelRegistry";
 import {
   DisplayTable,
   create_text_maker_component,
-  Select,
   SelectAllControl,
 } from "src/components/index";
 
@@ -19,7 +18,6 @@ import {
 } from "src/models/services/queries";
 
 import { infobase_colors } from "src/core/color_schemes";
-import { formats } from "src/core/format";
 import { is_a11y_mode } from "src/core/injected_build_constants";
 
 import { StandardLegend } from "src/charts/legends/index";
@@ -197,18 +195,6 @@ const ServicesChannelsPanel = ({ subject }) => {
             }}
           >
             <TM className="medium-panel-text" k="customizable_service_graph" />
-            <div style={{ display: "flex", justifyContent: "center" }}>
-              <Select
-                id="application_channels_select"
-                title={text_maker("select_period")}
-                selected={active_year}
-                options={_.map(report_years, (year) => ({
-                  id: year,
-                  display: formats.year_to_fiscal_year_raw(year),
-                }))}
-                onSelect={(year) => set_active_year(year)}
-              />
-            </div>
           </div>
           <div className="col-12 col-lg-4">
             <StandardLegend
