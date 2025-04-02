@@ -241,14 +241,27 @@ const EmployeeAgePanel = ({
 
   const { avg_age, age_group } = calculations;
 
+  // Fix for gov_avgage values when viewing at government level
   const dept_avg_first_active_year =
     avg_age.length > 0 ? _.first(avg_age[0].data) : null;
   const dept_avg_last_active_year =
     avg_age.length > 0 ? _.last(avg_age[0].data) : null;
+
+  // When subject_type is 'gov', avg_age[0] contains the government data
+  // When subject_type is 'dept', avg_age[1] contains the government data (if available)
   const gov_avgage_last_year_5 =
-    avg_age.length > 1 ? _.first(avg_age[1].data) : null;
+    subject_type === "gov"
+      ? _.first(avg_age[0].data)
+      : avg_age.length > 1
+      ? _.first(avg_age[1].data)
+      : null;
+
   const gov_avgage_last_year =
-    avg_age.length > 1 ? _.last(avg_age[1].data) : null;
+    subject_type === "gov"
+      ? _.last(avg_age[0].data)
+      : avg_age.length > 1
+      ? _.last(avg_age[1].data)
+      : null;
 
   const common_text_args = calculate_common_text_args(age_group);
 
@@ -330,37 +343,45 @@ const EmployeeAgePanel = ({
   })();
 
   return (
-    <StdPanel {...{ title, footnotes: required_footnotes, sources, datasets }}>
-      <Col size={12} isText>
-        <TM k={subject_type + "_employee_age_text"} args={text_calculations} />
-      </Col>
-      <Col size={12} isGraph>
-        <TabsStateful
-          tabs={{
-            age_group: {
-              label: text_maker("age_group"),
-              content: (
-                <div id={"emp_age_tab_pane"}>
-                  <GraphOverlay>
-                    <NivoLineBarToggle {...age_group_options} />
-                  </GraphOverlay>
-                  <div className="clearfix"></div>
-                </div>
-              ),
-            },
-            avgage: {
-              label: text_maker("avgage"),
-              content: (
-                <div id={"emp_age_tab_pane"}>
-                  <NivoLineBarToggle {...avg_age_options} />
-                  <div className="clearfix"></div>
-                </div>
-              ),
-            },
-          }}
-        />
-      </Col>
-    </StdPanel>
+    console.log(text_calculations),
+    (
+      <StdPanel
+        {...{ title, footnotes: required_footnotes, sources, datasets }}
+      >
+        <Col size={12} isText>
+          <TM
+            k={subject_type + "_employee_age_text"}
+            args={text_calculations}
+          />
+        </Col>
+        <Col size={12} isGraph>
+          <TabsStateful
+            tabs={{
+              age_group: {
+                label: text_maker("age_group"),
+                content: (
+                  <div id={"emp_age_tab_pane"}>
+                    <GraphOverlay>
+                      <NivoLineBarToggle {...age_group_options} />
+                    </GraphOverlay>
+                    <div className="clearfix"></div>
+                  </div>
+                ),
+              },
+              avgage: {
+                label: text_maker("avgage"),
+                content: (
+                  <div id={"emp_age_tab_pane"}>
+                    <NivoLineBarToggle {...avg_age_options} />
+                    <div className="clearfix"></div>
+                  </div>
+                ),
+              },
+            }}
+          />
+        </Col>
+      </StdPanel>
+    )
   );
 };
 
