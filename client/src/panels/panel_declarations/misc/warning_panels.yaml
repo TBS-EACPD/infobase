@@ -29,7 +29,7 @@ no_service_submission_text:
 dept_services_missing_program_intro:
   transform: [handlebars, markdown]
   en: |
-    For **{{fmt_year_to_fiscal_year to_year}}**, data collection is ongoing to identify the programs through which the following services are offered. Updates will follow.
+    For **{{fmt_year_to_fiscal_year to_year}}**, the following services did not report which programs they are offered through and are therefore excluded from any visualizations related to programs.
   fr: |
     Pour **{{fmt_year_to_fiscal_year to_year}}**, la collecte de données est en cours pour identifier les programmes par lesquels les services suivants sont offerts. Des mises à jour suivront.
 
