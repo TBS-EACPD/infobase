@@ -30,15 +30,23 @@ const transformHeaders = (csv) =>
 
 // Retrieve value based on dept_name, year, dimension, headcount_type
 const getValue = (filteredCsv, dept_name, year, dimension, headcount_type) => {
-  const record = filteredCsv.find(
+  // Find all matching records instead of just one
+  const matchingRecords = filteredCsv.filter(
     (item) =>
       item.department_or_agency === dept_name &&
       item.year == year &&
       item[headcountTypeMapping[headcount_type]] === dimension
   );
-  return record && record.number_of_employees !== "*"
-    ? parseInt(record.number_of_employees, 10)
-    : null;
+
+  // Sum all values from matching records
+  let total = 0;
+  matchingRecords.forEach((record) => {
+    if (record && record.number_of_employees !== "*") {
+      total += parseInt(record.number_of_employees, 10);
+    }
+  });
+
+  return matchingRecords.length > 0 ? total : null;
 };
 
 // Cache org IDs for departments
