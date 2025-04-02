@@ -5,20 +5,33 @@ const octokit = new Octokit({
 });
 
 export async function create_github_issue(issueContent) {
+  // Validate and clean input data
+  const cleanedContent = {
+    title: issueContent.title || "Untitled Issue",
+    body: issueContent.body || "",
+    labels: Array.isArray(issueContent.labels)
+      ? issueContent.labels.filter(Boolean)
+      : [],
+  };
+
   try {
     const response = await octokit.issues.create({
-      owner: process.env.GITHUB_OWNER,
-      repo: process.env.GITHUB_REPO,
-      title: issueContent.title,
-      body: issueContent.body,
-      labels: issueContent.labels,
+      owner: "TBS-EACPD",
+      repo: "infobase",
+      ...cleanedContent,
     });
 
-    console.log("GitHub issue created successfully");
-    return response.data.html_url;
+    const issueUrl = response.data.html_url;
+    console.log("GitHub issue created successfully:", issueUrl);
+    return {
+      success: true,
+      url: issueUrl,
+      issueNumber: response.data.number,
+      title: response.data.title,
+    };
   } catch (error) {
     console.error("Error creating GitHub issue:", error);
-    return false;
+    return { success: false, error: error.message };
   }
 }
 
