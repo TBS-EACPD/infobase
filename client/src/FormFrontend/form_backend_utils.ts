@@ -82,21 +82,31 @@ const send_completed_form_template = (
       }),
     },
   })
-    .then((resp) =>
-      resp
-        .json()
-        .catch(() => resp.text())
-        .then((response) => {
-          const is_success = /2[0-9][0-9]/.test(resp.status.toString());
-          !is_success &&
-            log_error_to_analytics(response.error_message || response);
-          return {
-            success: is_success,
-            error_message: response.error_message || response,
-            issueUrl: response.issueUrl,
-          };
-        })
-    )
+    .then((resp) => {
+      const is_success = /2[0-9][0-9]/.test(resp.status.toString());
+
+      // First try to parse as JSON, if that fails, get as text
+      return resp.text().then((textResponse) => {
+        let parsedResponse;
+        try {
+          parsedResponse = JSON.parse(textResponse);
+        } catch (e) {
+          parsedResponse = textResponse;
+        }
+
+        if (!is_success) {
+          log_error_to_analytics(
+            parsedResponse.error_message || parsedResponse
+          );
+        }
+
+        return {
+          success: is_success,
+          error_message: parsedResponse.error_message || parsedResponse,
+          issueUrl: parsedResponse.issueUrl,
+        };
+      });
+    })
     .catch((error) => ({
       success: false,
       error_message: error.toString(),
@@ -122,7 +132,7 @@ const get_values_for_automatic_fields = (
 
   return _.mapValues(
     automatic_fields,
-    (value, key: keyof typeof automatic_field_getters) =>
+    (key: keyof typeof automatic_field_getters) =>
       automatic_field_getters[key]?.()
   );
 };
