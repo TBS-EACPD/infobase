@@ -133,7 +133,7 @@ const schema = `
     report_years: [String]
     all_program_activity_codes: [String]
     program_activity_codes: [String]
-    is_missing_program_activity_codes: Boolean
+    missing_program_activity_codes: [String]
     programs: [Program]
     first_active_year: String
     last_active_year: String

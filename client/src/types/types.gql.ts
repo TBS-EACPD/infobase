@@ -637,13 +637,13 @@ export type Service = {
   first_active_year?: Maybe<Scalars['String']>;
   id?: Maybe<Scalars['String']>;
   is_active?: Maybe<Scalars['Boolean']>;
-  is_missing_program_activity_codes?: Maybe<Scalars['Boolean']>;
   issuance_digital_status?: Maybe<Scalars['Boolean']>;
   issue_res_digital_status?: Maybe<Scalars['Boolean']>;
   last_accessibility_review?: Maybe<Scalars['String']>;
   last_active_year?: Maybe<Scalars['String']>;
   last_gender_analysis?: Maybe<Scalars['String']>;
   last_improve_from_feedback?: Maybe<Scalars['String']>;
+  missing_program_activity_codes?: Maybe<Array<Maybe<Scalars['String']>>>;
   name?: Maybe<Scalars['String']>;
   org?: Maybe<Org>;
   org_id?: Maybe<Scalars['String']>;
