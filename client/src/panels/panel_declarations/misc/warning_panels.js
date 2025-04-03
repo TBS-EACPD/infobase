@@ -1,5 +1,5 @@
 import _ from "lodash";
-import React, { Fragment } from "react";
+import React, { Fragment, useState } from "react";
 
 import { declare_panel } from "src/panels/PanelRegistry";
 
@@ -8,17 +8,19 @@ import {
   AlertBanner,
   KeyConceptList,
   MultiColumnList,
+  LeafSpinner,
+  StatelessDetails,
 } from "src/components/index";
 
 import { PRE_DRR_PUBLIC_ACCOUNTS_LATE_FTE_MOCK_DOC } from "src/models/footnotes/dynamic_footnotes";
 
 import dynamic_footnote_text from "src/models/footnotes/dynamic_footnotes.yaml";
 import * as Results from "src/models/results";
-import {
-  useServicesForOrg,
-  useServicesForProgram,
-} from "src/models/services/queries";
+import { useServiceSummaryOrg } from "src/models/services/queries";
+
 import { Dept } from "src/models/subjects";
+
+import { infographic_href_template } from "src/infographic/infographic_href_template";
 
 import text from "./warning_panels.yaml";
 
@@ -28,7 +30,6 @@ const { TM, text_maker } = create_text_maker_component([
 ]);
 
 const { result_docs_in_tabling_order } = Results;
-console.log(result_docs_in_tabling_order);
 
 const WarningPanel = ({
   banner_class = "info",
@@ -54,61 +55,68 @@ const dead_panel_config = {
   calculate: ({ subject }) => subject.is_dead,
 };
 
-const dept_with_gaps = [
-  "263",
-  "124",
-  "69",
-  "150",
-  "98",
-  "297",
-  "347",
-  "246",
-  "210",
-  "539",
-  "333",
-  "302",
-  "222",
-  "174",
-  "152",
-  "134",
-  "118",
-  "117",
-  "114",
-  "99",
-];
+const service_infographic_link = (id) =>
+  infographic_href_template({ id, subject_type: "service" });
 
-const NoServiceSubmissionPanel = ({ subject }) => {
-  const useServices = (() => {
-    if (subject.subject_type === "dept") {
-      return useServicesForOrg;
-    }
-    if (subject.subject_type === "program") {
-      return useServicesForProgram;
-    }
-  })();
+const ServicesMissingProgramsPanel = ({ subject }) => {
+  const [is_open, set_is_open] = useState(false);
 
-  const { loading } = useServices({ id: subject.id });
+  const { loading, data } = useServiceSummaryOrg({ id: subject.id });
+
   if (loading) {
-    return <span>loading</span>;
+    return <LeafSpinner config_name="subroute" />;
   }
 
+  const {
+    services_missing_program_ids,
+    service_general_stats: { report_years },
+  } = data;
+
+  const list_services_missing_program_ids = _.chain(
+    services_missing_program_ids
+  )
+    .sortBy("name")
+    .map((service) => {
+      return (
+        <li key={service.id}>
+          <a href={service_infographic_link(service.id)}>{service.name}</a>
+        </li>
+      );
+    })
+    .value();
+
+  const show_panel = !_.isEmpty(services_missing_program_ids);
+
   return (
-    dept_with_gaps.includes(subject.id) && (
-      <WarningPanel banner_class="warning">
-        <TM k="no_service_submission_text" args={{ subject }} />
+    show_panel && (
+      <WarningPanel banner_class="warning" center_text={false}>
+        <TM
+          k={`dept_services_missing_program_intro`}
+          args={{
+            to_year: _.first(report_years),
+            subject,
+          }}
+        />
+        <StatelessDetails
+          summary_content={<TM k={`dept_missing_program_ids_dropdown`} />}
+          content={<ul>{list_services_missing_program_ids}</ul>}
+          on_click={() => set_is_open(!is_open)}
+          is_open={is_open}
+        />
       </WarningPanel>
     )
   );
 };
 
-export const declare_no_services_submission_panel = () =>
+export const declare_services_missing_program_ids_panel = () =>
   declare_panel({
-    panel_key: `no_services_submission_warning`,
-    subject_types: ["dept", "program"],
+    panel_key: `services_missing_program_ids_warning`,
+    subject_types: ["dept"],
     panel_config_func: () => ({
       ...common_panel_config,
+
       render: ({ subject }) => {
-        return <NoServiceSubmissionPanel subject={subject} />;
+        return <ServicesMissingProgramsPanel subject={subject} />;
       },
     }),
   });

@@ -26,7 +26,6 @@ import {
   declare_services_standards_panel,
 
   // shared dept, program
-  declare_no_services_submission_panel,
   declare_spend_rev_split_panel,
   declare_provided_services_list_panel,
   declare_application_channels_by_services_panel,
@@ -62,6 +61,7 @@ import {
   declare_internal_services_panel,
   declare_employee_last_year_totals_panel,
   declare_detailed_program_spending_split_panel,
+  declare_services_missing_program_ids_panel,
 } from "src/panels/panel_declarations/index";
 
 import { ensure_loaded } from "src/core/ensure_loaded";
@@ -117,7 +117,7 @@ export const get_dept_panels = (subject) =>
     ],
     services: services_feature_flag &&
       subject.has_data("services") && [
-        declare_no_services_submission_panel(),
+        declare_services_missing_program_ids_panel(),
         declare_services_intro_panel(),
         declare_subject_offering_services_panel(),
         declare_provided_services_list_panel(),

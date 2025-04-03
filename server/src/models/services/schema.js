@@ -24,16 +24,31 @@ const schema = `
 
   type ServiceSummary{
     id: String
+    depts_missing_program_ids: [String]
+    services_missing_program_ids: [ServicesMissingProgramIds]
     service_general_stats: ServiceGeneralStats
     service_channels_summary: [ServiceChannelsSummary]
     service_digital_status_summary: [ServiceDigitalStatusSummary]
     service_standards_summary: [ServiceStandardsSummary]
+    services_count: [ServicesCount]
+    service_standards_performance: [ServiceStandardsPerformance]
+    services_w_standards: [ServicesWithStandards]
     subject_offering_services_summary: [OrgsOfferingServicesSummary]
+    list_of_missing_dept: [MissingDept]
+  }
+  type ServicesMissingProgramIds{
+    id: String
+    name: String
+    submission_year: String
+    dept_code: String
+    program_activity_codes: [String]
   }
   type ServiceGeneralStats{
     report_years: [String]
+    all_report_years: [String]
     standard_years: [String]
     number_of_services: Float
+    number_of_services_w_program: Float
     number_of_online_enabled_services: Float
     pct_of_standards_met_high_vol_services: Float
     pct_of_online_client_interaction_pts: Float
@@ -60,6 +75,19 @@ const schema = `
     services_w_standards_count: Float
     standards_count: Float
     met_standards_count: Float
+  }
+  type ServicesCount{
+    year: String
+    services_count: Float
+  }
+  type ServiceStandardsPerformance{
+    year: String
+    standards_w_target_met: Float
+    standards_w_target_not_met: Float
+  }
+  type ServicesWithStandards{
+    year: String
+    services_w_standards: Float
   }
   type OrgsOfferingServicesSummary{
     subject_id: String
@@ -103,7 +131,9 @@ const schema = `
     submission_year: String
     is_active: Boolean
     report_years: [String]
+    all_program_activity_codes: [String]
     program_activity_codes: [String]
+    missing_program_activity_codes: [String]
     programs: [Program]
     first_active_year: String
     last_active_year: String
@@ -154,6 +184,11 @@ const schema = `
     standard_urls: [String]
     rtp_urls: [String]
     standard_report: [StandardReport]
+  }
+
+  type MissingDept{
+    org_id: String
+    report_years: [String]
   }
 `;
 
@@ -235,6 +270,9 @@ export default function ({ models, loaders }) {
     },
     StandardReport: {
       standard_report_comment: bilingual_field("standard_report_comment"),
+    },
+    ServicesMissingProgramIds: {
+      name: bilingual_field("name"),
     },
   };
 

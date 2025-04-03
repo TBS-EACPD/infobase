@@ -26,7 +26,7 @@ export {
   declare_temp_untabled_warning_panel,
   declare_late_actual_resources_panel,
   declare_late_planned_resources_panel,
-  declare_no_services_submission_panel,
+  declare_services_missing_program_ids_panel,
 } from "./warning_panels";
 
 export { declare_resource_structure_panel } from "./resource_structure/resource_structure";
