@@ -51,7 +51,7 @@ services_intro_gov:
   fr: |
     Les renseignements sur les {{gl_sidebar_link "services" "SERVICE"}} offerts par le **{{subject.name}}** sont présentés ici sous forme visuelle pour permettre aux Canadiens de suivre le rendement d'un service donné. Dans ces visualisations, vous trouverez des renseignements sur les {{gl_sidebar_link "normes de service" "STANDARD"}}, le rendement, les demandes et les frais de service. Chaque service a sa propre page et les données sur les services sont combinées ou compilées au niveau du programme, du ministère et du gouvernement. 
  
-    **Le Répertoire des services du GC** contient actuellement des données sur les services offerts par **{{total_depts}} ministères et organismes** et couvre les résultats de **{{fmt_year_to_fiscal_year from_year}}** à **{{fmt_year_to_fiscal_year to_year}}**.
+    Les visualisations de l'InfoBase du GC présentent des données sur les services de **{{total_depts}} ministères et organismes**, couvrant les résultats du **Répertoire des services du GC** de **{{fmt_year_to_fiscal_year from_year}}** à **{{fmt_year_to_fiscal_year to_year}}**.
 
     En **{{fmt_year_to_fiscal_year year}}**, **{{total_depts_submitted}} ministères et organismes** ont déclaré des données dans le **Répertoire des services du GC**. Le répertoire **n'inclue pas** les données des ministères et organismes suivant:
     {{list}}
