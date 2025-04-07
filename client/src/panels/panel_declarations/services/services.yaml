@@ -39,7 +39,7 @@ services_intro_gov:
   en: | 
     Information on {{gl_sidebar_link "services" "SERVICE"}} provided by the **{{subject.name}}** has been visualized here so that Canadians can track service performance. These visualizations include information on {{gl_sidebar_link "service standards" "STANDARD"}} and performance, applications for these services, and service fees information. Each service has its own page, and service data has been combined, or aggregated at the program, department and government level. 
 
-    GC InfoBase visualizations display(s) service data from **{{total_depts}} departments and agencies**, covering **GC Service Inventory** results from **{{fmt_year_to_fiscal_year from_year}}** to **{{fmt_year_to_fiscal_year to_year}}**.
+    GC InfoBase visualizations display service data from **{{total_depts}} departments and agencies**, covering **GC Service Inventory** results from **{{fmt_year_to_fiscal_year from_year}}** to **{{fmt_year_to_fiscal_year to_year}}**.
 
     In **{{fmt_year_to_fiscal_year year}}**, **{{total_depts_submitted}} departments and agencies** reported data in the **GC Service Inventory** and **does not** include values from the following:
     {{list}}
@@ -56,7 +56,7 @@ services_intro_gov:
     En **{{fmt_year_to_fiscal_year year}}**, **{{total_depts_submitted}} ministères et organismes** ont déclaré des données dans le **Répertoire des services du GC**. Le répertoire **n'inclue pas** les données des ministères et organismes suivant:
     {{list}}
     {{#if missing_cra}}
-    Remarque : l'Agence du revenu du Canada déclare volontairement leurs services via le Répertoire des services du GC.
+    Remarque: l'Agence du revenu du Canada déclare volontairement leurs services via le Répertoire des services du GC.
     {{/if}}
 
     Remarque: les données de ce tableau de bord reflètent les dernières informations disponibles. Les modifications apportées à l'ensemble de données peuvent entraîner des mises à jour des valeurs affichées.

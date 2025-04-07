@@ -90,12 +90,9 @@ export class ServiceOverview extends React.Component {
                     program && (
                       <li key={program_id}>
                         <a
-                          href={infographic_href_template(
-                            Program.store.lookup(program_id),
-                            "services"
-                          )}
+                          href={infographic_href_template(program, "services")}
                         >
-                          {Program.store.lookup(program_id).name}
+                          {program.name}
                         </a>
                       </li>
                     )

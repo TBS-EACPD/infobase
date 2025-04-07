@@ -896,11 +896,11 @@ export default async function ({ models }) {
           (row) => row.org_id === org_id
         ),
         service_general_stats: {
-          report_years: get_years_from_service_report(filtered_services),
+          report_years: get_years_from_service_report(services),
           all_report_years: get_years_from_service_report(
             absolute_most_recent_year_filtered_services
           ),
-          standard_years: get_years_from_service_standards(filtered_services),
+          standard_years: get_years_from_service_standards(services),
           number_of_services: filtered_services.length,
           number_of_services_w_program: _.filter(
             filtered_services,
@@ -949,11 +949,11 @@ export default async function ({ models }) {
       return {
         id: program_id,
         service_general_stats: {
-          report_years: get_years_from_service_report(filtered_services),
+          report_years: get_years_from_service_report(services),
           all_report_years: get_years_from_service_report(
             absolute_most_recent_year_filtered_services
           ),
-          standard_years: get_years_from_service_standards(filtered_services),
+          standard_years: get_years_from_service_standards(services),
           number_of_services: filtered_services.length,
           number_of_online_enabled_services:
             get_number_of_online_enabled_services(filtered_services),
