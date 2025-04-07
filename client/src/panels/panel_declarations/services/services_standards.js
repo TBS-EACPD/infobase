@@ -62,21 +62,24 @@ const ServicesStandardsPanel = ({ subject }) => {
     service_standards_performance,
   } = data;
 
-  const num_services = _.chain(services_count)
-    .find(({ year }) => year === active_year)
-    .value().services_count;
+  const getValueForYear = (data, key) =>
+    _.chain(data)
+      .find(({ year }) => year === active_year)
+      .value()[key];
 
-  const num_services_w_standards = _.chain(services_w_standards)
-    .find(({ year }) => year === active_year)
-    .value().services_w_standards;
-
-  const num_standards_w_target_met = _.chain(service_standards_performance)
-    .find(({ year }) => year === active_year)
-    .value().standards_w_target_met;
-
-  const num_standards_w_target_not_met = _.chain(service_standards_performance)
-    .find(({ year }) => year === active_year)
-    .value().standards_w_target_not_met;
+  const num_services = getValueForYear(services_count, "services_count");
+  const num_services_w_standards = getValueForYear(
+    services_w_standards,
+    "services_w_standards"
+  );
+  const num_standards_w_target_met = getValueForYear(
+    service_standards_performance,
+    "standards_w_target_met"
+  );
+  const num_standards_w_target_not_met = getValueForYear(
+    service_standards_performance,
+    "standards_w_target_not_met"
+  );
 
   const num_standards =
     num_standards_w_target_met + num_standards_w_target_not_met;
