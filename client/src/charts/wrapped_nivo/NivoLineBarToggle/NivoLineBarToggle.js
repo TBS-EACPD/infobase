@@ -152,6 +152,9 @@ export class NivoLineBarToggle extends React.Component {
         tickRotation: -45,
         tickPadding: 10,
       },
+      defs: graph_options.defs,
+      fill: graph_options.fill,
+      colorBy: extra_graph_options.colorBy,
     };
 
     const extended_graph_options_line = {

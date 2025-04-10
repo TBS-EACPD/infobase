@@ -1,3 +1,4 @@
+import { scaleOrdinal } from "d3-scale";
 import _ from "lodash";
 import React, { useMemo } from "react";
 
@@ -11,7 +12,6 @@ import {
   LeafSpinner,
 } from "src/components/index";
 
-import { businessConstants } from "src/models/businessConstants";
 import {
   useOrgPeopleSummary,
   useGovPeopleSummary,
@@ -19,6 +19,7 @@ import {
 import { run_template } from "src/models/text";
 import { year_templates } from "src/models/years";
 
+import { newIBCategoryColors } from "src/core/color_schemes";
 import { formats } from "src/core/format";
 
 import { lang } from "src/core/injected_build_constants";
@@ -32,7 +33,6 @@ import text from "./employee_age.yaml";
 const { text_maker, TM } = create_text_maker_component(text);
 
 const { people_years } = year_templates;
-const { age_groups } = businessConstants;
 
 const EmployeeAgePanel = ({
   title,
@@ -57,139 +57,42 @@ const EmployeeAgePanel = ({
       return null;
     }
 
-    // Process age_group data with correct labels from businessConstants
+    // Process age_group data
     const age_group = data.age_group
       .filter((group) => group && group.yearly_data)
       .map((row) => {
-        // Map the dimension to the correct age_groups constant
-        let mappedDimension = row.dimension;
-        let businessConstantKey = null;
-
-        // More comprehensive mapping for granular age ranges
-        if (
-          row.dimension.includes("<20") ||
-          row.dimension.includes("20-24") ||
-          row.dimension.includes("25-29") ||
-          row.dimension.match(/^(Under|Moins de) 30/) ||
-          row.dimension.match(/^(Age 29 and less|29 ans et moins)$/)
-        ) {
-          businessConstantKey = "age30less";
-        } else if (
-          row.dimension.includes("30-34") ||
-          row.dimension.includes("35-39") ||
-          row.dimension.match(/^(30 to 39|30 à 39)/) ||
-          row.dimension.match(/^(Age 30 to 39|30 à 39 ans)$/)
-        ) {
-          businessConstantKey = "age30to39";
-        } else if (
-          row.dimension.includes("40-44") ||
-          row.dimension.includes("45-49") ||
-          row.dimension.match(/^(40 to 49|40 à 49)/) ||
-          row.dimension.match(/^(Age 40 to 49|40 à 49 ans)$/)
-        ) {
-          businessConstantKey = "age40to49";
-        } else if (
-          row.dimension.includes("50-54") ||
-          row.dimension.includes("55-59") ||
-          row.dimension.match(/^(50 to 59|50 à 59)/) ||
-          row.dimension.match(/^(Age 50 to 59|50 à 59 ans)$/)
-        ) {
-          businessConstantKey = "age50to59";
-        } else if (
-          row.dimension.includes("60-64") ||
-          row.dimension.includes("65+") ||
-          row.dimension.includes("≥65") ||
-          row.dimension.match(/^(60 and over|60 ans et plus)/) ||
-          row.dimension.match(/^(Age 60 and over|60 ans et plus)$/)
-        ) {
-          businessConstantKey = "age60plus";
-        } else if (row.dimension.match(/^(Not Available|Non disponible)$/i)) {
-          businessConstantKey = "na";
-        } else if (
-          row.dimension.match(/^(Suppressed Data|Données supprimées)$/i)
-        ) {
-          businessConstantKey = "sup";
-        }
-
-        // If we found a mapping, use the text from the business constant
-        if (businessConstantKey && age_groups[businessConstantKey]) {
-          mappedDimension = age_groups[businessConstantKey].text;
-        }
+        const suppressedFlags = row.yearly_data
+          .filter((entry) => entry)
+          .map((entry) => entry.value === -1);
 
         return {
-          label: mappedDimension,
+          label: row.dimension,
+          // Store original values for display in tables/tooltips
+          displayData: row.yearly_data
+            .filter((entry) => entry)
+            .map((entry) => (entry.value === -1 ? "*" : entry.value)),
+          // Store numeric values for chart rendering
           data: row.yearly_data
             .filter((entry) => entry)
-            .map((entry) => entry.value),
+            .map((entry) => {
+              if (entry.value === -1) {
+                return 5; // Numeric value for suppressed data
+              } else if (entry.value === null || entry.value === undefined) {
+                return 0;
+              } else {
+                return entry.value;
+              }
+            }),
+          // Track which values are suppressed for styling
+          suppressedFlags,
           five_year_percent: row.avg_share,
           active: true,
         };
       })
-      .filter((group) =>
-        _.some(group.data, (val) => val !== null && val !== 0)
+      .filter((group) => _.some(group.data, (d) => d !== 0))
+      .sort((a, b) =>
+        a.label.localeCompare(b.label, undefined, { numeric: true })
       );
-
-    // Consolidate age groups to match business constants
-    const consolidatedGroups = {};
-
-    // Initialize groups from business constants
-    Object.keys(age_groups).forEach((key) => {
-      consolidatedGroups[age_groups[key].text] = {
-        label: age_groups[key].text,
-        data: new Array(5).fill(0),
-        five_year_percent: 0,
-        active: true,
-        count: 0,
-      };
-    });
-
-    // Sum up data for each consolidated group
-    age_group.forEach((group) => {
-      if (consolidatedGroups[group.label]) {
-        const target = consolidatedGroups[group.label];
-
-        // Sum the data arrays
-        group.data.forEach((value, index) => {
-          if (value !== null && !isNaN(value)) {
-            target.data[index] = (target.data[index] || 0) + value;
-          }
-        });
-
-        // Accumulate five_year_percent for averaging later
-        if (
-          group.five_year_percent !== null &&
-          !isNaN(group.five_year_percent)
-        ) {
-          target.five_year_percent += group.five_year_percent || 0;
-          target.count++;
-        }
-      }
-    });
-
-    // Calculate averages and convert to array
-    const finalAgeGroups = Object.values(consolidatedGroups)
-      .map((group) => ({
-        label: group.label,
-        data: group.data,
-        five_year_percent:
-          group.count > 0 ? group.five_year_percent / group.count : 0,
-        active: true,
-      }))
-      .filter((group) => _.some(group.data, (val) => val !== null && val !== 0))
-      .sort((a, b) => {
-        // Sort by age group order
-        const ageOrder = {
-          [age_groups.age30less.text]: 1,
-          [age_groups.age30to39.text]: 2,
-          [age_groups.age40to49.text]: 3,
-          [age_groups.age50to59.text]: 4,
-          [age_groups.age60plus.text]: 5,
-          [age_groups.na.text]: 6,
-          [age_groups.sup.text]: 7,
-        };
-
-        return (ageOrder[a.label] || 99) - (ageOrder[b.label] || 99);
-      });
 
     // Process average_age data
     const avg_age = [];
@@ -200,7 +103,15 @@ const EmployeeAgePanel = ({
         label: subject.name,
         data: data.average_age
           .filter((entry) => entry)
-          .map((entry) => entry.value),
+          .map((entry) => {
+            if (entry.value === -1) {
+              return 5;
+            } else if (entry.value === null || entry.value === undefined) {
+              return 0;
+            } else {
+              return entry.value;
+            }
+          }),
         active: true,
       });
     }
@@ -216,14 +127,22 @@ const EmployeeAgePanel = ({
         label: text_maker("fps"),
         data: govData.average_age
           .filter((entry) => entry)
-          .map((entry) => entry.value),
+          .map((entry) => {
+            if (entry.value === -1) {
+              return 5;
+            } else if (entry.value === null || entry.value === undefined) {
+              return 0;
+            } else {
+              return entry.value;
+            }
+          }),
         active: true,
       });
     }
 
     return {
       avg_age,
-      age_group: finalAgeGroups,
+      age_group,
     };
   }, [data, govData, subject.name, subject_type]);
 
@@ -288,22 +207,92 @@ const EmployeeAgePanel = ({
 
   const ticks = _.map(people_years, (y) => `${run_template(y)}`);
 
-  // Options for NivoLineBarToggle React components
+  const has_suppressed_data = _.some(calculations.age_group, (group) =>
+    _.some(group.suppressedFlags, (flag) => flag)
+  );
+
+  const required_footnotes = has_suppressed_data
+    ? footnotes
+    : _.filter(
+        footnotes,
+        (footnote) =>
+          !_.some(footnote.topic_keys, (key) => key === "SUPPRESSED_DATA")
+      );
+
+  // Options for NivoLineBarToggle component
   const age_group_options = {
     legend_title: text_maker("age_group"),
     bar: true,
+    get_colors: () => {
+      const baseColorScale = scaleOrdinal().range(newIBCategoryColors);
+
+      // Create pattern IDs for series with suppressed data
+      const patternIds = {};
+      calculations.age_group.forEach((series) => {
+        if (
+          series.suppressedFlags &&
+          series.suppressedFlags.some((flag) => flag)
+        ) {
+          patternIds[series.label] = `pattern-${series.label.replace(
+            /\s+/g,
+            "-"
+          )}`;
+        }
+      });
+
+      return (label) => {
+        // Find the series with this label
+        const series = calculations.age_group.find(
+          (group) => group.label === label
+        );
+
+        // If series has any suppressed data points, use a pattern
+        if (
+          series &&
+          series.suppressedFlags &&
+          series.suppressedFlags.some((flag) => flag)
+        ) {
+          return `url(#${patternIds[label]})`;
+        }
+
+        // Otherwise use the standard color
+        return baseColorScale(label);
+      };
+    },
     graph_options: {
       ticks: ticks,
       y_axis: text_maker("employees"),
-      formatter: formats.big_int_raw,
       responsive: true,
       animate: window.matchMedia("(prefers-reduced-motion: no-preference)")
         .matches,
       role: "img",
       ariaLabel: `${text_maker("age_group")} ${subject.name}`,
+      // Define patterns for series with suppressed data
+      defs: calculations.age_group
+        .filter(
+          (series) =>
+            series.suppressedFlags &&
+            series.suppressedFlags.some((flag) => flag)
+        )
+        .map((series) => ({
+          id: `pattern-${series.label.replace(/\s+/g, "-")}`,
+          type: "patternLines",
+          background: "#D3D3D3", // Light grey background
+          color: "#999999", // Darker grey lines
+          lineWidth: 3,
+          spacing: 8,
+          rotation: -45,
+        })),
     },
     initial_graph_mode: "bar_grouped",
     data: calculations.age_group,
+    formatter: (value) => {
+      // Check if this is a suppressed data point
+      if (value === 5) {
+        return "*";
+      }
+      return formats.big_int_raw(value);
+    },
   };
 
   const avg_age_options = {
@@ -314,8 +303,7 @@ const EmployeeAgePanel = ({
       y_axis: text_maker("avgage"),
       formatter: formats.int,
       responsive: true,
-      animate: window.matchMedia("(prefers-reduced-motion: no-preference)")
-        .matches,
+      animate: false,
       role: "img",
       ariaLabel: `${text_maker("avgage")} ${subject.name}`,
     },
@@ -325,63 +313,38 @@ const EmployeeAgePanel = ({
     formatter: formats.decimal2,
   };
 
-  const has_suppressed_data = _.some(
-    calculations.age_group,
-    (data) => data.label === age_groups.sup.text
-  );
-
-  const required_footnotes = (() => {
-    if (has_suppressed_data) {
-      return footnotes;
-    } else {
-      return _.filter(
-        footnotes,
-        (footnote) =>
-          !_.some(footnote.topic_keys, (key) => key === "SUPPRESSED_DATA")
-      );
-    }
-  })();
-
   return (
-    console.log(text_calculations),
-    (
-      <StdPanel
-        {...{ title, footnotes: required_footnotes, sources, datasets }}
-      >
-        <Col size={12} isText>
-          <TM
-            k={subject_type + "_employee_age_text"}
-            args={text_calculations}
-          />
-        </Col>
-        <Col size={12} isGraph>
-          <TabsStateful
-            tabs={{
-              age_group: {
-                label: text_maker("age_group"),
-                content: (
-                  <div id={"emp_age_tab_pane"}>
-                    <GraphOverlay>
-                      <NivoLineBarToggle {...age_group_options} />
-                    </GraphOverlay>
-                    <div className="clearfix"></div>
-                  </div>
-                ),
-              },
-              avgage: {
-                label: text_maker("avgage"),
-                content: (
-                  <div id={"emp_age_tab_pane"}>
-                    <NivoLineBarToggle {...avg_age_options} />
-                    <div className="clearfix"></div>
-                  </div>
-                ),
-              },
-            }}
-          />
-        </Col>
-      </StdPanel>
-    )
+    <StdPanel {...{ title, footnotes: required_footnotes, sources, datasets }}>
+      <Col size={12} isText>
+        <TM k={subject_type + "_employee_age_text"} args={text_calculations} />
+      </Col>
+      <Col size={12} isGraph>
+        <TabsStateful
+          tabs={{
+            age_group: {
+              label: text_maker("age_group"),
+              content: (
+                <div id={"emp_age_tab_pane"}>
+                  <GraphOverlay>
+                    <NivoLineBarToggle {...age_group_options} />
+                  </GraphOverlay>
+                  <div className="clearfix"></div>
+                </div>
+              ),
+            },
+            avgage: {
+              label: text_maker("avgage"),
+              content: (
+                <div id={"emp_age_tab_pane"}>
+                  <NivoLineBarToggle {...avg_age_options} />
+                  <div className="clearfix"></div>
+                </div>
+              ),
+            },
+          }}
+        />
+      </Col>
+    </StdPanel>
   );
 };
 
