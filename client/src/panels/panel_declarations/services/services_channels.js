@@ -257,9 +257,9 @@ export const declare_services_channels_panel = () =>
     panel_config_func: () => ({
       get_title: () => text_maker("services_channels_title"),
       get_dataset_keys: () => ["service_inventory"],
-      render({ title, subject, sources, datasets }) {
+      render({ title, subject, sources }) {
         return (
-          <InfographicPanel title={title} sources={sources} datasets={datasets}>
+          <InfographicPanel title={title} sources={sources}>
             <ServicesChannelsPanel subject={subject} />
           </InfographicPanel>
         );

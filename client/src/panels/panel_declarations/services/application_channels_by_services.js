@@ -271,9 +271,9 @@ export const declare_application_channels_by_services_panel = () =>
     panel_config_func: () => ({
       get_title: () => text_maker("customizable_service_graph"),
       get_dataset_keys: () => ["service_inventory"],
-      render({ title, subject, sources, datasets }) {
+      render({ title, subject, sources }) {
         return (
-          <InfographicPanel title={title} sources={sources} datasets={datasets}>
+          <InfographicPanel title={title} sources={sources}>
             <SuspenseLeafSpinner config_name={"subroute"}>
               <ServicesChannelsPanel subject={subject} />
             </SuspenseLeafSpinner>

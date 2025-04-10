@@ -127,9 +127,9 @@ export const declare_provided_services_list_panel = () =>
     panel_config_func: () => ({
       get_title: () => text_maker("list_of_provided_services_title"),
       get_dataset_keys: () => ["service_inventory"],
-      render({ title, subject, sources, datasets }) {
+      render({ title, subject, sources }) {
         return (
-          <InfographicPanel title={title} sources={sources} datasets={datasets}>
+          <InfographicPanel title={title} sources={sources}>
             <SuspenseLeafSpinner config_name={"subroute"}>
               <ProvidedServicesListPanel subject={subject} />
             </SuspenseLeafSpinner>

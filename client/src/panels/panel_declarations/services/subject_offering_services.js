@@ -124,9 +124,9 @@ export const declare_subject_offering_services_panel = () =>
           ? text_maker("subject_offering_services_title")
           : text_maker("programs_offering_services_title"),
       get_dataset_keys: () => ["service_inventory"],
-      render({ title, subject, sources, datasets }) {
+      render({ title, subject, sources }) {
         return (
-          <InfographicPanel title={title} sources={sources} datasets={datasets}>
+          <InfographicPanel title={title} sources={sources}>
             <OrgsOfferingServicesPanel subject={subject} />
           </InfographicPanel>
         );

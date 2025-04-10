@@ -202,7 +202,7 @@ export const declare_single_service_standards_panel = () =>
       get_title: () => text_maker("service_standards_title"),
       get_dataset_keys: () => ["service_inventory"],
       footnotes: false,
-      render({ title, subject, sources, datasets }) {
+      render({ title, subject, sources }) {
         const standards = subject.standards;
         const years = _.chain(standards)
           .map("submission_year")
@@ -242,7 +242,6 @@ export const declare_single_service_standards_panel = () =>
           <InfographicPanel
             title={title}
             sources={sources}
-            datasets={datasets}
             footnotes={footnotes}
           >
             {!_.isEmpty(standards) ? (

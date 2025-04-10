@@ -192,9 +192,9 @@ export const declare_services_intro_panel = () =>
         };
       },
       get_dataset_keys: () => ["service_inventory"],
-      render({ title, subject, sources, datasets }) {
+      render({ title, subject, sources }) {
         return (
-          <InfographicPanel title={title} sources={sources} datasets={datasets}>
+          <InfographicPanel title={title} sources={sources}>
             <ServicesIntroPanel subject={subject} />
           </InfographicPanel>
         );
