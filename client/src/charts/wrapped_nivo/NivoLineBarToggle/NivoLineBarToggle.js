@@ -75,14 +75,11 @@ export class NivoLineBarToggle extends React.Component {
   render() {
     const {
       data,
-
       legend_col_full_size,
       legend_col_class,
       legend_title,
-
       graph_col_full_size,
       graph_col_class,
-
       disable_toggle,
       formatter,
       graph_options,
@@ -92,20 +89,47 @@ export class NivoLineBarToggle extends React.Component {
 
     const extra_graph_options = this.extra_options_by_graph_mode[graph_mode];
 
-    const series = _.chain(data)
-      .filter(({ label }) => _.includes(selected, label))
+    // Filter and preserve the full original data objects
+    const selectedData = _.filter(data, ({ label }) =>
+      _.includes(selected, label)
+    );
+
+    // Extract just the data arrays for the series calculations
+    const series = _.chain(selectedData)
       .map(({ label, data }) => [label, data])
       .fromPairs()
       .value();
 
     const raw_data = _.flatMap(series, (value) => value);
 
-    const data_bar = _.map(graph_options.ticks, (date, date_index) => ({
-      ..._.chain(series)
-        .map((data, label) => [label, data[date_index]])
-        .fromPairs()
-        .value(),
-    }));
+    // Create a map of suppressed data points
+    const suppressedDataPoints = {};
+
+    // Iterate through selectedData to build suppressedDataPoints map
+    _.forEach(selectedData, (item) => {
+      if (item.suppressedFlags) {
+        suppressedDataPoints[item.label] = {};
+        _.forEach(item.suppressedFlags, (isSuppressed, index) => {
+          if (isSuppressed) {
+            const tickLabel = graph_options.ticks[index];
+            suppressedDataPoints[item.label][tickLabel] = true;
+          }
+        });
+      }
+    });
+
+    const data_bar = _.map(graph_options.ticks, (date, date_index) => {
+      // Create the base bar data
+      const bar_data = {
+        ..._.chain(series)
+          .map((data, label) => [label, data[date_index]])
+          .fromPairs()
+          .value(),
+        date: date, // Add the date to each data point
+      };
+
+      return bar_data;
+    });
 
     const data_formatter_bar = (data) =>
       _.map(data, (stacked_data, index) => ({
@@ -135,7 +159,27 @@ export class NivoLineBarToggle extends React.Component {
       data: extra_graph_options.normalized
         ? data_formatter_bar(normalize(data_bar))
         : data_formatter_bar(data_bar),
-      colors: (d) => colors(d.id),
+      colors: (d) => {
+        // Check if this specific data point is suppressed
+        if (
+          suppressedDataPoints[d.id] &&
+          suppressedDataPoints[d.id][d.indexValue]
+        ) {
+          // This specific data point is suppressed
+          const patternId =
+            graph_options.defs &&
+            graph_options.defs.find((def) => def.type === "patternLines")
+              ? graph_options.defs[0].id
+              : null;
+
+          if (patternId) {
+            return `url(#${patternId})`;
+          }
+        }
+
+        // Otherwise use the normal color
+        return colors(d.id);
+      },
       text_formatter: formatter || extra_graph_options.formatter,
       indexBy: extra_graph_options.index,
       is_money: !!extra_graph_options.is_money,

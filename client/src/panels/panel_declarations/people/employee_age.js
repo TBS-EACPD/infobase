@@ -207,11 +207,13 @@ const EmployeeAgePanel = ({
 
   const ticks = _.map(people_years, (y) => `${run_template(y)}`);
 
-  const has_suppressed_data = _.some(calculations.age_group, (group) =>
-    _.some(group.suppressedFlags, (flag) => flag)
+  // Single, consistent check for suppressed data
+  const hasSuppressedData = _.some(
+    calculations.age_group,
+    (ageGroup) => ageGroup.suppressedFlags && _.some(ageGroup.suppressedFlags)
   );
 
-  const required_footnotes = has_suppressed_data
+  const required_footnotes = hasSuppressedData
     ? footnotes
     : _.filter(
         footnotes,
@@ -223,42 +225,7 @@ const EmployeeAgePanel = ({
   const age_group_options = {
     legend_title: text_maker("age_group"),
     bar: true,
-    get_colors: () => {
-      const baseColorScale = scaleOrdinal().range(newIBCategoryColors);
-
-      // Create pattern IDs for series with suppressed data
-      const patternIds = {};
-      calculations.age_group.forEach((series) => {
-        if (
-          series.suppressedFlags &&
-          series.suppressedFlags.some((flag) => flag)
-        ) {
-          patternIds[series.label] = `pattern-${series.label.replace(
-            /\s+/g,
-            "-"
-          )}`;
-        }
-      });
-
-      return (label) => {
-        // Find the series with this label
-        const series = calculations.age_group.find(
-          (group) => group.label === label
-        );
-
-        // If series has any suppressed data points, use a pattern
-        if (
-          series &&
-          series.suppressedFlags &&
-          series.suppressedFlags.some((flag) => flag)
-        ) {
-          return `url(#${patternIds[label]})`;
-        }
-
-        // Otherwise use the standard color
-        return baseColorScale(label);
-      };
-    },
+    get_colors: () => scaleOrdinal().range(newIBCategoryColors),
     graph_options: {
       ticks: ticks,
       y_axis: text_maker("employees"),
@@ -267,22 +234,18 @@ const EmployeeAgePanel = ({
         .matches,
       role: "img",
       ariaLabel: `${text_maker("age_group")} ${subject.name}`,
-      // Define patterns for series with suppressed data
-      defs: calculations.age_group
-        .filter(
-          (series) =>
-            series.suppressedFlags &&
-            series.suppressedFlags.some((flag) => flag)
-        )
-        .map((series) => ({
-          id: `pattern-${series.label.replace(/\s+/g, "-")}`,
+      // Define patterns for suppressed data
+      defs: [
+        {
+          id: "pattern-suppressed-data",
           type: "patternLines",
           background: "#D3D3D3", // Light grey background
           color: "#999999", // Darker grey lines
           lineWidth: 3,
           spacing: 8,
           rotation: -45,
-        })),
+        },
+      ],
     },
     initial_graph_mode: "bar_grouped",
     data: calculations.age_group,
@@ -327,6 +290,24 @@ const EmployeeAgePanel = ({
                 <div id={"emp_age_tab_pane"}>
                   <GraphOverlay>
                     <NivoLineBarToggle {...age_group_options} />
+                    {hasSuppressedData && (
+                      <div className="graph-note text-center mt-2 font-italic">
+                        <small>
+                          <span
+                            className="mr-2"
+                            style={{
+                              display: "inline-block",
+                              width: "20px",
+                              height: "10px",
+                              backgroundImage:
+                                "linear-gradient(135deg, #999 25%, #D3D3D3 25%, #D3D3D3 50%, #999 50%, #999 75%, #D3D3D3 75%)",
+                              backgroundSize: "8px 8px",
+                            }}
+                          ></span>
+                          {text_maker("suppressed_data_pattern_note")}
+                        </small>
+                      </div>
+                    )}
                   </GraphOverlay>
                   <div className="clearfix"></div>
                 </div>
