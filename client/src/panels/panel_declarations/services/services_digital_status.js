@@ -216,9 +216,9 @@ export const declare_services_digital_status_panel = () =>
         };
       },
       get_dataset_keys: () => ["service_inventory"],
-      render({ title, subject, sources, datasets }) {
+      render({ title, subject, sources }) {
         return (
-          <InfographicPanel title={title} sources={sources} datasets={datasets}>
+          <InfographicPanel title={title} sources={sources}>
             <ServicesDigitalStatusPanel subject={subject} />
           </InfographicPanel>
         );

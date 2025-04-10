@@ -28,7 +28,7 @@ const { text_maker, TM } = create_text_maker_component(text);
 
 export class ServiceOverview extends React.Component {
   render() {
-    const { service, title, sources, datasets } = this.props;
+    const { service, title, sources } = this.props;
 
     const most_recent_year = service.report_years[0];
     const most_recent_report = _.find(service.service_report, {
@@ -48,7 +48,7 @@ export class ServiceOverview extends React.Component {
     };
 
     return (
-      <TextPanel title={title} sources={sources} datasets={datasets}>
+      <TextPanel title={title} sources={sources}>
         {!service.is_active && (
           <AlertBanner banner_class={"danger"} style={{ textAlign: "center" }}>
             <TM k="inactive_service_warning" />
@@ -197,14 +197,9 @@ export const declare_single_service_overview_panel = () =>
     panel_config_func: () => ({
       get_title: () => text_maker("service_overview_title"),
       get_dataset_keys: () => ["service_inventory"],
-      render({ title, subject, sources, datasets }) {
+      render({ title, subject, sources }) {
         return (
-          <ServiceOverview
-            service={subject}
-            title={title}
-            sources={sources}
-            datasets={datasets}
-          />
+          <ServiceOverview service={subject} title={title} sources={sources} />
         );
       },
     }),
