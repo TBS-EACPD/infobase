@@ -89,6 +89,9 @@ export class WrappedNivoBar extends React.Component {
       animate,
       motionDamping,
       motionStiffness,
+      defs,
+      fill,
+      colorBy,
     } = this.props;
 
     const table =
@@ -128,6 +131,9 @@ export class WrappedNivoBar extends React.Component {
             animate,
             motionDamping,
             motionStiffness,
+            defs,
+            fill,
+            colorBy,
           }}
           legends={fix_legend_symbols(legends)}
           keys={_.union(keys, [""])} //extra key allows negative bar to render (only needed when 1 type of key

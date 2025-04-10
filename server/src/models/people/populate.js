@@ -28,6 +28,7 @@ const transformHeaders = (csv) =>
     _.mapKeys(record, (value, key) => key.toLowerCase().replace(/ /g, "_"))
   );
 
+/*
 // Retrieve value based on dept_name, year, dimension, headcount_type
 const getValue = (filteredCsv, dept_name, year, dimension, headcount_type) => {
   // Find all matching records instead of just one
@@ -48,6 +49,7 @@ const getValue = (filteredCsv, dept_name, year, dimension, headcount_type) => {
 
   return matchingRecords.length > 0 ? total : null;
 };
+*/
 
 // Cache org IDs for departments
 const get_org_id_from_dept_name = (csv_name, dept_name) => {
@@ -154,13 +156,9 @@ const process_avg_age_dataset = () => {
           .map((record) => ({
             year: parseInt(record.year, 10),
             value:
-              record.average_age === "*"
-                ? null
-                : parseFloat(record.average_age),
+              record.average_age === "*" ? -1 : parseFloat(record.average_age),
           }))
-          .filter(
-            (item) => item.year && (item.value === null || !isNaN(item.value))
-          )
+          .filter((item) => item.year && !isNaN(item.value))
           .sortBy("year")
           .value(),
       };
@@ -260,16 +258,20 @@ const process_standard_headcount_dataset = (headcount_type) => {
         org_id: orgId,
         dimension: dimension,
         yearly_data: _.chain(recentYears)
-          .map((year) => ({
-            year,
-            value: getValue(
-              filteredCsv,
-              deptName,
+          .map((year) => {
+            const yearData = rows.find(
+              (row) => parseInt(row.year, 10) === year
+            );
+            return {
               year,
-              dimension,
-              headcount_type
-            ),
-          }))
+              value:
+                yearData && yearData.number_of_employees === "*"
+                  ? -1
+                  : yearData
+                  ? parseInt(yearData.number_of_employees, 10)
+                  : null,
+            };
+          })
           .value(),
         avg_share: averageShares[orgId]?.[dimension] || 0,
       };

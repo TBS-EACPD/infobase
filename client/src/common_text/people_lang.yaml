@@ -23,6 +23,9 @@ FOL:
 employee_gender:
   en: Employee Gender
   fr: Employés par sexe
+suppressed_data:
+  en: Suppressed Data
+  fr: Données supprimées
 
 
 
