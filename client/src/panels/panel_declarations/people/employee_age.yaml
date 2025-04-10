@@ -42,3 +42,7 @@ dept_employee_age_text_temporary_no_avg_age:
 
   fr: |
    De **{{fmt_big_int first_active_year}}** à **{{fmt_big_int last_active_year}}**, les personnes âgées de **{{fmt_big_int top_avg_group}}** constituaient en moyenne le plus fort contingent (**{{fmt_percentage1 top_avg_group_share}}**) d’{{gl_sidebar_link "employés" "HEAD"}} **{{subject.name}}**.
+
+suppressed_data_pattern_note:
+  en: Pattern indicates suppressed data points
+  fr: Le motif indique des données supprimées
