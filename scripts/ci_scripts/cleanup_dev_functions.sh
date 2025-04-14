@@ -14,7 +14,7 @@ if [[ ! -z "$to_delete_functions" ]]; then
     echo "start deleting functions"
     while IFS= read -r branch_name; do
         echo $branch_name
-        gcloud functions delete $branch_name --quiet --region=us-central1 --project=ib-serverless-api-dev
+        gcloud functions delete $branch_name --quiet --region=us-central1 --project=$DEV_API_PROJECT_ID
     done <<< "$to_delete_functions"
     echo "finish deleting functions"
 else
