@@ -25,7 +25,7 @@ if [[ ! -z "$to_delete_services" ]]; then
     echo "start deleting run services"
     while IFS= read -r branch_name; do
         echo $branch_name
-        gcloud run services delete $branch_name --quiet --region=us-central1 --project=ib-serverless-api-dev --namespace=961991692823 --async
+        gcloud run services delete $branch_name --quiet --region=us-central1 --project=ib-serverless-api-dev --async
     done <<< "$to_delete_services"
     echo "finish deleting run services"
 else
