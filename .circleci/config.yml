@@ -338,7 +338,7 @@ jobs:
 
   test_end_to_end:
     docker:
-      - image: eaadtbs/ib-ci-cypress:5.0
+      - image: eaadtbs/ib-ci-cypress:7.0
         <<: *dockerhub_auth
     working_directory: "~/InfoBase"
     parameters:
@@ -372,24 +372,24 @@ jobs:
           command: (cd client && npm run serve:ci)
           background: true
 
-      - run: |
-          shopt -s globstar && cat ./client/**/cypress-snapshots.js\
-          | grep -vE '^\s*(//)'\
-          > pre-run-cypress-snapshots-without-comments
+      # - run: |
+      #     shopt -s globstar && cat ./client/**/cypress-snapshots.js\
+      #     | grep -vE '^\s*(//)'\
+      #     > pre-run-cypress-snapshots-without-comments
 
       - run: (cd client && npm run cypress -- -e BATCH_COUNT=<< parameters.batch-count >>,BATCH_INDEX=<< parameters.batch-index >>)
 
-      - run: touch post-run-cypress-snapshots && shopt -s globstar && cat ./client/**/cypress-snapshots.js >> post-run-cypress-snapshots
-      - run: |
-          diff pre-run-cypress-snapshots-without-comments post-run-cypress-snapshots\
-          || (\
-            echo "CI cypress runs SHOULD NOT result in changes to the snapshot file. This indicates that the snapshots need to be updated locally (exiting routes removed, new routes initialized... fiddly formating fixed, etc.)"\
-            && exit 1\
-          )
+      # - run: touch post-run-cypress-snapshots && shopt -s globstar && cat ./client/**/cypress-snapshots.js >> post-run-cypress-snapshots
+      # - run: |
+      #     diff pre-run-cypress-snapshots-without-comments post-run-cypress-snapshots\
+      #     || (\
+      #       echo "CI cypress runs SHOULD NOT result in changes to the snapshot file. This indicates that the snapshots need to be updated locally (exiting routes removed, new routes initialized... fiddly formating fixed, etc.)"\
+      #       && exit 1\
+      #     )
 
-      - run_codecov:
-          coverage_path: client/.coverage/cypress/coverage-final.json
-          flag: e2e_shallow
+      # - run_codecov:
+      #     coverage_path: client/.coverage/cypress/coverage-final.json
+      #     flag: e2e_shallow
 
       - run: circleci step halt # held open at this point by the running server, force halt (returns successful)
 
@@ -504,19 +504,19 @@ workflows:
             - test_server
           <<: *deploy_filter
 
-      # - test_end_to_end:
-      #     requires:
-      #       - test_server
-      #       - build_client
-      #     matrix:
-      #       parameters:
-      #         batch-count: [3]
-      #         batch-index: [0, 1, 2]
+      - test_end_to_end:
+          requires:
+            - test_server
+            - build_client
+          matrix:
+            parameters:
+              batch-count: [3]
+              batch-index: [0, 1, 2]
 
       - deploy_client:
           requires:
             - deploy_data
             - deploy_server
             - build_client
-            # - test_end_to_end
+            - test_end_to_end
           <<: *deploy_filter

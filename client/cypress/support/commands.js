@@ -1,6 +1,6 @@
-import snapshot_plugin from "@cypress/snapshot";
+//import snapshot_plugin from "@cypress/snapshot";
 
-snapshot_plugin.register();
+//snapshot_plugin.register();
 
 Cypress.Commands.add("terminalLog", (violations) => {
   cy.task(
