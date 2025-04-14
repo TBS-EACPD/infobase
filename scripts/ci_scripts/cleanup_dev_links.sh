@@ -23,7 +23,7 @@ if [[ ! -z "$inactive_branches_with_live_dev_links" ]]; then
   echo "Clobbering dev link files for: $inactive_branches_with_live_dev_links"
 
   while IFS= read -r branch_name; do
-    gcloud storage rsync --continue-on-error --recursive --delete-unmatched-destination-objects --canned-acl=public-read --project=$DEV_CLIENT_PROJECT_ID "$dead_dev_link_html_location" "$GCLOUD_BUCKET_ROOT/$branch_name"
+    gcloud storage rsync --continue-on-error --recursive --delete-unmatched-destination-objects --predefined-acl=publicRead --project=$DEV_CLIENT_PROJECT_ID "$dead_dev_link_html_location" "$GCLOUD_BUCKET_ROOT/$branch_name"
     # saw cases where these html files were miss-typed. Couldn't tell why, but being explicit here to play it safe
     gcloud storage objects update --project=$DEV_CLIENT_PROJECT_ID "$GCLOUD_BUCKET_ROOT/$branch_name/*.html" --content-type=text/html
   done <<< "$inactive_branches_with_live_dev_links"
