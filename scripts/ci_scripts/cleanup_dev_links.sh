@@ -23,7 +23,7 @@ if [[ ! -z "$inactive_branches_with_live_dev_links" ]]; then
   echo "Clobbering dev link files for: $inactive_branches_with_live_dev_links"
 
   while IFS= read -r branch_name; do
-    gsutil -m rsync -cdr -a public-read "$dead_dev_link_html_location" "$GCLOUD_BUCKET_ROOT/$branch_name" --region=northamerica-northeast1-a --project=$DEV_CLIENT_PROJECT_ID
+    gsutil -m rsync -cdr -a public-read --region=northamerica-northeast1-a --project=$DEV_CLIENT_PROJECT_ID "$dead_dev_link_html_location" "$GCLOUD_BUCKET_ROOT/$branch_name"
     # saw cases where these html files were miss-typed. Couldn't tell why, but being explicit here to play it safe
     gsutil setmeta -h "Content-Type:text/html" "$GCLOUD_BUCKET_ROOT/$branch_name/*.html"
   done <<< "$inactive_branches_with_live_dev_links"
