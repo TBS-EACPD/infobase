@@ -163,8 +163,10 @@ jobs:
           command: |
             if [ ! -f "./dev-dbs-clean-for-these-branches" ]; then
               ./scripts/ci_scripts/cleanup_dev_dbs.sh
-              ./scripts/ci_scripts/cleanup_dev_links.sh
+              ./scripts.ci_scripts/authenticate-server-gcloud.sh
               ./scripts/ci_scripts/cleanup_dev_functions.sh
+              ./scripts/ci_scripts/authenticate-client-gcloud.sh
+              ./scripts/ci_scripts/cleanup_dev_links.sh
             fi
       - run: touch ./dev-dbs-clean-for-these-branches
       - save_cache:
