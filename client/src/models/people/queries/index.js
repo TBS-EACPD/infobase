@@ -4,7 +4,10 @@ export {
   useOrgPeopleSummary,
 } from "./OrgPeopleSummary/OrgPeopleSummary";
 
-export { useGovPeopleSummary } from "./GovPeopleSummary/GovPeopleSummary";
+export {
+  useGovPeopleSummary,
+  promisedGovPeopleSummary,
+} from "./GovPeopleSummary/GovPeopleSummary";
 
 export {
   promisedDeptHasPeopleData,

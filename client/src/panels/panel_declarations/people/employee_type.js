@@ -117,7 +117,6 @@ export const declare_employee_type_panel = () =>
     panel_key: "employee_type",
     subject_types: ["gov", "dept"],
     panel_config_func: (subject_type) => ({
-      legacy_table_dependencies: ["orgEmployeeType"],
       get_dataset_keys: () => ["employee_type"],
       get_title: () => text_maker("employee_type_title"),
       glossary_keys: [
