@@ -2,7 +2,7 @@ import _ from "lodash";
 
 import { log_standard_event } from "src/core/analytics";
 
-import { promisedOrgPeopleSummary } from "./queries";
+import { promisedDeptHasPeopleData } from "./queries";
 
 export const api_load_has_people_data = (subject) => {
   const subject_type = subject && subject.subject_type;
@@ -22,7 +22,7 @@ export const api_load_has_people_data = (subject) => {
         return {
           is_loaded: has_people_data_is_loaded,
           id: String(subject.id),
-          query: promisedOrgPeopleSummary,
+          query: promisedDeptHasPeopleData,
         };
       default:
         return {

@@ -1,0 +1,8 @@
+query DeptHasPeopleData($lang: String!, $id: String!) {
+  root(lang: $lang) {
+    org(org_id: $id) {
+      id
+      has_people_data
+    }
+  }
+}

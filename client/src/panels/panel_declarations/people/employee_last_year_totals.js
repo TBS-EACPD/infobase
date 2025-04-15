@@ -25,7 +25,6 @@ const EmployeeLastYearTotalsPanel = ({
   subject,
   footnotes,
   sources,
-  datasets,
 }) => {
   const { data: orgData, loading: orgLoading } = useOrgPeopleSummary({
     org_id: subject.id,
@@ -103,7 +102,7 @@ const EmployeeLastYearTotalsPanel = ({
   const text_calculations = { dept_emp_value, dept_emp_pct, subject };
 
   return (
-    <StdPanel {...{ title, footnotes, sources, datasets }} allowOverflow={true}>
+    <StdPanel {...{ title, footnotes, sources }} allowOverflow={true}>
       <Col size={!is_a11y_mode ? 5 : 12} isText>
         <TM k="dept_employee_last_year_totals_text" args={text_calculations} />
       </Col>

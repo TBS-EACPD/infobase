@@ -36,7 +36,6 @@ const EmployeeTotalsPanel = ({
   subject,
   footnotes,
   sources,
-  datasets,
   subject_type,
 }) => {
   const { data: orgData, loading: orgLoading } = useOrgPeopleSummary({
@@ -126,7 +125,7 @@ const EmployeeTotalsPanel = ({
   ];
 
   return (
-    <StdPanel {...{ title, footnotes, sources, datasets }}>
+    <StdPanel {...{ title, footnotes, sources }}>
       <Col size={4} isText>
         <TM
           k={subject_type + "_employee_totals_text"}

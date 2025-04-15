@@ -75,6 +75,7 @@ export const get_dept_panels = (subject) =>
     has_results: true,
     has_covid_data: true,
     has_services: services_feature_flag,
+    has_people_data: true,
   }).then(() => ({
     intro: [declare_profile_panel(), declare_portfolio_structure_intro_panel()],
     financial: !_.chain(subject.table_ids)
@@ -104,7 +105,7 @@ export const get_dept_panels = (subject) =>
       declare_covid_estimates_panel(),
       declare_covid_expenditures_panel(),
     ],
-    people: _.includes(subject.table_ids, "orgEmployeeType") && [
+    people: subject.has_data("people_data") && [
       declare_people_key_concepts_panel(),
       declare_employee_last_year_totals_panel(),
       declare_employee_totals_panel(),

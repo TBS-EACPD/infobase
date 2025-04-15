@@ -281,6 +281,7 @@ export type Org = SubjectI & {
   faa_schedule_hr_status?: Maybe<Scalars['String']>;
   faa_schedule_institutional?: Maybe<Scalars['String']>;
   federal_ownership?: Maybe<Scalars['String']>;
+  has_people_data?: Maybe<Scalars['Boolean']>;
   has_results?: Maybe<Scalars['Boolean']>;
   has_services?: Maybe<Scalars['Boolean']>;
   id?: Maybe<Scalars['String']>;

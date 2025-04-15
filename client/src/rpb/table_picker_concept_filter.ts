@@ -10,7 +10,7 @@ const concept_categories: { [key: string]: string[] } = {
     "PLANNED_EXP",
     "SOBJ10",
   ],
-  concept_category_people: ["PEOPLE", "FTE", "GENDER", "AGE", "FOL", "GEO"],
+  //concept_category_people: ["PEOPLE", "FTE", "GENDER", "AGE", "FOL", "GEO"],
   concept_category_source: ["PA", "EST_PROC", "DP", "DRR"],
   concept_category_other: ["PROG"],
 };

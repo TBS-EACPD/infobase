@@ -30,7 +30,6 @@ const EmployeeTypePanel = ({
   subject,
   footnotes,
   sources,
-  datasets,
   glossary_keys,
   subject_type,
 }) => {
@@ -86,7 +85,7 @@ const EmployeeTypePanel = ({
   const MemoizedNivoLineBarToggle = memo(NivoLineBarToggle);
 
   return (
-    <StdPanel {...{ title, footnotes, sources, datasets, glossary_keys }}>
+    <StdPanel {...{ title, footnotes, sources, glossary_keys }}>
       <Col size={12} isText>
         <TM k={subject_type + "_employee_type_text"} args={text_calculations} />
       </Col>
