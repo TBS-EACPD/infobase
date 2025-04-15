@@ -5,8 +5,6 @@ import text from "src/panels/panel_declarations/people/employee_age.yaml";
 
 import { create_text_maker_component } from "src/components/index";
 
-// You'll also need to import the text file that contains the "suppressed_data_pattern_note" string
-
 const { text_maker } = create_text_maker_component(text);
 
 /**
@@ -59,7 +57,7 @@ export const useSuppressedDataDetection = (data, threshold = 0.7) => {
  * @returns {JSX.Element} - Pattern element JSX
  */
 export const SuppressedDataPattern = () => (
-  <div className="graph-note text-center mt-2 font-italic">
+  <div className="graph-note mt-2 font-italic">
     <small>
       <span
         className="mr-2"
