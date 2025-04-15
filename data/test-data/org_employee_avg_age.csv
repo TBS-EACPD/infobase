@@ -1,5 +1,41 @@
-dept_code,dimension,2016,2017,2018,2019,2020
-AGR,avgage,44.36036384749371,44.08387466564769,43.91263975743794,43.99603174603175,43.3784125836196
-ND,avgage,47.90698788882112,47.82279846399448,47.52847152847153,47.23449121696471,47.128964140367046
-TBC,avgage,42.597800925925924,42.363389462248776,41.94216990788127,41.09788235294118,40.6792618629174
-ZGOC,avgage,44.51151646671326,44.418566229652974,44.06335582638194,43.678772957562586,43.41636156672702
+Year,Universe,Average Age,Department or agency
+2010,CPA,44.3,Agriculture and Agri-Food Canada
+2011,CPA,44.1,Agriculture and Agri-Food Canada
+2012,CPA,44.7,Agriculture and Agri-Food Canada
+2013,CPA,44.5,Agriculture and Agri-Food Canada
+2014,CPA,44.9,Agriculture and Agri-Food Canada
+2015,CPA,44.7,Agriculture and Agri-Food Canada
+2016,CPA,44.9,Agriculture and Agri-Food Canada
+2017,CPA,44.6,Agriculture and Agri-Food Canada
+2018,CPA,44.4,Agriculture and Agri-Food Canada
+2019,CPA,44.5,Agriculture and Agri-Food Canada
+2020,CPA,43.9,Agriculture and Agri-Food Canada
+2021,CPA,44.5,Agriculture and Agri-Food Canada
+2022,CPA,43.8,Agriculture and Agri-Food Canada
+2023,CPA,43.8,Agriculture and Agri-Food Canada
+2010,CPA,42.1,Treasury Board of Canada Secretariat
+2011,CPA,42.5,Treasury Board of Canada Secretariat
+2012,CPA,42.2,Treasury Board of Canada Secretariat
+2013,CPA,41.3,Treasury Board of Canada Secretariat
+2014,CPA,41.6,Treasury Board of Canada Secretariat
+2015,CPA,41.2,Treasury Board of Canada Secretariat
+2016,CPA,41.8,Treasury Board of Canada Secretariat
+2017,CPA,40.9,Treasury Board of Canada Secretariat
+2018,CPA,41.1,Treasury Board of Canada Secretariat
+2019,CPA,41.6,Treasury Board of Canada Secretariat
+2020,CPA,41.2,Treasury Board of Canada Secretariat
+2021,CPA,41.8,Treasury Board of Canada Secretariat
+2022,CPA,41.4,Treasury Board of Canada Secretariat
+2010,CPA,46.3,National Defence
+2011,CPA,46.6,National Defence
+2012,CPA,46.8,National Defence
+2013,CPA,47.5,National Defence
+2014,CPA,48,National Defence
+2015,CPA,48.4,National Defence
+2016,CPA,48.4,National Defence
+2017,CPA,48.3,National Defence
+2018,CPA,48,National Defence
+2019,CPA,47.7,National Defence
+2020,CPA,47.6,National Defence
+2021,CPA,47.9,National Defence
+2022,CPA,47.6,National Defence
