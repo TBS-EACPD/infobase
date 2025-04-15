@@ -1,226 +1,3074 @@
-dept_code,dimension,2017,2018,2019,2020,2021,avg_share
-ACOA,female,382.0,374.0,378.0,379.0,390.0,0.6370940743220622
-ACOA,male,211.0,212.0,210.0,214.0,236.0,0.3625711416136591
-ACOA,na,,,,1.0,,0.0003347840642785403
-AECB,female,405.0,443.0,444.0,418.0,419.0,0.4854081167350661
-AECB,male,454.0,453.0,443.0,434.0,429.0,0.5045599635202919
-AECB,na,,3.0,16.0,11.0,14.0,0.010031919744642043
-AGR,female,2662.0,2723.0,2780.0,2909.0,2881.0,0.5201461105520145
-AGR,male,2572.0,2554.0,2511.0,2622.0,2614.0,0.4798166163479816
-AGR,na,,,1.0,,,3.727310000372731e-05
-ATSSC,female,353.0,341.0,362.0,369.0,396.0,0.6253434065934066
-ATSSC,male,207.0,201.0,210.0,213.0,226.0,0.3629807692307693
-ATSSC,na,10.0,6.0,7.0,5.0,6.0,0.011675824175824176
-CAS,female,424.0,422.0,469.0,517.0,498.0,0.6561531962827372
-CAS,male,212.0,225.0,246.0,271.0,267.0,0.34384680371726273
-CB,female,,7.0,7.0,9.0,7.0,0.38961038961038963
-CB,male,,9.0,8.0,7.0,9.0,0.4285714285714286
-CB,sup,14.0,,,,,0.18181818181818182
-CBSA,female,6571.0,6687.0,6904.0,7139.0,7298.0,0.4779923740053051
-CBSA,male,7136.0,7326.0,7565.0,7832.0,7926.0,0.522007625994695
-CCMD,female,400.0,403.0,411.0,431.0,415.0,0.6552162849872772
-CCMD,male,210.0,196.0,208.0,235.0,229.0,0.34287531806615773
-CCMD,na,,,1.0,2.0,3.0,0.0019083969465648852
-CCRA,female,23770.0,24849.0,25676.0,26138.0,27527.0,0.5850188361800959
-CCRA,male,16453.0,17303.0,18232.0,18880.0,19898.0,0.41497202004315864
-CCRA,na,,,,1.0,1.0,9.143776745546982e-06
-CDC,female,35.0,40.0,36.0,37.0,39.0,0.5666666666666667
-CDC,male,26.0,28.0,29.0,28.0,32.0,0.43333333333333335
-CEAA,female,186.0,180.0,216.0,300.0,303.0,0.6601671309192201
-CEAA,male,103.0,98.0,114.0,138.0,157.0,0.3398328690807799
-CEO,female,314.0,374.0,413.0,468.0,678.0,0.5348726493691978
-CEO,male,270.0,302.0,364.0,435.0,583.0,0.4651273506308022
-CFGB,female,26.0,20.0,21.0,24.0,26.0,0.596938775510204
-CFGB,male,13.0,13.0,16.0,17.0,20.0,0.4030612244897959
-CFIA,female,3631.0,3681.0,3695.0,3617.0,3912.0,0.5930191637073295
-CFIA,male,2549.0,2568.0,2552.0,2425.0,2625.0,0.40691685062545996
-CFIA,na,,,,,2.0,6.398566721054485e-05
-CGC,female,196.0,204.0,208.0,205.0,216.0,0.4748500230733734
-CGC,male,239.0,222.0,221.0,225.0,231.0,0.5251499769266267
-CH,female,1163.0,1223.0,1255.0,1286.0,1305.0,0.6711178117596382
-CH,male,596.0,618.0,607.0,603.0,630.0,0.3288821882403618
-CHRC,female,137.0,145.0,141.0,176.0,177.0,0.7119266055045871
-CHRC,male,54.0,61.0,58.0,65.0,74.0,0.28623853211009176
-CHRC,na,,,,1.0,1.0,0.001834862385321101
-CI,female,4259.0,4575.0,5098.0,5465.0,5772.0,0.6485351336030302
-CI,male,2205.0,2418.0,2764.0,3027.0,3218.0,0.35125872864541724
-CI,na,1.0,,2.0,4.0,1.0,0.0002061377515524749
-CICS,female,9.0,11.0,14.0,11.0,9.0,0.4821428571428572
-CICS,male,13.0,10.0,10.0,12.0,13.0,0.5178571428571429
-CIHR,female,316.0,323.0,338.0,340.0,369.0,0.6803874092009685
-CIHR,male,146.0,147.0,164.0,165.0,170.0,0.3196125907990315
-CNEDA,female,46.0,47.0,50.0,64.0,72.0,0.6297968397291196
-CNEDA,male,32.0,34.0,26.0,35.0,37.0,0.37020316027088035
-CPCC,female,16.0,32.0,39.0,36.0,31.0,0.5310344827586208
-CPCC,male,11.0,26.0,22.0,27.0,29.0,0.39655172413793105
-CPCC,na,,3.0,,9.0,9.0,0.07241379310344828
-CRTC,female,250.0,247.0,273.0,294.0,295.0,0.5468812877263581
-CRTC,male,212.0,208.0,220.0,240.0,246.0,0.4531187122736418
-CSA,female,264.0,279.0,304.0,310.0,338.0,0.43662383177570097
-CSA,male,391.0,368.0,388.0,376.0,406.0,0.5633761682242991
-CSC,female,8238.0,8362.0,8591.0,8896.0,9004.0,0.49269943630729823
-CSC,male,8871.0,8784.0,8874.0,8897.0,8892.0,0.5067288672406498
-CSC,na,,,17.0,25.0,8.0,0.0005716964520518185
-CSEC,female,798.0,857.0,903.0,993.0,1062.0,0.3591280653950954
-CSEC,male,1410.0,1498.0,1635.0,1746.0,1899.0,0.6374464772284936
-CSEC,na,1.0,6.0,11.0,13.0,13.0,0.0034254573764110553
-CTA,female,135.0,137.0,155.0,159.0,197.0,0.5686274509803921
-CTA,male,88.0,98.0,117.0,133.0,158.0,0.43137254901960786
-CTAIB,female,68.0,78.0,82.0,80.0,90.0,0.36480293308890926
-CTAIB,male,141.0,132.0,134.0,145.0,141.0,0.6351970669110908
-EA,female,3393.0,3553.0,3667.0,3848.0,3959.0,0.5610721900700578
-EA,male,2668.0,2801.0,2893.0,3012.0,3032.0,0.4388059701492537
-EA,na,,,1.0,,3.0,0.00012183978068839477
-EC,female,3228.0,3404.0,3675.0,3841.0,3945.0,0.5042782686251011
-EC,male,3369.0,3432.0,3597.0,3707.0,3671.0,0.4954430168064885
-EC,na,4.0,,4.0,2.0,,0.0002787145684104908
-ERC,female,,,,,9.0,0.2
-ERC,male,,,,,6.0,0.13333333333333333
-ERC,sup,6.0,6.0,8.0,10.0,,0.6666666666666666
-FCAC,female,53.0,61.0,69.0,84.0,86.0,0.543076923076923
-FCAC,male,46.0,54.0,59.0,63.0,75.0,0.45692307692307693
-FEDSO,female,131.0,151.0,153.0,169.0,187.0,0.6170046801872074
-FEDSO,male,86.0,84.0,87.0,105.0,129.0,0.38299531981279256
-FIN,female,351.0,374.0,374.0,398.0,403.0,0.4722843649018146
-FIN,male,396.0,414.0,428.0,435.0,450.0,0.5277156350981854
-FJA,female,41.0,44.0,39.0,41.0,47.0,0.668769716088328
-FJA,male,18.0,18.0,19.0,25.0,25.0,0.3312302839116719
-FO,female,3987.0,4487.0,4814.0,5211.0,5732.0,0.40752451268941625
-FO,male,6243.0,6651.0,7096.0,7443.0,7791.0,0.5924082140634723
-FO,na,,,1.0,,3.0,6.727324711145496e-05
-FORDQ,female,199.0,177.0,181.0,178.0,207.0,0.5719489981785063
-FORDQ,male,136.0,129.0,142.0,141.0,153.0,0.42562234365513046
-FORDQ,na,1.0,1.0,1.0,1.0,,0.002428658166363084
-FTRAC,female,196.0,207.0,197.0,205.0,213.0,0.5391949152542372
-FTRAC,male,182.0,165.0,163.0,170.0,187.0,0.4592161016949152
-FTRAC,na,,,1.0,1.0,1.0,0.0015889830508474575
-GG,female,94.0,93.0,97.0,109.0,99.0,0.638961038961039
-GG,male,55.0,55.0,51.0,58.0,59.0,0.36103896103896105
-GSC,female,7632.0,8363.0,9423.0,10093.0,10196.0,0.5968529642204231
-GSC,male,5248.0,5624.0,6294.0,6793.0,6884.0,0.40275528858709847
-GSC,na,14.0,1.0,4.0,6.0,5.0,0.0003917471924784539
-H,female,6207.0,6492.0,7196.0,7552.0,5949.0,0.6641080199653986
-H,male,3120.0,3247.0,3593.0,3671.0,3253.0,0.335752779048263
-H,na,,,5.0,,2.0,0.00013920098633841749
-HRSD,female,16252.0,16836.0,17021.0,18326.0,22109.0,0.678537170263789
-HRSD,male,7477.0,7903.0,8138.0,8788.0,10586.0,0.3214328537170264
-HRSD,na,,,1.0,1.0,2.0,2.9976019184652286e-05
-IJC,female,16.0,14.0,14.0,18.0,17.0,0.5
-IJC,male,16.0,17.0,16.0,16.0,14.0,0.5
-INAC,female,3061.0,3216.0,3312.0,3507.0,1398.0,0.6524126755491538
-INAC,male,1647.0,1715.0,1774.0,1911.0,674.0,0.34754231184731726
-INAC,na,,,1.0,,,4.501260352898812e-05
-INDSC,female,,,,,4559.0,0.6835082458770614
-INDSC,male,,,,,2111.0,0.3164917541229385
-IOG,female,56.0,57.0,56.0,59.0,59.0,0.6537585421412301
-IOG,male,32.0,31.0,31.0,29.0,28.0,0.3439635535307517
-IOG,na,,,,,1.0,0.0022779043280182236
-IPC,female,154.0,153.0,157.0,189.0,191.0,0.6054519368723099
-IPC,male,107.0,103.0,95.0,113.0,132.0,0.3945480631276901
-IRB,female,625.0,671.0,882.0,1104.0,1268.0,0.6262042389210019
-IRB,male,393.0,413.0,529.0,634.0,718.0,0.36980456922653454
-IRB,na,13.0,3.0,2.0,4.0,7.0,0.003991191852463528
-ISC,female,2559.0,2678.0,2816.0,2770.0,2944.0,0.5143081291093843
-ISC,male,2386.0,2468.0,2641.0,2746.0,2756.0,0.4855424387328153
-ISC,na,2.0,,2.0,,,0.00014943215780035862
-JJJ,female,421.0,451.0,485.0,504.0,530.0,0.40497967479674796
-JJJ,male,707.0,714.0,713.0,699.0,677.0,0.5945121951219512
-JJJ,na,,,,1.0,2.0,0.0005081300813008131
-JUS,female,3057.0,3126.0,3213.0,3326.0,3400.0,0.6869780126129198
-JUS,male,1404.0,1406.0,1442.0,1510.0,1568.0,0.31234020794273054
-JUS,na,,,4.0,8.0,4.0,0.0006817794443497529
-LAC,female,568.0,574.0,611.0,624.0,587.0,0.6221662468513853
-LAC,male,362.0,353.0,370.0,376.0,339.0,0.3778337531486146
-MPCC,female,,,17.0,19.0,17.0,0.4274193548387097
-MPCC,male,,,8.0,9.0,11.0,0.22580645161290325
-MPCC,sup,25.0,18.0,,,,0.3467741935483871
-ND,female,9271.0,9639.0,10345.0,10748.0,10973.0,0.40797445357705947
-ND,male,13870.0,14333.0,14896.0,15256.0,15400.0,0.5902808345805088
-ND,na,37.0,52.0,37.0,43.0,49.0,0.0017447118424317122
-NEB,female,276.0,293.0,300.0,315.0,350.0,0.6215559157212318
-NEB,male,180.0,184.0,179.0,188.0,203.0,0.37844408427876824
-NFB,female,207.0,230.0,228.0,219.0,221.0,0.5698813821557503
-NFB,male,164.0,169.0,164.0,169.0,168.0,0.43011861784424965
-NPB,female,340.0,343.0,350.0,373.0,365.0,0.7610657498925656
-NPB,male,108.0,110.0,112.0,111.0,114.0,0.23850451224752903
-NPB,na,,,,1.0,,0.00042973785990545773
-NR,female,1960.0,2020.0,2156.0,2162.0,2214.0,0.4686162624821683
-NR,male,2304.0,2338.0,2394.0,2410.0,2468.0,0.5311162624821683
-NR,na,,,1.0,2.0,3.0,0.00026747503566333804
-NRC,female,1370.0,1370.0,1451.0,1538.0,1630.0,0.36094761624484994
-NRC,male,2485.0,2492.0,2595.0,2667.0,2739.0,0.6365509123013539
-NRC,na,9.0,9.0,12.0,10.0,11.0,0.002501471453796351
-NSERC,female,287.0,287.0,306.0,332.0,345.0,0.6457901285773537
-NSERC,male,155.0,160.0,169.0,179.0,191.0,0.35420987142264626
-NSICP,sup,,,5.0,9.0,6.0,1.0
-OAG,female,382.0,376.0,371.0,393.0,453.0,0.6154565285135557
-OAG,male,232.0,221.0,227.0,243.0,294.0,0.37924587098784673
-OAG,na,3.0,6.0,3.0,3.0,2.0,0.005297600498597694
-OCI,female,21.0,15.0,21.0,20.0,22.0,0.532258064516129
-OCI,male,15.0,18.0,20.0,18.0,16.0,0.4677419354838709
-OCOL,female,99.0,109.0,112.0,109.0,112.0,0.641755634638197
-OCOL,male,56.0,55.0,62.0,64.0,65.0,0.3582443653618031
-ODPP,female,659.0,674.0,654.0,689.0,710.0,0.6635312561238488
-ODPP,male,331.0,331.0,336.0,343.0,369.0,0.3350970017636684
-ODPP,na,,,1.0,3.0,3.0,0.0013717421124828531
-OICC,female,181.0,252.0,336.0,387.0,437.0,0.622022647403358
-OICC,male,148.0,149.0,178.0,230.0,263.0,0.3779773525966419
-OPSIC,female,15.0,11.0,11.0,14.0,20.0,0.5338345864661653
-OPSIC,male,9.0,12.0,14.0,13.0,14.0,0.46616541353383456
-ORL,female,11.0,8.0,11.0,12.0,14.0,0.45901639344262296
-ORL,male,13.0,14.0,14.0,14.0,11.0,0.5409836065573771
-OSFI,female,331.0,357.0,383.0,428.0,460.0,0.4986001527106134
-OSFI,male,353.0,359.0,382.0,414.0,438.0,0.4952914227538814
-OSFI,na,4.0,5.0,4.0,6.0,5.0,0.006108424535505218
-PCA,female,1943.0,2053.0,2171.0,2276.0,2385.0,0.49854965698236564
-PCA,male,2033.0,2149.0,2184.0,2241.0,2280.0,0.5012661724757125
-PCA,na,,,1.0,2.0,1.0,0.00018417054192181961
-PCC,female,35.0,37.0,42.0,49.0,47.0,0.5722070844686648
-PCC,male,32.0,30.0,34.0,31.0,30.0,0.4277929155313351
-PCO,female,466.0,594.0,618.0,554.0,585.0,0.5670289855072465
-PCO,male,333.0,412.0,456.0,451.0,489.0,0.4309581320450886
-PCO,na,,,1.0,6.0,3.0,0.0020128824476650566
-PHAC,female,1538.0,1475.0,1626.0,1615.0,2261.0,0.6870814169289116
-PHAC,male,696.0,684.0,753.0,725.0,1020.0,0.31291858307108855
-PMPRB,female,40.0,33.0,38.0,39.0,39.0,0.5206611570247934
-PMPRB,male,29.0,28.0,36.0,41.0,40.0,0.4793388429752066
-PSC,female,513.0,540.0,588.0,609.0,573.0,0.6548364648573418
-PSC,male,267.0,269.0,301.0,345.0,304.0,0.3446996056599397
-PSC,na,,,,1.0,1.0,0.0004639294827186268
-PSEP,female,686.0,716.0,784.0,754.0,748.0,0.5940721649484536
-PSEP,male,463.0,483.0,545.0,515.0,507.0,0.4048002577319587
-PSEP,na,,6.0,,,1.0,0.0011275773195876288
-RCMP,female,5239.0,5528.0,5702.0,5934.0,6225.0,0.7521214828048236
-RCMP,male,1548.0,1699.0,1845.0,2067.0,2180.0,0.24535638283897745
-RCMP,na,14.0,13.0,17.0,21.0,31.0,0.0025221343561989333
-SC,female,3890.0,3677.0,3723.0,3725.0,4847.0,0.550773667572514
-SC,male,3094.0,3037.0,3166.0,3181.0,3720.0,0.4491708723864456
-SC,na,,,1.0,,1.0,5.546004104043037e-05
-SCC,female,135.0,142.0,135.0,142.0,145.0,0.6126205083260298
-SCC,male,81.0,88.0,90.0,95.0,88.0,0.3873794916739702
-SHARE,female,1735.0,1958.0,2166.0,2441.0,2641.0,0.33832214972633656
-SHARE,male,3521.0,3858.0,4362.0,4743.0,4909.0,0.6615232381953678
-SHARE,na,1.0,,,1.0,3.0,0.00015461207829555644
-SIRC,female,12.0,16.0,13.0,11.0,43.0,0.5864197530864198
-SIRC,male,10.0,9.0,9.0,9.0,30.0,0.41358024691358025
-SSHRC,female,156.0,157.0,175.0,199.0,231.0,0.735576923076923
-SSHRC,male,55.0,53.0,69.0,76.0,77.0,0.2644230769230769
-SWC,female,88.0,105.0,154.0,221.0,275.0,0.8480885311871228
-SWC,male,11.0,16.0,27.0,43.0,54.0,0.15191146881287726
-TBC,female,1132.0,1188.0,1284.0,1383.0,1422.0,0.6074305753009194
-TBC,male,704.0,763.0,839.0,889.0,931.0,0.3910529807601176
-TBC,na,5.0,3.0,2.0,4.0,2.0,0.0015164439389631318
-TC,female,2117.0,2455.0,2568.0,2660.0,2928.0,0.45387440716043215
-TC,male,2665.0,2907.0,3115.0,3217.0,3411.0,0.5461255928395677
-VAC,female,2046.0,2053.0,2282.0,2405.0,2759.0,0.7266490433031219
-VAC,male,755.0,744.0,871.0,913.0,1038.0,0.2719662638469285
-VAC,na,8.0,3.0,6.0,3.0,2.0,0.0013846928499496476
-VRAB,female,57.0,59.0,57.0,51.0,58.0,0.6714285714285714
-VRAB,male,29.0,26.0,22.0,26.0,35.0,0.32857142857142857
-WDO,female,160.0,173.0,182.0,191.0,220.0,0.5646341463414634
-WDO,male,119.0,129.0,134.0,158.0,172.0,0.43414634146341463
-WDO,na,,,,,2.0,0.0012195121951219512
-ZGOC,female,144733.0,151189.0,159075.0,166243.0,178595.0,0.5537869183778173
-ZGOC,male,117791.0,122238.0,128727.0,133986.0,140792.0,0.44556778677020925
-ZGOC,na,127.0,120.0,168.0,202.0,208.0,0.0005712105717575491
-ZGOC,sup,45.0,24.0,13.0,19.0,6.0,7.408428021582758e-05
+Year,Department or agency,Sex,Number of employees
+2010,Agriculture and Agri-Food Canada,Men,3577
+2010,Agriculture and Agri-Food Canada,Women,3361
+2010,Assisted Human Reproduction Canada,Men,*
+2010,Assisted Human Reproduction Canada,Women,*
+2010,Atlantic Canada Opportunities Agency,Men,300
+2010,Atlantic Canada Opportunities Agency,Women,466
+2010,Canada Border Services Agency,Men,6984
+2010,Canada Border Services Agency,Women,7414
+2010,Canada Economic Development for Quebec Regions,Men,194
+2010,Canada Economic Development for Quebec Regions,Women,259
+2010,Canada Energy Regulator,Men,138
+2010,Canada Energy Regulator,Women,219
+2010,Canada Industrial Relations Board,Men,40
+2010,Canada Industrial Relations Board,Women,66
+2010,Canada Revenue Agency,Men,17318
+2010,Canada Revenue Agency,Women,25898
+2010,Canada School of Public Service,Men,321
+2010,Canada School of Public Service,Women,696
+2010,Canadian Artists and Producers Professional Relations Tribunal,Men,*
+2010,Canadian Artists and Producers Professional Relations Tribunal,Women,*
+2010,Canadian Dairy Commission,Men,25
+2010,Canadian Dairy Commission,Women,39
+2010,Canadian Food Inspection Agency,Men,2956
+2010,Canadian Food Inspection Agency,Women,3593
+2010,Canadian Grain Commission,Men,427
+2010,Canadian Grain Commission,Women,265
+2010,Canadian Heritage,Men,757
+2010,Canadian Heritage,Women,1601
+2010,Canadian Human Rights Commission,Men,70
+2010,Canadian Human Rights Commission,Women,129
+2010,Canadian Institutes of Health Research,Men,131
+2010,Canadian Institutes of Health Research,Women,288
+2010,Canadian Intergovernmental Conference Secretariat,Men,12
+2010,Canadian Intergovernmental Conference Secretariat,Women,13
+2010,Canadian International Trade Tribunal,Men,36
+2010,Canadian International Trade Tribunal,Women,46
+2010,Canadian Nuclear Safety Commission,Men,467
+2010,Canadian Nuclear Safety Commission,Women,385
+2010,Canadian Polar Commission,Men,*
+2010,Canadian Polar Commission,Women,*
+2010,Canadian Radio-television and Telecommunications Commission,Men,184
+2010,Canadian Radio-television and Telecommunications Commission,Women,252
+2010,Canadian Space Agency,Men,423
+2010,Canadian Space Agency,Women,291
+2010,Canadian Transportation Agency,Men,104
+2010,Canadian Transportation Agency,Women,151
+2010,Civilian Review and Complaints Commission for the RCMP,Men,15
+2010,Civilian Review and Complaints Commission for the RCMP,Women,41
+2010,Communications Security Establishment,Men,1126
+2010,Communications Security Establishment,Women,626
+2010,Competition Bureau Canada,Men,6
+2010,Competition Bureau Canada,Women,6
+2010,Copyright Board Canada,Men,6
+2010,Copyright Board Canada,Women,9
+2010,Correctional Service Canada,Men,9345
+2010,Correctional Service Canada,Women,8366
+2010,Courts Administration Service,Men,221
+2010,Courts Administration Service,Women,415
+2010,Crown-Indigenous Relations and Northern Affairs Canada,Men,1951
+2010,Crown-Indigenous Relations and Northern Affairs Canada,Women,3420
+2010,Department of Finance Canada,Men,423
+2010,Department of Finance Canada,Women,380
+2010,Department of Justice Canada,Men,1669
+2010,Department of Justice Canada,Women,3323
+2010,Elections Canada,Men,280
+2010,Elections Canada,Women,267
+2010,Employment and Social Development Canada,Men,7863
+2010,Employment and Social Development Canada,Women,18149
+2010,Environment and Climate Change Canada,Men,4038
+2010,Environment and Climate Change Canada,Women,3540
+2010,Farm Products Council of Canada,Men,*
+2010,Farm Products Council of Canada,Women,*
+2010,Federal Judges not part of any department,Men,740
+2010,Federal Judges not part of any department,Women,345
+2010,Federal public service,Total,282980
+2010,Financial Consumer Agency of Canada,Men,24
+2010,Financial Consumer Agency of Canada,Women,31
+2010,Financial Transactions and Reports Analysis Centre of Canada,Men,165
+2010,Financial Transactions and Reports Analysis Centre of Canada,Women,154
+2010,Fisheries and Oceans Canada,Men,7150
+2010,Fisheries and Oceans Canada,Women,4009
+2010,Global Affairs Canada,Men,3138
+2010,Global Affairs Canada,Women,3830
+2010,Hazardous Materials Information Review Commission Canada,Men,16
+2010,Hazardous Materials Information Review Commission Canada,Women,22
+2010,Health Canada,Men,3585
+2010,Health Canada,Women,6981
+2010,Human Rights Tribunal of Canada,Men,*
+2010,Human Rights Tribunal of Canada,Women,*
+2010,Immigration and Refugee Board of Canada,Men,385
+2010,Immigration and Refugee Board of Canada,Women,613
+2010,"Immigration, Refugees and Citizenship Canada",Men,1487
+2010,"Immigration, Refugees and Citizenship Canada",Women,3265
+2010,Impact Assessment Agency of Canada,Men,51
+2010,Impact Assessment Agency of Canada,Women,82
+2010,Indian Oil and Gas Canada,Men,27
+2010,Indian Oil and Gas Canada,Women,50
+2010,Indian Residential Schools Truth and Reconciliation Commission,Men,8
+2010,Indian Residential Schools Truth and Reconciliation Commission,Women,11
+2010,Infrastructure Canada,Men,132
+2010,Infrastructure Canada,Women,200
+2010,"Innovation, Science and Economic Development Canada",Men,2903
+2010,"Innovation, Science and Economic Development Canada",Women,2866
+2010,International Joint Commission,Men,18
+2010,International Joint Commission,Women,10
+2010,Library and Archives Canada,Men,455
+2010,Library and Archives Canada,Women,693
+2010,Military Grievances External Review Committee,Men,13
+2010,Military Grievances External Review Committee,Women,24
+2010,Military Police Complaints Commission of Canada,Men,*
+2010,Military Police Complaints Commission of Canada,Women,*
+2010,NAFTA Secretariat,Men,*
+2010,NAFTA Secretariat,Women,*
+2010,National Defence,Men,16458
+2010,National Defence,Women,10833
+2010,National Film Board,Men,166
+2010,National Film Board,Women,258
+2010,National Research Council Canada,Men,2953
+2010,National Research Council Canada,Women,1549
+2010,National Round Table on the Environment and the Economy,Men,13
+2010,National Round Table on the Environment and the Economy,Women,16
+2010,Natural Resources Canada,Men,2778
+2010,Natural Resources Canada,Women,2173
+2010,Natural Sciences and Engineering Research Canada,Men,127
+2010,Natural Sciences and Engineering Research Canada,Women,275
+2010,Office of the Auditor General of Canada,Men,255
+2010,Office of the Auditor General of Canada,Women,397
+2010,Office of the Commissioner for Federal Judicial Affairs Canada,Men,24
+2010,Office of the Commissioner for Federal Judicial Affairs Canada,Women,49
+2010,Office of the Commissioner of Lobbying of Canada,Men,11
+2010,Office of the Commissioner of Lobbying of Canada,Women,15
+2010,Office of the Commissioner of Official Languages,Men,52
+2010,Office of the Commissioner of Official Languages,Women,122
+2010,Office of the Governor General's Secretary,Men,66
+2010,Office of the Governor General's Secretary,Women,105
+2010,Office of the Public Sector Integrity Commissioner of Canada,Men,6
+2010,Office of the Public Sector Integrity Commissioner of Canada,Women,17
+2010,Office of the Superintendent of Financial Institutions Canada,Men,282
+2010,Office of the Superintendent of Financial Institutions Canada,Women,260
+2010,Offices of the Information and Privacy Commissioners of Canada,Men,77
+2010,Offices of the Information and Privacy Commissioners of Canada,Women,176
+2010,Parks Canada,Men,2190
+2010,Parks Canada,Women,1863
+2010,Parole Board of Canada,Men,98
+2010,Parole Board of Canada,Women,310
+2010,Passport Canada,Men,872
+2010,Passport Canada,Women,1817
+2010,Patented Medicine Prices Review Board Canada,Men,24
+2010,Patented Medicine Prices Review Board Canada,Women,35
+2010,Privy Council Office,Men,403
+2010,Privy Council Office,Women,502
+2010,Public Health Agency of Canada,Men,861
+2010,Public Health Agency of Canada,Women,1939
+2010,Public Prosecution Service of Canada,Men,283
+2010,Public Prosecution Service of Canada,Women,574
+2010,Public Safety Canada,Men,450
+2010,Public Safety Canada,Women,677
+2010,Public Servants Disclosure Protection Tribunal Canada,Men,*
+2010,Public Servants Disclosure Protection Tribunal Canada,Women,*
+2010,Public Service Commission of Canada,Men,362
+2010,Public Service Commission of Canada,Women,685
+2010,Public Service Labour Relations Board,Men,31
+2010,Public Service Labour Relations Board,Women,58
+2010,Public Service Staffing Tribunal,Men,12
+2010,Public Service Staffing Tribunal,Women,25
+2010,Public Services and Procurement Canada,Men,6099
+2010,Public Services and Procurement Canada,Women,7640
+2010,RCMP External Review Committee,Men,*
+2010,RCMP External Review Committee,Women,*
+2010,Registrar of the Supreme Court of Canada,Men,81
+2010,Registrar of the Supreme Court of Canada,Women,139
+2010,Registry of the Specific Claims Tribunal of Canada,Men,*
+2010,Registry of the Specific Claims Tribunal of Canada,Women,*
+2010,Royal Canadian Mounted Police (Civilian Staff),Men,1315
+2010,Royal Canadian Mounted Police (Civilian Staff),Women,4935
+2010,Security Intelligence Review Committee,Men,6
+2010,Security Intelligence Review Committee,Women,8
+2010,Social Sciences and Humanities Research Council of Canada,Men,59
+2010,Social Sciences and Humanities Research Council of Canada,Women,147
+2010,Statistical Survey Operations,Men,470
+2010,Statistical Survey Operations,Women,1375
+2010,Statistics Canada,Men,2743
+2010,Statistics Canada,Women,2815
+2010,The Correctional Investigator Canada,Men,14
+2010,The Correctional Investigator Canada,Women,12
+2010,Federal public service,Men,126758
+2010,Federal public service,Women,156222
+2010,Transport Canada,Men,3015
+2010,Transport Canada,Women,2509
+2010,Transportation Appeal Tribunal of Canada,Men,*
+2010,Transportation Appeal Tribunal of Canada,Women,*
+2010,Transportation Safety Board of Canada,Men,149
+2010,Transportation Safety Board of Canada,Women,67
+2010,Treasury Board of Canada Secretariat,Men,831
+2010,Treasury Board of Canada Secretariat,Women,1266
+2010,Veterans Affairs Canada,Men,1165
+2010,Veterans Affairs Canada,Women,2958
+2010,Western Economic Diversification Canada,Men,206
+2010,Western Economic Diversification Canada,Women,304
+2010,Women and Gender Equality Canada,Men,12
+2010,Women and Gender Equality Canada,Women,81
+2011,Agriculture and Agri-Food Canada,Men,3541
+2011,Agriculture and Agri-Food Canada,Women,3417
+2011,Assisted Human Reproduction Canada,Men,*
+2011,Assisted Human Reproduction Canada,Women,*
+2011,Atlantic Canada Opportunities Agency,Men,297
+2011,Atlantic Canada Opportunities Agency,Women,457
+2011,Canada Border Services Agency,Men,7066
+2011,Canada Border Services Agency,Women,7321
+2011,Canada Economic Development for Quebec Regions,Men,195
+2011,Canada Economic Development for Quebec Regions,Women,261
+2011,Canada Energy Regulator,Men,151
+2011,Canada Energy Regulator,Women,238
+2011,Canada Industrial Relations Board,Men,37
+2011,Canada Industrial Relations Board,Women,65
+2011,Canada Revenue Agency,Men,16795
+2011,Canada Revenue Agency,Women,25058
+2011,Canada School of Public Service,Men,334
+2011,Canada School of Public Service,Women,676
+2011,Canadian Artists and Producers Professional Relations Tribunal,Men,*
+2011,Canadian Artists and Producers Professional Relations Tribunal,Women,*
+2011,Canadian Dairy Commission,Men,24
+2011,Canadian Dairy Commission,Women,37
+2011,Canadian Food Inspection Agency,Men,2968
+2011,Canadian Food Inspection Agency,Women,3720
+2011,Canadian Grain Commission,Men,400
+2011,Canadian Grain Commission,Women,255
+2011,Canadian Heritage,Men,672
+2011,Canadian Heritage,Women,1394
+2011,Canadian Human Rights Commission,Men,69
+2011,Canadian Human Rights Commission,Women,128
+2011,Canadian Institutes of Health Research,Men,144
+2011,Canadian Institutes of Health Research,Women,319
+2011,Canadian Intergovernmental Conference Secretariat,Men,11
+2011,Canadian Intergovernmental Conference Secretariat,Women,13
+2011,Canadian International Trade Tribunal,Men,32
+2011,Canadian International Trade Tribunal,Women,49
+2011,Canadian Nuclear Safety Commission,Men,491
+2011,Canadian Nuclear Safety Commission,Women,381
+2011,Canadian Polar Commission,Men,*
+2011,Canadian Polar Commission,Women,*
+2011,Canadian Radio-television and Telecommunications Commission,Men,177
+2011,Canadian Radio-television and Telecommunications Commission,Women,246
+2011,Canadian Space Agency,Men,458
+2011,Canadian Space Agency,Women,308
+2011,Canadian Transportation Agency,Men,103
+2011,Canadian Transportation Agency,Women,154
+2011,Civilian Review and Complaints Commission for the RCMP,Men,14
+2011,Civilian Review and Complaints Commission for the RCMP,Women,43
+2011,Communications Security Establishment,Men,1199
+2011,Communications Security Establishment,Women,672
+2011,Competition Bureau Canada,Men,*
+2011,Competition Bureau Canada,Women,*
+2011,Copyright Board Canada,Men,6
+2011,Copyright Board Canada,Women,7
+2011,Correctional Service Canada,Men,9460
+2011,Correctional Service Canada,Women,8829
+2011,Courts Administration Service,Men,215
+2011,Courts Administration Service,Women,415
+2011,Crown-Indigenous Relations and Northern Affairs Canada,Men,1962
+2011,Crown-Indigenous Relations and Northern Affairs Canada,Women,3465
+2011,Department of Finance Canada,Men,426
+2011,Department of Finance Canada,Women,379
+2011,Department of Justice Canada,Men,1699
+2011,Department of Justice Canada,Women,3459
+2011,Elections Canada,Men,345
+2011,Elections Canada,Women,361
+2011,Employment and Social Development Canada,Men,7503
+2011,Employment and Social Development Canada,Women,17158
+2011,Environment and Climate Change Canada,Men,3806
+2011,Environment and Climate Change Canada,Women,3354
+2011,Farm Products Council of Canada,Men,6
+2011,Farm Products Council of Canada,Women,10
+2011,Federal Economic Development Agency for Southern Ontario,Men,91
+2011,Federal Economic Development Agency for Southern Ontario,Women,118
+2011,Federal Judges not part of any department,Men,759
+2011,Federal Judges not part of any department,Women,356
+2011,Federal public service,Total,282352
+2011,Financial Consumer Agency of Canada,Men,26
+2011,Financial Consumer Agency of Canada,Women,35
+2011,Financial Transactions and Reports Analysis Centre of Canada,Men,164
+2011,Financial Transactions and Reports Analysis Centre of Canada,Women,176
+2011,Fisheries and Oceans Canada,Men,6987
+2011,Fisheries and Oceans Canada,Women,4017
+2011,Global Affairs Canada,Men,3087
+2011,Global Affairs Canada,Women,3814
+2011,Hazardous Materials Information Review Commission Canada,Men,17
+2011,Hazardous Materials Information Review Commission Canada,Women,29
+2011,Health Canada,Men,3580
+2011,Health Canada,Women,6823
+2011,Human Rights Tribunal of Canada,Men,9
+2011,Human Rights Tribunal of Canada,Women,14
+2011,Immigration and Refugee Board of Canada,Men,415
+2011,Immigration and Refugee Board of Canada,Women,663
+2011,"Immigration, Refugees and Citizenship Canada",Men,1616
+2011,"Immigration, Refugees and Citizenship Canada",Women,3380
+2011,Impact Assessment Agency of Canada,Men,96
+2011,Impact Assessment Agency of Canada,Women,144
+2011,Indian Oil and Gas Canada,Men,23
+2011,Indian Oil and Gas Canada,Women,54
+2011,Indian Residential Schools Truth and Reconciliation Commission,Men,15
+2011,Indian Residential Schools Truth and Reconciliation Commission,Women,28
+2011,Infrastructure Canada,Men,154
+2011,Infrastructure Canada,Women,219
+2011,"Innovation, Science and Economic Development Canada",Men,2831
+2011,"Innovation, Science and Economic Development Canada",Women,2750
+2011,International Joint Commission,Men,18
+2011,International Joint Commission,Women,12
+2011,Library and Archives Canada,Men,471
+2011,Library and Archives Canada,Women,713
+2011,Military Grievances External Review Committee,Men,12
+2011,Military Grievances External Review Committee,Women,25
+2011,Military Police Complaints Commission of Canada,Men,6
+2011,Military Police Complaints Commission of Canada,Women,8
+2011,National Defence,Men,16508
+2011,National Defence,Women,10886
+2011,National Film Board,Men,167
+2011,National Film Board,Women,240
+2011,National Research Council Canada,Men,2808
+2011,National Research Council Canada,Women,1453
+2011,National Round Table on the Environment and the Economy,Men,12
+2011,National Round Table on the Environment and the Economy,Women,19
+2011,Natural Resources Canada,Men,2742
+2011,Natural Resources Canada,Women,2195
+2011,Natural Sciences and Engineering Research Canada,Men,141
+2011,Natural Sciences and Engineering Research Canada,Women,287
+2011,Northern Pipeline Agency,Men,*
+2011,Northern Pipeline Agency,Women,*
+2011,Office of the Auditor General of Canada,Men,271
+2011,Office of the Auditor General of Canada,Women,389
+2011,Office of the Commissioner for Federal Judicial Affairs Canada,Men,20
+2011,Office of the Commissioner for Federal Judicial Affairs Canada,Women,50
+2011,Office of the Commissioner of Lobbying of Canada,Men,11
+2011,Office of the Commissioner of Lobbying of Canada,Women,16
+2011,Office of the Commissioner of Official Languages,Men,52
+2011,Office of the Commissioner of Official Languages,Women,112
+2011,Office of the Governor General's Secretary,Men,71
+2011,Office of the Governor General's Secretary,Women,119
+2011,Office of the Public Sector Integrity Commissioner of Canada,Men,7
+2011,Office of the Public Sector Integrity Commissioner of Canada,Women,20
+2011,Office of the Superintendent of Financial Institutions Canada,Men,295
+2011,Office of the Superintendent of Financial Institutions Canada,Women,267
+2011,Offices of the Information and Privacy Commissioners of Canada,Men,77
+2011,Offices of the Information and Privacy Commissioners of Canada,Women,179
+2011,Parks Canada,Men,2203
+2011,Parks Canada,Women,1924
+2011,Parole Board of Canada,Men,97
+2011,Parole Board of Canada,Women,312
+2011,Passport Canada,Men,855
+2011,Passport Canada,Women,1724
+2011,Patented Medicine Prices Review Board Canada,Men,26
+2011,Patented Medicine Prices Review Board Canada,Women,40
+2011,Privy Council Office,Men,412
+2011,Privy Council Office,Women,509
+2011,Public Health Agency of Canada,Men,867
+2011,Public Health Agency of Canada,Women,2030
+2011,Public Prosecution Service of Canada,Men,301
+2011,Public Prosecution Service of Canada,Women,586
+2011,Public Safety Canada,Men,462
+2011,Public Safety Canada,Women,665
+2011,Public Servants Disclosure Protection Tribunal Canada,Men,*
+2011,Public Servants Disclosure Protection Tribunal Canada,Women,*
+2011,Public Service Commission of Canada,Men,353
+2011,Public Service Commission of Canada,Women,643
+2011,Public Service Labour Relations Board,Men,29
+2011,Public Service Labour Relations Board,Women,59
+2011,Public Service Staffing Tribunal,Men,12
+2011,Public Service Staffing Tribunal,Women,28
+2011,Public Services and Procurement Canada,Men,6337
+2011,Public Services and Procurement Canada,Women,8048
+2011,RCMP External Review Committee,Men,*
+2011,RCMP External Review Committee,Women,*
+2011,Registrar of the Supreme Court of Canada,Men,81
+2011,Registrar of the Supreme Court of Canada,Women,129
+2011,Registry of the Specific Claims Tribunal of Canada,Men,*
+2011,Registry of the Specific Claims Tribunal of Canada,Women,*
+2011,Royal Canadian Mounted Police (Civilian Staff),Men,1298
+2011,Royal Canadian Mounted Police (Civilian Staff),Women,4849
+2011,Security Intelligence Review Committee,Men,*
+2011,Security Intelligence Review Committee,Women,*
+2011,Social Sciences and Humanities Research Council of Canada,Men,65
+2011,Social Sciences and Humanities Research Council of Canada,Women,151
+2011,Statistical Survey Operations,Men,437
+2011,Statistical Survey Operations,Women,1244
+2011,Statistics Canada,Men,3043
+2011,Statistics Canada,Women,3381
+2011,The Correctional Investigator Canada,Men,16
+2011,The Correctional Investigator Canada,Women,15
+2011,Federal public service,Men,126455
+2011,Federal public service,Women,155897
+2011,Transport Canada,Men,3013
+2011,Transport Canada,Women,2540
+2011,Transportation Appeal Tribunal of Canada,Men,*
+2011,Transportation Appeal Tribunal of Canada,Women,*
+2011,Transportation Safety Board of Canada,Men,143
+2011,Transportation Safety Board of Canada,Women,68
+2011,Treasury Board of Canada Secretariat,Men,830
+2011,Treasury Board of Canada Secretariat,Women,1347
+2011,Veterans Affairs Canada,Men,1167
+2011,Veterans Affairs Canada,Women,2922
+2011,Western Economic Diversification Canada,Men,201
+2011,Western Economic Diversification Canada,Women,278
+2011,Women and Gender Equality Canada,Men,14
+2011,Women and Gender Equality Canada,Women,88
+2012,Agriculture and Agri-Food Canada,Men,3382
+2012,Agriculture and Agri-Food Canada,Women,3262
+2012,Assisted Human Reproduction Canada,Men,*
+2012,Assisted Human Reproduction Canada,Women,*
+2012,Atlantic Canada Opportunities Agency,Men,254
+2012,Atlantic Canada Opportunities Agency,Women,423
+2012,Canada Border Services Agency,Men,7206
+2012,Canada Border Services Agency,Women,7504
+2012,Canada Economic Development for Quebec Regions,Men,180
+2012,Canada Economic Development for Quebec Regions,Women,221
+2012,Canada Energy Regulator,Men,160
+2012,Canada Energy Regulator,Women,236
+2012,Canada Industrial Relations Board,Men,31
+2012,Canada Industrial Relations Board,Women,58
+2012,Canada Revenue Agency,Men,17104
+2012,Canada Revenue Agency,Women,25564
+2012,Canada School of Public Service,Men,308
+2012,Canada School of Public Service,Women,607
+2012,Canadian Artists and Producers Professional Relations Tribunal,Men,*
+2012,Canadian Artists and Producers Professional Relations Tribunal,Women,*
+2012,Canadian Dairy Commission,Men,25
+2012,Canadian Dairy Commission,Women,38
+2012,Canadian Food Inspection Agency,Men,2883
+2012,Canadian Food Inspection Agency,Women,3697
+2012,Canadian Grain Commission,Men,416
+2012,Canadian Grain Commission,Women,264
+2012,Canadian Heritage,Men,644
+2012,Canadian Heritage,Women,1337
+2012,Canadian Human Rights Commission,Men,76
+2012,Canadian Human Rights Commission,Women,133
+2012,Canadian Institutes of Health Research,Men,129
+2012,Canadian Institutes of Health Research,Women,295
+2012,Canadian Intergovernmental Conference Secretariat,Men,11
+2012,Canadian Intergovernmental Conference Secretariat,Women,10
+2012,Canadian International Trade Tribunal,Men,28
+2012,Canadian International Trade Tribunal,Women,49
+2012,Canadian Nuclear Safety Commission,Men,475
+2012,Canadian Nuclear Safety Commission,Women,389
+2012,Canadian Polar Commission,Men,*
+2012,Canadian Polar Commission,Women,*
+2012,Canadian Radio-television and Telecommunications Commission,Men,184
+2012,Canadian Radio-television and Telecommunications Commission,Women,267
+2012,Canadian Space Agency,Men,450
+2012,Canadian Space Agency,Women,305
+2012,Canadian Transportation Agency,Men,105
+2012,Canadian Transportation Agency,Women,145
+2012,Civilian Review and Complaints Commission for the RCMP,Men,17
+2012,Civilian Review and Complaints Commission for the RCMP,Women,38
+2012,Communications Security Establishment,Men,1280
+2012,Communications Security Establishment,Women,705
+2012,Competition Bureau Canada,Men,*
+2012,Competition Bureau Canada,Women,*
+2012,Copyright Board Canada,Men,7
+2012,Copyright Board Canada,Women,7
+2012,Correctional Service Canada,Men,9761
+2012,Correctional Service Canada,Women,9251
+2012,Courts Administration Service,Men,226
+2012,Courts Administration Service,Women,434
+2012,Crown-Indigenous Relations and Northern Affairs Canada,Men,1949
+2012,Crown-Indigenous Relations and Northern Affairs Canada,Women,3460
+2012,Department of Finance Canada,Men,412
+2012,Department of Finance Canada,Women,369
+2012,Department of Justice Canada,Men,1654
+2012,Department of Justice Canada,Women,3476
+2012,Elections Canada,Men,262
+2012,Elections Canada,Women,266
+2012,Employment and Social Development Canada,Men,7040
+2012,Employment and Social Development Canada,Women,15716
+2012,Environment and Climate Change Canada,Men,3610
+2012,Environment and Climate Change Canada,Women,3152
+2012,Farm Products Council of Canada,Men,7
+2012,Farm Products Council of Canada,Women,9
+2012,Federal Economic Development Agency for Southern Ontario,Men,84
+2012,Federal Economic Development Agency for Southern Ontario,Women,141
+2012,Federal Judges not part of any department,Men,749
+2012,Federal Judges not part of any department,Women,356
+2012,Federal public service,Total,278092
+2012,Financial Consumer Agency of Canada,Men,28
+2012,Financial Consumer Agency of Canada,Women,40
+2012,Financial Transactions and Reports Analysis Centre of Canada,Men,177
+2012,Financial Transactions and Reports Analysis Centre of Canada,Women,199
+2012,Fisheries and Oceans Canada,Men,6907
+2012,Fisheries and Oceans Canada,Women,4016
+2012,Global Affairs Canada,Men,2985
+2012,Global Affairs Canada,Women,3717
+2012,Hazardous Materials Information Review Commission Canada,Men,12
+2012,Hazardous Materials Information Review Commission Canada,Women,28
+2012,Health Canada,Men,3632
+2012,Health Canada,Women,6946
+2012,Human Rights Tribunal of Canada,Men,6
+2012,Human Rights Tribunal of Canada,Women,14
+2012,Immigration and Refugee Board of Canada,Men,402
+2012,Immigration and Refugee Board of Canada,Women,658
+2012,"Immigration, Refugees and Citizenship Canada",Men,1625
+2012,"Immigration, Refugees and Citizenship Canada",Women,3392
+2012,Impact Assessment Agency of Canada,Men,89
+2012,Impact Assessment Agency of Canada,Women,151
+2012,Indian Oil and Gas Canada,Men,25
+2012,Indian Oil and Gas Canada,Women,54
+2012,Indian Residential Schools Truth and Reconciliation Commission,Men,17
+2012,Indian Residential Schools Truth and Reconciliation Commission,Women,30
+2012,Infrastructure Canada,Men,139
+2012,Infrastructure Canada,Women,209
+2012,"Innovation, Science and Economic Development Canada",Men,2667
+2012,"Innovation, Science and Economic Development Canada",Women,2566
+2012,International Joint Commission,Men,16
+2012,International Joint Commission,Women,12
+2012,Library and Archives Canada,Men,448
+2012,Library and Archives Canada,Women,697
+2012,Military Grievances External Review Committee,Men,10
+2012,Military Grievances External Review Committee,Women,26
+2012,Military Police Complaints Commission of Canada,Men,7
+2012,Military Police Complaints Commission of Canada,Women,9
+2012,National Defence,Men,16465
+2012,National Defence,Women,10712
+2012,National Film Board,Men,176
+2012,National Film Board,Women,249
+2012,National Research Council Canada,Men,2599
+2012,National Research Council Canada,Women,1346
+2012,National Round Table on the Environment and the Economy,Men,12
+2012,National Round Table on the Environment and the Economy,Women,20
+2012,Natural Resources Canada,Men,2609
+2012,Natural Resources Canada,Women,2050
+2012,Natural Sciences and Engineering Research Canada,Men,148
+2012,Natural Sciences and Engineering Research Canada,Women,276
+2012,Office of the Auditor General of Canada,Men,250
+2012,Office of the Auditor General of Canada,Women,403
+2012,Office of the Commissioner for Federal Judicial Affairs Canada,Men,25
+2012,Office of the Commissioner for Federal Judicial Affairs Canada,Women,41
+2012,Office of the Commissioner of Lobbying of Canada,Men,10
+2012,Office of the Commissioner of Lobbying of Canada,Women,18
+2012,Office of the Commissioner of Official Languages,Men,52
+2012,Office of the Commissioner of Official Languages,Women,113
+2012,Office of the Governor General's Secretary,Men,69
+2012,Office of the Governor General's Secretary,Women,97
+2012,Office of the Public Sector Integrity Commissioner of Canada,Men,10
+2012,Office of the Public Sector Integrity Commissioner of Canada,Women,20
+2012,Office of the Superintendent of Financial Institutions Canada,Men,315
+2012,Office of the Superintendent of Financial Institutions Canada,Women,288
+2012,Offices of the Information and Privacy Commissioners of Canada,Men,100
+2012,Offices of the Information and Privacy Commissioners of Canada,Women,173
+2012,Parks Canada,Men,2028
+2012,Parks Canada,Women,1793
+2012,Parole Board of Canada,Men,100
+2012,Parole Board of Canada,Women,328
+2012,Passport Canada,Men,903
+2012,Passport Canada,Women,1793
+2012,Patented Medicine Prices Review Board Canada,Men,21
+2012,Patented Medicine Prices Review Board Canada,Women,35
+2012,Privy Council Office,Men,406
+2012,Privy Council Office,Women,486
+2012,Public Health Agency of Canada,Men,853
+2012,Public Health Agency of Canada,Women,1926
+2012,Public Prosecution Service of Canada,Men,310
+2012,Public Prosecution Service of Canada,Women,620
+2012,Public Safety Canada,Men,465
+2012,Public Safety Canada,Women,648
+2012,Public Servants Disclosure Protection Tribunal Canada,Men,*
+2012,Public Servants Disclosure Protection Tribunal Canada,Women,*
+2012,Public Service Commission of Canada,Men,337
+2012,Public Service Commission of Canada,Women,638
+2012,Public Service Labour Relations Board,Men,32
+2012,Public Service Labour Relations Board,Women,56
+2012,Public Service Staffing Tribunal,Men,12
+2012,Public Service Staffing Tribunal,Women,26
+2012,Public Services and Procurement Canada,Men,6058
+2012,Public Services and Procurement Canada,Women,7620
+2012,RCMP External Review Committee,Men,*
+2012,RCMP External Review Committee,Women,*
+2012,Registrar of the Supreme Court of Canada,Men,84
+2012,Registrar of the Supreme Court of Canada,Women,142
+2012,Registry of the Specific Claims Tribunal of Canada,Men,*
+2012,Registry of the Specific Claims Tribunal of Canada,Women,*
+2012,Royal Canadian Mounted Police (Civilian Staff),Men,1326
+2012,Royal Canadian Mounted Police (Civilian Staff),Women,4884
+2012,Security Intelligence Review Committee,Men,*
+2012,Security Intelligence Review Committee,Women,*
+2012,Social Sciences and Humanities Research Council of Canada,Men,58
+2012,Social Sciences and Humanities Research Council of Canada,Women,155
+2012,Statistical Survey Operations,Men,721
+2012,Statistical Survey Operations,Women,1650
+2012,Statistics Canada,Men,2742
+2012,Statistics Canada,Women,2814
+2012,The Correctional Investigator Canada,Men,14
+2012,The Correctional Investigator Canada,Women,14
+2012,Federal public service,Men,124737
+2012,Federal public service,Women,153355
+2012,Transport Canada,Men,2928
+2012,Transport Canada,Women,2442
+2012,Transportation Appeal Tribunal of Canada,Men,*
+2012,Transportation Appeal Tribunal of Canada,Women,*
+2012,Transportation Safety Board of Canada,Men,145
+2012,Transportation Safety Board of Canada,Women,71
+2012,Treasury Board of Canada Secretariat,Men,778
+2012,Treasury Board of Canada Secretariat,Women,1295
+2012,Veterans Affairs Canada,Men,1063
+2012,Veterans Affairs Canada,Women,2776
+2012,Western Economic Diversification Canada,Men,171
+2012,Western Economic Diversification Canada,Women,248
+2012,Women and Gender Equality Canada,Men,13
+2012,Women and Gender Equality Canada,Women,85
+2013,Agriculture and Agri-Food Canada,Men,3014
+2013,Agriculture and Agri-Food Canada,Women,2977
+2013,Atlantic Canada Opportunities Agency,Men,205
+2013,Atlantic Canada Opportunities Agency,Women,385
+2013,Canada Border Services Agency,Men,7075
+2013,Canada Border Services Agency,Women,7143
+2013,Canada Economic Development for Quebec Regions,Men,141
+2013,Canada Economic Development for Quebec Regions,Women,198
+2013,Canada Energy Regulator,Men,160
+2013,Canada Energy Regulator,Women,249
+2013,Canada Industrial Relations Board,Men,33
+2013,Canada Industrial Relations Board,Women,58
+2013,Canada Revenue Agency,Men,16407
+2013,Canada Revenue Agency,Women,24849
+2013,Canada School of Public Service,Men,228
+2013,Canada School of Public Service,Women,429
+2013,Canadian Artists and Producers Professional Relations Tribunal,Men,*
+2013,Canadian Artists and Producers Professional Relations Tribunal,Women,*
+2013,Canadian Dairy Commission,Men,25
+2013,Canadian Dairy Commission,Women,34
+2013,Canadian Food Inspection Agency,Men,2726
+2013,Canadian Food Inspection Agency,Women,3528
+2013,Canadian Grain Commission,Men,383
+2013,Canadian Grain Commission,Women,242
+2013,Canadian Heritage,Men,572
+2013,Canadian Heritage,Women,1181
+2013,Canadian Human Rights Commission,Men,74
+2013,Canadian Human Rights Commission,Women,141
+2013,Canadian Institutes of Health Research,Men,119
+2013,Canadian Institutes of Health Research,Women,275
+2013,Canadian Intergovernmental Conference Secretariat,Men,13
+2013,Canadian Intergovernmental Conference Secretariat,Women,10
+2013,Canadian International Trade Tribunal,Men,27
+2013,Canadian International Trade Tribunal,Women,46
+2013,Canadian Nuclear Safety Commission,Men,465
+2013,Canadian Nuclear Safety Commission,Women,391
+2013,Canadian Polar Commission,Men,*
+2013,Canadian Polar Commission,Women,*
+2013,Canadian Radio-television and Telecommunications Commission,Men,184
+2013,Canadian Radio-television and Telecommunications Commission,Women,260
+2013,Canadian Space Agency,Men,399
+2013,Canadian Space Agency,Women,264
+2013,Canadian Transportation Agency,Men,106
+2013,Canadian Transportation Agency,Women,138
+2013,Civilian Review and Complaints Commission for the RCMP,Men,18
+2013,Civilian Review and Complaints Commission for the RCMP,Women,42
+2013,Communications Security Establishment,Men,1328
+2013,Communications Security Establishment,Women,747
+2013,Competition Bureau Canada,Men,*
+2013,Competition Bureau Canada,Women,*
+2013,Copyright Board Canada,Men,8
+2013,Copyright Board Canada,Women,7
+2013,Correctional Service Canada,Men,9557
+2013,Correctional Service Canada,Women,8944
+2013,Courts Administration Service,Men,206
+2013,Courts Administration Service,Women,417
+2013,Crown-Indigenous Relations and Northern Affairs Canada,Men,1764
+2013,Crown-Indigenous Relations and Northern Affairs Canada,Women,3211
+2013,Department of Finance Canada,Men,397
+2013,Department of Finance Canada,Women,359
+2013,Department of Justice Canada,Men,1527
+2013,Department of Justice Canada,Women,3198
+2013,Elections Canada,Men,245
+2013,Elections Canada,Women,250
+2013,Employment and Social Development Canada,Men,6022
+2013,Employment and Social Development Canada,Women,14024
+2013,Environment and Climate Change Canada,Men,3353
+2013,Environment and Climate Change Canada,Women,3055
+2013,Farm Products Council of Canada,Men,7
+2013,Farm Products Council of Canada,Women,9
+2013,Federal Economic Development Agency for Southern Ontario,Men,84
+2013,Federal Economic Development Agency for Southern Ontario,Women,134
+2013,Federal Judges not part of any department,Men,738
+2013,Federal Judges not part of any department,Women,362
+2013,Federal public service,Total,262817
+2013,Financial Consumer Agency of Canada,Men,34
+2013,Financial Consumer Agency of Canada,Women,39
+2013,Financial Transactions and Reports Analysis Centre of Canada,Men,171
+2013,Financial Transactions and Reports Analysis Centre of Canada,Women,203
+2013,Fisheries and Oceans Canada,Men,6476
+2013,Fisheries and Oceans Canada,Women,3818
+2013,Global Affairs Canada,Men,2769
+2013,Global Affairs Canada,Women,3399
+2013,Hazardous Materials Information Review Commission Canada,Men,11
+2013,Hazardous Materials Information Review Commission Canada,Women,20
+2013,Health Canada,Men,3338
+2013,Health Canada,Women,6363
+2013,Human Rights Tribunal of Canada,Men,6
+2013,Human Rights Tribunal of Canada,Women,15
+2013,Immigration and Refugee Board of Canada,Men,377
+2013,Immigration and Refugee Board of Canada,Women,657
+2013,"Immigration, Refugees and Citizenship Canada",Men,1592
+2013,"Immigration, Refugees and Citizenship Canada",Women,3258
+2013,Impact Assessment Agency of Canada,Men,74
+2013,Impact Assessment Agency of Canada,Women,145
+2013,Indian Oil and Gas Canada,Men,25
+2013,Indian Oil and Gas Canada,Women,59
+2013,Indian Residential Schools Truth and Reconciliation Commission,Men,10
+2013,Indian Residential Schools Truth and Reconciliation Commission,Women,15
+2013,Infrastructure Canada,Men,122
+2013,Infrastructure Canada,Women,186
+2013,"Innovation, Science and Economic Development Canada",Men,2383
+2013,"Innovation, Science and Economic Development Canada",Women,2390
+2013,International Joint Commission,Men,20
+2013,International Joint Commission,Women,12
+2013,Library and Archives Canada,Men,377
+2013,Library and Archives Canada,Women,536
+2013,Military Grievances External Review Committee,Men,12
+2013,Military Grievances External Review Committee,Women,26
+2013,Military Police Complaints Commission of Canada,Men,6
+2013,Military Police Complaints Commission of Canada,Women,12
+2013,National Defence,Men,15070
+2013,National Defence,Women,9869
+2013,National Film Board,Men,202
+2013,National Film Board,Women,264
+2013,National Research Council Canada,Men,2290
+2013,National Research Council Canada,Women,1235
+2013,National Round Table on the Environment and the Economy,Men,*
+2013,National Round Table on the Environment and the Economy,Women,*
+2013,Natural Resources Canada,Men,2420
+2013,Natural Resources Canada,Women,1941
+2013,Natural Sciences and Engineering Research Canada,Men,146
+2013,Natural Sciences and Engineering Research Canada,Women,261
+2013,Office of the Auditor General of Canada,Men,231
+2013,Office of the Auditor General of Canada,Women,380
+2013,Office of the Commissioner for Federal Judicial Affairs Canada,Men,23
+2013,Office of the Commissioner for Federal Judicial Affairs Canada,Women,44
+2013,Office of the Commissioner of Lobbying of Canada,Men,12
+2013,Office of the Commissioner of Lobbying of Canada,Women,14
+2013,Office of the Commissioner of Official Languages,Men,50
+2013,Office of the Commissioner of Official Languages,Women,112
+2013,Office of the Governor General's Secretary,Men,62
+2013,Office of the Governor General's Secretary,Women,96
+2013,Office of the Public Sector Integrity Commissioner of Canada,Men,11
+2013,Office of the Public Sector Integrity Commissioner of Canada,Women,20
+2013,Office of the Superintendent of Financial Institutions Canada,Men,322
+2013,Office of the Superintendent of Financial Institutions Canada,Women,316
+2013,Offices of the Information and Privacy Commissioners of Canada,Men,96
+2013,Offices of the Information and Privacy Commissioners of Canada,Women,162
+2013,Parks Canada,Men,1543
+2013,Parks Canada,Women,1380
+2013,Parole Board of Canada,Men,113
+2013,Parole Board of Canada,Women,341
+2013,Passport Canada,Men,886
+2013,Passport Canada,Women,1810
+2013,Patented Medicine Prices Review Board Canada,Men,19
+2013,Patented Medicine Prices Review Board Canada,Women,34
+2013,Privy Council Office,Men,340
+2013,Privy Council Office,Women,414
+2013,Public Health Agency of Canada,Men,684
+2013,Public Health Agency of Canada,Women,1479
+2013,Public Prosecution Service of Canada,Men,317
+2013,Public Prosecution Service of Canada,Women,637
+2013,Public Safety Canada,Men,454
+2013,Public Safety Canada,Women,658
+2013,Public Servants Disclosure Protection Tribunal Canada,Men,*
+2013,Public Servants Disclosure Protection Tribunal Canada,Women,*
+2013,Public Service Commission of Canada,Men,294
+2013,Public Service Commission of Canada,Women,571
+2013,Public Service Labour Relations Board,Men,35
+2013,Public Service Labour Relations Board,Women,61
+2013,Public Service Staffing Tribunal,Men,12
+2013,Public Service Staffing Tribunal,Women,20
+2013,Public Services and Procurement Canada,Men,5087
+2013,Public Services and Procurement Canada,Women,7057
+2013,RCMP External Review Committee,Men,*
+2013,RCMP External Review Committee,Women,*
+2013,Registrar of the Supreme Court of Canada,Men,83
+2013,Registrar of the Supreme Court of Canada,Women,133
+2013,Registry of the Specific Claims Tribunal of Canada,Men,*
+2013,Registry of the Specific Claims Tribunal of Canada,Women,*
+2013,Royal Canadian Mounted Police (Civilian Staff),Men,1249
+2013,Royal Canadian Mounted Police (Civilian Staff),Women,4722
+2013,Security Intelligence Review Committee,Men,6
+2013,Security Intelligence Review Committee,Women,9
+2013,Shared Services Canada,Men,3608
+2013,Shared Services Canada,Women,1691
+2013,Social Sciences and Humanities Research Council of Canada,Men,54
+2013,Social Sciences and Humanities Research Council of Canada,Women,145
+2013,Statistical Survey Operations,Men,407
+2013,Statistical Survey Operations,Women,1194
+2013,Statistics Canada,Men,2227
+2013,Statistics Canada,Women,2303
+2013,The Correctional Investigator Canada,Men,17
+2013,The Correctional Investigator Canada,Women,16
+2013,Federal public service,Men,118380
+2013,Federal public service,Women,144437
+2013,Transport Canada,Men,2638
+2013,Transport Canada,Women,2140
+2013,Transportation Appeal Tribunal of Canada,Men,*
+2013,Transportation Appeal Tribunal of Canada,Women,*
+2013,Transportation Safety Board of Canada,Men,134
+2013,Transportation Safety Board of Canada,Women,68
+2013,Treasury Board of Canada Secretariat,Men,692
+2013,Treasury Board of Canada Secretariat,Women,1168
+2013,Veterans Affairs Canada,Men,967
+2013,Veterans Affairs Canada,Women,2635
+2013,Western Economic Diversification Canada,Men,129
+2013,Western Economic Diversification Canada,Women,206
+2013,Women and Gender Equality Canada,Men,14
+2013,Women and Gender Equality Canada,Women,86
+2014,Agriculture and Agri-Food Canada,Men,2669
+2014,Agriculture and Agri-Food Canada,Women,2622
+2014,Atlantic Canada Opportunities Agency,Men,207
+2014,Atlantic Canada Opportunities Agency,Women,384
+2014,Canada Border Services Agency,Men,7077
+2014,Canada Border Services Agency,Women,7019
+2014,Canada Economic Development for Quebec Regions,Men,148
+2014,Canada Economic Development for Quebec Regions,Women,200
+2014,Canada Energy Regulator,Men,173
+2014,Canada Energy Regulator,Women,262
+2014,Canada Industrial Relations Board,Men,25
+2014,Canada Industrial Relations Board,Women,63
+2014,Canada Revenue Agency,Men,16164
+2014,Canada Revenue Agency,Women,24115
+2014,Canada School of Public Service,Men,207
+2014,Canada School of Public Service,Women,418
+2014,Canadian Dairy Commission,Men,17
+2014,Canadian Dairy Commission,Women,34
+2014,Canadian Food Inspection Agency,Men,2731
+2014,Canadian Food Inspection Agency,Women,3584
+2014,Canadian Grain Commission,Men,242
+2014,Canadian Grain Commission,Women,171
+2014,Canadian Heritage,Men,616
+2014,Canadian Heritage,Women,1205
+2014,Canadian Human Rights Commission,Men,68
+2014,Canadian Human Rights Commission,Women,131
+2014,Canadian Institutes of Health Research,Men,118
+2014,Canadian Institutes of Health Research,Women,294
+2014,Canadian Intergovernmental Conference Secretariat,Men,13
+2014,Canadian Intergovernmental Conference Secretariat,Women,11
+2014,Canadian International Trade Tribunal,Men,30
+2014,Canadian International Trade Tribunal,Women,47
+2014,Canadian Nuclear Safety Commission,Men,448
+2014,Canadian Nuclear Safety Commission,Women,373
+2014,Canadian Polar Commission,Men,*
+2014,Canadian Polar Commission,Women,*
+2014,Canadian Radio-television and Telecommunications Commission,Men,186
+2014,Canadian Radio-television and Telecommunications Commission,Women,249
+2014,Canadian Space Agency,Men,363
+2014,Canadian Space Agency,Women,258
+2014,Canadian Transportation Agency,Men,94
+2014,Canadian Transportation Agency,Women,124
+2014,Civilian Review and Complaints Commission for the RCMP,Men,22
+2014,Civilian Review and Complaints Commission for the RCMP,Women,43
+2014,Communications Security Establishment,Men,1387
+2014,Communications Security Establishment,Women,784
+2014,Competition Bureau Canada,Men,*
+2014,Competition Bureau Canada,Women,*
+2014,Copyright Board Canada,Men,*
+2014,Copyright Board Canada,Women,*
+2014,Correctional Service Canada,Men,9454
+2014,Correctional Service Canada,Women,8805
+2014,Courts Administration Service,Men,213
+2014,Courts Administration Service,Women,401
+2014,Crown-Indigenous Relations and Northern Affairs Canada,Men,1718
+2014,Crown-Indigenous Relations and Northern Affairs Canada,Women,3139
+2014,Department of Finance Canada,Men,389
+2014,Department of Finance Canada,Women,362
+2014,Department of Justice Canada,Men,1461
+2014,Department of Justice Canada,Women,3113
+2014,Elections Canada,Men,261
+2014,Elections Canada,Women,259
+2014,Employment and Social Development Canada,Men,6402
+2014,Employment and Social Development Canada,Women,14695
+2014,Environment and Climate Change Canada,Men,3424
+2014,Environment and Climate Change Canada,Women,3126
+2014,Farm Products Council of Canada,Men,8
+2014,Farm Products Council of Canada,Women,9
+2014,Federal Economic Development Agency for Southern Ontario,Men,85
+2014,Federal Economic Development Agency for Southern Ontario,Women,139
+2014,Federal Judges not part of any department,Men,734
+2014,Federal Judges not part of any department,Women,376
+2014,Federal public service,Total,257138
+2014,Financial Consumer Agency of Canada,Men,34
+2014,Financial Consumer Agency of Canada,Women,44
+2014,Financial Transactions and Reports Analysis Centre of Canada,Men,158
+2014,Financial Transactions and Reports Analysis Centre of Canada,Women,189
+2014,Fisheries and Oceans Canada,Men,6274
+2014,Fisheries and Oceans Canada,Women,3684
+2014,Global Affairs Canada,Men,2704
+2014,Global Affairs Canada,Women,3323
+2014,Health Canada,Men,3188
+2014,Health Canada,Women,6153
+2014,Human Rights Tribunal of Canada,Men,8
+2014,Human Rights Tribunal of Canada,Women,12
+2014,Immigration and Refugee Board of Canada,Men,366
+2014,Immigration and Refugee Board of Canada,Women,617
+2014,"Immigration, Refugees and Citizenship Canada",Men,2031
+2014,"Immigration, Refugees and Citizenship Canada",Women,3896
+2014,Impact Assessment Agency of Canada,Men,72
+2014,Impact Assessment Agency of Canada,Women,158
+2014,Indian Oil and Gas Canada,Men,27
+2014,Indian Oil and Gas Canada,Women,58
+2014,Indian Residential Schools Truth and Reconciliation Commission,Men,7
+2014,Indian Residential Schools Truth and Reconciliation Commission,Women,8
+2014,Infrastructure Canada,Men,108
+2014,Infrastructure Canada,Women,180
+2014,"Innovation, Science and Economic Development Canada",Men,2345
+2014,"Innovation, Science and Economic Development Canada",Women,2366
+2014,International Joint Commission,Men,18
+2014,International Joint Commission,Women,13
+2014,Library and Archives Canada,Men,419
+2014,Library and Archives Canada,Women,624
+2014,Military Grievances External Review Committee,Men,10
+2014,Military Grievances External Review Committee,Women,27
+2014,Military Police Complaints Commission of Canada,Men,*
+2014,Military Police Complaints Commission of Canada,Women,*
+2014,National Defence,Men,14012
+2014,National Defence,Women,9134
+2014,National Film Board,Men,182
+2014,National Film Board,Women,238
+2014,National Research Council Canada,Men,2297
+2014,National Research Council Canada,Women,1237
+2014,Natural Resources Canada,Men,2334
+2014,Natural Resources Canada,Women,1897
+2014,Natural Sciences and Engineering Research Canada,Men,138
+2014,Natural Sciences and Engineering Research Canada,Women,271
+2014,Office of the Auditor General of Canada,Men,215
+2014,Office of the Auditor General of Canada,Women,366
+2014,Office of the Commissioner for Federal Judicial Affairs Canada,Men,21
+2014,Office of the Commissioner for Federal Judicial Affairs Canada,Women,37
+2014,Office of the Commissioner of Lobbying of Canada,Men,15
+2014,Office of the Commissioner of Lobbying of Canada,Women,11
+2014,Office of the Commissioner of Official Languages,Men,57
+2014,Office of the Commissioner of Official Languages,Women,114
+2014,Office of the Governor General's Secretary,Men,64
+2014,Office of the Governor General's Secretary,Women,91
+2014,Office of the Public Sector Integrity Commissioner of Canada,Men,8
+2014,Office of the Public Sector Integrity Commissioner of Canada,Women,20
+2014,Office of the Superintendent of Financial Institutions Canada,Men,353
+2014,Office of the Superintendent of Financial Institutions Canada,Women,331
+2014,Offices of the Information and Privacy Commissioners of Canada,Men,100
+2014,Offices of the Information and Privacy Commissioners of Canada,Women,161
+2014,Parks Canada,Men,1673
+2014,Parks Canada,Women,1502
+2014,Parole Board of Canada,Men,113
+2014,Parole Board of Canada,Women,346
+2014,Patented Medicine Prices Review Board Canada,Men,21
+2014,Patented Medicine Prices Review Board Canada,Women,34
+2014,Privy Council Office,Men,334
+2014,Privy Council Office,Women,417
+2014,Public Health Agency of Canada,Men,695
+2014,Public Health Agency of Canada,Women,1480
+2014,Public Prosecution Service of Canada,Men,314
+2014,Public Prosecution Service of Canada,Women,655
+2014,Public Safety Canada,Men,424
+2014,Public Safety Canada,Women,633
+2014,Public Servants Disclosure Protection Tribunal Canada,Men,*
+2014,Public Servants Disclosure Protection Tribunal Canada,Women,*
+2014,Public Service Commission of Canada,Men,265
+2014,Public Service Commission of Canada,Women,471
+2014,Public Service Labour Relations Board,Men,35
+2014,Public Service Labour Relations Board,Women,56
+2014,Public Service Staffing Tribunal,Men,11
+2014,Public Service Staffing Tribunal,Women,20
+2014,Public Services and Procurement Canada,Men,4973
+2014,Public Services and Procurement Canada,Women,6994
+2014,RCMP External Review Committee,Men,*
+2014,RCMP External Review Committee,Women,*
+2014,Registrar of the Supreme Court of Canada,Men,89
+2014,Registrar of the Supreme Court of Canada,Women,130
+2014,Registry of the Specific Claims Tribunal of Canada,Men,*
+2014,Registry of the Specific Claims Tribunal of Canada,Women,*
+2014,Royal Canadian Mounted Police (Civilian Staff),Men,1341
+2014,Royal Canadian Mounted Police (Civilian Staff),Women,4724
+2014,Security Intelligence Review Committee,Men,6
+2014,Security Intelligence Review Committee,Women,10
+2014,Shared Services Canada,Men,3630
+2014,Shared Services Canada,Women,1764
+2014,Social Sciences and Humanities Research Council of Canada,Men,62
+2014,Social Sciences and Humanities Research Council of Canada,Women,143
+2014,Statistical Survey Operations,Men,493
+2014,Statistical Survey Operations,Women,1206
+2014,Statistics Canada,Men,2360
+2014,Statistics Canada,Women,2447
+2014,The Correctional Investigator Canada,Men,17
+2014,The Correctional Investigator Canada,Women,23
+2014,Federal public service,Men,116025
+2014,Federal public service,Women,141113
+2014,Transport Canada,Men,2601
+2014,Transport Canada,Women,2170
+2014,Transportation Appeal Tribunal of Canada,Men,*
+2014,Transportation Appeal Tribunal of Canada,Women,*
+2014,Transportation Safety Board of Canada,Men,135
+2014,Transportation Safety Board of Canada,Women,68
+2014,Treasury Board of Canada Secretariat,Men,673
+2014,Treasury Board of Canada Secretariat,Women,1105
+2014,Veterans Affairs Canada,Men,880
+2014,Veterans Affairs Canada,Women,2308
+2014,Western Economic Diversification Canada,Men,118
+2014,Western Economic Diversification Canada,Women,200
+2014,Women and Gender Equality Canada,Men,10
+2014,Women and Gender Equality Canada,Women,88
+2015,Administrative Tribunals Support Service of Canada,Men,123
+2015,Administrative Tribunals Support Service of Canada,Women,226
+2015,Agriculture and Agri-Food Canada,Men,2589
+2015,Agriculture and Agri-Food Canada,Women,2605
+2015,Atlantic Canada Opportunities Agency,Men,216
+2015,Atlantic Canada Opportunities Agency,Women,388
+2015,Canada Border Services Agency,Men,7195
+2015,Canada Border Services Agency,Women,6918
+2015,Canada Economic Development for Quebec Regions,Men,141
+2015,Canada Economic Development for Quebec Regions,Women,190
+2015,Canada Energy Regulator,Men,170
+2015,Canada Energy Regulator,Women,277
+2015,Canada Revenue Agency,Men,16181
+2015,Canada Revenue Agency,Women,23878
+2015,Canada School of Public Service,Men,218
+2015,Canada School of Public Service,Women,428
+2015,Canadian Dairy Commission,Men,22
+2015,Canadian Dairy Commission,Women,34
+2015,Canadian Food Inspection Agency,Men,2589
+2015,Canadian Food Inspection Agency,Women,3420
+2015,Canadian Grain Commission,Men,231
+2015,Canadian Grain Commission,Women,177
+2015,Canadian Heritage,Men,600
+2015,Canadian Heritage,Women,1173
+2015,Canadian Human Rights Commission,Men,69
+2015,Canadian Human Rights Commission,Women,135
+2015,Canadian Institutes of Health Research,Men,127
+2015,Canadian Institutes of Health Research,Women,305
+2015,Canadian Intergovernmental Conference Secretariat,Men,13
+2015,Canadian Intergovernmental Conference Secretariat,Women,10
+2015,Canadian Northern Economic Development Agency,Men,29
+2015,Canadian Northern Economic Development Agency,Women,46
+2015,Canadian Nuclear Safety Commission,Men,444
+2015,Canadian Nuclear Safety Commission,Women,378
+2015,Canadian Polar Commission,Men,7
+2015,Canadian Polar Commission,Women,7
+2015,Canadian Radio-television and Telecommunications Commission,Men,217
+2015,Canadian Radio-television and Telecommunications Commission,Women,245
+2015,Canadian Space Agency,Men,355
+2015,Canadian Space Agency,Women,245
+2015,Canadian Transportation Agency,Men,95
+2015,Canadian Transportation Agency,Women,146
+2015,Civilian Review and Complaints Commission for the RCMP,Men,31
+2015,Civilian Review and Complaints Commission for the RCMP,Women,43
+2015,Communications Security Establishment,Men,1374
+2015,Communications Security Establishment,Women,794
+2015,Copyright Board Canada,Men,8
+2015,Copyright Board Canada,Women,9
+2015,Correctional Service Canada,Men,9237
+2015,Correctional Service Canada,Women,8402
+2015,Courts Administration Service,Men,218
+2015,Courts Administration Service,Women,400
+2015,Crown-Indigenous Relations and Northern Affairs Canada,Men,1623
+2015,Crown-Indigenous Relations and Northern Affairs Canada,Women,3061
+2015,Department of Finance Canada,Men,391
+2015,Department of Finance Canada,Women,352
+2015,Department of Justice Canada,Men,1427
+2015,Department of Justice Canada,Women,3049
+2015,Elections Canada,Men,305
+2015,Elections Canada,Women,325
+2015,Employment and Social Development Canada,Men,6687
+2015,Employment and Social Development Canada,Women,15020
+2015,Environment and Climate Change Canada,Men,3375
+2015,Environment and Climate Change Canada,Women,3220
+2015,Farm Products Council of Canada,Men,8
+2015,Farm Products Council of Canada,Women,11
+2015,Federal Economic Development Agency for Southern Ontario,Men,77
+2015,Federal Economic Development Agency for Southern Ontario,Women,141
+2015,Federal Judges not part of any department,Men,750
+2015,Federal Judges not part of any department,Women,394
+2015,Federal public service,Total,257034
+2015,Financial Consumer Agency of Canada,Men,41
+2015,Financial Consumer Agency of Canada,Women,43
+2015,Financial Transactions and Reports Analysis Centre of Canada,Men,159
+2015,Financial Transactions and Reports Analysis Centre of Canada,Women,196
+2015,Fisheries and Oceans Canada,Men,6164
+2015,Fisheries and Oceans Canada,Women,3694
+2015,Global Affairs Canada,Men,2695
+2015,Global Affairs Canada,Women,3278
+2015,Health Canada,Men,3045
+2015,Health Canada,Women,6034
+2015,Immigration and Refugee Board of Canada,Men,367
+2015,Immigration and Refugee Board of Canada,Women,587
+2015,"Immigration, Refugees and Citizenship Canada",Men,2171
+2015,"Immigration, Refugees and Citizenship Canada",Women,4214
+2015,Impact Assessment Agency of Canada,Men,69
+2015,Impact Assessment Agency of Canada,Women,160
+2015,Indian Oil and Gas Canada,Men,26
+2015,Indian Oil and Gas Canada,Women,54
+2015,Indian Residential Schools Truth and Reconciliation Commission,Men,*
+2015,Indian Residential Schools Truth and Reconciliation Commission,Women,*
+2015,Infrastructure Canada,Men,146
+2015,Infrastructure Canada,Women,208
+2015,"Innovation, Science and Economic Development Canada",Men,2321
+2015,"Innovation, Science and Economic Development Canada",Women,2421
+2015,International Joint Commission,Men,18
+2015,International Joint Commission,Women,14
+2015,Library and Archives Canada,Men,411
+2015,Library and Archives Canada,Women,615
+2015,Military Grievances External Review Committee,Men,16
+2015,Military Grievances External Review Committee,Women,26
+2015,Military Police Complaints Commission of Canada,Men,7
+2015,Military Police Complaints Commission of Canada,Women,15
+2015,National Defence,Men,13591
+2015,National Defence,Women,9020
+2015,National Film Board,Men,175
+2015,National Film Board,Women,219
+2015,National Research Council Canada,Men,2342
+2015,National Research Council Canada,Women,1276
+2015,Natural Resources Canada,Men,2269
+2015,Natural Resources Canada,Women,1880
+2015,Natural Sciences and Engineering Research Canada,Men,146
+2015,Natural Sciences and Engineering Research Canada,Women,272
+2015,Office of the Auditor General of Canada,Men,218
+2015,Office of the Auditor General of Canada,Women,353
+2015,Office of the Commissioner for Federal Judicial Affairs Canada,Men,19
+2015,Office of the Commissioner for Federal Judicial Affairs Canada,Women,35
+2015,Office of the Commissioner of Lobbying of Canada,Men,15
+2015,Office of the Commissioner of Lobbying of Canada,Women,12
+2015,Office of the Commissioner of Official Languages,Men,51
+2015,Office of the Commissioner of Official Languages,Women,121
+2015,Office of the Governor General's Secretary,Men,64
+2015,Office of the Governor General's Secretary,Women,92
+2015,Office of the Prime Minister,Men,*
+2015,Office of the Prime Minister,Women,*
+2015,Office of the Public Sector Integrity Commissioner of Canada,Men,6
+2015,Office of the Public Sector Integrity Commissioner of Canada,Women,19
+2015,Office of the Superintendent of Financial Institutions Canada,Men,358
+2015,Office of the Superintendent of Financial Institutions Canada,Women,342
+2015,Offices of the Information and Privacy Commissioners of Canada,Men,111
+2015,Offices of the Information and Privacy Commissioners of Canada,Women,171
+2015,Parks Canada,Men,1779
+2015,Parks Canada,Women,1615
+2015,Parole Board of Canada,Men,116
+2015,Parole Board of Canada,Women,351
+2015,Patented Medicine Prices Review Board Canada,Men,26
+2015,Patented Medicine Prices Review Board Canada,Women,34
+2015,Privy Council Office,Men,324
+2015,Privy Council Office,Women,403
+2015,Public Health Agency of Canada,Men,693
+2015,Public Health Agency of Canada,Women,1493
+2015,Public Prosecution Service of Canada,Men,321
+2015,Public Prosecution Service of Canada,Women,647
+2015,Public Safety Canada,Men,404
+2015,Public Safety Canada,Women,574
+2015,Public Service Commission of Canada,Men,258
+2015,Public Service Commission of Canada,Women,480
+2015,Public Services and Procurement Canada,Men,4994
+2015,Public Services and Procurement Canada,Women,7098
+2015,RCMP External Review Committee,Men,*
+2015,RCMP External Review Committee,Women,*
+2015,Registrar of the Supreme Court of Canada,Men,88
+2015,Registrar of the Supreme Court of Canada,Women,125
+2015,Royal Canadian Mounted Police (Civilian Staff),Men,1411
+2015,Royal Canadian Mounted Police (Civilian Staff),Women,5026
+2015,Security Intelligence Review Committee,Men,8
+2015,Security Intelligence Review Committee,Women,10
+2015,Shared Services Canada,Men,3530
+2015,Shared Services Canada,Women,1706
+2015,Social Sciences and Humanities Research Council of Canada,Men,59
+2015,Social Sciences and Humanities Research Council of Canada,Women,150
+2015,Statistical Survey Operations,Men,460
+2015,Statistical Survey Operations,Women,1182
+2015,Statistics Canada,Men,2419
+2015,Statistics Canada,Women,2471
+2015,The Correctional Investigator Canada,Men,16
+2015,The Correctional Investigator Canada,Women,19
+2015,Federal public service,Men,115689
+2015,Federal public service,Women,141345
+2015,Transport Canada,Men,2831
+2015,Transport Canada,Women,2374
+2015,Transportation Safety Board of Canada,Men,146
+2015,Transportation Safety Board of Canada,Women,67
+2015,Treasury Board of Canada Secretariat,Men,663
+2015,Treasury Board of Canada Secretariat,Women,1098
+2015,Veterans Affairs Canada,Men,847
+2015,Veterans Affairs Canada,Women,2327
+2015,Western Economic Diversification Canada,Men,112
+2015,Western Economic Diversification Canada,Women,185
+2015,Women and Gender Equality Canada,Men,12
+2015,Women and Gender Equality Canada,Women,80
+2016,Administrative Tribunals Support Service of Canada,Men,137
+2016,Administrative Tribunals Support Service of Canada,Women,237
+2016,Agriculture and Agri-Food Canada,Men,2547
+2016,Agriculture and Agri-Food Canada,Women,2620
+2016,Atlantic Canada Opportunities Agency,Men,217
+2016,Atlantic Canada Opportunities Agency,Women,398
+2016,Canada Border Services Agency,Men,7247
+2016,Canada Border Services Agency,Women,6924
+2016,Canada Economic Development for Quebec Regions,Men,142
+2016,Canada Economic Development for Quebec Regions,Women,191
+2016,Canada Energy Regulator,Men,180
+2016,Canada Energy Regulator,Women,289
+2016,Canada Revenue Agency,Men,16011
+2016,Canada Revenue Agency,Women,23473
+2016,Canada School of Public Service,Men,211
+2016,Canada School of Public Service,Women,437
+2016,Canadian Dairy Commission,Men,24
+2016,Canadian Dairy Commission,Women,36
+2016,Canadian Food Inspection Agency,Men,2523
+2016,Canadian Food Inspection Agency,Women,3423
+2016,Canadian Grain Commission,Men,225
+2016,Canadian Grain Commission,Women,178
+2016,Canadian Heritage,Men,596
+2016,Canadian Heritage,Women,1166
+2016,Canadian Human Rights Commission,Men,64
+2016,Canadian Human Rights Commission,Women,141
+2016,Canadian Institutes of Health Research,Men,126
+2016,Canadian Institutes of Health Research,Women,283
+2016,Canadian Intergovernmental Conference Secretariat,Men,12
+2016,Canadian Intergovernmental Conference Secretariat,Women,10
+2016,Canadian Northern Economic Development Agency,Men,31
+2016,Canadian Northern Economic Development Agency,Women,46
+2016,Canadian Nuclear Safety Commission,Men,464
+2016,Canadian Nuclear Safety Commission,Women,387
+2016,Canadian Radio-television and Telecommunications Commission,Men,210
+2016,Canadian Radio-television and Telecommunications Commission,Women,240
+2016,Canadian Space Agency,Men,358
+2016,Canadian Space Agency,Women,258
+2016,Canadian Transportation Agency,Men,97
+2016,Canadian Transportation Agency,Women,142
+2016,Civilian Review and Complaints Commission for the RCMP,Men,32
+2016,Civilian Review and Complaints Commission for the RCMP,Women,39
+2016,Communications Security Establishment,Men,1381
+2016,Communications Security Establishment,Women,781
+2016,Copyright Board Canada,Men,*
+2016,Copyright Board Canada,Women,*
+2016,Correctional Service Canada,Men,8976
+2016,Correctional Service Canada,Women,8196
+2016,Courts Administration Service,Men,238
+2016,Courts Administration Service,Women,430
+2016,Crown-Indigenous Relations and Northern Affairs Canada,Men,1601
+2016,Crown-Indigenous Relations and Northern Affairs Canada,Women,2981
+2016,Department of Finance Canada,Men,388
+2016,Department of Finance Canada,Women,347
+2016,Department of Justice Canada,Men,1403
+2016,Department of Justice Canada,Women,3058
+2016,Elections Canada,Men,312
+2016,Elections Canada,Women,322
+2016,Employment and Social Development Canada,Men,6986
+2016,Employment and Social Development Canada,Women,15326
+2016,Environment and Climate Change Canada,Men,3338
+2016,Environment and Climate Change Canada,Unknown,2
+2016,Environment and Climate Change Canada,Women,3135
+2016,Farm Products Council of Canada,Men,9
+2016,Farm Products Council of Canada,Women,10
+2016,Federal Economic Development Agency for Southern Ontario,Men,82
+2016,Federal Economic Development Agency for Southern Ontario,Women,140
+2016,Federal Judges not part of any department,Men,732
+2016,Federal Judges not part of any department,Women,409
+2016,Federal public service,Total,258979
+2016,Financial Consumer Agency of Canada,Men,44
+2016,Financial Consumer Agency of Canada,Women,50
+2016,Financial Transactions and Reports Analysis Centre of Canada,Men,176
+2016,Financial Transactions and Reports Analysis Centre of Canada,Women,198
+2016,Fisheries and Oceans Canada,Men,6104
+2016,Fisheries and Oceans Canada,Women,3797
+2016,Global Affairs Canada,Men,2622
+2016,Global Affairs Canada,Women,3268
+2016,Health Canada,Men,3068
+2016,Health Canada,Women,6121
+2016,Immigration and Refugee Board of Canada,Men,376
+2016,Immigration and Refugee Board of Canada,Women,597
+2016,"Immigration, Refugees and Citizenship Canada",Men,2246
+2016,"Immigration, Refugees and Citizenship Canada",Unknown,1
+2016,"Immigration, Refugees and Citizenship Canada",Women,4340
+2016,Impact Assessment Agency of Canada,Men,81
+2016,Impact Assessment Agency of Canada,Women,177
+2016,Indian Oil and Gas Canada,Men,27
+2016,Indian Oil and Gas Canada,Women,58
+2016,Infrastructure Canada,Men,151
+2016,Infrastructure Canada,Women,200
+2016,"Innovation, Science and Economic Development Canada",Men,2350
+2016,"Innovation, Science and Economic Development Canada",Women,2426
+2016,International Joint Commission,Men,19
+2016,International Joint Commission,Women,13
+2016,Library and Archives Canada,Men,369
+2016,Library and Archives Canada,Women,569
+2016,Military Grievances External Review Committee,Men,14
+2016,Military Grievances External Review Committee,Women,21
+2016,Military Police Complaints Commission of Canada,Men,6
+2016,Military Police Complaints Commission of Canada,Women,20
+2016,National Defence,Men,13702
+2016,National Defence,Unknown,4
+2016,National Defence,Women,9248
+2016,National Film Board,Men,171
+2016,National Film Board,Women,218
+2016,National Research Council Canada,Men,2439
+2016,National Research Council Canada,Women,1341
+2016,Natural Resources Canada,Men,2301
+2016,Natural Resources Canada,Women,1890
+2016,Natural Sciences and Engineering Research Canada,Men,157
+2016,Natural Sciences and Engineering Research Canada,Women,287
+2016,Office of the Auditor General of Canada,Men,222
+2016,Office of the Auditor General of Canada,Women,366
+2016,Office of the Commissioner for Federal Judicial Affairs Canada,Men,21
+2016,Office of the Commissioner for Federal Judicial Affairs Canada,Women,38
+2016,Office of the Commissioner of Lobbying of Canada,Men,13
+2016,Office of the Commissioner of Lobbying of Canada,Women,13
+2016,Office of the Commissioner of Official Languages,Men,53
+2016,Office of the Commissioner of Official Languages,Women,111
+2016,Office of the Governor General's Secretary,Men,65
+2016,Office of the Governor General's Secretary,Women,101
+2016,Office of the Public Sector Integrity Commissioner of Canada,Men,8
+2016,Office of the Public Sector Integrity Commissioner of Canada,Women,18
+2016,Office of the Superintendent of Financial Institutions Canada,Men,344
+2016,Office of the Superintendent of Financial Institutions Canada,Women,323
+2016,Offices of the Information and Privacy Commissioners of Canada,Men,99
+2016,Offices of the Information and Privacy Commissioners of Canada,Women,160
+2016,Parks Canada,Men,2041
+2016,Parks Canada,Women,1845
+2016,Parole Board of Canada,Men,111
+2016,Parole Board of Canada,Women,336
+2016,Patented Medicine Prices Review Board Canada,Men,27
+2016,Patented Medicine Prices Review Board Canada,Women,42
+2016,Polar Knowledge Canada,Men,10
+2016,Polar Knowledge Canada,Women,19
+2016,Privy Council Office,Men,308
+2016,Privy Council Office,Women,404
+2016,Public Health Agency of Canada,Men,695
+2016,Public Health Agency of Canada,Women,1528
+2016,Public Prosecution Service of Canada,Men,322
+2016,Public Prosecution Service of Canada,Women,648
+2016,Public Safety Canada,Men,451
+2016,Public Safety Canada,Women,674
+2016,Public Service Commission of Canada,Men,253
+2016,Public Service Commission of Canada,Women,488
+2016,Public Services and Procurement Canada,Men,4959
+2016,Public Services and Procurement Canada,Women,7102
+2016,RCMP External Review Committee,Men,*
+2016,RCMP External Review Committee,Women,*
+2016,Registrar of the Supreme Court of Canada,Men,82
+2016,Registrar of the Supreme Court of Canada,Women,130
+2016,Royal Canadian Mounted Police (Civilian Staff),Men,1474
+2016,Royal Canadian Mounted Police (Civilian Staff),Unknown,4
+2016,Royal Canadian Mounted Police (Civilian Staff),Women,5093
+2016,Security Intelligence Review Committee,Men,8
+2016,Security Intelligence Review Committee,Women,12
+2016,Shared Services Canada,Men,3483
+2016,Shared Services Canada,Women,1674
+2016,Social Sciences and Humanities Research Council of Canada,Men,61
+2016,Social Sciences and Humanities Research Council of Canada,Women,149
+2016,Statistical Survey Operations,Men,484
+2016,Statistical Survey Operations,Women,1217
+2016,Statistics Canada,Men,2724
+2016,Statistics Canada,Women,2993
+2016,The Correctional Investigator Canada,Men,15
+2016,The Correctional Investigator Canada,Women,22
+2016,Federal public service,Men,116351
+2016,Federal public service,Unknown,11
+2016,Federal public service,Women,142617
+2016,Transport Canada,Men,2812
+2016,Transport Canada,Women,2342
+2016,Transportation Safety Board of Canada,Men,148
+2016,Transportation Safety Board of Canada,Women,67
+2016,Treasury Board of Canada Secretariat,Men,668
+2016,Treasury Board of Canada Secretariat,Women,1060
+2016,Veterans Affairs Canada,Men,917
+2016,Veterans Affairs Canada,Women,2496
+2016,Western Economic Diversification Canada,Men,124
+2016,Western Economic Diversification Canada,Women,168
+2016,Women and Gender Equality Canada,Men,14
+2016,Women and Gender Equality Canada,Women,77
+2017,Administrative Tribunals Support Service of Canada,Men,207
+2017,Administrative Tribunals Support Service of Canada,Unknown,10
+2017,Administrative Tribunals Support Service of Canada,Women,353
+2017,Agriculture and Agri-Food Canada,Men,2572
+2017,Agriculture and Agri-Food Canada,Women,2662
+2017,Atlantic Canada Opportunities Agency,Men,211
+2017,Atlantic Canada Opportunities Agency,Women,382
+2017,Canada Border Services Agency,Men,7136
+2017,Canada Border Services Agency,Women,6571
+2017,Canada Economic Development for Quebec Regions,Men,136
+2017,Canada Economic Development for Quebec Regions,Unknown,1
+2017,Canada Economic Development for Quebec Regions,Women,199
+2017,Canada Energy Regulator,Men,180
+2017,Canada Energy Regulator,Women,276
+2017,Canada Revenue Agency,Men,16453
+2017,Canada Revenue Agency,Women,23770
+2017,Canada School of Public Service,Men,210
+2017,Canada School of Public Service,Women,400
+2017,Canadian Dairy Commission,Men,26
+2017,Canadian Dairy Commission,Women,35
+2017,Canadian Food Inspection Agency,Men,2549
+2017,Canadian Food Inspection Agency,Women,3631
+2017,Canadian Grain Commission,Men,239
+2017,Canadian Grain Commission,Women,196
+2017,Canadian Heritage,Men,596
+2017,Canadian Heritage,Women,1163
+2017,Canadian Human Rights Commission,Men,54
+2017,Canadian Human Rights Commission,Women,137
+2017,Canadian Institutes of Health Research,Men,146
+2017,Canadian Institutes of Health Research,Women,316
+2017,Canadian Intergovernmental Conference Secretariat,Men,13
+2017,Canadian Intergovernmental Conference Secretariat,Women,9
+2017,Canadian Northern Economic Development Agency,Men,32
+2017,Canadian Northern Economic Development Agency,Women,46
+2017,Canadian Nuclear Safety Commission,Men,454
+2017,Canadian Nuclear Safety Commission,Women,405
+2017,Canadian Radio-television and Telecommunications Commission,Men,212
+2017,Canadian Radio-television and Telecommunications Commission,Women,250
+2017,Canadian Space Agency,Men,391
+2017,Canadian Space Agency,Women,264
+2017,Canadian Transportation Agency,Men,88
+2017,Canadian Transportation Agency,Women,135
+2017,Civilian Review and Complaints Commission for the RCMP,Men,32
+2017,Civilian Review and Complaints Commission for the RCMP,Women,35
+2017,Communications Security Establishment,Men,1410
+2017,Communications Security Establishment,Unknown,1
+2017,Communications Security Establishment,Women,798
+2017,Copyright Board Canada,Men,*
+2017,Copyright Board Canada,Women,*
+2017,Correctional Service Canada,Men,8871
+2017,Correctional Service Canada,Women,8238
+2017,Courts Administration Service,Men,212
+2017,Courts Administration Service,Women,424
+2017,Crown-Indigenous Relations and Northern Affairs Canada,Men,1647
+2017,Crown-Indigenous Relations and Northern Affairs Canada,Women,3061
+2017,Department of Finance Canada,Men,396
+2017,Department of Finance Canada,Women,351
+2017,Department of Justice Canada,Men,1404
+2017,Department of Justice Canada,Women,3057
+2017,Elections Canada,Men,270
+2017,Elections Canada,Women,314
+2017,Employment and Social Development Canada,Men,7477
+2017,Employment and Social Development Canada,Women,16252
+2017,Environment and Climate Change Canada,Men,3369
+2017,Environment and Climate Change Canada,Unknown,4
+2017,Environment and Climate Change Canada,Women,3228
+2017,Federal Economic Development Agency for Southern Ontario,Men,86
+2017,Federal Economic Development Agency for Southern Ontario,Women,131
+2017,Federal Judges not part of any department,Men,707
+2017,Federal Judges not part of any department,Women,421
+2017,Federal public service,Total,262696
+2017,Financial Consumer Agency of Canada,Men,46
+2017,Financial Consumer Agency of Canada,Women,53
+2017,Financial Transactions and Reports Analysis Centre of Canada,Men,182
+2017,Financial Transactions and Reports Analysis Centre of Canada,Women,196
+2017,Fisheries and Oceans Canada,Men,6243
+2017,Fisheries and Oceans Canada,Women,3987
+2017,Global Affairs Canada,Men,2668
+2017,Global Affairs Canada,Women,3393
+2017,Health Canada,Men,3120
+2017,Health Canada,Women,6207
+2017,Immigration and Refugee Board of Canada,Men,393
+2017,Immigration and Refugee Board of Canada,Unknown,13
+2017,Immigration and Refugee Board of Canada,Women,625
+2017,"Immigration, Refugees and Citizenship Canada",Men,2205
+2017,"Immigration, Refugees and Citizenship Canada",Unknown,1
+2017,"Immigration, Refugees and Citizenship Canada",Women,4259
+2017,Impact Assessment Agency of Canada,Men,103
+2017,Impact Assessment Agency of Canada,Women,186
+2017,Indian Oil and Gas Canada,Men,32
+2017,Indian Oil and Gas Canada,Women,56
+2017,Infrastructure Canada,Men,148
+2017,Infrastructure Canada,Women,181
+2017,"Innovation, Science and Economic Development Canada",Men,2386
+2017,"Innovation, Science and Economic Development Canada",Unknown,2
+2017,"Innovation, Science and Economic Development Canada",Women,2559
+2017,International Joint Commission,Men,16
+2017,International Joint Commission,Women,16
+2017,Library and Archives Canada,Men,362
+2017,Library and Archives Canada,Women,568
+2017,Military Grievances External Review Committee,Men,13
+2017,Military Grievances External Review Committee,Women,26
+2017,Military Police Complaints Commission of Canada,Men,*
+2017,Military Police Complaints Commission of Canada,Women,*
+2017,National Defence,Men,13870
+2017,National Defence,Unknown,37
+2017,National Defence,Women,9271
+2017,National Film Board,Men,164
+2017,National Film Board,Women,207
+2017,National Research Council Canada,Men,2485
+2017,National Research Council Canada,Unknown,9
+2017,National Research Council Canada,Women,1370
+2017,Natural Resources Canada,Men,2304
+2017,Natural Resources Canada,Women,1960
+2017,Natural Sciences and Engineering Research Canada,Men,155
+2017,Natural Sciences and Engineering Research Canada,Women,287
+2017,Office of the Auditor General of Canada,Men,232
+2017,Office of the Auditor General of Canada,Unknown,3
+2017,Office of the Auditor General of Canada,Women,382
+2017,Office of the Commissioner for Federal Judicial Affairs Canada,Men,18
+2017,Office of the Commissioner for Federal Judicial Affairs Canada,Women,41
+2017,Office of the Commissioner of Lobbying of Canada,Men,13
+2017,Office of the Commissioner of Lobbying of Canada,Women,11
+2017,Office of the Commissioner of Official Languages,Men,56
+2017,Office of the Commissioner of Official Languages,Women,99
+2017,Office of the Governor General's Secretary,Men,55
+2017,Office of the Governor General's Secretary,Women,94
+2017,Office of the Public Sector Integrity Commissioner of Canada,Men,9
+2017,Office of the Public Sector Integrity Commissioner of Canada,Women,15
+2017,Office of the Superintendent of Financial Institutions Canada,Men,353
+2017,Office of the Superintendent of Financial Institutions Canada,Unknown,4
+2017,Office of the Superintendent of Financial Institutions Canada,Women,331
+2017,Offices of the Information and Privacy Commissioners of Canada,Men,107
+2017,Offices of the Information and Privacy Commissioners of Canada,Women,154
+2017,Parks Canada,Men,2033
+2017,Parks Canada,Women,1943
+2017,Parole Board of Canada,Men,108
+2017,Parole Board of Canada,Women,340
+2017,Patented Medicine Prices Review Board Canada,Men,29
+2017,Patented Medicine Prices Review Board Canada,Women,40
+2017,Polar Knowledge Canada,Men,11
+2017,Polar Knowledge Canada,Women,16
+2017,Privy Council Office,Men,333
+2017,Privy Council Office,Women,466
+2017,Public Health Agency of Canada,Men,696
+2017,Public Health Agency of Canada,Women,1538
+2017,Public Prosecution Service of Canada,Men,331
+2017,Public Prosecution Service of Canada,Women,659
+2017,Public Safety Canada,Men,463
+2017,Public Safety Canada,Women,686
+2017,Public Service Commission of Canada,Men,267
+2017,Public Service Commission of Canada,Women,513
+2017,Public Services and Procurement Canada,Men,5248
+2017,Public Services and Procurement Canada,Unknown,14
+2017,Public Services and Procurement Canada,Women,7632
+2017,RCMP External Review Committee,Men,*
+2017,RCMP External Review Committee,Women,*
+2017,Registrar of the Supreme Court of Canada,Men,81
+2017,Registrar of the Supreme Court of Canada,Women,135
+2017,Royal Canadian Mounted Police (Civilian Staff),Men,1548
+2017,Royal Canadian Mounted Police (Civilian Staff),Unknown,14
+2017,Royal Canadian Mounted Police (Civilian Staff),Women,5239
+2017,Security Intelligence Review Committee,Men,10
+2017,Security Intelligence Review Committee,Women,12
+2017,Shared Services Canada,Men,3521
+2017,Shared Services Canada,Unknown,1
+2017,Shared Services Canada,Women,1735
+2017,Social Sciences and Humanities Research Council of Canada,Men,55
+2017,Social Sciences and Humanities Research Council of Canada,Women,156
+2017,Statistical Survey Operations,Men,536
+2017,Statistical Survey Operations,Women,1261
+2017,Statistics Canada,Men,2558
+2017,Statistics Canada,Women,2629
+2017,The Correctional Investigator Canada,Men,15
+2017,The Correctional Investigator Canada,Women,21
+2017,Federal public service,Men,117810
+2017,Federal public service,Unknown,127
+2017,Federal public service,Women,144759
+2017,Transport Canada,Men,2665
+2017,Transport Canada,Women,2117
+2017,Transportation Safety Board of Canada,Men,141
+2017,Transportation Safety Board of Canada,Women,68
+2017,Treasury Board of Canada Secretariat,Men,704
+2017,Treasury Board of Canada Secretariat,Unknown,5
+2017,Treasury Board of Canada Secretariat,Women,1132
+2017,Veterans Affairs Canada,Men,755
+2017,Veterans Affairs Canada,Unknown,8
+2017,Veterans Affairs Canada,Women,2046
+2017,Veterans Review and Appeal Board,Men,29
+2017,Veterans Review and Appeal Board,Women,57
+2017,Western Economic Diversification Canada,Men,119
+2017,Western Economic Diversification Canada,Women,160
+2017,Women and Gender Equality Canada,Men,11
+2017,Women and Gender Equality Canada,Women,88
+2018,Administrative Tribunals Support Service of Canada,Men,201
+2018,Administrative Tribunals Support Service of Canada,Unknown,6
+2018,Administrative Tribunals Support Service of Canada,Women,341
+2018,Agriculture and Agri-Food Canada,Men,2554
+2018,Agriculture and Agri-Food Canada,Women,2723
+2018,Atlantic Canada Opportunities Agency,Men,212
+2018,Atlantic Canada Opportunities Agency,Women,374
+2018,Canada Border Services Agency,Men,7326
+2018,Canada Border Services Agency,Women,6687
+2018,Canada Economic Development for Quebec Regions,Men,129
+2018,Canada Economic Development for Quebec Regions,Unknown,1
+2018,Canada Economic Development for Quebec Regions,Women,177
+2018,Canada Energy Regulator,Men,184
+2018,Canada Energy Regulator,Women,293
+2018,Canada Revenue Agency,Men,17303
+2018,Canada Revenue Agency,Women,24849
+2018,Canada School of Public Service,Men,196
+2018,Canada School of Public Service,Women,403
+2018,Canadian Dairy Commission,Men,28
+2018,Canadian Dairy Commission,Women,40
+2018,Canadian Food Inspection Agency,Men,2568
+2018,Canadian Food Inspection Agency,Women,3681
+2018,Canadian Grain Commission,Men,222
+2018,Canadian Grain Commission,Women,204
+2018,Canadian Heritage,Men,618
+2018,Canadian Heritage,Women,1223
+2018,Canadian Human Rights Commission,Men,61
+2018,Canadian Human Rights Commission,Women,145
+2018,Canadian Institutes of Health Research,Men,147
+2018,Canadian Institutes of Health Research,Women,323
+2018,Canadian Intergovernmental Conference Secretariat,Men,10
+2018,Canadian Intergovernmental Conference Secretariat,Women,11
+2018,Canadian Northern Economic Development Agency,Men,34
+2018,Canadian Northern Economic Development Agency,Women,47
+2018,Canadian Nuclear Safety Commission,Men,453
+2018,Canadian Nuclear Safety Commission,Unknown,3
+2018,Canadian Nuclear Safety Commission,Women,443
+2018,Canadian Radio-television and Telecommunications Commission,Men,208
+2018,Canadian Radio-television and Telecommunications Commission,Women,247
+2018,Canadian Space Agency,Men,368
+2018,Canadian Space Agency,Women,279
+2018,Canadian Transportation Agency,Men,98
+2018,Canadian Transportation Agency,Women,137
+2018,Civilian Review and Complaints Commission for the RCMP,Men,30
+2018,Civilian Review and Complaints Commission for the RCMP,Women,37
+2018,Communications Security Establishment,Men,1498
+2018,Communications Security Establishment,Unknown,6
+2018,Communications Security Establishment,Women,857
+2018,Copyright Board Canada,Men,9
+2018,Copyright Board Canada,Women,7
+2018,Correctional Service Canada,Men,8784
+2018,Correctional Service Canada,Women,8362
+2018,Courts Administration Service,Men,225
+2018,Courts Administration Service,Women,422
+2018,Crown-Indigenous Relations and Northern Affairs Canada,Men,1715
+2018,Crown-Indigenous Relations and Northern Affairs Canada,Women,3216
+2018,Department of Finance Canada,Men,414
+2018,Department of Finance Canada,Women,374
+2018,Department of Justice Canada,Men,1406
+2018,Department of Justice Canada,Women,3126
+2018,Elections Canada,Men,302
+2018,Elections Canada,Women,374
+2018,Employment and Social Development Canada,Men,7903
+2018,Employment and Social Development Canada,Women,16836
+2018,Environment and Climate Change Canada,Men,3432
+2018,Environment and Climate Change Canada,Women,3404
+2018,Federal Economic Development Agency for Southern Ontario,Men,84
+2018,Federal Economic Development Agency for Southern Ontario,Women,151
+2018,Federal Judges not part of any department,Men,714
+2018,Federal Judges not part of any department,Women,451
+2018,Federal public service,Total,273571
+2018,Financial Consumer Agency of Canada,Men,54
+2018,Financial Consumer Agency of Canada,Women,61
+2018,Financial Transactions and Reports Analysis Centre of Canada,Men,165
+2018,Financial Transactions and Reports Analysis Centre of Canada,Women,207
+2018,Fisheries and Oceans Canada,Men,6651
+2018,Fisheries and Oceans Canada,Women,4487
+2018,Global Affairs Canada,Men,2801
+2018,Global Affairs Canada,Women,3553
+2018,Health Canada,Men,3247
+2018,Health Canada,Women,6492
+2018,Immigration and Refugee Board of Canada,Men,413
+2018,Immigration and Refugee Board of Canada,Unknown,3
+2018,Immigration and Refugee Board of Canada,Women,671
+2018,"Immigration, Refugees and Citizenship Canada",Men,2418
+2018,"Immigration, Refugees and Citizenship Canada",Women,4575
+2018,Impact Assessment Agency of Canada,Men,98
+2018,Impact Assessment Agency of Canada,Women,180
+2018,Indian Oil and Gas Canada,Men,31
+2018,Indian Oil and Gas Canada,Women,57
+2018,Infrastructure Canada,Men,149
+2018,Infrastructure Canada,Women,252
+2018,"Innovation, Science and Economic Development Canada",Men,2468
+2018,"Innovation, Science and Economic Development Canada",Women,2678
+2018,International Joint Commission,Men,17
+2018,International Joint Commission,Women,14
+2018,Library and Archives Canada,Men,353
+2018,Library and Archives Canada,Women,574
+2018,Military Grievances External Review Committee,Men,13
+2018,Military Grievances External Review Committee,Women,20
+2018,Military Police Complaints Commission of Canada,Men,*
+2018,Military Police Complaints Commission of Canada,Women,*
+2018,National Defence,Men,14333
+2018,National Defence,Unknown,52
+2018,National Defence,Women,9639
+2018,National Film Board,Men,169
+2018,National Film Board,Women,230
+2018,National Research Council Canada,Men,2492
+2018,National Research Council Canada,Unknown,9
+2018,National Research Council Canada,Women,1370
+2018,Natural Resources Canada,Men,2338
+2018,Natural Resources Canada,Women,2020
+2018,Natural Sciences and Engineering Research Canada,Men,160
+2018,Natural Sciences and Engineering Research Canada,Women,287
+2018,Office of the Auditor General of Canada,Men,221
+2018,Office of the Auditor General of Canada,Unknown,6
+2018,Office of the Auditor General of Canada,Women,376
+2018,Office of the Commissioner for Federal Judicial Affairs Canada,Men,18
+2018,Office of the Commissioner for Federal Judicial Affairs Canada,Women,44
+2018,Office of the Commissioner of Lobbying of Canada,Men,14
+2018,Office of the Commissioner of Lobbying of Canada,Women,8
+2018,Office of the Commissioner of Official Languages,Men,55
+2018,Office of the Commissioner of Official Languages,Women,109
+2018,Office of the Governor General's Secretary,Men,55
+2018,Office of the Governor General's Secretary,Women,93
+2018,Office of the Public Sector Integrity Commissioner of Canada,Men,12
+2018,Office of the Public Sector Integrity Commissioner of Canada,Women,11
+2018,Office of the Superintendent of Financial Institutions Canada,Men,359
+2018,Office of the Superintendent of Financial Institutions Canada,Unknown,5
+2018,Office of the Superintendent of Financial Institutions Canada,Women,357
+2018,Offices of the Information and Privacy Commissioners of Canada,Men,103
+2018,Offices of the Information and Privacy Commissioners of Canada,Women,153
+2018,Parks Canada,Men,2149
+2018,Parks Canada,Women,2053
+2018,Parole Board of Canada,Men,110
+2018,Parole Board of Canada,Women,343
+2018,Patented Medicine Prices Review Board Canada,Men,28
+2018,Patented Medicine Prices Review Board Canada,Women,33
+2018,Polar Knowledge Canada,Men,26
+2018,Polar Knowledge Canada,Unknown,3
+2018,Polar Knowledge Canada,Women,32
+2018,Privy Council Office,Men,412
+2018,Privy Council Office,Women,594
+2018,Public Health Agency of Canada,Men,684
+2018,Public Health Agency of Canada,Women,1475
+2018,Public Prosecution Service of Canada,Men,331
+2018,Public Prosecution Service of Canada,Women,674
+2018,Public Safety Canada,Men,483
+2018,Public Safety Canada,Unknown,6
+2018,Public Safety Canada,Women,716
+2018,Public Service Commission of Canada,Men,269
+2018,Public Service Commission of Canada,Women,540
+2018,Public Services and Procurement Canada,Men,5624
+2018,Public Services and Procurement Canada,Unknown,1
+2018,Public Services and Procurement Canada,Women,8363
+2018,RCMP External Review Committee,Men,*
+2018,RCMP External Review Committee,Women,*
+2018,Registrar of the Supreme Court of Canada,Men,88
+2018,Registrar of the Supreme Court of Canada,Women,142
+2018,Royal Canadian Mounted Police (Civilian Staff),Men,1699
+2018,Royal Canadian Mounted Police (Civilian Staff),Unknown,13
+2018,Royal Canadian Mounted Police (Civilian Staff),Women,5528
+2018,Security Intelligence Review Committee,Men,9
+2018,Security Intelligence Review Committee,Women,16
+2018,Shared Services Canada,Men,3858
+2018,Shared Services Canada,Women,1958
+2018,Social Sciences and Humanities Research Council of Canada,Men,53
+2018,Social Sciences and Humanities Research Council of Canada,Women,157
+2018,Statistical Survey Operations,Men,442
+2018,Statistical Survey Operations,Women,1062
+2018,Statistics Canada,Men,2595
+2018,Statistics Canada,Women,2615
+2018,The Correctional Investigator Canada,Men,18
+2018,The Correctional Investigator Canada,Women,15
+2018,Federal public service,Men,122247
+2018,Federal public service,Unknown,120
+2018,Federal public service,Women,151204
+2018,Transport Canada,Men,2907
+2018,Transport Canada,Women,2455
+2018,Transportation Safety Board of Canada,Men,132
+2018,Transportation Safety Board of Canada,Women,78
+2018,Treasury Board of Canada Secretariat,Men,763
+2018,Treasury Board of Canada Secretariat,Unknown,3
+2018,Treasury Board of Canada Secretariat,Women,1188
+2018,Veterans Affairs Canada,Men,744
+2018,Veterans Affairs Canada,Unknown,3
+2018,Veterans Affairs Canada,Women,2053
+2018,Veterans Review and Appeal Board,Men,26
+2018,Veterans Review and Appeal Board,Women,59
+2018,Western Economic Diversification Canada,Men,129
+2018,Western Economic Diversification Canada,Women,173
+2018,Women and Gender Equality Canada,Men,16
+2018,Women and Gender Equality Canada,Women,105
+2019,Administrative Tribunals Support Service of Canada,Men,210
+2019,Administrative Tribunals Support Service of Canada,Unknown,7
+2019,Administrative Tribunals Support Service of Canada,Women,362
+2019,Agriculture and Agri-Food Canada,Men,2511
+2019,Agriculture and Agri-Food Canada,Unknown,1
+2019,Agriculture and Agri-Food Canada,Women,2780
+2019,Atlantic Canada Opportunities Agency,Men,210
+2019,Atlantic Canada Opportunities Agency,Women,378
+2019,Canada Border Services Agency,Men,7565
+2019,Canada Border Services Agency,Women,6904
+2019,Canada Economic Development for Quebec Regions,Men,142
+2019,Canada Economic Development for Quebec Regions,Unknown,1
+2019,Canada Economic Development for Quebec Regions,Women,181
+2019,Canada Energy Regulator,Men,179
+2019,Canada Energy Regulator,Women,300
+2019,Canada Revenue Agency,Men,18232
+2019,Canada Revenue Agency,Women,25676
+2019,Canada School of Public Service,Men,208
+2019,Canada School of Public Service,Unknown,1
+2019,Canada School of Public Service,Women,411
+2019,Canadian Dairy Commission,Men,29
+2019,Canadian Dairy Commission,Women,36
+2019,Canadian Food Inspection Agency,Men,2552
+2019,Canadian Food Inspection Agency,Women,3695
+2019,Canadian Grain Commission,Men,221
+2019,Canadian Grain Commission,Women,208
+2019,Canadian Heritage,Men,607
+2019,Canadian Heritage,Women,1255
+2019,Canadian Human Rights Commission,Men,58
+2019,Canadian Human Rights Commission,Women,141
+2019,Canadian Institutes of Health Research,Men,164
+2019,Canadian Institutes of Health Research,Women,338
+2019,Canadian Intergovernmental Conference Secretariat,Men,10
+2019,Canadian Intergovernmental Conference Secretariat,Women,14
+2019,Canadian Northern Economic Development Agency,Men,26
+2019,Canadian Northern Economic Development Agency,Women,50
+2019,Canadian Nuclear Safety Commission,Men,443
+2019,Canadian Nuclear Safety Commission,Unknown,16
+2019,Canadian Nuclear Safety Commission,Women,444
+2019,Canadian Radio-television and Telecommunications Commission,Men,220
+2019,Canadian Radio-television and Telecommunications Commission,Women,273
+2019,Canadian Space Agency,Men,388
+2019,Canadian Space Agency,Women,304
+2019,Canadian Transportation Agency,Men,117
+2019,Canadian Transportation Agency,Women,155
+2019,Civilian Review and Complaints Commission for the RCMP,Men,34
+2019,Civilian Review and Complaints Commission for the RCMP,Women,42
+2019,Communications Security Establishment,Men,1635
+2019,Communications Security Establishment,Unknown,11
+2019,Communications Security Establishment,Women,903
+2019,Copyright Board Canada,Men,8
+2019,Copyright Board Canada,Women,7
+2019,Correctional Service Canada,Men,8874
+2019,Correctional Service Canada,Unknown,17
+2019,Correctional Service Canada,Women,8591
+2019,Courts Administration Service,Men,246
+2019,Courts Administration Service,Women,469
+2019,Crown-Indigenous Relations and Northern Affairs Canada,Men,1774
+2019,Crown-Indigenous Relations and Northern Affairs Canada,Unknown,1
+2019,Crown-Indigenous Relations and Northern Affairs Canada,Women,3312
+2019,Department of Finance Canada,Men,428
+2019,Department of Finance Canada,Women,374
+2019,Department of Justice Canada,Men,1442
+2019,Department of Justice Canada,Unknown,4
+2019,Department of Justice Canada,Women,3213
+2019,Elections Canada,Men,364
+2019,Elections Canada,Women,413
+2019,Employment and Social Development Canada,Men,8138
+2019,Employment and Social Development Canada,Unknown,1
+2019,Employment and Social Development Canada,Women,17021
+2019,Environment and Climate Change Canada,Men,3597
+2019,Environment and Climate Change Canada,Unknown,4
+2019,Environment and Climate Change Canada,Women,3675
+2019,Federal Economic Development Agency for Southern Ontario,Men,87
+2019,Federal Economic Development Agency for Southern Ontario,Women,153
+2019,Federal Judges not part of any department,Men,713
+2019,Federal Judges not part of any department,Women,485
+2019,Federal public service,Total,287983
+2019,Financial Consumer Agency of Canada,Men,59
+2019,Financial Consumer Agency of Canada,Women,69
+2019,Financial Transactions and Reports Analysis Centre of Canada,Men,163
+2019,Financial Transactions and Reports Analysis Centre of Canada,Unknown,1
+2019,Financial Transactions and Reports Analysis Centre of Canada,Women,197
+2019,Fisheries and Oceans Canada,Men,7096
+2019,Fisheries and Oceans Canada,Unknown,1
+2019,Fisheries and Oceans Canada,Women,4814
+2019,Global Affairs Canada,Men,2893
+2019,Global Affairs Canada,Unknown,1
+2019,Global Affairs Canada,Women,3667
+2019,Health Canada,Men,3593
+2019,Health Canada,Unknown,5
+2019,Health Canada,Women,7196
+2019,Immigration and Refugee Board of Canada,Men,529
+2019,Immigration and Refugee Board of Canada,Unknown,2
+2019,Immigration and Refugee Board of Canada,Women,882
+2019,"Immigration, Refugees and Citizenship Canada",Men,2764
+2019,"Immigration, Refugees and Citizenship Canada",Unknown,2
+2019,"Immigration, Refugees and Citizenship Canada",Women,5098
+2019,Impact Assessment Agency of Canada,Men,114
+2019,Impact Assessment Agency of Canada,Women,216
+2019,Indian Oil and Gas Canada,Men,31
+2019,Indian Oil and Gas Canada,Women,56
+2019,Infrastructure Canada,Men,178
+2019,Infrastructure Canada,Women,336
+2019,"Innovation, Science and Economic Development Canada",Men,2641
+2019,"Innovation, Science and Economic Development Canada",Unknown,2
+2019,"Innovation, Science and Economic Development Canada",Women,2816
+2019,International Joint Commission,Men,16
+2019,International Joint Commission,Women,14
+2019,Library and Archives Canada,Men,370
+2019,Library and Archives Canada,Women,611
+2019,Military Grievances External Review Committee,Men,16
+2019,Military Grievances External Review Committee,Women,21
+2019,Military Police Complaints Commission of Canada,Men,8
+2019,Military Police Complaints Commission of Canada,Women,17
+2019,National Defence,Men,14896
+2019,National Defence,Unknown,37
+2019,National Defence,Women,10345
+2019,National Film Board,Men,164
+2019,National Film Board,Women,228
+2019,National Research Council Canada,Men,2595
+2019,National Research Council Canada,Unknown,12
+2019,National Research Council Canada,Women,1451
+2019,Natural Resources Canada,Men,2394
+2019,Natural Resources Canada,Unknown,1
+2019,Natural Resources Canada,Women,2156
+2019,Natural Sciences and Engineering Research Canada,Men,169
+2019,Natural Sciences and Engineering Research Canada,Women,306
+2019,Office of the Auditor General of Canada,Men,227
+2019,Office of the Auditor General of Canada,Unknown,3
+2019,Office of the Auditor General of Canada,Women,371
+2019,Office of the Commissioner for Federal Judicial Affairs Canada,Men,19
+2019,Office of the Commissioner for Federal Judicial Affairs Canada,Women,39
+2019,Office of the Commissioner of Lobbying of Canada,Men,14
+2019,Office of the Commissioner of Lobbying of Canada,Women,11
+2019,Office of the Commissioner of Official Languages,Men,62
+2019,Office of the Commissioner of Official Languages,Women,112
+2019,Office of the Governor General's Secretary,Men,51
+2019,Office of the Governor General's Secretary,Women,97
+2019,Office of the Public Sector Integrity Commissioner of Canada,Men,14
+2019,Office of the Public Sector Integrity Commissioner of Canada,Women,11
+2019,Office of the Superintendent of Financial Institutions Canada,Men,382
+2019,Office of the Superintendent of Financial Institutions Canada,Unknown,4
+2019,Office of the Superintendent of Financial Institutions Canada,Women,383
+2019,Offices of the Information and Privacy Commissioners of Canada,Men,95
+2019,Offices of the Information and Privacy Commissioners of Canada,Women,157
+2019,Parks Canada,Men,2184
+2019,Parks Canada,Unknown,1
+2019,Parks Canada,Women,2171
+2019,Parole Board of Canada,Men,112
+2019,Parole Board of Canada,Women,350
+2019,Patented Medicine Prices Review Board Canada,Men,36
+2019,Patented Medicine Prices Review Board Canada,Women,38
+2019,Polar Knowledge Canada,Men,22
+2019,Polar Knowledge Canada,Women,39
+2019,Privy Council Office,Men,456
+2019,Privy Council Office,Unknown,1
+2019,Privy Council Office,Women,618
+2019,Public Health Agency of Canada,Men,753
+2019,Public Health Agency of Canada,Women,1626
+2019,Public Prosecution Service of Canada,Men,336
+2019,Public Prosecution Service of Canada,Unknown,1
+2019,Public Prosecution Service of Canada,Women,654
+2019,Public Safety Canada,Men,545
+2019,Public Safety Canada,Women,784
+2019,Public Service Commission of Canada,Men,301
+2019,Public Service Commission of Canada,Women,588
+2019,Public Services and Procurement Canada,Men,6294
+2019,Public Services and Procurement Canada,Unknown,4
+2019,Public Services and Procurement Canada,Women,9423
+2019,RCMP External Review Committee,Men,*
+2019,RCMP External Review Committee,Women,*
+2019,Registrar of the Supreme Court of Canada,Men,90
+2019,Registrar of the Supreme Court of Canada,Women,135
+2019,Royal Canadian Mounted Police (Civilian Staff),Men,1845
+2019,Royal Canadian Mounted Police (Civilian Staff),Unknown,17
+2019,Royal Canadian Mounted Police (Civilian Staff),Women,5702
+2019,Secretariat of the National Security and Intelligence Committee of Parliamentarians,Men,*
+2019,Secretariat of the National Security and Intelligence Committee of Parliamentarians,Women,*
+2019,Security Intelligence Review Committee,Men,9
+2019,Security Intelligence Review Committee,Women,13
+2019,Shared Services Canada,Men,4362
+2019,Shared Services Canada,Women,2166
+2019,Social Sciences and Humanities Research Council of Canada,Men,69
+2019,Social Sciences and Humanities Research Council of Canada,Women,175
+2019,Statistical Survey Operations,Men,441
+2019,Statistical Survey Operations,Unknown,1
+2019,Statistical Survey Operations,Women,1043
+2019,Statistics Canada,Men,2725
+2019,Statistics Canada,Women,2680
+2019,The Correctional Investigator Canada,Men,20
+2019,The Correctional Investigator Canada,Women,21
+2019,Federal public service,Men,128736
+2019,Federal public service,Unknown,168
+2019,Federal public service,Women,159079
+2019,Transport Canada,Men,3115
+2019,Transport Canada,Women,2568
+2019,Transportation Safety Board of Canada,Men,134
+2019,Transportation Safety Board of Canada,Women,82
+2019,Treasury Board of Canada Secretariat,Men,839
+2019,Treasury Board of Canada Secretariat,Unknown,2
+2019,Treasury Board of Canada Secretariat,Women,1284
+2019,Veterans Affairs Canada,Men,871
+2019,Veterans Affairs Canada,Unknown,6
+2019,Veterans Affairs Canada,Women,2282
+2019,Veterans Review and Appeal Board,Men,22
+2019,Veterans Review and Appeal Board,Women,57
+2019,Western Economic Diversification Canada,Men,134
+2019,Western Economic Diversification Canada,Women,182
+2019,Women and Gender Equality Canada,Men,27
+2019,Women and Gender Equality Canada,Women,154
+2020,Administrative Tribunals Support Service of Canada,Men,213
+2020,Administrative Tribunals Support Service of Canada,Unknown,5
+2020,Administrative Tribunals Support Service of Canada,Women,369
+2020,Agriculture and Agri-Food Canada,Men,2622
+2020,Agriculture and Agri-Food Canada,Women,2909
+2020,Atlantic Canada Opportunities Agency,Men,214
+2020,Atlantic Canada Opportunities Agency,Unknown,1
+2020,Atlantic Canada Opportunities Agency,Women,379
+2020,Canada Border Services Agency,Men,7832
+2020,Canada Border Services Agency,Women,7139
+2020,Canada Economic Development for Quebec Regions,Men,141
+2020,Canada Economic Development for Quebec Regions,Unknown,1
+2020,Canada Economic Development for Quebec Regions,Women,178
+2020,Canada Energy Regulator,Men,188
+2020,Canada Energy Regulator,Women,315
+2020,Canada Revenue Agency,Men,18880
+2020,Canada Revenue Agency,Unknown,1
+2020,Canada Revenue Agency,Women,26138
+2020,Canada School of Public Service,Men,235
+2020,Canada School of Public Service,Unknown,2
+2020,Canada School of Public Service,Women,431
+2020,Canadian Dairy Commission,Men,28
+2020,Canadian Dairy Commission,Women,37
+2020,Canadian Food Inspection Agency,Men,2425
+2020,Canadian Food Inspection Agency,Women,3617
+2020,Canadian Grain Commission,Men,225
+2020,Canadian Grain Commission,Women,205
+2020,Canadian Heritage,Men,603
+2020,Canadian Heritage,Women,1286
+2020,Canadian Human Rights Commission,Men,65
+2020,Canadian Human Rights Commission,Unknown,1
+2020,Canadian Human Rights Commission,Women,176
+2020,Canadian Institutes of Health Research,Men,165
+2020,Canadian Institutes of Health Research,Women,340
+2020,Canadian Intergovernmental Conference Secretariat,Men,12
+2020,Canadian Intergovernmental Conference Secretariat,Women,11
+2020,Canadian Northern Economic Development Agency,Men,35
+2020,Canadian Northern Economic Development Agency,Women,64
+2020,Canadian Nuclear Safety Commission,Men,434
+2020,Canadian Nuclear Safety Commission,Unknown,11
+2020,Canadian Nuclear Safety Commission,Women,418
+2020,Canadian Radio-television and Telecommunications Commission,Men,240
+2020,Canadian Radio-television and Telecommunications Commission,Women,294
+2020,Canadian Space Agency,Men,376
+2020,Canadian Space Agency,Women,310
+2020,Canadian Transportation Agency,Men,133
+2020,Canadian Transportation Agency,Women,159
+2020,Civilian Review and Complaints Commission for the RCMP,Men,31
+2020,Civilian Review and Complaints Commission for the RCMP,Women,49
+2020,Communications Security Establishment,Men,1746
+2020,Communications Security Establishment,Unknown,13
+2020,Communications Security Establishment,Women,993
+2020,Copyright Board Canada,Men,7
+2020,Copyright Board Canada,Women,9
+2020,Correctional Service Canada,Men,8897
+2020,Correctional Service Canada,Unknown,25
+2020,Correctional Service Canada,Women,8896
+2020,Courts Administration Service,Men,271
+2020,Courts Administration Service,Women,517
+2020,Crown-Indigenous Relations and Northern Affairs Canada,Men,1911
+2020,Crown-Indigenous Relations and Northern Affairs Canada,Women,3507
+2020,Department of Finance Canada,Men,435
+2020,Department of Finance Canada,Women,398
+2020,Department of Justice Canada,Men,1510
+2020,Department of Justice Canada,Unknown,8
+2020,Department of Justice Canada,Women,3326
+2020,Elections Canada,Men,435
+2020,Elections Canada,Women,468
+2020,Employment and Social Development Canada,Men,8788
+2020,Employment and Social Development Canada,Unknown,1
+2020,Employment and Social Development Canada,Women,18326
+2020,Environment and Climate Change Canada,Men,3707
+2020,Environment and Climate Change Canada,Unknown,2
+2020,Environment and Climate Change Canada,Women,3841
+2020,Federal Economic Development Agency for Southern Ontario,Men,105
+2020,Federal Economic Development Agency for Southern Ontario,Women,169
+2020,Federal Judges not part of any department,Men,699
+2020,Federal Judges not part of any department,Unknown,1
+2020,Federal Judges not part of any department,Women,504
+2020,Federal public service,Total,300450
+2020,Financial Consumer Agency of Canada,Men,63
+2020,Financial Consumer Agency of Canada,Women,84
+2020,Financial Transactions and Reports Analysis Centre of Canada,Men,170
+2020,Financial Transactions and Reports Analysis Centre of Canada,Unknown,1
+2020,Financial Transactions and Reports Analysis Centre of Canada,Women,205
+2020,Fisheries and Oceans Canada,Men,7443
+2020,Fisheries and Oceans Canada,Women,5211
+2020,Global Affairs Canada,Men,3012
+2020,Global Affairs Canada,Women,3848
+2020,Health Canada,Men,3671
+2020,Health Canada,Women,7552
+2020,Immigration and Refugee Board of Canada,Men,634
+2020,Immigration and Refugee Board of Canada,Unknown,4
+2020,Immigration and Refugee Board of Canada,Women,1104
+2020,"Immigration, Refugees and Citizenship Canada",Men,3027
+2020,"Immigration, Refugees and Citizenship Canada",Unknown,4
+2020,"Immigration, Refugees and Citizenship Canada",Women,5465
+2020,Impact Assessment Agency of Canada,Men,138
+2020,Impact Assessment Agency of Canada,Women,300
+2020,Indian Oil and Gas Canada,Men,29
+2020,Indian Oil and Gas Canada,Women,59
+2020,Infrastructure Canada,Men,230
+2020,Infrastructure Canada,Women,387
+2020,"Innovation, Science and Economic Development Canada",Men,2746
+2020,"Innovation, Science and Economic Development Canada",Women,2770
+2020,International Joint Commission,Men,16
+2020,International Joint Commission,Women,18
+2020,Library and Archives Canada,Men,376
+2020,Library and Archives Canada,Women,624
+2020,Military Grievances External Review Committee,Men,17
+2020,Military Grievances External Review Committee,Women,24
+2020,Military Police Complaints Commission of Canada,Men,9
+2020,Military Police Complaints Commission of Canada,Women,19
+2020,National Defence,Men,15256
+2020,National Defence,Unknown,43
+2020,National Defence,Women,10748
+2020,National Film Board,Men,169
+2020,National Film Board,Women,219
+2020,National Research Council Canada,Men,2667
+2020,National Research Council Canada,Unknown,10
+2020,National Research Council Canada,Women,1538
+2020,Natural Resources Canada,Men,2410
+2020,Natural Resources Canada,Unknown,2
+2020,Natural Resources Canada,Women,2162
+2020,Natural Sciences and Engineering Research Canada,Men,179
+2020,Natural Sciences and Engineering Research Canada,Women,332
+2020,Office of the Auditor General of Canada,Men,243
+2020,Office of the Auditor General of Canada,Unknown,3
+2020,Office of the Auditor General of Canada,Women,393
+2020,Office of the Commissioner for Federal Judicial Affairs Canada,Men,25
+2020,Office of the Commissioner for Federal Judicial Affairs Canada,Women,41
+2020,Office of the Commissioner of Lobbying of Canada,Men,14
+2020,Office of the Commissioner of Lobbying of Canada,Women,12
+2020,Office of the Commissioner of Official Languages,Men,64
+2020,Office of the Commissioner of Official Languages,Women,109
+2020,Office of the Governor General's Secretary,Men,58
+2020,Office of the Governor General's Secretary,Women,109
+2020,Office of the Public Sector Integrity Commissioner of Canada,Men,13
+2020,Office of the Public Sector Integrity Commissioner of Canada,Women,14
+2020,Office of the Superintendent of Financial Institutions Canada,Men,414
+2020,Office of the Superintendent of Financial Institutions Canada,Unknown,6
+2020,Office of the Superintendent of Financial Institutions Canada,Women,428
+2020,Offices of the Information and Privacy Commissioners of Canada,Men,113
+2020,Offices of the Information and Privacy Commissioners of Canada,Women,189
+2020,Parks Canada,Men,2241
+2020,Parks Canada,Unknown,2
+2020,Parks Canada,Women,2276
+2020,Parole Board of Canada,Men,111
+2020,Parole Board of Canada,Unknown,1
+2020,Parole Board of Canada,Women,373
+2020,Patented Medicine Prices Review Board Canada,Men,41
+2020,Patented Medicine Prices Review Board Canada,Women,39
+2020,Polar Knowledge Canada,Men,27
+2020,Polar Knowledge Canada,Unknown,9
+2020,Polar Knowledge Canada,Women,36
+2020,Privy Council Office,Men,451
+2020,Privy Council Office,Unknown,6
+2020,Privy Council Office,Women,554
+2020,Public Health Agency of Canada,Men,725
+2020,Public Health Agency of Canada,Women,1615
+2020,Public Prosecution Service of Canada,Men,343
+2020,Public Prosecution Service of Canada,Unknown,3
+2020,Public Prosecution Service of Canada,Women,689
+2020,Public Safety Canada,Men,515
+2020,Public Safety Canada,Women,754
+2020,Public Service Commission of Canada,Men,345
+2020,Public Service Commission of Canada,Unknown,1
+2020,Public Service Commission of Canada,Women,609
+2020,Public Services and Procurement Canada,Men,6793
+2020,Public Services and Procurement Canada,Unknown,6
+2020,Public Services and Procurement Canada,Women,10093
+2020,RCMP External Review Committee,Men,*
+2020,RCMP External Review Committee,Women,*
+2020,Registrar of the Supreme Court of Canada,Men,95
+2020,Registrar of the Supreme Court of Canada,Women,142
+2020,Royal Canadian Mounted Police (Civilian Staff),Men,2067
+2020,Royal Canadian Mounted Police (Civilian Staff),Unknown,21
+2020,Royal Canadian Mounted Police (Civilian Staff),Women,5934
+2020,Secretariat of the National Security and Intelligence Committee of Parliamentarians,Men,*
+2020,Secretariat of the National Security and Intelligence Committee of Parliamentarians,Women,*
+2020,Security Intelligence Review Committee,Men,9
+2020,Security Intelligence Review Committee,Women,11
+2020,Shared Services Canada,Men,4743
+2020,Shared Services Canada,Unknown,1
+2020,Shared Services Canada,Women,2441
+2020,Social Sciences and Humanities Research Council of Canada,Men,76
+2020,Social Sciences and Humanities Research Council of Canada,Women,199
+2020,Statistical Survey Operations,Men,429
+2020,Statistical Survey Operations,Women,1025
+2020,Statistics Canada,Men,2752
+2020,Statistics Canada,Women,2700
+2020,The Correctional Investigator Canada,Men,18
+2020,The Correctional Investigator Canada,Women,20
+2020,Federal public service,Men,133996
+2020,Federal public service,Unknown,202
+2020,Federal public service,Women,166252
+2020,Transport Canada,Men,3217
+2020,Transport Canada,Women,2660
+2020,Transportation Safety Board of Canada,Men,145
+2020,Transportation Safety Board of Canada,Women,80
+2020,Treasury Board of Canada Secretariat,Men,889
+2020,Treasury Board of Canada Secretariat,Unknown,4
+2020,Treasury Board of Canada Secretariat,Women,1383
+2020,Veterans Affairs Canada,Men,913
+2020,Veterans Affairs Canada,Unknown,3
+2020,Veterans Affairs Canada,Women,2405
+2020,Veterans Review and Appeal Board,Men,26
+2020,Veterans Review and Appeal Board,Women,51
+2020,Western Economic Diversification Canada,Men,158
+2020,Western Economic Diversification Canada,Women,191
+2020,Women and Gender Equality Canada,Men,43
+2020,Women and Gender Equality Canada,Women,221
+2021,Administrative Tribunals Support Service of Canada,Men,226
+2021,Administrative Tribunals Support Service of Canada,Unknown,6
+2021,Administrative Tribunals Support Service of Canada,Women,396
+2021,Agriculture and Agri-Food Canada,Men,2614
+2021,Agriculture and Agri-Food Canada,Women,2881
+2021,Atlantic Canada Opportunities Agency,Men,236
+2021,Atlantic Canada Opportunities Agency,Women,390
+2021,Canada Border Services Agency,Men,7926
+2021,Canada Border Services Agency,Women,7298
+2021,Canada Economic Development for Quebec Regions,Men,153
+2021,Canada Economic Development for Quebec Regions,Women,207
+2021,Canada Energy Regulator,Men,203
+2021,Canada Energy Regulator,Women,350
+2021,Canada Revenue Agency,Men,19898
+2021,Canada Revenue Agency,Unknown,1
+2021,Canada Revenue Agency,Women,27527
+2021,Canada School of Public Service,Men,229
+2021,Canada School of Public Service,Unknown,3
+2021,Canada School of Public Service,Women,415
+2021,Canadian Dairy Commission,Men,32
+2021,Canadian Dairy Commission,Women,39
+2021,Canadian Food Inspection Agency,Men,2625
+2021,Canadian Food Inspection Agency,Unknown,2
+2021,Canadian Food Inspection Agency,Women,3912
+2021,Canadian Grain Commission,Men,231
+2021,Canadian Grain Commission,Women,216
+2021,Canadian Heritage,Men,630
+2021,Canadian Heritage,Women,1305
+2021,Canadian Human Rights Commission,Men,74
+2021,Canadian Human Rights Commission,Unknown,1
+2021,Canadian Human Rights Commission,Women,177
+2021,Canadian Institutes of Health Research,Men,170
+2021,Canadian Institutes of Health Research,Women,369
+2021,Canadian Intergovernmental Conference Secretariat,Men,13
+2021,Canadian Intergovernmental Conference Secretariat,Women,9
+2021,Canadian Northern Economic Development Agency,Men,37
+2021,Canadian Northern Economic Development Agency,Women,72
+2021,Canadian Nuclear Safety Commission,Men,429
+2021,Canadian Nuclear Safety Commission,Unknown,14
+2021,Canadian Nuclear Safety Commission,Women,419
+2021,Canadian Radio-television and Telecommunications Commission,Men,246
+2021,Canadian Radio-television and Telecommunications Commission,Women,295
+2021,Canadian Space Agency,Men,406
+2021,Canadian Space Agency,Women,338
+2021,Canadian Transportation Agency,Men,158
+2021,Canadian Transportation Agency,Women,197
+2021,Civilian Review and Complaints Commission for the RCMP,Men,30
+2021,Civilian Review and Complaints Commission for the RCMP,Women,47
+2021,Communications Security Establishment,Men,1899
+2021,Communications Security Establishment,Unknown,13
+2021,Communications Security Establishment,Women,1062
+2021,Copyright Board Canada,Men,9
+2021,Copyright Board Canada,Women,7
+2021,Correctional Service Canada,Men,8892
+2021,Correctional Service Canada,Unknown,8
+2021,Correctional Service Canada,Women,9004
+2021,Courts Administration Service,Men,267
+2021,Courts Administration Service,Women,498
+2021,Crown-Indigenous Relations and Northern Affairs Canada,Men,674
+2021,Crown-Indigenous Relations and Northern Affairs Canada,Women,1398
+2021,Department of Finance Canada,Men,450
+2021,Department of Finance Canada,Women,403
+2021,Department of Justice Canada,Men,1568
+2021,Department of Justice Canada,Unknown,4
+2021,Department of Justice Canada,Women,3400
+2021,Elections Canada,Men,583
+2021,Elections Canada,Women,678
+2021,Employment and Social Development Canada,Men,10586
+2021,Employment and Social Development Canada,Unknown,2
+2021,Employment and Social Development Canada,Women,22109
+2021,Environment and Climate Change Canada,Men,3671
+2021,Environment and Climate Change Canada,Women,3945
+2021,Federal Economic Development Agency for Southern Ontario,Men,129
+2021,Federal Economic Development Agency for Southern Ontario,Women,187
+2021,Federal Judges not part of any department,Men,677
+2021,Federal Judges not part of any department,Unknown,2
+2021,Federal Judges not part of any department,Women,530
+2021,Federal public service,Total,319601
+2021,Financial Consumer Agency of Canada,Men,75
+2021,Financial Consumer Agency of Canada,Women,86
+2021,Financial Transactions and Reports Analysis Centre of Canada,Men,187
+2021,Financial Transactions and Reports Analysis Centre of Canada,Unknown,1
+2021,Financial Transactions and Reports Analysis Centre of Canada,Women,213
+2021,Fisheries and Oceans Canada,Men,7791
+2021,Fisheries and Oceans Canada,Unknown,3
+2021,Fisheries and Oceans Canada,Women,5732
+2021,Global Affairs Canada,Men,3032
+2021,Global Affairs Canada,Unknown,3
+2021,Global Affairs Canada,Women,3959
+2021,Health Canada,Men,3253
+2021,Health Canada,Unknown,2
+2021,Health Canada,Women,5949
+2021,Immigration and Refugee Board of Canada,Men,718
+2021,Immigration and Refugee Board of Canada,Unknown,7
+2021,Immigration and Refugee Board of Canada,Women,1268
+2021,"Immigration, Refugees and Citizenship Canada",Men,3218
+2021,"Immigration, Refugees and Citizenship Canada",Unknown,1
+2021,"Immigration, Refugees and Citizenship Canada",Women,5772
+2021,Impact Assessment Agency of Canada,Men,157
+2021,Impact Assessment Agency of Canada,Women,303
+2021,Indian Oil and Gas Canada,Men,28
+2021,Indian Oil and Gas Canada,Unknown,1
+2021,Indian Oil and Gas Canada,Women,59
+2021,Indigenous Services Canada,Men,2111
+2021,Indigenous Services Canada,Women,4559
+2021,Infrastructure Canada,Men,263
+2021,Infrastructure Canada,Women,437
+2021,"Innovation, Science and Economic Development Canada",Men,2756
+2021,"Innovation, Science and Economic Development Canada",Women,2944
+2021,International Joint Commission,Men,14
+2021,International Joint Commission,Women,17
+2021,Library and Archives Canada,Men,339
+2021,Library and Archives Canada,Women,587
+2021,Military Grievances External Review Committee,Men,20
+2021,Military Grievances External Review Committee,Women,26
+2021,Military Police Complaints Commission of Canada,Men,11
+2021,Military Police Complaints Commission of Canada,Women,17
+2021,National Defence,Men,15400
+2021,National Defence,Unknown,49
+2021,National Defence,Women,10973
+2021,National Film Board,Men,168
+2021,National Film Board,Women,221
+2021,National Research Council Canada,Men,2739
+2021,National Research Council Canada,Unknown,11
+2021,National Research Council Canada,Women,1630
+2021,National Security Intelligence and Review Agency,Men,30
+2021,National Security Intelligence and Review Agency,Women,43
+2021,Natural Resources Canada,Men,2468
+2021,Natural Resources Canada,Unknown,3
+2021,Natural Resources Canada,Women,2214
+2021,Natural Sciences and Engineering Research Canada,Men,191
+2021,Natural Sciences and Engineering Research Canada,Women,345
+2021,Office of the Auditor General of Canada,Men,294
+2021,Office of the Auditor General of Canada,Unknown,2
+2021,Office of the Auditor General of Canada,Women,453
+2021,Office of the Commissioner for Federal Judicial Affairs Canada,Men,25
+2021,Office of the Commissioner for Federal Judicial Affairs Canada,Women,47
+2021,Office of the Commissioner of Lobbying of Canada,Men,11
+2021,Office of the Commissioner of Lobbying of Canada,Women,14
+2021,Office of the Commissioner of Official Languages,Men,65
+2021,Office of the Commissioner of Official Languages,Women,112
+2021,Office of the Governor General's Secretary,Men,59
+2021,Office of the Governor General's Secretary,Women,99
+2021,Office of the Prime Minister,Men,*
+2021,Office of the Prime Minister,Women,*
+2021,Office of the Public Sector Integrity Commissioner of Canada,Men,14
+2021,Office of the Public Sector Integrity Commissioner of Canada,Women,20
+2021,Office of the Superintendent of Financial Institutions Canada,Men,438
+2021,Office of the Superintendent of Financial Institutions Canada,Unknown,5
+2021,Office of the Superintendent of Financial Institutions Canada,Women,460
+2021,Offices of the Information and Privacy Commissioners of Canada,Men,132
+2021,Offices of the Information and Privacy Commissioners of Canada,Women,191
+2021,Parks Canada,Men,2280
+2021,Parks Canada,Unknown,1
+2021,Parks Canada,Women,2385
+2021,Parole Board of Canada,Men,114
+2021,Parole Board of Canada,Women,365
+2021,Patented Medicine Prices Review Board Canada,Men,40
+2021,Patented Medicine Prices Review Board Canada,Women,39
+2021,Polar Knowledge Canada,Men,29
+2021,Polar Knowledge Canada,Unknown,9
+2021,Polar Knowledge Canada,Women,31
+2021,Privy Council Office,Men,488
+2021,Privy Council Office,Unknown,3
+2021,Privy Council Office,Women,585
+2021,Public Health Agency of Canada,Men,1020
+2021,Public Health Agency of Canada,Women,2261
+2021,Public Prosecution Service of Canada,Men,369
+2021,Public Prosecution Service of Canada,Unknown,3
+2021,Public Prosecution Service of Canada,Women,710
+2021,Public Safety Canada,Men,507
+2021,Public Safety Canada,Unknown,1
+2021,Public Safety Canada,Women,748
+2021,Public Service Commission of Canada,Men,304
+2021,Public Service Commission of Canada,Unknown,1
+2021,Public Service Commission of Canada,Women,573
+2021,Public Services and Procurement Canada,Men,6884
+2021,Public Services and Procurement Canada,Unknown,5
+2021,Public Services and Procurement Canada,Women,10196
+2021,RCMP External Review Committee,Men,6
+2021,RCMP External Review Committee,Women,9
+2021,Registrar of the Supreme Court of Canada,Men,88
+2021,Registrar of the Supreme Court of Canada,Women,145
+2021,Royal Canadian Mounted Police (Civilian Staff),Men,2180
+2021,Royal Canadian Mounted Police (Civilian Staff),Unknown,31
+2021,Royal Canadian Mounted Police (Civilian Staff),Women,6225
+2021,Secretariat of the National Security and Intelligence Committee of Parliamentarians,Men,*
+2021,Secretariat of the National Security and Intelligence Committee of Parliamentarians,Women,*
+2021,Shared Services Canada,Men,4909
+2021,Shared Services Canada,Unknown,3
+2021,Shared Services Canada,Women,2641
+2021,Social Sciences and Humanities Research Council of Canada,Men,77
+2021,Social Sciences and Humanities Research Council of Canada,Women,231
+2021,Statistical Survey Operations,Men,644
+2021,Statistical Survey Operations,Unknown,1
+2021,Statistical Survey Operations,Women,1563
+2021,Statistics Canada,Men,3076
+2021,Statistics Canada,Women,3284
+2021,The Correctional Investigator Canada,Men,16
+2021,The Correctional Investigator Canada,Women,22
+2021,Federal public service,Men,140796
+2021,Federal public service,Unknown,208
+2021,Federal public service,Women,178597
+2021,Transport Canada,Men,3411
+2021,Transport Canada,Women,2928
+2021,Transportation Safety Board of Canada,Men,141
+2021,Transportation Safety Board of Canada,Women,90
+2021,Treasury Board of Canada Secretariat,Men,931
+2021,Treasury Board of Canada Secretariat,Unknown,2
+2021,Treasury Board of Canada Secretariat,Women,1422
+2021,Veterans Affairs Canada,Men,1038
+2021,Veterans Affairs Canada,Unknown,2
+2021,Veterans Affairs Canada,Women,2759
+2021,Veterans Review and Appeal Board,Men,35
+2021,Veterans Review and Appeal Board,Women,58
+2021,Western Economic Diversification Canada,Men,172
+2021,Western Economic Diversification Canada,Unknown,2
+2021,Western Economic Diversification Canada,Women,220
+2021,Women and Gender Equality Canada,Men,54
+2021,Women and Gender Equality Canada,Women,275
+2022,Accessibility Standards Canada,Men,22
+2022,Accessibility Standards Canada,Women,22
+2022,Administrative Tribunals Support Service of Canada,Men,233
+2022,Administrative Tribunals Support Service of Canada,Unknown,6
+2022,Administrative Tribunals Support Service of Canada,Women,416
+2022,Agriculture and Agri-Food Canada,Men,2618
+2022,Agriculture and Agri-Food Canada,Women,3020
+2022,Atlantic Canada Opportunities Agency,Men,230
+2022,Atlantic Canada Opportunities Agency,Women,394
+2022,Canada Border Services Agency,Men,8027
+2022,Canada Border Services Agency,Women,7414
+2022,Canada Economic Development for Quebec Regions,Men,162
+2022,Canada Economic Development for Quebec Regions,Unknown,1
+2022,Canada Economic Development for Quebec Regions,Women,211
+2022,Canada Energy Regulator,Men,192
+2022,Canada Energy Regulator,Women,364
+2022,Canada Revenue Agency,Men,23206
+2022,Canada Revenue Agency,Women,31727
+2022,Canada School of Public Service,Men,244
+2022,Canada School of Public Service,Unknown,6
+2022,Canada School of Public Service,Women,457
+2022,Canadian Dairy Commission,Men,32
+2022,Canadian Dairy Commission,Women,38
+2022,Canadian Food Inspection Agency,Men,2628
+2022,Canadian Food Inspection Agency,Unknown,2
+2022,Canadian Food Inspection Agency,Women,3973
+2022,Canadian Grain Commission,Men,235
+2022,Canadian Grain Commission,Women,220
+2022,Canadian Heritage,Men,663
+2022,Canadian Heritage,Women,1399
+2022,Canadian Human Rights Commission,Men,72
+2022,Canadian Human Rights Commission,Unknown,1
+2022,Canadian Human Rights Commission,Women,206
+2022,Canadian Institutes of Health Research,Men,167
+2022,Canadian Institutes of Health Research,Women,402
+2022,Canadian Intergovernmental Conference Secretariat,Men,14
+2022,Canadian Intergovernmental Conference Secretariat,Women,12
+2022,Canadian Northern Economic Development Agency,Men,33
+2022,Canadian Northern Economic Development Agency,Women,80
+2022,Canadian Nuclear Safety Commission,Men,428
+2022,Canadian Nuclear Safety Commission,Unknown,12
+2022,Canadian Nuclear Safety Commission,Women,418
+2022,Canadian Radio-television and Telecommunications Commission,Men,245
+2022,Canadian Radio-television and Telecommunications Commission,Women,301
+2022,Canadian Space Agency,Men,433
+2022,Canadian Space Agency,Women,356
+2022,Canadian Transportation Agency,Men,125
+2022,Canadian Transportation Agency,Women,166
+2022,Civilian Review and Complaints Commission for the RCMP,Men,28
+2022,Civilian Review and Complaints Commission for the RCMP,Women,53
+2022,Communications Security Establishment,Men,1936
+2022,Communications Security Establishment,Unknown,17
+2022,Communications Security Establishment,Women,1065
+2022,Copyright Board Canada,Men,6
+2022,Copyright Board Canada,Women,10
+2022,Correctional Service Canada,Men,8859
+2022,Correctional Service Canada,Unknown,12
+2022,Correctional Service Canada,Women,9054
+2022,Courts Administration Service,Men,257
+2022,Courts Administration Service,Women,501
+2022,Crown-Indigenous Relations and Northern Affairs Canada,Men,689
+2022,Crown-Indigenous Relations and Northern Affairs Canada,Women,1403
+2022,Department of Finance Canada,Men,467
+2022,Department of Finance Canada,Unknown,1
+2022,Department of Finance Canada,Women,407
+2022,Department of Justice Canada,Men,1602
+2022,Department of Justice Canada,Unknown,4
+2022,Department of Justice Canada,Women,3464
+2022,Elections Canada,Men,491
+2022,Elections Canada,Women,555
+2022,Employment and Social Development Canada,Men,11540
+2022,Employment and Social Development Canada,Unknown,2
+2022,Employment and Social Development Canada,Women,24067
+2022,Environment and Climate Change Canada,Men,3670
+2022,Environment and Climate Change Canada,Unknown,10
+2022,Environment and Climate Change Canada,Women,4160
+2022,Federal Economic Development Agency for Southern Ontario,Men,137
+2022,Federal Economic Development Agency for Southern Ontario,Women,207
+2022,Federal Judges not part of any department,Men,659
+2022,Federal Judges not part of any department,Unknown,2
+2022,Federal Judges not part of any department,Women,529
+2022,Federal public service,Total,335957
+2022,Financial Consumer Agency of Canada,Men,88
+2022,Financial Consumer Agency of Canada,Women,108
+2022,Financial Transactions and Reports Analysis Centre of Canada,Men,240
+2022,Financial Transactions and Reports Analysis Centre of Canada,Unknown,1
+2022,Financial Transactions and Reports Analysis Centre of Canada,Women,282
+2022,Fisheries and Oceans Canada,Men,7637
+2022,Fisheries and Oceans Canada,Unknown,1
+2022,Fisheries and Oceans Canada,Women,5899
+2022,Global Affairs Canada,Men,3050
+2022,Global Affairs Canada,Women,4062
+2022,Health Canada,Men,3443
+2022,Health Canada,Unknown,2
+2022,Health Canada,Women,6441
+2022,Immigration and Refugee Board of Canada,Men,753
+2022,Immigration and Refugee Board of Canada,Unknown,6
+2022,Immigration and Refugee Board of Canada,Women,1355
+2022,"Immigration, Refugees and Citizenship Canada",Men,3671
+2022,"Immigration, Refugees and Citizenship Canada",Unknown,3
+2022,"Immigration, Refugees and Citizenship Canada",Women,6574
+2022,Impact Assessment Agency of Canada,Men,145
+2022,Impact Assessment Agency of Canada,Women,287
+2022,Indian Oil and Gas Canada,Men,31
+2022,Indian Oil and Gas Canada,Unknown,1
+2022,Indian Oil and Gas Canada,Women,53
+2022,Indigenous Services Canada,Men,2237
+2022,Indigenous Services Canada,Women,4793
+2022,Infrastructure Canada,Men,403
+2022,Infrastructure Canada,Women,640
+2022,"Innovation, Science and Economic Development Canada",Men,2941
+2022,"Innovation, Science and Economic Development Canada",Unknown,1
+2022,"Innovation, Science and Economic Development Canada",Women,3152
+2022,International Joint Commission,Men,18
+2022,International Joint Commission,Women,15
+2022,Library and Archives Canada,Men,308
+2022,Library and Archives Canada,Women,534
+2022,Military Grievances External Review Committee,Men,19
+2022,Military Grievances External Review Committee,Women,25
+2022,Military Police Complaints Commission of Canada,Men,11
+2022,Military Police Complaints Commission of Canada,Women,17
+2022,National Defence,Men,15267
+2022,National Defence,Unknown,38
+2022,National Defence,Women,11094
+2022,National Film Board,Men,158
+2022,National Film Board,Unknown,1
+2022,National Film Board,Women,220
+2022,National Research Council Canada,Men,2662
+2022,National Research Council Canada,Unknown,5
+2022,National Research Council Canada,Women,1634
+2022,National Security Intelligence and Review Agency,Men,28
+2022,National Security Intelligence and Review Agency,Women,39
+2022,Natural Resources Canada,Men,2481
+2022,Natural Resources Canada,Unknown,2
+2022,Natural Resources Canada,Women,2254
+2022,Natural Sciences and Engineering Research Canada,Men,184
+2022,Natural Sciences and Engineering Research Canada,Women,340
+2022,Office of the Auditor General of Canada,Men,267
+2022,Office of the Auditor General of Canada,Women,388
+2022,Office of the Commissioner for Federal Judicial Affairs Canada,Men,23
+2022,Office of the Commissioner for Federal Judicial Affairs Canada,Women,45
+2022,Office of the Commissioner of Lobbying of Canada,Men,13
+2022,Office of the Commissioner of Lobbying of Canada,Women,15
+2022,Office of the Commissioner of Official Languages,Men,67
+2022,Office of the Commissioner of Official Languages,Women,111
+2022,Office of the Governor General's Secretary,Men,68
+2022,Office of the Governor General's Secretary,Women,109
+2022,Office of the Intelligence Commissioner,Men,*
+2022,Office of the Intelligence Commissioner,Women,*
+2022,Office of the Public Sector Integrity Commissioner of Canada,Men,12
+2022,Office of the Public Sector Integrity Commissioner of Canada,Women,19
+2022,Office of the Superintendent of Financial Institutions Canada,Men,472
+2022,Office of the Superintendent of Financial Institutions Canada,Unknown,4
+2022,Office of the Superintendent of Financial Institutions Canada,Women,466
+2022,Offices of the Information and Privacy Commissioners of Canada,Men,143
+2022,Offices of the Information and Privacy Commissioners of Canada,Unknown,1
+2022,Offices of the Information and Privacy Commissioners of Canada,Women,212
+2022,Parks Canada,Men,2227
+2022,Parks Canada,Unknown,5
+2022,Parks Canada,Women,2470
+2022,Parole Board of Canada,Men,112
+2022,Parole Board of Canada,Women,351
+2022,Patented Medicine Prices Review Board Canada,Men,40
+2022,Patented Medicine Prices Review Board Canada,Women,37
+2022,Polar Knowledge Canada,Men,27
+2022,Polar Knowledge Canada,Unknown,4
+2022,Polar Knowledge Canada,Women,44
+2022,Privy Council Office,Men,498
+2022,Privy Council Office,Unknown,2
+2022,Privy Council Office,Women,630
+2022,Public Health Agency of Canada,Men,1347
+2022,Public Health Agency of Canada,Women,2907
+2022,Public Prosecution Service of Canada,Men,367
+2022,Public Prosecution Service of Canada,Unknown,4
+2022,Public Prosecution Service of Canada,Women,747
+2022,Public Safety Canada,Men,530
+2022,Public Safety Canada,Unknown,3
+2022,Public Safety Canada,Women,848
+2022,Public Service Commission of Canada,Men,314
+2022,Public Service Commission of Canada,Unknown,2
+2022,Public Service Commission of Canada,Women,583
+2022,Public Services and Procurement Canada,Men,6908
+2022,Public Services and Procurement Canada,Unknown,1
+2022,Public Services and Procurement Canada,Women,10269
+2022,RCMP External Review Committee,Men,8
+2022,RCMP External Review Committee,Women,14
+2022,Registrar of the Supreme Court of Canada,Men,82
+2022,Registrar of the Supreme Court of Canada,Women,139
+2022,Royal Canadian Mounted Police (Civilian Staff),Men,2383
+2022,Royal Canadian Mounted Police (Civilian Staff),Unknown,15
+2022,Royal Canadian Mounted Police (Civilian Staff),Women,6292
+2022,Secretariat of the National Security and Intelligence Committee of Parliamentarians,Men,*
+2022,Secretariat of the National Security and Intelligence Committee of Parliamentarians,Women,*
+2022,Shared Services Canada,Men,5129
+2022,Shared Services Canada,Unknown,3
+2022,Shared Services Canada,Women,2816
+2022,Social Sciences and Humanities Research Council of Canada,Men,81
+2022,Social Sciences and Humanities Research Council of Canada,Women,223
+2022,Statistical Survey Operations,Men,758
+2022,Statistical Survey Operations,Unknown,2
+2022,Statistical Survey Operations,Women,1558
+2022,Statistics Canada,Men,3174
+2022,Statistics Canada,Women,3190
+2022,The Correctional Investigator Canada,Men,14
+2022,The Correctional Investigator Canada,Women,23
+2022,Federal public service,Men,146781
+2022,Federal public service,Unknown,187
+2022,Federal public service,Women,188989
+2022,Transport Canada,Men,3276
+2022,Transport Canada,Women,2787
+2022,Transportation Safety Board of Canada,Men,138
+2022,Transportation Safety Board of Canada,Women,88
+2022,Treasury Board of Canada Secretariat,Men,921
+2022,Treasury Board of Canada Secretariat,Unknown,1
+2022,Treasury Board of Canada Secretariat,Women,1456
+2022,Veterans Affairs Canada,Men,961
+2022,Veterans Affairs Canada,Unknown,1
+2022,Veterans Affairs Canada,Women,2604
+2022,Veterans Review and Appeal Board,Men,37
+2022,Veterans Review and Appeal Board,Women,60
+2022,Western Economic Diversification Canada,Men,199
+2022,Western Economic Diversification Canada,Unknown,2
+2022,Western Economic Diversification Canada,Women,260
+2022,Women and Gender Equality Canada,Men,58
+2022,Women and Gender Equality Canada,Women,332
+2023,Accessibility Standards Canada,Men,24
+2023,Accessibility Standards Canada,Women,31
+2023,Administrative Tribunals Support Service of Canada,Men,250
+2023,Administrative Tribunals Support Service of Canada,Unknown,5
+2023,Administrative Tribunals Support Service of Canada,Women,467
+2023,Agriculture and Agri-Food Canada,Men,2600
+2023,Agriculture and Agri-Food Canada,Unknown,1
+2023,Agriculture and Agri-Food Canada,Women,3076
+2023,Atlantic Canada Opportunities Agency,Men,223
+2023,Atlantic Canada Opportunities Agency,Unknown,1
+2023,Atlantic Canada Opportunities Agency,Women,399
+2023,Canada Border Services Agency,Men,8547
+2023,Canada Border Services Agency,Women,7973
+2023,Canada Economic Development for Quebec Regions,Men,154
+2023,Canada Economic Development for Quebec Regions,Unknown,1
+2023,Canada Economic Development for Quebec Regions,Women,215
+2023,Canada Energy Regulator,Men,197
+2023,Canada Energy Regulator,Women,375
+2023,Canada Revenue Agency,Men,24599
+2023,Canada Revenue Agency,Women,34420
+2023,Canada School of Public Service,Men,254
+2023,Canada School of Public Service,Unknown,2
+2023,Canada School of Public Service,Women,486
+2023,Canadian Dairy Commission,Men,34
+2023,Canadian Dairy Commission,Women,39
+2023,Canadian Food Inspection Agency,Men,2739
+2023,Canadian Food Inspection Agency,Unknown,2
+2023,Canadian Food Inspection Agency,Women,4188
+2023,Canadian Grain Commission,Men,237
+2023,Canadian Grain Commission,Women,216
+2023,Canadian Heritage,Men,620
+2023,Canadian Heritage,Women,1355
+2023,Canadian Human Rights Commission,Men,80
+2023,Canadian Human Rights Commission,Women,217
+2023,Canadian Institutes of Health Research,Men,169
+2023,Canadian Institutes of Health Research,Women,445
+2023,Canadian Intergovernmental Conference Secretariat,Men,14
+2023,Canadian Intergovernmental Conference Secretariat,Women,14
+2023,Canadian Northern Economic Development Agency,Men,40
+2023,Canadian Northern Economic Development Agency,Women,71
+2023,Canadian Nuclear Safety Commission,Men,448
+2023,Canadian Nuclear Safety Commission,Unknown,15
+2023,Canadian Nuclear Safety Commission,Women,467
+2023,Canadian Radio-television and Telecommunications Commission,Men,254
+2023,Canadian Radio-television and Telecommunications Commission,Women,310
+2023,Canadian Space Agency,Men,470
+2023,Canadian Space Agency,Women,415
+2023,Canadian Transportation Agency,Men,139
+2023,Canadian Transportation Agency,Women,174
+2023,Civilian Review and Complaints Commission for the RCMP,Men,28
+2023,Civilian Review and Complaints Commission for the RCMP,Women,64
+2023,Communications Security Establishment,Men,2012
+2023,Communications Security Establishment,Unknown,25
+2023,Communications Security Establishment,Women,1124
+2023,Copyright Board Canada,Men,*
+2023,Copyright Board Canada,Women,*
+2023,Correctional Service Canada,Men,9044
+2023,Correctional Service Canada,Unknown,17
+2023,Correctional Service Canada,Women,9466
+2023,Courts Administration Service,Men,274
+2023,Courts Administration Service,Women,536
+2023,Crown-Indigenous Relations and Northern Affairs Canada,Men,709
+2023,Crown-Indigenous Relations and Northern Affairs Canada,Women,1495
+2023,Department of Finance Canada,Men,477
+2023,Department of Finance Canada,Unknown,1
+2023,Department of Finance Canada,Women,430
+2023,Department of Justice Canada,Men,1715
+2023,Department of Justice Canada,Unknown,9
+2023,Department of Justice Canada,Women,3654
+2023,Elections Canada,Men,480
+2023,Elections Canada,Unknown,1
+2023,Elections Canada,Women,559
+2023,Employment and Social Development Canada,Men,12735
+2023,Employment and Social Development Canada,Unknown,1
+2023,Employment and Social Development Canada,Women,26247
+2023,Environment and Climate Change Canada,Men,3871
+2023,Environment and Climate Change Canada,Unknown,3
+2023,Environment and Climate Change Canada,Women,4537
+2023,Federal Economic Development Agency for Southern Ontario,Men,129
+2023,Federal Economic Development Agency for Southern Ontario,Women,202
+2023,Federal Judges not part of any department,Men,641
+2023,Federal Judges not part of any department,Unknown,2
+2023,Federal Judges not part of any department,Women,540
+2023,Federal public service,Total,357247
+2023,Financial Consumer Agency of Canada,Men,93
+2023,Financial Consumer Agency of Canada,Women,123
+2023,Financial Transactions and Reports Analysis Centre of Canada,Men,244
+2023,Financial Transactions and Reports Analysis Centre of Canada,Unknown,1
+2023,Financial Transactions and Reports Analysis Centre of Canada,Women,300
+2023,Fisheries and Oceans Canada,Men,7999
+2023,Fisheries and Oceans Canada,Unknown,1
+2023,Fisheries and Oceans Canada,Women,6526
+2023,Global Affairs Canada,Men,3201
+2023,Global Affairs Canada,Unknown,2
+2023,Global Affairs Canada,Women,4257
+2023,Health Canada,Men,3494
+2023,Health Canada,Unknown,2
+2023,Health Canada,Women,6507
+2023,Immigration and Refugee Board of Canada,Men,811
+2023,Immigration and Refugee Board of Canada,Unknown,3
+2023,Immigration and Refugee Board of Canada,Women,1490
+2023,"Immigration, Refugees and Citizenship Canada",Men,4318
+2023,"Immigration, Refugees and Citizenship Canada",Unknown,3
+2023,"Immigration, Refugees and Citizenship Canada",Women,7937
+2023,Impact Assessment Agency of Canada,Men,144
+2023,Impact Assessment Agency of Canada,Women,308
+2023,Indian Oil and Gas Canada,Men,26
+2023,Indian Oil and Gas Canada,Unknown,1
+2023,Indian Oil and Gas Canada,Women,48
+2023,Indigenous Services Canada,Men,2374
+2023,Indigenous Services Canada,Women,5348
+2023,Infrastructure Canada,Men,507
+2023,Infrastructure Canada,Women,843
+2023,"Innovation, Science and Economic Development Canada",Men,3058
+2023,"Innovation, Science and Economic Development Canada",Unknown,2
+2023,"Innovation, Science and Economic Development Canada",Women,3271
+2023,International Joint Commission,Men,15
+2023,International Joint Commission,Women,18
+2023,Library and Archives Canada,Men,375
+2023,Library and Archives Canada,Women,638
+2023,Military Grievances External Review Committee,Men,18
+2023,Military Grievances External Review Committee,Women,30
+2023,Military Police Complaints Commission of Canada,Men,11
+2023,Military Police Complaints Commission of Canada,Women,21
+2023,National Defence,Men,15601
+2023,National Defence,Unknown,36
+2023,National Defence,Women,11719
+2023,National Film Board,Men,159
+2023,National Film Board,Unknown,1
+2023,National Film Board,Women,223
+2023,National Research Council Canada,Men,2691
+2023,National Research Council Canada,Unknown,15
+2023,National Research Council Canada,Women,1717
+2023,National Security Intelligence and Review Agency,Men,39
+2023,National Security Intelligence and Review Agency,Women,53
+2023,Natural Resources Canada,Men,2698
+2023,Natural Resources Canada,Unknown,3
+2023,Natural Resources Canada,Women,2601
+2023,Natural Sciences and Engineering Research Canada,Men,194
+2023,Natural Sciences and Engineering Research Canada,Women,349
+2023,Office of the Auditor General of Canada,Men,301
+2023,Office of the Auditor General of Canada,Unknown,1
+2023,Office of the Auditor General of Canada,Women,491
+2023,Office of the Commissioner for Federal Judicial Affairs Canada,Men,23
+2023,Office of the Commissioner for Federal Judicial Affairs Canada,Women,45
+2023,Office of the Commissioner of Lobbying of Canada,Men,12
+2023,Office of the Commissioner of Lobbying of Canada,Women,15
+2023,Office of the Commissioner of Official Languages,Men,61
+2023,Office of the Commissioner of Official Languages,Women,106
+2023,Office of the Governor General's Secretary,Men,69
+2023,Office of the Governor General's Secretary,Women,115
+2023,Office of the Intelligence Commissioner,Men,*
+2023,Office of the Intelligence Commissioner,Women,*
+2023,Office of the Public Sector Integrity Commissioner of Canada,Men,16
+2023,Office of the Public Sector Integrity Commissioner of Canada,Women,20
+2023,Office of the Superintendent of Financial Institutions Canada,Men,568
+2023,Office of the Superintendent of Financial Institutions Canada,Unknown,5
+2023,Office of the Superintendent of Financial Institutions Canada,Women,566
+2023,Offices of the Information and Privacy Commissioners of Canada,Men,116
+2023,Offices of the Information and Privacy Commissioners of Canada,Women,188
+2023,Parks Canada,Men,2292
+2023,Parks Canada,Unknown,8
+2023,Parks Canada,Women,2511
+2023,Parole Board of Canada,Men,121
+2023,Parole Board of Canada,Women,373
+2023,Patented Medicine Prices Review Board Canada,Men,36
+2023,Patented Medicine Prices Review Board Canada,Women,47
+2023,Polar Knowledge Canada,Men,33
+2023,Polar Knowledge Canada,Unknown,4
+2023,Polar Knowledge Canada,Women,52
+2023,Privy Council Office,Men,500
+2023,Privy Council Office,Unknown,1
+2023,Privy Council Office,Women,711
+2023,Public Health Agency of Canada,Men,1242
+2023,Public Health Agency of Canada,Women,2969
+2023,Public Prosecution Service of Canada,Men,396
+2023,Public Prosecution Service of Canada,Unknown,3
+2023,Public Prosecution Service of Canada,Women,774
+2023,Public Safety Canada,Men,624
+2023,Public Safety Canada,Unknown,6
+2023,Public Safety Canada,Women,992
+2023,Public Service Commission of Canada,Men,330
+2023,Public Service Commission of Canada,Unknown,5
+2023,Public Service Commission of Canada,Women,640
+2023,Public Services and Procurement Canada,Men,7203
+2023,Public Services and Procurement Canada,Unknown,2
+2023,Public Services and Procurement Canada,Women,10909
+2023,RCMP External Review Committee,Men,10
+2023,RCMP External Review Committee,Women,15
+2023,Registrar of the Supreme Court of Canada,Men,92
+2023,Registrar of the Supreme Court of Canada,Women,156
+2023,Royal Canadian Mounted Police (Civilian Staff),Men,2707
+2023,Royal Canadian Mounted Police (Civilian Staff),Unknown,20
+2023,Royal Canadian Mounted Police (Civilian Staff),Women,6659
+2023,Secretariat of the National Security and Intelligence Committee of Parliamentarians,Men,*
+2023,Secretariat of the National Security and Intelligence Committee of Parliamentarians,Women,*
+2023,Shared Services Canada,Men,5658
+2023,Shared Services Canada,Unknown,2
+2023,Shared Services Canada,Women,3219
+2023,Social Sciences and Humanities Research Council of Canada,Men,92
+2023,Social Sciences and Humanities Research Council of Canada,Women,249
+2023,Statistical Survey Operations,Men,580
+2023,Statistical Survey Operations,Women,1152
+2023,Statistics Canada,Men,3089
+2023,Statistics Canada,Women,3130
+2023,The Correctional Investigator Canada,Men,13
+2023,The Correctional Investigator Canada,Women,23
+2023,Federal public service,Men,154266
+2023,Federal public service,Unknown,220
+2023,Federal public service,Women,202761
+2023,Transport Canada,Men,3410
+2023,Transport Canada,Women,2956
+2023,Transportation Safety Board of Canada,Men,126
+2023,Transportation Safety Board of Canada,Women,83
+2023,Treasury Board of Canada Secretariat,Men,954
+2023,Treasury Board of Canada Secretariat,Unknown,2
+2023,Treasury Board of Canada Secretariat,Women,1599
+2023,Veterans Affairs Canada,Men,972
+2023,Veterans Affairs Canada,Unknown,2
+2023,Veterans Affairs Canada,Women,2677
+2023,Veterans Review and Appeal Board,Men,45
+2023,Veterans Review and Appeal Board,Women,68
+2023,Western Economic Diversification Canada,Men,216
+2023,Western Economic Diversification Canada,Unknown,3
+2023,Western Economic Diversification Canada,Women,299
+2023,Women and Gender Equality Canada,Men,72
+2023,Women and Gender Equality Canada,Women,396
+2024,Accessibility Standards Canada,Men,23
+2024,Accessibility Standards Canada,Women,37
+2024,Administrative Tribunals Support Service of Canada,Men,240
+2024,Administrative Tribunals Support Service of Canada,Women,466
+2024,Agriculture and Agri-Food Canada,Men,2655
+2024,Agriculture and Agri-Food Canada,Unknown,1
+2024,Agriculture and Agri-Food Canada,Women,3118
+2024,Atlantic Canada Opportunities Agency,Men,214
+2024,Atlantic Canada Opportunities Agency,Women,388
+2024,Canada Border Services Agency,Men,8923
+2024,Canada Border Services Agency,Women,8303
+2024,Canada Economic Development for Quebec Regions,Men,165
+2024,Canada Economic Development for Quebec Regions,Unknown,1
+2024,Canada Economic Development for Quebec Regions,Women,210
+2024,Canada Energy Regulator,Men,203
+2024,Canada Energy Regulator,Women,370
+2024,Canada Revenue Agency,Men,24718
+2024,Canada Revenue Agency,Women,34437
+2024,Canada School of Public Service,Men,219
+2024,Canada School of Public Service,Unknown,3
+2024,Canada School of Public Service,Women,457
+2024,Canadian Dairy Commission,Men,34
+2024,Canadian Dairy Commission,Women,41
+2024,Canadian Food Inspection Agency,Men,2710
+2024,Canadian Food Inspection Agency,Unknown,2
+2024,Canadian Food Inspection Agency,Women,4121
+2024,Canadian Grain Commission,Men,252
+2024,Canadian Grain Commission,Women,214
+2024,Canadian Heritage,Men,605
+2024,Canadian Heritage,Women,1324
+2024,Canadian Human Rights Commission,Men,81
+2024,Canadian Human Rights Commission,Unknown,1
+2024,Canadian Human Rights Commission,Women,218
+2024,Canadian Institutes of Health Research,Men,178
+2024,Canadian Institutes of Health Research,Women,440
+2024,Canadian Intergovernmental Conference Secretariat,Men,17
+2024,Canadian Intergovernmental Conference Secretariat,Women,22
+2024,Canadian Northern Economic Development Agency,Men,42
+2024,Canadian Northern Economic Development Agency,Women,73
+2024,Canadian Nuclear Safety Commission,Men,456
+2024,Canadian Nuclear Safety Commission,Unknown,24
+2024,Canadian Nuclear Safety Commission,Women,489
+2024,Canadian Radio-television and Telecommunications Commission,Men,286
+2024,Canadian Radio-television and Telecommunications Commission,Women,353
+2024,Canadian Space Agency,Men,494
+2024,Canadian Space Agency,Women,454
+2024,Canadian Transportation Agency,Men,172
+2024,Canadian Transportation Agency,Women,205
+2024,Civilian Review and Complaints Commission for the RCMP,Men,29
+2024,Civilian Review and Complaints Commission for the RCMP,Women,78
+2024,Communications Security Establishment,Men,2192
+2024,Communications Security Establishment,Unknown,38
+2024,Communications Security Establishment,Women,1260
+2024,Copyright Board Canada,Men,7
+2024,Copyright Board Canada,Women,12
+2024,Correctional Service Canada,Men,9216
+2024,Correctional Service Canada,Unknown,20
+2024,Correctional Service Canada,Women,9754
+2024,Courts Administration Service,Men,313
+2024,Courts Administration Service,Women,548
+2024,Crown-Indigenous Relations and Northern Affairs Canada,Men,682
+2024,Crown-Indigenous Relations and Northern Affairs Canada,Women,1406
+2024,Department of Finance Canada,Men,496
+2024,Department of Finance Canada,Unknown,1
+2024,Department of Finance Canada,Women,445
+2024,Department of Justice Canada,Men,1766
+2024,Department of Justice Canada,Unknown,7
+2024,Department of Justice Canada,Women,3864
+2024,Elections Canada,Men,577
+2024,Elections Canada,Women,673
+2024,Employment and Social Development Canada,Men,12794
+2024,Employment and Social Development Canada,Unknown,2
+2024,Employment and Social Development Canada,Women,26293
+2024,Environment and Climate Change Canada,Men,4009
+2024,Environment and Climate Change Canada,Unknown,2
+2024,Environment and Climate Change Canada,Women,4890
+2024,Federal Economic Development Agency for Northern Ontario,Men,30
+2024,Federal Economic Development Agency for Northern Ontario,Women,59
+2024,Federal Economic Development Agency for Southern Ontario,Men,136
+2024,Federal Economic Development Agency for Southern Ontario,Women,185
+2024,Federal Judges not part of any department,Men,628
+2024,Federal Judges not part of any department,Unknown,3
+2024,Federal Judges not part of any department,Women,554
+2024,Federal public service,Total,367772
+2024,Financial Consumer Agency of Canada,Men,95
+2024,Financial Consumer Agency of Canada,Women,136
+2024,Financial Transactions and Reports Analysis Centre of Canada,Men,233
+2024,Financial Transactions and Reports Analysis Centre of Canada,Unknown,3
+2024,Financial Transactions and Reports Analysis Centre of Canada,Women,320
+2024,Fisheries and Oceans Canada,Men,8072
+2024,Fisheries and Oceans Canada,Unknown,2
+2024,Fisheries and Oceans Canada,Women,6642
+2024,Global Affairs Canada,Men,3189
+2024,Global Affairs Canada,Unknown,2
+2024,Global Affairs Canada,Women,4248
+2024,Health Canada,Men,3567
+2024,Health Canada,Women,6620
+2024,Immigration and Refugee Board of Canada,Men,895
+2024,Immigration and Refugee Board of Canada,Unknown,3
+2024,Immigration and Refugee Board of Canada,Women,1681
+2024,"Immigration, Refugees and Citizenship Canada",Men,4590
+2024,"Immigration, Refugees and Citizenship Canada",Unknown,3
+2024,"Immigration, Refugees and Citizenship Canada",Women,8499
+2024,Impact Assessment Agency of Canada,Men,175
+2024,Impact Assessment Agency of Canada,Unknown,1
+2024,Impact Assessment Agency of Canada,Women,359
+2024,Indian Oil and Gas Canada,Men,30
+2024,Indian Oil and Gas Canada,Women,49
+2024,Indigenous Services Canada,Men,2589
+2024,Indigenous Services Canada,Women,6048
+2024,Infrastructure Canada,Men,569
+2024,Infrastructure Canada,Women,937
+2024,"Innovation, Science and Economic Development Canada",Men,3104
+2024,"Innovation, Science and Economic Development Canada",Unknown,1
+2024,"Innovation, Science and Economic Development Canada",Women,3426
+2024,International Joint Commission,Men,16
+2024,International Joint Commission,Women,16
+2024,Law Commission of Canada,Men,*
+2024,Law Commission of Canada,Women,*
+2024,Library and Archives Canada,Men,435
+2024,Library and Archives Canada,Women,738
+2024,Military Grievances External Review Committee,Men,19
+2024,Military Grievances External Review Committee,Women,33
+2024,Military Police Complaints Commission of Canada,Men,10
+2024,Military Police Complaints Commission of Canada,Women,23
+2024,National Defence,Men,16288
+2024,National Defence,Unknown,44
+2024,National Defence,Women,12408
+2024,National Film Board,Men,164
+2024,National Film Board,Unknown,1
+2024,National Film Board,Women,223
+2024,National Research Council Canada,Men,2729
+2024,National Research Council Canada,Unknown,16
+2024,National Research Council Canada,Women,1774
+2024,National Security Intelligence and Review Agency,Men,42
+2024,National Security Intelligence and Review Agency,Women,43
+2024,Natural Resources Canada,Men,2896
+2024,Natural Resources Canada,Unknown,2
+2024,Natural Resources Canada,Women,2853
+2024,Natural Sciences and Engineering Research Canada,Men,189
+2024,Natural Sciences and Engineering Research Canada,Women,333
+2024,Office of the Auditor General of Canada,Men,329
+2024,Office of the Auditor General of Canada,Unknown,1
+2024,Office of the Auditor General of Canada,Women,506
+2024,Office of the Commissioner for Federal Judicial Affairs Canada,Men,23
+2024,Office of the Commissioner for Federal Judicial Affairs Canada,Women,42
+2024,Office of the Commissioner of Lobbying of Canada,Men,16
+2024,Office of the Commissioner of Lobbying of Canada,Women,16
+2024,Office of the Commissioner of Official Languages,Men,61
+2024,Office of the Commissioner of Official Languages,Women,117
+2024,Office of the Governor General's Secretary,Men,62
+2024,Office of the Governor General's Secretary,Women,110
+2024,Office of the Intelligence Commissioner,Men,*
+2024,Office of the Intelligence Commissioner,Women,*
+2024,Office of the Public Sector Integrity Commissioner of Canada,Men,14
+2024,Office of the Public Sector Integrity Commissioner of Canada,Women,20
+2024,Office of the Superintendent of Financial Institutions Canada,Men,646
+2024,Office of the Superintendent of Financial Institutions Canada,Unknown,4
+2024,Office of the Superintendent of Financial Institutions Canada,Women,673
+2024,Offices of the Information and Privacy Commissioners of Canada,Men,120
+2024,Offices of the Information and Privacy Commissioners of Canada,Women,203
+2024,Parks Canada,Men,2310
+2024,Parks Canada,Unknown,7
+2024,Parks Canada,Women,2612
+2024,Parole Board of Canada,Men,145
+2024,Parole Board of Canada,Women,409
+2024,Patented Medicine Prices Review Board Canada,Men,38
+2024,Patented Medicine Prices Review Board Canada,Women,43
+2024,Polar Knowledge Canada,Men,35
+2024,Polar Knowledge Canada,Unknown,3
+2024,Polar Knowledge Canada,Women,44
+2024,Privy Council Office,Men,532
+2024,Privy Council Office,Unknown,2
+2024,Privy Council Office,Women,754
+2024,Public Health Agency of Canada,Men,1272
+2024,Public Health Agency of Canada,Women,2979
+2024,Public Prosecution Service of Canada,Men,399
+2024,Public Prosecution Service of Canada,Unknown,1
+2024,Public Prosecution Service of Canada,Women,777
+2024,Public Safety Canada,Men,656
+2024,Public Safety Canada,Unknown,3
+2024,Public Safety Canada,Women,1036
+2024,Public Service Commission of Canada,Men,300
+2024,Public Service Commission of Canada,Unknown,2
+2024,Public Service Commission of Canada,Women,590
+2024,Public Services and Procurement Canada,Men,7458
+2024,Public Services and Procurement Canada,Unknown,3
+2024,Public Services and Procurement Canada,Women,11500
+2024,RCMP External Review Committee,Men,9
+2024,RCMP External Review Committee,Women,15
+2024,Registrar of the Supreme Court of Canada,Men,97
+2024,Registrar of the Supreme Court of Canada,Women,152
+2024,Royal Canadian Mounted Police (Civilian Staff),Men,3087
+2024,Royal Canadian Mounted Police (Civilian Staff),Unknown,19
+2024,Royal Canadian Mounted Police (Civilian Staff),Women,7203
+2024,Secretariat of the National Security and Intelligence Committee of Parliamentarians,Men,*
+2024,Secretariat of the National Security and Intelligence Committee of Parliamentarians,Women,*
+2024,Shared Services Canada,Men,6060
+2024,Shared Services Canada,Unknown,3
+2024,Shared Services Canada,Women,3439
+2024,Social Sciences and Humanities Research Council of Canada,Men,104
+2024,Social Sciences and Humanities Research Council of Canada,Unknown,1
+2024,Social Sciences and Humanities Research Council of Canada,Women,274
+2024,Statistical Survey Operations,Men,*
+2024,Statistical Survey Operations,Women,*
+2024,Statistics Canada,Men,3361
+2024,Statistics Canada,Unknown,1
+2024,Statistics Canada,Women,3858
+2024,The Correctional Investigator Canada,Men,15
+2024,The Correctional Investigator Canada,Women,24
+2024,Federal public service,Men,158625
+2024,Federal public service,Unknown,238
+2024,Federal public service,Women,208909
+2024,Transport Canada,Men,3565
+2024,Transport Canada,Women,3149
+2024,Transportation Safety Board of Canada,Men,130
+2024,Transportation Safety Board of Canada,Women,88
+2024,Treasury Board of Canada Secretariat,Men,916
+2024,Treasury Board of Canada Secretariat,Unknown,2
+2024,Treasury Board of Canada Secretariat,Women,1583
+2024,Veterans Affairs Canada,Men,1044
+2024,Veterans Affairs Canada,Unknown,3
+2024,Veterans Affairs Canada,Women,2745
+2024,Veterans Review and Appeal Board,Men,64
+2024,Veterans Review and Appeal Board,Women,97
+2024,Western Economic Diversification Canada,Men,214
+2024,Western Economic Diversification Canada,Women,297
+2024,Women and Gender Equality Canada,Men,72
+2024,Women and Gender Equality Canada,Women,371

@@ -112,7 +112,7 @@ const getMostRecentYears = (csv) => {
 
 // Process average age data separately
 const process_avg_age_dataset = () => {
-  const csv_name = `test_org_employee_avg_age.csv`;
+  const csv_name = `org_employee_avg_age.csv`;
   const csv = get_standard_csv_file_rows(csv_name);
 
   if (_.isEmpty(csv)) {
@@ -180,7 +180,7 @@ const process_standard_headcount_dataset = (headcount_type) => {
     return process_avg_age_dataset();
   }
 
-  const csv_name = `test_org_employee_${headcount_type}.csv`;
+  const csv_name = `org_employee_${headcount_type}.csv`;
   const csv = get_standard_csv_file_rows(csv_name);
 
   // Transform headers and filter by the 5 most recent years dynamically
