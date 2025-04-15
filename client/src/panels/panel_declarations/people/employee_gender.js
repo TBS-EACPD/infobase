@@ -50,15 +50,37 @@ const EmployeeGenderPanel = ({
 
     return data.gender
       .filter((item) => item && item.yearly_data)
-      .map((row) => ({
-        label: row.dimension,
-        data: row.yearly_data
+      .map((row) => {
+        // Create suppressed flags array to track which values are suppressed
+        const suppressedFlags = row.yearly_data
           .filter((entry) => entry)
-          .map((entry) => entry.value),
-        five_year_percent: row.avg_share,
-        active: true,
-      }))
-      .filter((item) => _.some(item.data, (val) => val !== null && val !== 0))
+          .map((entry) => entry.value === -1);
+
+        return {
+          label: row.dimension,
+          // Store original values for display in tables/tooltips
+          displayData: row.yearly_data
+            .filter((entry) => entry)
+            .map((entry) => (entry.value === -1 ? "*" : entry.value)),
+          // Store numeric values for chart rendering
+          data: row.yearly_data
+            .filter((entry) => entry)
+            .map((entry) => {
+              if (entry.value === -1) {
+                return 5; // Numeric value for suppressed data
+              } else if (entry.value === null || entry.value === undefined) {
+                return 0;
+              } else {
+                return entry.value;
+              }
+            }),
+          // Track which values are suppressed for styling
+          suppressedFlags,
+          five_year_percent: row.avg_share,
+          active: true,
+        };
+      })
+      .filter((item) => _.some(item.data, (val) => val !== 0))
       .sort((a, b) => _.sum(b.data) - _.sum(a.data));
   }, [data]);
 
@@ -101,22 +123,19 @@ const EmployeeGenderPanel = ({
 
   const ticks = _.map(people_years, (y) => `${run_template(y)}`);
 
-  const has_suppressed_data = _.some(
+  // Check if any data point is suppressed
+  const hasSuppressedData = _.some(
     calculations,
-    (graph_arg) => graph_arg.label === gender.sup.text
+    (group) => group.suppressedFlags && _.some(group.suppressedFlags)
   );
 
-  const required_footnotes = (() => {
-    if (has_suppressed_data) {
-      return footnotes;
-    } else {
-      return _.filter(
+  const required_footnotes = hasSuppressedData
+    ? footnotes
+    : _.filter(
         footnotes,
         (footnote) =>
           !_.some(footnote.topic_keys, (key) => key === "SUPPRESSED_DATA")
       );
-    }
-  })();
 
   return (
     <StdPanel {...{ title, footnotes: required_footnotes, sources, datasets }}>
@@ -140,10 +159,47 @@ const EmployeeGenderPanel = ({
             ).matches,
             role: "img",
             ariaLabel: `${text_maker("employee_gender")} ${subject.name}`,
+            // Define patterns for suppressed data
+            defs: [
+              {
+                id: "pattern-suppressed-data",
+                type: "patternLines",
+                background: "#D3D3D3", // Light grey background
+                color: "#999999", // Darker grey lines
+                lineWidth: 3,
+                spacing: 8,
+                rotation: -45,
+              },
+            ],
+          }}
+          tooltip_formatter={(value) => {
+            // Check if this is a suppressed data point
+            if (value === 5) {
+              return "*";
+            }
+            return formats.big_int_raw(value);
           }}
           initial_graph_mode="bar_grouped"
           data={calculations}
         />
+        {hasSuppressedData && (
+          <div className="graph-note text-center mt-2 font-italic">
+            <small>
+              <span
+                className="mr-2"
+                style={{
+                  display: "inline-block",
+                  width: "20px",
+                  height: "10px",
+                  backgroundImage:
+                    "linear-gradient(135deg, #999 25%, #D3D3D3 25%, #D3D3D3 50%, #999 50%, #999 75%, #D3D3D3 75%)",
+                  backgroundSize: "8px 8px",
+                }}
+              ></span>
+              {text_maker("suppressed_data_pattern_note")}
+            </small>
+          </div>
+        )}
       </Col>
     </StdPanel>
   );
