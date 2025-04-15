@@ -247,6 +247,7 @@ const EmployeeAgePanel = ({
         },
       ],
     },
+    disable_toggle: hasSuppressedData,
     initial_graph_mode: "bar_grouped",
     data: calculations.age_group,
     formatter: formats.big_int_raw,

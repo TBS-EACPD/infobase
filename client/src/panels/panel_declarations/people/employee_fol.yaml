@@ -1,23 +1,24 @@
 employee_fol_title:
   transform: [handlebars]
-  en: First Official Language ({{ppl_last_year_5}} to {{ppl_last_year}})
-  fr: Première langue officielle ({{ppl_last_year_5}} to {{ppl_last_year}})
+  en: Employee First Official Language ({{ppl_last_year_5}} to {{ppl_last_year}})
+  fr: Première langue officielle des employés ({{ppl_last_year_5}} à {{ppl_last_year}})
 
 gov_employee_fol_text:
   transform: [handlebars,markdown]
   en: |
-    From **{{ppl_last_year_5}}** to **{{ppl_last_year}}**, an average of **{{fmt_percentage1 top_avg_group_share}}** of {{gl_sidebar_link "**Federal Public Service**" "FPS"}} {{gl_sidebar_link "employees" "HEAD"}} had **{{top_avg_group}}** as their {{gl_sidebar_link "First Official Language" "FOL"}},
-    while an average of **{{fmt_percentage1 bottom_avg_group_share}}** had **{{bottom_avg_group}}**.
+    From **{{ppl_last_year_5}}** to **{{ppl_last_year}}**, **{{top_avg_group}}** accounted for an average of **{{fmt_percentage1 top_avg_group_share}}** of the {{gl_sidebar_link "**Federal Public Service**" "FPS"}},
+    while **{{bottom_avg_group}}** accounted for an average of **{{fmt_percentage1 bottom_avg_group_share}}**.
   fr: |
-    De **{{ppl_last_year_5}}** à **{{ppl_last_year}}**, **{{fmt_percentage1 top_avg_group_share}}** des {{gl_sidebar_link "employés" "HEAD"}} de la {{gl_sidebar_link "**fonction publique fédérale**" "FPS"}}, en moyenne, avait {{#isEqual top_avg_group "Anglais"}}l'{{else}}le {{/isEqual}}**{{top_avg_group}}** comme {{gl_sidebar_link "première langue officielle" "FOL"}}, comparativement à **{{fmt_percentage1 bottom_avg_group_share}}** pour {{#isEqual bottom_avg_group "Anglais"}}l'{{else}}le {{/isEqual}}**{{bottom_avg_group}}**.
+    De **{{ppl_last_year_5}}** à **{{ppl_last_year}}**, les personnes dont la première langue officielle est l'**{{top_avg_group}}** constituaient en moyenne **{{fmt_percentage1 top_avg_group_share}}** de la {{gl_sidebar_link "**fonction publique fédérale**" "FPS"}}, 
+    comparativement à **{{fmt_percentage1 bottom_avg_group_share}}** pour l'**{{bottom_avg_group}}**.
 
 dept_employee_fol_text:
   transform: [handlebars,markdown]
   en: |
-    From **{{first_active_year}}** to **{{last_active_year}}**, an average of **{{fmt_percentage1 top_avg_group_share}}** of **{{subject.name}}** {{gl_sidebar_link "employees" "HEAD"}} had **{{top_avg_group}}** as their {{gl_sidebar_link "First Official Language" "FOL"}}{{#isEqual single_type_flag true}}.{{else}}, while an average of **{{fmt_percentage1 bottom_avg_group_share}}** had **{{bottom_avg_group}}**.{{/isEqual}} 
+    From **{{first_active_year}}** to **{{last_active_year}}**, **{{top_avg_group}}** accounted for an average of **{{fmt_percentage1 top_avg_group_share}}** of **{{subject.name}}**'s {{gl_sidebar_link "workforce" "HEAD"}}{{#isEqual single_type_flag true}}.{{else}}, while **{{bottom_avg_group}}** accounted for an average of **{{fmt_percentage1 bottom_avg_group_share}}**.{{/isEqual}}
   fr: |
-    De **{{first_active_year}}** à **{{last_active_year}}**, **{{fmt_percentage1 top_avg_group_share}}** des {{gl_sidebar_link "employés" "HEAD"}} **{{subject.name}}**, en moyenne, avait {{#isEqual top_avg_group "Anglais"}}l'{{else}}le {{/isEqual}}**{{top_avg_group}}** comme {{gl_sidebar_link "première langue officielle" "FOL"}}{{#isEqual single_type_flag true}}.{{else}}, comparativement à **{{fmt_percentage1 bottom_avg_group_share}}** pour {{#isEqual bottom_avg_group "Anglais"}}l'{{else}}le {{/isEqual}}**{{bottom_avg_group}}**.{{/isEqual}}
+    De **{{first_active_year}}** à **{{last_active_year}}**, les personnes dont la première langue officielle est l'**{{top_avg_group}}** constituaient en moyenne **{{fmt_percentage1 top_avg_group_share}}** du {{gl_sidebar_link "personnel" "HEAD"}} **{{subject.name}}**{{#isEqual single_type_flag true}}.{{else}}, comparativement à **{{fmt_percentage1 bottom_avg_group_share}}** pour l'**{{bottom_avg_group}}**.{{/isEqual}}
 
 suppressed_data_pattern_note:
-  en: Pattern indicates suppressed data points
-  fr: Le motif indique des données supprimées
+  en: Patterned bars indicate suppressed data (where count is less than 10)
+  fr: Les barres hachurées indiquent des données supprimées (lorsque le nombre est inférieur à 10)
