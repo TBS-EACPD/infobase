@@ -39,7 +39,6 @@ const EmployeeAgePanel = ({
   subject,
   footnotes,
   sources,
-  datasets,
   subject_type,
 }) => {
   const { data: orgData, loading: orgLoading } = useOrgPeopleSummary({
@@ -317,7 +316,7 @@ const EmployeeAgePanel = ({
   };
 
   return (
-    <StdPanel {...{ title, footnotes: required_footnotes, sources, datasets }}>
+    <StdPanel {...{ title, footnotes: required_footnotes, sources }}>
       <Col size={12} isText>
         <TM k={subject_type + "_employee_age_text"} args={text_calculations} />
       </Col>

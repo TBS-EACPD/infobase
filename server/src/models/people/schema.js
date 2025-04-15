@@ -5,6 +5,7 @@ import { headcount_types } from "./utils.js";
 const schema = `
   extend type Org {
     people_data: OrgPeopleData
+    has_people_data: Boolean
   }
   type OrgPeopleData {
     org_id: String
@@ -49,9 +50,16 @@ const schema = `
 
 export default function ({ loaders }) {
   const { org_people_data_loader, gov_people_summary_loader } = loaders;
+
+  const org_has_people_data = async (org_id) => {
+    const people_data = await org_people_data_loader.load(org_id);
+    return !_.isNull(people_data);
+  };
+
   const resolvers = {
     Org: {
       people_data: ({ org_id }) => org_people_data_loader.load(org_id),
+      has_people_data: ({ org_id }) => org_has_people_data(org_id),
     },
     Gov: {
       people_data: () => gov_people_summary_loader.load("gov"),

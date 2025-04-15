@@ -49,7 +49,6 @@ const EmployeeExecutiveLevelPanel = ({
   subject,
   footnotes,
   sources = [],
-  datasets,
   subject_type,
 }) => {
   const { data: orgData, loading: orgLoading } = useOrgPeopleSummary({
@@ -136,7 +135,7 @@ const EmployeeExecutiveLevelPanel = ({
   const ticks = _.map(people_years, (y) => `${run_template(y)}`);
 
   return (
-    <StdPanel {...{ title, footnotes, sources, datasets }}>
+    <StdPanel {...{ title, footnotes, sources }}>
       {loading ? (
         <LeafSpinner config_name="subroute" />
       ) : (

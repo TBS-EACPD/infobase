@@ -32,7 +32,6 @@ const EmployeeGenderPanel = ({
   subject,
   footnotes,
   sources,
-  datasets,
   subject_type,
 }) => {
   const { data: orgData, loading: orgLoading } = useOrgPeopleSummary({
@@ -138,7 +137,7 @@ const EmployeeGenderPanel = ({
       );
 
   return (
-    <StdPanel {...{ title, footnotes: required_footnotes, sources, datasets }}>
+    <StdPanel {...{ title, footnotes: required_footnotes, sources }}>
       <Col size={12} isText>
         <TM
           k={subject_type + "_employee_gender_text"}

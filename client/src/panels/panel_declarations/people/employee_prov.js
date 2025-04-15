@@ -37,7 +37,6 @@ const EmployeeProvPanel = ({
   subject,
   footnotes,
   sources,
-  datasets,
   subject_type,
 }) => {
   const { data: orgData, loading: orgLoading } = useOrgPeopleSummary({
@@ -130,7 +129,7 @@ const EmployeeProvPanel = ({
   const MemoizedCanada = memo(Canada);
 
   return (
-    <StdPanel {...{ title, footnotes, sources, datasets }}>
+    <StdPanel {...{ title, footnotes, sources }}>
       <Col size={12} isText>
         <TM k={subject_type + "_employee_prov_text"} args={text_calculations} />
       </Col>
