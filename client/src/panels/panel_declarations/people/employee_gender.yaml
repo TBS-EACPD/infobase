@@ -22,3 +22,7 @@ dept_employee_gender_text:
 suppressed_data_pattern_note:
   en: Patterned bars indicate suppressed data (where count is less than 10)
   fr: Les barres hachurées indiquent des données supprimées (lorsque le nombre est inférieur à 10)
+
+suppressed_data_warning:
+  en: Due to the size of this department, most of this data is suppressed to protect employee privacy.
+  fr: En raison de la taille de ce ministère, la plupart de ces données sont supprimées pour protéger la vie privée des employés.
