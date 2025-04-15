@@ -26,13 +26,6 @@ import {
   wake_up_graphql_cloud_function,
 } from "src/graphql_utils/graphql_utils";
 
-import orgEmployeeAgeGroup from "src/tables/orgEmployeeAgeGroup";
-import orgEmployeeAvgAge from "src/tables/orgEmployeeAvgAge";
-import orgEmployeeExLvl from "src/tables/orgEmployeeExLvl";
-import orgEmployeeFol from "src/tables/orgEmployeeFol";
-import orgEmployeeGender from "src/tables/orgEmployeeGender";
-import orgEmployeeRegion from "src/tables/orgEmployeeRegion";
-import orgEmployeeType from "src/tables/orgEmployeeType";
 import orgSobjs from "src/tables/orgSobjs";
 import orgTransferPayments from "src/tables/orgTransferPayments";
 import orgVoteStatEstimates from "src/tables/orgVoteStatEstimates";
@@ -51,15 +44,8 @@ const table_defs = [
   programSpending,
   orgTransferPayments,
   orgVoteStatEstimates,
-  orgEmployeeType,
-  orgEmployeeRegion,
-  orgEmployeeAgeGroup,
   programFtes,
-  orgEmployeeExLvl,
   programVoteStat,
-  orgEmployeeGender,
-  orgEmployeeFol,
-  orgEmployeeAvgAge,
   programSobjs,
 ];
 

@@ -28,7 +28,7 @@ simplographic_people_title:
 simplographic_people_text:
   transform: [handlebars,markdown]
   en: |
-    As of **{{ppl_last_year_end_ticks}}** there were **<a href="{{org_employee_type_link}}">{{fmt_big_int empl_count_total}}</a>** employees in the {{gl_sidebar_link "Federal Public Service" "FPS"}}, with **<a href="{{org_employee_region_link}}">{{fmt_percentage1 empl_count_ncr_ratio}}</a>** located in the National Capital Region.
+    As of **{{ppl_last_year_end_ticks}}** there were **{{fmt_big_int empl_count_total}}** employees in the {{gl_sidebar_link "Federal Public Service" "FPS"}}, with **{{fmt_percentage1 empl_count_ncr_ratio}}** located in the National Capital Region.
   fr: |
     Au **31 mars {{ppl_last_year_short_second}}**, il y avait **<a href="{{org_employee_type_link}}">{{fmt_big_int empl_count_total}}</a>** employés au sein de la {{gl_sidebar_link "fonction publique générale" "FPS"}}, dont **<a href="{{org_employee_region_link}}">{{fmt_percentage1 empl_count_ncr_ratio}}</a>** travaillaient dans la région de la capitale nationale.
 

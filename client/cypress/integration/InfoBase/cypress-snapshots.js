@@ -102,14 +102,6 @@ module.exports = {
         "Axe violations allow list": null
       }
     },
-    "Report Builder - Report": {
-      "Tested on index-eng.html#rpb/.-.-(table.-.-'orgEmployeeType.-.-subject.-.-'gov_gov.-.-columns.-.-(.-.-'*7b*7bppl_last_year_5*7d*7d.-.-'*7b*7bppl_last_year_4*7d*7d.-.-'*7b*7bppl_last_year_3*7d*7d.-.-'*7b*7bppl_last_year_2*7d*7d.-.-'*7b*7bppl_last_year*7d*7d.-.-'five_year_percent))": {
-        "Axe violations allow list": null
-      },
-      "Tested on index-basic-eng.html#rpb/.-.-(table.-.-'orgEmployeeType.-.-subject.-.-'gov_gov.-.-columns.-.-(.-.-'*7b*7bppl_last_year_5*7d*7d.-.-'*7b*7bppl_last_year_4*7d*7d.-.-'*7b*7bppl_last_year_3*7d*7d.-.-'*7b*7bppl_last_year_2*7d*7d.-.-'*7b*7bppl_last_year*7d*7d.-.-'five_year_percent))": {
-        "Axe violations allow list": null
-      }
-    },
     "Infographic - Gov - About": {
       "Tested on index-eng.html#infographic/gov/gov/intro": {
         "Axe violations allow list": null
