@@ -172,6 +172,8 @@ const EmployeeGenderPanel = ({
               },
             ],
           }}
+          // Disable toggle if there's suppressed data, since we only want to use bar charts
+          disable_toggle={hasSuppressedData}
           tooltip_formatter={(value) => {
             // Check if this is a suppressed data point
             if (value === 5) {

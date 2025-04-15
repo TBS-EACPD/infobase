@@ -27,7 +27,7 @@ const { text_maker, TM } = create_text_maker_component(text);
 const { people_years } = year_templates;
 const { fol } = businessConstants;
 
-const EmployeeFolPanel = ({
+const EmployeeFOLPanel = ({
   title,
   subject,
   footnotes,
@@ -51,6 +51,7 @@ const EmployeeFolPanel = ({
     return data.fol
       .filter((item) => item && item.yearly_data)
       .map((row) => {
+        // Create suppressed flags array to track which values are suppressed
         const suppressedFlags = row.yearly_data
           .filter((entry) => entry)
           .map((entry) => entry.value === -1);
@@ -61,6 +62,7 @@ const EmployeeFolPanel = ({
           displayData: row.yearly_data
             .filter((entry) => entry)
             .map((entry) => (entry.value === -1 ? "*" : entry.value)),
+          // Store numeric values for chart rendering
           data: row.yearly_data
             .filter((entry) => entry)
             .map((entry) => {
@@ -120,23 +122,19 @@ const EmployeeFolPanel = ({
 
   const ticks = _.map(people_years, (y) => `${run_template(y)}`);
 
-  const has_suppressed_data = _.some(
+  // Check if any data point is suppressed
+  const hasSuppressedData = _.some(
     calculations,
-    (graph_arg) =>
-      graph_arg.suppressedFlags && _.some(graph_arg.suppressedFlags)
+    (group) => group.suppressedFlags && _.some(group.suppressedFlags)
   );
 
-  const required_footnotes = (() => {
-    if (has_suppressed_data) {
-      return footnotes;
-    } else {
-      return _.filter(
+  const required_footnotes = hasSuppressedData
+    ? footnotes
+    : _.filter(
         footnotes,
         (footnote) =>
           !_.some(footnote.topic_keys, (key) => key === "SUPPRESSED_DATA")
       );
-    }
-  })();
 
   return (
     <StdPanel {...{ title, footnotes: required_footnotes, sources, datasets }}>
@@ -170,17 +168,19 @@ const EmployeeFolPanel = ({
               },
             ],
           }}
-          initial_graph_mode="bar_grouped"
-          data={calculations}
+          // Disable toggle if there's suppressed data, since we only want to use bar charts
+          disable_toggle={hasSuppressedData}
           tooltip_formatter={(value) => {
-            // Only use asterisk in tooltips, not for axis values
+            // Check if this is a suppressed data point
             if (value === 5) {
               return "*";
             }
             return formats.big_int_raw(value);
           }}
+          initial_graph_mode="bar_grouped"
+          data={calculations}
         />
-        {has_suppressed_data && (
+        {hasSuppressedData && (
           <div className="graph-note text-center mt-2 font-italic">
             <small>
               <span
@@ -211,7 +211,7 @@ export const declare_employee_fol_panel = () =>
       get_dataset_keys: () => ["employee_fol"],
       get_title: () => text_maker("employee_fol_title"),
       render(props) {
-        return <EmployeeFolPanel {...props} subject_type={subject_type} />;
+        return <EmployeeFOLPanel {...props} subject_type={subject_type} />;
       },
     }),
   });
