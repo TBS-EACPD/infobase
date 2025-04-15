@@ -8,6 +8,10 @@ import { create_text_maker_component, LeafSpinner } from "src/components/index";
 
 import { businessConstants } from "src/models/businessConstants";
 import {
+  useSuppressedDataDetection,
+  SuppressedDataPattern,
+} from "src/models/people/hooks";
+import {
   useOrgPeopleSummary,
   useGovPeopleSummary,
 } from "src/models/people/queries";
@@ -83,6 +87,11 @@ const EmployeeFOLPanel = ({
       .sort((a, b) => _.sum(b.data) - _.sum(a.data));
   }, [data]);
 
+  // Move hook call here, before any conditional returns
+  const { hasSuppressedData, isHeavilySuppressed } = useSuppressedDataDetection(
+    calculations || [] // Pass empty array if calculations is null
+  );
+
   if (loading) {
     return <LeafSpinner config_name="subroute" />;
   }
@@ -121,12 +130,6 @@ const EmployeeFOLPanel = ({
 
   const ticks = _.map(people_years, (y) => `${run_template(y)}`);
 
-  // Check if any data point is suppressed
-  const hasSuppressedData = _.some(
-    calculations,
-    (group) => group.suppressedFlags && _.some(group.suppressedFlags)
-  );
-
   const required_footnotes = hasSuppressedData
     ? footnotes
     : _.filter(
@@ -138,7 +141,16 @@ const EmployeeFOLPanel = ({
   return (
     <StdPanel {...{ title, footnotes: required_footnotes, sources }}>
       <Col size={12} isText>
-        <TM k={subject_type + "_employee_fol_text"} args={text_calculations} />
+        {isHeavilySuppressed ? (
+          <div className="mb-3">
+            <TM k="suppressed_data_warning" />
+          </div>
+        ) : (
+          <TM
+            k={subject_type + "_employee_fol_text"}
+            args={text_calculations}
+          />
+        )}
       </Col>
       <Col size={12} isGraph>
         <NivoLineBarToggle
@@ -179,24 +191,7 @@ const EmployeeFOLPanel = ({
           initial_graph_mode="bar_grouped"
           data={calculations}
         />
-        {hasSuppressedData && (
-          <div className="graph-note text-center mt-2 font-italic">
-            <small>
-              <span
-                className="mr-2"
-                style={{
-                  display: "inline-block",
-                  width: "20px",
-                  height: "10px",
-                  backgroundImage:
-                    "linear-gradient(135deg, #999 25%, #D3D3D3 25%, #D3D3D3 50%, #999 50%, #999 75%, #D3D3D3 75%)",
-                  backgroundSize: "8px 8px",
-                }}
-              ></span>
-              {text_maker("suppressed_data_pattern_note")}
-            </small>
-          </div>
-        )}
+        {hasSuppressedData && <SuppressedDataPattern />}
       </Col>
     </StdPanel>
   );
