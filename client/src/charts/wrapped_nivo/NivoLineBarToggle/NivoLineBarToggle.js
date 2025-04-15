@@ -7,7 +7,7 @@ import React from "react";
 import { create_text_maker } from "src/models/text";
 
 import { newIBCategoryColors } from "src/core/color_schemes";
-import { formats } from "src/core/format";
+//import { formats } from "src/core/format";
 import { is_a11y_mode } from "src/core/injected_build_constants";
 
 import { StandardLegend } from "src/charts/legends/index";
@@ -30,13 +30,13 @@ export class NivoLineBarToggle extends React.Component {
         index: "date",
         groupMode: "stacked",
       },
-      bar_normalized: {
+      /* bar_normalized: {
         bar: true,
         normalized: true,
         formatter: formats.percentage1,
         groupMode: "stacked",
         index: "date",
-      },
+      }, */
       bar_grouped: {
         bar: true,
         groupMode: "grouped",
