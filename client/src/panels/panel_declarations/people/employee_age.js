@@ -213,13 +213,19 @@ const EmployeeAgePanel = ({
     (ageGroup) => ageGroup.suppressedFlags && _.some(ageGroup.suppressedFlags)
   );
 
-  const required_footnotes = hasSuppressedData
-    ? footnotes
-    : _.filter(
-        footnotes,
-        (footnote) =>
-          !_.some(footnote.topic_keys, (key) => key === "SUPPRESSED_DATA")
-      );
+  // Check for suppressed data in average age
+  const hasAvgAgeSuppressedData = _.some(calculations.avg_age, (avgAgeData) =>
+    _.some(avgAgeData.data, (value) => value === 5)
+  );
+
+  const required_footnotes =
+    hasSuppressedData || hasAvgAgeSuppressedData
+      ? footnotes
+      : _.filter(
+          footnotes,
+          (footnote) =>
+            !_.some(footnote.topic_keys, (key) => key === "SUPPRESSED_DATA")
+        );
 
   // Options for NivoLineBarToggle component
   const age_group_options = {
@@ -262,20 +268,52 @@ const EmployeeAgePanel = ({
 
   const avg_age_options = {
     legend_title: text_maker("legend"),
-    bar: false,
+    bar: hasAvgAgeSuppressedData, // Use bar chart if suppressed data exists
     graph_options: {
       ticks: ticks,
       y_axis: text_maker("avgage"),
       formatter: formats.int,
       responsive: true,
-      animate: false,
+      animate: !hasAvgAgeSuppressedData, // Disable animation for bar charts with suppressed data
       role: "img",
       ariaLabel: `${text_maker("avgage")} ${subject.name}`,
+      // Define patterns for suppressed data if needed
+      defs: hasAvgAgeSuppressedData
+        ? [
+            {
+              id: "pattern-suppressed-data-avg",
+              type: "patternLines",
+              background: "#D3D3D3", // Light grey background
+              color: "#999999", // Darker grey lines
+              lineWidth: 3,
+              spacing: 8,
+              rotation: -45,
+            },
+          ]
+        : undefined,
+      // Tell Nivo which bars should use the pattern
+      fill: hasAvgAgeSuppressedData
+        ? [
+            {
+              match: (bar) => bar.data.value === 5, // Match bars with suppressed data value
+              id: "pattern-suppressed-data-avg",
+            },
+          ]
+        : undefined,
     },
     disable_toggle: true,
-    initial_graph_mode: "line",
+    initial_graph_mode: hasAvgAgeSuppressedData ? "bar_grouped" : "line",
     data: calculations.avg_age,
     formatter: formats.decimal2,
+    tooltip_formatter: hasAvgAgeSuppressedData
+      ? (value) => {
+          // Check if this is a suppressed data point
+          if (value === 5) {
+            return "*";
+          }
+          return formats.decimal2(value);
+        }
+      : undefined,
   };
 
   return (
@@ -319,7 +357,27 @@ const EmployeeAgePanel = ({
               label: text_maker("avgage"),
               content: (
                 <div id={"emp_age_tab_pane"}>
-                  <NivoLineBarToggle {...avg_age_options} />
+                  <GraphOverlay>
+                    <NivoLineBarToggle {...avg_age_options} />
+                    {hasAvgAgeSuppressedData && (
+                      <div className="graph-note text-center mt-2 font-italic">
+                        <small>
+                          <span
+                            className="mr-2"
+                            style={{
+                              display: "inline-block",
+                              width: "20px",
+                              height: "10px",
+                              backgroundImage:
+                                "linear-gradient(135deg, #999 25%, #D3D3D3 25%, #D3D3D3 50%, #999 50%, #999 75%, #D3D3D3 75%)",
+                              backgroundSize: "8px 8px",
+                            }}
+                          ></span>
+                          {text_maker("suppressed_data_pattern_note")}
+                        </small>
+                      </div>
+                    )}
+                  </GraphOverlay>
                   <div className="clearfix"></div>
                 </div>
               ),

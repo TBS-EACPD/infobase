@@ -150,17 +150,24 @@ const process_avg_age_dataset = () => {
 
       if (!orgId) return null;
 
+      // Create a map of year to value for this department
+      const yearValueMap = _.chain(rows)
+        .map((record) => [
+          parseInt(record.year, 10),
+          record.average_age === "*" ? -1 : parseFloat(record.average_age),
+        ])
+        .fromPairs()
+        .value();
+
+      // Create entries for all years, even missing ones
+      const average_age = recentYears.map((year) => ({
+        year,
+        value: yearValueMap[year] !== undefined ? yearValueMap[year] : null,
+      }));
+
       return {
         org_id: orgId,
-        average_age: _.chain(rows)
-          .map((record) => ({
-            year: parseInt(record.year, 10),
-            value:
-              record.average_age === "*" ? -1 : parseFloat(record.average_age),
-          }))
-          .filter((item) => item.year && !isNaN(item.value))
-          .sortBy("year")
-          .value(),
+        average_age,
       };
     })
     .filter(Boolean)
@@ -218,62 +225,74 @@ const process_standard_headcount_dataset = (headcount_type) => {
 
         if (!orgId) return null;
 
+        // Create a map of year to value for this department
+        const yearValueMap = _.chain(rows)
+          .map((record) => [
+            parseInt(record.year, 10),
+            record.number_of_employees === "*"
+              ? -1
+              : parseInt(record.number_of_employees, 10),
+          ])
+          .fromPairs()
+          .value();
+
+        // Create entries for all years, even missing ones
+        const yearly_data = recentYears.map((year) => ({
+          year,
+          value: yearValueMap[year] !== undefined ? yearValueMap[year] : null,
+        }));
+
         return {
           org_id: orgId,
           dimension: "Total",
-          yearly_data: _.chain(recentYears)
-            .map((year) => {
-              const yearData = rows.find((r) => parseInt(r.year, 10) === year);
-              return {
-                year,
-                value:
-                  yearData && yearData.number_of_employees !== "*"
-                    ? parseInt(yearData.number_of_employees, 10)
-                    : null,
-              };
-            })
-            .value(),
-          avg_share: 1.0, // Total is always 100%
+          yearly_data,
         };
       })
       .filter(Boolean)
       .value();
   }
 
-  // For other headcount types
+  // Group by department and dimension
   return _.chain(filteredCsv)
-    .groupBy(
-      (row) =>
-        `${row.department_or_agency}__${
-          row[headcountTypeMapping[headcount_type]]
-        }`
-    )
-    .map((rows, key) => {
-      const [deptName, dimension] = key.split("__");
+    .groupBy((record) => {
+      const dimension = record[headcountTypeMapping[headcount_type]];
+      return `${record.department_or_agency}_${dimension}`;
+    })
+    .map((records) => {
+      const firstRecord = records[0];
+      if (!firstRecord) return null;
+
+      const deptName = firstRecord.department_or_agency;
+      const dimension = firstRecord[headcountTypeMapping[headcount_type]];
       const orgId = orgIdCache[deptName];
 
       if (!orgId || !dimension) return null;
 
+      // Create a map of year to value for this department-dimension pair
+      const yearValueMap = _.chain(records)
+        .map((record) => [
+          parseInt(record.year, 10),
+          record.number_of_employees === "*"
+            ? -1
+            : parseInt(record.number_of_employees, 10),
+        ])
+        .fromPairs()
+        .value();
+
+      // Create entries for all years, even missing ones
+      const yearly_data = recentYears.map((year) => ({
+        year,
+        value: yearValueMap[year] !== undefined ? yearValueMap[year] : null,
+      }));
+
       return {
         org_id: orgId,
-        dimension: dimension,
-        yearly_data: _.chain(recentYears)
-          .map((year) => {
-            const yearData = rows.find(
-              (row) => parseInt(row.year, 10) === year
-            );
-            return {
-              year,
-              value:
-                yearData && yearData.number_of_employees === "*"
-                  ? -1
-                  : yearData
-                  ? parseInt(yearData.number_of_employees, 10)
-                  : null,
-            };
-          })
-          .value(),
-        avg_share: averageShares[orgId]?.[dimension] || 0,
+        dimension,
+        yearly_data,
+        avg_share:
+          orgId && averageShares[orgId] && averageShares[orgId][dimension]
+            ? averageShares[orgId][dimension]
+            : 0,
       };
     })
     .filter(Boolean)
