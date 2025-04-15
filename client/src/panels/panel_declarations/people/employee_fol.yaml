@@ -17,3 +17,7 @@ dept_employee_fol_text:
     From **{{first_active_year}}** to **{{last_active_year}}**, an average of **{{fmt_percentage1 top_avg_group_share}}** of **{{subject.name}}** {{gl_sidebar_link "employees" "HEAD"}} had **{{top_avg_group}}** as their {{gl_sidebar_link "First Official Language" "FOL"}}{{#isEqual single_type_flag true}}.{{else}}, while an average of **{{fmt_percentage1 bottom_avg_group_share}}** had **{{bottom_avg_group}}**.{{/isEqual}} 
   fr: |
     De **{{first_active_year}}** à **{{last_active_year}}**, **{{fmt_percentage1 top_avg_group_share}}** des {{gl_sidebar_link "employés" "HEAD"}} **{{subject.name}}**, en moyenne, avait {{#isEqual top_avg_group "Anglais"}}l'{{else}}le {{/isEqual}}**{{top_avg_group}}** comme {{gl_sidebar_link "première langue officielle" "FOL"}}{{#isEqual single_type_flag true}}.{{else}}, comparativement à **{{fmt_percentage1 bottom_avg_group_share}}** pour {{#isEqual bottom_avg_group "Anglais"}}l'{{else}}le {{/isEqual}}**{{bottom_avg_group}}**.{{/isEqual}}
+
+suppressed_data_pattern_note:
+  en: Pattern indicates suppressed data points
+  fr: Le motif indique des données supprimées

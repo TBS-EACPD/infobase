@@ -181,6 +181,10 @@ export class NivoLineBarToggle extends React.Component {
         return colors(d.id);
       },
       text_formatter: formatter || extra_graph_options.formatter,
+      tooltip_formatter:
+        this.props.tooltip_formatter ||
+        formatter ||
+        extra_graph_options.formatter,
       indexBy: extra_graph_options.index,
       is_money: !!extra_graph_options.is_money,
       groupMode: extra_graph_options.groupMode,
@@ -213,6 +217,10 @@ export class NivoLineBarToggle extends React.Component {
       stacked: !!extra_graph_options.stacked,
       is_money: !!extra_graph_options.is_money,
       text_formatter: formatter || extra_graph_options.formatter,
+      tooltip_formatter:
+        this.props.tooltip_formatter ||
+        formatter ||
+        extra_graph_options.formatter,
       margin: {
         top: 30,
         right: 20,

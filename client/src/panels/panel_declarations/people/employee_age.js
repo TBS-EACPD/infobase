@@ -249,7 +249,8 @@ const EmployeeAgePanel = ({
     },
     initial_graph_mode: "bar_grouped",
     data: calculations.age_group,
-    formatter: (value) => {
+    formatter: formats.big_int_raw,
+    tooltip_formatter: (value) => {
       // Check if this is a suppressed data point
       if (value === 5) {
         return "*";
