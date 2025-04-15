@@ -64,6 +64,7 @@ export class WrappedNivoLine extends React.Component {
       yScale,
       is_money,
       text_formatter,
+      tooltip_formatter,
       theme,
       colors,
       tooltip,
@@ -179,10 +180,17 @@ export class WrappedNivoLine extends React.Component {
         .groupBy("label")
         .map(_.spread(_.merge))
         .value();
-      const line_table_value_formatter = (value) =>
-        _.isUndefined(value)
-          ? ""
-          : get_formatter(is_money, text_formatter, true, false)(value);
+
+      const line_table_value_formatter = (value) => {
+        if (_.isUndefined(value)) return "";
+
+        if (tooltip_formatter) {
+          return get_formatter(is_money, tooltip_formatter, true, false)(value);
+        } else {
+          return get_formatter(is_money, text_formatter, true, false)(value);
+        }
+      };
+
       const column_configs = {
         label: {
           index: 0,
@@ -260,7 +268,14 @@ export class WrappedNivoLine extends React.Component {
           legends={fix_legend_symbols(legends)}
           enableSlices={"x"}
           sliceTooltip={(d) =>
-            tooltip(d, get_formatter(is_money, text_formatter, false))
+            tooltip(
+              d,
+              get_formatter(
+                is_money,
+                tooltip_formatter || text_formatter,
+                false
+              )
+            )
           }
           yScale={{
             stacked: !!stacked,

@@ -20,6 +20,7 @@ const bar_table = (
   keys,
   indexBy,
   table_view_format,
+  tooltip_format,
   table_name,
   table_first_column_name
 ) => {
@@ -35,8 +36,15 @@ const bar_table = (
         {
           index: idx + 1,
           header: key,
-          formatter: (value) =>
-            _.isUndefined(value) ? "" : table_view_format(value),
+          formatter: (value) => {
+            if (_.isUndefined(value)) return "";
+
+            if (tooltip_format) {
+              return tooltip_format(value);
+            } else {
+              return table_view_format(value);
+            }
+          },
         },
       ])
       .fromPairs()
@@ -70,6 +78,7 @@ export class WrappedNivoBar extends React.Component {
       label,
       is_money,
       text_formatter,
+      tooltip_formatter,
       theme,
       colors,
       tooltip,
@@ -102,6 +111,9 @@ export class WrappedNivoBar extends React.Component {
           keys,
           indexBy,
           get_formatter(is_money, text_formatter, true, false),
+          tooltip_formatter
+            ? get_formatter(is_money, tooltip_formatter, true, false)
+            : null,
           table_name,
           table_first_column_name
         ));
@@ -140,7 +152,14 @@ export class WrappedNivoBar extends React.Component {
           //and the key takes both negative or positive values)
           labelTextColor={textColor}
           tooltip={(d) =>
-            tooltip([d], get_formatter(is_money, text_formatter, false))
+            tooltip(
+              [d],
+              get_formatter(
+                is_money,
+                tooltip_formatter || text_formatter,
+                false
+              )
+            )
           }
           axisBottom={remove_bottom_axis ? null : bttm_axis}
           axisLeft={
