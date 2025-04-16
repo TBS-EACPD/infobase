@@ -409,7 +409,7 @@ const EmployeeAgePanel = ({
                   <GraphOverlay>
                     <NivoLineBarToggle {...age_group_options} />
                     {hasSuppressedData && (
-                      <div className="graph-note text-center mt-2 font-italic">
+                      <div className="graph-note mt-2 font-italic">
                         <small>
                           <span
                             className="mr-2"
@@ -438,7 +438,7 @@ const EmployeeAgePanel = ({
                   <GraphOverlay>
                     <NivoLineBarToggle {...avg_age_options} />
                     {hasAvgAgeSuppressedData && (
-                      <div className="graph-note text-center mt-2 font-italic">
+                      <div className="graph-note mt-2 font-italic">
                         <small>
                           <span
                             className="mr-2"
