@@ -154,11 +154,44 @@ const get_col_configs_with_defaults = (column_configs: ColumnConfigs) =>
     ...get_column_config_defaults(supplied_column_config.index),
     ...supplied_column_config,
   }));
+
+const ensure_all_columns_have_configs = (
+  data: DisplayTableData[],
+  column_configs: ColumnConfigs
+) => {
+  if (!data || data.length === 0) {
+    return column_configs;
+  }
+
+  // Get sample row to check all possible columns
+  const sample_row = data[0];
+  const all_columns = Object.keys(sample_row);
+
+  const complete_configs = { ...column_configs };
+
+  // Add missing column configs with defaults
+  all_columns.forEach((col, index) => {
+    if (!complete_configs[col]) {
+      complete_configs[col] = {
+        ...get_column_config_defaults(
+          index + Object.keys(column_configs).length
+        ),
+        index: index + Object.keys(column_configs).length,
+        header: col,
+        formatter: _.identity,
+      };
+    }
+  });
+
+  return complete_configs;
+};
+
 const get_default_state_from_props = (props: _DisplayTableProps) => {
   const { unsorted_initial, column_configs, data } = props;
 
-  const col_configs_with_defaults =
-    get_col_configs_with_defaults(column_configs);
+  const col_configs_with_defaults = get_col_configs_with_defaults(
+    ensure_all_columns_have_configs(data, column_configs)
+  );
 
   const visible_col_keys = _.chain(col_configs_with_defaults)
     .pickBy((col) => col.initial_visible)
@@ -315,8 +348,9 @@ export class _DisplayTable extends React.Component<
       filter_options_by_column,
     } = this.state;
 
-    const col_configs_with_defaults =
-      get_col_configs_with_defaults(column_configs);
+    const col_configs_with_defaults = get_col_configs_with_defaults(
+      ensure_all_columns_have_configs(data, column_configs)
+    );
     const NoDataMessage = () => (
       <tbody>
         <tr>
@@ -333,6 +367,11 @@ export class _DisplayTable extends React.Component<
     );
 
     const determine_text_align = (row: DisplayTableData, col: string) => {
+      // Check if the column config exists
+      if (!col_configs_with_defaults[col]) {
+        return "left"; // Default alignment
+      }
+
       const current_col_formatter = col_configs_with_defaults[col].formatter;
       const current_col_plain_formatter =
         col_configs_with_defaults[col].plain_formatter;
