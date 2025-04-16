@@ -172,13 +172,35 @@ const EmployeeGenderPanel = ({
               {
                 id: "pattern-suppressed-data",
                 type: "patternLines",
-                background: "#D3D3D3", // Light grey background
+                background: "inherit", // Light grey background
                 color: "#999999", // Darker grey lines
                 lineWidth: 3,
                 spacing: 8,
                 rotation: -45,
               },
             ],
+            fill: hasSuppressedData
+              ? [
+                  {
+                    match: (bar) => {
+                      const gender = calculations.find(
+                        (group) => group.label === bar.data.id
+                      );
+
+                      if (!gender || !gender.suppressedFlags) return false;
+
+                      const barKey = bar.key;
+                      const datePart = barKey.split(".")[1];
+
+                      const tickIndex = ticks.indexOf(datePart);
+                      if (tickIndex === -1) return false;
+
+                      return gender.suppressedFlags[tickIndex] === true;
+                    },
+                    id: "pattern-suppressed-data",
+                  },
+                ]
+              : [],
           }}
           // Disable toggle if there's suppressed data, since we only want to use bar charts
           disable_toggle={hasSuppressedData}

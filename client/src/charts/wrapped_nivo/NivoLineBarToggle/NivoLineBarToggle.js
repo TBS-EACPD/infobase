@@ -166,15 +166,9 @@ export class NivoLineBarToggle extends React.Component {
           suppressedDataPoints[d.id][d.indexValue]
         ) {
           // This specific data point is suppressed
-          const patternId =
-            graph_options.defs &&
-            graph_options.defs.find((def) => def.type === "patternLines")
-              ? graph_options.defs[0].id
-              : null;
-
-          if (patternId) {
-            return `url(#${patternId})`;
-          }
+          // Instead of completely replacing the color with a pattern,
+          // we'll return the original color - the pattern will be applied via the fill rules
+          return colors(d.id);
         }
 
         // Otherwise use the normal color
