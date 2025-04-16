@@ -247,18 +247,48 @@ const EmployeeAgePanel = ({
         .matches,
       role: "img",
       ariaLabel: `${text_maker("age_group")} ${subject.name}`,
-      // Define patterns for suppressed data
-      defs: [
-        {
-          id: "pattern-suppressed-data",
-          type: "patternLines",
-          background: "#D3D3D3", // Light grey background
-          color: "#999999", // Darker grey lines
-          lineWidth: 3,
-          spacing: 8,
-          rotation: -45,
-        },
-      ],
+      // Create single pattern that will be applied, but use the existing color as background
+      defs: hasSuppressedData
+        ? [
+            {
+              id: "pattern-suppressed-data",
+              type: "patternLines",
+              background: "inherit", // Use whatever color the bar already has
+              color: "#ffffff", // White lines for contrast
+              lineWidth: 2,
+              spacing: 6,
+              rotation: -45,
+            },
+          ]
+        : [],
+      // Tell Nivo to apply the pattern to suppressed data using the actual flags
+      fill: hasSuppressedData
+        ? [
+            {
+              match: (bar) => {
+                // Find the age group that matches this bar
+                const ageGroup = calculations.age_group.find(
+                  (group) => group.label === bar.data.id
+                );
+
+                if (!ageGroup || !ageGroup.suppressedFlags) return false;
+
+                // Extract the month/year from the bar key
+                const barKey = bar.key;
+                // The key format appears to be "age-group.Month Year"
+                const datePart = barKey.split(".")[1];
+
+                // Find the index of this date in the ticks array
+                const tickIndex = ticks.indexOf(datePart);
+                if (tickIndex === -1) return false;
+
+                // Check if this specific data point is suppressed
+                return ageGroup.suppressedFlags[tickIndex] === true;
+              },
+              id: "pattern-suppressed-data",
+            },
+          ]
+        : [],
     },
     disable_toggle: hasSuppressedData,
     initial_graph_mode: "bar_grouped",
@@ -275,38 +305,70 @@ const EmployeeAgePanel = ({
 
   const avg_age_options = {
     legend_title: text_maker("legend"),
-    bar: hasAvgAgeSuppressedData, // Use bar chart if suppressed data exists
+    bar: hasAvgAgeSuppressedData,
     graph_options: {
       ticks: ticks,
       y_axis: text_maker("avgage"),
       formatter: formats.int,
       responsive: true,
-      animate: !hasAvgAgeSuppressedData, // Disable animation for bar charts with suppressed data
+      animate: !hasAvgAgeSuppressedData,
       role: "img",
       ariaLabel: `${text_maker("avgage")} ${subject.name}`,
-      // Define patterns for suppressed data if needed
+      // Create single pattern that will be applied, but use the existing color as background
       defs: hasAvgAgeSuppressedData
         ? [
             {
               id: "pattern-suppressed-data-avg",
               type: "patternLines",
-              background: "#D3D3D3", // Light grey background
-              color: "#999999", // Darker grey lines
-              lineWidth: 3,
-              spacing: 8,
+              background: "inherit", // Use whatever color the bar already has
+              color: "#ffffff", // White lines for contrast
+              lineWidth: 2,
+              spacing: 6,
               rotation: -45,
             },
           ]
-        : undefined,
-      // Tell Nivo which bars should use the pattern
+        : [],
+      // Tell Nivo to apply the pattern to suppressed data using the actual flags
       fill: hasAvgAgeSuppressedData
         ? [
             {
-              match: (bar) => bar.data.value === 5, // Match bars with suppressed data value
+              match: (bar) => {
+                // Extract the series label from bar.data.id
+                const seriesLabel = bar.data.id;
+
+                // Extract the date from the bar key
+                const barKey = bar.key;
+                const datePart = barKey.split(".")[1];
+
+                // Find the index of this date in the ticks array
+                const tickIndex = ticks.indexOf(datePart);
+                if (tickIndex === -1) return false;
+
+                // For average age we need to check the source data
+                // Find the right data series (either subject or government-wide)
+                if (seriesLabel === subject.name) {
+                  // This is the subject (department) data
+                  return (
+                    data.average_age &&
+                    data.average_age[tickIndex] &&
+                    data.average_age[tickIndex].value === -1
+                  );
+                } else if (seriesLabel === text_maker("fps")) {
+                  // This is the government-wide data
+                  return (
+                    govData &&
+                    govData.average_age &&
+                    govData.average_age[tickIndex] &&
+                    govData.average_age[tickIndex].value === -1
+                  );
+                }
+
+                return false;
+              },
               id: "pattern-suppressed-data-avg",
             },
           ]
-        : undefined,
+        : [],
     },
     disable_toggle: true,
     initial_graph_mode: hasAvgAgeSuppressedData ? "bar_grouped" : "line",
@@ -356,8 +418,8 @@ const EmployeeAgePanel = ({
                               width: "20px",
                               height: "10px",
                               backgroundImage:
-                                "linear-gradient(135deg, #999 25%, #D3D3D3 25%, #D3D3D3 50%, #999 50%, #999 75%, #D3D3D3 75%)",
-                              backgroundSize: "8px 8px",
+                                "linear-gradient(135deg, #ffffff 25%, #666666 25%, #666666 50%, #ffffff 50%, #ffffff 75%, #666666 75%)",
+                              backgroundSize: "6px 6px",
                             }}
                           ></span>
                           {text_maker("suppressed_data_pattern_note")}
@@ -385,8 +447,8 @@ const EmployeeAgePanel = ({
                               width: "20px",
                               height: "10px",
                               backgroundImage:
-                                "linear-gradient(135deg, #999 25%, #D3D3D3 25%, #D3D3D3 50%, #999 50%, #999 75%, #D3D3D3 75%)",
-                              backgroundSize: "8px 8px",
+                                "linear-gradient(135deg, #ffffff 25%, #666666 25%, #666666 50%, #ffffff 50%, #ffffff 75%, #666666 75%)",
+                              backgroundSize: "6px 6px",
                             }}
                           ></span>
                           {text_maker("suppressed_data_pattern_note")}
