@@ -78,6 +78,11 @@ const featured_content_items = _.compact([
     is_new: "true",
   },
   {
+    text_key: "quick_link_people_2024",
+    href: "#infographic/gov/gov/people",
+    is_new: "true",
+  },
+  {
     text_key: "supps_b",
     href: "#compare_estimates",
   },
