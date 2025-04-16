@@ -12,6 +12,7 @@ import {
   LeafSpinner,
 } from "src/components/index";
 
+import { useSuppressedDataDetection } from "src/models/people/hooks";
 import {
   useOrgPeopleSummary,
   useGovPeopleSummary,
@@ -144,6 +145,13 @@ const EmployeeAgePanel = ({
       age_group,
     };
   }, [data, govData, subject.name, subject_type]);
+
+  // After calculating age_group data
+  // Use the suppressed data detection hook
+  const { isHeavilySuppressed } = useSuppressedDataDetection(
+    calculations?.age_group || [],
+    0.7 // You can adjust this threshold as needed
+  );
 
   if (loading) {
     return <LeafSpinner config_name="subroute" />;
@@ -318,7 +326,16 @@ const EmployeeAgePanel = ({
   return (
     <StdPanel {...{ title, footnotes: required_footnotes, sources }}>
       <Col size={12} isText>
-        <TM k={subject_type + "_employee_age_text"} args={text_calculations} />
+        {isHeavilySuppressed ? (
+          <div className="mb-3">
+            <TM k="suppressed_data_warning" />
+          </div>
+        ) : (
+          <TM
+            k={subject_type + "_employee_age_text"}
+            args={text_calculations}
+          />
+        )}
       </Col>
       <Col size={12} isGraph>
         <TabsStateful
