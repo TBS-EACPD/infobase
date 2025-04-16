@@ -1,3 +1,4 @@
+import { scaleOrdinal } from "d3-scale";
 import _ from "lodash";
 import React, { useMemo } from "react";
 
@@ -12,17 +13,16 @@ import {
 } from "src/components/index";
 
 import {
-  useSuppressedDataDetection,
-  SuppressedDataPattern,
-} from "src/models/people/hooks";
-import {
   useOrgPeopleSummary,
   useGovPeopleSummary,
 } from "src/models/people/queries";
 import { run_template } from "src/models/text";
 import { year_templates } from "src/models/years";
 
+import { newIBCategoryColors } from "src/core/color_schemes";
 import { formats } from "src/core/format";
+
+import { lang } from "src/core/injected_build_constants";
 
 import { NivoLineBarToggle } from "src/charts/wrapped_nivo/index";
 
@@ -52,10 +52,14 @@ const EmployeeAgePanel = ({
   const loading = subject_type === "gov" ? govLoading : orgLoading;
 
   const calculations = useMemo(() => {
-    if (!data) return { age_group: [], avg_age: [] };
+    if (!data || !data.age_group) {
+      return null;
+    }
 
-    const age_group =
-      data.age?.map((row) => {
+    // Process age_group data
+    const age_group = data.age_group
+      .filter((group) => group && group.yearly_data)
+      .map((row) => {
         const suppressedFlags = row.yearly_data
           .filter((entry) => entry)
           .map((entry) => entry.value === -1);
@@ -83,127 +87,159 @@ const EmployeeAgePanel = ({
           five_year_percent: row.avg_share,
           active: true,
         };
-      }) || [];
+      })
+      .filter((group) => _.some(group.data, (d) => d !== 0))
+      .sort((a, b) =>
+        a.label.localeCompare(b.label, undefined, { numeric: true })
+      );
 
-    const avg_age =
-      data.avgAge?.map((row) => {
-        const is_dept = row.dimension === "dept";
-        return {
-          label: is_dept ? subject.name : "Overall FPS",
-          data: row.yearly_data
-            .filter((entry) => entry)
-            .map((entry) => {
-              if (entry.value === -1) {
-                return 5; // Numeric value for suppressed data
-              } else if (entry.value === null || entry.value === undefined) {
-                return 0;
-              } else {
-                return entry.value;
-              }
-            }),
-          active: true,
-        };
-      }) || [];
+    // Process average_age data
+    const avg_age = [];
+
+    // Add department data if available
+    if (data.average_age && data.average_age.length > 0) {
+      avg_age.push({
+        label: subject.name,
+        data: data.average_age
+          .filter((entry) => entry)
+          .map((entry) => {
+            if (entry.value === -1) {
+              return 5;
+            } else if (entry.value === null || entry.value === undefined) {
+              return 0;
+            } else {
+              return entry.value;
+            }
+          }),
+        active: true,
+      });
+    }
+
+    // Add FPS data if we're looking at a department and have gov data
+    if (
+      subject_type === "dept" &&
+      govData &&
+      govData.average_age &&
+      govData.average_age.length > 0
+    ) {
+      avg_age.push({
+        label: text_maker("fps"),
+        data: govData.average_age
+          .filter((entry) => entry)
+          .map((entry) => {
+            if (entry.value === -1) {
+              return 5;
+            } else if (entry.value === null || entry.value === undefined) {
+              return 0;
+            } else {
+              return entry.value;
+            }
+          }),
+        active: true,
+      });
+    }
 
     return {
-      age_group: age_group.filter((item) =>
-        _.some(item.data, (val) => val !== 0)
-      ),
-      avg_age: avg_age.filter((item) => _.some(item.data, (val) => val !== 0)),
+      avg_age,
+      age_group,
     };
-  }, [data, subject]);
-
-  // Check for suppressed data in age groups and average age separately
-  const {
-    hasSuppressedData: hasSuppressedAgeGroupData,
-    isHeavilySuppressed: isAgeGroupHeavilySuppressed,
-  } = useSuppressedDataDetection(calculations.age_group || []);
-
-  const {
-    hasSuppressedData: hasAvgAgeSuppressedData,
-    isHeavilySuppressed: isAvgAgeHeavilySuppressed,
-  } = useSuppressedDataDetection(calculations.avg_age || []);
+  }, [data, govData, subject.name, subject_type]);
 
   if (loading) {
     return <LeafSpinner config_name="subroute" />;
   }
 
   if (
-    (!calculations.age_group || calculations.age_group.length === 0) &&
-    (!calculations.avg_age || calculations.avg_age.length === 0)
+    !calculations ||
+    !calculations.age_group ||
+    calculations.age_group.length === 0
   ) {
     return null;
   }
 
-  const text_groups = (() => {
-    if (!calculations.age_group || calculations.age_group.length === 0) {
-      return [];
-    }
+  const { avg_age, age_group } = calculations;
 
-    const sorted_groups = _.sortBy(calculations.age_group, "five_year_percent");
-    return _.uniq([_.last(sorted_groups)]);
-  })();
+  // Fix for gov_avgage values when viewing at government level
+  const dept_avg_first_active_year =
+    avg_age.length > 0 ? _.first(avg_age[0].data) : null;
+  const dept_avg_last_active_year =
+    avg_age.length > 0 ? _.last(avg_age[0].data) : null;
+
+  // When subject_type is 'gov', avg_age[0] contains the government data
+  // When subject_type is 'dept', avg_age[1] contains the government data (if available)
+  const gov_avgage_last_year_5 =
+    subject_type === "gov"
+      ? _.first(avg_age[0].data)
+      : avg_age.length > 1
+      ? _.first(avg_age[1].data)
+      : null;
+
+  const gov_avgage_last_year =
+    subject_type === "gov"
+      ? _.last(avg_age[0].data)
+      : avg_age.length > 1
+      ? _.last(avg_age[1].data)
+      : null;
+
+  const common_text_args = calculate_common_text_args(age_group);
 
   const text_calculations = {
-    ...calculate_common_text_args(text_groups),
+    ...common_text_args,
+    ..._.chain(["top", "bottom"])
+      .map((key_prefix) => {
+        const key = `${key_prefix}_avg_group`;
+        return [
+          key,
+          lang === "en"
+            ? common_text_args[key]?.replace("Age ", "")
+            : common_text_args[key],
+        ];
+      })
+      .fromPairs()
+      .value(),
+    dept_avg_first_active_year,
+    dept_avg_last_active_year,
+    gov_avgage_last_year_5,
+    gov_avgage_last_year,
     subject,
-    // Additional avg age values
-    gov_avgage_last_year: _.chain(calculations.avg_age)
-      .filter((row) => row.label === "Overall FPS")
-      .map((row) => _.last(row.data))
-      .first()
-      .value(),
-    gov_avgage_last_year_5: _.chain(calculations.avg_age)
-      .filter((row) => row.label === "Overall FPS")
-      .map((row) => _.first(row.data))
-      .first()
-      .value(),
-    dept_avg_first_active_year: _.chain(calculations.avg_age)
-      .filter((row) => row.label === subject.name)
-      .map((row) => _.first(row.data))
-      .first()
-      .value(),
-    dept_avg_last_active_year: _.chain(calculations.avg_age)
-      .filter((row) => row.label === subject.name)
-      .map((row) => _.last(row.data))
-      .first()
-      .value(),
   };
 
   const ticks = _.map(people_years, (y) => `${run_template(y)}`);
 
-  // Consider data heavily suppressed if either age_group or avg_age is heavily suppressed
-  const isHeavilySuppressed =
-    isAgeGroupHeavilySuppressed || isAvgAgeHeavilySuppressed;
-  const hasSuppressedData =
-    hasSuppressedAgeGroupData || hasAvgAgeSuppressedData;
+  // Single, consistent check for suppressed data
+  const hasSuppressedData = _.some(
+    calculations.age_group,
+    (ageGroup) => ageGroup.suppressedFlags && _.some(ageGroup.suppressedFlags)
+  );
 
-  // Determine which text template to use based on suppression levels
-  const textKey = isHeavilySuppressed
-    ? `${subject_type}_employee_age_text_temporary_no_avg_age`
-    : `${subject_type}_employee_age_text`;
+  // Check for suppressed data in average age
+  const hasAvgAgeSuppressedData = _.some(calculations.avg_age, (avgAgeData) =>
+    _.some(avgAgeData.data, (value) => value === 5)
+  );
 
-  const required_footnotes = hasSuppressedData
-    ? footnotes
-    : _.filter(
-        footnotes,
-        (footnote) =>
-          !_.some(footnote.topic_keys, (key) => key === "SUPPRESSED_DATA")
-      );
+  const required_footnotes =
+    hasSuppressedData || hasAvgAgeSuppressedData
+      ? footnotes
+      : _.filter(
+          footnotes,
+          (footnote) =>
+            !_.some(footnote.topic_keys, (key) => key === "SUPPRESSED_DATA")
+        );
 
-  // Configuration for the age group chart
+  // Options for NivoLineBarToggle component
   const age_group_options = {
     legend_title: text_maker("age_group"),
     bar: true,
+    get_colors: () => scaleOrdinal().range(newIBCategoryColors),
     graph_options: {
-      y_axis: text_maker("employees"),
       ticks: ticks,
-      formatter: formats.big_int_raw,
+      y_axis: text_maker("employees"),
       responsive: true,
       animate: window.matchMedia("(prefers-reduced-motion: no-preference)")
         .matches,
       role: "img",
       ariaLabel: `${text_maker("age_group")} ${subject.name}`,
+      // Define patterns for suppressed data
       defs: [
         {
           id: "pattern-suppressed-data",
@@ -216,64 +252,73 @@ const EmployeeAgePanel = ({
         },
       ],
     },
-    disable_toggle: hasSuppressedAgeGroupData,
+    disable_toggle: hasSuppressedData,
+    initial_graph_mode: "bar_grouped",
+    data: calculations.age_group,
+    formatter: formats.big_int_raw,
     tooltip_formatter: (value) => {
+      // Check if this is a suppressed data point
       if (value === 5) {
         return "*";
       }
       return formats.big_int_raw(value);
     },
-    initial_graph_mode: "bar_grouped",
-    data: calculations.age_group,
   };
 
-  // Configuration for the average age chart
   const avg_age_options = {
-    legend_title: text_maker("avgage"),
-    // Use line mode for average age
-    bar: false,
+    legend_title: text_maker("legend"),
+    bar: hasAvgAgeSuppressedData, // Use bar chart if suppressed data exists
     graph_options: {
-      y_axis: text_maker("avgage"),
       ticks: ticks,
-      formatter: formats.decimal1,
+      y_axis: text_maker("avgage"),
+      formatter: formats.int,
       responsive: true,
-      animate: window.matchMedia("(prefers-reduced-motion: no-preference)")
-        .matches,
+      animate: !hasAvgAgeSuppressedData, // Disable animation for bar charts with suppressed data
       role: "img",
       ariaLabel: `${text_maker("avgage")} ${subject.name}`,
-      defs: [
-        {
-          id: "pattern-suppressed-data",
-          type: "patternLines",
-          background: "#D3D3D3",
-          color: "#999999",
-          lineWidth: 3,
-          spacing: 8,
-          rotation: -45,
-        },
-      ],
+      // Define patterns for suppressed data if needed
+      defs: hasAvgAgeSuppressedData
+        ? [
+            {
+              id: "pattern-suppressed-data-avg",
+              type: "patternLines",
+              background: "#D3D3D3", // Light grey background
+              color: "#999999", // Darker grey lines
+              lineWidth: 3,
+              spacing: 8,
+              rotation: -45,
+            },
+          ]
+        : undefined,
+      // Tell Nivo which bars should use the pattern
+      fill: hasAvgAgeSuppressedData
+        ? [
+            {
+              match: (bar) => bar.data.value === 5, // Match bars with suppressed data value
+              id: "pattern-suppressed-data-avg",
+            },
+          ]
+        : undefined,
     },
-    disable_toggle: hasAvgAgeSuppressedData,
-    tooltip_formatter: (value) => {
-      if (value === 5) {
-        return "*";
-      }
-      return formats.decimal1(value);
-    },
-    initial_graph_mode: "line",
+    disable_toggle: true,
+    initial_graph_mode: hasAvgAgeSuppressedData ? "bar_grouped" : "line",
     data: calculations.avg_age,
+    formatter: formats.decimal2,
+    tooltip_formatter: hasAvgAgeSuppressedData
+      ? (value) => {
+          // Check if this is a suppressed data point
+          if (value === 5) {
+            return "*";
+          }
+          return formats.decimal2(value);
+        }
+      : undefined,
   };
 
   return (
     <StdPanel {...{ title, footnotes: required_footnotes, sources }}>
       <Col size={12} isText>
-        {isHeavilySuppressed ? (
-          <div className="mb-3">
-            <TM k="suppressed_data_warning" />
-          </div>
-        ) : (
-          <TM k={textKey} args={text_calculations} />
-        )}
+        <TM k={subject_type + "_employee_age_text"} args={text_calculations} />
       </Col>
       <Col size={12} isGraph>
         <TabsStateful
@@ -284,7 +329,24 @@ const EmployeeAgePanel = ({
                 <div id={"emp_age_tab_pane"}>
                   <GraphOverlay>
                     <NivoLineBarToggle {...age_group_options} />
-                    {hasSuppressedAgeGroupData && <SuppressedDataPattern />}
+                    {hasSuppressedData && (
+                      <div className="graph-note text-center mt-2 font-italic">
+                        <small>
+                          <span
+                            className="mr-2"
+                            style={{
+                              display: "inline-block",
+                              width: "20px",
+                              height: "10px",
+                              backgroundImage:
+                                "linear-gradient(135deg, #999 25%, #D3D3D3 25%, #D3D3D3 50%, #999 50%, #999 75%, #D3D3D3 75%)",
+                              backgroundSize: "8px 8px",
+                            }}
+                          ></span>
+                          {text_maker("suppressed_data_pattern_note")}
+                        </small>
+                      </div>
+                    )}
                   </GraphOverlay>
                   <div className="clearfix"></div>
                 </div>
@@ -296,7 +358,24 @@ const EmployeeAgePanel = ({
                 <div id={"emp_age_tab_pane"}>
                   <GraphOverlay>
                     <NivoLineBarToggle {...avg_age_options} />
-                    {hasAvgAgeSuppressedData && <SuppressedDataPattern />}
+                    {hasAvgAgeSuppressedData && (
+                      <div className="graph-note text-center mt-2 font-italic">
+                        <small>
+                          <span
+                            className="mr-2"
+                            style={{
+                              display: "inline-block",
+                              width: "20px",
+                              height: "10px",
+                              backgroundImage:
+                                "linear-gradient(135deg, #999 25%, #D3D3D3 25%, #D3D3D3 50%, #999 50%, #999 75%, #D3D3D3 75%)",
+                              backgroundSize: "8px 8px",
+                            }}
+                          ></span>
+                          {text_maker("suppressed_data_pattern_note")}
+                        </small>
+                      </div>
+                    )}
                   </GraphOverlay>
                   <div className="clearfix"></div>
                 </div>
@@ -314,7 +393,7 @@ export const declare_employee_age_panel = () =>
     panel_key: "employee_age",
     subject_types: ["gov", "dept"],
     panel_config_func: (subject_type) => ({
-      get_dataset_keys: () => ["employee_age"],
+      get_dataset_keys: () => ["age_group", "avg_age"],
       get_title: () => text_maker("employee_age_title"),
       render(props) {
         return <EmployeeAgePanel {...props} subject_type={subject_type} />;
