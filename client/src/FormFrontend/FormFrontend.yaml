@@ -32,10 +32,6 @@ form_frontend_required:
   en: Please complete all required fields.
   fr: S'il vous plaît remplir tous les champs requis.
 
-github_issue_created:
-  en: "Your issue has been created on GitHub. You can view it here: "
-  fr: "Votre problème a été créé sur GitHub. Vous pouvez le consulter ici : "
-
 issue_confirmation_title:
   en: "Report Submitted Successfully"
   fr: "Rapport soumis avec succès"
@@ -43,3 +39,7 @@ issue_confirmation_title:
 issue_confirmation_close:
   en: "Close"
   fr: "Fermer"
+
+github_issue_success:
+  en: "Your issue has been created on GitHub. You can view it here: "
+  fr: "Votre problème a été créé sur GitHub. Vous pouvez le consulter ici : "

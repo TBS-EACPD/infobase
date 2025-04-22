@@ -19,7 +19,6 @@ import {
   get_form_template,
   send_completed_form_template,
 } from "./form_backend_utils";
-import { IssueConfirmationModal } from "./IssueConfirmationModal";
 
 import text from "./FormFrontend.yaml";
 
@@ -98,7 +97,6 @@ class FormFrontend extends React.Component {
       backend_response: {},
       template: {},
       completed_template: {},
-      showConfirmationModal: false,
     };
   }
   componentDidMount() {
@@ -145,9 +143,20 @@ class FormFrontend extends React.Component {
           this.setState({
             awaiting_backend_response: false,
             backend_response,
-            showConfirmationModal:
-              backend_response.success && !!backend_response.issueUrl,
           });
+
+          // If submission was successful and there's an issue URL, close this modal and notify parent
+          if (backend_response.success && !!backend_response.issueUrl) {
+            // Close the parent modal
+            if (typeof this.props.onClose === "function") {
+              this.props.onClose();
+            }
+
+            // Notify parent about the successful submission with the issue URL
+            if (typeof this.props.onSuccessWithIssue === "function") {
+              this.props.onSuccessWithIssue(backend_response.issueUrl);
+            }
+          }
         }
       });
 
@@ -156,10 +165,6 @@ class FormFrontend extends React.Component {
       this.props.on_submitted();
     }
   }
-
-  closeConfirmationModal = () => {
-    this.setState({ showConfirmationModal: false });
-  };
 
   resetForm = () => {
     _.chain(this.state.template)
@@ -175,7 +180,6 @@ class FormFrontend extends React.Component {
       awaiting_backend_response: false,
       backend_response: {},
       completed_template: {},
-      showConfirmationModal: false,
     });
   };
 
@@ -188,7 +192,6 @@ class FormFrontend extends React.Component {
       backend_response,
       template,
       completed_template,
-      showConfirmationModal,
     } = this.state;
 
     const { include_privacy } = this.props;
@@ -430,49 +433,37 @@ class FormFrontend extends React.Component {
                   {text_maker("form_frontend_sending")}
                 </p>
               )}
-              {sent_to_backend &&
-                !awaiting_backend_response &&
-                !showConfirmationModal && (
-                  <Fragment>
-                    {backend_response.success && (
-                      <Fragment>
-                        <p aria-live="polite">
-                          {text_maker("form_frontend_has_sent_success")}
-                        </p>
-                        <button
-                          className="btn-sm btn btn-ib-primary"
-                          style={{ float: "right" }}
-                          onClick={(event) => {
-                            event.preventDefault();
-                            this.resetForm();
-                          }}
-                        >
-                          {text_maker("form_frontend_reset")}
-                        </button>
-                      </Fragment>
-                    )}
-                    {!backend_response.success && (
-                      <Fragment>
-                        <div aria-live="polite">
-                          <TM k="form_frontend_has_sent_failed" el="p" />
-                          {backend_response.error_message}
-                        </div>
-                      </Fragment>
-                    )}
-                  </Fragment>
-                )}
+              {sent_to_backend && !awaiting_backend_response && (
+                <Fragment>
+                  {backend_response.success && (
+                    <Fragment>
+                      <p aria-live="polite">
+                        {text_maker("form_frontend_has_sent_success")}
+                      </p>
+                      <button
+                        className="btn-sm btn btn-ib-primary"
+                        style={{ float: "right" }}
+                        onClick={(event) => {
+                          event.preventDefault();
+                          this.resetForm();
+                        }}
+                      >
+                        {text_maker("form_frontend_reset")}
+                      </button>
+                    </Fragment>
+                  )}
+                  {!backend_response.success && (
+                    <Fragment>
+                      <div aria-live="polite">
+                        <TM k="form_frontend_has_sent_failed" el="p" />
+                        {backend_response.error_message}
+                      </div>
+                    </Fragment>
+                  )}
+                </Fragment>
+              )}
             </fieldset>
           </form>
-        )}
-
-        {showConfirmationModal && (
-          <IssueConfirmationModal
-            issueUrl={backend_response.issueUrl}
-            onClose={() => {
-              this.closeConfirmationModal();
-              this.resetForm();
-            }}
-          />
         )}
       </div>
     );

@@ -20,3 +20,7 @@ infostatic_build_date:
   transform: [handlebars]
   en: (built {{build_date}})
   fr: (publiée {{build_date}})
+
+form_submission_successful:
+  en: Form submission successful
+  fr: Soumission du formulaire réussie
