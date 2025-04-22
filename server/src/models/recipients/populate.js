@@ -5,7 +5,7 @@ import { get_standard_csv_file_rows } from "../load_utils.js";
 const format_year = (year) => _.split(year, "-")[0];
 
 export default async function ({ models }) {
-  const { OrgRecipients } = models;
+  const { Recipients, RecipientsGeneralStats } = models;
 
   const raw_recipient_rows = get_standard_csv_file_rows(
     "transfer_payments.csv"
@@ -40,40 +40,48 @@ export default async function ({ models }) {
         city,
         province,
         country,
-        expenditure,
+        expenditure: _.toNumber(expenditure) || 0,
       })
     )
-    .value();
-
-  const report_years = _.chain(recipient_rows).map("year").uniq().value();
-
-  const get_general_stats = (recipients) =>
-    _.chain(recipients)
-      .groupBy("recipient")
-      .flatMap((rows, recipient) =>
-        _.map(report_years, (year) => ({
-          year,
-          org_id: rows[0].org_id,
-          recipient,
-          total: _.reduce(
-            _.filter(rows, (row) => row.year === year),
-            (sum, row) => sum + _.toNumber(row.expenditure) || 0,
-            0
-          ),
-        }))
-      )
-      .value();
-
-  const org_summary = _.chain(recipient_rows)
-    .groupBy("org_id")
-    .flatMap((value, org_id) => {
-      return {
-        id: org_id,
-        recipients: value,
-        recipients_general_stats: get_general_stats(value),
-      };
+    .forEach((item, index) => {
+      item.id = (index + 1).toString();
     })
     .value();
 
-  return await Promise.all([OrgRecipients.insertMany(org_summary)]);
+  const grouped_stats = _.chain(recipient_rows)
+    .groupBy("year")
+    .mapValues((years) =>
+      _.chain(years)
+        .groupBy("org_id")
+        .mapValues((orgs) =>
+          _.chain(orgs)
+            .groupBy("recipient")
+            .mapValues((recipient_rows) => ({
+              recipient: recipient_rows[0].recipient,
+              total_exp: _.sumBy(recipient_rows, "expenditure"),
+              num_transfer_payments: _.uniqBy(recipient_rows, "program").length,
+              programs: _.uniq(_.map(recipient_rows, "program")),
+            }))
+            .value()
+        )
+        .value()
+    )
+    .value();
+
+  const general_stats = _.flatMap(grouped_stats, (orgs, year) =>
+    _.flatMap(orgs, (recipients, org_id) =>
+      _.map(recipients, (summary) => ({
+        year,
+        org_id,
+        recipient: summary.recipient,
+        total_exp: summary.total_exp,
+        num_transfer_payments: summary.num_transfer_payments,
+      }))
+    )
+  );
+
+  return await Promise.all([
+    Recipients.insertMany(recipient_rows),
+    RecipientsGeneralStats.insertMany(general_stats),
+  ]);
 }

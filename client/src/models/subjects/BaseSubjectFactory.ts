@@ -77,7 +77,6 @@ export const BaseSubjectFactory = <
     set_has_data(data_type: string, has_data: boolean) {
       if (_.includes(api_data_types, data_type)) {
         const store_value = this._has_data[data_type];
-
         const store_value_is_unset = _.isNull(store_value);
         if (store_value_is_unset) {
           this._has_data[data_type] = has_data;

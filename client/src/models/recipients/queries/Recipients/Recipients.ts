@@ -10,5 +10,5 @@ export const { promisedRecipients, suspendedRecipients, useRecipients } =
   query_factory<RecipientsQuery, RecipientsQueryVariables>()({
     query_name: "Recipients",
     query: RecipientsDocument,
-    resolver: (response: RecipientsQuery) => response.root.org,
+    resolver: (response: RecipientsQuery) => response.root.org?.recipients,
   });

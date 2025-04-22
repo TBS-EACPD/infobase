@@ -72,7 +72,7 @@ const dept_subject_type = "dept" as const;
 export class Dept extends BaseSubjectFactory<DeptDef, typeof dept_subject_type>(
   dept_subject_type,
   trivial_text_maker("orgs"),
-  ["results", "services", "covid"]
+  ["results", "services", "covid", "recipients"]
 ) {
   static store = make_store(
     (def: DeptDef) => new Dept(def),

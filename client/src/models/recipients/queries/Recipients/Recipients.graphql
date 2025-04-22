@@ -1,0 +1,18 @@
+query Recipients($lang: String!, $orgId: String) {
+  root(lang: $lang) {
+    org(org_id: $orgId) {
+      recipients {
+        year
+        department
+        org_id
+        program
+        record_type
+        recipient
+        city
+        province
+        country
+        expenditure
+      }
+    }
+  }
+}

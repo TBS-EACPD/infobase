@@ -8,6 +8,10 @@ import {
 } from "src/models/covid/populate";
 import { load_footnotes_bundle } from "src/models/footnotes/populate_footnotes";
 import {
+  api_load_has_recipients,
+  api_load_recipients_general_stats_data,
+} from "src/models/recipients/populate";
+import {
   api_load_results_bundle,
   api_load_results_counts,
   subject_has_results,
@@ -40,6 +44,7 @@ function ensure_loaded({
   has_covid_data,
   years_with_covid_data,
   covid_measures,
+  has_recipients,
   footnotes_for: footnotes_subject,
 }) {
   const panel_set = _.map(panel_keys, (key) =>
@@ -79,6 +84,10 @@ function ensure_loaded({
   const should_load_covid_measures =
     covid_measures || check_for_panel_dependency("requires_covid_measures");
 
+  const should_load_recipients_general_stats =
+    has_recipients ||
+    check_for_panel_dependency("requires_recipients_general_stats");
+
   const result_docs_to_load = !_.isEmpty(result_docs)
     ? result_docs
     : _.chain(panel_set)
@@ -113,6 +122,11 @@ function ensure_loaded({
       ? api_load_has_services(subject)
       : Promise.resolve();
 
+  const has_recipients_prom =
+    has_recipients && _.isFunction(subject.set_has_data)
+      ? api_load_has_recipients(subject)
+      : Promise.resolve();
+
   const granular_result_counts_prom = should_load_granular_result_counts
     ? api_load_results_counts("granular", "all")
     : Promise.resolve();
@@ -137,6 +151,10 @@ function ensure_loaded({
     ? api_load_all_covid_measures()
     : Promise.resolve();
 
+  const recipients_general_stats_prom = should_load_recipients_general_stats
+    ? api_load_recipients_general_stats_data(subject)
+    : Promise.resolve();
+
   return Promise.all([
     load_tables(table_set),
     results_prom,
@@ -151,6 +169,8 @@ function ensure_loaded({
     footnotes_prom,
     years_with_covid_data_prom,
     covid_measures_prom,
+    recipients_general_stats_prom,
+    has_recipients_prom,
   ]);
 }
 

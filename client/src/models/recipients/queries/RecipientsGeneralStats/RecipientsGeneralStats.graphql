@@ -1,0 +1,13 @@
+query RecipientsGeneralStats($lang: String!, $id: String) {
+  root(lang: $lang) {
+    org(org_id: $id) {
+      recipients_general_stats {
+        year
+        org_id
+        recipient
+        total_exp
+        num_transfer_payments
+      }
+    }
+  }
+}

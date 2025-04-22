@@ -109,3 +109,7 @@ historical_g_and_c_custom_new_row:
       </div>
       <div class='clearfix'></div>
     </div>
+
+recipients_title:
+  en: Recipients
+  fr: Fill in

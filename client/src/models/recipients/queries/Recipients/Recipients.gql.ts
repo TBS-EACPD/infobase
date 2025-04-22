@@ -1,4 +1,4 @@
-import * as Types from '../../../types/types.gql';
+import * as Types from '../../../../types/types.gql';
 
 import { gql } from '@apollo/client';
 import * as Apollo from '@apollo/client';
@@ -9,33 +9,24 @@ export type RecipientsQueryVariables = Types.Exact<{
 }>;
 
 
-export type RecipientsQuery = { __typename?: 'Query', root: { __typename?: 'Root', org?: { __typename?: 'Org', org_recipients?: { __typename?: 'RecipientsSummary', id?: string | null, recipients?: Array<{ __typename?: 'Recipients', year?: string | null, department?: string | null, org_id?: string | null, program?: string | null, record_type?: string | null, recipient?: string | null, city?: string | null, province?: string | null, country?: string | null, expenditure?: number | null } | null> | null, recipients_general_stats?: Array<{ __typename?: 'RecipientsGeneralStats', year?: string | null, org_id?: string | null, recipient?: string | null, total?: number | null } | null> | null } | null } | null } };
+export type RecipientsQuery = { __typename?: 'Query', root: { __typename?: 'Root', org?: { __typename?: 'Org', recipients?: Array<{ __typename?: 'Recipients', year?: string | null, department?: string | null, org_id?: string | null, program?: string | null, record_type?: string | null, recipient?: string | null, city?: string | null, province?: string | null, country?: string | null, expenditure?: number | null } | null> | null } | null } };
 
 
 export const RecipientsDocument = gql`
     query Recipients($lang: String!, $orgId: String) {
   root(lang: $lang) {
     org(org_id: $orgId) {
-      org_recipients {
-        id
-        recipients {
-          year
-          department
-          org_id
-          program
-          record_type
-          recipient
-          city
-          province
-          country
-          expenditure
-        }
-        recipients_general_stats {
-          year
-          org_id
-          recipient
-          total
-        }
+      recipients {
+        year
+        department
+        org_id
+        program
+        record_type
+        recipient
+        city
+        province
+        country
+        expenditure
       }
     }
   }

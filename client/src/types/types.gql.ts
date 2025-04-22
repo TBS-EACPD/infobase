@@ -273,6 +273,7 @@ export type Org = SubjectI & {
   faa_schedule_hr_status?: Maybe<Scalars['String']>;
   faa_schedule_institutional?: Maybe<Scalars['String']>;
   federal_ownership?: Maybe<Scalars['String']>;
+  has_recipients?: Maybe<Scalars['Boolean']>;
   has_results?: Maybe<Scalars['Boolean']>;
   has_services?: Maybe<Scalars['Boolean']>;
   id?: Maybe<Scalars['String']>;
@@ -286,13 +287,14 @@ export type Org = SubjectI & {
   notes?: Maybe<Scalars['String']>;
   old_applied_title?: Maybe<Scalars['String']>;
   org_id?: Maybe<Scalars['String']>;
-  org_recipients?: Maybe<RecipientsSummary>;
   org_transfer_payments?: Maybe<Array<Maybe<OrgTransferPayments>>>;
   org_vote_stat_estimates?: Maybe<Array<Maybe<OrgVoteStatEstimates>>>;
   org_vote_stat_pa?: Maybe<Array<Maybe<OrgVoteStatPa>>>;
   pas_code?: Maybe<Scalars['String']>;
   people_data?: Maybe<OrgPeopleData>;
   programs?: Maybe<Array<Maybe<Program>>>;
+  recipients?: Maybe<Array<Maybe<Recipients>>>;
+  recipients_general_stats?: Maybe<Array<Maybe<RecipientsGeneralStats>>>;
   service_summary?: Maybe<ServiceSummary>;
   services?: Maybe<Array<Maybe<Service>>>;
   subject_type?: Maybe<Scalars['String']>;
@@ -501,6 +503,7 @@ export type Recipients = {
   country?: Maybe<Scalars['String']>;
   department?: Maybe<Scalars['String']>;
   expenditure?: Maybe<Scalars['Float']>;
+  org?: Maybe<Org>;
   org_id?: Maybe<Scalars['String']>;
   program?: Maybe<Scalars['String']>;
   province?: Maybe<Scalars['String']>;
@@ -511,17 +514,11 @@ export type Recipients = {
 
 export type RecipientsGeneralStats = {
   __typename?: 'RecipientsGeneralStats';
+  num_transfer_payments?: Maybe<Scalars['Float']>;
   org_id?: Maybe<Scalars['String']>;
   recipient?: Maybe<Scalars['String']>;
-  total?: Maybe<Scalars['Float']>;
+  total_exp?: Maybe<Scalars['Float']>;
   year?: Maybe<Scalars['String']>;
-};
-
-export type RecipientsSummary = {
-  __typename?: 'RecipientsSummary';
-  id?: Maybe<Scalars['String']>;
-  recipients?: Maybe<Array<Maybe<Recipients>>>;
-  recipients_general_stats?: Maybe<Array<Maybe<RecipientsGeneralStats>>>;
 };
 
 export type Result = {
@@ -565,6 +562,7 @@ export type Root = {
   orgs?: Maybe<Array<Maybe<Org>>>;
   program?: Maybe<Program>;
   program_search?: Maybe<Array<Maybe<Program>>>;
+  recipients?: Maybe<Recipients>;
   search_services?: Maybe<Array<Maybe<Service>>>;
   service?: Maybe<Service>;
   subject?: Maybe<SubjectI>;
@@ -616,6 +614,11 @@ export type RootProgramArgs = {
 
 export type RootProgram_SearchArgs = {
   query: Scalars['String'];
+};
+
+
+export type RootRecipientsArgs = {
+  id: Scalars['String'];
 };
 
 
