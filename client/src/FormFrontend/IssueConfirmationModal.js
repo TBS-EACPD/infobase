@@ -11,7 +11,7 @@ const { TM } = create_text_maker_component(text);
 
 export const IssueConfirmationModal = ({ issueUrl }) => {
   return (
-    <div className="issue-confirmation-modal">
+    <div>
       <TM k="github_issue_success" />
       <p>
         <ExternalLink href={issueUrl}>{issueUrl}</ExternalLink>

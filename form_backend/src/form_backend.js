@@ -109,7 +109,7 @@ const make_form_backend = (templates) => {
     next();
   });
 
-  form_backend.post("/submit_form", async (request, response, next) => {
+  form_backend.post("/submit_form", async (request, response) => {
     const { template_name, completed_template } = get_request_content(request);
 
     const original_template = templates[template_name];
