@@ -409,7 +409,7 @@ function get_data_by_item_types() {
 
       return {
         id: is_voted ? "voted" : "stat",
-        children: categories,
+        children: categories.length > 0 ? categories : [],
         data: {
           name: text_maker(is_voted ? "voted_items" : "stat_items"),
           current_value,
@@ -422,6 +422,7 @@ function get_data_by_item_types() {
         is_expanded: true,
       };
     })
+    .compact()
     .value();
 
   const root = {
