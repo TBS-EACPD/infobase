@@ -79,8 +79,8 @@ employee_type_open_data_link:
 
 
 tabled_estimates_dataset:
-  en: Tabled Estimates
-  fr: Budgets déposés
+  en: Source of Authorities
+  fr: Provenance des autorisations
 
 
 actual_results_dataset:
