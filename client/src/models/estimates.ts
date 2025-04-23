@@ -46,8 +46,8 @@ export const estimates_docs = {
     order: 4,
   },
   SW1: {
-    en: "Special Warrants (SW placeholder name)",
-    fr: "Mandats spéciaux (SW placeholder name)",
+    en: "Canada Gazette, Part I, Volume 159, Number 15, April 12, 2025. Special Warrant, Order in Council P.C. 2025-462 of April 1, 2025",
+    fr: "Gazette du Canada, Partie I, volume 159, numéro 15, le 12 avril 2025. Mandat spécial, vertu du décret C.P. 2025-462 du 1er avril 2025",
     order: 5,
   },
 } as const;
