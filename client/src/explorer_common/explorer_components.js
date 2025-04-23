@@ -6,6 +6,7 @@ import { createSelector } from "reselect";
 
 import { AccordionTransition, SortDirections } from "src/components/index";
 
+import { isSpecialWarrants } from "src/models/estimates";
 import { trivial_text_maker } from "src/models/text";
 
 import "./explorer-components.scss";
@@ -262,6 +263,10 @@ const compute_col_styles = createSelector(_.identity, (col_defs) => {
           flex = `1 1 ${width + 300}px`;
         }
         marginRight = "auto";
+      } else if (ix === 1 && isSpecialWarrants()) {
+        // Give second column more width only when dealing with special warrants
+        flex = `0 1 ${width + 150}px`;
+        marginLeft = "auto";
       } else {
         if (ix === col_defs.length - 1) {
           //last col

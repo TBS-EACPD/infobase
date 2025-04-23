@@ -96,6 +96,6 @@ dept_lapse_by_votes_text:
 auth_special_warrants_note:
   transform: [handlebars, markdown]
   en: |
-    **Note:** The current fiscal year (2025-26) authorities data point is not included in this graph because it only includes voted authorities from Special Warrants, and not statutory authorities. Including this data point would not provide a meaningful comparison with previous years, which include both voted and statutory authorities.
+    **Note:** The authorities data point for the current fiscal year (2025-26) is not included in this graph because the statutory authorities have not yet been published. Currently, only the authorities provided through the Governor General special warrants are available.
   fr: |
     **Remarque :** Le point de données sur les autorisations de l'exercice en cours (2025-2026) n'est pas inclus dans ce graphique car il ne comprend que les autorisations votées des mandats spéciaux, et non les autorisations législatives. L'inclusion de ce point de données ne fournirait pas une comparaison significative avec les années précédentes, qui comprennent à la fois les autorisations votées et législatives.
