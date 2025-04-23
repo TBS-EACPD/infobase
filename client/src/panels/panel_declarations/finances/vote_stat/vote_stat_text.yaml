@@ -1,21 +1,21 @@
 in_year_voted_breakdown_title:
   transform: [handlebars]
-  en: Details on Voted Items in Estimates ({{est_in_year}})
-  fr: Détails sur les postes votés dans les budgets des dépenses ({{est_in_year}})
+  en: Details on Voted Authorities ({{est_in_year}})
+  fr: Détails sur les autorisations votées ({{est_in_year}})
 
 in_year_voted_breakdown_text:
   transform: [handlebars, markdown]
   en: |
-   Of the **{{fmt_compact1_written voted_stat_est_in_year}}** sought from Parliament in {{gl_sidebar_link "voted" "VOTED"}} budgetary authorities, the **10** largest were:
+   Of the **{{fmt_compact1_written voted_stat_est_in_year}}** in {{gl_sidebar_link "voted" "VOTED"}} authorities, the **10** largest were:
   fr: |
-   Sur les **{{fmt_compact1_written voted_stat_est_in_year}}** demandés au Parlement pour les autorisations budgétaires {{gl_sidebar_link "votées" "VOTED"}}, 
+   Sur les **{{fmt_compact1_written voted_stat_est_in_year}}** dans les autorisations {{gl_sidebar_link "votées" "VOTED"}}, 
    les **10** plus importantes étaient :
 
 
 in_year_stat_breakdown_title:
   transform: [handlebars]
-  en: Details on Statutory Items in Estimates ({{est_in_year}})
-  fr: Détails sur les postes législatifs dans les budgets des dépenses ({{est_in_year}})
+  en: Details on Statutory Authorities ({{est_in_year}})
+  fr: Détails sur les autorisations législatives ({{est_in_year}})
 
 in_year_stat_breakdown_text:
   transform: [handlebars, markdown]
@@ -80,21 +80,21 @@ dept_in_year_voted_stat_split_text:
 
 in_year_estimates_split_title:
   transform: [handlebars]
-  en: Estimates by Source ({{est_in_year}})
-  fr: Budgets des dépenses par source ({{est_in_year}})
+  en: Source of Authorities ({{est_in_year}})
+  fr: Provenance des autorisations ({{est_in_year}})
 
 gov_in_year_estimates_split_text:
   transform: [handlebars,markdown]
   en: |
-    This fiscal year ({{est_in_year}}), a total of **{{fmt_compact1_written tabled_est_in_year}}** in planned budgetary expenditures have been presented in the 
-    following {{gl_sidebar_link "Funding Sources" "EST_PROC"}} (Main Estimates, Supplementary Estimates A, B, C, and Special Warrants) and {{gl_sidebar_link "adjustments and transfers" "ADJUS"}}:
+    This fiscal year ({{est_in_year}}), a total of **{{fmt_compact1_written tabled_est_in_year}}** in authorities have been presented in the 
+    following sources of authorities (Main Estimates, Supplementary Estimates A, B, C, and Special Warrants) and {{gl_sidebar_link "adjustments and transfers" "ADJUS"}}:
     {{#each in_year_estimates_split}}
     * {{ this.[0]}}: **{{fmt_compact1_written this.[1] }}** 
     {{/each}}
     
   fr: |
-    Pour l'exercice courant ({{est_in_year}}), le total de dépenses budgétaires prévues s'élève à 
-    **{{fmt_compact1_written tabled_est_in_year}}** dans le(s) {{gl_sidebar_link "sources de financement" "EST_PROC"}} (Budget principal des dépenses, Budget supplémentaire des dépenses A, B, C, et Mandats spéciaux) et {{gl_sidebar_link "redressements et virements" "ADJUS"}} suivants:
+    Pour l'exercice courant ({{est_in_year}}), le total d'autorisations s'élève à 
+    **{{fmt_compact1_written tabled_est_in_year}}** dans le(s) provenances des autorisations (Budget principal des dépenses, Budget supplémentaire des dépenses A, B, C, et Mandats spéciaux) et {{gl_sidebar_link "redressements et virements" "ADJUS"}} suivants:
     {{#each in_year_estimates_split}}
     * {{ this.[0]}}: **{{fmt_compact1_written this.[1] }}** 
     {{/each}}
@@ -102,31 +102,30 @@ gov_in_year_estimates_split_text:
 dept_in_year_estimates_split_text:
   transform: [handlebars,markdown]
   en: |
-   As of the {{est_in_year}} {{gt "last_estimates"}}, **{{subject.name}}**'s planned budgetary expenditures of **{{fmt_compact1_written tabled_est_in_year}}** were presented in the following
-   {{gl_sidebar_link "Funding Sources" "EST_PROC"}} and {{gl_sidebar_link "adjustments and transfers" "ADJUS"}}: 
+   As of the {{est_in_year}} {{gt "last_estimates"}}, **{{subject.name}}**'s authorities of **{{fmt_compact1_written tabled_est_in_year}}** were presented in the following
+   sources of authorities and {{gl_sidebar_link "adjustments and transfers" "ADJUS"}}: 
    {{#each in_year_estimates_split}}
    * {{ this.[0]}}: **{{fmt_compact1 this.[1] }}** 
    {{/each}}
   fr: |
-   En date du {{est_in_year}} {{gt "last_estimates"}}, pour **{{le_dept subject}}**, les dépenses budgétaires prévues de **{{fmt_compact1_written tabled_est_in_year}}** figurent 
-   dans le(s) {{gl_sidebar_link "sources de financement" "EST_PROC"}}  et {{gl_sidebar_link "redressements et virements" "ADJUS"}} suivants: 
+   En date du {{est_in_year}} {{gt "last_estimates"}}, pour **{{le_dept subject}}**, les autorisations de **{{fmt_compact1_written tabled_est_in_year}}** figurent 
+   dans le(s) provenances des autorisations et {{gl_sidebar_link "redressements et virements" "ADJUS"}} suivants: 
    {{#each in_year_estimates_split}}
    * {{ this.[0]}}: **{{fmt_compact1 this.[1] }}** 
    {{/each}}
 
 estimates_perspective_title:
   transform: [handlebars]
-  en: Estimates in Perspective ({{est_in_year}})
-  fr: Budget des dépenses en perspective ({{est_in_year}})
+  en: Authorities in Perspective ({{est_in_year}})
+  fr: Autorisations en perspective ({{est_in_year}})
 
 estimates_perspective_text:
   transform: [handlebars,markdown]
   en: |
-   As of the {{est_in_year}} {{gt "last_estimates"}}, the government has presented Parliament with planned {{gl_sidebar_link "budgetary" 'BUD_EXP'}} expenditure estimates 
-   totaling **{{fmt_compact1_written gov_tabled_est_in_year}}**. Of this amount, **{{fmt_compact1_written dept_tabled_est_in_year}}**
+   As of the {{est_in_year}} {{gt "last_estimates"}}, the government has {{gl_sidebar_link "authorities" 'AUTH'}} totaling **{{fmt_compact1_written gov_tabled_est_in_year}}**. Of this amount, **{{fmt_compact1_written dept_tabled_est_in_year}}**
    (or **{{fmt_smart_percentage1 (divide dept_tabled_est_in_year gov_tabled_est_in_year)}}**) will be allocated to **{{subject.name}} ({{subject.abbr}})**.	
   fr: |
-   En date du {{gt "last_estimates"}} {{est_in_year}}, le gouvernement a présenté au Parlement des dépenses budgétaires prévues d'un total de 
+   En date du {{gt "last_estimates"}} {{est_in_year}}, le gouvernement a des {{gl_sidebar_link "autorisations" 'AUTH'}} d'un total de 
    **{{fmt_compact1_written gov_tabled_est_in_year}}**. De ce montant, **{{fmt_compact1_written dept_tabled_est_in_year}}**
    (ou **{{fmt_smart_percentage1 (divide dept_tabled_est_in_year gov_tabled_est_in_year)}}**) seront attribués à **{{subject.name}} ({{subject.abbr}})**.
 
