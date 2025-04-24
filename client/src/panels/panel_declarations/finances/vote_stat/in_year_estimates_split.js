@@ -68,7 +68,7 @@ const estimates_split_render_w_text_key =
         label={(d) => (
           <tspan y={-10}>{formats.compact2_raw(d.formattedValue)}</tspan>
         )}
-        isInteractive={false}
+        isInteractive={true}
         enableLabel={true}
         indexBy="label"
         colors={(d) => (d.data[d.id] < 0 ? highlightColor : secondaryColor)}
