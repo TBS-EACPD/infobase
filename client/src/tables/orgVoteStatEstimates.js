@@ -80,8 +80,8 @@ export default {
       key: true,
       nick: "est_doc",
       header: {
-        en: "Funding Source",
-        fr: "Source de financement",
+        en: "Sources of Authorities",
+        fr: "Provenances des autorisations",
       },
       can_group_by: true,
     });

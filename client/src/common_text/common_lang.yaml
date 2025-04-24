@@ -709,8 +709,8 @@ voted_stat:
   fr: Crédit / poste législatif
 
 estimates_doc:
-  en: Funding Source
-  fr: Source de financement
+  en: Sources of Authorities
+  fr: Provenances des autorisations
 
 by_estimates_doc:
   en: By Funding Source
