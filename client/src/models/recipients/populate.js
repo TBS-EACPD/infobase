@@ -4,9 +4,10 @@ import { log_standard_event } from "src/core/analytics";
 
 import {
   promisedDeptHasRecipients,
-  promisedRecipientsGeneralStats,
+  promisedRecipientSummaryGov,
+  promisedRecipientSummaryOrg,
 } from "./queries";
-import { RecipientsGeneralStatsDataStore } from "./RecipientsGeneralStatsDataStore";
+import { RecipientSummary } from "./RecipientsGeneralStatsDataStore";
 
 export const api_load_has_recipients = (subject) => {
   const subject_type = subject && subject.subject_type;
@@ -71,11 +72,11 @@ export const api_load_has_recipients = (subject) => {
     });
 };
 
-const _subject_ids_with_loaded_recipients_general_stats_data = {};
-export const api_load_recipients_general_stats_data = (subject) => {
+const _subject_ids_with_loaded_recipients_summary_data = {};
+export const api_load_recipients_summary_data = (subject) => {
   const { is_loaded, subject_type, id, query } = (() => {
     const subject_is_loaded = (id) =>
-      _.get(_subject_ids_with_loaded_recipients_general_stats_data, id);
+      _.get(_subject_ids_with_loaded_recipients_summary_data, id);
 
     switch (subject.subject_type) {
       case "dept":
@@ -83,7 +84,14 @@ export const api_load_recipients_general_stats_data = (subject) => {
           is_loaded: subject_is_loaded(subject.id),
           subject_type: "dept",
           id: String(subject.id),
-          query: promisedRecipientsGeneralStats,
+          query: promisedRecipientSummaryOrg,
+        };
+      default:
+        return {
+          is_loaded: subject_is_loaded("gov"),
+          subject_type: "gov",
+          id: "gov",
+          query: promisedRecipientSummaryGov,
         };
     }
   })();
@@ -93,31 +101,26 @@ export const api_load_recipients_general_stats_data = (subject) => {
   }
 
   return query({ id }).then((response) => {
-    RecipientsGeneralStatsDataStore.create_and_register({
+    RecipientSummary.create_and_register({
       subject_id: id,
-      data: response,
+      recipient_summary: response,
     });
 
     if (subject_type === "dept") {
       subject.set_has_data(
         "recipients",
         !_.chain(response)
-          .thru(
-            ({ year, org_id, recipient, total_exp, num_transfer_payments }) => [
-              year,
-              org_id,
-              recipient,
-              total_exp,
-              num_transfer_payments,
-            ]
-          )
+          .thru(({ recipient_overview, recipient_exp_summary }) => [
+            ...recipient_overview,
+            ...recipient_exp_summary,
+          ])
           .isEmpty()
           .value()
       );
     }
 
     _.setWith(
-      _subject_ids_with_loaded_recipients_general_stats_data,
+      _subject_ids_with_loaded_recipients_summary_data,
       id,
       true,
       Object

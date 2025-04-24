@@ -5,7 +5,12 @@ import { get_standard_csv_file_rows } from "../load_utils.js";
 const format_year = (year) => _.split(year, "-")[0];
 
 export default async function ({ models }) {
-  const { Recipients, RecipientsGeneralStats } = models;
+  const {
+    Recipients,
+    RecipientsGeneralStats,
+    GovRecipientSummary,
+    OrgRecipientSummary,
+  } = models;
 
   const raw_recipient_rows = get_standard_csv_file_rows(
     "transfer_payments.csv"
@@ -48,6 +53,13 @@ export default async function ({ models }) {
     })
     .value();
 
+  const most_recent_submission_year = _.chain(recipient_rows)
+    .map("year")
+    .uniq()
+    .sort()
+    .last()
+    .value();
+
   const grouped_stats = _.chain(recipient_rows)
     .groupBy("year")
     .mapValues((years) =>
@@ -80,8 +92,52 @@ export default async function ({ models }) {
     )
   );
 
+  const get_recipient_overview = (recipients) =>
+    _.chain(recipients)
+      .groupBy("year")
+      .map((recipients_grouped_by_year, year) => ({
+        year: year,
+        total_tf_exp: _.sumBy(recipients_grouped_by_year, "expenditure"),
+      }))
+      .value();
+
+  const get_recipient_summary = (recipients) =>
+    _.chain(recipients)
+      .groupBy("year")
+      .flatMap((recipients_by_year, year) =>
+        _.chain(recipients_by_year)
+          .groupBy("recipient")
+          .flatMap((recipient_rows, recipient) => ({
+            year,
+            recipient,
+            total_exp: _.sumBy(recipient_rows, "expenditure"),
+            num_transfer_payments: _.uniqBy(recipient_rows, "program").length,
+          }))
+          .value()
+      )
+      .value();
+
+  const gov_summary = [
+    {
+      id: "gov",
+      recipient_overview: get_recipient_overview(recipient_rows),
+      recipient_exp_summary: get_recipient_summary(recipient_rows),
+    },
+  ];
+
+  const org_summary = _.chain(recipient_rows)
+    .groupBy("org_id")
+    .flatMap((recipients, org_id) => ({
+      id: org_id,
+      recipient_overview: get_recipient_overview(recipients),
+      recipient_exp_summary: get_recipient_summary(recipients),
+    }))
+    .value();
+
   return await Promise.all([
     Recipients.insertMany(recipient_rows),
     RecipientsGeneralStats.insertMany(general_stats),
+    GovRecipientSummary.insertMany(gov_summary),
+    OrgRecipientSummary.insertMany(org_summary),
   ]);
 }

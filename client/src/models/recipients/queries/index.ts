@@ -15,3 +15,15 @@ export {
   suspendedDeptHasRecipients,
   useDeptHasRecipients,
 } from "./DeptHasRecipients/DeptHasRecipients";
+
+export {
+  promisedRecipientSummaryGov,
+  suspendedRecipientSummaryGov,
+  useRecipientSummaryGov,
+} from "./RecipientSummaryGov/RecipientSummaryGov";
+
+export {
+  promisedRecipientSummaryOrg,
+  suspendedRecipientSummaryOrg,
+  useRecipientSummaryOrg,
+} from "./RecipientSummaryOrg/RecipientSummaryOrg";

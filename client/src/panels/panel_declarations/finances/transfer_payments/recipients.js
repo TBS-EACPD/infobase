@@ -7,14 +7,16 @@ import { declare_panel } from "src/panels/PanelRegistry";
 
 import { DisplayTable, Tabs } from "src/components/index";
 
-import { RecipientsGeneralStatsDataStore } from "src/models/recipients/RecipientsGeneralStatsDataStore";
+import { RecipientSummary } from "src/models/recipients/RecipientsGeneralStatsDataStore";
 
 import { newIBLightCategoryColors } from "src/core/color_schemes";
 import { formats } from "src/core/format";
 
 import { WrappedNivoTreemap } from "src/charts/wrapped_nivo/index";
 
-import { text_maker } from "./gnc_text_provider";
+import { text_maker, TM } from "./gnc_text_provider";
+
+const { year_to_fiscal_year } = formats;
 
 const RecipientTable = ({ filtered_data }) => {
   const table_data = _.map(
@@ -30,7 +32,6 @@ const RecipientTable = ({ filtered_data }) => {
     recipient: {
       index: 0,
       header: "Recipients",
-      is_searchable: true,
     },
     num_transfer_payments: {
       index: 1,
@@ -72,24 +73,43 @@ const RecipientTreeMap = ({ filtered_data }) => {
   );
 };
 
-const RecipientsPanel = ({ calculations }) => {
+const RecipientsPanel = ({ subject, calculations }) => {
   const { data, tab_keys } = calculations;
+
+  const { recipient_exp_summary, recipient_overview } = data;
 
   const [tab_key, set_tab_key] = useState(_.last(tab_keys));
 
-  const filtered_data = _.chain(data)
+  const pa_last_year = year_to_fiscal_year(_.first(tab_keys));
+
+  const pa_last_year_5 = year_to_fiscal_year(_.last(tab_keys));
+
+  const total_exp = _.chain(recipient_overview)
+    .filter((row) => row.year === tab_key)
+    .map("total_tf_exp")
+    .value();
+
+  const filtered_data = _.chain(recipient_exp_summary)
     .filter((row) => row.year === tab_key)
     .orderBy("total_exp", "desc")
     .take(10)
     .value();
 
   const summary = (
-    <div className="row align-items-center">
-      <div className="col-12 col-lg-6">
-        <RecipientTable filtered_data={filtered_data} />
+    <div>
+      <div className="medium-panel-text">
+        <TM
+          k={`recipient_${subject.subject_type}_text`}
+          args={{ tab_key, subject, total_exp, pa_last_year, pa_last_year_5 }}
+        />
       </div>
-      <div className="col-12 col-lg-6">
-        <RecipientTreeMap filtered_data={filtered_data} />
+      <div className="row align-items-center">
+        <div className="col-12 col-lg-6">
+          <RecipientTable filtered_data={filtered_data} />
+        </div>
+        <div className="col-12 col-lg-6">
+          <RecipientTreeMap filtered_data={filtered_data} />
+        </div>
       </div>
     </div>
   );
@@ -97,7 +117,7 @@ const RecipientsPanel = ({ calculations }) => {
   return (
     <Tabs
       tabs={_.chain(tab_keys)
-        .map((year) => [year, formats.year_to_fiscal_year(year)])
+        .map((year) => [year, year_to_fiscal_year(year)])
         .fromPairs()
         .value()}
       open_tab_key={tab_key}
@@ -111,13 +131,16 @@ const RecipientsPanel = ({ calculations }) => {
 export const declare_recipients_panel = () =>
   declare_panel({
     panel_key: "recipients",
-    subject_types: ["dept"],
+    subject_types: ["gov", "dept"],
     panel_config_func: () => ({
       legacy_non_table_dependencies: ["requires_recipients_general_stats"],
       calculate: ({ subject }) => {
-        const data = RecipientsGeneralStatsDataStore.lookup(subject.id).data;
+        const data = RecipientSummary.lookup(subject.id);
 
-        const tab_keys = _.chain(data).map("year").uniq().value();
+        const tab_keys = _.chain(data.recipient_exp_summary)
+          .map("year")
+          .uniq()
+          .value();
 
         return { data, tab_keys };
       },

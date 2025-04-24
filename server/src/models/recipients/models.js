@@ -1,11 +1,33 @@
 import _ from "lodash";
 import mongoose from "mongoose";
 
-import { create_resource_by_foreignkey_attr_dataloader } from "../loader_utils.js";
-import { str_type } from "../model_utils.js";
+import {
+  create_resource_by_id_attr_dataloader,
+  create_resource_by_foreignkey_attr_dataloader,
+} from "../loader_utils.js";
+import { number_type, pkey_type, str_type } from "../model_utils.js";
 import { make_schema_with_search_terms } from "../search_utils.js";
 
 export default function (model_singleton) {
+  const common_recipient_fields = {
+    id: pkey_type(),
+    recipient_overview: [
+      {
+        year: str_type,
+        total_tf_exp: number_type,
+      },
+    ],
+    recipient_exp_summary: [
+      {
+        year: str_type,
+        recipient: str_type,
+        total_exp: number_type,
+        num_transfer_payments: number_type,
+        programs: [str_type],
+      },
+    ],
+  };
+
   const RecipientsSchema = make_schema_with_search_terms({
     id: str_type,
     year: str_type,
@@ -28,13 +50,34 @@ export default function (model_singleton) {
     num_transfer_payments: { type: Number },
   });
 
+  const GovRecipientSummarySchema = mongoose.Schema({
+    ...common_recipient_fields,
+  });
+
+  const OrgRecipientSummarySchema = mongoose.Schema({
+    ...common_recipient_fields,
+  });
+
   model_singleton.define_model("Recipients", RecipientsSchema);
   model_singleton.define_model(
     "RecipientsGeneralStats",
     RecipientsGeneralStatsSchema
   );
+  model_singleton.define_model(
+    "GovRecipientSummary",
+    GovRecipientSummarySchema
+  );
+  model_singleton.define_model(
+    "OrgRecipientSummary",
+    OrgRecipientSummarySchema
+  );
 
-  const { Recipients, RecipientsGeneralStats } = model_singleton.models;
+  const {
+    Recipients,
+    RecipientsGeneralStats,
+    GovRecipientSummary,
+    OrgRecipientSummary,
+  } = model_singleton.models;
 
   const loaders = {
     recipients_loader: create_resource_by_foreignkey_attr_dataloader(
@@ -50,6 +93,14 @@ export default function (model_singleton) {
         RecipientsGeneralStats,
         "org_id"
       ),
+    gov_recipient_summary_loader: create_resource_by_id_attr_dataloader(
+      GovRecipientSummary,
+      "id"
+    ),
+    org_recipient_summary_loader: create_resource_by_id_attr_dataloader(
+      OrgRecipientSummary,
+      "id"
+    ),
   };
 
   _.each(loaders, (val, key) => model_singleton.define_loader(key, val));

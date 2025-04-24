@@ -1,22 +1,29 @@
 import { make_store } from "src/models/utils/make_store";
 
-type RecipientsGeneralStatsDataDef = {
+type RecipientSummaryDataDef = {
   subject_id: string;
-  data: [
-    {
-      year: string;
-      org_id: string;
-      recipient: string;
-      total_exp: number;
-      num_transfer_payments: number;
-    }
-  ];
+  recipient_summary: {
+    subject_id: String;
+    recipient_overview: [
+      {
+        year: string;
+        total_tf_exp: number;
+      }
+    ];
+    recipient_exp_summary: [
+      {
+        year: string;
+        recipient: string;
+        total_exp: number;
+        num_transfer_payments: number;
+      }
+    ];
+  };
 };
 
-export const RecipientsGeneralStatsDataStore = make_store(
-  ({ subject_id, data }: RecipientsGeneralStatsDataDef) => ({
+export const RecipientSummary = make_store(
+  ({ subject_id, recipient_summary }: RecipientSummaryDataDef) => ({
     id: subject_id,
-    subject_id,
-    data,
+    ...recipient_summary,
   })
 );

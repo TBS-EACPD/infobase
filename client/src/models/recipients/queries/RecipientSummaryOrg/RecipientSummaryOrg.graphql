@@ -1,0 +1,19 @@
+query RecipientSummaryOrg($lang: String!, $id: String) {
+  root(lang: $lang) {
+    org(org_id: $id) {
+      recipient_summary {
+        id
+        recipient_overview {
+          year
+          total_tf_exp
+        }
+        recipient_exp_summary {
+          year
+          recipient
+          total_exp
+          num_transfer_payments
+        }
+      }
+    }
+  }
+}

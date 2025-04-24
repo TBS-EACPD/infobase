@@ -9,7 +9,8 @@ import {
 import { load_footnotes_bundle } from "src/models/footnotes/populate_footnotes";
 import {
   api_load_has_recipients,
-  api_load_recipients_general_stats_data,
+  //  api_load_recipients_general_stats_data,
+  api_load_recipients_summary_data,
 } from "src/models/recipients/populate";
 import {
   api_load_results_bundle,
@@ -151,8 +152,13 @@ function ensure_loaded({
     ? api_load_all_covid_measures()
     : Promise.resolve();
 
+  /*
   const recipients_general_stats_prom = should_load_recipients_general_stats
     ? api_load_recipients_general_stats_data(subject)
+    : Promise.resolve();
+*/
+  const recipients_summary_prom = should_load_recipients_general_stats
+    ? api_load_recipients_summary_data(subject)
     : Promise.resolve();
 
   return Promise.all([
@@ -169,8 +175,9 @@ function ensure_loaded({
     footnotes_prom,
     years_with_covid_data_prom,
     covid_measures_prom,
-    recipients_general_stats_prom,
+    //  recipients_general_stats_prom,
     has_recipients_prom,
+    recipients_summary_prom,
   ]);
 }
 
