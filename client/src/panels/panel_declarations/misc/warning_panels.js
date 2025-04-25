@@ -12,6 +12,7 @@ import {
   StatelessDetails,
 } from "src/components/index";
 
+import { isSpecialWarrants } from "src/models/estimates";
 import { PRE_DRR_PUBLIC_ACCOUNTS_LATE_FTE_MOCK_DOC } from "src/models/footnotes/dynamic_footnotes";
 
 import dynamic_footnote_text from "src/models/footnotes/dynamic_footnotes.yaml";
@@ -475,3 +476,20 @@ export const declare_late_planned_resources_panel =
     "planned",
     depts_with_late_planned_resources
   );
+
+export const declare_special_warrants_warning_panel = () =>
+  declare_panel({
+    panel_key: "special_warrants_warning",
+    subject_types: ["gov", "dept"],
+    panel_config_func: () => ({
+      ...common_panel_config,
+
+      calculate: () => isSpecialWarrants(),
+
+      render: () => (
+        <WarningPanel banner_class="info">
+          <TM k="special_warrants_banner" />
+        </WarningPanel>
+      ),
+    }),
+  });

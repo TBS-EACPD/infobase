@@ -11,6 +11,7 @@ import {
   declare_temp_untabled_warning_panel,
   declare_late_actual_resources_panel,
   declare_late_planned_resources_panel,
+  declare_special_warrants_warning_panel,
 
   // shared dept, crso, program
   declare_profile_panel,
@@ -86,6 +87,7 @@ export const get_dept_panels = (subject) =>
       declare_late_actual_resources_panel(),
       declare_late_planned_resources_panel(),
       declare_temp_untabled_warning_panel(),
+      declare_special_warrants_warning_panel(),
       declare_welcome_mat_panel(),
       declare_auth_exp_planned_spending_panel(),
       declare_in_year_estimates_split_panel(),
