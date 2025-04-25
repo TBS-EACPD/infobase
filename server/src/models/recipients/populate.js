@@ -2,7 +2,29 @@ import _ from "lodash";
 
 import { get_standard_csv_file_rows } from "../load_utils.js";
 
+import { provinces_def } from "./constants.js";
+
 const format_year = (year) => _.split(year, "-")[0];
+
+const format_country = (country) => {
+  if (_.isEmpty(country)) {
+    return "Not Available";
+  } else if (country === "Canada") {
+    return country;
+  } else {
+    return "Abroad";
+  }
+};
+
+const format_province = (province) => {
+  if (_.isEmpty(province)) {
+    return "na";
+  } else if (_.isEmpty(provinces_def[province])) {
+    return "abroad";
+  } else {
+    return provinces_def[province];
+  }
+};
 
 export default async function ({ models }) {
   const {
@@ -44,20 +66,13 @@ export default async function ({ models }) {
         recipient,
         city,
         province,
-        country,
+        country: format_country(country),
         expenditure: _.toNumber(expenditure) || 0,
       })
     )
     .forEach((item, index) => {
       item.id = (index + 1).toString();
     })
-    .value();
-
-  const most_recent_submission_year = _.chain(recipient_rows)
-    .map("year")
-    .uniq()
-    .sort()
-    .last()
     .value();
 
   const grouped_stats = _.chain(recipient_rows)
@@ -80,6 +95,24 @@ export default async function ({ models }) {
     )
     .value();
 
+  const get_recipient_location_summary = (recipients) =>
+    _.chain(recipients)
+      .map(({ province, country, ...other_fields }) => ({
+        province: format_province(province),
+        country: format_country(country),
+        ...other_fields,
+      }))
+      .groupBy("year")
+      .map((recipients_grouped_by_year, year) => ({
+        year,
+        ..._.chain(recipients_grouped_by_year)
+          .groupBy("province")
+          .map((value, key) => [key, _.sumBy(value, "expenditure")])
+          .fromPairs()
+          .value(),
+      }))
+      .value();
+
   const general_stats = _.flatMap(grouped_stats, (orgs, year) =>
     _.flatMap(orgs, (recipients, org_id) =>
       _.map(recipients, (summary) => ({
@@ -96,7 +129,7 @@ export default async function ({ models }) {
     _.chain(recipients)
       .groupBy("year")
       .map((recipients_grouped_by_year, year) => ({
-        year: year,
+        year,
         total_tf_exp: _.sumBy(recipients_grouped_by_year, "expenditure"),
       }))
       .value();
@@ -122,6 +155,7 @@ export default async function ({ models }) {
       id: "gov",
       recipient_overview: get_recipient_overview(recipient_rows),
       recipient_exp_summary: get_recipient_summary(recipient_rows),
+      recipient_location: get_recipient_location_summary(recipient_rows),
     },
   ];
 
@@ -131,6 +165,7 @@ export default async function ({ models }) {
       id: org_id,
       recipient_overview: get_recipient_overview(recipients),
       recipient_exp_summary: get_recipient_summary(recipients),
+      recipient_location: get_recipient_location_summary(recipients),
     }))
     .value();
 
