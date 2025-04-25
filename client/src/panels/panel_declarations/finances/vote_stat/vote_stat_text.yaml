@@ -87,16 +87,14 @@ gov_in_year_estimates_split_text:
   transform: [handlebars,markdown]
   en: |
     This fiscal year ({{est_in_year}}), a total of **{{fmt_compact1_written tabled_est_in_year}}** in authorities have been presented in the 
-    following sources of authorities 
-    ({{gl_sidebar_link "Main Estimates" "MAINS"}}, {{gl_sidebar_link "Supplementary Estimates" "SUPPS"}} A, B, C, {{gl_sidebar_link "adjustments, warrants and transfers" "ADJUS"}}):
+    following sources of authorities:
     {{#each in_year_estimates_split}}
     * {{ this.[0]}}: **{{fmt_compact1_written this.[1] }}** 
     {{/each}}
     
   fr: |
     Pour l'exercice courant ({{est_in_year}}), le total d'autorisations s'élève à 
-    **{{fmt_compact1_written tabled_est_in_year}}** dans le(s) provenances des autorisations 
-    ({{gl_sidebar_link "Budget principal des dépenses" "MAINS"}}, {{gl_sidebar_link "Budget supplémentaire des dépenses" "SUPPS"}} A, B, C, et {{gl_sidebar_link "redressements, mandats et virements" "ADJUS"}}) suivantes:
+    **{{fmt_compact1_written tabled_est_in_year}}** dans le(s) provenances des autorisations suivantes :
     {{#each in_year_estimates_split}}
     * {{ this.[0]}}: **{{fmt_compact1_written this.[1] }}** 
     {{/each}}
@@ -105,14 +103,13 @@ dept_in_year_estimates_split_text:
   transform: [handlebars,markdown]
   en: |
    As of the {{est_in_year}} {{gt "last_estimates"}}, **{{subject.name}}**'s authorities of **{{fmt_compact1_written tabled_est_in_year}}** were presented in the following
-   sources of authorities 
-   ({{gl_sidebar_link "Main Estimates" "MAINS"}}, {{gl_sidebar_link "Supplementary Estimates" "SUPPS"}} A, B, C, {{gl_sidebar_link "adjustments, warrants and transfers" "ADJUS"}}): 
+   sources of authorities: 
    {{#each in_year_estimates_split}}
    * {{ this.[0]}}: **{{fmt_compact1 this.[1] }}** 
    {{/each}}
   fr: |
    En date du {{est_in_year}} {{gt "last_estimates"}}, pour **{{le_dept subject}}**, les autorisations de **{{fmt_compact1_written tabled_est_in_year}}** figurent 
-    dans le(s) provenances des autorisations ({{gl_sidebar_link "Main Estimates" "MAINS"}}, {{gl_sidebar_link "Supplementary Estimates" "SUPPS"}} A, B, C, {{gl_sidebar_link "adjustments, warrants and transfers" "ADJUS"}}) suivantes: 
+    dans le(s) provenances des autorisations suivantes : 
     {{#each in_year_estimates_split}}
    * {{ this.[0]}}: **{{fmt_compact1 this.[1] }}** 
    {{/each}}

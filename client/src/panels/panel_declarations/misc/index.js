@@ -26,6 +26,7 @@ export {
   declare_temp_untabled_warning_panel,
   declare_late_actual_resources_panel,
   declare_late_planned_resources_panel,
+  declare_special_warrants_warning_panel,
   declare_services_missing_program_ids_panel,
 } from "./warning_panels";
 

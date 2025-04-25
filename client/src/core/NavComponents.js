@@ -6,6 +6,7 @@ import { withRouter } from "react-router";
 import { AlertBanner } from "src/components/AlertBanner/AlertBanner";
 import { MultiColumnList } from "src/components/misc_util_components";
 
+import { isSpecialWarrants } from "src/models/estimates";
 import { PRE_DRR_PUBLIC_ACCOUNTS_LATE_FTE_MOCK_DOC } from "src/models/footnotes/dynamic_footnotes";
 import { result_docs_in_tabling_order } from "src/models/results";
 import { Dept } from "src/models/subjects";
@@ -311,6 +312,31 @@ const LateDrrFteResources = () => {
   );
 };
 
+const SpecialWarrantsBanner = () => {
+  const route_filter = (match, _history) =>
+    /^\/(start|dept|gov)/.test(match.path) && isSpecialWarrants();
+
+  const banner_content = (
+    <Fragment>
+      {
+        {
+          en: "The latest GC InfoBase updates for 2025–26 reflect Governor General Special Warrants authorizing amounts to be drawn from the Consolidated Revenue Fund.",
+          fr: "La dernière mise à jour d'InfoBase du GC pour 2025–2026 reflète des mandats spéciaux du gouverneur général autorisant le prélèvement de fonds sur le Trésor.",
+        }[lang]
+      }
+    </Fragment>
+  );
+
+  return (
+    <HeaderBanner
+      route_filter={route_filter}
+      banner_content={banner_content}
+      banner_class="info"
+      additional_class_names="medium-panel-text"
+    />
+  );
+};
+
 export class StandardRouteContainer extends React.Component {
   componentDidMount() {
     //unless a route's component is sufficiently complicated, it should never unmount/remount a StandardRouteContainer
@@ -337,6 +363,7 @@ export class StandardRouteContainer extends React.Component {
         <TempUntabledBanner />
         <LateDpResourcesBanner />
         <LateDrrFteResources />
+        <SpecialWarrantsBanner />
         <AnalyticsSynchronizer route_key={route_key} />
         {shouldSyncLang !== false && <LangSynchronizer />}
         {!is_a11y_mode && <A11yLinkSynchronizer />}
