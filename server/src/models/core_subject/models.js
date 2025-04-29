@@ -63,7 +63,7 @@ export default function define_core_subjects(model_singleton) {
     ...bilingual("enabling_instrument", str_type),
     ...bilingual("auditor", str_type),
     ...bilingual("eval_url", str_type),
-    ...bilingual("dept_website_url", str_type),
+    ...bilingual("dept_website", str_type),
     article1_fr: str_type,
     article2_fr: str_type,
   });
