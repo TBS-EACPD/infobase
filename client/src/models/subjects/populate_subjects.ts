@@ -16,7 +16,6 @@ export const populate_depts = (
   ministers: ParsedCsvWithUndefineds,
   inst_forms: ParsedCsvWithUndefineds,
   igoc: ParsedCsvWithUndefineds,
-  url_lookups: ParsedCsvWithUndefineds,
   org_to_minister: ParsedCsvWithUndefineds,
   dept_code_to_csv_name: ParsedCsvWithUndefineds,
   crso: ParsedCsvWithUndefineds
@@ -50,10 +49,6 @@ export const populate_depts = (
     });
   });
 
-  const get_url_from_url_lookup = (url_key: string | undefined) => {
-    const url_row = _.find(url_lookups, ({ id }) => id === url_key);
-    return url_row?.[`url_${lang}`] || "";
-  };
   _.each(
     igoc,
     ({
@@ -77,7 +72,7 @@ export const populate_depts = (
       dp_status: dp_status_code,
       ministry: ministry_id,
       institutional_form: inst_form_id,
-      eval_url_id,
+      eval_url,
       dept_website,
       article1,
       article2,
@@ -112,8 +107,8 @@ export const populate_depts = (
         other_lang_abbr,
         other_lang_applied_title,
         dept_website,
+        eval_url,
 
-        eval_url: get_url_from_url_lookup(eval_url_id),
         le_la: article1 || "",
         du_de_la: article2 || "",
 
