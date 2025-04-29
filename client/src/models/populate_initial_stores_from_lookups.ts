@@ -35,7 +35,6 @@ export const populate_initial_stores_from_lookups = () =>
         ministers,
         ministries,
         igoc,
-        url_lookups,
         dept_code_to_csv_name,
         crso,
         program,
@@ -53,7 +52,6 @@ export const populate_initial_stores_from_lookups = () =>
         ministers,
         inst_forms,
         igoc,
-        url_lookups,
         org_to_minister,
         dept_code_to_csv_name,
         crso
