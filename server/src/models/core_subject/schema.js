@@ -47,7 +47,7 @@ const schema = `
     crsos: [Crso]
 
     eval_url: String
-    website_url: String
+    dept_website: String
 
     enabling_instrument: String
     pas_code: String
@@ -221,7 +221,7 @@ export default function ({ models, loaders, services }) {
       inst_form: () => "TODO",
 
       eval_url: (org, _args, { lang }) => org[`eval_url_${lang}`],
-      website_url: (org, _args, { lang }) => org[`dept_website_url_${lang}`],
+      dept_website: (org, _args, { lang }) => org[`dept_website_${lang}`],
 
       programs: (org) =>
         org.dept_code && prog_dept_code_loader.load(org.dept_code),

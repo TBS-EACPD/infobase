@@ -9,11 +9,6 @@ import {
 export default async function ({ models }) {
   const { Org, Program, Crso } = models;
 
-  const url_lookups = _.keyBy(
-    get_standard_csv_file_rows("url_lookups.csv"),
-    "id"
-  );
-
   const org_objs = _.chain(get_standard_csv_file_rows("igoc.csv"))
     .map((obj) => ({
       ...obj,
@@ -21,13 +16,7 @@ export default async function ({ models }) {
       inst_form_id: obj.institutional_form,
       name_en: obj.applied_title_en || obj.legal_title_en,
       name_fr: obj.applied_title_fr || obj.legal_title_fr,
-      ...bilingual_remap(obj, "acronym", "abbr"),
-      ...bilingual_remap(url_lookups[obj.eval_url_id], "eval_url", "url"),
-      ...bilingual_remap(
-        url_lookups[obj.dept_website_id],
-        "dept_website_url",
-        "url"
-      ),
+      ...bilingual_remap(obj, "acronym", "abbr", "dept_website", "eval_url"),
     }))
     .map((rec) => new Org(rec))
     .value();
