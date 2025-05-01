@@ -4,7 +4,8 @@ import { smart_sort_func } from "src/sort_utils";
 
 // TODO ideally CURRENT_EST_DOC could be derived from input data and injected in to the app at build time, or something like that
 // For now, needs to be manually updated on new estimates publication!
-export const CURRENT_EST_DOC: "MAINS" | "SEA" | "SEB" | "SEC" | "SW1" = "SW1";
+export const CURRENT_EST_DOC: "MAINS" | "SEA" | "SEB" | "SEC" | "SW1" | "SW2" =
+  "SW2";
 
 // Add a new helper function to check for Special Warrants
 export const isSpecialWarrants = () => CURRENT_EST_DOC.startsWith("SW");
@@ -50,6 +51,11 @@ export const estimates_docs = {
     fr: "Mandat spécial, vertu du décret C.P. 2025-462 du 1er avril 2025",
     order: 5,
   },
+  SW2: {
+    en: "Special Warrants 2 Name Placeholder",
+    fr: "Special Warrants 2 Name Placeholder",
+    order: 6,
+  },
 } as const;
 
 export type est_doc = keyof typeof estimates_docs;
@@ -64,6 +70,7 @@ export const get_est_doc_glossary_key = (est_doc: est_doc) =>
     SEB: "SUPPSB",
     SEC: "SUPPSC",
     SW1: "SW1",
+    SW2: "SW2",
   }[est_doc]);
 
 export const get_est_doc_name = (est_doc: est_doc) =>

@@ -828,8 +828,8 @@ supps_c:
 
 spec_war:
   transform: [handlebars]
-  en: "Special Warrant, Order in Council P.C. 2025-462 of April 1, 2025"
-  fr: "Mandat spécial, vertu du décret C.P. 2025-462 du 1er avril 2025"
+  en: Special Warrant 2 Name Placeholder
+  fr: Mandat spécial 2 Nom Placeholder
 
 help:
   en: Help
