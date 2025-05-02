@@ -270,13 +270,14 @@ const process_standard_headcount_dataset = (headcount_type) => {
 
       // Create a map of year to value for this department-dimension pair
       const yearValueMap = _.chain(records)
-        .map((record) => [
-          parseInt(record.year, 10),
-          record.number_of_employees === "*"
-            ? -1
-            : parseInt(record.number_of_employees, 10),
-        ])
-        .fromPairs()
+        .groupBy("year")
+        .mapValues((yearRecords) =>
+          _.sumBy(yearRecords, (record) =>
+            record.number_of_employees === "*"
+              ? 0
+              : parseInt(record.number_of_employees, 10)
+          )
+        )
         .value();
 
       // Create entries for all years, even missing ones
