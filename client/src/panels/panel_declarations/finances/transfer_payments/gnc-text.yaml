@@ -112,17 +112,17 @@ historical_g_and_c_custom_new_row:
 
 recipients_title:
   transform: [handlebars]
-  en: Recipients ({{pa_last_year_5}} to {{pa_last_year}})
+  en: Recipients of Transfer Payments ({{pa_year_5}} to {{pa_year}})
   fr: Fill in
 
 recipient_gov_text:
   transform: [handlebars,markdown]
   en: |
-    In **{{pa_last_year}}**, the government spent **{{fmt_compact1_written total_exp}}** in {{gl_sidebar_link "transfer payments" "TP"}} and of that amount the top **10** recipients were:
+    In {{year}}, the government spent **{{fmt_compact1_written total_exp}}** in {{gl_sidebar_link "transfer payments" "TP"}} and of that amount the top **10** recipients were:
   fr: Fill in
 
 recipient_dept_text:
   transform: [handlebars,markdown]
   en: |
-    In **{{pa_last_year}}**, {{subject.name}} spent **{{fmt_compact1_written total_exp}}** in {{gl_sidebar_link "transfer payments" "TP"}} and of that amount the top **10** recipients were:
+    In {{year}}, **{{subject.name}}** spent **{{fmt_compact1_written total_exp}}** in {{gl_sidebar_link "transfer payments" "TP"}} and of that amount the top **10** recipients were:
   fr: Fill in

@@ -18,6 +18,7 @@ const schema = `
     id: String
     recipient_overview: [RecipientOverview]
     recipient_exp_summary: [RecipientExpSummary]
+    recipient_location: [RecipientLocation]
   }
   type RecipientsGeneralStats {
     year: String
@@ -49,6 +50,24 @@ const schema = `
     total_exp: Float
     num_transfer_payments: Float
     programs: [String]
+  }
+  type RecipientLocation {
+    year: String
+    qc: Float
+    nb: Float
+    bc: Float
+    on: Float
+    ns: Float
+    mb: Float
+    nl: Float
+    nu: Float
+    na: Float
+    pe: Float
+    nt: Float
+    yk: Float
+    abroad: Float
+    sk: Float
+    ab: Float   
   }
 `;
 

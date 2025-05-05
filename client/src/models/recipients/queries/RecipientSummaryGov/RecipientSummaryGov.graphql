@@ -13,6 +13,24 @@ query RecipientSummaryGov($lang: String!) {
           total_exp
           num_transfer_payments
         }
+        recipient_location {
+          year
+          qc
+          nb
+          bc
+          on
+          ns
+          mb
+          nl
+          nu
+          na
+          pe
+          nt
+          yk
+          abroad
+          sk
+          ab
+        }
       }
     }
   }

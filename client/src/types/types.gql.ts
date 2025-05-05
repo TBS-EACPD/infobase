@@ -508,6 +508,26 @@ export type RecipientExpSummary = {
   year?: Maybe<Scalars['String']>;
 };
 
+export type RecipientLocation = {
+  __typename?: 'RecipientLocation';
+  ab?: Maybe<Scalars['Float']>;
+  abroad?: Maybe<Scalars['Float']>;
+  bc?: Maybe<Scalars['Float']>;
+  mb?: Maybe<Scalars['Float']>;
+  na?: Maybe<Scalars['Float']>;
+  nb?: Maybe<Scalars['Float']>;
+  nl?: Maybe<Scalars['Float']>;
+  ns?: Maybe<Scalars['Float']>;
+  nt?: Maybe<Scalars['Float']>;
+  nu?: Maybe<Scalars['Float']>;
+  on?: Maybe<Scalars['Float']>;
+  pe?: Maybe<Scalars['Float']>;
+  qc?: Maybe<Scalars['Float']>;
+  sk?: Maybe<Scalars['Float']>;
+  year?: Maybe<Scalars['String']>;
+  yk?: Maybe<Scalars['Float']>;
+};
+
 export type RecipientOverview = {
   __typename?: 'RecipientOverview';
   total_tf_exp?: Maybe<Scalars['Float']>;
@@ -518,6 +538,7 @@ export type RecipientSummary = {
   __typename?: 'RecipientSummary';
   id?: Maybe<Scalars['String']>;
   recipient_exp_summary?: Maybe<Array<Maybe<RecipientExpSummary>>>;
+  recipient_location?: Maybe<Array<Maybe<RecipientLocation>>>;
   recipient_overview?: Maybe<Array<Maybe<RecipientOverview>>>;
 };
 

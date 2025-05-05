@@ -78,6 +78,11 @@ const public_accounts = common_source_and_topic_data_set_defs(
         table: "orgTransferPayments",
       }),
     },
+    recipients: {
+      name: text_maker("recipient_dataset"),
+      infobase_link:
+        "#infographic/gov/gov/financial/.-.-(panel_key.-.-'recipients)",
+    },
   }
 );
 

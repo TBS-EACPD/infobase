@@ -8,7 +8,7 @@ export type RecipientSummaryGovQueryVariables = Types.Exact<{
 }>;
 
 
-export type RecipientSummaryGovQuery = { __typename?: 'Query', root: { __typename?: 'Root', gov?: { __typename?: 'Gov', recipient_summary?: { __typename?: 'RecipientSummary', id?: string | null, recipient_overview?: Array<{ __typename?: 'RecipientOverview', year?: string | null, total_tf_exp?: number | null } | null> | null, recipient_exp_summary?: Array<{ __typename?: 'RecipientExpSummary', year?: string | null, recipient?: string | null, total_exp?: number | null, num_transfer_payments?: number | null } | null> | null } | null } | null } };
+export type RecipientSummaryGovQuery = { __typename?: 'Query', root: { __typename?: 'Root', gov?: { __typename?: 'Gov', recipient_summary?: { __typename?: 'RecipientSummary', id?: string | null, recipient_overview?: Array<{ __typename?: 'RecipientOverview', year?: string | null, total_tf_exp?: number | null } | null> | null, recipient_exp_summary?: Array<{ __typename?: 'RecipientExpSummary', year?: string | null, recipient?: string | null, total_exp?: number | null, num_transfer_payments?: number | null } | null> | null, recipient_location?: Array<{ __typename?: 'RecipientLocation', year?: string | null, qc?: number | null, nb?: number | null, bc?: number | null, on?: number | null, ns?: number | null, mb?: number | null, nl?: number | null, nu?: number | null, na?: number | null, pe?: number | null, nt?: number | null, yk?: number | null, abroad?: number | null, sk?: number | null, ab?: number | null } | null> | null } | null } | null } };
 
 
 export const RecipientSummaryGovDocument = gql`
@@ -26,6 +26,24 @@ export const RecipientSummaryGovDocument = gql`
           recipient
           total_exp
           num_transfer_payments
+        }
+        recipient_location {
+          year
+          qc
+          nb
+          bc
+          on
+          ns
+          mb
+          nl
+          nu
+          na
+          pe
+          nt
+          yk
+          abroad
+          sk
+          ab
         }
       }
     }

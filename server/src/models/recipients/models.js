@@ -26,6 +26,26 @@ export default function (model_singleton) {
         programs: [str_type],
       },
     ],
+    recipient_location: [
+      {
+        year: str_type,
+        qc: number_type,
+        nb: number_type,
+        bc: number_type,
+        on: number_type,
+        ns: number_type,
+        mb: number_type,
+        nl: number_type,
+        nu: number_type,
+        na: number_type,
+        pe: number_type,
+        nt: number_type,
+        yk: number_type,
+        abroad: number_type,
+        sk: number_type,
+        ab: number_type,
+      },
+    ],
   };
 
   const RecipientsSchema = make_schema_with_search_terms({

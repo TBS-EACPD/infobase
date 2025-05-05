@@ -110,10 +110,17 @@ export const api_load_recipients_summary_data = (subject) => {
       subject.set_has_data(
         "recipients",
         !_.chain(response)
-          .thru(({ recipient_overview, recipient_exp_summary }) => [
-            ...recipient_overview,
-            ...recipient_exp_summary,
-          ])
+          .thru(
+            ({
+              recipient_overview,
+              recipient_exp_summary,
+              recipient_location,
+            }) => [
+              ...recipient_overview,
+              ...recipient_exp_summary,
+              ...recipient_location,
+            ]
+          )
           .isEmpty()
           .value()
       );

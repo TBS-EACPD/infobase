@@ -80,10 +80,6 @@ const RecipientsPanel = ({ subject, calculations }) => {
 
   const [tab_key, set_tab_key] = useState(_.last(tab_keys));
 
-  const pa_last_year = year_to_fiscal_year(_.first(tab_keys));
-
-  const pa_last_year_5 = year_to_fiscal_year(_.last(tab_keys));
-
   const total_exp = _.chain(recipient_overview)
     .filter((row) => row.year === tab_key)
     .map("total_tf_exp")
@@ -100,14 +96,21 @@ const RecipientsPanel = ({ subject, calculations }) => {
       <div className="medium-panel-text">
         <TM
           k={`recipient_${subject.subject_type}_text`}
-          args={{ tab_key, subject, total_exp, pa_last_year, pa_last_year_5 }}
+          args={{ year: year_to_fiscal_year(tab_key), subject, total_exp }}
         />
       </div>
       <div className="row align-items-center">
         <div className="col-12 col-lg-6">
           <RecipientTable filtered_data={filtered_data} />
         </div>
-        <div className="col-12 col-lg-6">
+        <div
+          className="col-12 col-lg-6"
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+          }}
+        >
           <RecipientTreeMap filtered_data={filtered_data} />
         </div>
       </div>
@@ -134,6 +137,7 @@ export const declare_recipients_panel = () =>
     subject_types: ["gov", "dept"],
     panel_config_func: () => ({
       legacy_non_table_dependencies: ["requires_recipients_general_stats"],
+      get_dataset_keys: () => ["recipients"],
       calculate: ({ subject }) => {
         const data = RecipientSummary.lookup(subject.id);
 
@@ -142,9 +146,17 @@ export const declare_recipients_panel = () =>
           .uniq()
           .value();
 
-        return { data, tab_keys };
+        const pa_year_5 = year_to_fiscal_year(_.first(tab_keys));
+
+        const pa_year = year_to_fiscal_year(_.last(tab_keys));
+
+        return { data, tab_keys, pa_year_5, pa_year };
       },
-      get_title: () => text_maker("recipients_title"),
+      get_title: ({ calculations }) =>
+        text_maker("recipients_title", {
+          pa_year_5: calculations.pa_year_5,
+          pa_year: calculations.pa_year,
+        }),
       render({ title, subject, sources, calculations }) {
         return (
           <InfographicPanel {...{ title, sources }}>

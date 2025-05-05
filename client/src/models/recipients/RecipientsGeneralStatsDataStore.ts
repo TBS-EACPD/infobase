@@ -3,7 +3,7 @@ import { make_store } from "src/models/utils/make_store";
 type RecipientSummaryDataDef = {
   subject_id: string;
   recipient_summary: {
-    subject_id: String;
+    subject_id: string;
     recipient_overview: [
       {
         year: string;
