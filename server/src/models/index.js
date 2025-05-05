@@ -6,10 +6,10 @@ import covid from "./covid/index.js";
 import resources from "./finances/index.js";
 import model_singleton from "./model_singleton.js";
 import people from "./people/index.js";
+import recipients from "./recipients/index.js";
 import results from "./results/index.js";
 import root_schema from "./schema_root.js";
 import services from "./services/index.js";
-import recipients from "./recipients/index.js";
 
 // unused models, mostly still using the pre-mongoDB approach
 // import sobjs from './standard_objects/index.js';
