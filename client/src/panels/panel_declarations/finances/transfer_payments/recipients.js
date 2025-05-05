@@ -87,8 +87,6 @@ const RecipientsPanel = ({ subject, calculations }) => {
 
   const filtered_data = _.chain(recipient_exp_summary)
     .filter((row) => row.year === tab_key)
-    .orderBy("total_exp", "desc")
-    .take(10)
     .value();
 
   const summary = (

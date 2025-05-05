@@ -146,6 +146,8 @@ export default async function ({ models }) {
             total_exp: _.sumBy(recipient_rows, "expenditure"),
             num_transfer_payments: _.uniqBy(recipient_rows, "program").length,
           }))
+          .orderBy("total_exp", "desc")
+          .take(10)
           .value()
       )
       .value();
