@@ -6,7 +6,6 @@ import {
   create_resource_by_foreignkey_attr_dataloader,
 } from "../loader_utils.js";
 import { number_type, pkey_type, str_type } from "../model_utils.js";
-import { make_schema_with_search_terms } from "../search_utils.js";
 
 export default function (model_singleton) {
   const common_fields = {
