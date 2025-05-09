@@ -505,6 +505,7 @@ export type RecipientExpSummary = {
   programs?: Maybe<Array<Maybe<Scalars['String']>>>;
   recipient?: Maybe<Scalars['String']>;
   total_exp?: Maybe<Scalars['Float']>;
+  transfer_payments?: Maybe<Array<Maybe<Recipients>>>;
   year?: Maybe<Scalars['String']>;
 };
 

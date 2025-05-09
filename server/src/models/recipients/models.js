@@ -9,6 +9,20 @@ import { number_type, pkey_type, str_type } from "../model_utils.js";
 import { make_schema_with_search_terms } from "../search_utils.js";
 
 export default function (model_singleton) {
+  const common_fields = {
+    id: str_type,
+    year: str_type,
+    department: str_type,
+    org_id: str_type,
+    program: str_type,
+    record_type: str_type,
+    recipient: str_type,
+    city: str_type,
+    province: str_type,
+    country: str_type,
+    expenditure: { type: Number },
+  };
+
   const common_recipient_fields = {
     id: pkey_type(),
     recipient_overview: [
@@ -24,6 +38,7 @@ export default function (model_singleton) {
         total_exp: number_type,
         num_transfer_payments: number_type,
         programs: [str_type],
+        transfer_payments: [common_fields],
       },
     ],
     recipient_location: [
@@ -48,18 +63,8 @@ export default function (model_singleton) {
     ],
   };
 
-  const RecipientsSchema = make_schema_with_search_terms({
-    id: str_type,
-    year: str_type,
-    department: str_type,
-    org_id: str_type,
-    program: str_type,
-    record_type: str_type,
-    recipient: str_type,
-    city: str_type,
-    province: str_type,
-    country: str_type,
-    expenditure: { type: Number },
+  const RecipientsSchema = mongoose.Schema({
+    ...common_fields,
   });
 
   const RecipientsGeneralStatsSchema = mongoose.Schema({

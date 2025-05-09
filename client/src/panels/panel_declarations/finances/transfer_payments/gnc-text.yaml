@@ -126,3 +126,8 @@ recipient_dept_text:
   en: |
     In {{year}}, **{{subject.name}}** spent **{{fmt_compact1_written total_exp}}** in {{gl_sidebar_link "transfer payments" "TP"}} and of that amount the top **10** recipients were:
   fr: Fill in
+
+transfer_payment_table_title:
+  transform: [handlebars]
+  en: Transfer Payments to {{recipient}}
+  fr: Fill in

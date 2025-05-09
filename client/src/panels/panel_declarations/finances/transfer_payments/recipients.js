@@ -1,11 +1,11 @@
 import { scaleOrdinal } from "d3-scale";
 import _ from "lodash";
-import React, { useState } from "react";
+import React, { Fragment, useState } from "react";
 
 import { InfographicPanel } from "src/panels/panel_declarations/InfographicPanel";
 import { declare_panel } from "src/panels/PanelRegistry";
 
-import { DisplayTable, Tabs } from "src/components/index";
+import { DisplayTable, StatelessModal, Tabs } from "src/components/index";
 
 import { RecipientSummary } from "src/models/recipients/RecipientsGeneralStatsDataStore";
 
@@ -14,38 +14,123 @@ import { formats } from "src/core/format";
 
 import { WrappedNivoTreemap } from "src/charts/wrapped_nivo/index";
 
+import { secondaryColor } from "src/style_constants/index";
+
 import { text_maker, TM } from "./gnc_text_provider";
 
 const { year_to_fiscal_year } = formats;
 
+const no_data_or_na_to_null = (value) =>
+  value === "Not Available" || value === null ? "-" : value;
+
 const RecipientTable = ({ filtered_data }) => {
-  const table_data = _.map(
-    filtered_data,
-    ({ recipient, total_exp, num_transfer_payments }) => ({
+  const [open_recipient, set_open_recipient] = useState(null);
+
+  const cleaned_data = filtered_data.map((row, idx) => ({
+    ...row,
+    id: idx.toString(),
+  }));
+
+  const get_tf_by_id = (id) => {
+    const row = cleaned_data.find((row) => row.id === id);
+    const transfer_payments = row ? row.transfer_payments || [] : [];
+
+    return transfer_payments.map(
+      ({ program, city, province, country, expenditure }) => ({
+        program,
+        city: no_data_or_na_to_null(city),
+        province: no_data_or_na_to_null(province),
+        country: no_data_or_na_to_null(country),
+        expenditure,
+      })
+    );
+  };
+
+  const get_recipient_by_id = (id) => {
+    const row = cleaned_data.find((row) => row.id === id);
+    return row ? row.recipient : null;
+  };
+
+  const table_data = _.chain(cleaned_data)
+    .map(({ recipient, total_exp, id }) => ({
       recipient,
       total_exp,
-      num_transfer_payments,
-    })
-  );
+      id: id,
+    }))
+    .value();
 
-  const column_configs = {
+  const column_configs_recipients = {
     recipient: {
       index: 0,
       header: "Recipients",
     },
-    num_transfer_payments: {
+    id: {
       index: 1,
-      header: "# of Transfer Payments",
+      header: "Transfer Payments",
+      formatter: (id) => (
+        <button
+          className="btn btn-link"
+          onClick={() => set_open_recipient(id)}
+          style={{ color: secondaryColor }}
+        >
+          {get_tf_by_id(id).length}
+        </button>
+      ),
+      plain_formatter: (id) => get_tf_by_id(id).length,
     },
     total_exp: {
       index: 2,
-      header: "Total",
+      header: "Total Payment Received",
       formatter: "compact2_written",
       is_summable: true,
     },
   };
 
-  return <DisplayTable data={table_data} column_configs={column_configs} />;
+  const column_configs_tf = {
+    program: {
+      index: 0,
+      header: "Transfer Payment Program",
+    },
+    city: { index: 1, header: "City" },
+    province: {
+      index: 2,
+      header: "Province",
+    },
+    country: {
+      index: 3,
+      header: "Country",
+    },
+    expenditure: {
+      index: 4,
+      header: "Payment",
+      formatter: "compact2_written",
+      is_summable: true,
+    },
+  };
+
+  return (
+    <Fragment>
+      <DisplayTable
+        data={table_data}
+        column_configs={column_configs_recipients}
+      />
+      <StatelessModal
+        show={!_.isNull(open_recipient)}
+        on_close_callback={() => set_open_recipient(null)}
+        additional_dialog_class={"modal-responsive"}
+        title={text_maker("transfer_payment_table_title", {
+          recipient: get_recipient_by_id(open_recipient),
+        })}
+      >
+        {!_.isNull(open_recipient) && (
+          <DisplayTable
+            data={get_tf_by_id(open_recipient)}
+            column_configs={column_configs_tf}
+          />
+        )}
+      </StatelessModal>
+    </Fragment>
+  );
 };
 
 const RecipientTreeMap = ({ filtered_data }) => {
@@ -89,9 +174,16 @@ const RecipientsPanel = ({ subject, calculations }) => {
     .filter((row) => row.year === tab_key)
     .value();
 
-  const summary = (
-    <div>
-      <div className="medium-panel-text">
+  return (
+    <Tabs
+      tabs={_.chain(tab_keys)
+        .map((year) => [year, year_to_fiscal_year(year)])
+        .fromPairs()
+        .value()}
+      open_tab_key={tab_key}
+      tab_open_callback={set_tab_key}
+    >
+      <div className="medium-panel-text text">
         <TM
           k={`recipient_${subject.subject_type}_text`}
           args={{ year: year_to_fiscal_year(tab_key), subject, total_exp }}
@@ -112,19 +204,6 @@ const RecipientsPanel = ({ subject, calculations }) => {
           <RecipientTreeMap filtered_data={filtered_data} />
         </div>
       </div>
-    </div>
-  );
-
-  return (
-    <Tabs
-      tabs={_.chain(tab_keys)
-        .map((year) => [year, year_to_fiscal_year(year)])
-        .fromPairs()
-        .value()}
-      open_tab_key={tab_key}
-      tab_open_callback={set_tab_key}
-    >
-      {summary}
     </Tabs>
   );
 };

@@ -50,6 +50,7 @@ const schema = `
     total_exp: Float
     num_transfer_payments: Float
     programs: [String]
+    transfer_payments: [Recipients]
   }
   type RecipientLocation {
     year: String

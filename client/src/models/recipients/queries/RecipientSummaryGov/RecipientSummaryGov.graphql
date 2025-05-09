@@ -12,6 +12,18 @@ query RecipientSummaryGov($lang: String!) {
           recipient
           total_exp
           num_transfer_payments
+          transfer_payments {
+            year
+            department
+            org_id
+            program
+            record_type
+            recipient
+            city
+            province
+            country
+            expenditure
+          }
         }
         recipient_location {
           year
