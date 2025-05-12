@@ -296,7 +296,6 @@ export type Org = SubjectI & {
   programs?: Maybe<Array<Maybe<Program>>>;
   recipient_summary?: Maybe<RecipientSummary>;
   recipients?: Maybe<Array<Maybe<Recipients>>>;
-  recipients_general_stats?: Maybe<Array<Maybe<RecipientsGeneralStats>>>;
   service_summary?: Maybe<ServiceSummary>;
   services?: Maybe<Array<Maybe<Service>>>;
   subject_type?: Maybe<Scalars['String']>;
@@ -555,15 +554,6 @@ export type Recipients = {
   province?: Maybe<Scalars['String']>;
   recipient?: Maybe<Scalars['String']>;
   record_type?: Maybe<Scalars['String']>;
-  year?: Maybe<Scalars['String']>;
-};
-
-export type RecipientsGeneralStats = {
-  __typename?: 'RecipientsGeneralStats';
-  num_transfer_payments?: Maybe<Scalars['Float']>;
-  org_id?: Maybe<Scalars['String']>;
-  recipient?: Maybe<Scalars['String']>;
-  total_exp?: Maybe<Scalars['Float']>;
   year?: Maybe<Scalars['String']>;
 };
 

@@ -5,12 +5,6 @@ export {
 } from "./Recipients/Recipients";
 
 export {
-  promisedRecipientsGeneralStats,
-  suspendedRecipientsGeneralStats,
-  useRecipientsGeneralStats,
-} from "./RecipientsGeneralStats/RecipientsGeneralStats";
-
-export {
   promisedDeptHasRecipients,
   suspendedDeptHasRecipients,
   useDeptHasRecipients,

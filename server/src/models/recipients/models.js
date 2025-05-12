@@ -66,14 +66,6 @@ export default function (model_singleton) {
     ...common_fields,
   });
 
-  const RecipientsGeneralStatsSchema = mongoose.Schema({
-    year: str_type,
-    org_id: str_type,
-    recipient: str_type,
-    total_exp: { type: Number },
-    num_transfer_payments: { type: Number },
-  });
-
   const GovRecipientSummarySchema = mongoose.Schema({
     ...common_recipient_fields,
   });
@@ -84,10 +76,6 @@ export default function (model_singleton) {
 
   model_singleton.define_model("Recipients", RecipientsSchema);
   model_singleton.define_model(
-    "RecipientsGeneralStats",
-    RecipientsGeneralStatsSchema
-  );
-  model_singleton.define_model(
     "GovRecipientSummary",
     GovRecipientSummarySchema
   );
@@ -96,12 +84,8 @@ export default function (model_singleton) {
     OrgRecipientSummarySchema
   );
 
-  const {
-    Recipients,
-    RecipientsGeneralStats,
-    GovRecipientSummary,
-    OrgRecipientSummary,
-  } = model_singleton.models;
+  const { Recipients, GovRecipientSummary, OrgRecipientSummary } =
+    model_singleton.models;
 
   const loaders = {
     recipients_loader: create_resource_by_foreignkey_attr_dataloader(
@@ -112,11 +96,6 @@ export default function (model_singleton) {
       Recipients,
       "org_id"
     ),
-    recipients_general_stat_by_org_id:
-      create_resource_by_foreignkey_attr_dataloader(
-        RecipientsGeneralStats,
-        "org_id"
-      ),
     gov_recipient_summary_loader: create_resource_by_id_attr_dataloader(
       GovRecipientSummary,
       "id"

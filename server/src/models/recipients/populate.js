@@ -27,12 +27,7 @@ const format_province = (province) => {
 };
 
 export default async function ({ models }) {
-  const {
-    Recipients,
-    RecipientsGeneralStats,
-    GovRecipientSummary,
-    OrgRecipientSummary,
-  } = models;
+  const { Recipients, GovRecipientSummary, OrgRecipientSummary } = models;
 
   const raw_recipient_rows = get_standard_csv_file_rows(
     "transfer_payments.csv"
@@ -75,26 +70,6 @@ export default async function ({ models }) {
     })
     .value();
 
-  const grouped_stats = _.chain(recipient_rows)
-    .groupBy("year")
-    .mapValues((years) =>
-      _.chain(years)
-        .groupBy("org_id")
-        .mapValues((orgs) =>
-          _.chain(orgs)
-            .groupBy("recipient")
-            .mapValues((recipient_rows) => ({
-              recipient: recipient_rows[0].recipient,
-              total_exp: _.sumBy(recipient_rows, "expenditure"),
-              num_transfer_payments: _.uniqBy(recipient_rows, "program").length,
-              programs: _.uniq(_.map(recipient_rows, "program")),
-            }))
-            .value()
-        )
-        .value()
-    )
-    .value();
-
   const get_recipient_location_summary = (recipients) =>
     _.chain(recipients)
       .map(({ province, country, ...other_fields }) => ({
@@ -112,18 +87,6 @@ export default async function ({ models }) {
           .value(),
       }))
       .value();
-
-  const general_stats = _.flatMap(grouped_stats, (orgs, year) =>
-    _.flatMap(orgs, (recipients, org_id) =>
-      _.map(recipients, (summary) => ({
-        year,
-        org_id,
-        recipient: summary.recipient,
-        total_exp: summary.total_exp,
-        num_transfer_payments: summary.num_transfer_payments,
-      }))
-    )
-  );
 
   const get_recipient_overview = (recipients) =>
     _.chain(recipients)
@@ -174,7 +137,6 @@ export default async function ({ models }) {
 
   return await Promise.all([
     Recipients.insertMany(recipient_rows),
-    RecipientsGeneralStats.insertMany(general_stats),
     GovRecipientSummary.insertMany(gov_summary),
     OrgRecipientSummary.insertMany(org_summary),
   ]);

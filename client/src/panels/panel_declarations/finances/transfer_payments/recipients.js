@@ -7,7 +7,7 @@ import { declare_panel } from "src/panels/PanelRegistry";
 
 import { DisplayTable, StatelessModal, Tabs } from "src/components/index";
 
-import { RecipientSummary } from "src/models/recipients/RecipientsGeneralStatsDataStore";
+import { RecipientSummary } from "src/models/recipients/RecipientsSummaryDataStore";
 
 import { newIBLightCategoryColors } from "src/core/color_schemes";
 import { formats } from "src/core/format";

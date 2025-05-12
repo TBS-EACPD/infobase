@@ -9,7 +9,6 @@ const schema = `
   }
   extend type Org {
     recipients: [Recipients]
-    recipients_general_stats: [RecipientsGeneralStats]
     has_recipients: Boolean
     recipient_summary: RecipientSummary
   }
@@ -19,13 +18,6 @@ const schema = `
     recipient_overview: [RecipientOverview]
     recipient_exp_summary: [RecipientExpSummary]
     recipient_location: [RecipientLocation]
-  }
-  type RecipientsGeneralStats {
-    year: String
-    org_id: String
-    recipient: String
-    total_exp: Float
-    num_transfer_payments: Float
   }
   type Recipients {
    year: String,
@@ -79,7 +71,6 @@ export default function ({ models, loaders }) {
     org_id_loader,
     recipients_loader,
     recipients_by_org_id,
-    recipients_general_stat_by_org_id,
     gov_recipient_summary_loader,
     org_recipient_summary_loader,
   } = loaders;
@@ -98,8 +89,6 @@ export default function ({ models, loaders }) {
     },
     Org: {
       recipients: ({ org_id }) => recipients_by_org_id.load(org_id),
-      recipients_general_stats: ({ org_id }) =>
-        recipients_general_stat_by_org_id.load(org_id),
       has_recipients: ({ org_id }) => org_has_recipients(org_id),
       recipient_summary: ({ org_id }) =>
         org_recipient_summary_loader.load(org_id),

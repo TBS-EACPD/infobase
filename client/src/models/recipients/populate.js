@@ -7,7 +7,7 @@ import {
   promisedRecipientSummaryGov,
   promisedRecipientSummaryOrg,
 } from "./queries";
-import { RecipientSummary } from "./RecipientsGeneralStatsDataStore";
+import { RecipientSummary } from "./RecipientsSummaryDataStore";
 
 export const api_load_has_recipients = (subject) => {
   const subject_type = subject && subject.subject_type;
