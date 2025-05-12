@@ -11,6 +11,8 @@ import {
   TabsStateful,
 } from "src/components/index";
 
+import { create_footnote } from "src/models/footnotes/footnotes";
+
 import { run_template } from "src/models/text";
 
 import { year_templates } from "src/models/years";
@@ -932,6 +934,29 @@ function render({
   sources,
   datasets,
 }) {
+  footnotes =
+    subject.id === "326"
+      ? _.concat(
+          create_footnote({
+            id: text_maker("tbs_exp_variance_footnote"),
+            subject_type: subject.subject_type,
+            subject_id: subject.id,
+            text: text_maker("tbs_exp_variance_footnote"),
+            topic_keys: ["PLANNED_EXP"],
+          }),
+          create_footnote({
+            id: text_maker("tbs_exp_variance_2021_footnote"),
+            subject_type: subject.subject_type,
+            subject_id: subject.id,
+            text: text_maker("tbs_exp_variance_2021_footnote"),
+            topic_keys: ["EXP", "DRR_EXP", "FTE", "DRR_FTE"],
+            year1: "2021-22",
+            year2: "2021-22",
+          }),
+          footnotes
+        )
+      : footnotes;
+
   return (
     <InfographicPanel
       {...{ sources, datasets, glossary_keys, footnotes, title }}
