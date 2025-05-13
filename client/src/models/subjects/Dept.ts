@@ -162,7 +162,7 @@ export class Dept extends BaseSubjectFactory<DeptDef, typeof dept_subject_type>(
     }
   }
   get is_dp_org() {
-    return this.dp_status_code === "0" || this.dp_status_code === "1";
+    return this.dp_status_code === "1";
   }
   get has_planned_spending() {
     // TODO: these hardcoded rules are horrible, need the pipeline to include flags somewhere so planned spending status can be managed as data
