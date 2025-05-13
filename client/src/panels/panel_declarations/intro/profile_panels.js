@@ -40,9 +40,9 @@ export const declare_profile_panel = () =>
                   ["inst_form", subject.inst_form.name],
                   [
                     "website",
-                    !subject.is_dead && subject.website_url && (
-                      <ExternalLink href={generate_href(subject.website_url)}>
-                        {subject.website_url}
+                    !subject.is_dead && subject.dept_website && (
+                      <ExternalLink href={generate_href(subject.dept_website)}>
+                        {subject.dept_website}
                       </ExternalLink>
                     ),
                   ],

@@ -32,7 +32,7 @@ interface DeptDef {
   ministry_id?: string;
   inst_form_id: string;
   eval_url?: string;
-  website_url?: string;
+  dept_website?: string;
   le_la: string;
   du_de_la: string;
   other_lang_abbr?: string;
