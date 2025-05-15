@@ -14,6 +14,7 @@ export {
   declare_historical_g_and_c_panel,
   declare_last_year_g_and_c_perspective_panel,
   declare_recipients_panel,
+  declare_recipients_map_panel,
   declare_estimates_in_perspective_panel,
   declare_in_year_estimates_split_panel,
   declare_in_year_voted_breakdown_panel,

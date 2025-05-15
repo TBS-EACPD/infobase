@@ -54,7 +54,7 @@ export default function (model_singleton) {
         na: number_type,
         pe: number_type,
         nt: number_type,
-        yk: number_type,
+        yt: number_type,
         abroad: number_type,
         sk: number_type,
         ab: number_type,

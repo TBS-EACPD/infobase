@@ -12,7 +12,7 @@ const provinces_def = {
   "Prince Edward Island": "pe",
   Quebec: "qc",
   Saskatchewan: "sk",
-  Yukon: "yk",
+  Yukon: "yt",
   "Newfoundland and Labrador": "nl",
   "Not Available": "na",
 };

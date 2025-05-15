@@ -57,7 +57,7 @@ const schema = `
     na: Float
     pe: Float
     nt: Float
-    yk: Float
+    yt: Float
     abroad: Float
     sk: Float
     ab: Float   

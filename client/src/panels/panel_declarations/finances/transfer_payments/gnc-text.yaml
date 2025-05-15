@@ -131,3 +131,13 @@ transfer_payment_table_title:
   transform: [handlebars]
   en: Transfer Payments to {{recipient}}
   fr: Fill in
+
+recipient_map_title:
+  transform: [handlebars]
+  en: Transfer Payment Recipients by Geographic Region ({{pa_year_5}} to {{pa_year}})
+  fr: Fill in
+
+recipient_map_text:
+  transform: [handlebars]
+  en: Hover over or tap a province or territory in the map below to see the transfer payment amount received by a specific region over the last five years. Note that the scale may change to accommodate the data displayed.
+  fr: Fill in,

@@ -525,7 +525,7 @@ export type RecipientLocation = {
   qc?: Maybe<Scalars['Float']>;
   sk?: Maybe<Scalars['Float']>;
   year?: Maybe<Scalars['String']>;
-  yk?: Maybe<Scalars['Float']>;
+  yt?: Maybe<Scalars['Float']>;
 };
 
 export type RecipientOverview = {
