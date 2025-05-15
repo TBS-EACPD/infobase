@@ -40,8 +40,8 @@ export const estimates_docs = {
     order: 5,
   },
   SW2: {
-    en: "Special Warrants 2 Name Placeholder",
-    fr: "Special Warrants 2 Name Placeholder",
+    en: "Special Warrant, Order in Council P.C. 2025-467 of May 2, 2025",
+    fr: "Mandat spécial, vertu du décret C.P. 2025-467 du 2 mai 2025",
     order: 6,
   },
 };

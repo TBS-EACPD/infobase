@@ -828,8 +828,8 @@ supps_c:
 
 spec_war:
   transform: [handlebars]
-  en: Special Warrant 2 Name Placeholder
-  fr: Mandat spécial 2 Nom Placeholder
+  en: Special Warrant, Order in Council P.C. 2025-467 of May 2, 2025
+  fr: Mandat spécial, vertu du décret C.P. 2025-462 du 2 mai 2025
 
 help:
   en: Help
