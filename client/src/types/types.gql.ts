@@ -273,6 +273,7 @@ export type Org = SubjectI & {
   covid_summary?: Maybe<Array<Maybe<CovidOrgSummary>>>;
   crsos?: Maybe<Array<Maybe<Crso>>>;
   dept_code?: Maybe<Scalars['String']>;
+  dept_website?: Maybe<Scalars['String']>;
   description?: Maybe<Scalars['String']>;
   dp_status?: Maybe<Scalars['String']>;
   enabling_instrument?: Maybe<Scalars['String']>;
@@ -305,7 +306,6 @@ export type Org = SubjectI & {
   services?: Maybe<Array<Maybe<Service>>>;
   subject_type?: Maybe<Scalars['String']>;
   target_counts?: Maybe<ResultCount>;
-  website_url?: Maybe<Scalars['String']>;
   years_with_covid_data?: Maybe<YearsWithCovidData>;
 };
 

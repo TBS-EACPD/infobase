@@ -57,7 +57,6 @@ const common_lookups = _.map(
     "ministers.csv",
     "ministries.csv",
     "inst_forms.csv",
-    "url_lookups.csv",
 
     "glossary.csv",
     "faq.csv",

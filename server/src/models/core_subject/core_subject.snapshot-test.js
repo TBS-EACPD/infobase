@@ -53,7 +53,7 @@ query IgocTestQuery ($lang: String!){
       description
     
       eval_url
-      website_url
+      dept_website
   
       enabling_instrument
       pas_code
