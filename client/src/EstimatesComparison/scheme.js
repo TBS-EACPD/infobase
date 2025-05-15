@@ -35,12 +35,22 @@ const this_year_col = "{{est_in_year}}_estimates";
 const last_year_col = "{{est_last_year}}_estimates";
 const row_identifier_func = (row) => `${row.dept}-${row.votenum}-${row.desc}`;
 
+const CURRENT_EST_DOC = "SW2";
 const current_doc_code = current_doc_is_mains
   ? "MAINS"
   : current_doc_is_sw
-  ? "SW1"
+  ? CURRENT_EST_DOC
   : `SE${current_sups_letter}`;
-const ordered_est_docs = ["MAINS", "VA", "SA", "SEA", "SEB", "SEC", "SW1"];
+const ordered_est_docs = [
+  "MAINS",
+  "VA",
+  "SA",
+  "SEA",
+  "SEB",
+  "SEC",
+  "SW1",
+  "SW2",
+];
 
 function footnote_from_glossary_item(key) {
   return () => glossaryEntryStore.lookup(key).get_compiled_definition();

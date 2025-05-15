@@ -39,4 +39,9 @@ export const estimates_docs = {
     fr: "Mandat spécial, vertu du décret C.P. 2025-462 du 1er avril 2025",
     order: 5,
   },
+  SW2: {
+    en: "Special Warrant, Order in Council P.C. 2025-467 of May 2, 2025",
+    fr: "Mandat spécial, vertu du décret C.P. 2025-467 du 2 mai 2025",
+    order: 6,
+  },
 };
