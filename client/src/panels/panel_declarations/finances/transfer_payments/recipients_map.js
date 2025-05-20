@@ -64,15 +64,10 @@ export const declare_recipients_map_panel = () =>
         const data = RecipientSummary.lookup(subject.id).recipient_location;
 
         const years = _.map(data, "year");
-        const pa_year = _.last(years);
-        const pa_year_5 = _.first(years);
-        return { data, years, pa_year, pa_year_5 };
+
+        return { data, years };
       },
-      get_title: ({ calculations }) =>
-        text_maker("recipient_map_title", {
-          pa_year_5: calculations.pa_year_5,
-          pa_year: calculations.pa_year,
-        }),
+      get_title: () => text_maker("recipient_map_title"),
       render({ title, subject, sources, calculations }) {
         return (
           <InfographicPanel {...{ title, sources }}>

@@ -35,15 +35,16 @@ const RecipientTable = ({ filtered_data }) => {
     const row = cleaned_data.find((row) => row.id === id);
     const transfer_payments = row ? row.transfer_payments || [] : [];
 
-    return transfer_payments.map(
-      ({ program, city, province, country, expenditure }) => ({
+    return _.chain(transfer_payments)
+      .map(({ program, city, province, country, expenditure }) => ({
         program,
         city: no_data_or_na_to_null(city),
         province: no_data_or_na_to_null(province),
         country: no_data_or_na_to_null(country),
         expenditure,
-      })
-    );
+      }))
+      .orderBy("expenditure", "desc")
+      .value();
   };
 
   const get_recipient_by_id = (id) => {
@@ -223,17 +224,9 @@ export const declare_recipients_panel = () =>
           .uniq()
           .value();
 
-        const pa_year_5 = year_to_fiscal_year(_.first(tab_keys));
-
-        const pa_year = year_to_fiscal_year(_.last(tab_keys));
-
-        return { data, tab_keys, pa_year_5, pa_year };
+        return { data, tab_keys };
       },
-      get_title: ({ calculations }) =>
-        text_maker("recipients_title", {
-          pa_year_5: calculations.pa_year_5,
-          pa_year: calculations.pa_year,
-        }),
+      get_title: () => text_maker("recipients_title"),
       render({ title, subject, sources, calculations }) {
         return (
           <InfographicPanel {...{ title, sources }}>

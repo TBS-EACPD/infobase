@@ -33,20 +33,12 @@ export default async function ({ models }) {
     "transfer_payments.csv"
   );
 
-  const igoc_rows = get_standard_csv_file_rows("igoc.csv");
-
-  const org_id_by_dept_name = _.chain(igoc_rows)
-    .map(({ org_id, legal_title_en }) => [legal_title_en, org_id])
-    .fromPairs()
-    .value();
-
   const recipient_rows = _.chain(raw_recipient_rows)
     .map(
       ({
         fyear: year,
-        department,
-        transfer_payment: program,
-        record_type,
+        org_id,
+        tpname: program,
         recipient,
         city,
         province,
@@ -54,10 +46,8 @@ export default async function ({ models }) {
         expenditure,
       }) => ({
         year: format_year(year),
-        department,
-        org_id: org_id_by_dept_name[department],
+        org_id,
         program,
-        record_type,
         recipient,
         city,
         province,

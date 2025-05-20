@@ -112,7 +112,7 @@ historical_g_and_c_custom_new_row:
 
 recipients_title:
   transform: [handlebars]
-  en: Recipients of Transfer Payments ({{pa_year_5}} to {{pa_year}})
+  en: Recipients of Transfer Payments ({{pa_last_year_5}} to {{pa_last_year}})
   fr: Fill in
 
 recipient_gov_text:
@@ -134,7 +134,7 @@ transfer_payment_table_title:
 
 recipient_map_title:
   transform: [handlebars]
-  en: Transfer Payment Recipients by Geographic Region ({{pa_year_5}} to {{pa_year}})
+  en: Transfer Payment Recipients by Geographic Region ({{pa_last_year_5}} to {{pa_last_year}})
   fr: Fill in
 
 recipient_map_text:
