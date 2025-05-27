@@ -934,6 +934,8 @@ function render({
   sources,
   datasets,
 }) {
+  const { oldest_hist_spend_data } = calculations.calcs;
+
   footnotes =
     subject.id === "326"
       ? _.concat(
@@ -942,17 +944,22 @@ function render({
             subject_type: subject.subject_type,
             subject_id: subject.id,
             text: text_maker("tbs_exp_variance_footnote"),
-            topic_keys: ["PLANNED_EXP"],
+            topic_keys: ["PLANNED_EXP", "EXP", "DRR_EXP", "DRR_FTE"],
           }),
-          create_footnote({
-            id: text_maker("tbs_exp_variance_2021_footnote"),
-            subject_type: subject.subject_type,
-            subject_id: subject.id,
-            text: text_maker("tbs_exp_variance_2021_footnote"),
-            topic_keys: ["EXP", "DRR_EXP", "FTE", "DRR_FTE"],
-            year1: "2021-22",
-            year2: "2021-22",
-          }),
+          // will stop displaying this footnote when the range of years being displayed on infobase include "2021-22"
+          ...(oldest_hist_spend_data.year <= "2021-22"
+            ? [
+                create_footnote({
+                  id: text_maker("tbs_exp_variance_2021_footnote"),
+                  subject_type: subject.subject_type,
+                  subject_id: subject.id,
+                  text: text_maker("tbs_exp_variance_2021_footnote"),
+                  topic_keys: ["EXP", "DRR_EXP", "FTE", "DRR_FTE"],
+                  year1: "2021-22",
+                  year2: "2021-22",
+                }),
+              ]
+            : []),
           footnotes
         )
       : footnotes;
