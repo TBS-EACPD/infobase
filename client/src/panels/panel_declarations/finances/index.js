@@ -25,7 +25,6 @@ export {
   declare_historical_g_and_c_panel,
   declare_last_year_g_and_c_perspective_panel,
   declare_recipients_panel,
-  declare_recipients_map_panel,
 } from "./transfer_payments/index";
 
 export {
