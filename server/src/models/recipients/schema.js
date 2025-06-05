@@ -15,6 +15,7 @@ const schema = `
 
   type RecipientSummary {
     id: String
+    report_years: [String]
     recipient_overview: [RecipientOverview]
     recipient_exp_summary: [RecipientExpSummary]
     recipient_location: [RecipientLocation]

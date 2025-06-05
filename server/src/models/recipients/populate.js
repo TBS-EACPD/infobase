@@ -106,9 +106,13 @@ export default async function ({ models }) {
       )
       .value();
 
+  const get_report_years = (recipients) =>
+    _.chain(recipients).map("year").uniq().value();
+
   const gov_summary = [
     {
       id: "gov",
+      report_years: get_report_years(recipient_rows),
       recipient_overview: get_recipient_overview(recipient_rows),
       recipient_exp_summary: get_recipient_summary(recipient_rows),
       recipient_location: get_recipient_location_summary(recipient_rows),
@@ -119,6 +123,7 @@ export default async function ({ models }) {
     .groupBy("org_id")
     .flatMap((recipients, org_id) => ({
       id: org_id,
+      report_years: get_report_years(recipients),
       recipient_overview: get_recipient_overview(recipients),
       recipient_exp_summary: get_recipient_summary(recipients),
       recipient_location: get_recipient_location_summary(recipients),

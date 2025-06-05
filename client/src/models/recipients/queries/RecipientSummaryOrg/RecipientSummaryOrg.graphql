@@ -3,6 +3,7 @@ query RecipientSummaryOrg($lang: String!, $id: String) {
     org(org_id: $id) {
       recipient_summary {
         id
+        report_years
         recipient_overview {
           year
           total_tf_exp

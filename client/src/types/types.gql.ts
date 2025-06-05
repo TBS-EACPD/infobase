@@ -540,6 +540,7 @@ export type RecipientSummary = {
   recipient_exp_summary?: Maybe<Array<Maybe<RecipientExpSummary>>>;
   recipient_location?: Maybe<Array<Maybe<RecipientLocation>>>;
   recipient_overview?: Maybe<Array<Maybe<RecipientOverview>>>;
+  report_years?: Maybe<Array<Maybe<Scalars['String']>>>;
 };
 
 export type Recipients = {

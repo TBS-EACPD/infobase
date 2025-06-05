@@ -24,6 +24,7 @@ export default function (model_singleton) {
 
   const common_recipient_fields = {
     id: pkey_type(),
+    report_years: [str_type],
     recipient_overview: [
       {
         year: str_type,

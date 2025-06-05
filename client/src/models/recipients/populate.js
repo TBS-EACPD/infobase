@@ -112,10 +112,12 @@ export const api_load_recipients_summary_data = (subject) => {
         !_.chain(response)
           .thru(
             ({
+              report_years,
               recipient_overview,
               recipient_exp_summary,
               recipient_location,
             }) => [
+              ...report_years,
               ...recipient_overview,
               ...recipient_exp_summary,
               ...recipient_location,

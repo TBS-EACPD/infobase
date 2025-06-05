@@ -3,6 +3,7 @@ query RecipientSummaryGov($lang: String!) {
     gov {
       recipient_summary {
         id
+        report_years
         recipient_overview {
           year
           total_tf_exp

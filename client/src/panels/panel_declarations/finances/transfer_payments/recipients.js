@@ -219,10 +219,7 @@ export const declare_recipients_panel = () =>
       calculate: ({ subject }) => {
         const data = RecipientSummary.lookup(subject.id);
 
-        const tab_keys = _.chain(data.recipient_exp_summary)
-          .map("year")
-          .uniq()
-          .value();
+        const tab_keys = data.report_years;
 
         return { data, tab_keys };
       },
