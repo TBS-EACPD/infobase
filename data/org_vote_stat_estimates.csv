@@ -512,7 +512,7 @@ CSC,S,0,Contributions to employee benefit plans,Contributions aux régimes d'ava
 CSC,S,0,Refunds of amounts credited to revenues in previous years,Remboursements de montants portés aux revenus d'exercices antérieurs,SA,847.00,14141,1994.15,,
 CSC,S,0,Spending of proceeds from the disposal of surplus Crown assets,Dépenses des produits de la vente de biens excédentaires de l'État,SA,1308896.00,3408697,4404953.00,,
 CSEC,1,1,Operating AND Program,Fonctionnement AND Programme,MAINS,668829446.00,745978292,906759081.00,977621520,1144688528
-CSEC,1,1,Operating AND Program,Fonctionnement AND Programme,SEA,16721508.00,0,0.00,0,0
+CSEC,1,1,Operating AND Program,Fonctionnement AND Programme,SEA,16721508.00,0,0.00,0,370060088
 CSEC,1,1,Operating AND Program,Fonctionnement AND Programme,SEB,45893523.00,97023959,12824037.00,58310668,0
 CSEC,1,1,Operating AND Program,Fonctionnement AND Programme,SEC,15615796.00,13735535,10592560.00,0,0
 CSEC,1,1,Operating AND Program,Fonctionnement AND Programme,VA,63166626.00,34600415,46993779.00,0,0
@@ -1307,12 +1307,12 @@ NCC,5,5,Payments to Crown Corps,Paiement aux sociétés d'État,SEA,0.00,0,0.00,
 NCC,5,5,Payments to Crown Corps,Paiement aux sociétés d'État,SEB,0.00,33000000,0.00,35152000,0
 NCC,5,5,Payments to Crown Corps,Paiement aux sociétés d'État,SEC,32000000.00,0,0.00,0,0
 ND,1,1,Operating AND Program,Fonctionnement AND Programme,MAINS,16449558144.00,17574151036,17912761663.00,20236301508,21542249545
-ND,1,1,Operating AND Program,Fonctionnement AND Programme,SEA,0.00,0,0.00,0,0
+ND,1,1,Operating AND Program,Fonctionnement AND Programme,SEA,0.00,0,0.00,0,3966131556
 ND,1,1,Operating AND Program,Fonctionnement AND Programme,SEB,577991293.00,-55333483,755342390.00,770591870,0
 ND,1,1,Operating AND Program,Fonctionnement AND Programme,SEC,432648907.00,649480052,794586525.00,0,0
 ND,1,1,Operating AND Program,Fonctionnement AND Programme,VA,855561959.00,851730670,1084595515.00,0,0
 ND,10,3,Grants & Contributions,Subventions et Contributions,MAINS,247181598.00,314401113,319808513.00,893526093,1009220911
-ND,10,3,Grants & Contributions,Subventions et Contributions,SEA,0.00,500000000,0.00,0,0
+ND,10,3,Grants & Contributions,Subventions et Contributions,SEA,0.00,500000000,0.00,0,3439460843
 ND,10,3,Grants & Contributions,Subventions et Contributions,SEB,63900000.00,250000000,624319000.00,760706999,0
 ND,10,3,Grants & Contributions,Subventions et Contributions,SEC,485000.00,261854000,254698205.00,0,0
 ND,10,3,Grants & Contributions,Subventions et Contributions,VA,32446569.00,0,0.00,0,0
@@ -1321,18 +1321,18 @@ ND,15,1,Operating AND Program,Fonctionnement AND Programme,SEC,108893191.00,0,0.
 ND,20,4,Debt Forgiveness - Used until 2020-21,Radiation de dettes - utilisé jusqu'en 2020-2021,SEC,,,,,
 ND,25,4,Debt Forgiveness - Used until 2020-21,Radiation de dettes - utilisé jusqu'en 2020-2021,SEC,,,,,
 ND,5,2,Capital,Capital,MAINS,5695650677.00,5956536653,6076583477.00,7216407948,10903027855
-ND,5,2,Capital,Capital,SEA,0.00,0,0.00,0,0
+ND,5,2,Capital,Capital,SEA,0.00,0,0.00,0,804619191
 ND,5,2,Capital,Capital,SEB,2462813.00,2228013,-3729919.00,1745923295,0
 ND,5,2,Capital,Capital,SEC,99198106.00,-14797870,1120702798.00,0,0
 ND,5,2,Capital,Capital,VA,55985.00,169294,79554.00,0,0
 ND,S,0,Contributions to employee benefit plans,Contributions aux régimes d'avantages sociaux des employés,MAINS,317406035.00,335655066,330464584.00,363660847,404264965
 ND,S,0,Contributions to employee benefit plans,Contributions aux régimes d'avantages sociaux des employés,SA,-16944119.00,-24317215,38673383.04,0,0
-ND,S,0,Contributions to employee benefit plans,Contributions aux régimes d'avantages sociaux des employés,SEA,0.00,0,0.00,0,0
+ND,S,0,Contributions to employee benefit plans,Contributions aux régimes d'avantages sociaux des employés,SEA,0.00,0,0.00,0,65972299
 ND,S,0,Contributions to employee benefit plans,Contributions aux régimes d'avantages sociaux des employés,SEB,580936.00,0,299170.00,9140778,0
 ND,S,0,Contributions to employee benefit plans,Contributions aux régimes d'avantages sociaux des employés,SEC,6468752.00,7198762,10828607.00,0,0
 ND,S,0,Contributions to employee benefit plans (Members of the Military),Contributions aux régimes d'avantages sociaux des employés - Membres militaires,MAINS,1160201540.00,1321783656,1402013774.00,1427471426,1358868590
 ND,S,0,Contributions to employee benefit plans (Members of the Military),Contributions aux régimes d'avantages sociaux des employés - Membres militaires,SA,1809835.00,8563457,3230348730.42,0,0
-ND,S,0,Contributions to employee benefit plans (Members of the Military),Contributions aux régimes d'avantages sociaux des employés - Membres militaires,SEA,0.00,0,0.00,0,0
+ND,S,0,Contributions to employee benefit plans (Members of the Military),Contributions aux régimes d'avantages sociaux des employés - Membres militaires,SEA,0.00,0,0.00,0,401069507
 ND,S,0,Contributions to employee benefit plans (Members of the Military),Contributions aux régimes d'avantages sociaux des employés - Membres militaires,SEB,124544674.00,0,171844916.00,264107,0
 ND,S,0,Contributions to employee benefit plans (Members of the Military),Contributions aux régimes d'avantages sociaux des employés - Membres militaires,SEC,25558474.00,29633485,48145297.00,0,0
 ND,S,0,Court Awards,Montants adjugés par une cour,SA,,40000000,296680399.80,,
