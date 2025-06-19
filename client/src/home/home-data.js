@@ -68,6 +68,11 @@ const infographic_link_items = _.compact([
 
 const featured_content_items = _.compact([
   {
+    text_key: "quick_link_DP25",
+    href: "#infographic/gov/gov/results/.-.-(panel_key.-.-'gov_dp)",
+    is_new: true,
+  },
+  {
     text_key: "supps_a",
     href: "#compare_estimates",
     is_new: true,
@@ -89,10 +94,6 @@ const featured_content_items = _.compact([
   {
     text_key: "quick_link_DRR24",
     href: "#infographic/gov/gov/results/.-.-(panel_key.-.-'gov_drr)",
-  },
-  {
-    text_key: "quick_link_DP24",
-    href: "#infographic/gov/gov/results/.-.-(panel_key.-.-'gov_dp)",
   },
   {
     text_key: "covid_expenditures_estimated_exp_2022",
