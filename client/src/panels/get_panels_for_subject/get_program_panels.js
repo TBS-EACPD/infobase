@@ -77,8 +77,6 @@ export const get_program_panels = (subject) =>
       subject.has_data("results") && [
         declare_results_key_concepts_panel(),
         declare_late_results_warning_panel(),
-        declare_late_actual_resources_panel(),
-        declare_late_planned_resources_panel(),
         declare_dead_program_warning_panel(),
         declare_temp_untabled_warning_panel(),
         declare_drr_summary_panel(),

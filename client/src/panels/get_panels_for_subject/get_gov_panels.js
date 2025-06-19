@@ -93,8 +93,6 @@ export const get_gov_panels = () => ({
   results: [
     declare_results_key_concepts_panel(),
     declare_late_results_warning_panel(),
-    declare_late_actual_resources_panel(),
-    declare_late_planned_resources_panel(),
     declare_temp_untabled_warning_panel(),
     declare_results_intro_panel(),
     declare_gov_drr_panel(),
