@@ -642,27 +642,7 @@ SOBJ9,Acquisition of machinery and equipement,Acquisition de machines et de mat�
 * Matériel et accessoires à microfilmer, matériel de communication entre bureaux, machines à affranchir avec compteur, cylindres pour machines enregistreuses et autres accessoires de bureau.
 * Véhicules automobiles, avions, tracteurs, matériel de voirie, matériel de télécommunications et autre appareillage du même genre; matériel scientifique et de laboratoire, navires, brise-glaces et matériel auxiliaire de la navigation, ainsi que tout autre genre de matériel lourd et léger; munitions et divers genres de matériel pour le ministère de la Défense nationale, tels que navires, avions, matériel mécanique, véhicules de combat, armes, moteurs et pièces de rechange habituellement achetées avec ce matériel au moment de l'achat."
 SPA,Budgetary Planned Specified Purpose Accounts,Dépenses budgétaires prévues dans des comptes à fins déterminées,"Specified purpose accounts is a classification of accounts established in the Accounts of Canada used to record revenues deposited into, and money payable out of, the Consolidated Revenue Fund under statutory authorities for specified purposes.",Les comptes à fins déterminées correspondent à une classification de comptes établis dans les Comptes publics du Canada et qui servent à comptabiliser les recettes déposées dans le Trésor et les montants prélevés sur le Trésor aux termes d’autorisations législatives établies à des fins déterminées.
-SPEC_WARR,Governor General Special Warrants,Mandat spécial du gouverneur général,"Governor General special warrants are used by the government to obtain funds when Parliament is dissolved due to an election.
-
-Special warrants allow organizations to continue to do the work that is essential to the normal operation of government until a new Parliament is formed and the next appropriation act is granted royal assent.
-
-For a special warrant to be used, a minister must report that an expenditure is urgently required for the public good, and the President of the Treasury Board must report that there is no funding available through current appropriations to make the payment.
-
-Any initiative that is to be considered for funding through a special warrant must have received the appropriate Cabinet and Treasury Board approvals.
-
-Every special warrant must be published in the Canada Gazette within 30 days after it is issued. In addition, within 15 days of a new Parliament, the government must table a statement in the House of Commons that shows all of Governor General special warrants that were issued while Parliament was not in session.
-
-In accordance with subsection 30(4) of the Financial Administration Act, the amounts of these warrants will be included in the next appropriation act for the fiscal year but will not be voted on.","Le gouvernement recourt aux mandats spéciaux du gouverneur général pour obtenir des fonds lorsque le Parlement est dissous en prévision d’une élection.
-
-Les mandats spéciaux du gouverneur général permettent aux organisations de poursuivre le travail qui est essentiel pour la continuité des opérations normales du gouvernement jusqu’à ce qu’un nouveau Parlement soit formé et que la prochaine loi de crédits reçoit la sanction royale.
-
-Pour utiliser le mécanisme des mandats spéciaux du gouverneur général, un ministre doit signaler qu’une dépense s’impose à titre urgent pour le bien public, et le président du Conseil du Trésor doit signaler qu’aucun financement n’est disponible au moyen des crédits courants pour effectuer le paiement.
-
-Toute initiative dont le financement est envisagé par le truchement de mandats spéciaux du gouverneur général doit avoir été approuvée par le Cabinet et le Conseil du Trésor.
-
-Tous les mandats spéciaux du gouverneur général doivent être publiés dans la Gazette du Canada dans les 30 jours suivant leur émission. De plus, dans les 15 jours qui suivent la formation d’un nouveau Parlement, le gouvernement doit déposer un avis à la Chambre des communes faisant état de tous les mandats spéciaux du gouverneur général qui ont été émis au cours de la période où le Parlement ne siégeait pas.
-
-Conformément au paragraphe 30(4) de la Loi sur la gestion des finances publiques, les montants visés par les mandats spéciaux seront inscrits dans la prochaine loi de crédits de l’exercice, mais ils ne feront pas l’objet d’un vote."
+SPEC_WARR,Governor General’s Special Warrants,Mandat spécial du gouverneur général,Governor General’s Special Warrants are the established processes for obtaining funds urgently required for the public good when Parliament is dissolved for a general election.,"Par « mandat spécial du gouverneur général », on entend le processus établi pour obtenir les fonds requis de toute urgence dans l’intérêt public à la dissolution du Parlement par suite du déclenchement d’une élection générale."
 SSP,Sub-program (or sub-sub-program),Sous-programme (ou sous-sous-programme),"Sub-program represents smaller identifiable programs that are logically part of the Program under the Program Alignment Architecture. Similarly, below the Sub-Program are the Sub-Sub-Programs, which represent the lowest-level programs that are logically part of the Sub-Program. 
 
 
