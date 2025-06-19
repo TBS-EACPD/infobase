@@ -359,8 +359,8 @@ export class StandardRouteContainer extends React.Component {
         <DocumentDescription description_str={description} />
         <BreadCrumbs crumbs={breadcrumbs} />
         <HeaderBanner route_filter={_.constant(false)} />
-        <LateResultsBanner />
         <TempUntabledBanner />
+        <LateResultsBanner />
         <LateDpResourcesBanner />
         <LateDrrFteResources />
         <SpecialWarrantsBanner />
