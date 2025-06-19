@@ -526,6 +526,17 @@ const drr_docs = build_doc_info_objects("drr", [
 const dp_docs = build_doc_info_objects("dp", [
   {
     year_short: "2024",
+    resource_years: [],
+    doc_url_en:
+      "https://www.canada.ca/en/treasury-board-secretariat/services/planned-government-spending/reports-plans-priorities/2025-26-departmental-plans.html",
+    doc_url_fr:
+      "https://www.canada.ca/fr/secretariat-conseil-tresor/services/depenses-prevues/rapports-plans-priorites/plans-ministeriels-2025-2026.html",
+    late_results_orgs: [],
+    late_resources_orgs: [],
+    temp_untabled_orgs: [],
+  },
+  {
+    year_short: "2025",
     resource_years: [
       "{{planning_year_1}}",
       "{{planning_year_2}}",
