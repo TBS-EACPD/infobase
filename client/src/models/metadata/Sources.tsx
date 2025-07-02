@@ -95,7 +95,7 @@ const source_definitions = LiteralKeyedRecordHelper<SourceDef>()({
       description: <TM k="service_inventory_desc" />,
       topic_key: "SERVICES",
       open_data_link: text_maker("service_inventory_open_data_link"),
-      frequency_key: "yearly",
+      frequency_key: "quarterly",
     },
   }),
 });
