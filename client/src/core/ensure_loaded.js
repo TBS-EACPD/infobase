@@ -9,8 +9,7 @@ import {
 import { load_footnotes_bundle } from "src/models/footnotes/populate_footnotes";
 import {
   api_load_has_recipients,
-  //  api_load_recipients_general_stats_data,
-  api_load_recipients_summary_data,
+  api_load_recipients_report_years_data,
 } from "src/models/recipients/populate";
 import {
   api_load_results_bundle,
@@ -85,9 +84,8 @@ function ensure_loaded({
   const should_load_covid_measures =
     covid_measures || check_for_panel_dependency("requires_covid_measures");
 
-  const should_load_recipients_general_stats =
-    has_recipients ||
-    check_for_panel_dependency("requires_recipients_general_stats");
+  const should_load_recipients =
+    has_recipients || check_for_panel_dependency("requires_recipients");
 
   const result_docs_to_load = !_.isEmpty(result_docs)
     ? result_docs
@@ -152,13 +150,8 @@ function ensure_loaded({
     ? api_load_all_covid_measures()
     : Promise.resolve();
 
-  /*
-  const recipients_general_stats_prom = should_load_recipients_general_stats
-    ? api_load_recipients_general_stats_data(subject)
-    : Promise.resolve();
-*/
-  const recipients_summary_prom = should_load_recipients_general_stats
-    ? api_load_recipients_summary_data(subject)
+  const recipients_report_years_prom = should_load_recipients
+    ? api_load_recipients_report_years_data(subject)
     : Promise.resolve();
 
   return Promise.all([
@@ -175,9 +168,8 @@ function ensure_loaded({
     footnotes_prom,
     years_with_covid_data_prom,
     covid_measures_prom,
-    //  recipients_general_stats_prom,
     has_recipients_prom,
-    recipients_summary_prom,
+    recipients_report_years_prom,
   ]);
 }
 

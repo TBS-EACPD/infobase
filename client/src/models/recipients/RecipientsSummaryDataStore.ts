@@ -1,29 +1,13 @@
 import { make_store } from "src/models/utils/make_store";
 
-type RecipientSummaryDataDef = {
+type RecipientReportYearsDataDef = {
   subject_id: string;
-  recipient_summary: {
-    subject_id: string;
-    recipient_overview: [
-      {
-        year: string;
-        total_tf_exp: number;
-      }
-    ];
-    recipient_exp_summary: [
-      {
-        year: string;
-        recipient: string;
-        total_exp: number;
-        num_transfer_payments: number;
-      }
-    ];
-  };
+  report_years: [string];
 };
 
-export const RecipientSummary = make_store(
-  ({ subject_id, recipient_summary }: RecipientSummaryDataDef) => ({
+export const RecipientReportYears = make_store(
+  ({ subject_id, report_years }: RecipientReportYearsDataDef) => ({
     id: subject_id,
-    ...recipient_summary,
+    report_years,
   })
 );

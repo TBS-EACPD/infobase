@@ -3,10 +3,8 @@ query Recipients($lang: String!, $orgId: String) {
     org(org_id: $orgId) {
       recipients {
         year
-        department
         org_id
         program
-        record_type
         recipient
         city
         province

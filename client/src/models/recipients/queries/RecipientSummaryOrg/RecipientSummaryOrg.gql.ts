@@ -6,58 +6,34 @@ const defaultOptions = {} as const;
 export type RecipientSummaryOrgQueryVariables = Types.Exact<{
   lang: Types.Scalars['String'];
   id?: Types.InputMaybe<Types.Scalars['String']>;
+  year: Types.Scalars['String'];
 }>;
 
 
-export type RecipientSummaryOrgQuery = { __typename?: 'Query', root: { __typename?: 'Root', org?: { __typename?: 'Org', recipient_summary?: { __typename?: 'RecipientSummary', id?: string | null, report_years?: Array<string | null> | null, recipient_overview?: Array<{ __typename?: 'RecipientOverview', year?: string | null, total_tf_exp?: number | null } | null> | null, recipient_exp_summary?: Array<{ __typename?: 'RecipientExpSummary', year?: string | null, recipient?: string | null, total_exp?: number | null, num_transfer_payments?: number | null, transfer_payments?: Array<{ __typename?: 'Recipients', year?: string | null, department?: string | null, org_id?: string | null, program?: string | null, record_type?: string | null, recipient?: string | null, city?: string | null, province?: string | null, country?: string | null, expenditure?: number | null } | null> | null } | null> | null, recipient_location?: Array<{ __typename?: 'RecipientLocation', year?: string | null, qc?: number | null, nb?: number | null, bc?: number | null, on?: number | null, ns?: number | null, mb?: number | null, nl?: number | null, nu?: number | null, na?: number | null, pe?: number | null, nt?: number | null, yt?: number | null, abroad?: number | null, sk?: number | null, ab?: number | null } | null> | null } | null } | null } };
+export type RecipientSummaryOrgQuery = { __typename?: 'Query', root: { __typename?: 'Root', org?: { __typename?: 'Org', recipient_summary?: { __typename?: 'TopTen', id?: string | null, year?: string | null, total_exp?: number | null, top_ten?: Array<{ __typename?: 'TopTenSummary', row_id?: string | null, recipient?: string | null, total_exp?: number | null, num_transfer_payments?: number | null, transfer_payments?: Array<{ __typename?: 'Recipients', program?: string | null, recipient?: string | null, city?: string | null, province?: string | null, country?: string | null, expenditure?: number | null } | null> | null } | null> | null } | null } | null } };
 
 
 export const RecipientSummaryOrgDocument = gql`
-    query RecipientSummaryOrg($lang: String!, $id: String) {
+    query RecipientSummaryOrg($lang: String!, $id: String, $year: String!) {
   root(lang: $lang) {
     org(org_id: $id) {
-      recipient_summary {
+      recipient_summary(year: $year) {
         id
-        report_years
-        recipient_overview {
-          year
-          total_tf_exp
-        }
-        recipient_exp_summary {
-          year
+        year
+        total_exp
+        top_ten {
+          row_id
           recipient
           total_exp
           num_transfer_payments
           transfer_payments {
-            year
-            department
-            org_id
             program
-            record_type
             recipient
             city
             province
             country
             expenditure
           }
-        }
-        recipient_location {
-          year
-          qc
-          nb
-          bc
-          on
-          ns
-          mb
-          nl
-          nu
-          na
-          pe
-          nt
-          yt
-          abroad
-          sk
-          ab
         }
       }
     }
@@ -79,6 +55,7 @@ export const RecipientSummaryOrgDocument = gql`
  *   variables: {
  *      lang: // value for 'lang'
  *      id: // value for 'id'
+ *      year: // value for 'year'
  *   },
  * });
  */

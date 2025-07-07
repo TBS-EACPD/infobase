@@ -5,9 +5,19 @@ import React, { Fragment, useState } from "react";
 import { InfographicPanel } from "src/panels/panel_declarations/InfographicPanel";
 import { declare_panel } from "src/panels/PanelRegistry";
 
-import { DisplayTable, StatelessModal, Tabs } from "src/components/index";
+import {
+  DisplayTable,
+  LeafSpinner,
+  StatelessModal,
+  Tabs,
+} from "src/components/index";
 
-import { RecipientSummary } from "src/models/recipients/RecipientsSummaryDataStore";
+import {
+  useRecipientSummaryGov,
+  useRecipientSummaryOrg,
+} from "src/models/recipients/queries";
+
+import { RecipientReportYears } from "src/models/recipients/RecipientsSummaryDataStore";
 
 import { newIBLightCategoryColors } from "src/core/color_schemes";
 import { formats } from "src/core/format";
@@ -20,51 +30,30 @@ import { text_maker, TM } from "./gnc_text_provider";
 
 const { year_to_fiscal_year } = formats;
 
-const no_data_or_na_to_null = (value) =>
-  value === "Not Available" || value === null ? "-" : value;
-
-const RecipientTable = ({ filtered_data }) => {
+const RecipientTable = ({ data, table_data }) => {
+  const all_other_recipients_row = "11";
   const [open_recipient, set_open_recipient] = useState(null);
 
-  const cleaned_data = filtered_data.map((row, idx) => ({
-    ...row,
-    id: idx.toString(),
-  }));
-
-  const get_tf_by_id = (id) => {
-    const row = cleaned_data.find((row) => row.id === id);
-    const transfer_payments = row ? row.transfer_payments || [] : [];
-
-    return _.chain(transfer_payments)
-      .map(({ program, city, province, country, expenditure }) => ({
-        program,
-        city: no_data_or_na_to_null(city),
-        province: no_data_or_na_to_null(province),
-        country: no_data_or_na_to_null(country),
-        expenditure,
-      }))
-      .orderBy("expenditure", "desc")
-      .value();
-  };
-
   const get_recipient_by_id = (id) => {
-    const row = cleaned_data.find((row) => row.id === id);
+    if (!id) return null;
+    const row = data.find((row) => row.row_id === id);
     return row ? row.recipient : null;
   };
 
-  const table_data = _.chain(cleaned_data)
-    .map(({ recipient, total_exp, id }) => ({
-      recipient,
-      total_exp,
-      id: id,
-    }))
-    .value();
+  const get_tp_by_id = (id) => {
+    if (!id) return [];
+    const tp_rows = _.chain(data)
+      .find((row) => row.row_id === id)
+      .get("transfer_payments")
+      .map(({ __typename, ...rest }) => rest)
+      .value();
+    return id === all_other_recipients_row
+      ? tp_rows
+      : _.map(tp_rows, ({ recipient, ...rest }) => rest);
+  };
 
   const column_configs_recipients = {
-    recipient: {
-      index: 0,
-      header: "Recipients",
-    },
+    recipient: { index: 0, header: "Recipients" },
     id: {
       index: 1,
       header: "Transfer Payments",
@@ -74,10 +63,10 @@ const RecipientTable = ({ filtered_data }) => {
           onClick={() => set_open_recipient(id)}
           style={{ color: secondaryColor }}
         >
-          {get_tf_by_id(id).length}
+          {get_tp_by_id(id).length}
         </button>
       ),
-      plain_formatter: (id) => get_tf_by_id(id).length,
+      plain_formatter: (id) => get_tp_by_id(id).length,
     },
     total_exp: {
       index: 2,
@@ -87,27 +76,28 @@ const RecipientTable = ({ filtered_data }) => {
     },
   };
 
-  const column_configs_tf = {
-    program: {
-      index: 0,
-      header: "Transfer Payment Program",
-    },
-    city: { index: 1, header: "City" },
-    province: {
-      index: 2,
-      header: "Province",
-    },
-    country: {
-      index: 3,
-      header: "Country",
-    },
+  const common_column_configs_tp = {
+    program: { index: 1, header: "Transfer Payment Program" },
+    city: { index: 2, header: "City" },
+    province: { index: 3, header: "Province" },
+    country: { index: 4, header: "Country" },
     expenditure: {
-      index: 4,
+      index: 5,
       header: "Payment",
       formatter: "compact2_written",
       is_summable: true,
     },
   };
+
+  const showModal = open_recipient !== null;
+  const isSpecialRecipient = open_recipient === all_other_recipients_row;
+  const modalData = get_tp_by_id(open_recipient);
+  const modalColumns = isSpecialRecipient
+    ? {
+        recipient: { index: 0, header: "Recipient" },
+        ...common_column_configs_tp,
+      }
+    : common_column_configs_tp;
 
   return (
     <Fragment>
@@ -116,64 +106,93 @@ const RecipientTable = ({ filtered_data }) => {
         column_configs={column_configs_recipients}
       />
       <StatelessModal
-        show={!_.isNull(open_recipient)}
+        show={showModal}
         on_close_callback={() => set_open_recipient(null)}
         additional_dialog_class={"modal-responsive"}
         title={text_maker("transfer_payment_table_title", {
           recipient: get_recipient_by_id(open_recipient),
         })}
       >
-        {!_.isNull(open_recipient) && (
-          <DisplayTable
-            data={get_tf_by_id(open_recipient)}
-            column_configs={column_configs_tf}
-          />
+        {showModal && (
+          <DisplayTable data={modalData} column_configs={modalColumns} />
         )}
       </StatelessModal>
     </Fragment>
   );
 };
 
-const RecipientTreeMap = ({ filtered_data }) => {
+const RecipientTreeMap = ({ table_data }) => {
   const color_scale = scaleOrdinal().range(newIBLightCategoryColors);
 
   const top_ten_data = {
     name: "root",
     color: "white",
-    children: _.map(filtered_data, (data, index) => ({
-      id: index,
-      recipient: data.recipient,
-      year: data.year,
-      expenditure: data.total_exp,
-    })),
+    children: _.take(table_data, 10),
   };
 
   return (
     <WrappedNivoTreemap
       data={top_ten_data}
-      colorScale={(d) => color_scale(d.expenditure)}
-      value_string="expenditure"
+      colorScale={(d) => color_scale(d.total_exp)}
+      value_string="total_exp"
       formatter={formats.compact1}
       label_id="recipient"
     />
   );
 };
 
-const RecipientsPanel = ({ subject, calculations }) => {
-  const { data, tab_keys } = calculations;
+const RecipientPanelContent = ({ subject, tab_key }) => {
+  const useRecipientSummary = (subject) =>
+    ({
+      gov: useRecipientSummaryGov({ year: tab_key }),
+      dept: useRecipientSummaryOrg({ id: subject.id, year: tab_key }),
+    }[subject.subject_type]);
 
-  const { recipient_exp_summary, recipient_overview } = data;
+  const { loading, data } = useRecipientSummary(subject);
+
+  if (loading) {
+    return <LeafSpinner config_name="subroute" />;
+  }
+
+  const { total_exp, top_ten } = data;
+
+  const table_data = _.map(top_ten, (data) => ({
+    id: data.row_id,
+    recipient: data.recipient,
+    total_exp: data.total_exp,
+  }));
+
+  return (
+    <div>
+      <div className="medium-panel-text text">
+        <TM
+          k={`recipient_${subject.subject_type}_text`}
+          args={{ year: year_to_fiscal_year(tab_key), subject, total_exp }}
+        />
+      </div>
+      <div className="row align-items-center">
+        <div className="col-12 col-lg-6">
+          <RecipientTable data={top_ten} table_data={table_data} />
+        </div>
+        <div
+          className="col-12 col-lg-6"
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+          }}
+        >
+          <RecipientTreeMap table_data={table_data} />
+        </div>
+      </div>
+    </div>
+  );
+};
+
+const RecipientsPanel = ({ subject }) => {
+  const tab_keys = RecipientReportYears.lookup(subject.id).report_years;
 
   const [tab_key, set_tab_key] = useState(_.last(tab_keys));
-
-  const total_exp = _.chain(recipient_overview)
-    .filter((row) => row.year === tab_key)
-    .map("total_tf_exp")
-    .value();
-
-  const filtered_data = _.chain(recipient_exp_summary)
-    .filter((row) => row.year === tab_key)
-    .value();
 
   return (
     <Tabs
@@ -184,27 +203,7 @@ const RecipientsPanel = ({ subject, calculations }) => {
       open_tab_key={tab_key}
       tab_open_callback={set_tab_key}
     >
-      <div className="medium-panel-text text">
-        <TM
-          k={`recipient_${subject.subject_type}_text`}
-          args={{ year: year_to_fiscal_year(tab_key), subject, total_exp }}
-        />
-      </div>
-      <div className="row align-items-center">
-        <div className="col-12 col-lg-6">
-          <RecipientTable filtered_data={filtered_data} />
-        </div>
-        <div
-          className="col-12 col-lg-6"
-          style={{
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-          }}
-        >
-          <RecipientTreeMap filtered_data={filtered_data} />
-        </div>
-      </div>
+      <RecipientPanelContent subject={subject} tab_key={tab_key} />
     </Tabs>
   );
 };
@@ -214,20 +213,21 @@ export const declare_recipients_panel = () =>
     panel_key: "recipients",
     subject_types: ["gov", "dept"],
     panel_config_func: () => ({
-      legacy_non_table_dependencies: ["requires_recipients_general_stats"],
+      legacy_non_table_dependencies: ["requires_recipients"],
       get_dataset_keys: () => ["recipients"],
       calculate: ({ subject }) => {
-        const data = RecipientSummary.lookup(subject.id);
-
-        const tab_keys = data.report_years;
-
-        return { data, tab_keys };
+        switch (subject.subject_type) {
+          case "gov":
+            return true;
+          case "dept":
+            return subject.has_data("recipients");
+        }
       },
       get_title: () => text_maker("recipients_title"),
-      render({ title, subject, sources, calculations }) {
+      render({ title, subject, sources }) {
         return (
           <InfographicPanel {...{ title, sources }}>
-            <RecipientsPanel subject={subject} calculations={calculations} />
+            <RecipientsPanel subject={subject} />
           </InfographicPanel>
         );
       },

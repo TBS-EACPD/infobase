@@ -4,10 +4,10 @@ import { log_standard_event } from "src/core/analytics";
 
 import {
   promisedDeptHasRecipients,
-  promisedRecipientSummaryGov,
-  promisedRecipientSummaryOrg,
+  promisedDeptRecipientReportYears,
+  promisedGovRecipientReportYears,
 } from "./queries";
-import { RecipientSummary } from "./RecipientsSummaryDataStore";
+import { RecipientReportYears } from "./RecipientsSummaryDataStore";
 
 export const api_load_has_recipients = (subject) => {
   const subject_type = subject && subject.subject_type;
@@ -72,11 +72,11 @@ export const api_load_has_recipients = (subject) => {
     });
 };
 
-const _subject_ids_with_loaded_recipients_summary_data = {};
-export const api_load_recipients_summary_data = (subject) => {
-  const { is_loaded, subject_type, id, query } = (() => {
+const _subject_ids_with_loaded_recipients_report_years_data = {};
+export const api_load_recipients_report_years_data = (subject) => {
+  const { is_loaded, id, query } = (() => {
     const subject_is_loaded = (id) =>
-      _.get(_subject_ids_with_loaded_recipients_summary_data, id);
+      _.get(_subject_ids_with_loaded_recipients_report_years_data, id);
 
     switch (subject.subject_type) {
       case "dept":
@@ -84,14 +84,14 @@ export const api_load_recipients_summary_data = (subject) => {
           is_loaded: subject_is_loaded(subject.id),
           subject_type: "dept",
           id: String(subject.id),
-          query: promisedRecipientSummaryOrg,
+          query: promisedDeptRecipientReportYears,
         };
       default:
         return {
           is_loaded: subject_is_loaded("gov"),
           subject_type: "gov",
           id: "gov",
-          query: promisedRecipientSummaryGov,
+          query: promisedGovRecipientReportYears,
         };
     }
   })();
@@ -101,35 +101,13 @@ export const api_load_recipients_summary_data = (subject) => {
   }
 
   return query({ id }).then((response) => {
-    RecipientSummary.create_and_register({
+    RecipientReportYears.create_and_register({
       subject_id: id,
-      recipient_summary: response,
+      report_years: response.years_with_recipient_data,
     });
 
-    if (subject_type === "dept") {
-      subject.set_has_data(
-        "recipients",
-        !_.chain(response)
-          .thru(
-            ({
-              report_years,
-              recipient_overview,
-              recipient_exp_summary,
-              recipient_location,
-            }) => [
-              ...report_years,
-              ...recipient_overview,
-              ...recipient_exp_summary,
-              ...recipient_location,
-            ]
-          )
-          .isEmpty()
-          .value()
-      );
-    }
-
     _.setWith(
-      _subject_ids_with_loaded_recipients_summary_data,
+      _subject_ids_with_loaded_recipients_report_years_data,
       id,
       true,
       Object

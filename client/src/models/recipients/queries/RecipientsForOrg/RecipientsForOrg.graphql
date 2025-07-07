@@ -1,9 +1,0 @@
-query RecipientsForOrg($lang: String!, $id: String) {
-  root(lang: $lang) {
-    org(org_id: $id) {
-      recipients {
-        ...RecipientsFragment
-      }
-    }
-  }
-}

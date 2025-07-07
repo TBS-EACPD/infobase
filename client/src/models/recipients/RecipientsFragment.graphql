@@ -1,9 +1,7 @@
 fragment RecipientsFragment on Recipients {
   year
-  department
   org_id
   program
-  record_type
   recipient
   city
   province

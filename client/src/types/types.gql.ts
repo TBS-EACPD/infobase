@@ -174,16 +174,22 @@ export type Gov = {
   people_data?: Maybe<GovPeopleSummary>;
   pr_target_counts_granular?: Maybe<Array<Maybe<AllDocResultCount>>>;
   pr_target_counts_summary?: Maybe<Array<Maybe<AllDocResultCount>>>;
-  recipient_summary?: Maybe<RecipientSummary>;
+  recipient_summary?: Maybe<TopTen>;
   service_summary?: Maybe<ServiceSummary>;
   subject_type?: Maybe<Scalars['String']>;
   target_counts?: Maybe<ResultCount>;
   years_with_covid_data?: Maybe<YearsWithCovidData>;
+  years_with_recipient_data?: Maybe<Array<Maybe<Scalars['String']>>>;
 };
 
 
 export type GovCovid_SummaryArgs = {
   fiscal_year?: InputMaybe<Scalars['Int']>;
+};
+
+
+export type GovRecipient_SummaryArgs = {
+  year: Scalars['String'];
 };
 
 
@@ -294,7 +300,7 @@ export type Org = SubjectI & {
   pas_code?: Maybe<Scalars['String']>;
   people_data?: Maybe<OrgPeopleData>;
   programs?: Maybe<Array<Maybe<Program>>>;
-  recipient_summary?: Maybe<RecipientSummary>;
+  recipient_summary?: Maybe<TopTen>;
   recipients?: Maybe<Array<Maybe<Recipients>>>;
   service_summary?: Maybe<ServiceSummary>;
   services?: Maybe<Array<Maybe<Service>>>;
@@ -302,6 +308,7 @@ export type Org = SubjectI & {
   target_counts?: Maybe<ResultCount>;
   website_url?: Maybe<Scalars['String']>;
   years_with_covid_data?: Maybe<YearsWithCovidData>;
+  years_with_recipient_data?: Maybe<Array<Maybe<Scalars['String']>>>;
 };
 
 
@@ -312,6 +319,11 @@ export type OrgCovid_MeasuresArgs = {
 
 export type OrgCovid_SummaryArgs = {
   fiscal_year?: InputMaybe<Scalars['Int']>;
+};
+
+
+export type OrgRecipient_SummaryArgs = {
+  year: Scalars['String'];
 };
 
 
@@ -498,63 +510,16 @@ export type QueryRootArgs = {
   lang: Scalars['String'];
 };
 
-export type RecipientExpSummary = {
-  __typename?: 'RecipientExpSummary';
-  num_transfer_payments?: Maybe<Scalars['Float']>;
-  programs?: Maybe<Array<Maybe<Scalars['String']>>>;
-  recipient?: Maybe<Scalars['String']>;
-  total_exp?: Maybe<Scalars['Float']>;
-  transfer_payments?: Maybe<Array<Maybe<Recipients>>>;
-  year?: Maybe<Scalars['String']>;
-};
-
-export type RecipientLocation = {
-  __typename?: 'RecipientLocation';
-  ab?: Maybe<Scalars['Float']>;
-  abroad?: Maybe<Scalars['Float']>;
-  bc?: Maybe<Scalars['Float']>;
-  mb?: Maybe<Scalars['Float']>;
-  na?: Maybe<Scalars['Float']>;
-  nb?: Maybe<Scalars['Float']>;
-  nl?: Maybe<Scalars['Float']>;
-  ns?: Maybe<Scalars['Float']>;
-  nt?: Maybe<Scalars['Float']>;
-  nu?: Maybe<Scalars['Float']>;
-  on?: Maybe<Scalars['Float']>;
-  pe?: Maybe<Scalars['Float']>;
-  qc?: Maybe<Scalars['Float']>;
-  sk?: Maybe<Scalars['Float']>;
-  year?: Maybe<Scalars['String']>;
-  yt?: Maybe<Scalars['Float']>;
-};
-
-export type RecipientOverview = {
-  __typename?: 'RecipientOverview';
-  total_tf_exp?: Maybe<Scalars['Float']>;
-  year?: Maybe<Scalars['String']>;
-};
-
-export type RecipientSummary = {
-  __typename?: 'RecipientSummary';
-  id?: Maybe<Scalars['String']>;
-  recipient_exp_summary?: Maybe<Array<Maybe<RecipientExpSummary>>>;
-  recipient_location?: Maybe<Array<Maybe<RecipientLocation>>>;
-  recipient_overview?: Maybe<Array<Maybe<RecipientOverview>>>;
-  report_years?: Maybe<Array<Maybe<Scalars['String']>>>;
-};
-
 export type Recipients = {
   __typename?: 'Recipients';
   city?: Maybe<Scalars['String']>;
   country?: Maybe<Scalars['String']>;
-  department?: Maybe<Scalars['String']>;
   expenditure?: Maybe<Scalars['Float']>;
-  org?: Maybe<Org>;
+  id?: Maybe<Scalars['Float']>;
   org_id?: Maybe<Scalars['String']>;
   program?: Maybe<Scalars['String']>;
   province?: Maybe<Scalars['String']>;
   recipient?: Maybe<Scalars['String']>;
-  record_type?: Maybe<Scalars['String']>;
   year?: Maybe<Scalars['String']>;
 };
 
@@ -840,6 +805,24 @@ export type SummaryHeadcountData = {
   __typename?: 'SummaryHeadcountData';
   dimension?: Maybe<Scalars['String']>;
   yearly_data?: Maybe<Array<Maybe<YearlyData>>>;
+};
+
+export type TopTen = {
+  __typename?: 'TopTen';
+  id?: Maybe<Scalars['String']>;
+  top_ten?: Maybe<Array<Maybe<TopTenSummary>>>;
+  total_exp?: Maybe<Scalars['Float']>;
+  year?: Maybe<Scalars['String']>;
+};
+
+export type TopTenSummary = {
+  __typename?: 'TopTenSummary';
+  index?: Maybe<Scalars['String']>;
+  num_transfer_payments?: Maybe<Scalars['Float']>;
+  recipient?: Maybe<Scalars['String']>;
+  row_id?: Maybe<Scalars['String']>;
+  total_exp?: Maybe<Scalars['Float']>;
+  transfer_payments?: Maybe<Array<Maybe<Recipients>>>;
 };
 
 export type YearlyData = {

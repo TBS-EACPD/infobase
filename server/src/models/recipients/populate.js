@@ -2,137 +2,111 @@ import _ from "lodash";
 
 import { get_standard_csv_file_rows } from "../load_utils.js";
 
-import { provinces_def } from "./constants.js";
+const no_data_or_na_to_null = (value) =>
+  value === "Not Available" || value === null ? "-" : value;
 
 const format_year = (year) => _.split(year, "-")[0];
 
-const format_country = (country) => {
-  if (_.isEmpty(country)) {
-    return "Not Available";
-  } else if (country === "Canada") {
-    return country;
-  } else {
-    return "Abroad";
-  }
-};
-
-const format_province = (province) => {
-  if (_.isEmpty(province)) {
-    return "na";
-  } else if (_.isEmpty(provinces_def[province])) {
-    return "abroad";
-  } else {
-    return provinces_def[province];
-  }
-};
-
 export default async function ({ models }) {
-  const { Recipients, GovRecipientSummary, OrgRecipientSummary } = models;
+  const { Recipients, RecipientSummary } = models;
 
   const raw_recipient_rows = get_standard_csv_file_rows(
     "transfer_payments.csv"
   );
 
-  const recipient_rows = _.chain(raw_recipient_rows)
-    .map(
-      ({
-        fyear: year,
-        org_id,
-        tpname: program,
-        recipient,
-        city,
-        province,
-        country,
-        expenditure,
-      }) => ({
-        year: format_year(year),
-        org_id,
-        program,
-        recipient,
-        city,
-        province,
-        country: format_country(country),
-        expenditure: _.toNumber(expenditure) || 0,
-      })
-    )
-    .forEach((item, index) => {
-      item.id = (index + 1).toString();
-    })
+  const recipient_id_by_recipient_name = _.chain(raw_recipient_rows)
+    .map("recipient")
+    .uniq()
+    .map((recipient, index) => [recipient, index])
+    .fromPairs()
     .value();
 
-  const get_recipient_location_summary = (recipients) =>
-    _.chain(recipients)
-      .map(({ province, country, ...other_fields }) => ({
-        province: format_province(province),
-        country: format_country(country),
-        ...other_fields,
+  const recipient_rows = _.map(
+    raw_recipient_rows,
+    ({
+      fyear: year,
+      org_id,
+      tpname: program,
+      recipient,
+      city,
+      province,
+      country,
+      expenditure,
+    }) => ({
+      id: recipient_id_by_recipient_name[recipient],
+      year: format_year(year),
+      org_id,
+      program,
+      recipient,
+      city: no_data_or_na_to_null(city),
+      province: no_data_or_na_to_null(province),
+      country: no_data_or_na_to_null(country),
+      expenditure: _.toNumber(expenditure) || 0,
+    })
+  );
+
+  const get_top_ten = (recipients) => {
+    const all_recipients = _.chain(recipients)
+      .groupBy("recipient")
+      .map((rows, recipient) => ({
+        recipient,
+        total_exp: _.sumBy(rows, "expenditure"),
+        num_transfer_payments: rows.length,
+        transfer_payments: _.orderBy(rows, "expenditure", "desc"),
       }))
-      .groupBy("year")
-      .map((recipients_grouped_by_year, year) => ({
-        year,
-        ..._.chain(recipients_grouped_by_year)
-          .groupBy("province")
-          .map((value, key) => [key, _.sumBy(value, "expenditure")])
-          .fromPairs()
+      .orderBy("total_exp", "desc")
+      .forEach((item, index) => {
+        item.row_id = (index + 1).toString();
+      })
+      .value();
+
+    const top_ten = _.take(all_recipients, 10);
+    const remaining = _.slice(all_recipients, 10);
+
+    if (remaining.length > 0) {
+      const other_row = {
+        row_id: "11",
+        recipient: "All Other Recipients",
+        total_exp: _.sumBy(remaining, "total_exp"),
+        num_transfer_payments: _.sumBy(remaining, "num_transfer_payments"),
+        transfer_payments: _.chain(remaining)
+          .flatMap("transfer_payments")
+          .orderBy("expenditure", "desc")
           .value(),
-      }))
-      .value();
+      };
+      return [...top_ten, other_row];
+    } else {
+      return top_ten;
+    }
+  };
 
-  const get_recipient_overview = (recipients) =>
-    _.chain(recipients)
-      .groupBy("year")
-      .map((recipients_grouped_by_year, year) => ({
-        year,
-        total_tf_exp: _.sumBy(recipients_grouped_by_year, "expenditure"),
-      }))
-      .value();
-
-  const get_recipient_summary = (recipients) =>
-    _.chain(recipients)
-      .groupBy("year")
-      .flatMap((recipients_by_year, year) =>
-        _.chain(recipients_by_year)
-          .groupBy("recipient")
-          .flatMap((recipient_rows, recipient) => ({
-            year,
-            recipient,
-            total_exp: _.sumBy(recipient_rows, "expenditure"),
-            num_transfer_payments: _.uniqBy(recipient_rows, "program").length,
-            transfer_payments: recipient_rows,
-          }))
-          .orderBy("total_exp", "desc")
-          .take(10)
-          .value()
-      )
-      .value();
-
-  const get_report_years = (recipients) =>
-    _.chain(recipients).map("year").uniq().value();
-
-  const gov_summary = [
-    {
+  const gov_top_ten = _.chain(recipient_rows)
+    .groupBy("year")
+    .flatMap((recipients_per_year, year) => ({
       id: "gov",
-      report_years: get_report_years(recipient_rows),
-      recipient_overview: get_recipient_overview(recipient_rows),
-      recipient_exp_summary: get_recipient_summary(recipient_rows),
-      recipient_location: get_recipient_location_summary(recipient_rows),
-    },
-  ];
-
-  const org_summary = _.chain(recipient_rows)
-    .groupBy("org_id")
-    .flatMap((recipients, org_id) => ({
-      id: org_id,
-      report_years: get_report_years(recipients),
-      recipient_overview: get_recipient_overview(recipients),
-      recipient_exp_summary: get_recipient_summary(recipients),
-      recipient_location: get_recipient_location_summary(recipients),
+      year,
+      top_ten: get_top_ten(recipients_per_year),
+      total_exp: _.sumBy(get_top_ten(recipients_per_year), "total_exp"),
     }))
+    .value();
+
+  const org_top_ten = _.chain(recipient_rows)
+    .groupBy("org_id")
+    .flatMap((recipients_per_org, org_id) =>
+      _.chain(recipients_per_org)
+        .groupBy("year")
+        .flatMap((recipients_per_year, year) => ({
+          id: org_id,
+          year,
+          top_ten: get_top_ten(recipients_per_year),
+          total_exp: _.sumBy(get_top_ten(recipients_per_year), "total_exp"),
+        }))
+        .value()
+    )
     .value();
 
   return await Promise.all([
     Recipients.insertMany(recipient_rows),
-    GovRecipientSummary.insertMany(gov_summary),
-    OrgRecipientSummary.insertMany(org_summary),
+    RecipientSummary.insertMany([...gov_top_ten, ...org_top_ten]),
   ]);
 }

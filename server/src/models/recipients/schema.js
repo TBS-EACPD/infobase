@@ -5,97 +5,79 @@ const schema = `
     recipients(id: String!): Recipients
   }
   extend type Gov {
-    recipient_summary: RecipientSummary
+    years_with_recipient_data: [String]
+    recipient_summary(year: String!): TopTen
   }
   extend type Org {
     recipients: [Recipients]
     has_recipients: Boolean
-    recipient_summary: RecipientSummary
+    years_with_recipient_data: [String]
+    recipient_summary(year: String!): TopTen
   }
 
-  type RecipientSummary {
+  type TopTen {
     id: String
-    report_years: [String]
-    recipient_overview: [RecipientOverview]
-    recipient_exp_summary: [RecipientExpSummary]
-    recipient_location: [RecipientLocation]
-  }
-  type Recipients {
-   year: String,
-   department: String,
-   org_id: String,
-   org: Org,
-   program: String,
-   record_type: String,
-   recipient: String,
-   city: String,
-   province: String,
-   country: String,
-   expenditure: Float,
-  }
-  type RecipientOverview {
-    year: String,
-    total_tf_exp: Float,
-  }
-  type RecipientExpSummary {
     year: String
+    top_ten: [TopTenSummary]
+    total_exp: Float
+  }
+  type TopTenSummary {
+    index: String
+    row_id: String
     recipient: String
     total_exp: Float
     num_transfer_payments: Float
-    programs: [String]
     transfer_payments: [Recipients]
   }
-  type RecipientLocation {
+  type Recipients {
+    id: Float
     year: String
-    qc: Float
-    nb: Float
-    bc: Float
-    on: Float
-    ns: Float
-    mb: Float
-    nl: Float
-    nu: Float
-    na: Float
-    pe: Float
-    nt: Float
-    yt: Float
-    abroad: Float
-    sk: Float
-    ab: Float   
+    org_id: String
+    program: String
+    recipient: String
+    city: String
+    province: String
+    country: String
+    expenditure: Float
   }
 `;
 
 export default function ({ models, loaders }) {
   const { Recipients } = models;
 
-  const {
-    org_id_loader,
-    recipients_loader,
-    recipients_by_org_id,
-    gov_recipient_summary_loader,
-    org_recipient_summary_loader,
-  } = loaders;
+  const { recipients_loader, recipients_by_org_id, recipient_summary_loader } =
+    loaders;
 
   const org_has_recipients = async (org_id) => {
     const has_recipients = await Recipients.findOne({ org_id: org_id });
     return !_.isNull(has_recipients);
   };
 
+  const get_report_years = _.curry((data) => {
+    return _.map(data, "year");
+  });
+
+  const filter_for_year = _.curry((year, data) => {
+    return _.find(data, { year: year });
+  });
+
   const resolvers = {
     Root: {
       recipients: (_x, { id }) => recipients_loader.load(id).then(_.first),
     },
     Gov: {
-      recipient_summary: () => gov_recipient_summary_loader.load("gov"),
+      years_with_recipient_data: () =>
+        recipient_summary_loader.load("gov").then(get_report_years()),
+      recipient_summary: (_x, { year }) =>
+        recipient_summary_loader.load("gov").then(filter_for_year(year)),
     },
     Org: {
       recipients: ({ org_id }) => recipients_by_org_id.load(org_id),
       has_recipients: ({ org_id }) => org_has_recipients(org_id),
-      recipient_summary: ({ org_id }) =>
-        org_recipient_summary_loader.load(org_id),
-    },
-    Recipients: {
-      org: ({ org_id }) => org_id_loader.load(org_id),
+      years_with_recipient_data: ({ org_id }) =>
+        recipient_summary_loader.load(org_id).then(get_report_years()),
+      recipient_summary: ({ org_id }, { year }) =>
+        recipient_summary_loader.load(org_id).then(filter_for_year(year)),
     },
   };
   return {
