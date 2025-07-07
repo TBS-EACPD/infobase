@@ -22,11 +22,10 @@ export default function (model_singleton) {
   });
 
   const RecipientSummarySchema = mongoose.Schema({
-    id: str_type,
+    subject_id: str_type,
     year: str_type,
     top_ten: [
       {
-        index: str_type,
         row_id: str_type,
         recipient: str_type,
         total_exp: number_type,
@@ -53,7 +52,7 @@ export default function (model_singleton) {
     ),
     recipient_summary_loader: create_resource_by_foreignkey_attr_dataloader(
       RecipientSummary,
-      "id"
+      "subject_id"
     ),
   };
 

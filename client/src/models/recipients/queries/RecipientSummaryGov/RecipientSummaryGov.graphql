@@ -2,7 +2,7 @@ query RecipientSummaryGov($lang: String!, $year: String!) {
   root(lang: $lang) {
     gov {
       recipient_summary(year: $year) {
-        id
+        subject_id
         year
         total_exp
         top_ten {

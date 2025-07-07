@@ -280,7 +280,6 @@ export type Org = SubjectI & {
   faa_schedule_hr_status?: Maybe<Scalars['String']>;
   faa_schedule_institutional?: Maybe<Scalars['String']>;
   federal_ownership?: Maybe<Scalars['String']>;
-  has_recipients?: Maybe<Scalars['Boolean']>;
   has_results?: Maybe<Scalars['Boolean']>;
   has_services?: Maybe<Scalars['Boolean']>;
   id?: Maybe<Scalars['String']>;
@@ -810,6 +809,7 @@ export type SummaryHeadcountData = {
 export type TopTen = {
   __typename?: 'TopTen';
   id?: Maybe<Scalars['String']>;
+  subject_id?: Maybe<Scalars['String']>;
   top_ten?: Maybe<Array<Maybe<TopTenSummary>>>;
   total_exp?: Maybe<Scalars['Float']>;
   year?: Maybe<Scalars['String']>;
@@ -817,7 +817,6 @@ export type TopTen = {
 
 export type TopTenSummary = {
   __typename?: 'TopTenSummary';
-  index?: Maybe<Scalars['String']>;
   num_transfer_payments?: Maybe<Scalars['Float']>;
   recipient?: Maybe<Scalars['String']>;
   row_id?: Maybe<Scalars['String']>;

@@ -2,7 +2,7 @@ query RecipientSummaryOrg($lang: String!, $id: String, $year: String!) {
   root(lang: $lang) {
     org(org_id: $id) {
       recipient_summary(year: $year) {
-        id
+        subject_id
         year
         total_exp
         top_ten {

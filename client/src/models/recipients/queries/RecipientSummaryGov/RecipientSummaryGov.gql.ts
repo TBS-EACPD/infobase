@@ -9,7 +9,7 @@ export type RecipientSummaryGovQueryVariables = Types.Exact<{
 }>;
 
 
-export type RecipientSummaryGovQuery = { __typename?: 'Query', root: { __typename?: 'Root', gov?: { __typename?: 'Gov', recipient_summary?: { __typename?: 'TopTen', id?: string | null, year?: string | null, total_exp?: number | null, top_ten?: Array<{ __typename?: 'TopTenSummary', row_id?: string | null, recipient?: string | null, total_exp?: number | null, num_transfer_payments?: number | null, transfer_payments?: Array<{ __typename?: 'Recipients', program?: string | null, recipient?: string | null, city?: string | null, province?: string | null, country?: string | null, expenditure?: number | null } | null> | null } | null> | null } | null } | null } };
+export type RecipientSummaryGovQuery = { __typename?: 'Query', root: { __typename?: 'Root', gov?: { __typename?: 'Gov', recipient_summary?: { __typename?: 'TopTen', subject_id?: string | null, year?: string | null, total_exp?: number | null, top_ten?: Array<{ __typename?: 'TopTenSummary', row_id?: string | null, recipient?: string | null, total_exp?: number | null, num_transfer_payments?: number | null, transfer_payments?: Array<{ __typename?: 'Recipients', program?: string | null, recipient?: string | null, city?: string | null, province?: string | null, country?: string | null, expenditure?: number | null } | null> | null } | null> | null } | null } | null } };
 
 
 export const RecipientSummaryGovDocument = gql`
@@ -17,7 +17,7 @@ export const RecipientSummaryGovDocument = gql`
   root(lang: $lang) {
     gov {
       recipient_summary(year: $year) {
-        id
+        subject_id
         year
         total_exp
         top_ten {

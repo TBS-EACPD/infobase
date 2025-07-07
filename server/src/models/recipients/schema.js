@@ -10,19 +10,18 @@ const schema = `
   }
   extend type Org {
     recipients: [Recipients]
-    has_recipients: Boolean
     years_with_recipient_data: [String]
     recipient_summary(year: String!): TopTen
   }
 
   type TopTen {
     id: String
+    subject_id: String
     year: String
     top_ten: [TopTenSummary]
     total_exp: Float
   }
   type TopTenSummary {
-    index: String
     row_id: String
     recipient: String
     total_exp: Float
@@ -42,16 +41,9 @@ const schema = `
   }
 `;
 
-export default function ({ models, loaders }) {
-  const { Recipients } = models;
-
+export default function ({ loaders }) {
   const { recipients_loader, recipients_by_org_id, recipient_summary_loader } =
     loaders;
-
-  const org_has_recipients = async (org_id) => {
-    const has_recipients = await Recipients.findOne({ org_id: org_id });
-    return !_.isNull(has_recipients);
-  };
 
   const get_report_years = _.curry((data) => {
     return _.map(data, "year");
@@ -73,7 +65,6 @@ export default function ({ models, loaders }) {
     },
     Org: {
       recipients: ({ org_id }) => recipients_by_org_id.load(org_id),
-      has_recipients: ({ org_id }) => org_has_recipients(org_id),
       years_with_recipient_data: ({ org_id }) =>
         recipient_summary_loader.load(org_id).then(get_report_years()),
       recipient_summary: ({ org_id }, { year }) =>

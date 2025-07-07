@@ -83,7 +83,7 @@ export default async function ({ models }) {
   const gov_top_ten = _.chain(recipient_rows)
     .groupBy("year")
     .flatMap((recipients_per_year, year) => ({
-      id: "gov",
+      subject_id: "gov",
       year,
       top_ten: get_top_ten(recipients_per_year),
       total_exp: _.sumBy(get_top_ten(recipients_per_year), "total_exp"),
@@ -96,7 +96,7 @@ export default async function ({ models }) {
       _.chain(recipients_per_org)
         .groupBy("year")
         .flatMap((recipients_per_year, year) => ({
-          id: org_id,
+          subject_id: org_id,
           year,
           top_ten: get_top_ten(recipients_per_year),
           total_exp: _.sumBy(get_top_ten(recipients_per_year), "total_exp"),

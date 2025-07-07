@@ -7,10 +7,7 @@ import {
   api_load_all_covid_measures,
 } from "src/models/covid/populate";
 import { load_footnotes_bundle } from "src/models/footnotes/populate_footnotes";
-import {
-  api_load_has_recipients,
-  api_load_recipients_report_years_data,
-} from "src/models/recipients/populate";
+import { api_load_years_with_recipient_data } from "src/models/recipients/populate";
 import {
   api_load_results_bundle,
   api_load_results_counts,
@@ -121,11 +118,6 @@ function ensure_loaded({
       ? api_load_has_services(subject)
       : Promise.resolve();
 
-  const has_recipients_prom =
-    has_recipients && _.isFunction(subject.set_has_data)
-      ? api_load_has_recipients(subject)
-      : Promise.resolve();
-
   const granular_result_counts_prom = should_load_granular_result_counts
     ? api_load_results_counts("granular", "all")
     : Promise.resolve();
@@ -151,7 +143,7 @@ function ensure_loaded({
     : Promise.resolve();
 
   const recipients_report_years_prom = should_load_recipients
-    ? api_load_recipients_report_years_data(subject)
+    ? api_load_years_with_recipient_data(subject)
     : Promise.resolve();
 
   return Promise.all([
@@ -168,7 +160,6 @@ function ensure_loaded({
     footnotes_prom,
     years_with_covid_data_prom,
     covid_measures_prom,
-    has_recipients_prom,
     recipients_report_years_prom,
   ]);
 }
