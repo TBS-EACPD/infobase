@@ -225,21 +225,10 @@ export default async function ({ models }) {
     .filter(valid_doc_filter)
     .value();
 
-  const dr_result_record = _.filter(result_records, ({ result_id }) =>
-    _.startsWith(result_id, "DR")
-  );
-
-  const pr_result_record = _.filter(result_records, ({ result_id }) =>
-    _.startsWith(result_id, "PROGRAM")
-  );
-
-  const dr_indicator_record = _.filter(indicator_records, ({ result_id }) =>
-    _.startsWith(result_id, "DR")
-  );
-
-  const pr_indicator_record = _.filter(indicator_records, ({ result_id }) =>
-    _.startsWith(result_id, "PROGRAM")
-  );
+  const get_records_by_level = (records, level) =>
+    _.filter(records, ({ result_id }) =>
+      _.startsWith(result_id.toLowerCase(), level)
+    );
 
   const result_count_records = get_result_count_records(
     result_records,
@@ -247,13 +236,13 @@ export default async function ({ models }) {
   );
 
   const dr_result_count_records = get_result_count_records(
-    dr_result_record,
-    dr_indicator_record
+    get_records_by_level(result_records, "dr"),
+    get_records_by_level(indicator_records, "dr")
   );
 
   const pr_result_count_records = get_result_count_records(
-    pr_result_record,
-    pr_indicator_record
+    get_records_by_level(result_records, "program"),
+    get_records_by_level(indicator_records, "program")
   );
 
   await Result.insertMany(result_records);
