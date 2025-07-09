@@ -73,7 +73,7 @@ export const populate_initial_stores_from_lookups = () =>
     });
 
 // TODO, work with pipeline to clean up the headers in igoc_en.csv etc some time, strip the unwanted _en/_fr instances
-const MONOLINGUAL_CSVS_WITH_BILINGUAL_HEADERS = ["igoc", "crso", "program"];
+const MONOLINGUAL_CSVS_WITH_BILINGUAL_HEADERS = ["crso", "program"];
 
 const process_lookups = (lookup_csv_strings: { [x: string]: string }) =>
   _.mapValues(lookup_csv_strings, (csv_string, csv_name) =>

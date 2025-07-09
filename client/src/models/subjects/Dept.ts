@@ -33,8 +33,8 @@ interface DeptDef {
   inst_form_id: string;
   eval_url?: string;
   dept_website?: string;
-  le_la: string;
-  du_de_la: string;
+  le_la: string | undefined;
+  du_de_la: string | undefined;
   other_lang_abbr?: string;
   other_lang_legal_title: string;
   other_lang_applied_title?: string;
