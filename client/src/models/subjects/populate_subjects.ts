@@ -117,8 +117,8 @@ export const populate_depts = (
         dept_website: is_en ? dept_website_en : dept_website_fr,
         eval_url: is_en ? eval_url_en : eval_url_fr,
 
-        le_la: is_en ? undefined : article1_fr,
-        du_de_la: is_en ? undefined : article2_fr,
+        le_la: article1_fr,
+        du_de_la: article2_fr,
 
         ministry_id,
         minister_ids: _.chain(org_to_minister)
