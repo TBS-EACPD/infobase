@@ -11,6 +11,9 @@ import { Program, ProgramTag } from "./Program";
 
 const is_en = lang === "en";
 
+const select_lang = (lang1: string | undefined, lang2: string | undefined) =>
+  is_en ? lang1 : lang2;
+
 export const populate_depts = (
   ministries: ParsedCsvWithUndefineds,
   ministers: ParsedCsvWithUndefineds,
@@ -91,31 +94,37 @@ export const populate_depts = (
       Dept.store.create_and_register({
         ...enforced_required_fields({
           id,
-          legal_title: is_en ? legal_title_en : legal_title_fr,
+          legal_title: select_lang(legal_title_en, legal_title_fr),
           status_code,
           incorp_yr,
           dp_status_code,
           inst_form_id,
-          other_lang_legal_title: is_en ? legal_title_fr : legal_title_en,
+          other_lang_legal_title: select_lang(legal_title_fr, legal_title_en),
         }),
 
         dept_code,
-        abbr: is_en ? abbr_en : abbr_fr,
-        applied_title: is_en ? applied_title_en : applied_title_fr,
-        old_applied_title: is_en ? old_applied_title_en : old_applied_title_fr,
-        legislation: is_en ? legislation_en : legislation_fr,
-        raw_mandate: is_en ? raw_mandate_en : raw_mandate_fr,
+        abbr: select_lang(abbr_en, abbr_fr),
+        applied_title: select_lang(applied_title_en, applied_title_fr),
+        old_applied_title: select_lang(
+          old_applied_title_en,
+          old_applied_title_fr
+        ),
+        legislation: select_lang(legislation_en, legislation_fr),
+        raw_mandate: select_lang(raw_mandate_en, raw_mandate_fr),
         pas_code,
         schedule,
         faa_hr,
-        auditor: is_en ? auditor_en : auditor_fr,
-        fed_ownership: is_en ? fed_ownership_en : fed_ownership_fr,
+        auditor: select_lang(auditor_en, auditor_fr),
+        fed_ownership: select_lang(fed_ownership_en, fed_ownership_fr),
         end_yr,
-        notes: is_en ? notes_en : notes_fr,
-        other_lang_abbr: is_en ? abbr_fr : abbr_en,
-        other_lang_applied_title: is_en ? applied_title_fr : applied_title_en,
-        dept_website: is_en ? dept_website_en : dept_website_fr,
-        eval_url: is_en ? eval_url_en : eval_url_fr,
+        notes: select_lang(notes_en, notes_fr),
+        other_lang_abbr: select_lang(abbr_fr, abbr_en),
+        other_lang_applied_title: select_lang(
+          applied_title_fr,
+          applied_title_en
+        ),
+        dept_website: select_lang(dept_website_en, dept_website_fr),
+        eval_url: select_lang(eval_url_en, eval_url_fr),
 
         le_la: article1_fr,
         du_de_la: article2_fr,
