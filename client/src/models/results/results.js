@@ -517,9 +517,9 @@ const drr_docs = build_doc_info_objects("drr", [
       "https://www.canada.ca/en/treasury-board-secretariat/services/departmental-performance-reports/2023-24-departmental-results-reports.html",
     doc_url_fr:
       "https://www.canada.ca/fr/secretariat-conseil-tresor/services/rapports-ministeriels-rendement/rapport-resultats-ministeriels-2023-2024.html",
-    late_results_orgs: ["278"],
-    late_resources_orgs: ["278"],
-    temp_untabled_orgs: ["124", "152", "253", "238"],
+    late_results_orgs: [],
+    late_resources_orgs: [],
+    temp_untabled_orgs: [],
   },
 ]);
 
@@ -546,8 +546,8 @@ const dp_docs = build_doc_info_objects("dp", [
       "https://www.canada.ca/en/treasury-board-secretariat/services/planned-government-spending/reports-plans-priorities/2024-25-departmental-plans.html",
     doc_url_fr:
       "https://www.canada.ca/fr/secretariat-conseil-tresor/services/depenses-prevues/rapports-plans-priorites/plans-ministeriels-2024-2025.html",
-    late_results_orgs: ["297", "350", "235", "253", "278"],
-    late_resources_orgs: ["297", "253", "278"],
+    late_results_orgs: ["297", "350", "235", "278"],
+    late_resources_orgs: ["297", "278"],
     temp_untabled_orgs: [],
   },
 ]);
