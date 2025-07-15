@@ -57,6 +57,7 @@ const common_lookups = _.map(
     "ministers.csv",
     "ministries.csv",
     "inst_forms.csv",
+    "igoc.csv",
 
     "glossary.csv",
     "faq.csv",
@@ -66,7 +67,7 @@ const common_lookups = _.map(
 
 //these files are big and are explicitly split by the pipeline (bilingual bundles are also used elsewhere, though)
 const lang_specific_lookups = (lang) =>
-  ["program", "crso", "igoc"].map((name) => `${name}_${lang}.csv`);
+  ["program", "crso"].map((name) => `${name}_${lang}.csv`);
 
 const common_lookups_en = _.map(
   lang_specific_lookups("en"),
