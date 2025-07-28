@@ -312,6 +312,46 @@ const LateDrrFteResources = () => {
   );
 };
 
+const LatePlannedFteBanner = () => {
+  const route_filter = (match, _history) =>
+    /^\/(start|tag-explorer|rpb)/.test(match.path);
+
+  const latest_doc = _.last(result_docs_in_tabling_order);
+
+  const late_orgs = latest_doc.late_planned_fte_orgs;
+
+  if (!latest_doc.is_dp || late_orgs.length === 0) {
+    return null;
+  }
+
+  const banner_content = (
+    <Fragment>
+      {
+        {
+          en: `Planned FTE data does not include values from the organizations listed below, as their data is not yet available. Updates will follow.`,
+          fr: `Les données ETP planifiées des organisations ci-dessous ne sont pas encore disponibles. Des mises à jour suivront au fur et à mesure de la transmission de ces données.`,
+        }[lang]
+      }
+      <MultiColumnList
+        list_items={_.map(
+          late_orgs,
+          (org_id) => Dept.store.lookup(org_id).name
+        )}
+        column_count={2}
+      />
+    </Fragment>
+  );
+
+  return (
+    <HeaderBanner
+      route_filter={route_filter}
+      banner_content={banner_content}
+      banner_class="warning"
+      additional_class_names="medium-panel-text"
+    />
+  );
+};
+
 const SpecialWarrantsBanner = () => {
   const route_filter = (match, _history) =>
     /^\/(start|dept|gov)/.test(match.path) && isSpecialWarrants();
@@ -362,6 +402,7 @@ export class StandardRouteContainer extends React.Component {
         <TempUntabledBanner />
         <LateResultsBanner />
         <LateDpResourcesBanner />
+        <LatePlannedFteBanner />
         <LateDrrFteResources />
         <SpecialWarrantsBanner />
         <AnalyticsSynchronizer route_key={route_key} />

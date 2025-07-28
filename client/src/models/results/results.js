@@ -475,6 +475,7 @@ const drr_docs = build_doc_info_objects("drr", [
       "https://www.canada.ca/fr/secretariat-conseil-tresor/services/rapports-ministeriels-rendement/rapport-resultats-ministeriels-2019-2020.html",
     late_results_orgs: [],
     late_resources_orgs: [],
+    late_planned_fte_orgs: [],
     temp_untabled_orgs: [],
   },
   {
@@ -486,6 +487,7 @@ const drr_docs = build_doc_info_objects("drr", [
       "https://www.canada.ca/fr/secretariat-conseil-tresor/services/rapports-ministeriels-rendement/rapport-resultats-ministeriels-2020-2021.html",
     late_results_orgs: [],
     late_resources_orgs: [],
+    late_planned_fte_orgs: [],
     temp_untabled_orgs: [],
   },
   {
@@ -497,6 +499,7 @@ const drr_docs = build_doc_info_objects("drr", [
       "https://www.canada.ca/fr/secretariat-conseil-tresor/services/rapports-ministeriels-rendement/rapport-resultats-ministeriels-2021-2022.html",
     late_results_orgs: [],
     late_resources_orgs: [],
+    late_planned_fte_orgs: [],
     temp_untabled_orgs: [],
   },
   {
@@ -508,6 +511,7 @@ const drr_docs = build_doc_info_objects("drr", [
       "https://www.canada.ca/fr/secretariat-conseil-tresor/services/rapports-ministeriels-rendement/rapport-resultats-ministeriels-2022-2023.html",
     late_results_orgs: [],
     late_resources_orgs: [],
+    late_planned_fte_orgs: [],
     temp_untabled_orgs: [],
   },
   {
@@ -519,6 +523,7 @@ const drr_docs = build_doc_info_objects("drr", [
       "https://www.canada.ca/fr/secretariat-conseil-tresor/services/rapports-ministeriels-rendement/rapport-resultats-ministeriels-2023-2024.html",
     late_results_orgs: [],
     late_resources_orgs: [],
+    late_planned_fte_orgs: [],
     temp_untabled_orgs: [],
   },
 ]);
@@ -533,6 +538,7 @@ const dp_docs = build_doc_info_objects("dp", [
       "https://www.canada.ca/fr/secretariat-conseil-tresor/services/depenses-prevues/rapports-plans-priorites/plans-ministeriels-2025-2026.html",
     late_results_orgs: [],
     late_resources_orgs: [],
+    late_planned_fte_orgs: [],
     temp_untabled_orgs: [],
   },
   {
@@ -548,6 +554,7 @@ const dp_docs = build_doc_info_objects("dp", [
       "https://www.canada.ca/fr/secretariat-conseil-tresor/services/depenses-prevues/rapports-plans-priorites/plans-ministeriels-2024-2025.html",
     late_results_orgs: ["297", "350", "235", "278"],
     late_resources_orgs: ["297", "278"],
+    late_planned_fte_orgs: ["263", "128", "136"],
     temp_untabled_orgs: [],
   },
 ]);

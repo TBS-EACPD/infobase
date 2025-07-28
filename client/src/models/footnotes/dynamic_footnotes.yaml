@@ -65,3 +65,16 @@ late_planned_resources_warning_program:
 late_planned_resources_warning_crso:
   en: Planned spending and planned FTE data for this Core Responsibility is not yet available. An update will follow.
   fr: Dépenses planifiées et ETP prévus pour cette responsabilité essentielle ne sont pas encore disponibles. Une mise à jour suivra.
+
+late_planned_fte_resources_warning_gov:
+  en: Planned FTE data does not include values from the organizations listed below, as their data is not yet available. Updates will follow.
+  fr: Les données ETP planifiées des organisations ci-dessous ne sont pas encore disponibles. Des mises à jour suivront au fur et à mesure de la transmission de ces données.
+late_planned_fte_resources_warning_dept:
+  en: Planned FTE data for this organization is not yet available. An update will follow.
+  fr: Les données ETP planifiées pour cette organisation ne sont pas encore disponibles. Une mise à jour suivra.
+late_planned_fte_resources_warning_program:
+  en: Planned FTE data for this Program is not yet available. An update will follow.
+  fr: Les données ETP planifiées pour ce programme ne sont pas encore disponibles. Une mise à jour suivra.
+late_planned_fte_resources_warning_crso:
+  en: Planned FTE data for this Core Responsibility is not yet available. An update will follow.
+  fr: Les données ETP planifiées pour cette responsabilité essentielle ne sont pas encore disponibles. Une mise à jour suivra.

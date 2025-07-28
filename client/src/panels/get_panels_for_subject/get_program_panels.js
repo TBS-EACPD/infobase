@@ -9,6 +9,7 @@ import {
   declare_temp_untabled_warning_panel,
   declare_late_actual_resources_panel,
   declare_late_planned_resources_panel,
+  declare_late_planned_fte_panel,
 
   // shared dept, crso, program
   declare_profile_panel,
@@ -57,6 +58,7 @@ export const get_program_panels = (subject) =>
       declare_dead_program_warning_panel(),
       declare_late_actual_resources_panel(),
       declare_late_planned_resources_panel(),
+      declare_late_planned_fte_panel(),
       declare_temp_untabled_warning_panel(),
       declare_welcome_mat_panel(),
       declare_vote_stat_split_panel(),
