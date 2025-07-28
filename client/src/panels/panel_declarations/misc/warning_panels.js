@@ -477,6 +477,16 @@ export const declare_late_planned_resources_panel =
     depts_with_late_planned_resources
   );
 
+const depts_with_late_planned_fte = _.chain(result_docs_in_tabling_order)
+  .filter(({ doc_type }) => doc_type === "dp")
+  .last()
+  .get("late_planned_fte_orgs")
+  .value();
+export const declare_late_planned_fte_panel = get_declare_late_resources_panel(
+  "planned_fte",
+  depts_with_late_planned_fte
+);
+
 export const declare_special_warrants_warning_panel = () =>
   declare_panel({
     panel_key: "special_warrants_warning",
