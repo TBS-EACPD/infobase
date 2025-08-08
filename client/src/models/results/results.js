@@ -554,7 +554,7 @@ const dp_docs = build_doc_info_objects("dp", [
       "https://www.canada.ca/fr/secretariat-conseil-tresor/services/depenses-prevues/rapports-plans-priorites/plans-ministeriels-2024-2025.html",
     late_results_orgs: ["297", "350", "235", "278"],
     late_resources_orgs: ["297", "278"],
-    late_planned_fte_orgs: ["263", "128", "136"],
+    late_planned_fte_orgs: [],
     temp_untabled_orgs: [],
   },
 ]);

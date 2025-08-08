@@ -1004,19 +1004,6 @@ Once an RDSP is opened, beneficiaries may be eligible for grant and bond. Grant 
 The CPP’s primary benefit is the retirement pension, however, it also provides pensions to disabled contributors and to the survivors of deceased contributors, as well as flat-rate benefits to the dependant children of disabled and deceased contributors and a one-time lump-sum death benefit.",0,1,0,0
 "HRSD","HRSD-BGN00","BGN04","Personal Support Worker Retirement Savings Innovation Program",,"This program will provide funding to organizations to develop pilot projects. These organizations will provide retirement savings incentives for personal support workers (PSWs) without workplace pension plans. The government will use the program to test different approaches to encourage savings for retirement among PSWs and to find out which works best. The incentives offered through the pilot projects must at least in part match some of the funds invested by PSWs in eligible savings accounts. In addition to helping PSWs save for retirement, the incentives may also encourage them to keep working in the long-term care sector.",0,1,0,0
 "HRSD","HRSD-BGN00","BGN05","Canada Disability Benefit",,"The Canada Disability Benefit is an income-tested benefit for eligible low- and modest-income, working-age (18-64) individuals with severe and prolonged disabilities. The benefit is meant to reduce poverty and support financial and social security among persons with disabilities. It aims to supplement existing disability support programs and is not intended to be an income replacement benefit.",0,1,0,0
-"HRSD","HRSD-BGO00","BG030","Pandemic-related Benefits",,"This program consolidates three temporary benefit programs put in place to help support Canadian workers during the pandemic: 
-
-
-
-•	Canada Emergency Response Benefit;
-
-•	Canada Recovery Benefits (which included the Canada Recovery Benefit, the Canada Recovery Sickness Benefit and the Canada Recovery Caregiving Benefit); and 
-
-•	Canada Worker Lockdown Benefit
-
-
-
-These benefits were administered by the Canada Revenue Agency on behalf of Employment and Social Development Canada.",0,1,0,0
 "HRSD","HRSD-BGO00","BGO01","Employment Insurance",,"Employment Insurance (EI) benefits provide eligible workers with temporary support to partially replace lost employment income. These benefits include regular and fishing benefits for eligible unemployed workers looking for employment or upgrading their skills. Special benefits are available for workers who take time off due to illness, pregnancy, to care for a newborn or newly adopted child, or to provide care or support to a critically ill or injured family member or a family member requiring end of life care.",0,1,0,0
 "HRSD","HRSD-BGO00","BGO02","Workforce Development Agreements",,"The Workforce Development Agreements provide individuals and employers with skills training and employment programs through bilateral agreements with provinces and territories. These agreements support individuals furthest removed from the labour market in finding and keeping employment. This includes specific funding to support persons with disabilities, and a focus on supporting members of underrepresented groups such as Indigenous peoples, youth, older workers, and newcomers to Canada. Provinces and territories work with employers and other stakeholders in their jurisdictions in setting priorities and delivering programs.",0,1,0,0
 "HRSD","HRSD-BGO00","BGO03","Labour Market Development Agreements",,"Labour Market Development Agreements fund programs and services to help Canadians find and return to work. These agreements provide funding to design and deliver Employment Benefits and Support Measures. Employment Benefits provide eligible participants with skills development, self-employment support and wage subsidies; while Support Measures, such as Employment Assistance Services (e.g., employment counselling, job search assistance, needs assessments) are available to all workers. Further support measures include partnerships with labour market stakeholders, and research and innovation activities. This program is funded through Part II of the Employment Insurance Act. Provinces and territories work with employers and other stakeholders in their jurisdictions to set priorities and deliver programming.",0,1,0,0
@@ -1080,6 +1067,19 @@ Eligible workers were required to apply for the benefit for each one-week period
 
 The benefit was available between October 24, 2021, and May 7, 2022, and was administered by the Canada Revenue Agency on behalf of Employment and Social Development Canada.",0,0,0,0
 "HRSD","HRSD-BGO00","BGO29","Canadian Apprenticeship Strategy",,"The Canadian Apprenticeship Strategy (CAS) provides funding to individuals and organizations to: promote the skilled trades as a good career option; help Canadians explore, prepare for, participate and succeed in apprenticeship. It helps employers and unions to participate in apprenticeship, and funds development of innovative tools and approaches to better prepare pre-apprentices, apprentices and journeypersons – including those from equity-deserving groups – for the jobs of tomorrow.",0,1,0,0
+"HRSD","HRSD-BGO00","BGO30","Pandemic-related Benefits",,"This program consolidates three temporary benefit programs put in place to help support Canadian workers during the pandemic: 
+
+
+
+•	Canada Emergency Response Benefit;
+
+•	Canada Recovery Benefits (which included the Canada Recovery Benefit, the Canada Recovery Sickness Benefit and the Canada Recovery Caregiving Benefit); and 
+
+•	Canada Worker Lockdown Benefit
+
+
+
+These benefits were administered by the Canada Revenue Agency on behalf of Employment and Social Development Canada.",0,1,0,0
 "HRSD","HRSD-BGO00","BGO31","Canadian Benefit for Parents of Young Victims of Crime",,"The Canadian Benefit for Parents of Young Victims of Crime (CBPYVC) provides income support to eligible parents or legal guardians who suffer a loss of income while taking time from work to cope with the death or disappearance of their child (or children) under 25 years of age as the result of a probable Criminal Code offense.",0,1,0,0
 "HRSD","HRSD-BGP00","BGP01","Labour Relations",,"The Labour Relations Program (LRP), which includes the Federal Mediation and Conciliation Service (FMCS), promotes cooperative labour relations between unions and employers in federally-regulated workplaces. Federally-regulated workplaces include: banking; telecommunications; broadcasting; air, interprovincial rail, road and pipeline transportation; shipping; uranium mining; grain handling; along with workplaces in the territories, Indigenous public administration and some Crown corporations. The FMCS helps employers and unions negotiate and renew collective agreements and manage relations after implementation. Other program activities include: mediation and conciliation assistance to parties to resolve collective bargaining disputes; dispute prevention skills training; facilitation services; grievance mediation; and others.",0,1,0,0
 "HRSD","HRSD-BGP00","BGP02","Federal Workers' Compensation",,"The Federal Workers’ Compensation Service (FWCS) is responsible for administering the Government Employee Compensation Act (GECA). The Act provides for compensation for medical expenses and treatments, and wage replacement for federal government employees with workplace injuries and occupational illnesses. The provincial workers’ compensation boards (WCBs) are responsible for the claims of federal government employees. The WCBs decide on federal workers’ compensation claims, provide benefits and services such as medical expense payments and wage replacement, and support employees’ return to work. WCBs charge the Labour Program for claim-related costs plus administration fees and the Labour Program recovers these costs from employers.",0,1,0,0
