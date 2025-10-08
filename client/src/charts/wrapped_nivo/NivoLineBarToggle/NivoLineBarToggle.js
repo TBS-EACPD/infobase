@@ -100,6 +100,14 @@ export class NivoLineBarToggle extends React.Component {
       .fromPairs()
       .value();
 
+    // Ensure all series have the same length by padding with 0s
+    const maxLength = _.max(_.map(series, (data) => data.length));
+    _.forEach(series, (data, label) => {
+      if (data.length < maxLength) {
+        series[label] = [...data, ..._.times(maxLength - data.length, () => 0)];
+      }
+    });
+
     const raw_data = _.flatMap(series, (value) => value);
 
     // Create a map of suppressed data points
@@ -122,7 +130,7 @@ export class NivoLineBarToggle extends React.Component {
       // Create the base bar data
       const bar_data = {
         ..._.chain(series)
-          .map((data, label) => [label, data[date_index]])
+          .map((data, label) => [label, data[date_index] || 0]) // Use 0 as fallback for missing data
           .fromPairs()
           .value(),
         date: date, // Add the date to each data point
