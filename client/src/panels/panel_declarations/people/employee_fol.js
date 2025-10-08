@@ -54,31 +54,28 @@ const EmployeeFOLPanel = ({
     return data.fol
       .filter((item) => item && item.yearly_data)
       .map((row) => {
-        // Create suppressed flags array to track which values are suppressed
-        const suppressedFlags = row.yearly_data
-          .filter((entry) => entry)
-          .map((entry) => entry.value === -1);
-
         return {
           label: row.dimension,
           // Store original values for display in tables/tooltips
-          displayData: row.yearly_data
-            .filter((entry) => entry)
-            .map((entry) => (entry.value === -1 ? "*" : entry.value)),
+          displayData: row.yearly_data.map((entry) =>
+            entry ? (entry.value === -1 ? "*" : entry.value) : "*"
+          ),
           // Store numeric values for chart rendering
-          data: row.yearly_data
-            .filter((entry) => entry)
-            .map((entry) => {
-              if (entry.value === -1) {
-                return 5; // Numeric value for suppressed data
-              } else if (entry.value === null || entry.value === undefined) {
-                return 0;
-              } else {
-                return entry.value;
-              }
-            }),
+          data: row.yearly_data.map((entry) => {
+            if (!entry) {
+              return 0; // Handle missing entries
+            } else if (entry.value === -1) {
+              return 5; // Numeric value for suppressed data
+            } else if (entry.value === null || entry.value === undefined) {
+              return 0;
+            } else {
+              return entry.value;
+            }
+          }),
           // Track which values are suppressed for styling
-          suppressedFlags,
+          suppressedFlags: row.yearly_data.map((entry) =>
+            entry ? entry.value === -1 : false
+          ),
           five_year_percent: row.avg_share,
           active: true,
         };
