@@ -13,8 +13,6 @@ import {
   service_type_fr,
 } from "./constants.js";
 
-const internal_service = "ISS0";
-
 const key_to_text_def = (definition, list_values) => {
   if (list_values.length > 1) {
     return _.chain(list_values)
@@ -294,14 +292,7 @@ export default async function ({ models }) {
   const program_activity_codes_formatter = (program_activity_codes, org_id) =>
     _.chain(program_activity_codes)
       .split(",")
-      .map((id) =>
-        _.includes(id, "ISS")
-          ? id &&
-            `${dept_code_by_dept_id[org_id]}-${internal_service.concat(
-              id.slice(-1)
-            )}`
-          : id && `${dept_code_by_dept_id[org_id]}-${id}`
-      )
+      .map((id) => id && `${dept_code_by_dept_id[org_id]}-${id}`)
       .compact()
       .value();
 
@@ -388,9 +379,7 @@ export default async function ({ models }) {
       missing_program_activity_codes: program_activity_codes_formatter(
         program_activity_codes,
         org_id
-      ).filter(
-        (value) => !program_ids.includes(value) && !_.includes(value, "ISS")
-      ),
+      ).filter((value) => !program_ids.includes(value)),
       service_type_code: service_type,
       service_type_en: key_to_text_def(
         service_type_en,
@@ -451,8 +440,8 @@ export default async function ({ models }) {
         submission_year,
         org_id,
         program_activity_codes:
-          all_program_activity_codes.filter(
-            (value) => program_ids.includes(value) || _.includes(value, "ISS")
+          all_program_activity_codes.filter((value) =>
+            program_ids.includes(value)
           ).length > 0
             ? []
             : all_program_activity_codes.filter(
