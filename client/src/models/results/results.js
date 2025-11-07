@@ -467,20 +467,8 @@ const build_doc_info_objects = (doc_type, docs) =>
 // for now, resource_years values will need to be updated manually as program_spending.csv, etc, roll forward
 const drr_docs = build_doc_info_objects("drr", [
   {
-    year_short: "2019",
-    resource_years: ["{{pa_last_year_5}}"],
-    doc_url_en:
-      "https://www.canada.ca/en/treasury-board-secretariat/services/departmental-performance-reports/2019-20-departmental-results-reports.html",
-    doc_url_fr:
-      "https://www.canada.ca/fr/secretariat-conseil-tresor/services/rapports-ministeriels-rendement/rapport-resultats-ministeriels-2019-2020.html",
-    late_results_orgs: [],
-    late_resources_orgs: [],
-    late_planned_fte_orgs: [],
-    temp_untabled_orgs: [],
-  },
-  {
     year_short: "2020",
-    resource_years: ["{{pa_last_year_4}}"],
+    resource_years: ["{{pa_last_year_5}}"],
     doc_url_en:
       "https://www.canada.ca/en/treasury-board-secretariat/services/departmental-performance-reports/2020-21-departmental-results-reports.html",
     doc_url_fr:
@@ -492,7 +480,7 @@ const drr_docs = build_doc_info_objects("drr", [
   },
   {
     year_short: "2021",
-    resource_years: ["{{pa_last_year_3}}"],
+    resource_years: ["{{pa_last_year_4}}"],
     doc_url_en:
       "https://www.canada.ca/en/treasury-board-secretariat/services/departmental-performance-reports/2021-22-departmental-results-reports.html",
     doc_url_fr:
@@ -504,7 +492,7 @@ const drr_docs = build_doc_info_objects("drr", [
   },
   {
     year_short: "2022",
-    resource_years: ["{{pa_last_year_2}}"],
+    resource_years: ["{{pa_last_year_3}}"],
     doc_url_en:
       "https://www.canada.ca/en/treasury-board-secretariat/services/departmental-performance-reports/2022-23-departmental-results-reports.html",
     doc_url_fr:
@@ -516,7 +504,7 @@ const drr_docs = build_doc_info_objects("drr", [
   },
   {
     year_short: "2023",
-    resource_years: ["{{pa_last_year}}"],
+    resource_years: ["{{pa_last_year_2}}"],
     doc_url_en:
       "https://www.canada.ca/en/treasury-board-secretariat/services/departmental-performance-reports/2023-24-departmental-results-reports.html",
     doc_url_fr:
@@ -526,21 +514,21 @@ const drr_docs = build_doc_info_objects("drr", [
     late_planned_fte_orgs: [],
     temp_untabled_orgs: [],
   },
-]);
-
-const dp_docs = build_doc_info_objects("dp", [
   {
     year_short: "2024",
-    resource_years: [],
+    resource_years: ["{{pa_last_year}}"],
     doc_url_en:
-      "https://www.canada.ca/en/treasury-board-secretariat/services/planned-government-spending/reports-plans-priorities/2025-26-departmental-plans.html",
+      "https://www.canada.ca/en/treasury-board-secretariat/services/departmental-performance-reports/2024-25-departmental-results-reports.html",
     doc_url_fr:
-      "https://www.canada.ca/fr/secretariat-conseil-tresor/services/depenses-prevues/rapports-plans-priorites/plans-ministeriels-2025-2026.html",
-    late_results_orgs: [],
+      "https://www.canada.ca/fr/secretariat-conseil-tresor/services/rapports-ministeriels-rendement/rapport-resultats-ministeriels-2024-2025.html",
+    late_results_orgs: ["278", "256", "302"],
     late_resources_orgs: [],
     late_planned_fte_orgs: [],
     temp_untabled_orgs: [],
   },
+]);
+
+const dp_docs = build_doc_info_objects("dp", [
   {
     year_short: "2025",
     resource_years: [
