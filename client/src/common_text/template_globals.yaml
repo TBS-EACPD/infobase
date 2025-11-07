@@ -7,49 +7,49 @@ current_fiscal_year:
   fr: 2025-2026
 
 pa_last_year:
+  en: 2024-25
+  fr: 2024-2025
+pa_last_year_2:
   en: 2023-24
   fr: 2023-2024
-pa_last_year_2:
+pa_last_year_3:
   en: 2022-23
   fr: 2022-2023
-pa_last_year_3:
+pa_last_year_4:
   en: 2021-22
   fr: 2021-2022
-pa_last_year_4:
+pa_last_year_5:
   en: 2020-21
   fr: 2020-2021
-pa_last_year_5:
-  en: 2019-20
-  fr: 2019-2020
 
 
 # should always be in-sync with pa_last_year?
 pa_last_year_planned:
-  en: 2023-24
-  fr: 2023-2024
+  en: 2024-25
+  fr: 2024-2025
 
 
 fte_last_year:
+  en: 2024-25
+  fr: 2024-2025
+fte_last_year_2:
   en: 2023-24
   fr: 2023-2024
-fte_last_year_2:
+fte_last_year_3:
   en: 2022-23
   fr: 2022-2023
-fte_last_year_3:
+fte_last_year_4:
   en: 2021-22
   fr: 2021-2022
-fte_last_year_4:
-  en: 2020-21
-  fr: 202o-2021
 fte_last_year_5:
-  en: 2019-20
-  fr: 2019-2020
+  en: 2020-21
+  fr: 2020-2021
 
 
 
 fte_last_year_planned:
-  en: 2023-24
-  fr: 2023-2024
+  en: 2024-25
+  fr: 2024-2025
 
 est_in_year:
   en: 2025-26

@@ -238,11 +238,18 @@ const LateDpResourcesBanner = () => {
   const route_filter = (match, _history) =>
     /^\/(start|tag-explorer|rpb)/.test(match.path);
 
-  const latest_doc = _.last(result_docs_in_tabling_order);
+  const latest_dp_doc = _.chain(result_docs_in_tabling_order)
+    .filter((doc) => doc.is_dp)
+    .last()
+    .value();
 
-  const late_orgs = latest_doc.late_resources_orgs;
+  if (!latest_dp_doc) {
+    return null;
+  }
 
-  if (!latest_doc.is_dp || late_orgs.length === 0) {
+  const late_orgs = latest_dp_doc.late_resources_orgs;
+
+  if (late_orgs.length === 0) {
     return null;
   }
 
