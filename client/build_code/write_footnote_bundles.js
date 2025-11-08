@@ -149,7 +149,10 @@ function populate_stores(parsed_models) {
 
   // At the end, print the unique list of problematic subject_ids
   if (problematic_subject_ids.length > 0) {
-    console.log("Unique problematic subject_ids:", Array.from(new Set(problematic_subject_ids)));
+    console.log(
+      "Unique problematic subject_ids:",
+      Array.from(new Set(problematic_subject_ids))
+    );
   }
 }
 
