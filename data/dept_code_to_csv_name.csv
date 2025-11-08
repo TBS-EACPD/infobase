@@ -262,6 +262,7 @@ TOUR,org_sobjs
 VAC,org_sobjs
 VIA,org_sobjs
 VRAB,org_sobjs
+WATER,org_sobjs
 WDBA,org_sobjs
 WDO,org_sobjs
 ACOA,org_transfer_payments
@@ -318,6 +319,7 @@ SWC,org_transfer_payments
 TBC,org_transfer_payments
 TC,org_transfer_payments
 VAC,org_transfer_payments
+WATER,org_transfer_payments
 WDO,org_transfer_payments
 ACOA,org_vote_stat_estimates
 AECB,org_vote_stat_estimates
@@ -399,6 +401,7 @@ LAC,org_vote_stat_estimates
 LCC,org_vote_stat_estimates
 LDC,org_vote_stat_estimates
 LP,org_vote_stat_estimates
+MJRC,org_vote_stat_estimates
 MPCC,org_vote_stat_estimates
 NAC,org_vote_stat_estimates
 NBC,org_vote_stat_estimates
@@ -583,6 +586,7 @@ TOUR,org_vote_stat_pa
 VAC,org_vote_stat_pa
 VIA,org_vote_stat_pa
 VRAB,org_vote_stat_pa
+WATER,org_vote_stat_pa
 WDBA,org_vote_stat_pa
 WDO,org_vote_stat_pa
 ACOA,program_ftes
@@ -844,6 +848,7 @@ TOUR,program_sobjs
 VAC,program_sobjs
 VIA,program_sobjs
 VRAB,program_sobjs
+WATER,program_sobjs
 WDBA,program_sobjs
 WDO,program_sobjs
 ACOA,program_spending
@@ -1105,5 +1110,6 @@ TOUR,program_vote_stat
 VAC,program_vote_stat
 VIA,program_vote_stat
 VRAB,program_vote_stat
+WATER,program_vote_stat
 WDBA,program_vote_stat
 WDO,program_vote_stat

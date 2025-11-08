@@ -9,7 +9,8 @@ let all_footnotes,
   global_footnotes,
   footnotes_by_deptcode,
   footnotes_by_tag_id,
-  estimate_footnotes;
+  estimate_footnotes,
+  problematic_subject_ids;
 
 const estimate_topics = ["AUTH", "EST_PROC", "VOTED", "STAT"];
 
@@ -22,6 +23,7 @@ function populate_stores(parsed_models) {
 
   global_footnotes = [];
   estimate_footnotes = [];
+  problematic_subject_ids = [];
 
   const {
     depts,
@@ -81,13 +83,31 @@ function populate_stores(parsed_models) {
       switch (subject_class) {
         case "dept": {
           const dept_code = subject_id;
-          footnotes_by_deptcode[dept_code].push(obj);
+          if (!footnotes_by_deptcode[dept_code]) {
+            console.error(
+              `Missing dept_code in footnotes_by_deptcode (subject_class=dept):`,
+              dept_code
+            );
+            problematic_subject_ids.push(dept_code);
+          } else {
+            footnotes_by_deptcode[dept_code].push(obj);
+          }
           break;
         }
 
         case "program": {
           const dept_code = program_deptcodes[subject_id];
-          footnotes_by_deptcode[dept_code].push(obj);
+          if (!footnotes_by_deptcode[dept_code]) {
+            console.error(
+              `Missing dept_code in footnotes_by_deptcode (subject_class=program):`,
+              dept_code,
+              "for program",
+              subject_id
+            );
+            problematic_subject_ids.push(subject_id);
+          } else {
+            footnotes_by_deptcode[dept_code].push(obj);
+          }
 
           const tag_ids = program_tag_ids[subject_id];
           _.each(tag_ids, (tag_id) => {
@@ -101,8 +121,17 @@ function populate_stores(parsed_models) {
         case "CRSO": {
           const dept_code = crso_deptcodes[subject_id];
           if (dept_code) {
-            //TODO stop this from hapenning on the pipeline side
-            footnotes_by_deptcode[dept_code].push(obj);
+            if (!footnotes_by_deptcode[dept_code]) {
+              console.error(
+                `Missing dept_code in footnotes_by_deptcode (subject_class=crso):`,
+                dept_code,
+                "for crso",
+                subject_id
+              );
+              problematic_subject_ids.push(subject_id);
+            } else {
+              footnotes_by_deptcode[dept_code].push(obj);
+            }
           }
 
           break;
@@ -117,6 +146,11 @@ function populate_stores(parsed_models) {
       }
     }
   });
+
+  // At the end, print the unique list of problematic subject_ids
+  if (problematic_subject_ids.length > 0) {
+    console.log("Unique problematic subject_ids:", Array.from(new Set(problematic_subject_ids)));
+  }
 }
 
 function footnotes_to_csv_string(footnote_objs, lang) {
