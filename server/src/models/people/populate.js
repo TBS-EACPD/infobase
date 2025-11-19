@@ -271,13 +271,20 @@ const process_standard_headcount_dataset = (headcount_type) => {
       // Create a map of year to value for this department-dimension pair
       const yearValueMap = _.chain(records)
         .groupBy("year")
-        .mapValues((yearRecords) =>
-          _.sumBy(yearRecords, (record) =>
-            record.number_of_employees === "*"
-              ? 0
-              : parseInt(record.number_of_employees, 10)
-          )
-        )
+        .mapValues((yearRecords) => {
+          // Check if any record for this year has censored data ("*")
+          const hasCensored = _.some(
+            yearRecords,
+            (record) => record.number_of_employees === "*"
+          );
+          if (hasCensored) {
+            return -1; // Return -1 for censored data
+          }
+          // Otherwise, sum the numeric values
+          return _.sumBy(yearRecords, (record) =>
+            parseInt(record.number_of_employees, 10)
+          );
+        })
         .value();
 
       // Create entries for all years, even missing ones
