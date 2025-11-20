@@ -127,6 +127,7 @@ const process_avg_age_dataset = () => {
   const filteredCsv = transformedCsv.filter(
     (record) =>
       record.department_or_agency !== "Office of the Prime Minister" &&
+      !record.department_or_agency.endsWith(" Total") &&
       recentYears.includes(parseInt(record.year, 10))
   );
 
@@ -190,6 +191,8 @@ const process_standard_headcount_dataset = (headcount_type) => {
   const filteredCsv = transformedCsv.filter(
     (record) =>
       record.department_or_agency !== "Office of the Prime Minister" &&
+      !record.department_or_agency.endsWith(" Total") &&
+      record[headcountTypeMapping[headcount_type]] !== "Total" &&
       recentYears.includes(parseInt(record.year, 10))
   );
 
