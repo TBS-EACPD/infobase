@@ -92,17 +92,17 @@ fte_planning_year_3:
   fr: 2027-2028
 
 ppl_last_year:
+  en: March 2025
+  fr: mars 2025
+ppl_last_year_2:
   en: March 2024
   fr: mars 2024
-ppl_last_year_2:
+ppl_last_year_3:
   en: March 2023
   fr: mars 2023
-ppl_last_year_3:
+ppl_last_year_4:
   en: March 2022
   fr: mars 2022
-ppl_last_year_4:
+ppl_last_year_5:
   en: March 2021
   fr: mars 2021
-ppl_last_year_5:
-  en: March 2020
-  fr: mars 2020
