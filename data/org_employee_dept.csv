@@ -33,12 +33,12 @@ Year,Universe,Department or agency,Number of employees
 2010,CPA,Global Affairs Canada,6968
 2010,CPA,Hazardous Materials Information Review Commission Canada,38
 2010,CPA,Health Canada,10566
+2010,CPA,"Housing, Infrastructure and Communities Canada",332
 2010,CPA,Human Rights Tribunal of Canada,19
 2010,CPA,Immigration and Refugee Board of Canada,998
 2010,CPA,"Immigration, Refugees and Citizenship Canada",4752
 2010,CPA,Impact Assessment Agency of Canada,133
 2010,CPA,Indian Residential Schools Truth and Reconciliation Commission,19
-2010,CPA,Infrastructure Canada,332
 2010,CPA,"Innovation, Science and Economic Development Canada",5769
 2010,CPA,International Joint Commission,28
 2010,CPA,Library and Archives Canada,1148
@@ -133,12 +133,12 @@ Year,Universe,Department or agency,Number of employees
 2011,CPA,Global Affairs Canada,6901
 2011,CPA,Hazardous Materials Information Review Commission Canada,46
 2011,CPA,Health Canada,10403
+2011,CPA,"Housing, Infrastructure and Communities Canada",373
 2011,CPA,Human Rights Tribunal of Canada,23
 2011,CPA,Immigration and Refugee Board of Canada,1078
 2011,CPA,"Immigration, Refugees and Citizenship Canada",4996
 2011,CPA,Impact Assessment Agency of Canada,240
 2011,CPA,Indian Residential Schools Truth and Reconciliation Commission,43
-2011,CPA,Infrastructure Canada,373
 2011,CPA,"Innovation, Science and Economic Development Canada",5581
 2011,CPA,International Joint Commission,30
 2011,CPA,Library and Archives Canada,1184
@@ -233,12 +233,12 @@ Year,Universe,Department or agency,Number of employees
 2012,CPA,Global Affairs Canada,6702
 2012,CPA,Hazardous Materials Information Review Commission Canada,40
 2012,CPA,Health Canada,10578
+2012,CPA,"Housing, Infrastructure and Communities Canada",348
 2012,CPA,Human Rights Tribunal of Canada,20
 2012,CPA,Immigration and Refugee Board of Canada,1060
 2012,CPA,"Immigration, Refugees and Citizenship Canada",5017
 2012,CPA,Impact Assessment Agency of Canada,240
 2012,CPA,Indian Residential Schools Truth and Reconciliation Commission,47
-2012,CPA,Infrastructure Canada,348
 2012,CPA,"Innovation, Science and Economic Development Canada",5233
 2012,CPA,International Joint Commission,28
 2012,CPA,Library and Archives Canada,1145
@@ -331,12 +331,12 @@ Year,Universe,Department or agency,Number of employees
 2013,CPA,Global Affairs Canada,6168
 2013,CPA,Hazardous Materials Information Review Commission Canada,31
 2013,CPA,Health Canada,9701
+2013,CPA,"Housing, Infrastructure and Communities Canada",308
 2013,CPA,Human Rights Tribunal of Canada,21
 2013,CPA,Immigration and Refugee Board of Canada,1034
 2013,CPA,"Immigration, Refugees and Citizenship Canada",4850
 2013,CPA,Impact Assessment Agency of Canada,219
 2013,CPA,Indian Residential Schools Truth and Reconciliation Commission,25
-2013,CPA,Infrastructure Canada,308
 2013,CPA,"Innovation, Science and Economic Development Canada",4773
 2013,CPA,International Joint Commission,32
 2013,CPA,Library and Archives Canada,913
@@ -428,12 +428,12 @@ Year,Universe,Department or agency,Number of employees
 2014,CPA,Fisheries and Oceans Canada,9958
 2014,CPA,Global Affairs Canada,6027
 2014,CPA,Health Canada,9341
+2014,CPA,"Housing, Infrastructure and Communities Canada",288
 2014,CPA,Human Rights Tribunal of Canada,20
 2014,CPA,Immigration and Refugee Board of Canada,983
 2014,CPA,"Immigration, Refugees and Citizenship Canada",5927
 2014,CPA,Impact Assessment Agency of Canada,230
 2014,CPA,Indian Residential Schools Truth and Reconciliation Commission,15
-2014,CPA,Infrastructure Canada,288
 2014,CPA,"Innovation, Science and Economic Development Canada",4711
 2014,CPA,International Joint Commission,31
 2014,CPA,Library and Archives Canada,1043
@@ -522,11 +522,11 @@ Year,Universe,Department or agency,Number of employees
 2015,CPA,Fisheries and Oceans Canada,9858
 2015,CPA,Global Affairs Canada,5973
 2015,CPA,Health Canada,9079
+2015,CPA,"Housing, Infrastructure and Communities Canada",354
 2015,CPA,Immigration and Refugee Board of Canada,954
 2015,CPA,"Immigration, Refugees and Citizenship Canada",6385
 2015,CPA,Impact Assessment Agency of Canada,229
 2015,CPA,Indian Residential Schools Truth and Reconciliation Commission,9
-2015,CPA,Infrastructure Canada,354
 2015,CPA,"Innovation, Science and Economic Development Canada",4742
 2015,CPA,International Joint Commission,32
 2015,CPA,Library and Archives Canada,1026
@@ -611,10 +611,10 @@ Year,Universe,Department or agency,Number of employees
 2016,CPA,Fisheries and Oceans Canada,9901
 2016,CPA,Global Affairs Canada,5890
 2016,CPA,Health Canada,9189
+2016,CPA,"Housing, Infrastructure and Communities Canada",351
 2016,CPA,Immigration and Refugee Board of Canada,973
 2016,CPA,"Immigration, Refugees and Citizenship Canada",6587
 2016,CPA,Impact Assessment Agency of Canada,258
-2016,CPA,Infrastructure Canada,351
 2016,CPA,"Innovation, Science and Economic Development Canada",4776
 2016,CPA,International Joint Commission,32
 2016,CPA,Library and Archives Canada,938
@@ -697,10 +697,10 @@ Year,Universe,Department or agency,Number of employees
 2017,CPA,Fisheries and Oceans Canada,10230
 2017,CPA,Global Affairs Canada,6061
 2017,CPA,Health Canada,9327
+2017,CPA,"Housing, Infrastructure and Communities Canada",329
 2017,CPA,Immigration and Refugee Board of Canada,1031
 2017,CPA,"Immigration, Refugees and Citizenship Canada",6465
 2017,CPA,Impact Assessment Agency of Canada,289
-2017,CPA,Infrastructure Canada,329
 2017,CPA,"Innovation, Science and Economic Development Canada",4947
 2017,CPA,International Joint Commission,32
 2017,CPA,Library and Archives Canada,930
@@ -784,10 +784,10 @@ Year,Universe,Department or agency,Number of employees
 2018,CPA,Fisheries and Oceans Canada,11138
 2018,CPA,Global Affairs Canada,6354
 2018,CPA,Health Canada,9739
+2018,CPA,"Housing, Infrastructure and Communities Canada",401
 2018,CPA,Immigration and Refugee Board of Canada,1087
 2018,CPA,"Immigration, Refugees and Citizenship Canada",6993
 2018,CPA,Impact Assessment Agency of Canada,278
-2018,CPA,Infrastructure Canada,401
 2018,CPA,"Innovation, Science and Economic Development Canada",5146
 2018,CPA,International Joint Commission,31
 2018,CPA,Library and Archives Canada,927
@@ -871,10 +871,10 @@ Year,Universe,Department or agency,Number of employees
 2019,CPA,Fisheries and Oceans Canada,11911
 2019,CPA,Global Affairs Canada,6561
 2019,CPA,Health Canada,10794
+2019,CPA,"Housing, Infrastructure and Communities Canada",514
 2019,CPA,Immigration and Refugee Board of Canada,1413
 2019,CPA,"Immigration, Refugees and Citizenship Canada",7864
 2019,CPA,Impact Assessment Agency of Canada,330
-2019,CPA,Infrastructure Canada,514
 2019,CPA,"Innovation, Science and Economic Development Canada",5459
 2019,CPA,International Joint Commission,30
 2019,CPA,Library and Archives Canada,981
@@ -959,10 +959,10 @@ Year,Universe,Department or agency,Number of employees
 2020,CPA,Fisheries and Oceans Canada,12654
 2020,CPA,Global Affairs Canada,6860
 2020,CPA,Health Canada,11223
+2020,CPA,"Housing, Infrastructure and Communities Canada",617
 2020,CPA,Immigration and Refugee Board of Canada,1742
 2020,CPA,"Immigration, Refugees and Citizenship Canada",8496
 2020,CPA,Impact Assessment Agency of Canada,438
-2020,CPA,Infrastructure Canada,617
 2020,CPA,"Innovation, Science and Economic Development Canada",5516
 2020,CPA,International Joint Commission,34
 2020,CPA,Library and Archives Canada,1000
@@ -1047,11 +1047,11 @@ Year,Universe,Department or agency,Number of employees
 2021,CPA,Fisheries and Oceans Canada,13526
 2021,CPA,Global Affairs Canada,6994
 2021,CPA,Health Canada,9204
+2021,CPA,"Housing, Infrastructure and Communities Canada",700
 2021,CPA,Immigration and Refugee Board of Canada,1993
 2021,CPA,"Immigration, Refugees and Citizenship Canada",8991
 2021,CPA,Impact Assessment Agency of Canada,460
 2021,CPA,Indigenous Services Canada,6670
-2021,CPA,Infrastructure Canada,700
 2021,CPA,"Innovation, Science and Economic Development Canada",5700
 2021,CPA,International Joint Commission,31
 2021,CPA,Library and Archives Canada,926
@@ -1138,11 +1138,11 @@ Year,Universe,Department or agency,Number of employees
 2022,CPA,Fisheries and Oceans Canada,13537
 2022,CPA,Global Affairs Canada,7112
 2022,CPA,Health Canada,9886
+2022,CPA,"Housing, Infrastructure and Communities Canada",1043
 2022,CPA,Immigration and Refugee Board of Canada,2114
 2022,CPA,"Immigration, Refugees and Citizenship Canada",10248
 2022,CPA,Impact Assessment Agency of Canada,432
 2022,CPA,Indigenous Services Canada,7030
-2022,CPA,Infrastructure Canada,1043
 2022,CPA,"Innovation, Science and Economic Development Canada",6094
 2022,CPA,International Joint Commission,33
 2022,CPA,Library and Archives Canada,842
@@ -1229,11 +1229,11 @@ Year,Universe,Department or agency,Number of employees
 2023,CPA,Fisheries and Oceans Canada,14526
 2023,CPA,Global Affairs Canada,7460
 2023,CPA,Health Canada,10003
+2023,CPA,"Housing, Infrastructure and Communities Canada",1350
 2023,CPA,Immigration and Refugee Board of Canada,2304
 2023,CPA,"Immigration, Refugees and Citizenship Canada",12258
 2023,CPA,Impact Assessment Agency of Canada,452
 2023,CPA,Indigenous Services Canada,7722
-2023,CPA,Infrastructure Canada,1350
 2023,CPA,"Innovation, Science and Economic Development Canada",6331
 2023,CPA,International Joint Commission,33
 2023,CPA,Library and Archives Canada,1013
@@ -1321,11 +1321,11 @@ Year,Universe,Department or agency,Number of employees
 2024,CPA,Fisheries and Oceans Canada,14716
 2024,CPA,Global Affairs Canada,7439
 2024,CPA,Health Canada,10187
+2024,CPA,"Housing, Infrastructure and Communities Canada",1506
 2024,CPA,Immigration and Refugee Board of Canada,2579
 2024,CPA,"Immigration, Refugees and Citizenship Canada",13092
 2024,CPA,Impact Assessment Agency of Canada,535
 2024,CPA,Indigenous Services Canada,8637
-2024,CPA,Infrastructure Canada,1506
 2024,CPA,"Innovation, Science and Economic Development Canada",6531
 2024,CPA,International Joint Commission,32
 2024,CPA,Law Commission of Canada,5
@@ -1382,3 +1382,96 @@ Year,Universe,Department or agency,Number of employees
 2024,SA,Social Sciences and Humanities Research Council of Canada,379
 2024,SA,Statistical Survey Operations,9
 2024,SA,The Correctional Investigator Canada,39
+2025,CPA,Accessibility Standards Canada,62
+2025,CPA,Administrative Tribunals Support Service of Canada,679
+2025,CPA,Agriculture and Agri-Food Canada,5690
+2025,CPA,Atlantic Canada Opportunities Agency,579
+2025,CPA,Canada Border Services Agency,17234
+2025,CPA,Canada Economic Development for Quebec Regions,371
+2025,CPA,Canada School of Public Service,597
+2025,CPA,Canadian Dairy Commission,85
+2025,CPA,Canadian Grain Commission,463
+2025,CPA,Canadian Heritage,1910
+2025,CPA,Canadian Human Rights Commission,287
+2025,CPA,Canadian Intergovernmental Conference Secretariat,40
+2025,CPA,Canadian Northern Economic Development Agency,123
+2025,CPA,Canadian Radio-television and Telecommunications Commission,733
+2025,CPA,Canadian Space Agency,1015
+2025,CPA,Canadian Transportation Agency,358
+2025,CPA,Civilian Review and Complaints Commission for the RCMP,96
+2025,CPA,Copyright Board Canada,22
+2025,CPA,Correctional Service Canada,18902
+2025,CPA,Courts Administration Service,831
+2025,CPA,Crown-Indigenous Relations and Northern Affairs Canada,1892
+2025,CPA,Department of Finance Canada,963
+2025,CPA,Department of Justice Canada,5608
+2025,CPA,Elections Canada,1729
+2025,CPA,Employment and Social Development Canada,39154
+2025,CPA,Environment and Climate Change Canada,8778
+2025,CPA,Federal Economic Development Agency for Northern Ontario,103
+2025,CPA,Federal Economic Development Agency for Southern Ontario,240
+2025,CPA,Federal Judges not part of any department,1224
+2025,CPA,Fisheries and Oceans Canada,14451
+2025,CPA,Global Affairs Canada,7657
+2025,CPA,Health Canada,9628
+2025,CPA,"Housing, Infrastructure and Communities Canada",1667
+2025,CPA,Immigration and Refugee Board of Canada,2507
+2025,CPA,"Immigration, Refugees and Citizenship Canada",11148
+2025,CPA,Impact Assessment Agency of Canada,586
+2025,CPA,Indigenous Services Canada,8577
+2025,CPA,"Innovation, Science and Economic Development Canada",6526
+2025,CPA,International Joint Commission,30
+2025,CPA,Law Commission of Canada,6
+2025,CPA,Library and Archives Canada,1138
+2025,CPA,Military Grievances External Review Committee,54
+2025,CPA,Military Police Complaints Commission of Canada,29
+2025,CPA,National Defence,29121
+2025,CPA,Natural Resources Canada,6044
+2025,CPA,Office of the Commissioner for Federal Judicial Affairs Canada,73
+2025,CPA,Office of the Commissioner of Lobbying of Canada,33
+2025,CPA,Office of the Commissioner of Official Languages,170
+2025,CPA,Office of the Governor General's Secretary,163
+2025,CPA,Office of the Public Sector Integrity Commissioner of Canada,35
+2025,CPA,Offices of the Information and Privacy Commissioners of Canada,353
+2025,CPA,Parole Board of Canada,496
+2025,CPA,Patented Medicine Prices Review Board Canada,80
+2025,CPA,Privy Council Office,1208
+2025,CPA,Public Health Agency of Canada,3372
+2025,CPA,Public Prosecution Service of Canada,1149
+2025,CPA,Public Safety Canada,1789
+2025,CPA,Public Service Commission of Canada,803
+2025,CPA,Public Services and Procurement Canada,18936
+2025,CPA,RCMP External Review Committee,23
+2025,CPA,Registrar of the Supreme Court of Canada,249
+2025,CPA,Royal Canadian Mounted Police,11220
+2025,CPA,Secretariat of the National Security and Intelligence Committee of Parliamentarians,10
+2025,CPA,Shared Services Canada,8894
+2025,CPA,Statistics Canada,7274
+2025,CPA,Transport Canada,6666
+2025,CPA,Transportation Safety Board of Canada,230
+2025,CPA,Treasury Board of Canada Secretariat,2374
+2025,CPA,Veterans Affairs Canada,3779
+2025,CPA,Veterans Review and Appeal Board,178
+2025,CPA,Western Economic Diversification Canada,507
+2025,CPA,Women and Gender Equality Canada,395
+2025,SA,Canada Energy Regulator,582
+2025,SA,Canada Revenue Agency,52499
+2025,SA,Canadian Food Inspection Agency,6380
+2025,SA,Canadian Institutes of Health Research,523
+2025,SA,Canadian Nuclear Safety Commission,1004
+2025,SA,Communications Security Establishment,3686
+2025,SA,Financial Consumer Agency of Canada,239
+2025,SA,Financial Transactions and Reports Analysis Centre of Canada,541
+2025,SA,Indian Oil and Gas Canada,87
+2025,SA,National Film Board,343
+2025,SA,National Research Council Canada,4688
+2025,SA,National Security Intelligence and Review Agency,89
+2025,SA,Natural Sciences and Engineering Research Canada,541
+2025,SA,Office of the Auditor General of Canada,746
+2025,SA,Office of the Intelligence Commissioner,4
+2025,SA,Office of the Superintendent of Financial Institutions Canada,1256
+2025,SA,Parks Canada,4842
+2025,SA,Polar Knowledge Canada,92
+2025,SA,Social Sciences and Humanities Research Council of Canada,387
+2025,SA,Statistical Survey Operations,4
+2025,SA,The Correctional Investigator Canada,36

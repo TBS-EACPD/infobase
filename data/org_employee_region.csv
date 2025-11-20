@@ -286,6 +286,7 @@ Year,Department or agency,Province or territory of work,Number of employees
 2010,Health Canada,Quebec (minus the NCR),507
 2010,Health Canada,Saskatchewan,298
 2010,Health Canada,Yukon,19
+2010,"Housing, Infrastructure and Communities Canada",National Capital Region (NCR),332
 2010,Human Rights Tribunal of Canada,National Capital Region (NCR),19
 2010,Immigration and Refugee Board of Canada,Alberta,14
 2010,Immigration and Refugee Board of Canada,British Columbia,113
@@ -312,7 +313,6 @@ Year,Department or agency,Province or territory of work,Number of employees
 2010,Indian Residential Schools Truth and Reconciliation Commission,Manitoba,13
 2010,Indian Residential Schools Truth and Reconciliation Commission,National Capital Region (NCR),4
 2010,Indian Residential Schools Truth and Reconciliation Commission,Northwest Territories,1
-2010,Infrastructure Canada,National Capital Region (NCR),332
 2010,"Innovation, Science and Economic Development Canada",Alberta,110
 2010,"Innovation, Science and Economic Development Canada",British Columbia,163
 2010,"Innovation, Science and Economic Development Canada",Manitoba,77
@@ -916,6 +916,7 @@ Year,Department or agency,Province or territory of work,Number of employees
 2011,Health Canada,Quebec (minus the NCR),513
 2011,Health Canada,Saskatchewan,293
 2011,Health Canada,Yukon,22
+2011,"Housing, Infrastructure and Communities Canada",National Capital Region (NCR),373
 2011,Human Rights Tribunal of Canada,National Capital Region (NCR),23
 2011,Immigration and Refugee Board of Canada,Alberta,17
 2011,Immigration and Refugee Board of Canada,British Columbia,124
@@ -952,7 +953,6 @@ Year,Department or agency,Province or territory of work,Number of employees
 2011,Indian Residential Schools Truth and Reconciliation Commission,Northwest Territories,4
 2011,Indian Residential Schools Truth and Reconciliation Commission,Quebec (minus the NCR),1
 2011,Indian Residential Schools Truth and Reconciliation Commission,Saskatchewan,1
-2011,Infrastructure Canada,National Capital Region (NCR),373
 2011,"Innovation, Science and Economic Development Canada",Alberta,106
 2011,"Innovation, Science and Economic Development Canada",British Columbia,164
 2011,"Innovation, Science and Economic Development Canada",Manitoba,71
@@ -1551,6 +1551,7 @@ Year,Department or agency,Province or territory of work,Number of employees
 2012,Health Canada,Quebec (minus the NCR),517
 2012,Health Canada,Saskatchewan,318
 2012,Health Canada,Yukon,19
+2012,"Housing, Infrastructure and Communities Canada",National Capital Region (NCR),348
 2012,Human Rights Tribunal of Canada,National Capital Region (NCR),20
 2012,Immigration and Refugee Board of Canada,Alberta,13
 2012,Immigration and Refugee Board of Canada,British Columbia,113
@@ -1587,7 +1588,6 @@ Year,Department or agency,Province or territory of work,Number of employees
 2012,Indian Residential Schools Truth and Reconciliation Commission,Northwest Territories,5
 2012,Indian Residential Schools Truth and Reconciliation Commission,Quebec (minus the NCR),1
 2012,Indian Residential Schools Truth and Reconciliation Commission,Saskatchewan,1
-2012,Infrastructure Canada,National Capital Region (NCR),348
 2012,"Innovation, Science and Economic Development Canada",Alberta,97
 2012,"Innovation, Science and Economic Development Canada",British Columbia,162
 2012,"Innovation, Science and Economic Development Canada",Manitoba,70
@@ -2179,6 +2179,7 @@ Year,Department or agency,Province or territory of work,Number of employees
 2013,Health Canada,Quebec (minus the NCR),490
 2013,Health Canada,Saskatchewan,275
 2013,Health Canada,Yukon,12
+2013,"Housing, Infrastructure and Communities Canada",National Capital Region (NCR),308
 2013,Human Rights Tribunal of Canada,National Capital Region (NCR),21
 2013,Immigration and Refugee Board of Canada,Alberta,14
 2013,Immigration and Refugee Board of Canada,British Columbia,105
@@ -2211,7 +2212,6 @@ Year,Department or agency,Province or territory of work,Number of employees
 2013,Indian Residential Schools Truth and Reconciliation Commission,Manitoba,15
 2013,Indian Residential Schools Truth and Reconciliation Commission,National Capital Region (NCR),5
 2013,Indian Residential Schools Truth and Reconciliation Commission,Northwest Territories,2
-2013,Infrastructure Canada,National Capital Region (NCR),308
 2013,"Innovation, Science and Economic Development Canada",Alberta,90
 2013,"Innovation, Science and Economic Development Canada",British Columbia,144
 2013,"Innovation, Science and Economic Development Canada",Manitoba,62
@@ -2802,6 +2802,7 @@ Year,Department or agency,Province or territory of work,Number of employees
 2014,Health Canada,Quebec (minus the NCR),481
 2014,Health Canada,Saskatchewan,267
 2014,Health Canada,Yukon,11
+2014,"Housing, Infrastructure and Communities Canada",National Capital Region (NCR),288
 2014,Human Rights Tribunal of Canada,National Capital Region (NCR),20
 2014,Immigration and Refugee Board of Canada,Alberta,14
 2014,Immigration and Refugee Board of Canada,British Columbia,108
@@ -2833,7 +2834,6 @@ Year,Department or agency,Province or territory of work,Number of employees
 2014,Indian Residential Schools Truth and Reconciliation Commission,Manitoba,10
 2014,Indian Residential Schools Truth and Reconciliation Commission,National Capital Region (NCR),2
 2014,Indian Residential Schools Truth and Reconciliation Commission,Northwest Territories,1
-2014,Infrastructure Canada,National Capital Region (NCR),288
 2014,"Innovation, Science and Economic Development Canada",Alberta,90
 2014,"Innovation, Science and Economic Development Canada",British Columbia,144
 2014,"Innovation, Science and Economic Development Canada",Manitoba,56
@@ -3409,6 +3409,8 @@ Year,Department or agency,Province or territory of work,Number of employees
 2015,Health Canada,Quebec (minus the NCR),469
 2015,Health Canada,Saskatchewan,240
 2015,Health Canada,Yukon,12
+2015,"Housing, Infrastructure and Communities Canada",National Capital Region (NCR),346
+2015,"Housing, Infrastructure and Communities Canada",Quebec (minus the NCR),8
 2015,Immigration and Refugee Board of Canada,Alberta,13
 2015,Immigration and Refugee Board of Canada,British Columbia,103
 2015,Immigration and Refugee Board of Canada,National Capital Region (NCR),280
@@ -3440,8 +3442,6 @@ Year,Department or agency,Province or territory of work,Number of employees
 2015,Indian Residential Schools Truth and Reconciliation Commission,Manitoba,6
 2015,Indian Residential Schools Truth and Reconciliation Commission,National Capital Region (NCR),1
 2015,Indian Residential Schools Truth and Reconciliation Commission,Northwest Territories,1
-2015,Infrastructure Canada,National Capital Region (NCR),346
-2015,Infrastructure Canada,Quebec (minus the NCR),8
 2015,"Innovation, Science and Economic Development Canada",Alberta,85
 2015,"Innovation, Science and Economic Development Canada",British Columbia,148
 2015,"Innovation, Science and Economic Development Canada",Manitoba,53
@@ -4030,6 +4030,8 @@ Year,Department or agency,Province or territory of work,Number of employees
 2016,Health Canada,Saskatchewan,243
 2016,Health Canada,Unknown,80
 2016,Health Canada,Yukon,11
+2016,"Housing, Infrastructure and Communities Canada",National Capital Region (NCR),341
+2016,"Housing, Infrastructure and Communities Canada",Quebec (minus the NCR),10
 2016,Immigration and Refugee Board of Canada,Alberta,11
 2016,Immigration and Refugee Board of Canada,British Columbia,100
 2016,Immigration and Refugee Board of Canada,National Capital Region (NCR),284
@@ -4057,8 +4059,6 @@ Year,Department or agency,Province or territory of work,Number of employees
 2016,Impact Assessment Agency of Canada,Quebec (minus the NCR),11
 2016,Impact Assessment Agency of Canada,Unknown,15
 2016,Indian Oil and Gas Canada,Alberta,85
-2016,Infrastructure Canada,National Capital Region (NCR),341
-2016,Infrastructure Canada,Quebec (minus the NCR),10
 2016,"Innovation, Science and Economic Development Canada",Alberta,91
 2016,"Innovation, Science and Economic Development Canada",British Columbia,157
 2016,"Innovation, Science and Economic Development Canada",Manitoba,51
@@ -4652,6 +4652,9 @@ Year,Department or agency,Province or territory of work,Number of employees
 2017,Health Canada,Saskatchewan,247
 2017,Health Canada,Unknown,62
 2017,Health Canada,Yukon,14
+2017,"Housing, Infrastructure and Communities Canada",National Capital Region (NCR),307
+2017,"Housing, Infrastructure and Communities Canada",Quebec (minus the NCR),12
+2017,"Housing, Infrastructure and Communities Canada",Unknown,10
 2017,Immigration and Refugee Board of Canada,Alberta,13
 2017,Immigration and Refugee Board of Canada,British Columbia,102
 2017,Immigration and Refugee Board of Canada,National Capital Region (NCR),310
@@ -4680,9 +4683,6 @@ Year,Department or agency,Province or territory of work,Number of employees
 2017,Impact Assessment Agency of Canada,Unknown,5
 2017,Indian Oil and Gas Canada,Alberta,87
 2017,Indian Oil and Gas Canada,Unknown,1
-2017,Infrastructure Canada,National Capital Region (NCR),307
-2017,Infrastructure Canada,Quebec (minus the NCR),12
-2017,Infrastructure Canada,Unknown,10
 2017,"Innovation, Science and Economic Development Canada",Alberta,89
 2017,"Innovation, Science and Economic Development Canada",British Columbia,157
 2017,"Innovation, Science and Economic Development Canada",Manitoba,47
@@ -5283,6 +5283,9 @@ Year,Department or agency,Province or territory of work,Number of employees
 2018,Health Canada,Saskatchewan,261
 2018,Health Canada,Unknown,74
 2018,Health Canada,Yukon,15
+2018,"Housing, Infrastructure and Communities Canada",National Capital Region (NCR),379
+2018,"Housing, Infrastructure and Communities Canada",Quebec (minus the NCR),10
+2018,"Housing, Infrastructure and Communities Canada",Unknown,12
 2018,Immigration and Refugee Board of Canada,Alberta,11
 2018,Immigration and Refugee Board of Canada,British Columbia,107
 2018,Immigration and Refugee Board of Canada,National Capital Region (NCR),324
@@ -5312,9 +5315,6 @@ Year,Department or agency,Province or territory of work,Number of employees
 2018,Impact Assessment Agency of Canada,Unknown,3
 2018,Indian Oil and Gas Canada,Alberta,86
 2018,Indian Oil and Gas Canada,Unknown,2
-2018,Infrastructure Canada,National Capital Region (NCR),379
-2018,Infrastructure Canada,Quebec (minus the NCR),10
-2018,Infrastructure Canada,Unknown,12
 2018,"Innovation, Science and Economic Development Canada",Alberta,87
 2018,"Innovation, Science and Economic Development Canada",British Columbia,152
 2018,"Innovation, Science and Economic Development Canada",Manitoba,44
@@ -5922,6 +5922,9 @@ Year,Department or agency,Province or territory of work,Number of employees
 2019,Health Canada,Saskatchewan,267
 2019,Health Canada,Unknown,81
 2019,Health Canada,Yukon,17
+2019,"Housing, Infrastructure and Communities Canada",National Capital Region (NCR),478
+2019,"Housing, Infrastructure and Communities Canada",Quebec (minus the NCR),16
+2019,"Housing, Infrastructure and Communities Canada",Unknown,20
 2019,Immigration and Refugee Board of Canada,Alberta,18
 2019,Immigration and Refugee Board of Canada,British Columbia,135
 2019,Immigration and Refugee Board of Canada,National Capital Region (NCR),354
@@ -5953,9 +5956,6 @@ Year,Department or agency,Province or territory of work,Number of employees
 2019,Impact Assessment Agency of Canada,Unknown,10
 2019,Indian Oil and Gas Canada,Alberta,84
 2019,Indian Oil and Gas Canada,Unknown,3
-2019,Infrastructure Canada,National Capital Region (NCR),478
-2019,Infrastructure Canada,Quebec (minus the NCR),16
-2019,Infrastructure Canada,Unknown,20
 2019,"Innovation, Science and Economic Development Canada",Alberta,99
 2019,"Innovation, Science and Economic Development Canada",British Columbia,145
 2019,"Innovation, Science and Economic Development Canada",Manitoba,46
@@ -6556,6 +6556,9 @@ Year,Department or agency,Province or territory of work,Number of employees
 2020,Health Canada,Saskatchewan,290
 2020,Health Canada,Unknown,85
 2020,Health Canada,Yukon,15
+2020,"Housing, Infrastructure and Communities Canada",National Capital Region (NCR),579
+2020,"Housing, Infrastructure and Communities Canada",Quebec (minus the NCR),24
+2020,"Housing, Infrastructure and Communities Canada",Unknown,14
 2020,Immigration and Refugee Board of Canada,Alberta,20
 2020,Immigration and Refugee Board of Canada,British Columbia,166
 2020,Immigration and Refugee Board of Canada,National Capital Region (NCR),447
@@ -6586,9 +6589,6 @@ Year,Department or agency,Province or territory of work,Number of employees
 2020,Impact Assessment Agency of Canada,Quebec (minus the NCR),24
 2020,Impact Assessment Agency of Canada,Unknown,5
 2020,Indian Oil and Gas Canada,Alberta,88
-2020,Infrastructure Canada,National Capital Region (NCR),579
-2020,Infrastructure Canada,Quebec (minus the NCR),24
-2020,Infrastructure Canada,Unknown,14
 2020,"Innovation, Science and Economic Development Canada",Alberta,95
 2020,"Innovation, Science and Economic Development Canada",British Columbia,154
 2020,"Innovation, Science and Economic Development Canada",Manitoba,46
@@ -7197,6 +7197,11 @@ Year,Department or agency,Province or territory of work,Number of employees
 2021,Health Canada,Saskatchewan,13
 2021,Health Canada,Unknown,57
 2021,Health Canada,Yukon,1
+2021,"Housing, Infrastructure and Communities Canada",British Columbia,1
+2021,"Housing, Infrastructure and Communities Canada",National Capital Region (NCR),670
+2021,"Housing, Infrastructure and Communities Canada",New Brunswick,1
+2021,"Housing, Infrastructure and Communities Canada",Quebec (minus the NCR),18
+2021,"Housing, Infrastructure and Communities Canada",Unknown,10
 2021,Immigration and Refugee Board of Canada,Alberta,23
 2021,Immigration and Refugee Board of Canada,British Columbia,195
 2021,Immigration and Refugee Board of Canada,National Capital Region (NCR),490
@@ -7241,11 +7246,6 @@ Year,Department or agency,Province or territory of work,Number of employees
 2021,Indigenous Services Canada,Saskatchewan,526
 2021,Indigenous Services Canada,Unknown,255
 2021,Indigenous Services Canada,Yukon,11
-2021,Infrastructure Canada,British Columbia,1
-2021,Infrastructure Canada,National Capital Region (NCR),670
-2021,Infrastructure Canada,New Brunswick,1
-2021,Infrastructure Canada,Quebec (minus the NCR),18
-2021,Infrastructure Canada,Unknown,10
 2021,"Innovation, Science and Economic Development Canada",Alberta,90
 2021,"Innovation, Science and Economic Development Canada",British Columbia,171
 2021,"Innovation, Science and Economic Development Canada",Manitoba,40
@@ -7875,6 +7875,10 @@ Year,Department or agency,Province or territory of work,Number of employees
 2022,Health Canada,Saskatchewan,16
 2022,Health Canada,Unknown,58
 2022,Health Canada,Yukon,1
+2022,"Housing, Infrastructure and Communities Canada",British Columbia,3
+2022,"Housing, Infrastructure and Communities Canada",National Capital Region (NCR),998
+2022,"Housing, Infrastructure and Communities Canada",Quebec (minus the NCR),35
+2022,"Housing, Infrastructure and Communities Canada",Unknown,7
 2022,Immigration and Refugee Board of Canada,Alberta,26
 2022,Immigration and Refugee Board of Canada,British Columbia,245
 2022,Immigration and Refugee Board of Canada,National Capital Region (NCR),458
@@ -7917,10 +7921,6 @@ Year,Department or agency,Province or territory of work,Number of employees
 2022,Indigenous Services Canada,Saskatchewan,533
 2022,Indigenous Services Canada,Unknown,229
 2022,Indigenous Services Canada,Yukon,13
-2022,Infrastructure Canada,British Columbia,3
-2022,Infrastructure Canada,National Capital Region (NCR),998
-2022,Infrastructure Canada,Quebec (minus the NCR),35
-2022,Infrastructure Canada,Unknown,7
 2022,"Innovation, Science and Economic Development Canada",Alberta,95
 2022,"Innovation, Science and Economic Development Canada",British Columbia,165
 2022,"Innovation, Science and Economic Development Canada",Manitoba,39
@@ -8543,6 +8543,13 @@ Year,Department or agency,Province or territory of work,Number of employees
 2023,Health Canada,Quebec (minus the NCR),462
 2023,Health Canada,Saskatchewan,17
 2023,Health Canada,Unknown,178
+2023,"Housing, Infrastructure and Communities Canada",Alberta,1
+2023,"Housing, Infrastructure and Communities Canada",British Columbia,7
+2023,"Housing, Infrastructure and Communities Canada",National Capital Region (NCR),1265
+2023,"Housing, Infrastructure and Communities Canada",Nova Scotia,3
+2023,"Housing, Infrastructure and Communities Canada",Prince Edward Island,1
+2023,"Housing, Infrastructure and Communities Canada",Quebec (minus the NCR),40
+2023,"Housing, Infrastructure and Communities Canada",Unknown,33
 2023,Immigration and Refugee Board of Canada,Alberta,26
 2023,Immigration and Refugee Board of Canada,British Columbia,273
 2023,Immigration and Refugee Board of Canada,National Capital Region (NCR),497
@@ -8587,13 +8594,6 @@ Year,Department or agency,Province or territory of work,Number of employees
 2023,Indigenous Services Canada,Saskatchewan,548
 2023,Indigenous Services Canada,Unknown,62
 2023,Indigenous Services Canada,Yukon,19
-2023,Infrastructure Canada,Alberta,1
-2023,Infrastructure Canada,British Columbia,7
-2023,Infrastructure Canada,National Capital Region (NCR),1265
-2023,Infrastructure Canada,Nova Scotia,3
-2023,Infrastructure Canada,Prince Edward Island,1
-2023,Infrastructure Canada,Quebec (minus the NCR),40
-2023,Infrastructure Canada,Unknown,33
 2023,"Innovation, Science and Economic Development Canada",Alberta,99
 2023,"Innovation, Science and Economic Development Canada",British Columbia,167
 2023,"Innovation, Science and Economic Development Canada",Manitoba,42
@@ -9226,6 +9226,19 @@ Year,Department or agency,Province or territory of work,Number of employees
 2024,Health Canada,Quebec (minus the NCR),506
 2024,Health Canada,Saskatchewan,18
 2024,Health Canada,Unknown,140
+2024,"Housing, Infrastructure and Communities Canada",Alberta,9
+2024,"Housing, Infrastructure and Communities Canada",British Columbia,20
+2024,"Housing, Infrastructure and Communities Canada",Manitoba,3
+2024,"Housing, Infrastructure and Communities Canada",National Capital Region (NCR),1300
+2024,"Housing, Infrastructure and Communities Canada",New Brunswick,4
+2024,"Housing, Infrastructure and Communities Canada",Newfoundland and Labrador,3
+2024,"Housing, Infrastructure and Communities Canada",Northwest Territories,1
+2024,"Housing, Infrastructure and Communities Canada",Nova Scotia,4
+2024,"Housing, Infrastructure and Communities Canada",Ontario (minus the NCR),18
+2024,"Housing, Infrastructure and Communities Canada",Prince Edward Island,1
+2024,"Housing, Infrastructure and Communities Canada",Quebec (minus the NCR),119
+2024,"Housing, Infrastructure and Communities Canada",Saskatchewan,1
+2024,"Housing, Infrastructure and Communities Canada",Unknown,23
 2024,Immigration and Refugee Board of Canada,Alberta,63
 2024,Immigration and Refugee Board of Canada,British Columbia,326
 2024,Immigration and Refugee Board of Canada,National Capital Region (NCR),560
@@ -9269,19 +9282,6 @@ Year,Department or agency,Province or territory of work,Number of employees
 2024,Indigenous Services Canada,Saskatchewan,600
 2024,Indigenous Services Canada,Unknown,34
 2024,Indigenous Services Canada,Yukon,19
-2024,Infrastructure Canada,Alberta,9
-2024,Infrastructure Canada,British Columbia,20
-2024,Infrastructure Canada,Manitoba,3
-2024,Infrastructure Canada,National Capital Region (NCR),1300
-2024,Infrastructure Canada,New Brunswick,4
-2024,Infrastructure Canada,Newfoundland and Labrador,3
-2024,Infrastructure Canada,Northwest Territories,1
-2024,Infrastructure Canada,Nova Scotia,4
-2024,Infrastructure Canada,Ontario (minus the NCR),18
-2024,Infrastructure Canada,Prince Edward Island,1
-2024,Infrastructure Canada,Quebec (minus the NCR),119
-2024,Infrastructure Canada,Saskatchewan,1
-2024,Infrastructure Canada,Unknown,23
 2024,"Innovation, Science and Economic Development Canada",Alberta,101
 2024,"Innovation, Science and Economic Development Canada",British Columbia,163
 2024,"Innovation, Science and Economic Development Canada",Manitoba,52
@@ -9609,3 +9609,676 @@ Year,Department or agency,Province or territory of work,Number of employees
 2024,Women and Gender Equality Canada,New Brunswick,9
 2024,Women and Gender Equality Canada,Quebec (minus the NCR),12
 2024,Women and Gender Equality Canada,Unknown,4
+2025,Accessibility Standards Canada,National Capital Region (NCR),61
+2025,Accessibility Standards Canada,Unknown,1
+2025,Administrative Tribunals Support Service of Canada,Alberta,4
+2025,Administrative Tribunals Support Service of Canada,British Columbia,14
+2025,Administrative Tribunals Support Service of Canada,Manitoba,1
+2025,Administrative Tribunals Support Service of Canada,National Capital Region (NCR),561
+2025,Administrative Tribunals Support Service of Canada,New Brunswick,1
+2025,Administrative Tribunals Support Service of Canada,Nova Scotia,2
+2025,Administrative Tribunals Support Service of Canada,Ontario (minus the NCR),65
+2025,Administrative Tribunals Support Service of Canada,Quebec (minus the NCR),29
+2025,Administrative Tribunals Support Service of Canada,Saskatchewan,1
+2025,Administrative Tribunals Support Service of Canada,Unknown,1
+2025,Agriculture and Agri-Food Canada,Alberta,513
+2025,Agriculture and Agri-Food Canada,British Columbia,254
+2025,Agriculture and Agri-Food Canada,Manitoba,632
+2025,Agriculture and Agri-Food Canada,National Capital Region (NCR),2266
+2025,Agriculture and Agri-Food Canada,New Brunswick,185
+2025,Agriculture and Agri-Food Canada,Newfoundland and Labrador,46
+2025,Agriculture and Agri-Food Canada,Northwest Territories,1
+2025,Agriculture and Agri-Food Canada,Nova Scotia,124
+2025,Agriculture and Agri-Food Canada,Ontario (minus the NCR),450
+2025,Agriculture and Agri-Food Canada,Prince Edward Island,82
+2025,Agriculture and Agri-Food Canada,Quebec (minus the NCR),573
+2025,Agriculture and Agri-Food Canada,Saskatchewan,540
+2025,Agriculture and Agri-Food Canada,Unknown,24
+2025,Atlantic Canada Opportunities Agency,National Capital Region (NCR),26
+2025,Atlantic Canada Opportunities Agency,New Brunswick,288
+2025,Atlantic Canada Opportunities Agency,Newfoundland and Labrador,86
+2025,Atlantic Canada Opportunities Agency,Nova Scotia,123
+2025,Atlantic Canada Opportunities Agency,Prince Edward Island,56
+2025,Canada Border Services Agency,Alberta,667
+2025,Canada Border Services Agency,British Columbia,2040
+2025,Canada Border Services Agency,Manitoba,491
+2025,Canada Border Services Agency,National Capital Region (NCR),5753
+2025,Canada Border Services Agency,New Brunswick,471
+2025,Canada Border Services Agency,Newfoundland and Labrador,88
+2025,Canada Border Services Agency,Northwest Territories,2
+2025,Canada Border Services Agency,Nova Scotia,271
+2025,Canada Border Services Agency,Nunavut,1
+2025,Canada Border Services Agency,Ontario (minus the NCR),4615
+2025,Canada Border Services Agency,Outside of Canada,34
+2025,Canada Border Services Agency,Prince Edward Island,4
+2025,Canada Border Services Agency,Quebec (minus the NCR),2568
+2025,Canada Border Services Agency,Saskatchewan,176
+2025,Canada Border Services Agency,Unknown,35
+2025,Canada Border Services Agency,Yukon,18
+2025,Canada Economic Development for Quebec Regions,National Capital Region (NCR),30
+2025,Canada Economic Development for Quebec Regions,Quebec (minus the NCR),340
+2025,Canada Economic Development for Quebec Regions,Unknown,1
+2025,Canada Energy Regulator,Alberta,568
+2025,Canada Energy Regulator,British Columbia,5
+2025,Canada Energy Regulator,Quebec (minus the NCR),9
+2025,Canada Revenue Agency,Alberta,2934
+2025,Canada Revenue Agency,British Columbia,5368
+2025,Canada Revenue Agency,Manitoba,3814
+2025,Canada Revenue Agency,National Capital Region (NCR),16075
+2025,Canada Revenue Agency,New Brunswick,962
+2025,Canada Revenue Agency,Newfoundland and Labrador,2285
+2025,Canada Revenue Agency,Nova Scotia,886
+2025,Canada Revenue Agency,Ontario (minus the NCR),11760
+2025,Canada Revenue Agency,Prince Edward Island,1312
+2025,Canada Revenue Agency,Quebec (minus the NCR),6535
+2025,Canada Revenue Agency,Saskatchewan,566
+2025,Canada Revenue Agency,Unknown,2
+2025,Canada School of Public Service,Alberta,2
+2025,Canada School of Public Service,British Columbia,17
+2025,Canada School of Public Service,Manitoba,4
+2025,Canada School of Public Service,National Capital Region (NCR),511
+2025,Canada School of Public Service,New Brunswick,5
+2025,Canada School of Public Service,Nova Scotia,3
+2025,Canada School of Public Service,Ontario (minus the NCR),18
+2025,Canada School of Public Service,Quebec (minus the NCR),29
+2025,Canada School of Public Service,Unknown,8
+2025,Canadian Dairy Commission,National Capital Region (NCR),85
+2025,Canadian Food Inspection Agency,Alberta,571
+2025,Canadian Food Inspection Agency,British Columbia,533
+2025,Canadian Food Inspection Agency,Manitoba,300
+2025,Canadian Food Inspection Agency,National Capital Region (NCR),1808
+2025,Canadian Food Inspection Agency,New Brunswick,357
+2025,Canadian Food Inspection Agency,Newfoundland and Labrador,97
+2025,Canadian Food Inspection Agency,Nova Scotia,215
+2025,Canadian Food Inspection Agency,Ontario (minus the NCR),1097
+2025,Canadian Food Inspection Agency,Prince Edward Island,124
+2025,Canadian Food Inspection Agency,Quebec (minus the NCR),1064
+2025,Canadian Food Inspection Agency,Saskatchewan,214
+2025,Canadian Grain Commission,Alberta,4
+2025,Canadian Grain Commission,British Columbia,107
+2025,Canadian Grain Commission,Manitoba,256
+2025,Canadian Grain Commission,National Capital Region (NCR),1
+2025,Canadian Grain Commission,Ontario (minus the NCR),24
+2025,Canadian Grain Commission,Quebec (minus the NCR),62
+2025,Canadian Grain Commission,Saskatchewan,9
+2025,Canadian Heritage,Alberta,19
+2025,Canadian Heritage,British Columbia,44
+2025,Canadian Heritage,Manitoba,33
+2025,Canadian Heritage,National Capital Region (NCR),1516
+2025,Canadian Heritage,New Brunswick,28
+2025,Canadian Heritage,Newfoundland and Labrador,8
+2025,Canadian Heritage,Northwest Territories,2
+2025,Canadian Heritage,Nova Scotia,18
+2025,Canadian Heritage,Ontario (minus the NCR),54
+2025,Canadian Heritage,Prince Edward Island,7
+2025,Canadian Heritage,Quebec (minus the NCR),74
+2025,Canadian Heritage,Saskatchewan,11
+2025,Canadian Heritage,Unknown,94
+2025,Canadian Heritage,Yukon,2
+2025,Canadian Human Rights Commission,Alberta,1
+2025,Canadian Human Rights Commission,British Columbia,3
+2025,Canadian Human Rights Commission,National Capital Region (NCR),271
+2025,Canadian Human Rights Commission,Ontario (minus the NCR),2
+2025,Canadian Human Rights Commission,Quebec (minus the NCR),8
+2025,Canadian Human Rights Commission,Unknown,2
+2025,Canadian Institutes of Health Research,National Capital Region (NCR),523
+2025,Canadian Intergovernmental Conference Secretariat,National Capital Region (NCR),40
+2025,Canadian Northern Economic Development Agency,National Capital Region (NCR),36
+2025,Canadian Northern Economic Development Agency,Northwest Territories,23
+2025,Canadian Northern Economic Development Agency,Nunavut,38
+2025,Canadian Northern Economic Development Agency,Unknown,2
+2025,Canadian Northern Economic Development Agency,Yukon,24
+2025,Canadian Nuclear Safety Commission,Alberta,10
+2025,Canadian Nuclear Safety Commission,National Capital Region (NCR),853
+2025,Canadian Nuclear Safety Commission,New Brunswick,8
+2025,Canadian Nuclear Safety Commission,Ontario (minus the NCR),43
+2025,Canadian Nuclear Safety Commission,Quebec (minus the NCR),8
+2025,Canadian Nuclear Safety Commission,Saskatchewan,9
+2025,Canadian Nuclear Safety Commission,Unknown,73
+2025,Canadian Radio-television and Telecommunications Commission,Alberta,1
+2025,Canadian Radio-television and Telecommunications Commission,British Columbia,1
+2025,Canadian Radio-television and Telecommunications Commission,National Capital Region (NCR),723
+2025,Canadian Radio-television and Telecommunications Commission,Nova Scotia,2
+2025,Canadian Radio-television and Telecommunications Commission,Ontario (minus the NCR),2
+2025,Canadian Radio-television and Telecommunications Commission,Saskatchewan,2
+2025,Canadian Radio-television and Telecommunications Commission,Unknown,1
+2025,Canadian Radio-television and Telecommunications Commission,Yukon,1
+2025,Canadian Space Agency,National Capital Region (NCR),100
+2025,Canadian Space Agency,Quebec (minus the NCR),905
+2025,Canadian Space Agency,Unknown,10
+2025,Canadian Transportation Agency,Alberta,2
+2025,Canadian Transportation Agency,British Columbia,2
+2025,Canadian Transportation Agency,National Capital Region (NCR),347
+2025,Canadian Transportation Agency,New Brunswick,1
+2025,Canadian Transportation Agency,Ontario (minus the NCR),3
+2025,Canadian Transportation Agency,Quebec (minus the NCR),2
+2025,Canadian Transportation Agency,Unknown,1
+2025,Civilian Review and Complaints Commission for the RCMP,National Capital Region (NCR),90
+2025,Civilian Review and Complaints Commission for the RCMP,Unknown,6
+2025,Communications Security Establishment,Unknown,3686
+2025,Copyright Board Canada,National Capital Region (NCR),21
+2025,Copyright Board Canada,Unknown,1
+2025,Correctional Service Canada,Alberta,2250
+2025,Correctional Service Canada,British Columbia,2743
+2025,Correctional Service Canada,Manitoba,713
+2025,Correctional Service Canada,National Capital Region (NCR),1639
+2025,Correctional Service Canada,New Brunswick,1323
+2025,Correctional Service Canada,Newfoundland and Labrador,43
+2025,Correctional Service Canada,Northwest Territories,2
+2025,Correctional Service Canada,Nova Scotia,658
+2025,Correctional Service Canada,Nunavut,1
+2025,Correctional Service Canada,Ontario (minus the NCR),3908
+2025,Correctional Service Canada,Prince Edward Island,27
+2025,Correctional Service Canada,Quebec (minus the NCR),3917
+2025,Correctional Service Canada,Saskatchewan,1620
+2025,Correctional Service Canada,Unknown,57
+2025,Correctional Service Canada,Yukon,1
+2025,Courts Administration Service,Alberta,15
+2025,Courts Administration Service,British Columbia,30
+2025,Courts Administration Service,Manitoba,8
+2025,Courts Administration Service,National Capital Region (NCR),636
+2025,Courts Administration Service,Newfoundland and Labrador,1
+2025,Courts Administration Service,Nova Scotia,4
+2025,Courts Administration Service,Ontario (minus the NCR),96
+2025,Courts Administration Service,Quebec (minus the NCR),39
+2025,Courts Administration Service,Unknown,2
+2025,Crown-Indigenous Relations and Northern Affairs Canada,Alberta,30
+2025,Crown-Indigenous Relations and Northern Affairs Canada,British Columbia,168
+2025,Crown-Indigenous Relations and Northern Affairs Canada,Manitoba,25
+2025,Crown-Indigenous Relations and Northern Affairs Canada,National Capital Region (NCR),1305
+2025,Crown-Indigenous Relations and Northern Affairs Canada,New Brunswick,9
+2025,Crown-Indigenous Relations and Northern Affairs Canada,Newfoundland and Labrador,1
+2025,Crown-Indigenous Relations and Northern Affairs Canada,Northwest Territories,85
+2025,Crown-Indigenous Relations and Northern Affairs Canada,Nova Scotia,10
+2025,Crown-Indigenous Relations and Northern Affairs Canada,Nunavut,83
+2025,Crown-Indigenous Relations and Northern Affairs Canada,Ontario (minus the NCR),35
+2025,Crown-Indigenous Relations and Northern Affairs Canada,Quebec (minus the NCR),39
+2025,Crown-Indigenous Relations and Northern Affairs Canada,Saskatchewan,5
+2025,Crown-Indigenous Relations and Northern Affairs Canada,Unknown,1
+2025,Crown-Indigenous Relations and Northern Affairs Canada,Yukon,96
+2025,Department of Finance Canada,National Capital Region (NCR),962
+2025,Department of Finance Canada,Quebec (minus the NCR),1
+2025,Department of Justice Canada,Alberta,262
+2025,Department of Justice Canada,British Columbia,564
+2025,Department of Justice Canada,Manitoba,128
+2025,Department of Justice Canada,National Capital Region (NCR),3204
+2025,Department of Justice Canada,New Brunswick,11
+2025,Department of Justice Canada,Newfoundland and Labrador,1
+2025,Department of Justice Canada,Northwest Territories,10
+2025,Department of Justice Canada,Nova Scotia,135
+2025,Department of Justice Canada,Nunavut,1
+2025,Department of Justice Canada,Ontario (minus the NCR),694
+2025,Department of Justice Canada,Prince Edward Island,11
+2025,Department of Justice Canada,Quebec (minus the NCR),472
+2025,Department of Justice Canada,Saskatchewan,92
+2025,Department of Justice Canada,Unknown,5
+2025,Department of Justice Canada,Yukon,18
+2025,Elections Canada,National Capital Region (NCR),1727
+2025,Elections Canada,Unknown,2
+2025,Employment and Social Development Canada,Alberta,2859
+2025,Employment and Social Development Canada,British Columbia,3012
+2025,Employment and Social Development Canada,Manitoba,1323
+2025,Employment and Social Development Canada,National Capital Region (NCR),9731
+2025,Employment and Social Development Canada,New Brunswick,2499
+2025,Employment and Social Development Canada,Newfoundland and Labrador,1340
+2025,Employment and Social Development Canada,Northwest Territories,19
+2025,Employment and Social Development Canada,Nova Scotia,1053
+2025,Employment and Social Development Canada,Nunavut,12
+2025,Employment and Social Development Canada,Ontario (minus the NCR),9357
+2025,Employment and Social Development Canada,Prince Edward Island,245
+2025,Employment and Social Development Canada,Quebec (minus the NCR),6507
+2025,Employment and Social Development Canada,Saskatchewan,775
+2025,Employment and Social Development Canada,Unknown,407
+2025,Employment and Social Development Canada,Yukon,15
+2025,Environment and Climate Change Canada,Alberta,465
+2025,Environment and Climate Change Canada,British Columbia,782
+2025,Environment and Climate Change Canada,Manitoba,211
+2025,Environment and Climate Change Canada,National Capital Region (NCR),3677
+2025,Environment and Climate Change Canada,New Brunswick,192
+2025,Environment and Climate Change Canada,Newfoundland and Labrador,85
+2025,Environment and Climate Change Canada,Northwest Territories,66
+2025,Environment and Climate Change Canada,Nova Scotia,307
+2025,Environment and Climate Change Canada,Nunavut,22
+2025,Environment and Climate Change Canada,Ontario (minus the NCR),1560
+2025,Environment and Climate Change Canada,Quebec (minus the NCR),1201
+2025,Environment and Climate Change Canada,Saskatchewan,165
+2025,Environment and Climate Change Canada,Unknown,9
+2025,Environment and Climate Change Canada,Yukon,36
+2025,Federal Economic Development Agency for Northern Ontario,National Capital Region (NCR),4
+2025,Federal Economic Development Agency for Northern Ontario,Ontario (minus the NCR),99
+2025,Federal Economic Development Agency for Southern Ontario,National Capital Region (NCR),48
+2025,Federal Economic Development Agency for Southern Ontario,Ontario (minus the NCR),190
+2025,Federal Economic Development Agency for Southern Ontario,Unknown,2
+2025,Federal Judges not part of any department,National Capital Region (NCR),1
+2025,Federal Judges not part of any department,Unknown,1223
+2025,Financial Consumer Agency of Canada,National Capital Region (NCR),231
+2025,Financial Consumer Agency of Canada,Ontario (minus the NCR),8
+2025,Financial Transactions and Reports Analysis Centre of Canada,British Columbia,9
+2025,Financial Transactions and Reports Analysis Centre of Canada,National Capital Region (NCR),159
+2025,Financial Transactions and Reports Analysis Centre of Canada,Ontario (minus the NCR),8
+2025,Financial Transactions and Reports Analysis Centre of Canada,Quebec (minus the NCR),4
+2025,Financial Transactions and Reports Analysis Centre of Canada,Unknown,361
+2025,Fisheries and Oceans Canada,Alberta,45
+2025,Fisheries and Oceans Canada,British Columbia,3562
+2025,Fisheries and Oceans Canada,Manitoba,353
+2025,Fisheries and Oceans Canada,National Capital Region (NCR),2544
+2025,Fisheries and Oceans Canada,New Brunswick,847
+2025,Fisheries and Oceans Canada,Newfoundland and Labrador,1898
+2025,Fisheries and Oceans Canada,Northwest Territories,100
+2025,Fisheries and Oceans Canada,Nova Scotia,2061
+2025,Fisheries and Oceans Canada,Nunavut,54
+2025,Fisheries and Oceans Canada,Ontario (minus the NCR),1038
+2025,Fisheries and Oceans Canada,Prince Edward Island,138
+2025,Fisheries and Oceans Canada,Quebec (minus the NCR),1722
+2025,Fisheries and Oceans Canada,Saskatchewan,12
+2025,Fisheries and Oceans Canada,Unknown,31
+2025,Fisheries and Oceans Canada,Yukon,46
+2025,Global Affairs Canada,Alberta,38
+2025,Global Affairs Canada,British Columbia,29
+2025,Global Affairs Canada,Manitoba,6
+2025,Global Affairs Canada,National Capital Region (NCR),6280
+2025,Global Affairs Canada,New Brunswick,2
+2025,Global Affairs Canada,Newfoundland and Labrador,2
+2025,Global Affairs Canada,Nova Scotia,7
+2025,Global Affairs Canada,Ontario (minus the NCR),37
+2025,Global Affairs Canada,Outside of Canada,1201
+2025,Global Affairs Canada,Prince Edward Island,1
+2025,Global Affairs Canada,Quebec (minus the NCR),34
+2025,Global Affairs Canada,Saskatchewan,3
+2025,Global Affairs Canada,Unknown,17
+2025,Health Canada,Alberta,137
+2025,Health Canada,British Columbia,289
+2025,Health Canada,Manitoba,162
+2025,Health Canada,National Capital Region (NCR),7732
+2025,Health Canada,New Brunswick,33
+2025,Health Canada,Newfoundland and Labrador,21
+2025,Health Canada,Nova Scotia,116
+2025,Health Canada,Ontario (minus the NCR),592
+2025,Health Canada,Prince Edward Island,8
+2025,Health Canada,Quebec (minus the NCR),477
+2025,Health Canada,Saskatchewan,18
+2025,Health Canada,Unknown,43
+2025,"Housing, Infrastructure and Communities Canada",Alberta,11
+2025,"Housing, Infrastructure and Communities Canada",British Columbia,41
+2025,"Housing, Infrastructure and Communities Canada",Manitoba,3
+2025,"Housing, Infrastructure and Communities Canada",National Capital Region (NCR),1405
+2025,"Housing, Infrastructure and Communities Canada",New Brunswick,2
+2025,"Housing, Infrastructure and Communities Canada",Newfoundland and Labrador,3
+2025,"Housing, Infrastructure and Communities Canada",Northwest Territories,3
+2025,"Housing, Infrastructure and Communities Canada",Nova Scotia,27
+2025,"Housing, Infrastructure and Communities Canada",Ontario (minus the NCR),13
+2025,"Housing, Infrastructure and Communities Canada",Quebec (minus the NCR),155
+2025,"Housing, Infrastructure and Communities Canada",Saskatchewan,1
+2025,"Housing, Infrastructure and Communities Canada",Unknown,3
+2025,Immigration and Refugee Board of Canada,Alberta,67
+2025,Immigration and Refugee Board of Canada,British Columbia,308
+2025,Immigration and Refugee Board of Canada,National Capital Region (NCR),562
+2025,Immigration and Refugee Board of Canada,Ontario (minus the NCR),877
+2025,Immigration and Refugee Board of Canada,Quebec (minus the NCR),689
+2025,Immigration and Refugee Board of Canada,Unknown,4
+2025,"Immigration, Refugees and Citizenship Canada",Alberta,575
+2025,"Immigration, Refugees and Citizenship Canada",British Columbia,383
+2025,"Immigration, Refugees and Citizenship Canada",Manitoba,164
+2025,"Immigration, Refugees and Citizenship Canada",National Capital Region (NCR),6517
+2025,"Immigration, Refugees and Citizenship Canada",New Brunswick,42
+2025,"Immigration, Refugees and Citizenship Canada",Newfoundland and Labrador,12
+2025,"Immigration, Refugees and Citizenship Canada",Northwest Territories,1
+2025,"Immigration, Refugees and Citizenship Canada",Nova Scotia,825
+2025,"Immigration, Refugees and Citizenship Canada",Ontario (minus the NCR),1187
+2025,"Immigration, Refugees and Citizenship Canada",Outside of Canada,312
+2025,"Immigration, Refugees and Citizenship Canada",Prince Edward Island,8
+2025,"Immigration, Refugees and Citizenship Canada",Quebec (minus the NCR),996
+2025,"Immigration, Refugees and Citizenship Canada",Saskatchewan,58
+2025,"Immigration, Refugees and Citizenship Canada",Unknown,68
+2025,Impact Assessment Agency of Canada,Alberta,29
+2025,Impact Assessment Agency of Canada,British Columbia,40
+2025,Impact Assessment Agency of Canada,National Capital Region (NCR),428
+2025,Impact Assessment Agency of Canada,Newfoundland and Labrador,12
+2025,Impact Assessment Agency of Canada,Nova Scotia,21
+2025,Impact Assessment Agency of Canada,Ontario (minus the NCR),24
+2025,Impact Assessment Agency of Canada,Quebec (minus the NCR),31
+2025,Impact Assessment Agency of Canada,Unknown,1
+2025,Indian Oil and Gas Canada,Alberta,84
+2025,Indian Oil and Gas Canada,Unknown,3
+2025,Indigenous Services Canada,Alberta,737
+2025,Indigenous Services Canada,British Columbia,375
+2025,Indigenous Services Canada,Manitoba,1133
+2025,Indigenous Services Canada,National Capital Region (NCR),3870
+2025,Indigenous Services Canada,New Brunswick,34
+2025,Indigenous Services Canada,Newfoundland and Labrador,4
+2025,Indigenous Services Canada,Northwest Territories,7
+2025,Indigenous Services Canada,Nova Scotia,362
+2025,Indigenous Services Canada,Ontario (minus the NCR),966
+2025,Indigenous Services Canada,Prince Edward Island,1
+2025,Indigenous Services Canada,Quebec (minus the NCR),470
+2025,Indigenous Services Canada,Saskatchewan,582
+2025,Indigenous Services Canada,Unknown,17
+2025,Indigenous Services Canada,Yukon,19
+2025,"Innovation, Science and Economic Development Canada",Alberta,94
+2025,"Innovation, Science and Economic Development Canada",British Columbia,158
+2025,"Innovation, Science and Economic Development Canada",Manitoba,48
+2025,"Innovation, Science and Economic Development Canada",National Capital Region (NCR),5525
+2025,"Innovation, Science and Economic Development Canada",New Brunswick,17
+2025,"Innovation, Science and Economic Development Canada",Newfoundland and Labrador,18
+2025,"Innovation, Science and Economic Development Canada",Nova Scotia,50
+2025,"Innovation, Science and Economic Development Canada",Ontario (minus the NCR),321
+2025,"Innovation, Science and Economic Development Canada",Prince Edward Island,1
+2025,"Innovation, Science and Economic Development Canada",Quebec (minus the NCR),264
+2025,"Innovation, Science and Economic Development Canada",Saskatchewan,22
+2025,"Innovation, Science and Economic Development Canada",Unknown,8
+2025,International Joint Commission,National Capital Region (NCR),21
+2025,International Joint Commission,Ontario (minus the NCR),9
+2025,Law Commission of Canada,National Capital Region (NCR),5
+2025,Law Commission of Canada,Ontario (minus the NCR),1
+2025,Library and Archives Canada,British Columbia,6
+2025,Library and Archives Canada,Manitoba,43
+2025,Library and Archives Canada,National Capital Region (NCR),1083
+2025,Library and Archives Canada,Nova Scotia,4
+2025,Library and Archives Canada,Unknown,2
+2025,Military Grievances External Review Committee,National Capital Region (NCR),53
+2025,Military Grievances External Review Committee,Unknown,1
+2025,Military Police Complaints Commission of Canada,National Capital Region (NCR),29
+2025,National Defence,Alberta,1601
+2025,National Defence,British Columbia,2626
+2025,National Defence,Manitoba,799
+2025,National Defence,National Capital Region (NCR),12295
+2025,National Defence,New Brunswick,953
+2025,National Defence,Newfoundland and Labrador,116
+2025,National Defence,Northwest Territories,32
+2025,National Defence,Nova Scotia,3363
+2025,National Defence,Ontario (minus the NCR),3965
+2025,National Defence,Outside of Canada,11
+2025,National Defence,Prince Edward Island,11
+2025,National Defence,Quebec (minus the NCR),3171
+2025,National Defence,Saskatchewan,175
+2025,National Defence,Unknown,2
+2025,National Defence,Yukon,1
+2025,National Film Board,Alberta,5
+2025,National Film Board,British Columbia,17
+2025,National Film Board,Manitoba,4
+2025,National Film Board,New Brunswick,4
+2025,National Film Board,Newfoundland and Labrador,1
+2025,National Film Board,Nova Scotia,4
+2025,National Film Board,Ontario (minus the NCR),16
+2025,National Film Board,Quebec (minus the NCR),292
+2025,National Research Council Canada,Alberta,93
+2025,National Research Council Canada,British Columbia,225
+2025,National Research Council Canada,Manitoba,40
+2025,National Research Council Canada,National Capital Region (NCR),1786
+2025,National Research Council Canada,New Brunswick,33
+2025,National Research Council Canada,Newfoundland and Labrador,81
+2025,National Research Council Canada,Nova Scotia,98
+2025,National Research Council Canada,Ontario (minus the NCR),107
+2025,National Research Council Canada,Prince Edward Island,13
+2025,National Research Council Canada,Quebec (minus the NCR),503
+2025,National Research Council Canada,Saskatchewan,85
+2025,National Research Council Canada,Unknown,1624
+2025,National Security Intelligence and Review Agency,National Capital Region (NCR),89
+2025,Natural Resources Canada,Alberta,393
+2025,Natural Resources Canada,British Columbia,362
+2025,Natural Resources Canada,Manitoba,9
+2025,Natural Resources Canada,National Capital Region (NCR),4165
+2025,Natural Resources Canada,New Brunswick,102
+2025,Natural Resources Canada,Newfoundland and Labrador,27
+2025,Natural Resources Canada,Northwest Territories,8
+2025,Natural Resources Canada,Nova Scotia,87
+2025,Natural Resources Canada,Nunavut,5
+2025,Natural Resources Canada,Ontario (minus the NCR),326
+2025,Natural Resources Canada,Prince Edward Island,1
+2025,Natural Resources Canada,Quebec (minus the NCR),529
+2025,Natural Resources Canada,Saskatchewan,11
+2025,Natural Resources Canada,Unknown,14
+2025,Natural Resources Canada,Yukon,5
+2025,Natural Sciences and Engineering Research Canada,British Columbia,2
+2025,Natural Sciences and Engineering Research Canada,National Capital Region (NCR),539
+2025,Office of the Auditor General of Canada,Alberta,11
+2025,Office of the Auditor General of Canada,British Columbia,15
+2025,Office of the Auditor General of Canada,National Capital Region (NCR),674
+2025,Office of the Auditor General of Canada,Nova Scotia,12
+2025,Office of the Auditor General of Canada,Quebec (minus the NCR),29
+2025,Office of the Auditor General of Canada,Unknown,5
+2025,Office of the Commissioner for Federal Judicial Affairs Canada,National Capital Region (NCR),64
+2025,Office of the Commissioner for Federal Judicial Affairs Canada,Unknown,9
+2025,Office of the Commissioner of Lobbying of Canada,National Capital Region (NCR),32
+2025,Office of the Commissioner of Lobbying of Canada,Unknown,1
+2025,Office of the Commissioner of Official Languages,Alberta,2
+2025,Office of the Commissioner of Official Languages,British Columbia,1
+2025,Office of the Commissioner of Official Languages,Manitoba,2
+2025,Office of the Commissioner of Official Languages,National Capital Region (NCR),156
+2025,Office of the Commissioner of Official Languages,New Brunswick,3
+2025,Office of the Commissioner of Official Languages,Ontario (minus the NCR),1
+2025,Office of the Commissioner of Official Languages,Quebec (minus the NCR),4
+2025,Office of the Commissioner of Official Languages,Saskatchewan,1
+2025,Office of the Governor General's Secretary,National Capital Region (NCR),160
+2025,Office of the Governor General's Secretary,Quebec (minus the NCR),3
+2025,Office of the Intelligence Commissioner,Unknown,4
+2025,Office of the Public Sector Integrity Commissioner of Canada,National Capital Region (NCR),34
+2025,Office of the Public Sector Integrity Commissioner of Canada,Unknown,1
+2025,Office of the Superintendent of Financial Institutions Canada,British Columbia,30
+2025,Office of the Superintendent of Financial Institutions Canada,National Capital Region (NCR),523
+2025,Office of the Superintendent of Financial Institutions Canada,Ontario (minus the NCR),674
+2025,Office of the Superintendent of Financial Institutions Canada,Quebec (minus the NCR),28
+2025,Office of the Superintendent of Financial Institutions Canada,Unknown,1
+2025,Offices of the Information and Privacy Commissioners of Canada,National Capital Region (NCR),338
+2025,Offices of the Information and Privacy Commissioners of Canada,Ontario (minus the NCR),13
+2025,Offices of the Information and Privacy Commissioners of Canada,Unknown,2
+2025,Parks Canada,Alberta,927
+2025,Parks Canada,British Columbia,593
+2025,Parks Canada,Manitoba,233
+2025,Parks Canada,National Capital Region (NCR),748
+2025,Parks Canada,New Brunswick,125
+2025,Parks Canada,Newfoundland and Labrador,152
+2025,Parks Canada,Northwest Territories,94
+2025,Parks Canada,Nova Scotia,310
+2025,Parks Canada,Nunavut,67
+2025,Parks Canada,Ontario (minus the NCR),706
+2025,Parks Canada,Prince Edward Island,81
+2025,Parks Canada,Quebec (minus the NCR),512
+2025,Parks Canada,Saskatchewan,143
+2025,Parks Canada,Unknown,67
+2025,Parks Canada,Yukon,84
+2025,Parole Board of Canada,Alberta,47
+2025,Parole Board of Canada,British Columbia,46
+2025,Parole Board of Canada,National Capital Region (NCR),188
+2025,Parole Board of Canada,New Brunswick,43
+2025,Parole Board of Canada,Ontario (minus the NCR),69
+2025,Parole Board of Canada,Quebec (minus the NCR),69
+2025,Parole Board of Canada,Saskatchewan,32
+2025,Parole Board of Canada,Unknown,2
+2025,Patented Medicine Prices Review Board Canada,National Capital Region (NCR),80
+2025,Polar Knowledge Canada,National Capital Region (NCR),54
+2025,Polar Knowledge Canada,Nunavut,37
+2025,Polar Knowledge Canada,Unknown,1
+2025,Privy Council Office,Alberta,4
+2025,Privy Council Office,British Columbia,5
+2025,Privy Council Office,Manitoba,3
+2025,Privy Council Office,National Capital Region (NCR),1163
+2025,Privy Council Office,New Brunswick,2
+2025,Privy Council Office,Newfoundland and Labrador,2
+2025,Privy Council Office,Northwest Territories,1
+2025,Privy Council Office,Nova Scotia,3
+2025,Privy Council Office,Nunavut,1
+2025,Privy Council Office,Ontario (minus the NCR),8
+2025,Privy Council Office,Prince Edward Island,2
+2025,Privy Council Office,Quebec (minus the NCR),7
+2025,Privy Council Office,Saskatchewan,2
+2025,Privy Council Office,Unknown,4
+2025,Privy Council Office,Yukon,1
+2025,Public Health Agency of Canada,Alberta,55
+2025,Public Health Agency of Canada,British Columbia,79
+2025,Public Health Agency of Canada,Manitoba,638
+2025,Public Health Agency of Canada,National Capital Region (NCR),1962
+2025,Public Health Agency of Canada,New Brunswick,14
+2025,Public Health Agency of Canada,Newfoundland and Labrador,15
+2025,Public Health Agency of Canada,Northwest Territories,1
+2025,Public Health Agency of Canada,Nova Scotia,47
+2025,Public Health Agency of Canada,Nunavut,2
+2025,Public Health Agency of Canada,Ontario (minus the NCR),334
+2025,Public Health Agency of Canada,Prince Edward Island,3
+2025,Public Health Agency of Canada,Quebec (minus the NCR),138
+2025,Public Health Agency of Canada,Saskatchewan,22
+2025,Public Health Agency of Canada,Unknown,55
+2025,Public Health Agency of Canada,Yukon,7
+2025,Public Prosecution Service of Canada,Alberta,117
+2025,Public Prosecution Service of Canada,British Columbia,126
+2025,Public Prosecution Service of Canada,Manitoba,48
+2025,Public Prosecution Service of Canada,National Capital Region (NCR),280
+2025,Public Prosecution Service of Canada,New Brunswick,13
+2025,Public Prosecution Service of Canada,Newfoundland and Labrador,8
+2025,Public Prosecution Service of Canada,Northwest Territories,60
+2025,Public Prosecution Service of Canada,Nova Scotia,52
+2025,Public Prosecution Service of Canada,Nunavut,47
+2025,Public Prosecution Service of Canada,Ontario (minus the NCR),231
+2025,Public Prosecution Service of Canada,Quebec (minus the NCR),97
+2025,Public Prosecution Service of Canada,Saskatchewan,32
+2025,Public Prosecution Service of Canada,Unknown,1
+2025,Public Prosecution Service of Canada,Yukon,37
+2025,Public Safety Canada,Alberta,16
+2025,Public Safety Canada,British Columbia,32
+2025,Public Safety Canada,Manitoba,18
+2025,Public Safety Canada,National Capital Region (NCR),1592
+2025,Public Safety Canada,New Brunswick,10
+2025,Public Safety Canada,Newfoundland and Labrador,4
+2025,Public Safety Canada,Northwest Territories,1
+2025,Public Safety Canada,Nova Scotia,17
+2025,Public Safety Canada,Ontario (minus the NCR),41
+2025,Public Safety Canada,Outside of Canada,2
+2025,Public Safety Canada,Prince Edward Island,2
+2025,Public Safety Canada,Quebec (minus the NCR),35
+2025,Public Safety Canada,Saskatchewan,10
+2025,Public Safety Canada,Unknown,9
+2025,Public Service Commission of Canada,British Columbia,14
+2025,Public Service Commission of Canada,Manitoba,1
+2025,Public Service Commission of Canada,National Capital Region (NCR),674
+2025,Public Service Commission of Canada,Nova Scotia,32
+2025,Public Service Commission of Canada,Nunavut,1
+2025,Public Service Commission of Canada,Ontario (minus the NCR),16
+2025,Public Service Commission of Canada,Quebec (minus the NCR),64
+2025,Public Service Commission of Canada,Unknown,1
+2025,Public Services and Procurement Canada,Alberta,413
+2025,Public Services and Procurement Canada,British Columbia,617
+2025,Public Services and Procurement Canada,Manitoba,308
+2025,Public Services and Procurement Canada,National Capital Region (NCR),11494
+2025,Public Services and Procurement Canada,New Brunswick,3000
+2025,Public Services and Procurement Canada,Newfoundland and Labrador,98
+2025,Public Services and Procurement Canada,Northwest Territories,10
+2025,Public Services and Procurement Canada,Nova Scotia,435
+2025,Public Services and Procurement Canada,Nunavut,8
+2025,Public Services and Procurement Canada,Ontario (minus the NCR),749
+2025,Public Services and Procurement Canada,Outside of Canada,4
+2025,Public Services and Procurement Canada,Prince Edward Island,173
+2025,Public Services and Procurement Canada,Quebec (minus the NCR),1517
+2025,Public Services and Procurement Canada,Saskatchewan,59
+2025,Public Services and Procurement Canada,Unknown,46
+2025,Public Services and Procurement Canada,Yukon,5
+2025,RCMP External Review Committee,National Capital Region (NCR),23
+2025,Registrar of the Supreme Court of Canada,National Capital Region (NCR),249
+2025,Royal Canadian Mounted Police,Alberta,1135
+2025,Royal Canadian Mounted Police,British Columbia,1824
+2025,Royal Canadian Mounted Police,Manitoba,444
+2025,Royal Canadian Mounted Police,National Capital Region (NCR),4649
+2025,Royal Canadian Mounted Police,New Brunswick,618
+2025,Royal Canadian Mounted Police,Newfoundland and Labrador,237
+2025,Royal Canadian Mounted Police,Northwest Territories,49
+2025,Royal Canadian Mounted Police,Nova Scotia,364
+2025,Royal Canadian Mounted Police,Nunavut,22
+2025,Royal Canadian Mounted Police,Ontario (minus the NCR),354
+2025,Royal Canadian Mounted Police,Prince Edward Island,54
+2025,Royal Canadian Mounted Police,Quebec (minus the NCR),361
+2025,Royal Canadian Mounted Police,Saskatchewan,1052
+2025,Royal Canadian Mounted Police,Unknown,11
+2025,Royal Canadian Mounted Police,Yukon,46
+2025,Secretariat of the National Security and Intelligence Committee of Parliamentarians,National Capital Region (NCR),10
+2025,Shared Services Canada,Alberta,213
+2025,Shared Services Canada,British Columbia,253
+2025,Shared Services Canada,Manitoba,108
+2025,Shared Services Canada,National Capital Region (NCR),6091
+2025,Shared Services Canada,New Brunswick,428
+2025,Shared Services Canada,Newfoundland and Labrador,50
+2025,Shared Services Canada,Northwest Territories,2
+2025,Shared Services Canada,Nova Scotia,169
+2025,Shared Services Canada,Nunavut,3
+2025,Shared Services Canada,Ontario (minus the NCR),572
+2025,Shared Services Canada,Prince Edward Island,82
+2025,Shared Services Canada,Quebec (minus the NCR),843
+2025,Shared Services Canada,Saskatchewan,36
+2025,Shared Services Canada,Unknown,41
+2025,Shared Services Canada,Yukon,3
+2025,Social Sciences and Humanities Research Council of Canada,National Capital Region (NCR),387
+2025,Statistical Survey Operations,British Columbia,1
+2025,Statistical Survey Operations,Nova Scotia,2
+2025,Statistical Survey Operations,Quebec (minus the NCR),1
+2025,Statistics Canada,Alberta,281
+2025,Statistics Canada,British Columbia,153
+2025,Statistics Canada,Manitoba,254
+2025,Statistics Canada,National Capital Region (NCR),5187
+2025,Statistics Canada,New Brunswick,3
+2025,Statistics Canada,Northwest Territories,8
+2025,Statistics Canada,Nova Scotia,302
+2025,Statistics Canada,Nunavut,1
+2025,Statistics Canada,Ontario (minus the NCR),563
+2025,Statistics Canada,Quebec (minus the NCR),413
+2025,Statistics Canada,Saskatchewan,2
+2025,Statistics Canada,Unknown,102
+2025,Statistics Canada,Yukon,5
+2025,The Correctional Investigator Canada,National Capital Region (NCR),35
+2025,The Correctional Investigator Canada,Unknown,1
+2025,Transport Canada,Alberta,188
+2025,Transport Canada,British Columbia,609
+2025,Transport Canada,Manitoba,275
+2025,Transport Canada,National Capital Region (NCR),3993
+2025,Transport Canada,New Brunswick,253
+2025,Transport Canada,Newfoundland and Labrador,95
+2025,Transport Canada,Northwest Territories,4
+2025,Transport Canada,Nova Scotia,106
+2025,Transport Canada,Nunavut,2
+2025,Transport Canada,Ontario (minus the NCR),477
+2025,Transport Canada,Prince Edward Island,5
+2025,Transport Canada,Quebec (minus the NCR),626
+2025,Transport Canada,Saskatchewan,21
+2025,Transport Canada,Unknown,8
+2025,Transport Canada,Yukon,4
+2025,Transportation Safety Board of Canada,Alberta,15
+2025,Transportation Safety Board of Canada,British Columbia,14
+2025,Transportation Safety Board of Canada,Manitoba,9
+2025,Transportation Safety Board of Canada,National Capital Region (NCR),147
+2025,Transportation Safety Board of Canada,Newfoundland and Labrador,3
+2025,Transportation Safety Board of Canada,Nova Scotia,10
+2025,Transportation Safety Board of Canada,Ontario (minus the NCR),14
+2025,Transportation Safety Board of Canada,Quebec (minus the NCR),15
+2025,Transportation Safety Board of Canada,Saskatchewan,1
+2025,Transportation Safety Board of Canada,Unknown,2
+2025,Treasury Board of Canada Secretariat,British Columbia,1
+2025,Treasury Board of Canada Secretariat,Manitoba,1
+2025,Treasury Board of Canada Secretariat,National Capital Region (NCR),2346
+2025,Treasury Board of Canada Secretariat,Quebec (minus the NCR),8
+2025,Treasury Board of Canada Secretariat,Unknown,18
+2025,Veterans Affairs Canada,Alberta,158
+2025,Veterans Affairs Canada,British Columbia,204
+2025,Veterans Affairs Canada,Manitoba,139
+2025,Veterans Affairs Canada,National Capital Region (NCR),296
+2025,Veterans Affairs Canada,New Brunswick,181
+2025,Veterans Affairs Canada,Newfoundland and Labrador,55
+2025,Veterans Affairs Canada,Nova Scotia,270
+2025,Veterans Affairs Canada,Ontario (minus the NCR),496
+2025,Veterans Affairs Canada,Outside of Canada,20
+2025,Veterans Affairs Canada,Prince Edward Island,1559
+2025,Veterans Affairs Canada,Quebec (minus the NCR),372
+2025,Veterans Affairs Canada,Saskatchewan,24
+2025,Veterans Affairs Canada,Unknown,5
+2025,Veterans Review and Appeal Board,Prince Edward Island,119
+2025,Veterans Review and Appeal Board,Unknown,59
+2025,Western Economic Diversification Canada,Alberta,204
+2025,Western Economic Diversification Canada,British Columbia,157
+2025,Western Economic Diversification Canada,Manitoba,50
+2025,Western Economic Diversification Canada,National Capital Region (NCR),42
+2025,Western Economic Diversification Canada,Saskatchewan,51
+2025,Western Economic Diversification Canada,Unknown,3
+2025,Women and Gender Equality Canada,Alberta,8
+2025,Women and Gender Equality Canada,British Columbia,8
+2025,Women and Gender Equality Canada,Manitoba,1
+2025,Women and Gender Equality Canada,National Capital Region (NCR),359
+2025,Women and Gender Equality Canada,New Brunswick,6
+2025,Women and Gender Equality Canada,Ontario (minus the NCR),1
+2025,Women and Gender Equality Canada,Quebec (minus the NCR),11
+2025,Women and Gender Equality Canada,Unknown,1
