@@ -141,6 +141,10 @@ Year,Department or agency,Tenure,Number of employees
 2010,Health Canada,Indeterminate,9311
 2010,Health Canada,Student,169
 2010,Health Canada,Term,615
+2010,"Housing, Infrastructure and Communities Canada",Casual,18
+2010,"Housing, Infrastructure and Communities Canada",Indeterminate,291
+2010,"Housing, Infrastructure and Communities Canada",Student,15
+2010,"Housing, Infrastructure and Communities Canada",Term,8
 2010,Human Rights Tribunal of Canada,Indeterminate,19
 2010,Immigration and Refugee Board of Canada,Casual,49
 2010,Immigration and Refugee Board of Canada,Indeterminate,876
@@ -157,10 +161,6 @@ Year,Department or agency,Tenure,Number of employees
 2010,Indian Residential Schools Truth and Reconciliation Commission,Casual,8
 2010,Indian Residential Schools Truth and Reconciliation Commission,Indeterminate,8
 2010,Indian Residential Schools Truth and Reconciliation Commission,Term,3
-2010,Infrastructure Canada,Casual,18
-2010,Infrastructure Canada,Indeterminate,291
-2010,Infrastructure Canada,Student,15
-2010,Infrastructure Canada,Term,8
 2010,"Innovation, Science and Economic Development Canada",Casual,132
 2010,"Innovation, Science and Economic Development Canada",Indeterminate,5266
 2010,"Innovation, Science and Economic Development Canada",Student,141
@@ -476,6 +476,10 @@ Year,Department or agency,Tenure,Number of employees
 2011,Health Canada,Indeterminate,9178
 2011,Health Canada,Student,214
 2011,Health Canada,Term,548
+2011,"Housing, Infrastructure and Communities Canada",Casual,10
+2011,"Housing, Infrastructure and Communities Canada",Indeterminate,338
+2011,"Housing, Infrastructure and Communities Canada",Student,17
+2011,"Housing, Infrastructure and Communities Canada",Term,8
 2011,Human Rights Tribunal of Canada,Casual,3
 2011,Human Rights Tribunal of Canada,Indeterminate,18
 2011,Human Rights Tribunal of Canada,Term,2
@@ -497,10 +501,6 @@ Year,Department or agency,Tenure,Number of employees
 2011,Indian Residential Schools Truth and Reconciliation Commission,Indeterminate,16
 2011,Indian Residential Schools Truth and Reconciliation Commission,Student,1
 2011,Indian Residential Schools Truth and Reconciliation Commission,Term,24
-2011,Infrastructure Canada,Casual,10
-2011,Infrastructure Canada,Indeterminate,338
-2011,Infrastructure Canada,Student,17
-2011,Infrastructure Canada,Term,8
 2011,"Innovation, Science and Economic Development Canada",Casual,100
 2011,"Innovation, Science and Economic Development Canada",Indeterminate,5174
 2011,"Innovation, Science and Economic Development Canada",Student,116
@@ -812,6 +812,10 @@ Year,Department or agency,Tenure,Number of employees
 2012,Health Canada,Indeterminate,9319
 2012,Health Canada,Student,167
 2012,Health Canada,Term,623
+2012,"Housing, Infrastructure and Communities Canada",Casual,4
+2012,"Housing, Infrastructure and Communities Canada",Indeterminate,323
+2012,"Housing, Infrastructure and Communities Canada",Student,14
+2012,"Housing, Infrastructure and Communities Canada",Term,7
 2012,Human Rights Tribunal of Canada,Indeterminate,17
 2012,Human Rights Tribunal of Canada,Student,1
 2012,Human Rights Tribunal of Canada,Term,2
@@ -833,10 +837,6 @@ Year,Department or agency,Tenure,Number of employees
 2012,Indian Residential Schools Truth and Reconciliation Commission,Casual,1
 2012,Indian Residential Schools Truth and Reconciliation Commission,Indeterminate,18
 2012,Indian Residential Schools Truth and Reconciliation Commission,Term,28
-2012,Infrastructure Canada,Casual,4
-2012,Infrastructure Canada,Indeterminate,323
-2012,Infrastructure Canada,Student,14
-2012,Infrastructure Canada,Term,7
 2012,"Innovation, Science and Economic Development Canada",Casual,62
 2012,"Innovation, Science and Economic Development Canada",Indeterminate,4982
 2012,"Innovation, Science and Economic Development Canada",Student,54
@@ -1150,6 +1150,10 @@ Year,Department or agency,Tenure,Number of employees
 2013,Health Canada,Indeterminate,8585
 2013,Health Canada,Student,142
 2013,Health Canada,Term,573
+2013,"Housing, Infrastructure and Communities Canada",Casual,5
+2013,"Housing, Infrastructure and Communities Canada",Indeterminate,292
+2013,"Housing, Infrastructure and Communities Canada",Student,6
+2013,"Housing, Infrastructure and Communities Canada",Term,5
 2013,Human Rights Tribunal of Canada,Casual,1
 2013,Human Rights Tribunal of Canada,Indeterminate,16
 2013,Human Rights Tribunal of Canada,Student,1
@@ -1173,10 +1177,6 @@ Year,Department or agency,Tenure,Number of employees
 2013,Indian Residential Schools Truth and Reconciliation Commission,Casual,1
 2013,Indian Residential Schools Truth and Reconciliation Commission,Indeterminate,13
 2013,Indian Residential Schools Truth and Reconciliation Commission,Term,11
-2013,Infrastructure Canada,Casual,5
-2013,Infrastructure Canada,Indeterminate,292
-2013,Infrastructure Canada,Student,6
-2013,Infrastructure Canada,Term,5
 2013,"Innovation, Science and Economic Development Canada",Casual,68
 2013,"Innovation, Science and Economic Development Canada",Indeterminate,4557
 2013,"Innovation, Science and Economic Development Canada",Student,49
@@ -1487,6 +1487,10 @@ Year,Department or agency,Tenure,Number of employees
 2014,Health Canada,Indeterminate,8178
 2014,Health Canada,Student,177
 2014,Health Canada,Term,592
+2014,"Housing, Infrastructure and Communities Canada",Casual,12
+2014,"Housing, Infrastructure and Communities Canada",Indeterminate,269
+2014,"Housing, Infrastructure and Communities Canada",Student,4
+2014,"Housing, Infrastructure and Communities Canada",Term,3
 2014,Human Rights Tribunal of Canada,Casual,1
 2014,Human Rights Tribunal of Canada,Indeterminate,16
 2014,Human Rights Tribunal of Canada,Term,3
@@ -1507,10 +1511,6 @@ Year,Department or agency,Tenure,Number of employees
 2014,Indian Oil and Gas Canada,Term,2
 2014,Indian Residential Schools Truth and Reconciliation Commission,Indeterminate,4
 2014,Indian Residential Schools Truth and Reconciliation Commission,Term,11
-2014,Infrastructure Canada,Casual,12
-2014,Infrastructure Canada,Indeterminate,269
-2014,Infrastructure Canada,Student,4
-2014,Infrastructure Canada,Term,3
 2014,"Innovation, Science and Economic Development Canada",Casual,85
 2014,"Innovation, Science and Economic Development Canada",Indeterminate,4451
 2014,"Innovation, Science and Economic Development Canada",Student,78
@@ -1808,6 +1808,10 @@ Year,Department or agency,Tenure,Number of employees
 2015,Health Canada,Indeterminate,8104
 2015,Health Canada,Student,157
 2015,Health Canada,Term,561
+2015,"Housing, Infrastructure and Communities Canada",Casual,19
+2015,"Housing, Infrastructure and Communities Canada",Indeterminate,312
+2015,"Housing, Infrastructure and Communities Canada",Student,16
+2015,"Housing, Infrastructure and Communities Canada",Term,7
 2015,Immigration and Refugee Board of Canada,Casual,91
 2015,Immigration and Refugee Board of Canada,Indeterminate,714
 2015,Immigration and Refugee Board of Canada,Student,14
@@ -1826,10 +1830,6 @@ Year,Department or agency,Tenure,Number of employees
 2015,Indian Residential Schools Truth and Reconciliation Commission,Casual,2
 2015,Indian Residential Schools Truth and Reconciliation Commission,Indeterminate,4
 2015,Indian Residential Schools Truth and Reconciliation Commission,Term,3
-2015,Infrastructure Canada,Casual,19
-2015,Infrastructure Canada,Indeterminate,312
-2015,Infrastructure Canada,Student,16
-2015,Infrastructure Canada,Term,7
 2015,"Innovation, Science and Economic Development Canada",Casual,120
 2015,"Innovation, Science and Economic Development Canada",Indeterminate,4438
 2015,"Innovation, Science and Economic Development Canada",Student,80
@@ -2120,6 +2120,10 @@ Year,Department or agency,Tenure,Number of employees
 2016,Health Canada,Indeterminate,8080
 2016,Health Canada,Student,223
 2016,Health Canada,Term,546
+2016,"Housing, Infrastructure and Communities Canada",Casual,21
+2016,"Housing, Infrastructure and Communities Canada",Indeterminate,311
+2016,"Housing, Infrastructure and Communities Canada",Student,14
+2016,"Housing, Infrastructure and Communities Canada",Term,5
 2016,Immigration and Refugee Board of Canada,Casual,84
 2016,Immigration and Refugee Board of Canada,Indeterminate,718
 2016,Immigration and Refugee Board of Canada,Student,22
@@ -2136,10 +2140,6 @@ Year,Department or agency,Tenure,Number of employees
 2016,Indian Oil and Gas Canada,Indeterminate,71
 2016,Indian Oil and Gas Canada,Student,5
 2016,Indian Oil and Gas Canada,Term,4
-2016,Infrastructure Canada,Casual,21
-2016,Infrastructure Canada,Indeterminate,311
-2016,Infrastructure Canada,Student,14
-2016,Infrastructure Canada,Term,5
 2016,"Innovation, Science and Economic Development Canada",Casual,125
 2016,"Innovation, Science and Economic Development Canada",Indeterminate,4406
 2016,"Innovation, Science and Economic Development Canada",Student,139
@@ -2441,6 +2441,10 @@ Year,Department or agency,Tenure,Number of employees
 2017,Health Canada,Indeterminate,8355
 2017,Health Canada,Student,186
 2017,Health Canada,Term,513
+2017,"Housing, Infrastructure and Communities Canada",Casual,21
+2017,"Housing, Infrastructure and Communities Canada",Indeterminate,278
+2017,"Housing, Infrastructure and Communities Canada",Student,17
+2017,"Housing, Infrastructure and Communities Canada",Term,13
 2017,Immigration and Refugee Board of Canada,Casual,68
 2017,Immigration and Refugee Board of Canada,Indeterminate,759
 2017,Immigration and Refugee Board of Canada,Student,20
@@ -2457,10 +2461,6 @@ Year,Department or agency,Tenure,Number of employees
 2017,Indian Oil and Gas Canada,Casual,2
 2017,Indian Oil and Gas Canada,Indeterminate,75
 2017,Indian Oil and Gas Canada,Term,11
-2017,Infrastructure Canada,Casual,21
-2017,Infrastructure Canada,Indeterminate,278
-2017,Infrastructure Canada,Student,17
-2017,Infrastructure Canada,Term,13
 2017,"Innovation, Science and Economic Development Canada",Casual,166
 2017,"Innovation, Science and Economic Development Canada",Indeterminate,4501
 2017,"Innovation, Science and Economic Development Canada",Student,142
@@ -2758,6 +2758,10 @@ Year,Department or agency,Tenure,Number of employees
 2018,Health Canada,Indeterminate,8610
 2018,Health Canada,Student,245
 2018,Health Canada,Term,577
+2018,"Housing, Infrastructure and Communities Canada",Casual,21
+2018,"Housing, Infrastructure and Communities Canada",Indeterminate,331
+2018,"Housing, Infrastructure and Communities Canada",Student,21
+2018,"Housing, Infrastructure and Communities Canada",Term,28
 2018,Immigration and Refugee Board of Canada,Casual,107
 2018,Immigration and Refugee Board of Canada,Indeterminate,767
 2018,Immigration and Refugee Board of Canada,Student,13
@@ -2774,10 +2778,6 @@ Year,Department or agency,Tenure,Number of employees
 2018,Indian Oil and Gas Canada,Casual,4
 2018,Indian Oil and Gas Canada,Indeterminate,72
 2018,Indian Oil and Gas Canada,Term,12
-2018,Infrastructure Canada,Casual,21
-2018,Infrastructure Canada,Indeterminate,331
-2018,Infrastructure Canada,Student,21
-2018,Infrastructure Canada,Term,28
 2018,"Innovation, Science and Economic Development Canada",Casual,178
 2018,"Innovation, Science and Economic Development Canada",Indeterminate,4646
 2018,"Innovation, Science and Economic Development Canada",Student,159
@@ -3077,6 +3077,10 @@ Year,Department or agency,Tenure,Number of employees
 2019,Health Canada,Indeterminate,9303
 2019,Health Canada,Student,320
 2019,Health Canada,Term,821
+2019,"Housing, Infrastructure and Communities Canada",Casual,38
+2019,"Housing, Infrastructure and Communities Canada",Indeterminate,421
+2019,"Housing, Infrastructure and Communities Canada",Student,28
+2019,"Housing, Infrastructure and Communities Canada",Term,27
 2019,Immigration and Refugee Board of Canada,Casual,203
 2019,Immigration and Refugee Board of Canada,Indeterminate,793
 2019,Immigration and Refugee Board of Canada,Student,21
@@ -3093,10 +3097,6 @@ Year,Department or agency,Tenure,Number of employees
 2019,Indian Oil and Gas Canada,Casual,4
 2019,Indian Oil and Gas Canada,Indeterminate,74
 2019,Indian Oil and Gas Canada,Term,9
-2019,Infrastructure Canada,Casual,38
-2019,Infrastructure Canada,Indeterminate,421
-2019,Infrastructure Canada,Student,28
-2019,Infrastructure Canada,Term,27
 2019,"Innovation, Science and Economic Development Canada",Casual,237
 2019,"Innovation, Science and Economic Development Canada",Indeterminate,4809
 2019,"Innovation, Science and Economic Development Canada",Student,225
@@ -3401,6 +3401,10 @@ Year,Department or agency,Tenure,Number of employees
 2020,Health Canada,Indeterminate,9747
 2020,Health Canada,Student,327
 2020,Health Canada,Term,812
+2020,"Housing, Infrastructure and Communities Canada",Casual,47
+2020,"Housing, Infrastructure and Communities Canada",Indeterminate,517
+2020,"Housing, Infrastructure and Communities Canada",Student,26
+2020,"Housing, Infrastructure and Communities Canada",Term,27
 2020,Immigration and Refugee Board of Canada,Casual,194
 2020,Immigration and Refugee Board of Canada,Indeterminate,911
 2020,Immigration and Refugee Board of Canada,Student,26
@@ -3417,10 +3421,6 @@ Year,Department or agency,Tenure,Number of employees
 2020,Indian Oil and Gas Canada,Casual,5
 2020,Indian Oil and Gas Canada,Indeterminate,73
 2020,Indian Oil and Gas Canada,Term,10
-2020,Infrastructure Canada,Casual,47
-2020,Infrastructure Canada,Indeterminate,517
-2020,Infrastructure Canada,Student,26
-2020,Infrastructure Canada,Term,27
 2020,"Innovation, Science and Economic Development Canada",Casual,154
 2020,"Innovation, Science and Economic Development Canada",Indeterminate,4940
 2020,"Innovation, Science and Economic Development Canada",Student,196
@@ -3723,6 +3723,10 @@ Year,Department or agency,Tenure,Number of employees
 2021,Health Canada,Indeterminate,7729
 2021,Health Canada,Student,328
 2021,Health Canada,Term,765
+2021,"Housing, Infrastructure and Communities Canada",Casual,33
+2021,"Housing, Infrastructure and Communities Canada",Indeterminate,589
+2021,"Housing, Infrastructure and Communities Canada",Student,38
+2021,"Housing, Infrastructure and Communities Canada",Term,40
 2021,Immigration and Refugee Board of Canada,Casual,257
 2021,Immigration and Refugee Board of Canada,Indeterminate,955
 2021,Immigration and Refugee Board of Canada,Student,15
@@ -3742,10 +3746,6 @@ Year,Department or agency,Tenure,Number of employees
 2021,Indigenous Services Canada,Indeterminate,5676
 2021,Indigenous Services Canada,Student,146
 2021,Indigenous Services Canada,Term,605
-2021,Infrastructure Canada,Casual,33
-2021,Infrastructure Canada,Indeterminate,589
-2021,Infrastructure Canada,Student,38
-2021,Infrastructure Canada,Term,40
 2021,"Innovation, Science and Economic Development Canada",Casual,192
 2021,"Innovation, Science and Economic Development Canada",Indeterminate,4998
 2021,"Innovation, Science and Economic Development Canada",Student,268
@@ -4058,6 +4058,10 @@ Year,Department or agency,Tenure,Number of employees
 2022,Health Canada,Indeterminate,8265
 2022,Health Canada,Student,395
 2022,Health Canada,Term,927
+2022,"Housing, Infrastructure and Communities Canada",Casual,76
+2022,"Housing, Infrastructure and Communities Canada",Indeterminate,837
+2022,"Housing, Infrastructure and Communities Canada",Student,71
+2022,"Housing, Infrastructure and Communities Canada",Term,59
 2022,Immigration and Refugee Board of Canada,Casual,185
 2022,Immigration and Refugee Board of Canada,Indeterminate,940
 2022,Immigration and Refugee Board of Canada,Student,9
@@ -4078,10 +4082,6 @@ Year,Department or agency,Tenure,Number of employees
 2022,Indigenous Services Canada,Indeterminate,5947
 2022,Indigenous Services Canada,Student,135
 2022,Indigenous Services Canada,Term,718
-2022,Infrastructure Canada,Casual,76
-2022,Infrastructure Canada,Indeterminate,837
-2022,Infrastructure Canada,Student,71
-2022,Infrastructure Canada,Term,59
 2022,"Innovation, Science and Economic Development Canada",Casual,251
 2022,"Innovation, Science and Economic Development Canada",Indeterminate,5237
 2022,"Innovation, Science and Economic Development Canada",Student,294
@@ -4395,6 +4395,10 @@ Year,Department or agency,Tenure,Number of employees
 2023,Health Canada,Indeterminate,8482
 2023,Health Canada,Student,390
 2023,Health Canada,Term,888
+2023,"Housing, Infrastructure and Communities Canada",Casual,67
+2023,"Housing, Infrastructure and Communities Canada",Indeterminate,1123
+2023,"Housing, Infrastructure and Communities Canada",Student,87
+2023,"Housing, Infrastructure and Communities Canada",Term,73
 2023,Immigration and Refugee Board of Canada,Casual,192
 2023,Immigration and Refugee Board of Canada,Indeterminate,1627
 2023,Immigration and Refugee Board of Canada,Student,26
@@ -4414,10 +4418,6 @@ Year,Department or agency,Tenure,Number of employees
 2023,Indigenous Services Canada,Indeterminate,6549
 2023,Indigenous Services Canada,Student,149
 2023,Indigenous Services Canada,Term,707
-2023,Infrastructure Canada,Casual,67
-2023,Infrastructure Canada,Indeterminate,1123
-2023,Infrastructure Canada,Student,87
-2023,Infrastructure Canada,Term,73
 2023,"Innovation, Science and Economic Development Canada",Casual,208
 2023,"Innovation, Science and Economic Development Canada",Indeterminate,5468
 2023,"Innovation, Science and Economic Development Canada",Student,326
@@ -4688,8 +4688,7 @@ Year,Department or agency,Tenure,Number of employees
 2024,Department of Justice Canada,Indeterminate,5126
 2024,Department of Justice Canada,Student,49
 2024,Department of Justice Canada,Term,358
-2024,Elections Canada,Casual,159
-2024,Elections Canada,Casual,33
+2024,Elections Canada,Casual,192
 2024,Elections Canada,Indeterminate,521
 2024,Elections Canada,Student,10
 2024,Elections Canada,Term,527
@@ -4732,6 +4731,10 @@ Year,Department or agency,Tenure,Number of employees
 2024,Health Canada,Indeterminate,8723
 2024,Health Canada,Student,398
 2024,Health Canada,Term,874
+2024,"Housing, Infrastructure and Communities Canada",Casual,59
+2024,"Housing, Infrastructure and Communities Canada",Indeterminate,1295
+2024,"Housing, Infrastructure and Communities Canada",Student,84
+2024,"Housing, Infrastructure and Communities Canada",Term,68
 2024,Immigration and Refugee Board of Canada,Casual,118
 2024,Immigration and Refugee Board of Canada,Indeterminate,1832
 2024,Immigration and Refugee Board of Canada,Student,28
@@ -4753,10 +4756,6 @@ Year,Department or agency,Tenure,Number of employees
 2024,Indigenous Services Canada,Indeterminate,7337
 2024,Indigenous Services Canada,Student,181
 2024,Indigenous Services Canada,Term,817
-2024,Infrastructure Canada,Casual,59
-2024,Infrastructure Canada,Indeterminate,1295
-2024,Infrastructure Canada,Student,84
-2024,Infrastructure Canada,Term,68
 2024,"Innovation, Science and Economic Development Canada",Casual,222
 2024,"Innovation, Science and Economic Development Canada",Indeterminate,5723
 2024,"Innovation, Science and Economic Development Canada",Student,291
@@ -4923,3 +4922,337 @@ Year,Department or agency,Tenure,Number of employees
 2024,Women and Gender Equality Canada,Indeterminate,388
 2024,Women and Gender Equality Canada,Student,15
 2024,Women and Gender Equality Canada,Term,29
+2025,Accessibility Standards Canada,Casual,3
+2025,Accessibility Standards Canada,Indeterminate,51
+2025,Accessibility Standards Canada,Student,1
+2025,Accessibility Standards Canada,Term,7
+2025,Administrative Tribunals Support Service of Canada,Casual,13
+2025,Administrative Tribunals Support Service of Canada,Indeterminate,528
+2025,Administrative Tribunals Support Service of Canada,Student,9
+2025,Administrative Tribunals Support Service of Canada,Term,129
+2025,Agriculture and Agri-Food Canada,Casual,53
+2025,Agriculture and Agri-Food Canada,Indeterminate,4744
+2025,Agriculture and Agri-Food Canada,Student,591
+2025,Agriculture and Agri-Food Canada,Term,302
+2025,Atlantic Canada Opportunities Agency,Indeterminate,531
+2025,Atlantic Canada Opportunities Agency,Student,14
+2025,Atlantic Canada Opportunities Agency,Term,34
+2025,Canada Border Services Agency,Casual,232
+2025,Canada Border Services Agency,Indeterminate,15453
+2025,Canada Border Services Agency,Student,764
+2025,Canada Border Services Agency,Term,785
+2025,Canada Economic Development for Quebec Regions,Casual,1
+2025,Canada Economic Development for Quebec Regions,Indeterminate,337
+2025,Canada Economic Development for Quebec Regions,Student,7
+2025,Canada Economic Development for Quebec Regions,Term,26
+2025,Canada Energy Regulator,Casual,8
+2025,Canada Energy Regulator,Indeterminate,498
+2025,Canada Energy Regulator,Student,6
+2025,Canada Energy Regulator,Term,70
+2025,Canada Revenue Agency,Indeterminate,41368
+2025,Canada Revenue Agency,Student,268
+2025,Canada Revenue Agency,Term,10863
+2025,Canada School of Public Service,Casual,21
+2025,Canada School of Public Service,Indeterminate,530
+2025,Canada School of Public Service,Student,4
+2025,Canada School of Public Service,Term,42
+2025,Canadian Dairy Commission,Indeterminate,83
+2025,Canadian Dairy Commission,Term,2
+2025,Canadian Food Inspection Agency,Indeterminate,5794
+2025,Canadian Food Inspection Agency,Student,72
+2025,Canadian Food Inspection Agency,Term,514
+2025,Canadian Grain Commission,Casual,5
+2025,Canadian Grain Commission,Indeterminate,438
+2025,Canadian Grain Commission,Student,6
+2025,Canadian Grain Commission,Term,14
+2025,Canadian Heritage,Casual,43
+2025,Canadian Heritage,Indeterminate,1681
+2025,Canadian Heritage,Student,40
+2025,Canadian Heritage,Term,146
+2025,Canadian Human Rights Commission,Casual,10
+2025,Canadian Human Rights Commission,Indeterminate,255
+2025,Canadian Human Rights Commission,Student,8
+2025,Canadian Human Rights Commission,Term,14
+2025,Canadian Institutes of Health Research,Indeterminate,485
+2025,Canadian Institutes of Health Research,Term,38
+2025,Canadian Intergovernmental Conference Secretariat,Indeterminate,34
+2025,Canadian Intergovernmental Conference Secretariat,Student,3
+2025,Canadian Intergovernmental Conference Secretariat,Term,3
+2025,Canadian Northern Economic Development Agency,Casual,9
+2025,Canadian Northern Economic Development Agency,Indeterminate,104
+2025,Canadian Northern Economic Development Agency,Term,10
+2025,Canadian Nuclear Safety Commission,Indeterminate,949
+2025,Canadian Nuclear Safety Commission,Student,13
+2025,Canadian Nuclear Safety Commission,Term,42
+2025,Canadian Radio-television and Telecommunications Commission,Casual,17
+2025,Canadian Radio-television and Telecommunications Commission,Indeterminate,665
+2025,Canadian Radio-television and Telecommunications Commission,Student,18
+2025,Canadian Radio-television and Telecommunications Commission,Term,33
+2025,Canadian Space Agency,Casual,29
+2025,Canadian Space Agency,Indeterminate,883
+2025,Canadian Space Agency,Student,83
+2025,Canadian Space Agency,Term,20
+2025,Canadian Transportation Agency,Casual,6
+2025,Canadian Transportation Agency,Indeterminate,292
+2025,Canadian Transportation Agency,Student,12
+2025,Canadian Transportation Agency,Term,48
+2025,Civilian Review and Complaints Commission for the RCMP,Casual,2
+2025,Civilian Review and Complaints Commission for the RCMP,Indeterminate,90
+2025,Civilian Review and Complaints Commission for the RCMP,Student,2
+2025,Civilian Review and Complaints Commission for the RCMP,Term,2
+2025,Communications Security Establishment,Casual,1
+2025,Communications Security Establishment,Indeterminate,3545
+2025,Communications Security Establishment,Student,116
+2025,Communications Security Establishment,Term,24
+2025,Copyright Board Canada,Indeterminate,19
+2025,Copyright Board Canada,Student,1
+2025,Copyright Board Canada,Term,2
+2025,Correctional Service Canada,Casual,142
+2025,Correctional Service Canada,Indeterminate,17529
+2025,Correctional Service Canada,Student,97
+2025,Correctional Service Canada,Term,1134
+2025,Courts Administration Service,Casual,3
+2025,Courts Administration Service,Indeterminate,683
+2025,Courts Administration Service,Student,4
+2025,Courts Administration Service,Term,141
+2025,Crown-Indigenous Relations and Northern Affairs Canada,Casual,14
+2025,Crown-Indigenous Relations and Northern Affairs Canada,Indeterminate,1747
+2025,Crown-Indigenous Relations and Northern Affairs Canada,Student,64
+2025,Crown-Indigenous Relations and Northern Affairs Canada,Term,67
+2025,Department of Finance Canada,Casual,9
+2025,Department of Finance Canada,Indeterminate,931
+2025,Department of Finance Canada,Student,6
+2025,Department of Finance Canada,Term,17
+2025,Department of Justice Canada,Casual,31
+2025,Department of Justice Canada,Indeterminate,5190
+2025,Department of Justice Canada,Student,17
+2025,Department of Justice Canada,Term,370
+2025,Elections Canada,Casual,405
+2025,Elections Canada,Indeterminate,555
+2025,Elections Canada,Student,13
+2025,Elections Canada,Term,756
+2025,Employment and Social Development Canada,Casual,471
+2025,Employment and Social Development Canada,Indeterminate,31099
+2025,Employment and Social Development Canada,Student,331
+2025,Employment and Social Development Canada,Term,7253
+2025,Environment and Climate Change Canada,Casual,135
+2025,Environment and Climate Change Canada,Indeterminate,7629
+2025,Environment and Climate Change Canada,Student,459
+2025,Environment and Climate Change Canada,Term,555
+2025,Federal Economic Development Agency for Northern Ontario,Casual,2
+2025,Federal Economic Development Agency for Northern Ontario,Indeterminate,97
+2025,Federal Economic Development Agency for Northern Ontario,Student,2
+2025,Federal Economic Development Agency for Northern Ontario,Term,2
+2025,Federal Economic Development Agency for Southern Ontario,Indeterminate,228
+2025,Federal Economic Development Agency for Southern Ontario,Student,2
+2025,Federal Economic Development Agency for Southern Ontario,Term,10
+2025,Federal Judges not part of any department,Indeterminate,1224
+2025,Financial Consumer Agency of Canada,Casual,9
+2025,Financial Consumer Agency of Canada,Indeterminate,213
+2025,Financial Consumer Agency of Canada,Student,9
+2025,Financial Consumer Agency of Canada,Term,8
+2025,Financial Transactions and Reports Analysis Centre of Canada,Casual,7
+2025,Financial Transactions and Reports Analysis Centre of Canada,Indeterminate,461
+2025,Financial Transactions and Reports Analysis Centre of Canada,Student,51
+2025,Financial Transactions and Reports Analysis Centre of Canada,Term,22
+2025,Fisheries and Oceans Canada,Casual,280
+2025,Fisheries and Oceans Canada,Indeterminate,12192
+2025,Fisheries and Oceans Canada,Student,193
+2025,Fisheries and Oceans Canada,Term,1762
+2025,Fisheries and Oceans Canada,Unknown,24
+2025,Global Affairs Canada,Casual,251
+2025,Global Affairs Canada,Indeterminate,6775
+2025,Global Affairs Canada,Student,165
+2025,Global Affairs Canada,Term,455
+2025,Global Affairs Canada,Unknown,11
+2025,Health Canada,Casual,119
+2025,Health Canada,Indeterminate,8539
+2025,Health Canada,Student,333
+2025,Health Canada,Term,637
+2025,"Housing, Infrastructure and Communities Canada",Casual,46
+2025,"Housing, Infrastructure and Communities Canada",Indeterminate,1486
+2025,"Housing, Infrastructure and Communities Canada",Student,68
+2025,"Housing, Infrastructure and Communities Canada",Term,67
+2025,Immigration and Refugee Board of Canada,Casual,72
+2025,Immigration and Refugee Board of Canada,Indeterminate,1811
+2025,Immigration and Refugee Board of Canada,Student,23
+2025,Immigration and Refugee Board of Canada,Term,601
+2025,"Immigration, Refugees and Citizenship Canada",Casual,53
+2025,"Immigration, Refugees and Citizenship Canada",Indeterminate,9029
+2025,"Immigration, Refugees and Citizenship Canada",Student,101
+2025,"Immigration, Refugees and Citizenship Canada",Term,1955
+2025,"Immigration, Refugees and Citizenship Canada",Unknown,10
+2025,Impact Assessment Agency of Canada,Casual,17
+2025,Impact Assessment Agency of Canada,Indeterminate,510
+2025,Impact Assessment Agency of Canada,Student,18
+2025,Impact Assessment Agency of Canada,Term,41
+2025,Indian Oil and Gas Canada,Casual,10
+2025,Indian Oil and Gas Canada,Indeterminate,68
+2025,Indian Oil and Gas Canada,Student,1
+2025,Indian Oil and Gas Canada,Term,8
+2025,Indigenous Services Canada,Casual,66
+2025,Indigenous Services Canada,Indeterminate,7615
+2025,Indigenous Services Canada,Student,118
+2025,Indigenous Services Canada,Term,778
+2025,"Innovation, Science and Economic Development Canada",Casual,162
+2025,"Innovation, Science and Economic Development Canada",Indeterminate,5767
+2025,"Innovation, Science and Economic Development Canada",Student,267
+2025,"Innovation, Science and Economic Development Canada",Term,330
+2025,International Joint Commission,Indeterminate,28
+2025,International Joint Commission,Student,1
+2025,International Joint Commission,Term,1
+2025,Law Commission of Canada,Indeterminate,4
+2025,Law Commission of Canada,Term,2
+2025,Library and Archives Canada,Casual,7
+2025,Library and Archives Canada,Indeterminate,947
+2025,Library and Archives Canada,Student,22
+2025,Library and Archives Canada,Term,162
+2025,Military Grievances External Review Committee,Casual,1
+2025,Military Grievances External Review Committee,Indeterminate,44
+2025,Military Grievances External Review Committee,Term,9
+2025,Military Police Complaints Commission of Canada,Casual,1
+2025,Military Police Complaints Commission of Canada,Indeterminate,23
+2025,Military Police Complaints Commission of Canada,Student,2
+2025,Military Police Complaints Commission of Canada,Term,3
+2025,National Defence,Casual,324
+2025,National Defence,Indeterminate,27294
+2025,National Defence,Student,551
+2025,National Defence,Term,952
+2025,National Film Board,Indeterminate,320
+2025,National Film Board,Term,23
+2025,National Research Council Canada,Indeterminate,3878
+2025,National Research Council Canada,Student,255
+2025,National Research Council Canada,Term,555
+2025,National Security Intelligence and Review Agency,Casual,1
+2025,National Security Intelligence and Review Agency,Indeterminate,83
+2025,National Security Intelligence and Review Agency,Student,2
+2025,National Security Intelligence and Review Agency,Term,3
+2025,Natural Resources Canada,Casual,200
+2025,Natural Resources Canada,Indeterminate,5022
+2025,Natural Resources Canada,Student,226
+2025,Natural Resources Canada,Term,596
+2025,Natural Sciences and Engineering Research Canada,Casual,1
+2025,Natural Sciences and Engineering Research Canada,Indeterminate,443
+2025,Natural Sciences and Engineering Research Canada,Student,16
+2025,Natural Sciences and Engineering Research Canada,Term,81
+2025,Office of the Auditor General of Canada,Casual,2
+2025,Office of the Auditor General of Canada,Indeterminate,704
+2025,Office of the Auditor General of Canada,Student,12
+2025,Office of the Auditor General of Canada,Term,28
+2025,Office of the Commissioner for Federal Judicial Affairs Canada,Casual,1
+2025,Office of the Commissioner for Federal Judicial Affairs Canada,Indeterminate,68
+2025,Office of the Commissioner for Federal Judicial Affairs Canada,Term,4
+2025,Office of the Commissioner of Lobbying of Canada,Indeterminate,32
+2025,Office of the Commissioner of Lobbying of Canada,Term,1
+2025,Office of the Commissioner of Official Languages,Casual,5
+2025,Office of the Commissioner of Official Languages,Indeterminate,156
+2025,Office of the Commissioner of Official Languages,Student,5
+2025,Office of the Commissioner of Official Languages,Term,4
+2025,Office of the Governor General's Secretary,Casual,4
+2025,Office of the Governor General's Secretary,Indeterminate,135
+2025,Office of the Governor General's Secretary,Student,17
+2025,Office of the Governor General's Secretary,Term,7
+2025,Office of the Intelligence Commissioner,Indeterminate,4
+2025,Office of the Public Sector Integrity Commissioner of Canada,Casual,1
+2025,Office of the Public Sector Integrity Commissioner of Canada,Indeterminate,31
+2025,Office of the Public Sector Integrity Commissioner of Canada,Term,3
+2025,Office of the Superintendent of Financial Institutions Canada,Indeterminate,1247
+2025,Office of the Superintendent of Financial Institutions Canada,Term,9
+2025,Offices of the Information and Privacy Commissioners of Canada,Casual,7
+2025,Offices of the Information and Privacy Commissioners of Canada,Indeterminate,310
+2025,Offices of the Information and Privacy Commissioners of Canada,Student,11
+2025,Offices of the Information and Privacy Commissioners of Canada,Term,25
+2025,Parks Canada,Casual,23
+2025,Parks Canada,Indeterminate,3837
+2025,Parks Canada,Student,56
+2025,Parks Canada,Term,926
+2025,Parole Board of Canada,Casual,1
+2025,Parole Board of Canada,Indeterminate,435
+2025,Parole Board of Canada,Term,60
+2025,Patented Medicine Prices Review Board Canada,Casual,1
+2025,Patented Medicine Prices Review Board Canada,Indeterminate,78
+2025,Patented Medicine Prices Review Board Canada,Student,1
+2025,Polar Knowledge Canada,Casual,1
+2025,Polar Knowledge Canada,Indeterminate,83
+2025,Polar Knowledge Canada,Student,1
+2025,Polar Knowledge Canada,Term,7
+2025,Privy Council Office,Casual,13
+2025,Privy Council Office,Indeterminate,1065
+2025,Privy Council Office,Student,55
+2025,Privy Council Office,Term,75
+2025,Public Health Agency of Canada,Casual,32
+2025,Public Health Agency of Canada,Indeterminate,2869
+2025,Public Health Agency of Canada,Student,171
+2025,Public Health Agency of Canada,Term,300
+2025,Public Prosecution Service of Canada,Casual,9
+2025,Public Prosecution Service of Canada,Indeterminate,1055
+2025,Public Prosecution Service of Canada,Student,1
+2025,Public Prosecution Service of Canada,Term,84
+2025,Public Safety Canada,Casual,80
+2025,Public Safety Canada,Indeterminate,1514
+2025,Public Safety Canada,Student,78
+2025,Public Safety Canada,Term,117
+2025,Public Service Commission of Canada,Casual,7
+2025,Public Service Commission of Canada,Indeterminate,766
+2025,Public Service Commission of Canada,Student,24
+2025,Public Service Commission of Canada,Term,6
+2025,Public Services and Procurement Canada,Casual,227
+2025,Public Services and Procurement Canada,Indeterminate,16363
+2025,Public Services and Procurement Canada,Student,319
+2025,Public Services and Procurement Canada,Term,2027
+2025,RCMP External Review Committee,Indeterminate,21
+2025,RCMP External Review Committee,Term,2
+2025,Registrar of the Supreme Court of Canada,Casual,2
+2025,Registrar of the Supreme Court of Canada,Indeterminate,186
+2025,Registrar of the Supreme Court of Canada,Student,19
+2025,Registrar of the Supreme Court of Canada,Term,42
+2025,Royal Canadian Mounted Police,Casual,104
+2025,Royal Canadian Mounted Police,Indeterminate,10163
+2025,Royal Canadian Mounted Police,Student,292
+2025,Royal Canadian Mounted Police,Term,661
+2025,Secretariat of the National Security and Intelligence Committee of Parliamentarians,Casual,1
+2025,Secretariat of the National Security and Intelligence Committee of Parliamentarians,Indeterminate,8
+2025,Secretariat of the National Security and Intelligence Committee of Parliamentarians,Term,1
+2025,Shared Services Canada,Casual,28
+2025,Shared Services Canada,Indeterminate,8506
+2025,Shared Services Canada,Student,192
+2025,Shared Services Canada,Term,168
+2025,Social Sciences and Humanities Research Council of Canada,Casual,5
+2025,Social Sciences and Humanities Research Council of Canada,Indeterminate,318
+2025,Social Sciences and Humanities Research Council of Canada,Student,8
+2025,Social Sciences and Humanities Research Council of Canada,Term,56
+2025,Statistical Survey Operations,Term,4
+2025,Statistics Canada,Casual,169
+2025,Statistics Canada,Indeterminate,5788
+2025,Statistics Canada,Student,259
+2025,Statistics Canada,Term,1058
+2025,The Correctional Investigator Canada,Casual,1
+2025,The Correctional Investigator Canada,Indeterminate,32
+2025,The Correctional Investigator Canada,Term,3
+2025,Transport Canada,Casual,110
+2025,Transport Canada,Indeterminate,6062
+2025,Transport Canada,Student,192
+2025,Transport Canada,Term,302
+2025,Transportation Safety Board of Canada,Casual,4
+2025,Transportation Safety Board of Canada,Indeterminate,209
+2025,Transportation Safety Board of Canada,Student,7
+2025,Transportation Safety Board of Canada,Term,10
+2025,Treasury Board of Canada Secretariat,Casual,37
+2025,Treasury Board of Canada Secretariat,Indeterminate,2202
+2025,Treasury Board of Canada Secretariat,Student,59
+2025,Treasury Board of Canada Secretariat,Term,76
+2025,Veterans Affairs Canada,Casual,31
+2025,Veterans Affairs Canada,Indeterminate,2914
+2025,Veterans Affairs Canada,Student,82
+2025,Veterans Affairs Canada,Term,752
+2025,Veterans Review and Appeal Board,Indeterminate,98
+2025,Veterans Review and Appeal Board,Student,19
+2025,Veterans Review and Appeal Board,Term,61
+2025,Western Economic Diversification Canada,Casual,4
+2025,Western Economic Diversification Canada,Indeterminate,429
+2025,Western Economic Diversification Canada,Student,25
+2025,Western Economic Diversification Canada,Term,49
+2025,Women and Gender Equality Canada,Casual,8
+2025,Women and Gender Equality Canada,Indeterminate,363
+2025,Women and Gender Equality Canada,Student,10
+2025,Women and Gender Equality Canada,Term,14

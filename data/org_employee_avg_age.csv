@@ -1,1384 +1,1477 @@
-Year,Universe,Average Age,Department or agency
-2010,CPA,43,Atlantic Canada Opportunities Agency
-2010,CPA,44.3,Agriculture and Agri-Food Canada
-2010,CPA,41,Public Health Agency of Canada
-2010,CPA,47.9,Canadian Artists and Producers Professional Relations Tribunal
-2010,CPA,43.2,Canadian Transportation Agency
-2010,CPA,44.1,Library and Archives Canada
-2010,CPA,42.3,Canadian International Trade Tribunal
-2010,CPA,40.9,Canada Border Services Agency
-2010,CPA,42.1,Courts Administration Service
-2010,CPA,43.5,Canadian Dairy Commission
-2010,CPA,40.5,Elections Canada
-2010,CPA,42.7,Canada School of Public Service
-2010,CPA,45.2,Canadian Grain Commission
-2010,CPA,47.9,Canadian Intergovernmental Conference Secretariat
-2010,CPA,46.3,Canada Industrial Relations Board
-2010,CPA,42.7,Office of the Commissioner of Official Languages
-2010,CPA,44,Copyright Board Canada
-2010,CPA,37.8,Military Police Complaints Commission of Canada
-2010,CPA,43.3,Canadian Space Agency
-2010,CPA,43.4,Employment and Social Development Canada
-2010,CPA,51.6,NAFTA Secretariat
-2010,CPA,44.2,Women and Gender Equality Canada
-2010,CPA,44.8,Fisheries and Oceans Canada
-2010,CPA,46.3,National Defence
-2010,CPA,41.9,Environment and Climate Change Canada
-2010,CPA,43.1,"Innovation, Science and Economic Development Canada"
-2010,CPA,45.8,Veterans Affairs Canada
-2010,CPA,39.4,Impact Assessment Agency of Canada
-2010,CPA,43.1,Global Affairs Canada
-2010,CPA,47.6,Military Grievances External Review Committee
-2010,CPA,40.1,Department of Finance Canada
-2010,CPA,42.4,Office of the Commissioner for Federal Judicial Affairs Canada
-2010,CPA,47.7,Farm Products Council of Canada
-2010,CPA,43.8,Canada Economic Development for Quebec Regions
-2010,CPA,44.5,Office of the Governor General's Secretary
-2010,CPA,38.3,Registry of the Specific Claims Tribunal of Canada
-2010,CPA,43.8,Canadian Human Rights Commission
-2010,CPA,42.7,Crown-Indigenous Relations and Northern Affairs Canada
-2010,CPA,48.1,International Joint Commission
-2010,CPA,42.7,"Immigration, Refugees and Citizenship Canada"
-2010,CPA,38.3,Infrastructure Canada
-2010,CPA,48.2,Office of the Public Sector Integrity Commissioner of Canada
-2010,CPA,42.5,Offices of the Information and Privacy Commissioners of Canada
-2010,CPA,47.1,Immigration and Refugee Board of Canada
-2010,CPA,45.2,Indian Residential Schools Truth and Reconciliation Commission
-2010,CPA,60.9,Federal Judges not part of any department
-2010,CPA,42.5,Department of Justice Canada
-2010,CPA,43.9,Office of the Commissioner of Lobbying of Canada
-2010,CPA,41.8,Hazardous Materials Information Review Commission Canada
-2010,CPA,45.3,Transport Canada
-2010,CPA,42.7,Health Canada
-2010,CPA,45.8,Parole Board of Canada
-2010,CPA,42.6,Canadian Heritage
-2010,CPA,41.5,Privy Council Office
-2010,CPA,42.8,Correctional Service Canada
-2010,CPA,42.5,Public Prosecution Service of Canada
-2010,CPA,38.1,Passport Canada
-2010,CPA,48.2,Public Servants Disclosure Protection Tribunal Canada
-2010,CPA,43.5,Public Service Commission of Canada
-2010,CPA,40.2,Public Safety Canada
-2010,CPA,42.8,Human Rights Tribunal of Canada
-2010,CPA,42.9,Patented Medicine Prices Review Board Canada
-2010,CPA,50.1,Assisted Human Reproduction Canada
-2010,CPA,44,Royal Canadian Mounted Police (Civilian Staff)
-2010,CPA,39.7,Competition Bureau Canada
-2010,CPA,*,RCMP External Review Committee
-2010,CPA,41.6,Civilian Review and Complaints Commission for the RCMP
-2010,CPA,44.9,Natural Resources Canada
-2010,CPA,44.1,Canadian Radio-television and Telecommunications Commission
-2010,CPA,43.6,Statistics Canada
-2010,CPA,41.6,Registrar of the Supreme Court of Canada
-2010,CPA,44.8,Public Services and Procurement Canada
-2010,CPA,52.3,Transportation Appeal Tribunal of Canada
-2010,CPA,42.1,Treasury Board of Canada Secretariat
-2010,CPA,49.3,Transportation Safety Board of Canada
-2010,CPA,48.2,Public Service Staffing Tribunal
-2010,CPA,41.8,Western Economic Diversification Canada
-2010,SA,40.8,Office of the Auditor General of Canada
-2010,SA,45,Parks Canada
-2010,SA,37.7,Financial Transactions and Reports Analysis Centre of Canada
-2010,SA,41,Canadian Institutes of Health Research
-2010,SA,42.2,Communications Security Establishment
-2010,SA,44.8,Canadian Nuclear Safety Commission
-2010,SA,44.5,Canada Energy Regulator
-2010,SA,41.3,Financial Consumer Agency of Canada
-2010,SA,43.3,Canadian Food Inspection Agency
-2010,SA,48.6,Indian Oil and Gas Canada
-2010,SA,44.9,Canada Revenue Agency
-2010,SA,42.1,National Round Table on the Environment and the Economy
-2010,SA,44,National Film Board
-2010,SA,44.8,National Research Council Canada
-2010,SA,41.6,Natural Sciences and Engineering Research Canada
-2010,SA,35.9,The Correctional Investigator Canada
-2010,SA,*,Canadian Polar Commission
-2010,SA,42.3,Public Service Labour Relations Board
-2010,SA,44.6,Office of the Superintendent of Financial Institutions Canada
-2010,SA,44.2,Security Intelligence Review Committee
-2010,SA,41.3,Social Sciences and Humanities Research Council of Canada
-2010,SA,46.2,Statistical Survey Operations
-2011,CPA,43.2,Atlantic Canada Opportunities Agency
-2011,CPA,44.1,Agriculture and Agri-Food Canada
-2011,CPA,41.4,Public Health Agency of Canada
-2011,CPA,48.5,Canadian Artists and Producers Professional Relations Tribunal
-2011,CPA,43.3,Canadian Transportation Agency
-2011,CPA,44,Library and Archives Canada
-2011,CPA,42.9,Canadian International Trade Tribunal
-2011,CPA,41.3,Canada Border Services Agency
-2011,CPA,42.5,Courts Administration Service
-2011,CPA,43.3,Canadian Dairy Commission
-2011,CPA,42.3,Elections Canada
-2011,CPA,43.6,Canada School of Public Service
-2011,CPA,45.3,Canadian Grain Commission
-2011,CPA,46.2,Canadian Intergovernmental Conference Secretariat
-2011,CPA,46.7,Canada Industrial Relations Board
-2011,CPA,43.5,Office of the Commissioner of Official Languages
-2011,CPA,44.8,Copyright Board Canada
-2011,CPA,39.3,Military Police Complaints Commission of Canada
-2011,CPA,43.5,Canadian Space Agency
-2011,CPA,43.8,Employment and Social Development Canada
-2011,CPA,43,Women and Gender Equality Canada
-2011,CPA,44.9,Fisheries and Oceans Canada
-2011,CPA,46.6,National Defence
-2011,CPA,42.4,Environment and Climate Change Canada
-2011,CPA,43.2,"Innovation, Science and Economic Development Canada"
-2011,CPA,46.1,Veterans Affairs Canada
-2011,CPA,41,Impact Assessment Agency of Canada
-2011,CPA,38.9,Federal Economic Development Agency for Southern Ontario
-2011,CPA,43.1,Global Affairs Canada
-2011,CPA,46.2,Military Grievances External Review Committee
-2011,CPA,40.6,Department of Finance Canada
-2011,CPA,43.7,Office of the Commissioner for Federal Judicial Affairs Canada
-2011,CPA,48.7,Farm Products Council of Canada
-2011,CPA,43.3,Canada Economic Development for Quebec Regions
-2011,CPA,43.4,Office of the Governor General's Secretary
-2011,CPA,36.8,Registry of the Specific Claims Tribunal of Canada
-2011,CPA,44.2,Canadian Human Rights Commission
-2011,CPA,42.7,Crown-Indigenous Relations and Northern Affairs Canada
-2011,CPA,47.8,International Joint Commission
-2011,CPA,42.4,"Immigration, Refugees and Citizenship Canada"
-2011,CPA,37.6,Infrastructure Canada
-2011,CPA,45.7,Office of the Public Sector Integrity Commissioner of Canada
-2011,CPA,43.1,Offices of the Information and Privacy Commissioners of Canada
-2011,CPA,46.4,Immigration and Refugee Board of Canada
-2011,CPA,45.1,Indian Residential Schools Truth and Reconciliation Commission
-2011,CPA,61.2,Federal Judges not part of any department
-2011,CPA,42.5,Department of Justice Canada
-2011,CPA,46.1,Office of the Commissioner of Lobbying of Canada
-2011,CPA,41.1,Hazardous Materials Information Review Commission Canada
-2011,CPA,45.5,Transport Canada
-2011,CPA,43,Health Canada
-2011,CPA,45.9,Parole Board of Canada
-2011,CPA,43.8,Canadian Heritage
-2011,CPA,41.7,Privy Council Office
-2011,CPA,42.7,Correctional Service Canada
-2011,CPA,42.6,Public Prosecution Service of Canada
-2011,CPA,39,Passport Canada
-2011,CPA,*,Public Servants Disclosure Protection Tribunal Canada
-2011,CPA,43.9,Public Service Commission of Canada
-2011,CPA,40.7,Public Safety Canada
-2011,CPA,40.8,Human Rights Tribunal of Canada
-2011,CPA,41.8,Patented Medicine Prices Review Board Canada
-2011,CPA,43.7,Assisted Human Reproduction Canada
-2011,CPA,44.5,Royal Canadian Mounted Police (Civilian Staff)
-2011,CPA,43.6,Competition Bureau Canada
-2011,CPA,*,RCMP External Review Committee
-2011,CPA,43,Civilian Review and Complaints Commission for the RCMP
-2011,CPA,44.7,Natural Resources Canada
-2011,CPA,44.5,Canadian Radio-television and Telecommunications Commission
-2011,CPA,43.4,Statistics Canada
-2011,CPA,42.2,Registrar of the Supreme Court of Canada
-2011,CPA,44.3,Public Services and Procurement Canada
-2011,CPA,56.1,Transportation Appeal Tribunal of Canada
-2011,CPA,41.8,Treasury Board of Canada Secretariat
-2011,CPA,48.7,Transportation Safety Board of Canada
-2011,CPA,50.4,Public Service Staffing Tribunal
-2011,CPA,42.8,Western Economic Diversification Canada
-2011,SA,40.8,Office of the Auditor General of Canada
-2011,SA,44.9,Parks Canada
-2011,SA,38.5,Financial Transactions and Reports Analysis Centre of Canada
-2011,SA,40.8,Canadian Institutes of Health Research
-2011,SA,42.6,Communications Security Establishment
-2011,SA,45.4,Canadian Nuclear Safety Commission
-2011,SA,44.3,Canada Energy Regulator
-2011,SA,41.4,Financial Consumer Agency of Canada
-2011,SA,43.3,Canadian Food Inspection Agency
-2011,SA,49,Indian Oil and Gas Canada
-2011,SA,45.4,Canada Revenue Agency
-2011,SA,42,National Round Table on the Environment and the Economy
-2011,SA,44.1,National Film Board
-2011,SA,*,Northern Pipeline Agency
-2011,SA,45.7,National Research Council Canada
-2011,SA,41.5,Natural Sciences and Engineering Research Canada
-2011,SA,37,The Correctional Investigator Canada
-2011,SA,*,Canadian Polar Commission
-2011,SA,42.9,Public Service Labour Relations Board
-2011,SA,44.7,Office of the Superintendent of Financial Institutions Canada
-2011,SA,44.6,Security Intelligence Review Committee
-2011,SA,40.8,Social Sciences and Humanities Research Council of Canada
-2011,SA,45.3,Statistical Survey Operations
-2012,CPA,43.9,Atlantic Canada Opportunities Agency
-2012,CPA,44.7,Agriculture and Agri-Food Canada
-2012,CPA,42,Public Health Agency of Canada
-2012,CPA,48.8,Canadian Artists and Producers Professional Relations Tribunal
-2012,CPA,43.5,Canadian Transportation Agency
-2012,CPA,44.3,Library and Archives Canada
-2012,CPA,41.6,Canadian International Trade Tribunal
-2012,CPA,41.5,Canada Border Services Agency
-2012,CPA,42.6,Courts Administration Service
-2012,CPA,42.3,Canadian Dairy Commission
-2012,CPA,42.2,Elections Canada
-2012,CPA,43.9,Canada School of Public Service
-2012,CPA,45.3,Canadian Grain Commission
-2012,CPA,48.6,Canadian Intergovernmental Conference Secretariat
-2012,CPA,46.9,Canada Industrial Relations Board
-2012,CPA,42.9,Office of the Commissioner of Official Languages
-2012,CPA,46,Copyright Board Canada
-2012,CPA,40.1,Military Police Complaints Commission of Canada
-2012,CPA,44.1,Canadian Space Agency
-2012,CPA,44.6,Employment and Social Development Canada
-2012,CPA,43,Women and Gender Equality Canada
-2012,CPA,45.1,Fisheries and Oceans Canada
-2012,CPA,46.8,National Defence
-2012,CPA,42.9,Environment and Climate Change Canada
-2012,CPA,43.9,"Innovation, Science and Economic Development Canada"
-2012,CPA,46.6,Veterans Affairs Canada
-2012,CPA,41.5,Impact Assessment Agency of Canada
-2012,CPA,38.5,Federal Economic Development Agency for Southern Ontario
-2012,CPA,43.4,Global Affairs Canada
-2012,CPA,47.6,Military Grievances External Review Committee
-2012,CPA,40.5,Department of Finance Canada
-2012,CPA,46.2,Office of the Commissioner for Federal Judicial Affairs Canada
-2012,CPA,47.9,Farm Products Council of Canada
-2012,CPA,43.9,Canada Economic Development for Quebec Regions
-2012,CPA,45.3,Office of the Governor General's Secretary
-2012,CPA,38.4,Registry of the Specific Claims Tribunal of Canada
-2012,CPA,44.4,Canadian Human Rights Commission
-2012,CPA,42.9,Crown-Indigenous Relations and Northern Affairs Canada
-2012,CPA,50.1,International Joint Commission
-2012,CPA,42.4,"Immigration, Refugees and Citizenship Canada"
-2012,CPA,37.7,Infrastructure Canada
-2012,CPA,46.6,Office of the Public Sector Integrity Commissioner of Canada
-2012,CPA,43,Offices of the Information and Privacy Commissioners of Canada
-2012,CPA,46.7,Immigration and Refugee Board of Canada
-2012,CPA,46.7,Indian Residential Schools Truth and Reconciliation Commission
-2012,CPA,61.5,Federal Judges not part of any department
-2012,CPA,43,Department of Justice Canada
-2012,CPA,44.2,Office of the Commissioner of Lobbying of Canada
-2012,CPA,44.3,Hazardous Materials Information Review Commission Canada
-2012,CPA,45.9,Transport Canada
-2012,CPA,43.4,Health Canada
-2012,CPA,46.1,Parole Board of Canada
-2012,CPA,44,Canadian Heritage
-2012,CPA,42.4,Privy Council Office
-2012,CPA,42.7,Correctional Service Canada
-2012,CPA,42.8,Public Prosecution Service of Canada
-2012,CPA,38.9,Passport Canada
-2012,CPA,44.8,Public Servants Disclosure Protection Tribunal Canada
-2012,CPA,43.6,Public Service Commission of Canada
-2012,CPA,41.3,Public Safety Canada
-2012,CPA,41.3,Human Rights Tribunal of Canada
-2012,CPA,45.2,Patented Medicine Prices Review Board Canada
-2012,CPA,49.6,Assisted Human Reproduction Canada
-2012,CPA,44.6,Royal Canadian Mounted Police (Civilian Staff)
-2012,CPA,44.4,Competition Bureau Canada
-2012,CPA,*,RCMP External Review Committee
-2012,CPA,42.9,Civilian Review and Complaints Commission for the RCMP
-2012,CPA,45.4,Natural Resources Canada
-2012,CPA,44,Canadian Radio-television and Telecommunications Commission
-2012,CPA,43.6,Statistics Canada
-2012,CPA,42.2,Registrar of the Supreme Court of Canada
-2012,CPA,44.7,Public Services and Procurement Canada
-2012,CPA,42.7,Transportation Appeal Tribunal of Canada
-2012,CPA,42.2,Treasury Board of Canada Secretariat
-2012,CPA,49.6,Transportation Safety Board of Canada
-2012,CPA,49.4,Public Service Staffing Tribunal
-2012,CPA,44,Western Economic Diversification Canada
-2012,SA,40.6,Office of the Auditor General of Canada
-2012,SA,45.8,Parks Canada
-2012,SA,38.1,Financial Transactions and Reports Analysis Centre of Canada
-2012,SA,42.4,Canadian Institutes of Health Research
-2012,SA,42.6,Communications Security Establishment
-2012,SA,45.8,Canadian Nuclear Safety Commission
-2012,SA,44.5,Canada Energy Regulator
-2012,SA,39.6,Financial Consumer Agency of Canada
-2012,SA,43.6,Canadian Food Inspection Agency
-2012,SA,49.8,Indian Oil and Gas Canada
-2012,SA,45.7,Canada Revenue Agency
-2012,SA,42.4,National Round Table on the Environment and the Economy
-2012,SA,43.4,National Film Board
-2012,SA,46.5,National Research Council Canada
-2012,SA,41.7,Natural Sciences and Engineering Research Canada
-2012,SA,37.8,The Correctional Investigator Canada
-2012,SA,*,Canadian Polar Commission
-2012,SA,42,Public Service Labour Relations Board
-2012,SA,45.1,Office of the Superintendent of Financial Institutions Canada
-2012,SA,44.1,Security Intelligence Review Committee
-2012,SA,41.5,Social Sciences and Humanities Research Council of Canada
-2012,SA,45.2,Statistical Survey Operations
-2013,CPA,44.5,Atlantic Canada Opportunities Agency
-2013,CPA,44.8,Agriculture and Agri-Food Canada
-2013,CPA,42.8,Public Health Agency of Canada
-2013,CPA,*,Canadian Artists and Producers Professional Relations Tribunal
-2013,CPA,44.2,Canadian Transportation Agency
-2013,CPA,44.3,Library and Archives Canada
-2013,CPA,41.7,Canadian International Trade Tribunal
-2013,CPA,41.8,Canada Border Services Agency
-2013,CPA,43.2,Courts Administration Service
-2013,CPA,42.2,Canadian Dairy Commission
-2013,CPA,43.2,Elections Canada
-2013,CPA,44,Canada School of Public Service
-2013,CPA,46.7,Canadian Grain Commission
-2013,CPA,50.1,Canadian Intergovernmental Conference Secretariat
-2013,CPA,46.9,Canada Industrial Relations Board
-2013,CPA,43.5,Office of the Commissioner of Official Languages
-2013,CPA,42.6,Copyright Board Canada
-2013,CPA,39.1,Military Police Complaints Commission of Canada
-2013,CPA,45.5,Canadian Space Agency
-2013,CPA,45.1,Employment and Social Development Canada
-2013,CPA,42.3,Women and Gender Equality Canada
-2013,CPA,45.3,Fisheries and Oceans Canada
-2013,CPA,47.5,National Defence
-2013,CPA,43,Environment and Climate Change Canada
-2013,CPA,44.2,"Innovation, Science and Economic Development Canada"
-2013,CPA,46.9,Veterans Affairs Canada
-2013,CPA,42.2,Impact Assessment Agency of Canada
-2013,CPA,39,Federal Economic Development Agency for Southern Ontario
-2013,CPA,43.5,Global Affairs Canada
-2013,CPA,47.1,Military Grievances External Review Committee
-2013,CPA,40.7,Department of Finance Canada
-2013,CPA,44.6,Office of the Commissioner for Federal Judicial Affairs Canada
-2013,CPA,47.1,Farm Products Council of Canada
-2013,CPA,44.3,Canada Economic Development for Quebec Regions
-2013,CPA,45.2,Office of the Governor General's Secretary
-2013,CPA,44.9,Shared Services Canada
-2013,CPA,40.4,Registry of the Specific Claims Tribunal of Canada
-2013,CPA,44.3,Canadian Human Rights Commission
-2013,CPA,43.1,Crown-Indigenous Relations and Northern Affairs Canada
-2013,CPA,48.9,International Joint Commission
-2013,CPA,42,"Immigration, Refugees and Citizenship Canada"
-2013,CPA,38.6,Infrastructure Canada
-2013,CPA,43.8,Office of the Public Sector Integrity Commissioner of Canada
-2013,CPA,43,Offices of the Information and Privacy Commissioners of Canada
-2013,CPA,46.7,Immigration and Refugee Board of Canada
-2013,CPA,48.6,Indian Residential Schools Truth and Reconciliation Commission
-2013,CPA,61.6,Federal Judges not part of any department
-2013,CPA,44,Department of Justice Canada
-2013,CPA,42.5,Office of the Commissioner of Lobbying of Canada
-2013,CPA,43.9,Hazardous Materials Information Review Commission Canada
-2013,CPA,46.6,Transport Canada
-2013,CPA,43.9,Health Canada
-2013,CPA,45.1,Parole Board of Canada
-2013,CPA,44.1,Canadian Heritage
-2013,CPA,43.6,Privy Council Office
-2013,CPA,43.1,Correctional Service Canada
-2013,CPA,43,Public Prosecution Service of Canada
-2013,CPA,39.6,Passport Canada
-2013,CPA,35.2,Public Servants Disclosure Protection Tribunal Canada
-2013,CPA,44.3,Public Service Commission of Canada
-2013,CPA,41.2,Public Safety Canada
-2013,CPA,41.6,Human Rights Tribunal of Canada
-2013,CPA,45,Patented Medicine Prices Review Board Canada
-2013,CPA,45.2,Royal Canadian Mounted Police (Civilian Staff)
-2013,CPA,43.3,Competition Bureau Canada
-2013,CPA,44.5,RCMP External Review Committee
-2013,CPA,42.5,Civilian Review and Complaints Commission for the RCMP
-2013,CPA,45.5,Natural Resources Canada
-2013,CPA,43.9,Canadian Radio-television and Telecommunications Commission
-2013,CPA,43.7,Statistics Canada
-2013,CPA,43.1,Registrar of the Supreme Court of Canada
-2013,CPA,45.1,Public Services and Procurement Canada
-2013,CPA,45.2,Transportation Appeal Tribunal of Canada
-2013,CPA,42.6,Treasury Board of Canada Secretariat
-2013,CPA,49.5,Transportation Safety Board of Canada
-2013,CPA,51.2,Public Service Staffing Tribunal
-2013,CPA,44.6,Western Economic Diversification Canada
-2013,SA,40.9,Office of the Auditor General of Canada
-2013,SA,45.7,Parks Canada
-2013,SA,39,Financial Transactions and Reports Analysis Centre of Canada
-2013,SA,42.5,Canadian Institutes of Health Research
-2013,SA,42.8,Communications Security Establishment
-2013,SA,46,Canadian Nuclear Safety Commission
-2013,SA,44.7,Canada Energy Regulator
-2013,SA,40.3,Financial Consumer Agency of Canada
-2013,SA,44,Canadian Food Inspection Agency
-2013,SA,49.2,Indian Oil and Gas Canada
-2013,SA,45.9,Canada Revenue Agency
-2013,SA,*,National Round Table on the Environment and the Economy
-2013,SA,43.1,National Film Board
-2013,SA,47.2,National Research Council Canada
-2013,SA,42.1,Natural Sciences and Engineering Research Canada
-2013,SA,39.7,The Correctional Investigator Canada
-2013,SA,44.8,Canadian Polar Commission
-2013,SA,42.8,Public Service Labour Relations Board
-2013,SA,45.2,Office of the Superintendent of Financial Institutions Canada
-2013,SA,43.4,Security Intelligence Review Committee
-2013,SA,41.4,Social Sciences and Humanities Research Council of Canada
-2013,SA,47.9,Statistical Survey Operations
-2014,CPA,45,Atlantic Canada Opportunities Agency
-2014,CPA,44.9,Agriculture and Agri-Food Canada
-2014,CPA,42.7,Public Health Agency of Canada
-2014,CPA,45.8,Canadian Transportation Agency
-2014,CPA,43.4,Library and Archives Canada
-2014,CPA,41.1,Canadian International Trade Tribunal
-2014,CPA,41.9,Canada Border Services Agency
-2014,CPA,43.3,Courts Administration Service
-2014,CPA,40.3,Canadian Dairy Commission
-2014,CPA,43.1,Elections Canada
-2014,CPA,43.5,Canada School of Public Service
-2014,CPA,46.3,Canadian Grain Commission
-2014,CPA,48.3,Canadian Intergovernmental Conference Secretariat
-2014,CPA,47.6,Canada Industrial Relations Board
-2014,CPA,43.3,Office of the Commissioner of Official Languages
-2014,CPA,42.3,Copyright Board Canada
-2014,CPA,41.1,Military Police Complaints Commission of Canada
-2014,CPA,46.6,Canadian Space Agency
-2014,CPA,44.5,Employment and Social Development Canada
-2014,CPA,42.5,Women and Gender Equality Canada
-2014,CPA,45.5,Fisheries and Oceans Canada
-2014,CPA,48,National Defence
-2014,CPA,43,Environment and Climate Change Canada
-2014,CPA,44.3,"Innovation, Science and Economic Development Canada"
-2014,CPA,47,Veterans Affairs Canada
-2014,CPA,41.1,Impact Assessment Agency of Canada
-2014,CPA,40.5,Federal Economic Development Agency for Southern Ontario
-2014,CPA,43.8,Global Affairs Canada
-2014,CPA,47.9,Military Grievances External Review Committee
-2014,CPA,41.3,Department of Finance Canada
-2014,CPA,46.6,Office of the Commissioner for Federal Judicial Affairs Canada
-2014,CPA,49,Farm Products Council of Canada
-2014,CPA,44.5,Canada Economic Development for Quebec Regions
-2014,CPA,45.8,Office of the Governor General's Secretary
-2014,CPA,45.3,Shared Services Canada
-2014,CPA,39.2,Registry of the Specific Claims Tribunal of Canada
-2014,CPA,44.6,Canadian Human Rights Commission
-2014,CPA,43.2,Crown-Indigenous Relations and Northern Affairs Canada
-2014,CPA,45.3,International Joint Commission
-2014,CPA,41.6,"Immigration, Refugees and Citizenship Canada"
-2014,CPA,39.7,Infrastructure Canada
-2014,CPA,44,Office of the Public Sector Integrity Commissioner of Canada
-2014,CPA,43.1,Offices of the Information and Privacy Commissioners of Canada
-2014,CPA,46.3,Immigration and Refugee Board of Canada
-2014,CPA,53.6,Indian Residential Schools Truth and Reconciliation Commission
-2014,CPA,61.8,Federal Judges not part of any department
-2014,CPA,44.4,Department of Justice Canada
-2014,CPA,45.3,Office of the Commissioner of Lobbying of Canada
-2014,CPA,46.6,Transport Canada
-2014,CPA,44.2,Health Canada
-2014,CPA,45.3,Parole Board of Canada
-2014,CPA,44.3,Canadian Heritage
-2014,CPA,43.6,Privy Council Office
-2014,CPA,43.4,Correctional Service Canada
-2014,CPA,43.2,Public Prosecution Service of Canada
-2014,CPA,42.1,Public Servants Disclosure Protection Tribunal Canada
-2014,CPA,45.1,Public Service Commission of Canada
-2014,CPA,41.7,Public Safety Canada
-2014,CPA,42.6,Human Rights Tribunal of Canada
-2014,CPA,44.4,Patented Medicine Prices Review Board Canada
-2014,CPA,45.6,Royal Canadian Mounted Police (Civilian Staff)
-2014,CPA,43.4,Competition Bureau Canada
-2014,CPA,*,RCMP External Review Committee
-2014,CPA,42.4,Civilian Review and Complaints Commission for the RCMP
-2014,CPA,45.7,Natural Resources Canada
-2014,CPA,43.9,Canadian Radio-television and Telecommunications Commission
-2014,CPA,42.9,Statistics Canada
-2014,CPA,42.5,Registrar of the Supreme Court of Canada
-2014,CPA,45.3,Public Services and Procurement Canada
-2014,CPA,47.4,Transportation Appeal Tribunal of Canada
-2014,CPA,42.7,Treasury Board of Canada Secretariat
-2014,CPA,48.6,Transportation Safety Board of Canada
-2014,CPA,50.6,Public Service Staffing Tribunal
-2014,CPA,44.7,Western Economic Diversification Canada
-2014,SA,41.6,Office of the Auditor General of Canada
-2014,SA,45.1,Parks Canada
-2014,SA,40.3,Financial Transactions and Reports Analysis Centre of Canada
-2014,SA,42,Canadian Institutes of Health Research
-2014,SA,42.7,Communications Security Establishment
-2014,SA,46.5,Canadian Nuclear Safety Commission
-2014,SA,44.8,Canada Energy Regulator
-2014,SA,40.5,Financial Consumer Agency of Canada
-2014,SA,44.1,Canadian Food Inspection Agency
-2014,SA,49.8,Indian Oil and Gas Canada
-2014,SA,46.1,Canada Revenue Agency
-2014,SA,44.1,National Film Board
-2014,SA,47.1,National Research Council Canada
-2014,SA,42.3,Natural Sciences and Engineering Research Canada
-2014,SA,38.7,The Correctional Investigator Canada
-2014,SA,45.8,Canadian Polar Commission
-2014,SA,42.9,Public Service Labour Relations Board
-2014,SA,44.9,Office of the Superintendent of Financial Institutions Canada
-2014,SA,43.6,Security Intelligence Review Committee
-2014,SA,41.7,Social Sciences and Humanities Research Council of Canada
-2014,SA,46,Statistical Survey Operations
-2015,CPA,45.8,Atlantic Canada Opportunities Agency
-2015,CPA,44.7,Agriculture and Agri-Food Canada
-2015,CPA,43,Public Health Agency of Canada
-2015,CPA,44.6,Canadian Transportation Agency
-2015,CPA,44.7,Administrative Tribunals Support Service of Canada
-2015,CPA,43.4,Library and Archives Canada
-2015,CPA,42.1,Canada Border Services Agency
-2015,CPA,42.7,Courts Administration Service
-2015,CPA,39.8,Canadian Dairy Commission
-2015,CPA,41.9,Elections Canada
-2015,CPA,43.3,Canada School of Public Service
-2015,CPA,45.8,Canadian Grain Commission
-2015,CPA,46.8,Canadian Intergovernmental Conference Secretariat
-2015,CPA,43.3,Office of the Commissioner of Official Languages
-2015,CPA,41.8,Copyright Board Canada
-2015,CPA,40.2,Military Police Complaints Commission of Canada
-2015,CPA,47.3,Canadian Space Agency
-2015,CPA,44.2,Employment and Social Development Canada
-2015,CPA,42.8,Women and Gender Equality Canada
-2015,CPA,45.4,Fisheries and Oceans Canada
-2015,CPA,48.4,National Defence
-2015,CPA,43.1,Environment and Climate Change Canada
-2015,CPA,44.4,"Innovation, Science and Economic Development Canada"
-2015,CPA,47.4,Veterans Affairs Canada
-2015,CPA,41.9,Impact Assessment Agency of Canada
-2015,CPA,41.2,Federal Economic Development Agency for Southern Ontario
-2015,CPA,44,Global Affairs Canada
-2015,CPA,48.8,Military Grievances External Review Committee
-2015,CPA,41.1,Department of Finance Canada
-2015,CPA,47.1,Office of the Commissioner for Federal Judicial Affairs Canada
-2015,CPA,48.1,Farm Products Council of Canada
-2015,CPA,45.4,Canada Economic Development for Quebec Regions
-2015,CPA,44.5,Office of the Governor General's Secretary
-2015,CPA,45.8,Shared Services Canada
-2015,CPA,44.5,Canadian Human Rights Commission
-2015,CPA,43.3,Crown-Indigenous Relations and Northern Affairs Canada
-2015,CPA,43.7,International Joint Commission
-2015,CPA,41.5,"Immigration, Refugees and Citizenship Canada"
-2015,CPA,39.6,Infrastructure Canada
-2015,CPA,44.1,Office of the Public Sector Integrity Commissioner of Canada
-2015,CPA,43.5,Offices of the Information and Privacy Commissioners of Canada
-2015,CPA,47.3,Immigration and Refugee Board of Canada
-2015,CPA,54.7,Indian Residential Schools Truth and Reconciliation Commission
-2015,CPA,61.7,Federal Judges not part of any department
-2015,CPA,44.7,Department of Justice Canada
-2015,CPA,44.4,Office of the Commissioner of Lobbying of Canada
-2015,CPA,46.2,Transport Canada
-2015,CPA,44.4,Canadian Northern Economic Development Agency
-2015,CPA,44.8,Health Canada
-2015,CPA,45,Parole Board of Canada
-2015,CPA,*,Office of the Prime Minister
-2015,CPA,44.6,Canadian Heritage
-2015,CPA,43.5,Privy Council Office
-2015,CPA,43.7,Correctional Service Canada
-2015,CPA,43.9,Public Prosecution Service of Canada
-2015,CPA,44.8,Public Service Commission of Canada
-2015,CPA,42,Public Safety Canada
-2015,CPA,43.6,Patented Medicine Prices Review Board Canada
-2015,CPA,45.6,Royal Canadian Mounted Police (Civilian Staff)
-2015,CPA,46.8,RCMP External Review Committee
-2015,CPA,43,Civilian Review and Complaints Commission for the RCMP
-2015,CPA,45.8,Natural Resources Canada
-2015,CPA,42.9,Canadian Radio-television and Telecommunications Commission
-2015,CPA,43.5,Statistics Canada
-2015,CPA,42.4,Registrar of the Supreme Court of Canada
-2015,CPA,45.3,Public Services and Procurement Canada
-2015,CPA,43.1,Treasury Board of Canada Secretariat
-2015,CPA,49.5,Transportation Safety Board of Canada
-2015,CPA,44.5,Western Economic Diversification Canada
-2015,SA,42,Office of the Auditor General of Canada
-2015,SA,44.9,Parks Canada
-2015,SA,39.9,Financial Transactions and Reports Analysis Centre of Canada
-2015,SA,42.1,Canadian Institutes of Health Research
-2015,SA,43.2,Communications Security Establishment
-2015,SA,46.8,Canadian Nuclear Safety Commission
-2015,SA,44.8,Canada Energy Regulator
-2015,SA,41,Financial Consumer Agency of Canada
-2015,SA,44.6,Canadian Food Inspection Agency
-2015,SA,50.8,Indian Oil and Gas Canada
-2015,SA,46,Canada Revenue Agency
-2015,SA,45.1,National Film Board
-2015,SA,47.1,National Research Council Canada
-2015,SA,42.4,Natural Sciences and Engineering Research Canada
-2015,SA,40.7,The Correctional Investigator Canada
-2015,SA,41.9,Canadian Polar Commission
-2015,SA,45.3,Office of the Superintendent of Financial Institutions Canada
-2015,SA,42.8,Security Intelligence Review Committee
-2015,SA,42.4,Social Sciences and Humanities Research Council of Canada
-2015,SA,46.9,Statistical Survey Operations
-2016,CPA,46.4,Atlantic Canada Opportunities Agency
-2016,CPA,44.9,Agriculture and Agri-Food Canada
-2016,CPA,43.3,Public Health Agency of Canada
-2016,CPA,45.1,Canadian Transportation Agency
-2016,CPA,44.1,Administrative Tribunals Support Service of Canada
-2016,CPA,44,Library and Archives Canada
-2016,CPA,42.3,Canada Border Services Agency
-2016,CPA,42.4,Courts Administration Service
-2016,CPA,40.6,Canadian Dairy Commission
-2016,CPA,41.5,Elections Canada
-2016,CPA,43.5,Canada School of Public Service
-2016,CPA,45.9,Canadian Grain Commission
-2016,CPA,44.7,Canadian Intergovernmental Conference Secretariat
-2016,CPA,43.7,Office of the Commissioner of Official Languages
-2016,CPA,44.1,Copyright Board Canada
-2016,CPA,38.8,Military Police Complaints Commission of Canada
-2016,CPA,47.3,Canadian Space Agency
-2016,CPA,43.9,Employment and Social Development Canada
-2016,CPA,43.4,Women and Gender Equality Canada
-2016,CPA,45.4,Fisheries and Oceans Canada
-2016,CPA,48.4,National Defence
-2016,CPA,43.4,Environment and Climate Change Canada
-2016,CPA,44.1,"Innovation, Science and Economic Development Canada"
-2016,CPA,47,Veterans Affairs Canada
-2016,CPA,41.4,Impact Assessment Agency of Canada
-2016,CPA,40.8,Federal Economic Development Agency for Southern Ontario
-2016,CPA,44.2,Global Affairs Canada
-2016,CPA,48.2,Military Grievances External Review Committee
-2016,CPA,41.4,Department of Finance Canada
-2016,CPA,46.7,Office of the Commissioner for Federal Judicial Affairs Canada
-2016,CPA,46.9,Farm Products Council of Canada
-2016,CPA,46.2,Canada Economic Development for Quebec Regions
-2016,CPA,44.7,Office of the Governor General's Secretary
-2016,CPA,46,Shared Services Canada
-2016,CPA,44.4,Canadian Human Rights Commission
-2016,CPA,43.6,Crown-Indigenous Relations and Northern Affairs Canada
-2016,CPA,46,International Joint Commission
-2016,CPA,41.4,"Immigration, Refugees and Citizenship Canada"
-2016,CPA,39.7,Infrastructure Canada
-2016,CPA,42.8,Office of the Public Sector Integrity Commissioner of Canada
-2016,CPA,43.2,Offices of the Information and Privacy Commissioners of Canada
-2016,CPA,46.8,Immigration and Refugee Board of Canada
-2016,CPA,61.8,Federal Judges not part of any department
-2016,CPA,44.9,Department of Justice Canada
-2016,CPA,44.8,Office of the Commissioner of Lobbying of Canada
-2016,CPA,46.3,Transport Canada
-2016,CPA,44,Canadian Northern Economic Development Agency
-2016,CPA,44.8,Health Canada
-2016,CPA,44.7,Parole Board of Canada
-2016,CPA,44.3,Canadian Heritage
-2016,CPA,43.7,Privy Council Office
-2016,CPA,44.1,Correctional Service Canada
-2016,CPA,44.1,Public Prosecution Service of Canada
-2016,CPA,45.1,Public Service Commission of Canada
-2016,CPA,41,Public Safety Canada
-2016,CPA,42.1,Patented Medicine Prices Review Board Canada
-2016,CPA,45.6,Royal Canadian Mounted Police (Civilian Staff)
-2016,CPA,48.8,RCMP External Review Committee
-2016,CPA,42,Civilian Review and Complaints Commission for the RCMP
-2016,CPA,45.7,Natural Resources Canada
-2016,CPA,42.6,Canadian Radio-television and Telecommunications Commission
-2016,CPA,43.6,Statistics Canada
-2016,CPA,42.3,Registrar of the Supreme Court of Canada
-2016,CPA,45.3,Public Services and Procurement Canada
-2016,CPA,43.1,Treasury Board of Canada Secretariat
-2016,CPA,49.9,Transportation Safety Board of Canada
-2016,CPA,44.1,Western Economic Diversification Canada
-2016,SA,41.1,Office of the Auditor General of Canada
-2016,SA,44.5,Parks Canada
-2016,SA,39,Financial Transactions and Reports Analysis Centre of Canada
-2016,SA,41.4,Polar Knowledge Canada
-2016,SA,43.1,Canadian Institutes of Health Research
-2016,SA,43.4,Communications Security Establishment
-2016,SA,45.6,Canadian Nuclear Safety Commission
-2016,SA,45.3,Canada Energy Regulator
-2016,SA,40.3,Financial Consumer Agency of Canada
-2016,SA,44.9,Canadian Food Inspection Agency
-2016,SA,49.6,Indian Oil and Gas Canada
-2016,SA,46,Canada Revenue Agency
-2016,SA,44.9,National Film Board
-2016,SA,46.8,National Research Council Canada
-2016,SA,42.8,Natural Sciences and Engineering Research Canada
-2016,SA,40.6,The Correctional Investigator Canada
-2016,SA,45.6,Office of the Superintendent of Financial Institutions Canada
-2016,SA,41.9,Security Intelligence Review Committee
-2016,SA,42.5,Social Sciences and Humanities Research Council of Canada
-2016,SA,46.1,Statistical Survey Operations
-2017,CPA,46.4,Atlantic Canada Opportunities Agency
-2017,CPA,44.6,Agriculture and Agri-Food Canada
-2017,CPA,43.3,Public Health Agency of Canada
-2017,CPA,44.9,Canadian Transportation Agency
-2017,CPA,43.8,Administrative Tribunals Support Service of Canada
-2017,CPA,51.2,Veterans Review and Appeal Board
-2017,CPA,43.9,Library and Archives Canada
-2017,CPA,42.5,Canada Border Services Agency
-2017,CPA,43.1,Courts Administration Service
-2017,CPA,41.3,Canadian Dairy Commission
-2017,CPA,42.9,Elections Canada
-2017,CPA,43.9,Canada School of Public Service
-2017,CPA,45.6,Canadian Grain Commission
-2017,CPA,45.3,Canadian Intergovernmental Conference Secretariat
-2017,CPA,43.1,Office of the Commissioner of Official Languages
-2017,CPA,48.6,Copyright Board Canada
-2017,CPA,41.3,Military Police Complaints Commission of Canada
-2017,CPA,46.7,Canadian Space Agency
-2017,CPA,43.8,Employment and Social Development Canada
-2017,CPA,42.3,Women and Gender Equality Canada
-2017,CPA,45,Fisheries and Oceans Canada
-2017,CPA,48.3,National Defence
-2017,CPA,43.2,Environment and Climate Change Canada
-2017,CPA,43.7,"Innovation, Science and Economic Development Canada"
-2017,CPA,45.7,Veterans Affairs Canada
-2017,CPA,40.4,Impact Assessment Agency of Canada
-2017,CPA,41.4,Federal Economic Development Agency for Southern Ontario
-2017,CPA,44.1,Global Affairs Canada
-2017,CPA,45.5,Military Grievances External Review Committee
-2017,CPA,41.3,Department of Finance Canada
-2017,CPA,43.6,Office of the Commissioner for Federal Judicial Affairs Canada
-2017,CPA,45.4,Canada Economic Development for Quebec Regions
-2017,CPA,44.9,Office of the Governor General's Secretary
-2017,CPA,46.1,Shared Services Canada
-2017,CPA,45.1,Canadian Human Rights Commission
-2017,CPA,43.6,Crown-Indigenous Relations and Northern Affairs Canada
-2017,CPA,44.2,International Joint Commission
-2017,CPA,41.9,"Immigration, Refugees and Citizenship Canada"
-2017,CPA,39.8,Infrastructure Canada
-2017,CPA,44.2,Office of the Public Sector Integrity Commissioner of Canada
-2017,CPA,41.7,Offices of the Information and Privacy Commissioners of Canada
-2017,CPA,46.8,Immigration and Refugee Board of Canada
-2017,CPA,62.1,Federal Judges not part of any department
-2017,CPA,45,Department of Justice Canada
-2017,CPA,47.3,Office of the Commissioner of Lobbying of Canada
-2017,CPA,47.1,Transport Canada
-2017,CPA,43.9,Canadian Northern Economic Development Agency
-2017,CPA,44.9,Health Canada
-2017,CPA,45.4,Parole Board of Canada
-2017,CPA,44.5,Canadian Heritage
-2017,CPA,43.4,Privy Council Office
-2017,CPA,44.4,Correctional Service Canada
-2017,CPA,44,Public Prosecution Service of Canada
-2017,CPA,44.3,Public Service Commission of Canada
-2017,CPA,40.5,Public Safety Canada
-2017,CPA,44.1,Patented Medicine Prices Review Board Canada
-2017,CPA,45.3,Royal Canadian Mounted Police (Civilian Staff)
-2017,CPA,49,RCMP External Review Committee
-2017,CPA,42.8,Civilian Review and Complaints Commission for the RCMP
-2017,CPA,45.7,Natural Resources Canada
-2017,CPA,42.5,Canadian Radio-television and Telecommunications Commission
-2017,CPA,43.1,Statistics Canada
-2017,CPA,42.8,Registrar of the Supreme Court of Canada
-2017,CPA,44.8,Public Services and Procurement Canada
-2017,CPA,42.9,Treasury Board of Canada Secretariat
-2017,CPA,49.6,Transportation Safety Board of Canada
-2017,CPA,44,Western Economic Diversification Canada
-2017,SA,40.7,Office of the Auditor General of Canada
-2017,SA,44.3,Parks Canada
-2017,SA,39.4,Financial Transactions and Reports Analysis Centre of Canada
-2017,SA,41.2,Polar Knowledge Canada
-2017,SA,42.2,Canadian Institutes of Health Research
-2017,SA,43.3,Communications Security Establishment
-2017,SA,45.8,Canadian Nuclear Safety Commission
-2017,SA,46.2,Canada Energy Regulator
-2017,SA,40.5,Financial Consumer Agency of Canada
-2017,SA,44.7,Canadian Food Inspection Agency
-2017,SA,50.1,Indian Oil and Gas Canada
-2017,SA,45.7,Canada Revenue Agency
-2017,SA,46.1,National Film Board
-2017,SA,46.7,National Research Council Canada
-2017,SA,43.4,Natural Sciences and Engineering Research Canada
-2017,SA,41.4,The Correctional Investigator Canada
-2017,SA,45.4,Office of the Superintendent of Financial Institutions Canada
-2017,SA,44.2,Security Intelligence Review Committee
-2017,SA,43.5,Social Sciences and Humanities Research Council of Canada
-2017,SA,46.1,Statistical Survey Operations
-2018,CPA,46.7,Atlantic Canada Opportunities Agency
-2018,CPA,44.4,Agriculture and Agri-Food Canada
-2018,CPA,43.5,Public Health Agency of Canada
-2018,CPA,43.7,Canadian Transportation Agency
-2018,CPA,44.2,Administrative Tribunals Support Service of Canada
-2018,CPA,50.1,Veterans Review and Appeal Board
-2018,CPA,44.4,Library and Archives Canada
-2018,CPA,42.5,Canada Border Services Agency
-2018,CPA,43.1,Courts Administration Service
-2018,CPA,41.9,Canadian Dairy Commission
-2018,CPA,42.4,Elections Canada
-2018,CPA,43.2,Canada School of Public Service
-2018,CPA,45.4,Canadian Grain Commission
-2018,CPA,44.9,Canadian Intergovernmental Conference Secretariat
-2018,CPA,41.8,Office of the Commissioner of Official Languages
-2018,CPA,46.9,Copyright Board Canada
-2018,CPA,45.7,Military Police Complaints Commission of Canada
-2018,CPA,47.3,Canadian Space Agency
-2018,CPA,43.4,Employment and Social Development Canada
-2018,CPA,40.9,Women and Gender Equality Canada
-2018,CPA,44,Fisheries and Oceans Canada
-2018,CPA,48,National Defence
-2018,CPA,43.1,Environment and Climate Change Canada
-2018,CPA,43.3,"Innovation, Science and Economic Development Canada"
-2018,CPA,45.6,Veterans Affairs Canada
-2018,CPA,41.6,Impact Assessment Agency of Canada
-2018,CPA,41.6,Federal Economic Development Agency for Southern Ontario
-2018,CPA,43.9,Global Affairs Canada
-2018,CPA,47.5,Military Grievances External Review Committee
-2018,CPA,41.2,Department of Finance Canada
-2018,CPA,45.1,Office of the Commissioner for Federal Judicial Affairs Canada
-2018,CPA,45.1,Canada Economic Development for Quebec Regions
-2018,CPA,44.3,Office of the Governor General's Secretary
-2018,CPA,45.5,Shared Services Canada
-2018,CPA,44.5,Canadian Human Rights Commission
-2018,CPA,43.4,Crown-Indigenous Relations and Northern Affairs Canada
-2018,CPA,44.3,International Joint Commission
-2018,CPA,41.5,"Immigration, Refugees and Citizenship Canada"
-2018,CPA,39.4,Infrastructure Canada
-2018,CPA,45.2,Office of the Public Sector Integrity Commissioner of Canada
-2018,CPA,42.2,Offices of the Information and Privacy Commissioners of Canada
-2018,CPA,45.9,Immigration and Refugee Board of Canada
-2018,CPA,61.9,Federal Judges not part of any department
-2018,CPA,44.8,Department of Justice Canada
-2018,CPA,48,Office of the Commissioner of Lobbying of Canada
-2018,CPA,45.9,Transport Canada
-2018,CPA,44.5,Canadian Northern Economic Development Agency
-2018,CPA,44.5,Health Canada
-2018,CPA,44.7,Parole Board of Canada
-2018,CPA,44,Canadian Heritage
-2018,CPA,42.4,Privy Council Office
-2018,CPA,44.6,Correctional Service Canada
-2018,CPA,44,Public Prosecution Service of Canada
-2018,CPA,43.5,Public Service Commission of Canada
-2018,CPA,40.1,Public Safety Canada
-2018,CPA,43.7,Patented Medicine Prices Review Board Canada
-2018,CPA,45,Royal Canadian Mounted Police (Civilian Staff)
-2018,CPA,45.7,RCMP External Review Committee
-2018,CPA,44.5,Civilian Review and Complaints Commission for the RCMP
-2018,CPA,45.1,Natural Resources Canada
-2018,CPA,42.3,Canadian Radio-television and Telecommunications Commission
-2018,CPA,43,Statistics Canada
-2018,CPA,41.2,Registrar of the Supreme Court of Canada
-2018,CPA,44.2,Public Services and Procurement Canada
-2018,CPA,42.4,Treasury Board of Canada Secretariat
-2018,CPA,48.8,Transportation Safety Board of Canada
-2018,CPA,43.1,Western Economic Diversification Canada
-2018,SA,41,Office of the Auditor General of Canada
-2018,SA,44,Parks Canada
-2018,SA,39.6,Financial Transactions and Reports Analysis Centre of Canada
-2018,SA,41.7,Polar Knowledge Canada
-2018,SA,42,Canadian Institutes of Health Research
-2018,SA,42.6,Communications Security Establishment
-2018,SA,44.9,Canadian Nuclear Safety Commission
-2018,SA,46.4,Canada Energy Regulator
-2018,SA,41.3,Financial Consumer Agency of Canada
-2018,SA,45,Canadian Food Inspection Agency
-2018,SA,50.4,Indian Oil and Gas Canada
-2018,SA,45,Canada Revenue Agency
-2018,SA,45.9,National Film Board
-2018,SA,47,National Research Council Canada
-2018,SA,43.7,Natural Sciences and Engineering Research Canada
-2018,SA,42.7,The Correctional Investigator Canada
-2018,SA,45.5,Office of the Superintendent of Financial Institutions Canada
-2018,SA,42.5,Security Intelligence Review Committee
-2018,SA,43.9,Social Sciences and Humanities Research Council of Canada
-2018,SA,47.7,Statistical Survey Operations
-2019,CPA,46.4,Atlantic Canada Opportunities Agency
-2019,CPA,44.5,Agriculture and Agri-Food Canada
-2019,CPA,42.7,Public Health Agency of Canada
-2019,CPA,42.3,Canadian Transportation Agency
-2019,CPA,43.7,Administrative Tribunals Support Service of Canada
-2019,CPA,50.1,Veterans Review and Appeal Board
-2019,CPA,44.1,Library and Archives Canada
-2019,CPA,42.2,Canada Border Services Agency
-2019,CPA,42.1,Courts Administration Service
-2019,CPA,41.8,Canadian Dairy Commission
-2019,CPA,41.7,Elections Canada
-2019,CPA,42.5,Canada School of Public Service
-2019,CPA,44.9,Canadian Grain Commission
-2019,CPA,41,Canadian Intergovernmental Conference Secretariat
-2019,CPA,40.9,Office of the Commissioner of Official Languages
-2019,CPA,46.7,Copyright Board Canada
-2019,CPA,43.5,Military Police Complaints Commission of Canada
-2019,CPA,46.4,Canadian Space Agency
-2019,CPA,43.5,Employment and Social Development Canada
-2019,CPA,40.2,Women and Gender Equality Canada
-2019,CPA,43.6,Fisheries and Oceans Canada
-2019,CPA,47.7,National Defence
-2019,CPA,42.5,Environment and Climate Change Canada
-2019,CPA,42.5,"Innovation, Science and Economic Development Canada"
-2019,CPA,44.9,Veterans Affairs Canada
-2019,CPA,41,Impact Assessment Agency of Canada
-2019,CPA,41.8,Federal Economic Development Agency for Southern Ontario
-2019,CPA,43.6,Global Affairs Canada
-2019,CPA,48.3,Military Grievances External Review Committee
-2019,CPA,41.1,Department of Finance Canada
-2019,CPA,46.6,Office of the Commissioner for Federal Judicial Affairs Canada
-2019,CPA,44.3,Canada Economic Development for Quebec Regions
-2019,CPA,42.5,Office of the Governor General's Secretary
-2019,CPA,45.1,Shared Services Canada
-2019,CPA,44.3,Canadian Human Rights Commission
-2019,CPA,43.1,Crown-Indigenous Relations and Northern Affairs Canada
-2019,CPA,44.6,International Joint Commission
-2019,CPA,41,"Immigration, Refugees and Citizenship Canada"
-2019,CPA,38.9,Infrastructure Canada
-2019,CPA,42.2,Office of the Public Sector Integrity Commissioner of Canada
-2019,CPA,41.4,Offices of the Information and Privacy Commissioners of Canada
-2019,CPA,44.6,Immigration and Refugee Board of Canada
-2019,CPA,61.8,Federal Judges not part of any department
-2019,CPA,44.5,Department of Justice Canada
-2019,CPA,47.1,Office of the Commissioner of Lobbying of Canada
-2019,CPA,45.3,Transport Canada
-2019,CPA,43.4,Canadian Northern Economic Development Agency
-2019,CPA,43.8,Health Canada
-2019,CPA,44.5,Parole Board of Canada
-2019,CPA,*,Secretariat of the National Security and Intelligence Committee of Parliamentarians
-2019,CPA,43.7,Canadian Heritage
-2019,CPA,41.5,Privy Council Office
-2019,CPA,44.5,Correctional Service Canada
-2019,CPA,44.3,Public Prosecution Service of Canada
-2019,CPA,42.2,Public Service Commission of Canada
-2019,CPA,39.9,Public Safety Canada
-2019,CPA,42.6,Patented Medicine Prices Review Board Canada
-2019,CPA,44.7,Royal Canadian Mounted Police (Civilian Staff)
-2019,CPA,43.6,RCMP External Review Committee
-2019,CPA,42.4,Civilian Review and Complaints Commission for the RCMP
-2019,CPA,44.5,Natural Resources Canada
-2019,CPA,42.5,Canadian Radio-television and Telecommunications Commission
-2019,CPA,42.6,Statistics Canada
-2019,CPA,40.4,Registrar of the Supreme Court of Canada
-2019,CPA,43.5,Public Services and Procurement Canada
-2019,CPA,41.6,Treasury Board of Canada Secretariat
-2019,CPA,48.7,Transportation Safety Board of Canada
-2019,CPA,43.1,Western Economic Diversification Canada
-2019,SA,40.9,Office of the Auditor General of Canada
-2019,SA,43.9,Parks Canada
-2019,SA,40.2,Financial Transactions and Reports Analysis Centre of Canada
-2019,SA,43.3,Polar Knowledge Canada
-2019,SA,41.4,Canadian Institutes of Health Research
-2019,SA,41.9,Communications Security Establishment
-2019,SA,44.9,Canadian Nuclear Safety Commission
-2019,SA,46.7,Canada Energy Regulator
-2019,SA,41.9,Financial Consumer Agency of Canada
-2019,SA,45,Canadian Food Inspection Agency
-2019,SA,51.4,Indian Oil and Gas Canada
-2019,SA,44.5,Canada Revenue Agency
-2019,SA,46.2,National Film Board
-2019,SA,46.3,National Research Council Canada
-2019,SA,43.5,Natural Sciences and Engineering Research Canada
-2019,SA,43.1,The Correctional Investigator Canada
-2019,SA,45.1,Office of the Superintendent of Financial Institutions Canada
-2019,SA,39.7,Security Intelligence Review Committee
-2019,SA,43.3,Social Sciences and Humanities Research Council of Canada
-2019,SA,47.2,Statistical Survey Operations
-2020,CPA,46.2,Atlantic Canada Opportunities Agency
-2020,CPA,43.9,Agriculture and Agri-Food Canada
-2020,CPA,42.6,Public Health Agency of Canada
-2020,CPA,42.9,Canadian Transportation Agency
-2020,CPA,43.7,Administrative Tribunals Support Service of Canada
-2020,CPA,50,Veterans Review and Appeal Board
-2020,CPA,44,Library and Archives Canada
-2020,CPA,41.9,Canada Border Services Agency
-2020,CPA,41.4,Courts Administration Service
-2020,CPA,42.4,Canadian Dairy Commission
-2020,CPA,41.4,Elections Canada
-2020,CPA,42.4,Canada School of Public Service
-2020,CPA,45.1,Canadian Grain Commission
-2020,CPA,43.9,Canadian Intergovernmental Conference Secretariat
-2020,CPA,40.9,Office of the Commissioner of Official Languages
-2020,CPA,43.8,Copyright Board Canada
-2020,CPA,41.8,Military Police Complaints Commission of Canada
-2020,CPA,46.5,Canadian Space Agency
-2020,CPA,43.2,Employment and Social Development Canada
-2020,CPA,39.8,Women and Gender Equality Canada
-2020,CPA,43.3,Fisheries and Oceans Canada
-2020,CPA,47.6,National Defence
-2020,CPA,42.4,Environment and Climate Change Canada
-2020,CPA,42.4,"Innovation, Science and Economic Development Canada"
-2020,CPA,44.7,Veterans Affairs Canada
-2020,CPA,39.3,Impact Assessment Agency of Canada
-2020,CPA,40.5,Federal Economic Development Agency for Southern Ontario
-2020,CPA,43.1,Global Affairs Canada
-2020,CPA,47.2,Military Grievances External Review Committee
-2020,CPA,40.6,Department of Finance Canada
-2020,CPA,46.1,Office of the Commissioner for Federal Judicial Affairs Canada
-2020,CPA,44.5,Canada Economic Development for Quebec Regions
-2020,CPA,42,Office of the Governor General's Secretary
-2020,CPA,45,Shared Services Canada
-2020,CPA,42.4,Canadian Human Rights Commission
-2020,CPA,42.8,Crown-Indigenous Relations and Northern Affairs Canada
-2020,CPA,43.4,International Joint Commission
-2020,CPA,40.6,"Immigration, Refugees and Citizenship Canada"
-2020,CPA,38.5,Infrastructure Canada
-2020,CPA,42.1,Office of the Public Sector Integrity Commissioner of Canada
-2020,CPA,40.4,Offices of the Information and Privacy Commissioners of Canada
-2020,CPA,43.3,Immigration and Refugee Board of Canada
-2020,CPA,61.9,Federal Judges not part of any department
-2020,CPA,44.1,Department of Justice Canada
-2020,CPA,47.2,Office of the Commissioner of Lobbying of Canada
-2020,CPA,45,Transport Canada
-2020,CPA,41.3,Canadian Northern Economic Development Agency
-2020,CPA,43.6,Health Canada
-2020,CPA,43.7,Parole Board of Canada
-2020,CPA,46.2,Secretariat of the National Security and Intelligence Committee of Parliamentarians
-2020,CPA,43.2,Canadian Heritage
-2020,CPA,41.2,Privy Council Office
-2020,CPA,44.2,Correctional Service Canada
-2020,CPA,44.1,Public Prosecution Service of Canada
-2020,CPA,42.1,Public Service Commission of Canada
-2020,CPA,40,Public Safety Canada
-2020,CPA,43,Patented Medicine Prices Review Board Canada
-2020,CPA,44.2,Royal Canadian Mounted Police (Civilian Staff)
-2020,CPA,41.7,RCMP External Review Committee
-2020,CPA,41.5,Civilian Review and Complaints Commission for the RCMP
-2020,CPA,44.1,Natural Resources Canada
-2020,CPA,42.6,Canadian Radio-television and Telecommunications Commission
-2020,CPA,42.7,Statistics Canada
-2020,CPA,40.9,Registrar of the Supreme Court of Canada
-2020,CPA,43.2,Public Services and Procurement Canada
-2020,CPA,41.2,Treasury Board of Canada Secretariat
-2020,CPA,48.6,Transportation Safety Board of Canada
-2020,CPA,43.4,Western Economic Diversification Canada
-2020,SA,40.3,Office of the Auditor General of Canada
-2020,SA,43.7,Parks Canada
-2020,SA,39.7,Financial Transactions and Reports Analysis Centre of Canada
-2020,SA,39.7,Polar Knowledge Canada
-2020,SA,41.5,Canadian Institutes of Health Research
-2020,SA,41.4,Communications Security Establishment
-2020,SA,45.5,Canadian Nuclear Safety Commission
-2020,SA,46.8,Canada Energy Regulator
-2020,SA,41.5,Financial Consumer Agency of Canada
-2020,SA,45.3,Canadian Food Inspection Agency
-2020,SA,51.6,Indian Oil and Gas Canada
-2020,SA,44.2,Canada Revenue Agency
-2020,SA,46.8,National Film Board
-2020,SA,46.3,National Research Council Canada
-2020,SA,42.4,Natural Sciences and Engineering Research Canada
-2020,SA,43.9,The Correctional Investigator Canada
-2020,SA,44.7,Office of the Superintendent of Financial Institutions Canada
-2020,SA,44.4,Security Intelligence Review Committee
-2020,SA,43.9,Social Sciences and Humanities Research Council of Canada
-2020,SA,48.6,Statistical Survey Operations
-2021,CPA,46.3,Atlantic Canada Opportunities Agency
-2021,CPA,44.5,Agriculture and Agri-Food Canada
-2021,CPA,40.9,Public Health Agency of Canada
-2021,CPA,41.6,Canadian Transportation Agency
-2021,CPA,43.6,Administrative Tribunals Support Service of Canada
-2021,CPA,48.8,Veterans Review and Appeal Board
-2021,CPA,44.9,Library and Archives Canada
-2021,CPA,42.3,Canada Border Services Agency
-2021,CPA,42.1,Courts Administration Service
-2021,CPA,41.8,Canadian Dairy Commission
-2021,CPA,40.4,Elections Canada
-2021,CPA,42.2,Canada School of Public Service
-2021,CPA,45,Canadian Grain Commission
-2021,CPA,43.5,Canadian Intergovernmental Conference Secretariat
-2021,CPA,41.5,Office of the Commissioner of Official Languages
-2021,CPA,42,Copyright Board Canada
-2021,CPA,43.4,Military Police Complaints Commission of Canada
-2021,CPA,46,Canadian Space Agency
-2021,CPA,42.6,Employment and Social Development Canada
-2021,CPA,39.5,Women and Gender Equality Canada
-2021,CPA,42.9,Fisheries and Oceans Canada
-2021,CPA,44.5,Indigenous Services Canada
-2021,CPA,47.9,National Defence
-2021,CPA,42.7,Environment and Climate Change Canada
-2021,CPA,42.2,"Innovation, Science and Economic Development Canada"
-2021,CPA,44.4,Veterans Affairs Canada
-2021,CPA,39.9,Impact Assessment Agency of Canada
-2021,CPA,40.5,Federal Economic Development Agency for Southern Ontario
-2021,CPA,43.3,Global Affairs Canada
-2021,CPA,46.3,Military Grievances External Review Committee
-2021,CPA,40.6,Department of Finance Canada
-2021,CPA,45.9,Office of the Commissioner for Federal Judicial Affairs Canada
-2021,CPA,44.8,Canada Economic Development for Quebec Regions
-2021,CPA,41.2,Office of the Governor General's Secretary
-2021,CPA,45,Shared Services Canada
-2021,CPA,41.9,Canadian Human Rights Commission
-2021,CPA,41.7,Crown-Indigenous Relations and Northern Affairs Canada
-2021,CPA,44.5,International Joint Commission
-2021,CPA,40.9,"Immigration, Refugees and Citizenship Canada"
-2021,CPA,39.1,Infrastructure Canada
-2021,CPA,39.2,Office of the Public Sector Integrity Commissioner of Canada
-2021,CPA,41.1,Offices of the Information and Privacy Commissioners of Canada
-2021,CPA,43,Immigration and Refugee Board of Canada
-2021,CPA,61.8,Federal Judges not part of any department
-2021,CPA,44.2,Department of Justice Canada
-2021,CPA,43.6,Office of the Commissioner of Lobbying of Canada
-2021,CPA,44.8,Transport Canada
-2021,CPA,41.8,Canadian Northern Economic Development Agency
-2021,CPA,42.7,Health Canada
-2021,CPA,44.2,Parole Board of Canada
-2021,CPA,40,Secretariat of the National Security and Intelligence Committee of Parliamentarians
-2021,CPA,*,Office of the Prime Minister
-2021,CPA,43.6,Canadian Heritage
-2021,CPA,41.3,Privy Council Office
-2021,CPA,44.4,Correctional Service Canada
-2021,CPA,43.8,Public Prosecution Service of Canada
-2021,CPA,43.1,Public Service Commission of Canada
-2021,CPA,40.2,Public Safety Canada
-2021,CPA,43.2,Patented Medicine Prices Review Board Canada
-2021,CPA,44.2,Royal Canadian Mounted Police (Civilian Staff)
-2021,CPA,43.2,RCMP External Review Committee
-2021,CPA,42.6,Civilian Review and Complaints Commission for the RCMP
-2021,CPA,44.3,Natural Resources Canada
-2021,CPA,42.9,Canadian Radio-television and Telecommunications Commission
-2021,CPA,43.5,Statistics Canada
-2021,CPA,41.3,Registrar of the Supreme Court of Canada
-2021,CPA,43.6,Public Services and Procurement Canada
-2021,CPA,41.8,Treasury Board of Canada Secretariat
-2021,CPA,48.4,Transportation Safety Board of Canada
-2021,CPA,43.1,Western Economic Diversification Canada
-2021,SA,40,Office of the Auditor General of Canada
-2021,SA,43.7,Parks Canada
-2021,SA,40.7,Financial Transactions and Reports Analysis Centre of Canada
-2021,SA,40.5,Polar Knowledge Canada
-2021,SA,41,Canadian Institutes of Health Research
-2021,SA,41.6,Communications Security Establishment
-2021,SA,45.5,Canadian Nuclear Safety Commission
-2021,SA,46.6,Canada Energy Regulator
-2021,SA,42.4,Financial Consumer Agency of Canada
-2021,SA,44.9,Canadian Food Inspection Agency
-2021,SA,50.9,Indian Oil and Gas Canada
-2021,SA,44.2,Canada Revenue Agency
-2021,SA,47.2,National Film Board
-2021,SA,39.4,National Security Intelligence and Review Agency
-2021,SA,46.4,National Research Council Canada
-2021,SA,42.7,Natural Sciences and Engineering Research Canada
-2021,SA,42.9,The Correctional Investigator Canada
-2021,SA,45,Office of the Superintendent of Financial Institutions Canada
-2021,SA,43.4,Social Sciences and Humanities Research Council of Canada
-2021,SA,46,Statistical Survey Operations
-2022,CPA,46.1,Atlantic Canada Opportunities Agency
-2022,CPA,43.8,Agriculture and Agri-Food Canada
-2022,CPA,40,Public Health Agency of Canada
-2022,CPA,43.2,Canadian Transportation Agency
-2022,CPA,42.7,Administrative Tribunals Support Service of Canada
-2022,CPA,48.2,Veterans Review and Appeal Board
-2022,CPA,45.5,Library and Archives Canada
-2022,CPA,42.2,Canada Border Services Agency
-2022,CPA,41.9,Courts Administration Service
-2022,CPA,44.5,Accessibility Standards Canada
-2022,CPA,42.8,Canadian Dairy Commission
-2022,CPA,41.4,Elections Canada
-2022,CPA,41.6,Canada School of Public Service
-2022,CPA,45,Canadian Grain Commission
-2022,CPA,42.2,Canadian Intergovernmental Conference Secretariat
-2022,CPA,41.6,Office of the Commissioner of Official Languages
-2022,CPA,43.7,Copyright Board Canada
-2022,CPA,43.4,Military Police Complaints Commission of Canada
-2022,CPA,45.4,Canadian Space Agency
-2022,CPA,42.5,Employment and Social Development Canada
-2022,CPA,40.3,Women and Gender Equality Canada
-2022,CPA,42.8,Fisheries and Oceans Canada
-2022,CPA,44.2,Indigenous Services Canada
-2022,CPA,47.6,National Defence
-2022,CPA,42.2,Environment and Climate Change Canada
-2022,CPA,41.6,"Innovation, Science and Economic Development Canada"
-2022,CPA,44.6,Veterans Affairs Canada
-2022,CPA,40.4,Impact Assessment Agency of Canada
-2022,CPA,39.9,Federal Economic Development Agency for Southern Ontario
-2022,CPA,43.1,Global Affairs Canada
-2022,CPA,45.8,Military Grievances External Review Committee
-2022,CPA,40.8,Department of Finance Canada
-2022,CPA,46.8,Office of the Commissioner for Federal Judicial Affairs Canada
-2022,CPA,44.5,Canada Economic Development for Quebec Regions
-2022,CPA,40.2,Office of the Governor General's Secretary
-2022,CPA,44.9,Shared Services Canada
-2022,CPA,41.6,Canadian Human Rights Commission
-2022,CPA,41.4,Crown-Indigenous Relations and Northern Affairs Canada
-2022,CPA,43.5,International Joint Commission
-2022,CPA,40.5,"Immigration, Refugees and Citizenship Canada"
-2022,CPA,37.7,Infrastructure Canada
-2022,CPA,40,Office of the Public Sector Integrity Commissioner of Canada
-2022,CPA,40.3,Offices of the Information and Privacy Commissioners of Canada
-2022,CPA,42.1,Immigration and Refugee Board of Canada
-2022,CPA,61.9,Federal Judges not part of any department
-2022,CPA,44,Department of Justice Canada
-2022,CPA,43.1,Office of the Commissioner of Lobbying of Canada
-2022,CPA,45.2,Transport Canada
-2022,CPA,41.4,Canadian Northern Economic Development Agency
-2022,CPA,42.4,Health Canada
-2022,CPA,44.4,Parole Board of Canada
-2022,CPA,40.8,Secretariat of the National Security and Intelligence Committee of Parliamentarians
-2022,CPA,43.1,Canadian Heritage
-2022,CPA,41.1,Privy Council Office
-2022,CPA,44.2,Correctional Service Canada
-2022,CPA,43.8,Public Prosecution Service of Canada
-2022,CPA,42.9,Public Service Commission of Canada
-2022,CPA,39.9,Public Safety Canada
-2022,CPA,42.9,Patented Medicine Prices Review Board Canada
-2022,CPA,43.8,Royal Canadian Mounted Police (Civilian Staff)
-2022,CPA,41.5,RCMP External Review Committee
-2022,CPA,42.1,Civilian Review and Complaints Commission for the RCMP
-2022,CPA,43.9,Natural Resources Canada
-2022,CPA,43,Canadian Radio-television and Telecommunications Commission
-2022,CPA,41.9,Statistics Canada
-2022,CPA,41.3,Registrar of the Supreme Court of Canada
-2022,CPA,43.8,Public Services and Procurement Canada
-2022,CPA,41.7,Treasury Board of Canada Secretariat
-2022,CPA,49.3,Transportation Safety Board of Canada
-2022,CPA,42.9,Western Economic Diversification Canada
-2022,SA,40.2,Office of the Auditor General of Canada
-2022,SA,43.2,Parks Canada
-2022,SA,39,Financial Transactions and Reports Analysis Centre of Canada
-2022,SA,40.1,Polar Knowledge Canada
-2022,SA,40.8,Canadian Institutes of Health Research
-2022,SA,41.5,Communications Security Establishment
-2022,SA,45.5,Canadian Nuclear Safety Commission
-2022,SA,46.4,Canada Energy Regulator
-2022,SA,42.6,Financial Consumer Agency of Canada
-2022,SA,44.7,Canadian Food Inspection Agency
-2022,SA,51.9,Indian Oil and Gas Canada
-2022,SA,43,Canada Revenue Agency
-2022,SA,47.1,National Film Board
-2022,SA,40.2,National Security Intelligence and Review Agency
-2022,SA,46.5,National Research Council Canada
-2022,SA,43.2,Natural Sciences and Engineering Research Canada
-2022,SA,44.2,The Correctional Investigator Canada
-2022,SA,*,Office of the Intelligence Commissioner
-2022,SA,44.8,Office of the Superintendent of Financial Institutions Canada
-2022,SA,43.1,Social Sciences and Humanities Research Council of Canada
-2022,SA,48.7,Statistical Survey Operations
-2023,CPA,46.6,Atlantic Canada Opportunities Agency
-2023,CPA,43.8,Agriculture and Agri-Food Canada
-2023,CPA,40.2,Public Health Agency of Canada
-2023,CPA,43.3,Canadian Transportation Agency
-2023,CPA,42.7,Administrative Tribunals Support Service of Canada
-2023,CPA,45.9,Veterans Review and Appeal Board
-2023,CPA,43.8,Library and Archives Canada
-2023,CPA,41.9,Canada Border Services Agency
-2023,CPA,41,Courts Administration Service
-2023,CPA,43.2,Accessibility Standards Canada
-2023,CPA,42.4,Canadian Dairy Commission
-2023,CPA,41.9,Elections Canada
-2023,CPA,41.7,Canada School of Public Service
-2023,CPA,44.7,Canadian Grain Commission
-2023,CPA,41.3,Canadian Intergovernmental Conference Secretariat
-2023,CPA,42.3,Office of the Commissioner of Official Languages
-2023,CPA,42.1,Copyright Board Canada
-2023,CPA,42.3,Military Police Complaints Commission of Canada
-2023,CPA,44.5,Canadian Space Agency
-2023,CPA,42.5,Employment and Social Development Canada
-2023,CPA,39.5,Women and Gender Equality Canada
-2023,CPA,42.3,Fisheries and Oceans Canada
-2023,CPA,43.8,Indigenous Services Canada
-2023,CPA,47.3,National Defence
-2023,CPA,41.7,Environment and Climate Change Canada
-2023,CPA,41.3,"Innovation, Science and Economic Development Canada"
-2023,CPA,44.9,Veterans Affairs Canada
-2023,CPA,40.4,Impact Assessment Agency of Canada
-2023,CPA,40.6,Federal Economic Development Agency for Southern Ontario
-2023,CPA,42.9,Global Affairs Canada
-2023,CPA,45.3,Military Grievances External Review Committee
-2023,CPA,40.8,Department of Finance Canada
-2023,CPA,46.6,Office of the Commissioner for Federal Judicial Affairs Canada
-2023,CPA,44,Canada Economic Development for Quebec Regions
-2023,CPA,39.9,Office of the Governor General's Secretary
-2023,CPA,44.6,Shared Services Canada
-2023,CPA,42.1,Canadian Human Rights Commission
-2023,CPA,41.2,Crown-Indigenous Relations and Northern Affairs Canada
-2023,CPA,45.3,International Joint Commission
-2023,CPA,40.1,"Immigration, Refugees and Citizenship Canada"
-2023,CPA,37.8,Infrastructure Canada
-2023,CPA,42.1,Office of the Public Sector Integrity Commissioner of Canada
-2023,CPA,41.4,Offices of the Information and Privacy Commissioners of Canada
-2023,CPA,41.9,Immigration and Refugee Board of Canada
-2023,CPA,61.7,Federal Judges not part of any department
-2023,CPA,43.5,Department of Justice Canada
-2023,CPA,42.4,Office of the Commissioner of Lobbying of Canada
-2023,CPA,44.9,Transport Canada
-2023,CPA,41.9,Canadian Northern Economic Development Agency
-2023,CPA,42.8,Health Canada
-2023,CPA,43.5,Parole Board of Canada
-2023,CPA,40.2,Secretariat of the National Security and Intelligence Committee of Parliamentarians
-2023,CPA,43.6,Canadian Heritage
-2023,CPA,40.3,Privy Council Office
-2023,CPA,44,Correctional Service Canada
-2023,CPA,43.5,Public Prosecution Service of Canada
-2023,CPA,42.5,Public Service Commission of Canada
-2023,CPA,39.7,Public Safety Canada
-2023,CPA,42.7,Patented Medicine Prices Review Board Canada
-2023,CPA,43.5,Royal Canadian Mounted Police (Civilian Staff)
-2023,CPA,42.7,RCMP External Review Committee
-2023,CPA,41.3,Civilian Review and Complaints Commission for the RCMP
-2023,CPA,43.3,Natural Resources Canada
-2023,CPA,42.5,Canadian Radio-television and Telecommunications Commission
-2023,CPA,42.6,Statistics Canada
-2023,CPA,40.6,Registrar of the Supreme Court of Canada
-2023,CPA,43.7,Public Services and Procurement Canada
-2023,CPA,41.8,Treasury Board of Canada Secretariat
-2023,CPA,49.2,Transportation Safety Board of Canada
-2023,CPA,42.5,Western Economic Diversification Canada
-2023,SA,41.2,Office of the Auditor General of Canada
-2023,SA,43.2,Parks Canada
-2023,SA,39.4,Financial Transactions and Reports Analysis Centre of Canada
-2023,SA,40.2,Polar Knowledge Canada
-2023,SA,40.5,Canadian Institutes of Health Research
-2023,SA,41.5,Communications Security Establishment
-2023,SA,44.6,Canadian Nuclear Safety Commission
-2023,SA,47.4,Canada Energy Regulator
-2023,SA,41.3,Financial Consumer Agency of Canada
-2023,SA,44.4,Canadian Food Inspection Agency
-2023,SA,51.2,Indian Oil and Gas Canada
-2023,SA,42.8,Canada Revenue Agency
-2023,SA,46.8,National Film Board
-2023,SA,37.5,National Security Intelligence and Review Agency
-2023,SA,46.6,National Research Council Canada
-2023,SA,43.5,Natural Sciences and Engineering Research Canada
-2023,SA,43.5,The Correctional Investigator Canada
-2023,SA,45.2,Office of the Intelligence Commissioner
-2023,SA,43.7,Office of the Superintendent of Financial Institutions Canada
-2023,SA,42.2,Social Sciences and Humanities Research Council of Canada
-2023,SA,50.5,Statistical Survey Operations
-2024,CPA,47,Atlantic Canada Opportunities Agency
-2024,CPA,43.7,Agriculture and Agri-Food Canada
-2024,CPA,40.6,Public Health Agency of Canada
-2024,CPA,42.7,Canadian Transportation Agency
-2024,CPA,43,Administrative Tribunals Support Service of Canada
-2024,CPA,42,Veterans Review and Appeal Board
-2024,CPA,42.7,Library and Archives Canada
-2024,CPA,41.7,Canada Border Services Agency
-2024,CPA,40.5,Courts Administration Service
-2024,CPA,43.6,Accessibility Standards Canada
-2024,CPA,41.3,Canadian Dairy Commission
-2024,CPA,41.5,Elections Canada
-2024,CPA,42,Canada School of Public Service
-2024,CPA,44.9,Canadian Grain Commission
-2024,CPA,38.3,Canadian Intergovernmental Conference Secretariat
-2024,CPA,*,Law Commission of Canada
-2024,CPA,41.8,Office of the Commissioner of Official Languages
-2024,CPA,42.7,Copyright Board Canada
-2024,CPA,43.3,Military Police Complaints Commission of Canada
-2024,CPA,43.9,Canadian Space Agency
-2024,CPA,43.1,Employment and Social Development Canada
-2024,CPA,40.6,Women and Gender Equality Canada
-2024,CPA,42.3,Fisheries and Oceans Canada
-2024,CPA,43.4,Indigenous Services Canada
-2024,CPA,47,National Defence
-2024,CPA,41.5,Environment and Climate Change Canada
-2024,CPA,41.4,"Innovation, Science and Economic Development Canada"
-2024,CPA,44.6,Veterans Affairs Canada
-2024,CPA,39.8,Impact Assessment Agency of Canada
-2024,CPA,40.9,Federal Economic Development Agency for Southern Ontario
-2024,CPA,43.2,Global Affairs Canada
-2024,CPA,44.6,Military Grievances External Review Committee
-2024,CPA,40.7,Department of Finance Canada
-2024,CPA,46.3,Office of the Commissioner for Federal Judicial Affairs Canada
-2024,CPA,44.1,Canada Economic Development for Quebec Regions
-2024,CPA,42.3,Office of the Governor General's Secretary
-2024,CPA,44.6,Shared Services Canada
-2024,CPA,42.1,Canadian Human Rights Commission
-2024,CPA,41.6,Crown-Indigenous Relations and Northern Affairs Canada
-2024,CPA,45.4,International Joint Commission
-2024,CPA,40.6,"Immigration, Refugees and Citizenship Canada"
-2024,CPA,38.4,Infrastructure Canada
-2024,CPA,42.2,Office of the Public Sector Integrity Commissioner of Canada
-2024,CPA,42,Offices of the Information and Privacy Commissioners of Canada
-2024,CPA,41.9,Immigration and Refugee Board of Canada
-2024,CPA,61.7,Federal Judges not part of any department
-2024,CPA,43.4,Department of Justice Canada
-2024,CPA,40,Office of the Commissioner of Lobbying of Canada
-2024,CPA,44.5,Transport Canada
-2024,CPA,42.6,Canadian Northern Economic Development Agency
-2024,CPA,43,Health Canada
-2024,CPA,45.8,Federal Economic Development Agency for Northern Ontario
-2024,CPA,43,Parole Board of Canada
-2024,CPA,40.1,Secretariat of the National Security and Intelligence Committee of Parliamentarians
-2024,CPA,43.6,Canadian Heritage
-2024,CPA,40.2,Privy Council Office
-2024,CPA,43.8,Correctional Service Canada
-2024,CPA,43.6,Public Prosecution Service of Canada
-2024,CPA,43.5,Public Service Commission of Canada
-2024,CPA,39.9,Public Safety Canada
-2024,CPA,43.1,Patented Medicine Prices Review Board Canada
-2024,CPA,43.1,Royal Canadian Mounted Police (Civilian Staff)
-2024,CPA,44.1,RCMP External Review Committee
-2024,CPA,39.7,Civilian Review and Complaints Commission for the RCMP
-2024,CPA,42.9,Natural Resources Canada
-2024,CPA,41.7,Canadian Radio-television and Telecommunications Commission
-2024,CPA,45.2,Statistics Canada
-2024,CPA,40.9,Registrar of the Supreme Court of Canada
-2024,CPA,43.8,Public Services and Procurement Canada
-2024,CPA,42.4,Treasury Board of Canada Secretariat
-2024,CPA,49,Transportation Safety Board of Canada
-2024,CPA,43.7,Western Economic Diversification Canada
-2024,SA,41.5,Office of the Auditor General of Canada
-2024,SA,43.4,Parks Canada
-2024,SA,39.4,Financial Transactions and Reports Analysis Centre of Canada
-2024,SA,40.7,Polar Knowledge Canada
-2024,SA,40.7,Canadian Institutes of Health Research
-2024,SA,41.3,Communications Security Establishment
-2024,SA,44.6,Canadian Nuclear Safety Commission
-2024,SA,47.5,Canada Energy Regulator
-2024,SA,41.6,Financial Consumer Agency of Canada
-2024,SA,44.9,Canadian Food Inspection Agency
-2024,SA,52.2,Indian Oil and Gas Canada
-2024,SA,43.1,Canada Revenue Agency
-2024,SA,47.1,National Film Board
-2024,SA,37.4,National Security Intelligence and Review Agency
-2024,SA,46.5,National Research Council Canada
-2024,SA,43.7,Natural Sciences and Engineering Research Canada
-2024,SA,44.6,The Correctional Investigator Canada
-2024,SA,*,Office of the Intelligence Commissioner
-2024,SA,43.7,Office of the Superintendent of Financial Institutions Canada
-2024,SA,42.3,Social Sciences and Humanities Research Council of Canada
-2024,SA,49.8,Statistical Survey Operations
+Year,Universe,Department or agency,Average Age
+2010,CPA,Atlantic Canada Opportunities Agency,43
+2010,CPA,Agriculture and Agri-Food Canada,44.3
+2010,CPA,Public Health Agency of Canada,41
+2010,CPA,Canadian Artists and Producers Professional Relations Tribunal,47.9
+2010,CPA,Canadian Transportation Agency,43.2
+2010,CPA,Library and Archives Canada,44.1
+2010,CPA,Canadian International Trade Tribunal,42.3
+2010,CPA,Canada Border Services Agency,40.9
+2010,CPA,Courts Administration Service,42.1
+2010,CPA,Canadian Dairy Commission,43.5
+2010,CPA,Elections Canada,40.5
+2010,CPA,Canada School of Public Service,42.7
+2010,CPA,Canadian Grain Commission,45.2
+2010,CPA,Canadian Intergovernmental Conference Secretariat,47.9
+2010,CPA,Canada Industrial Relations Board,46.3
+2010,CPA,Office of the Commissioner of Official Languages,42.7
+2010,CPA,Copyright Board Canada,44
+2010,CPA,Military Police Complaints Commission of Canada,37.8
+2010,CPA,Canadian Space Agency,43.3
+2010,CPA,Employment and Social Development Canada,43.4
+2010,CPA,NAFTA Secretariat,51.6
+2010,CPA,Women and Gender Equality Canada,44.2
+2010,CPA,Fisheries and Oceans Canada,44.8
+2010,CPA,National Defence,46.3
+2010,CPA,Environment and Climate Change Canada,41.9
+2010,CPA,"Innovation, Science and Economic Development Canada",43.1
+2010,CPA,Veterans Affairs Canada,45.8
+2010,CPA,Impact Assessment Agency of Canada,39.4
+2010,CPA,Global Affairs Canada,43.1
+2010,CPA,Military Grievances External Review Committee,47.6
+2010,CPA,Department of Finance Canada,40.1
+2010,CPA,Office of the Commissioner for Federal Judicial Affairs Canada,42.4
+2010,CPA,Farm Products Council of Canada,47.7
+2010,CPA,Canada Economic Development for Quebec Regions,43.8
+2010,CPA,Office of the Governor General's Secretary,44.5
+2010,CPA,Registry of the Specific Claims Tribunal of Canada,38.3
+2010,CPA,Canadian Human Rights Commission,43.8
+2010,CPA,Crown-Indigenous Relations and Northern Affairs Canada,42.7
+2010,CPA,International Joint Commission,48.1
+2010,CPA,"Immigration, Refugees and Citizenship Canada",42.7
+2010,CPA,"Housing, Infrastructure and Communities Canada",38.3
+2010,CPA,Office of the Public Sector Integrity Commissioner of Canada,48.2
+2010,CPA,Offices of the Information and Privacy Commissioners of Canada,42.5
+2010,CPA,Immigration and Refugee Board of Canada,47.1
+2010,CPA,Indian Residential Schools Truth and Reconciliation Commission,45.2
+2010,CPA,Federal Judges not part of any department,60.9
+2010,CPA,Department of Justice Canada,42.5
+2010,CPA,Office of the Commissioner of Lobbying of Canada,43.9
+2010,CPA,Hazardous Materials Information Review Commission Canada,41.8
+2010,CPA,Transport Canada,45.3
+2010,CPA,Health Canada,42.7
+2010,CPA,Parole Board of Canada,45.8
+2010,CPA,Canadian Heritage,42.6
+2010,CPA,Privy Council Office,41.5
+2010,CPA,Correctional Service Canada,42.8
+2010,CPA,Public Prosecution Service of Canada,42.5
+2010,CPA,Passport Canada,38.1
+2010,CPA,Public Servants Disclosure Protection Tribunal Canada,48.2
+2010,CPA,Public Service Commission of Canada,43.5
+2010,CPA,Public Safety Canada,40.2
+2010,CPA,Human Rights Tribunal of Canada,42.8
+2010,CPA,Patented Medicine Prices Review Board Canada,42.9
+2010,CPA,Assisted Human Reproduction Canada,50.1
+2010,CPA,Royal Canadian Mounted Police (Civilian Staff),44
+2010,CPA,Competition Bureau Canada,39.7
+2010,CPA,RCMP External Review Committee,*
+2010,CPA,Civilian Review and Complaints Commission for the RCMP,41.6
+2010,CPA,Natural Resources Canada,44.9
+2010,CPA,Canadian Radio-television and Telecommunications Commission,44.1
+2010,CPA,Statistics Canada,43.6
+2010,CPA,Registrar of the Supreme Court of Canada,41.6
+2010,CPA,Public Services and Procurement Canada,44.8
+2010,CPA,Transportation Appeal Tribunal of Canada,52.3
+2010,CPA,Treasury Board of Canada Secretariat,42.1
+2010,CPA,Transportation Safety Board of Canada,49.3
+2010,CPA,Public Service Staffing Tribunal,48.2
+2010,CPA,Western Economic Diversification Canada,41.8
+2010,SA,Office of the Auditor General of Canada,40.8
+2010,SA,Parks Canada,45
+2010,SA,Financial Transactions and Reports Analysis Centre of Canada,37.7
+2010,SA,Canadian Institutes of Health Research,41
+2010,SA,Communications Security Establishment,42.2
+2010,SA,Canadian Nuclear Safety Commission,44.8
+2010,SA,Canada Energy Regulator,44.5
+2010,SA,Financial Consumer Agency of Canada,41.3
+2010,SA,Canadian Food Inspection Agency,43.3
+2010,SA,Indian Oil and Gas Canada,48.6
+2010,SA,Canada Revenue Agency,44.9
+2010,SA,National Round Table on the Environment and the Economy,42.1
+2010,SA,National Film Board,44
+2010,SA,National Research Council Canada,44.8
+2010,SA,Natural Sciences and Engineering Research Canada,41.6
+2010,SA,The Correctional Investigator Canada,35.9
+2010,SA,Canadian Polar Commission,*
+2010,SA,Public Service Labour Relations Board,42.3
+2010,SA,Office of the Superintendent of Financial Institutions Canada,44.6
+2010,SA,Security Intelligence Review Committee,44.2
+2010,SA,Social Sciences and Humanities Research Council of Canada,41.3
+2010,SA,Statistical Survey Operations,46.2
+2011,CPA,Atlantic Canada Opportunities Agency,43.2
+2011,CPA,Agriculture and Agri-Food Canada,44.1
+2011,CPA,Public Health Agency of Canada,41.4
+2011,CPA,Canadian Artists and Producers Professional Relations Tribunal,48.5
+2011,CPA,Canadian Transportation Agency,43.3
+2011,CPA,Library and Archives Canada,44
+2011,CPA,Canadian International Trade Tribunal,42.9
+2011,CPA,Canada Border Services Agency,41.3
+2011,CPA,Courts Administration Service,42.5
+2011,CPA,Canadian Dairy Commission,43.3
+2011,CPA,Elections Canada,42.3
+2011,CPA,Canada School of Public Service,43.6
+2011,CPA,Canadian Grain Commission,45.3
+2011,CPA,Canadian Intergovernmental Conference Secretariat,46.2
+2011,CPA,Canada Industrial Relations Board,46.7
+2011,CPA,Office of the Commissioner of Official Languages,43.5
+2011,CPA,Copyright Board Canada,44.8
+2011,CPA,Military Police Complaints Commission of Canada,39.3
+2011,CPA,Canadian Space Agency,43.5
+2011,CPA,Employment and Social Development Canada,43.8
+2011,CPA,Women and Gender Equality Canada,43
+2011,CPA,Fisheries and Oceans Canada,44.9
+2011,CPA,National Defence,46.6
+2011,CPA,Environment and Climate Change Canada,42.4
+2011,CPA,"Innovation, Science and Economic Development Canada",43.2
+2011,CPA,Veterans Affairs Canada,46.1
+2011,CPA,Impact Assessment Agency of Canada,41
+2011,CPA,Federal Economic Development Agency for Southern Ontario,38.9
+2011,CPA,Global Affairs Canada,43.1
+2011,CPA,Military Grievances External Review Committee,46.2
+2011,CPA,Department of Finance Canada,40.6
+2011,CPA,Office of the Commissioner for Federal Judicial Affairs Canada,43.7
+2011,CPA,Farm Products Council of Canada,48.7
+2011,CPA,Canada Economic Development for Quebec Regions,43.3
+2011,CPA,Office of the Governor General's Secretary,43.4
+2011,CPA,Registry of the Specific Claims Tribunal of Canada,36.8
+2011,CPA,Canadian Human Rights Commission,44.2
+2011,CPA,Crown-Indigenous Relations and Northern Affairs Canada,42.7
+2011,CPA,International Joint Commission,47.8
+2011,CPA,"Immigration, Refugees and Citizenship Canada",42.4
+2011,CPA,"Housing, Infrastructure and Communities Canada",37.6
+2011,CPA,Office of the Public Sector Integrity Commissioner of Canada,45.7
+2011,CPA,Offices of the Information and Privacy Commissioners of Canada,43.1
+2011,CPA,Immigration and Refugee Board of Canada,46.4
+2011,CPA,Indian Residential Schools Truth and Reconciliation Commission,45.1
+2011,CPA,Federal Judges not part of any department,61.2
+2011,CPA,Department of Justice Canada,42.5
+2011,CPA,Office of the Commissioner of Lobbying of Canada,46.1
+2011,CPA,Hazardous Materials Information Review Commission Canada,41.1
+2011,CPA,Transport Canada,45.5
+2011,CPA,Health Canada,43
+2011,CPA,Parole Board of Canada,45.9
+2011,CPA,Canadian Heritage,43.8
+2011,CPA,Privy Council Office,41.7
+2011,CPA,Correctional Service Canada,42.7
+2011,CPA,Public Prosecution Service of Canada,42.6
+2011,CPA,Passport Canada,39
+2011,CPA,Public Servants Disclosure Protection Tribunal Canada,*
+2011,CPA,Public Service Commission of Canada,43.9
+2011,CPA,Public Safety Canada,40.7
+2011,CPA,Human Rights Tribunal of Canada,40.8
+2011,CPA,Patented Medicine Prices Review Board Canada,41.8
+2011,CPA,Assisted Human Reproduction Canada,43.7
+2011,CPA,Royal Canadian Mounted Police (Civilian Staff),44.5
+2011,CPA,Competition Bureau Canada,43.6
+2011,CPA,RCMP External Review Committee,*
+2011,CPA,Civilian Review and Complaints Commission for the RCMP,43
+2011,CPA,Natural Resources Canada,44.7
+2011,CPA,Canadian Radio-television and Telecommunications Commission,44.5
+2011,CPA,Statistics Canada,43.4
+2011,CPA,Registrar of the Supreme Court of Canada,42.2
+2011,CPA,Public Services and Procurement Canada,44.3
+2011,CPA,Transportation Appeal Tribunal of Canada,56.1
+2011,CPA,Treasury Board of Canada Secretariat,41.8
+2011,CPA,Transportation Safety Board of Canada,48.7
+2011,CPA,Public Service Staffing Tribunal,50.4
+2011,CPA,Western Economic Diversification Canada,42.8
+2011,SA,Office of the Auditor General of Canada,40.8
+2011,SA,Parks Canada,44.9
+2011,SA,Financial Transactions and Reports Analysis Centre of Canada,38.5
+2011,SA,Canadian Institutes of Health Research,40.8
+2011,SA,Communications Security Establishment,42.6
+2011,SA,Canadian Nuclear Safety Commission,45.4
+2011,SA,Canada Energy Regulator,44.3
+2011,SA,Financial Consumer Agency of Canada,41.4
+2011,SA,Canadian Food Inspection Agency,43.3
+2011,SA,Indian Oil and Gas Canada,49
+2011,SA,Canada Revenue Agency,45.4
+2011,SA,National Round Table on the Environment and the Economy,42
+2011,SA,National Film Board,44.1
+2011,SA,Northern Pipeline Agency,*
+2011,SA,National Research Council Canada,45.7
+2011,SA,Natural Sciences and Engineering Research Canada,41.5
+2011,SA,The Correctional Investigator Canada,37
+2011,SA,Canadian Polar Commission,*
+2011,SA,Public Service Labour Relations Board,42.9
+2011,SA,Office of the Superintendent of Financial Institutions Canada,44.7
+2011,SA,Security Intelligence Review Committee,44.6
+2011,SA,Social Sciences and Humanities Research Council of Canada,40.8
+2011,SA,Statistical Survey Operations,45.3
+2012,CPA,Atlantic Canada Opportunities Agency,43.9
+2012,CPA,Agriculture and Agri-Food Canada,44.7
+2012,CPA,Public Health Agency of Canada,42
+2012,CPA,Canadian Artists and Producers Professional Relations Tribunal,48.8
+2012,CPA,Canadian Transportation Agency,43.5
+2012,CPA,Library and Archives Canada,44.3
+2012,CPA,Canadian International Trade Tribunal,41.6
+2012,CPA,Canada Border Services Agency,41.5
+2012,CPA,Courts Administration Service,42.6
+2012,CPA,Canadian Dairy Commission,42.3
+2012,CPA,Elections Canada,42.2
+2012,CPA,Canada School of Public Service,43.9
+2012,CPA,Canadian Grain Commission,45.3
+2012,CPA,Canadian Intergovernmental Conference Secretariat,48.6
+2012,CPA,Canada Industrial Relations Board,46.9
+2012,CPA,Office of the Commissioner of Official Languages,42.9
+2012,CPA,Copyright Board Canada,46
+2012,CPA,Military Police Complaints Commission of Canada,40.1
+2012,CPA,Canadian Space Agency,44.1
+2012,CPA,Employment and Social Development Canada,44.6
+2012,CPA,Women and Gender Equality Canada,43
+2012,CPA,Fisheries and Oceans Canada,45.1
+2012,CPA,National Defence,46.8
+2012,CPA,Environment and Climate Change Canada,42.9
+2012,CPA,"Innovation, Science and Economic Development Canada",43.9
+2012,CPA,Veterans Affairs Canada,46.6
+2012,CPA,Impact Assessment Agency of Canada,41.5
+2012,CPA,Federal Economic Development Agency for Southern Ontario,38.5
+2012,CPA,Global Affairs Canada,43.4
+2012,CPA,Military Grievances External Review Committee,47.6
+2012,CPA,Department of Finance Canada,40.5
+2012,CPA,Office of the Commissioner for Federal Judicial Affairs Canada,46.2
+2012,CPA,Farm Products Council of Canada,47.9
+2012,CPA,Canada Economic Development for Quebec Regions,43.9
+2012,CPA,Office of the Governor General's Secretary,45.3
+2012,CPA,Registry of the Specific Claims Tribunal of Canada,38.4
+2012,CPA,Canadian Human Rights Commission,44.4
+2012,CPA,Crown-Indigenous Relations and Northern Affairs Canada,42.9
+2012,CPA,International Joint Commission,50.1
+2012,CPA,"Immigration, Refugees and Citizenship Canada",42.4
+2012,CPA,"Housing, Infrastructure and Communities Canada",37.7
+2012,CPA,Office of the Public Sector Integrity Commissioner of Canada,46.6
+2012,CPA,Offices of the Information and Privacy Commissioners of Canada,43
+2012,CPA,Immigration and Refugee Board of Canada,46.7
+2012,CPA,Indian Residential Schools Truth and Reconciliation Commission,46.7
+2012,CPA,Federal Judges not part of any department,61.5
+2012,CPA,Department of Justice Canada,43
+2012,CPA,Office of the Commissioner of Lobbying of Canada,44.2
+2012,CPA,Hazardous Materials Information Review Commission Canada,44.3
+2012,CPA,Transport Canada,45.9
+2012,CPA,Health Canada,43.4
+2012,CPA,Parole Board of Canada,46.1
+2012,CPA,Canadian Heritage,44
+2012,CPA,Privy Council Office,42.4
+2012,CPA,Correctional Service Canada,42.7
+2012,CPA,Public Prosecution Service of Canada,42.8
+2012,CPA,Passport Canada,38.9
+2012,CPA,Public Servants Disclosure Protection Tribunal Canada,44.8
+2012,CPA,Public Service Commission of Canada,43.6
+2012,CPA,Public Safety Canada,41.3
+2012,CPA,Human Rights Tribunal of Canada,41.3
+2012,CPA,Patented Medicine Prices Review Board Canada,45.2
+2012,CPA,Assisted Human Reproduction Canada,49.6
+2012,CPA,Royal Canadian Mounted Police (Civilian Staff),44.6
+2012,CPA,Competition Bureau Canada,44.4
+2012,CPA,RCMP External Review Committee,*
+2012,CPA,Civilian Review and Complaints Commission for the RCMP,42.9
+2012,CPA,Natural Resources Canada,45.4
+2012,CPA,Canadian Radio-television and Telecommunications Commission,44
+2012,CPA,Statistics Canada,43.6
+2012,CPA,Registrar of the Supreme Court of Canada,42.2
+2012,CPA,Public Services and Procurement Canada,44.7
+2012,CPA,Transportation Appeal Tribunal of Canada,42.7
+2012,CPA,Treasury Board of Canada Secretariat,42.2
+2012,CPA,Transportation Safety Board of Canada,49.6
+2012,CPA,Public Service Staffing Tribunal,49.4
+2012,CPA,Western Economic Diversification Canada,44
+2012,SA,Office of the Auditor General of Canada,40.6
+2012,SA,Parks Canada,45.8
+2012,SA,Financial Transactions and Reports Analysis Centre of Canada,38.1
+2012,SA,Canadian Institutes of Health Research,42.4
+2012,SA,Communications Security Establishment,42.6
+2012,SA,Canadian Nuclear Safety Commission,45.8
+2012,SA,Canada Energy Regulator,44.5
+2012,SA,Financial Consumer Agency of Canada,39.6
+2012,SA,Canadian Food Inspection Agency,43.6
+2012,SA,Indian Oil and Gas Canada,49.8
+2012,SA,Canada Revenue Agency,45.7
+2012,SA,National Round Table on the Environment and the Economy,42.4
+2012,SA,National Film Board,43.4
+2012,SA,National Research Council Canada,46.5
+2012,SA,Natural Sciences and Engineering Research Canada,41.7
+2012,SA,The Correctional Investigator Canada,37.8
+2012,SA,Canadian Polar Commission,*
+2012,SA,Public Service Labour Relations Board,42
+2012,SA,Office of the Superintendent of Financial Institutions Canada,45.1
+2012,SA,Security Intelligence Review Committee,44.1
+2012,SA,Social Sciences and Humanities Research Council of Canada,41.5
+2012,SA,Statistical Survey Operations,45.2
+2013,CPA,Atlantic Canada Opportunities Agency,44.5
+2013,CPA,Agriculture and Agri-Food Canada,44.8
+2013,CPA,Public Health Agency of Canada,42.8
+2013,CPA,Canadian Artists and Producers Professional Relations Tribunal,*
+2013,CPA,Canadian Transportation Agency,44.2
+2013,CPA,Library and Archives Canada,44.3
+2013,CPA,Canadian International Trade Tribunal,41.7
+2013,CPA,Canada Border Services Agency,41.8
+2013,CPA,Courts Administration Service,43.2
+2013,CPA,Canadian Dairy Commission,42.2
+2013,CPA,Elections Canada,43.2
+2013,CPA,Canada School of Public Service,44
+2013,CPA,Canadian Grain Commission,46.7
+2013,CPA,Canadian Intergovernmental Conference Secretariat,50.1
+2013,CPA,Canada Industrial Relations Board,46.9
+2013,CPA,Office of the Commissioner of Official Languages,43.5
+2013,CPA,Copyright Board Canada,42.6
+2013,CPA,Military Police Complaints Commission of Canada,39.1
+2013,CPA,Canadian Space Agency,45.5
+2013,CPA,Employment and Social Development Canada,45.1
+2013,CPA,Women and Gender Equality Canada,42.3
+2013,CPA,Fisheries and Oceans Canada,45.3
+2013,CPA,National Defence,47.5
+2013,CPA,Environment and Climate Change Canada,43
+2013,CPA,"Innovation, Science and Economic Development Canada",44.2
+2013,CPA,Veterans Affairs Canada,46.9
+2013,CPA,Impact Assessment Agency of Canada,42.2
+2013,CPA,Federal Economic Development Agency for Southern Ontario,39
+2013,CPA,Global Affairs Canada,43.5
+2013,CPA,Military Grievances External Review Committee,47.1
+2013,CPA,Department of Finance Canada,40.7
+2013,CPA,Office of the Commissioner for Federal Judicial Affairs Canada,44.6
+2013,CPA,Farm Products Council of Canada,47.1
+2013,CPA,Canada Economic Development for Quebec Regions,44.3
+2013,CPA,Office of the Governor General's Secretary,45.2
+2013,CPA,Shared Services Canada,44.9
+2013,CPA,Registry of the Specific Claims Tribunal of Canada,40.4
+2013,CPA,Canadian Human Rights Commission,44.3
+2013,CPA,Crown-Indigenous Relations and Northern Affairs Canada,43.1
+2013,CPA,International Joint Commission,48.9
+2013,CPA,"Immigration, Refugees and Citizenship Canada",42
+2013,CPA,"Housing, Infrastructure and Communities Canada",38.6
+2013,CPA,Office of the Public Sector Integrity Commissioner of Canada,43.8
+2013,CPA,Offices of the Information and Privacy Commissioners of Canada,43
+2013,CPA,Immigration and Refugee Board of Canada,46.7
+2013,CPA,Indian Residential Schools Truth and Reconciliation Commission,48.6
+2013,CPA,Federal Judges not part of any department,61.6
+2013,CPA,Department of Justice Canada,44
+2013,CPA,Office of the Commissioner of Lobbying of Canada,42.5
+2013,CPA,Hazardous Materials Information Review Commission Canada,43.9
+2013,CPA,Transport Canada,46.6
+2013,CPA,Health Canada,43.9
+2013,CPA,Parole Board of Canada,45.1
+2013,CPA,Canadian Heritage,44.1
+2013,CPA,Privy Council Office,43.6
+2013,CPA,Correctional Service Canada,43.1
+2013,CPA,Public Prosecution Service of Canada,43
+2013,CPA,Passport Canada,39.6
+2013,CPA,Public Servants Disclosure Protection Tribunal Canada,35.2
+2013,CPA,Public Service Commission of Canada,44.3
+2013,CPA,Public Safety Canada,41.2
+2013,CPA,Human Rights Tribunal of Canada,41.6
+2013,CPA,Patented Medicine Prices Review Board Canada,45
+2013,CPA,Royal Canadian Mounted Police (Civilian Staff),45.2
+2013,CPA,Competition Bureau Canada,43.3
+2013,CPA,RCMP External Review Committee,44.5
+2013,CPA,Civilian Review and Complaints Commission for the RCMP,42.5
+2013,CPA,Natural Resources Canada,45.5
+2013,CPA,Canadian Radio-television and Telecommunications Commission,43.9
+2013,CPA,Statistics Canada,43.7
+2013,CPA,Registrar of the Supreme Court of Canada,43.1
+2013,CPA,Public Services and Procurement Canada,45.1
+2013,CPA,Transportation Appeal Tribunal of Canada,45.2
+2013,CPA,Treasury Board of Canada Secretariat,42.6
+2013,CPA,Transportation Safety Board of Canada,49.5
+2013,CPA,Public Service Staffing Tribunal,51.2
+2013,CPA,Western Economic Diversification Canada,44.6
+2013,SA,Office of the Auditor General of Canada,40.9
+2013,SA,Parks Canada,45.7
+2013,SA,Financial Transactions and Reports Analysis Centre of Canada,39
+2013,SA,Canadian Institutes of Health Research,42.5
+2013,SA,Communications Security Establishment,42.8
+2013,SA,Canadian Nuclear Safety Commission,46
+2013,SA,Canada Energy Regulator,44.7
+2013,SA,Financial Consumer Agency of Canada,40.3
+2013,SA,Canadian Food Inspection Agency,44
+2013,SA,Indian Oil and Gas Canada,49.2
+2013,SA,Canada Revenue Agency,45.9
+2013,SA,National Round Table on the Environment and the Economy,*
+2013,SA,National Film Board,43.1
+2013,SA,National Research Council Canada,47.2
+2013,SA,Natural Sciences and Engineering Research Canada,42.1
+2013,SA,The Correctional Investigator Canada,39.7
+2013,SA,Canadian Polar Commission,44.8
+2013,SA,Public Service Labour Relations Board,42.8
+2013,SA,Office of the Superintendent of Financial Institutions Canada,45.2
+2013,SA,Security Intelligence Review Committee,43.4
+2013,SA,Social Sciences and Humanities Research Council of Canada,41.4
+2013,SA,Statistical Survey Operations,47.9
+2014,CPA,Atlantic Canada Opportunities Agency,45
+2014,CPA,Agriculture and Agri-Food Canada,44.9
+2014,CPA,Public Health Agency of Canada,42.7
+2014,CPA,Canadian Transportation Agency,45.8
+2014,CPA,Library and Archives Canada,43.4
+2014,CPA,Canadian International Trade Tribunal,41.1
+2014,CPA,Canada Border Services Agency,41.9
+2014,CPA,Courts Administration Service,43.3
+2014,CPA,Canadian Dairy Commission,40.3
+2014,CPA,Elections Canada,43.1
+2014,CPA,Canada School of Public Service,43.5
+2014,CPA,Canadian Grain Commission,46.3
+2014,CPA,Canadian Intergovernmental Conference Secretariat,48.3
+2014,CPA,Canada Industrial Relations Board,47.6
+2014,CPA,Office of the Commissioner of Official Languages,43.3
+2014,CPA,Copyright Board Canada,42.3
+2014,CPA,Military Police Complaints Commission of Canada,41.1
+2014,CPA,Canadian Space Agency,46.6
+2014,CPA,Employment and Social Development Canada,44.5
+2014,CPA,Women and Gender Equality Canada,42.5
+2014,CPA,Fisheries and Oceans Canada,45.5
+2014,CPA,National Defence,48
+2014,CPA,Environment and Climate Change Canada,43
+2014,CPA,"Innovation, Science and Economic Development Canada",44.3
+2014,CPA,Veterans Affairs Canada,47
+2014,CPA,Impact Assessment Agency of Canada,41.1
+2014,CPA,Federal Economic Development Agency for Southern Ontario,40.5
+2014,CPA,Global Affairs Canada,43.8
+2014,CPA,Military Grievances External Review Committee,47.9
+2014,CPA,Department of Finance Canada,41.3
+2014,CPA,Office of the Commissioner for Federal Judicial Affairs Canada,46.6
+2014,CPA,Farm Products Council of Canada,49
+2014,CPA,Canada Economic Development for Quebec Regions,44.5
+2014,CPA,Office of the Governor General's Secretary,45.8
+2014,CPA,Shared Services Canada,45.3
+2014,CPA,Registry of the Specific Claims Tribunal of Canada,39.2
+2014,CPA,Canadian Human Rights Commission,44.6
+2014,CPA,Crown-Indigenous Relations and Northern Affairs Canada,43.2
+2014,CPA,International Joint Commission,45.3
+2014,CPA,"Immigration, Refugees and Citizenship Canada",41.6
+2014,CPA,"Housing, Infrastructure and Communities Canada",39.7
+2014,CPA,Office of the Public Sector Integrity Commissioner of Canada,44
+2014,CPA,Offices of the Information and Privacy Commissioners of Canada,43.1
+2014,CPA,Immigration and Refugee Board of Canada,46.3
+2014,CPA,Indian Residential Schools Truth and Reconciliation Commission,53.6
+2014,CPA,Federal Judges not part of any department,61.8
+2014,CPA,Department of Justice Canada,44.4
+2014,CPA,Office of the Commissioner of Lobbying of Canada,45.3
+2014,CPA,Transport Canada,46.6
+2014,CPA,Health Canada,44.2
+2014,CPA,Parole Board of Canada,45.3
+2014,CPA,Canadian Heritage,44.3
+2014,CPA,Privy Council Office,43.6
+2014,CPA,Correctional Service Canada,43.4
+2014,CPA,Public Prosecution Service of Canada,43.2
+2014,CPA,Public Servants Disclosure Protection Tribunal Canada,42.1
+2014,CPA,Public Service Commission of Canada,45.1
+2014,CPA,Public Safety Canada,41.7
+2014,CPA,Human Rights Tribunal of Canada,42.6
+2014,CPA,Patented Medicine Prices Review Board Canada,44.4
+2014,CPA,Royal Canadian Mounted Police (Civilian Staff),45.6
+2014,CPA,Competition Bureau Canada,43.4
+2014,CPA,RCMP External Review Committee,*
+2014,CPA,Civilian Review and Complaints Commission for the RCMP,42.4
+2014,CPA,Natural Resources Canada,45.7
+2014,CPA,Canadian Radio-television and Telecommunications Commission,43.9
+2014,CPA,Statistics Canada,42.9
+2014,CPA,Registrar of the Supreme Court of Canada,42.5
+2014,CPA,Public Services and Procurement Canada,45.3
+2014,CPA,Transportation Appeal Tribunal of Canada,47.4
+2014,CPA,Treasury Board of Canada Secretariat,42.7
+2014,CPA,Transportation Safety Board of Canada,48.6
+2014,CPA,Public Service Staffing Tribunal,50.6
+2014,CPA,Western Economic Diversification Canada,44.7
+2014,SA,Office of the Auditor General of Canada,41.6
+2014,SA,Parks Canada,45.1
+2014,SA,Financial Transactions and Reports Analysis Centre of Canada,40.3
+2014,SA,Canadian Institutes of Health Research,42
+2014,SA,Communications Security Establishment,42.7
+2014,SA,Canadian Nuclear Safety Commission,46.5
+2014,SA,Canada Energy Regulator,44.8
+2014,SA,Financial Consumer Agency of Canada,40.5
+2014,SA,Canadian Food Inspection Agency,44.1
+2014,SA,Indian Oil and Gas Canada,49.8
+2014,SA,Canada Revenue Agency,46.1
+2014,SA,National Film Board,44.1
+2014,SA,National Research Council Canada,47.1
+2014,SA,Natural Sciences and Engineering Research Canada,42.3
+2014,SA,The Correctional Investigator Canada,38.7
+2014,SA,Canadian Polar Commission,45.8
+2014,SA,Public Service Labour Relations Board,42.9
+2014,SA,Office of the Superintendent of Financial Institutions Canada,44.9
+2014,SA,Security Intelligence Review Committee,43.6
+2014,SA,Social Sciences and Humanities Research Council of Canada,41.7
+2014,SA,Statistical Survey Operations,46
+2015,CPA,Atlantic Canada Opportunities Agency,45.8
+2015,CPA,Agriculture and Agri-Food Canada,44.7
+2015,CPA,Public Health Agency of Canada,43
+2015,CPA,Canadian Transportation Agency,44.6
+2015,CPA,Administrative Tribunals Support Service of Canada,44.7
+2015,CPA,Library and Archives Canada,43.4
+2015,CPA,Canada Border Services Agency,42.1
+2015,CPA,Courts Administration Service,42.7
+2015,CPA,Canadian Dairy Commission,39.8
+2015,CPA,Elections Canada,41.9
+2015,CPA,Canada School of Public Service,43.3
+2015,CPA,Canadian Grain Commission,45.8
+2015,CPA,Canadian Intergovernmental Conference Secretariat,46.8
+2015,CPA,Office of the Commissioner of Official Languages,43.3
+2015,CPA,Copyright Board Canada,41.8
+2015,CPA,Military Police Complaints Commission of Canada,40.2
+2015,CPA,Canadian Space Agency,47.3
+2015,CPA,Employment and Social Development Canada,44.2
+2015,CPA,Women and Gender Equality Canada,42.8
+2015,CPA,Fisheries and Oceans Canada,45.4
+2015,CPA,National Defence,48.4
+2015,CPA,Environment and Climate Change Canada,43.1
+2015,CPA,"Innovation, Science and Economic Development Canada",44.4
+2015,CPA,Veterans Affairs Canada,47.4
+2015,CPA,Impact Assessment Agency of Canada,41.9
+2015,CPA,Federal Economic Development Agency for Southern Ontario,41.2
+2015,CPA,Global Affairs Canada,44
+2015,CPA,Military Grievances External Review Committee,48.8
+2015,CPA,Department of Finance Canada,41.1
+2015,CPA,Office of the Commissioner for Federal Judicial Affairs Canada,47.1
+2015,CPA,Farm Products Council of Canada,48.1
+2015,CPA,Canada Economic Development for Quebec Regions,45.4
+2015,CPA,Office of the Governor General's Secretary,44.5
+2015,CPA,Shared Services Canada,45.8
+2015,CPA,Canadian Human Rights Commission,44.5
+2015,CPA,Crown-Indigenous Relations and Northern Affairs Canada,43.3
+2015,CPA,International Joint Commission,43.7
+2015,CPA,"Immigration, Refugees and Citizenship Canada",41.5
+2015,CPA,"Housing, Infrastructure and Communities Canada",39.6
+2015,CPA,Office of the Public Sector Integrity Commissioner of Canada,44.1
+2015,CPA,Offices of the Information and Privacy Commissioners of Canada,43.5
+2015,CPA,Immigration and Refugee Board of Canada,47.3
+2015,CPA,Indian Residential Schools Truth and Reconciliation Commission,54.7
+2015,CPA,Federal Judges not part of any department,61.7
+2015,CPA,Department of Justice Canada,44.7
+2015,CPA,Office of the Commissioner of Lobbying of Canada,44.4
+2015,CPA,Transport Canada,46.2
+2015,CPA,Canadian Northern Economic Development Agency,44.4
+2015,CPA,Health Canada,44.8
+2015,CPA,Parole Board of Canada,45
+2015,CPA,Office of the Prime Minister,*
+2015,CPA,Canadian Heritage,44.6
+2015,CPA,Privy Council Office,43.5
+2015,CPA,Correctional Service Canada,43.7
+2015,CPA,Public Prosecution Service of Canada,43.9
+2015,CPA,Public Service Commission of Canada,44.8
+2015,CPA,Public Safety Canada,42
+2015,CPA,Patented Medicine Prices Review Board Canada,43.6
+2015,CPA,Royal Canadian Mounted Police (Civilian Staff),45.6
+2015,CPA,RCMP External Review Committee,46.8
+2015,CPA,Civilian Review and Complaints Commission for the RCMP,43
+2015,CPA,Natural Resources Canada,45.8
+2015,CPA,Canadian Radio-television and Telecommunications Commission,42.9
+2015,CPA,Statistics Canada,43.5
+2015,CPA,Registrar of the Supreme Court of Canada,42.4
+2015,CPA,Public Services and Procurement Canada,45.3
+2015,CPA,Treasury Board of Canada Secretariat,43.1
+2015,CPA,Transportation Safety Board of Canada,49.5
+2015,CPA,Western Economic Diversification Canada,44.5
+2015,SA,Office of the Auditor General of Canada,42
+2015,SA,Parks Canada,44.9
+2015,SA,Financial Transactions and Reports Analysis Centre of Canada,39.9
+2015,SA,Canadian Institutes of Health Research,42.1
+2015,SA,Communications Security Establishment,43.2
+2015,SA,Canadian Nuclear Safety Commission,46.8
+2015,SA,Canada Energy Regulator,44.8
+2015,SA,Financial Consumer Agency of Canada,41
+2015,SA,Canadian Food Inspection Agency,44.6
+2015,SA,Indian Oil and Gas Canada,50.8
+2015,SA,Canada Revenue Agency,46
+2015,SA,National Film Board,45.1
+2015,SA,National Research Council Canada,47.1
+2015,SA,Natural Sciences and Engineering Research Canada,42.4
+2015,SA,The Correctional Investigator Canada,40.7
+2015,SA,Canadian Polar Commission,41.9
+2015,SA,Office of the Superintendent of Financial Institutions Canada,45.3
+2015,SA,Security Intelligence Review Committee,42.8
+2015,SA,Social Sciences and Humanities Research Council of Canada,42.4
+2015,SA,Statistical Survey Operations,46.9
+2016,CPA,Atlantic Canada Opportunities Agency,46.4
+2016,CPA,Agriculture and Agri-Food Canada,44.9
+2016,CPA,Public Health Agency of Canada,43.3
+2016,CPA,Canadian Transportation Agency,45.1
+2016,CPA,Administrative Tribunals Support Service of Canada,44.1
+2016,CPA,Library and Archives Canada,44
+2016,CPA,Canada Border Services Agency,42.3
+2016,CPA,Courts Administration Service,42.4
+2016,CPA,Canadian Dairy Commission,40.6
+2016,CPA,Elections Canada,41.5
+2016,CPA,Canada School of Public Service,43.5
+2016,CPA,Canadian Grain Commission,45.9
+2016,CPA,Canadian Intergovernmental Conference Secretariat,44.7
+2016,CPA,Office of the Commissioner of Official Languages,43.7
+2016,CPA,Copyright Board Canada,44.1
+2016,CPA,Military Police Complaints Commission of Canada,38.8
+2016,CPA,Canadian Space Agency,47.3
+2016,CPA,Employment and Social Development Canada,43.9
+2016,CPA,Women and Gender Equality Canada,43.4
+2016,CPA,Fisheries and Oceans Canada,45.4
+2016,CPA,National Defence,48.4
+2016,CPA,Environment and Climate Change Canada,43.4
+2016,CPA,"Innovation, Science and Economic Development Canada",44.1
+2016,CPA,Veterans Affairs Canada,47
+2016,CPA,Impact Assessment Agency of Canada,41.4
+2016,CPA,Federal Economic Development Agency for Southern Ontario,40.8
+2016,CPA,Global Affairs Canada,44.2
+2016,CPA,Military Grievances External Review Committee,48.2
+2016,CPA,Department of Finance Canada,41.4
+2016,CPA,Office of the Commissioner for Federal Judicial Affairs Canada,46.7
+2016,CPA,Farm Products Council of Canada,46.9
+2016,CPA,Canada Economic Development for Quebec Regions,46.2
+2016,CPA,Office of the Governor General's Secretary,44.7
+2016,CPA,Shared Services Canada,46
+2016,CPA,Canadian Human Rights Commission,44.4
+2016,CPA,Crown-Indigenous Relations and Northern Affairs Canada,43.6
+2016,CPA,International Joint Commission,46
+2016,CPA,"Immigration, Refugees and Citizenship Canada",41.4
+2016,CPA,"Housing, Infrastructure and Communities Canada",39.7
+2016,CPA,Office of the Public Sector Integrity Commissioner of Canada,42.8
+2016,CPA,Offices of the Information and Privacy Commissioners of Canada,43.2
+2016,CPA,Immigration and Refugee Board of Canada,46.8
+2016,CPA,Federal Judges not part of any department,61.8
+2016,CPA,Department of Justice Canada,44.9
+2016,CPA,Office of the Commissioner of Lobbying of Canada,44.8
+2016,CPA,Transport Canada,46.3
+2016,CPA,Canadian Northern Economic Development Agency,44
+2016,CPA,Health Canada,44.8
+2016,CPA,Parole Board of Canada,44.7
+2016,CPA,Canadian Heritage,44.3
+2016,CPA,Privy Council Office,43.7
+2016,CPA,Correctional Service Canada,44.1
+2016,CPA,Public Prosecution Service of Canada,44.1
+2016,CPA,Public Service Commission of Canada,45.1
+2016,CPA,Public Safety Canada,41
+2016,CPA,Patented Medicine Prices Review Board Canada,42.1
+2016,CPA,Royal Canadian Mounted Police (Civilian Staff),45.6
+2016,CPA,RCMP External Review Committee,48.8
+2016,CPA,Civilian Review and Complaints Commission for the RCMP,42
+2016,CPA,Natural Resources Canada,45.7
+2016,CPA,Canadian Radio-television and Telecommunications Commission,42.6
+2016,CPA,Statistics Canada,43.6
+2016,CPA,Registrar of the Supreme Court of Canada,42.3
+2016,CPA,Public Services and Procurement Canada,45.3
+2016,CPA,Treasury Board of Canada Secretariat,43.1
+2016,CPA,Transportation Safety Board of Canada,49.9
+2016,CPA,Western Economic Diversification Canada,44.1
+2016,SA,Office of the Auditor General of Canada,41.1
+2016,SA,Parks Canada,44.5
+2016,SA,Financial Transactions and Reports Analysis Centre of Canada,39
+2016,SA,Polar Knowledge Canada,41.4
+2016,SA,Canadian Institutes of Health Research,43.1
+2016,SA,Communications Security Establishment,43.4
+2016,SA,Canadian Nuclear Safety Commission,45.6
+2016,SA,Canada Energy Regulator,45.3
+2016,SA,Financial Consumer Agency of Canada,40.3
+2016,SA,Canadian Food Inspection Agency,44.9
+2016,SA,Indian Oil and Gas Canada,49.6
+2016,SA,Canada Revenue Agency,46
+2016,SA,National Film Board,44.9
+2016,SA,National Research Council Canada,46.8
+2016,SA,Natural Sciences and Engineering Research Canada,42.8
+2016,SA,The Correctional Investigator Canada,40.6
+2016,SA,Office of the Superintendent of Financial Institutions Canada,45.6
+2016,SA,Security Intelligence Review Committee,41.9
+2016,SA,Social Sciences and Humanities Research Council of Canada,42.5
+2016,SA,Statistical Survey Operations,46.1
+2017,CPA,Atlantic Canada Opportunities Agency,46.4
+2017,CPA,Agriculture and Agri-Food Canada,44.6
+2017,CPA,Public Health Agency of Canada,43.3
+2017,CPA,Canadian Transportation Agency,44.9
+2017,CPA,Administrative Tribunals Support Service of Canada,43.8
+2017,CPA,Veterans Review and Appeal Board,51.2
+2017,CPA,Library and Archives Canada,43.9
+2017,CPA,Canada Border Services Agency,42.5
+2017,CPA,Courts Administration Service,43.1
+2017,CPA,Canadian Dairy Commission,41.3
+2017,CPA,Elections Canada,42.9
+2017,CPA,Canada School of Public Service,43.9
+2017,CPA,Canadian Grain Commission,45.6
+2017,CPA,Canadian Intergovernmental Conference Secretariat,45.3
+2017,CPA,Office of the Commissioner of Official Languages,43.1
+2017,CPA,Copyright Board Canada,48.6
+2017,CPA,Military Police Complaints Commission of Canada,41.3
+2017,CPA,Canadian Space Agency,46.7
+2017,CPA,Employment and Social Development Canada,43.8
+2017,CPA,Women and Gender Equality Canada,42.3
+2017,CPA,Fisheries and Oceans Canada,45
+2017,CPA,National Defence,48.3
+2017,CPA,Environment and Climate Change Canada,43.2
+2017,CPA,"Innovation, Science and Economic Development Canada",43.7
+2017,CPA,Veterans Affairs Canada,45.7
+2017,CPA,Impact Assessment Agency of Canada,40.4
+2017,CPA,Federal Economic Development Agency for Southern Ontario,41.4
+2017,CPA,Global Affairs Canada,44.1
+2017,CPA,Military Grievances External Review Committee,45.5
+2017,CPA,Department of Finance Canada,41.3
+2017,CPA,Office of the Commissioner for Federal Judicial Affairs Canada,43.6
+2017,CPA,Canada Economic Development for Quebec Regions,45.4
+2017,CPA,Office of the Governor General's Secretary,44.9
+2017,CPA,Shared Services Canada,46.1
+2017,CPA,Canadian Human Rights Commission,45.1
+2017,CPA,Crown-Indigenous Relations and Northern Affairs Canada,43.6
+2017,CPA,International Joint Commission,44.2
+2017,CPA,"Immigration, Refugees and Citizenship Canada",41.9
+2017,CPA,"Housing, Infrastructure and Communities Canada",39.8
+2017,CPA,Office of the Public Sector Integrity Commissioner of Canada,44.2
+2017,CPA,Offices of the Information and Privacy Commissioners of Canada,41.7
+2017,CPA,Immigration and Refugee Board of Canada,46.8
+2017,CPA,Federal Judges not part of any department,62.1
+2017,CPA,Department of Justice Canada,45
+2017,CPA,Office of the Commissioner of Lobbying of Canada,47.3
+2017,CPA,Transport Canada,47.1
+2017,CPA,Canadian Northern Economic Development Agency,43.9
+2017,CPA,Health Canada,44.9
+2017,CPA,Parole Board of Canada,45.4
+2017,CPA,Canadian Heritage,44.5
+2017,CPA,Privy Council Office,43.4
+2017,CPA,Correctional Service Canada,44.4
+2017,CPA,Public Prosecution Service of Canada,44
+2017,CPA,Public Service Commission of Canada,44.3
+2017,CPA,Public Safety Canada,40.5
+2017,CPA,Patented Medicine Prices Review Board Canada,44.1
+2017,CPA,Royal Canadian Mounted Police (Civilian Staff),45.3
+2017,CPA,RCMP External Review Committee,49
+2017,CPA,Civilian Review and Complaints Commission for the RCMP,42.8
+2017,CPA,Natural Resources Canada,45.7
+2017,CPA,Canadian Radio-television and Telecommunications Commission,42.5
+2017,CPA,Statistics Canada,43.1
+2017,CPA,Registrar of the Supreme Court of Canada,42.8
+2017,CPA,Public Services and Procurement Canada,44.8
+2017,CPA,Treasury Board of Canada Secretariat,42.9
+2017,CPA,Transportation Safety Board of Canada,49.6
+2017,CPA,Western Economic Diversification Canada,44
+2017,SA,Office of the Auditor General of Canada,40.7
+2017,SA,Parks Canada,44.3
+2017,SA,Financial Transactions and Reports Analysis Centre of Canada,39.4
+2017,SA,Polar Knowledge Canada,41.2
+2017,SA,Canadian Institutes of Health Research,42.2
+2017,SA,Communications Security Establishment,43.3
+2017,SA,Canadian Nuclear Safety Commission,45.8
+2017,SA,Canada Energy Regulator,46.2
+2017,SA,Financial Consumer Agency of Canada,40.5
+2017,SA,Canadian Food Inspection Agency,44.7
+2017,SA,Indian Oil and Gas Canada,50.1
+2017,SA,Canada Revenue Agency,45.7
+2017,SA,National Film Board,46.1
+2017,SA,National Research Council Canada,46.7
+2017,SA,Natural Sciences and Engineering Research Canada,43.4
+2017,SA,The Correctional Investigator Canada,41.4
+2017,SA,Office of the Superintendent of Financial Institutions Canada,45.4
+2017,SA,Security Intelligence Review Committee,44.2
+2017,SA,Social Sciences and Humanities Research Council of Canada,43.5
+2017,SA,Statistical Survey Operations,46.1
+2018,CPA,Atlantic Canada Opportunities Agency,46.7
+2018,CPA,Agriculture and Agri-Food Canada,44.4
+2018,CPA,Public Health Agency of Canada,43.5
+2018,CPA,Canadian Transportation Agency,43.7
+2018,CPA,Administrative Tribunals Support Service of Canada,44.2
+2018,CPA,Veterans Review and Appeal Board,50.1
+2018,CPA,Library and Archives Canada,44.4
+2018,CPA,Canada Border Services Agency,42.5
+2018,CPA,Courts Administration Service,43.1
+2018,CPA,Canadian Dairy Commission,41.9
+2018,CPA,Elections Canada,42.4
+2018,CPA,Canada School of Public Service,43.2
+2018,CPA,Canadian Grain Commission,45.4
+2018,CPA,Canadian Intergovernmental Conference Secretariat,44.9
+2018,CPA,Office of the Commissioner of Official Languages,41.8
+2018,CPA,Copyright Board Canada,46.9
+2018,CPA,Military Police Complaints Commission of Canada,45.7
+2018,CPA,Canadian Space Agency,47.3
+2018,CPA,Employment and Social Development Canada,43.4
+2018,CPA,Women and Gender Equality Canada,40.9
+2018,CPA,Fisheries and Oceans Canada,44
+2018,CPA,National Defence,48
+2018,CPA,Environment and Climate Change Canada,43.1
+2018,CPA,"Innovation, Science and Economic Development Canada",43.3
+2018,CPA,Veterans Affairs Canada,45.6
+2018,CPA,Impact Assessment Agency of Canada,41.6
+2018,CPA,Federal Economic Development Agency for Southern Ontario,41.6
+2018,CPA,Global Affairs Canada,43.9
+2018,CPA,Military Grievances External Review Committee,47.5
+2018,CPA,Department of Finance Canada,41.2
+2018,CPA,Office of the Commissioner for Federal Judicial Affairs Canada,45.1
+2018,CPA,Canada Economic Development for Quebec Regions,45.1
+2018,CPA,Office of the Governor General's Secretary,44.3
+2018,CPA,Shared Services Canada,45.5
+2018,CPA,Canadian Human Rights Commission,44.5
+2018,CPA,Crown-Indigenous Relations and Northern Affairs Canada,43.4
+2018,CPA,International Joint Commission,44.3
+2018,CPA,"Immigration, Refugees and Citizenship Canada",41.5
+2018,CPA,"Housing, Infrastructure and Communities Canada",39.4
+2018,CPA,Office of the Public Sector Integrity Commissioner of Canada,45.2
+2018,CPA,Offices of the Information and Privacy Commissioners of Canada,42.2
+2018,CPA,Immigration and Refugee Board of Canada,45.9
+2018,CPA,Federal Judges not part of any department,61.9
+2018,CPA,Department of Justice Canada,44.8
+2018,CPA,Office of the Commissioner of Lobbying of Canada,48
+2018,CPA,Transport Canada,45.9
+2018,CPA,Canadian Northern Economic Development Agency,44.5
+2018,CPA,Health Canada,44.5
+2018,CPA,Parole Board of Canada,44.7
+2018,CPA,Canadian Heritage,44
+2018,CPA,Privy Council Office,42.4
+2018,CPA,Correctional Service Canada,44.6
+2018,CPA,Public Prosecution Service of Canada,44
+2018,CPA,Public Service Commission of Canada,43.5
+2018,CPA,Public Safety Canada,40.1
+2018,CPA,Patented Medicine Prices Review Board Canada,43.7
+2018,CPA,Royal Canadian Mounted Police (Civilian Staff),45
+2018,CPA,RCMP External Review Committee,45.7
+2018,CPA,Civilian Review and Complaints Commission for the RCMP,44.5
+2018,CPA,Natural Resources Canada,45.1
+2018,CPA,Canadian Radio-television and Telecommunications Commission,42.3
+2018,CPA,Statistics Canada,43
+2018,CPA,Registrar of the Supreme Court of Canada,41.2
+2018,CPA,Public Services and Procurement Canada,44.2
+2018,CPA,Treasury Board of Canada Secretariat,42.4
+2018,CPA,Transportation Safety Board of Canada,48.8
+2018,CPA,Western Economic Diversification Canada,43.1
+2018,SA,Office of the Auditor General of Canada,41
+2018,SA,Parks Canada,44
+2018,SA,Financial Transactions and Reports Analysis Centre of Canada,39.6
+2018,SA,Polar Knowledge Canada,41.7
+2018,SA,Canadian Institutes of Health Research,42
+2018,SA,Communications Security Establishment,42.6
+2018,SA,Canadian Nuclear Safety Commission,44.9
+2018,SA,Canada Energy Regulator,46.4
+2018,SA,Financial Consumer Agency of Canada,41.3
+2018,SA,Canadian Food Inspection Agency,45
+2018,SA,Indian Oil and Gas Canada,50.4
+2018,SA,Canada Revenue Agency,45
+2018,SA,National Film Board,45.9
+2018,SA,National Research Council Canada,47
+2018,SA,Natural Sciences and Engineering Research Canada,43.7
+2018,SA,The Correctional Investigator Canada,42.7
+2018,SA,Office of the Superintendent of Financial Institutions Canada,45.5
+2018,SA,Security Intelligence Review Committee,42.5
+2018,SA,Social Sciences and Humanities Research Council of Canada,43.9
+2018,SA,Statistical Survey Operations,47.7
+2019,CPA,Atlantic Canada Opportunities Agency,46.4
+2019,CPA,Agriculture and Agri-Food Canada,44.5
+2019,CPA,Public Health Agency of Canada,42.7
+2019,CPA,Canadian Transportation Agency,42.3
+2019,CPA,Administrative Tribunals Support Service of Canada,43.7
+2019,CPA,Veterans Review and Appeal Board,50.1
+2019,CPA,Library and Archives Canada,44.1
+2019,CPA,Canada Border Services Agency,42.2
+2019,CPA,Courts Administration Service,42.1
+2019,CPA,Canadian Dairy Commission,41.8
+2019,CPA,Elections Canada,41.7
+2019,CPA,Canada School of Public Service,42.5
+2019,CPA,Canadian Grain Commission,44.9
+2019,CPA,Canadian Intergovernmental Conference Secretariat,41
+2019,CPA,Office of the Commissioner of Official Languages,40.9
+2019,CPA,Copyright Board Canada,46.7
+2019,CPA,Military Police Complaints Commission of Canada,43.5
+2019,CPA,Canadian Space Agency,46.4
+2019,CPA,Employment and Social Development Canada,43.5
+2019,CPA,Women and Gender Equality Canada,40.2
+2019,CPA,Fisheries and Oceans Canada,43.6
+2019,CPA,National Defence,47.7
+2019,CPA,Environment and Climate Change Canada,42.5
+2019,CPA,"Innovation, Science and Economic Development Canada",42.5
+2019,CPA,Veterans Affairs Canada,44.9
+2019,CPA,Impact Assessment Agency of Canada,41
+2019,CPA,Federal Economic Development Agency for Southern Ontario,41.8
+2019,CPA,Global Affairs Canada,43.6
+2019,CPA,Military Grievances External Review Committee,48.3
+2019,CPA,Department of Finance Canada,41.1
+2019,CPA,Office of the Commissioner for Federal Judicial Affairs Canada,46.6
+2019,CPA,Canada Economic Development for Quebec Regions,44.3
+2019,CPA,Office of the Governor General's Secretary,42.5
+2019,CPA,Shared Services Canada,45.1
+2019,CPA,Canadian Human Rights Commission,44.3
+2019,CPA,Crown-Indigenous Relations and Northern Affairs Canada,43.1
+2019,CPA,International Joint Commission,44.6
+2019,CPA,"Immigration, Refugees and Citizenship Canada",41
+2019,CPA,"Housing, Infrastructure and Communities Canada",38.9
+2019,CPA,Office of the Public Sector Integrity Commissioner of Canada,42.2
+2019,CPA,Offices of the Information and Privacy Commissioners of Canada,41.4
+2019,CPA,Immigration and Refugee Board of Canada,44.6
+2019,CPA,Federal Judges not part of any department,61.8
+2019,CPA,Department of Justice Canada,44.5
+2019,CPA,Office of the Commissioner of Lobbying of Canada,47.1
+2019,CPA,Transport Canada,45.3
+2019,CPA,Canadian Northern Economic Development Agency,43.4
+2019,CPA,Health Canada,43.8
+2019,CPA,Parole Board of Canada,44.5
+2019,CPA,Secretariat of the National Security and Intelligence Committee of Parliamentarians,*
+2019,CPA,Canadian Heritage,43.7
+2019,CPA,Privy Council Office,41.5
+2019,CPA,Correctional Service Canada,44.5
+2019,CPA,Public Prosecution Service of Canada,44.3
+2019,CPA,Public Service Commission of Canada,42.2
+2019,CPA,Public Safety Canada,39.9
+2019,CPA,Patented Medicine Prices Review Board Canada,42.6
+2019,CPA,Royal Canadian Mounted Police (Civilian Staff),44.7
+2019,CPA,RCMP External Review Committee,43.6
+2019,CPA,Civilian Review and Complaints Commission for the RCMP,42.4
+2019,CPA,Natural Resources Canada,44.5
+2019,CPA,Canadian Radio-television and Telecommunications Commission,42.5
+2019,CPA,Statistics Canada,42.6
+2019,CPA,Registrar of the Supreme Court of Canada,40.4
+2019,CPA,Public Services and Procurement Canada,43.5
+2019,CPA,Treasury Board of Canada Secretariat,41.6
+2019,CPA,Transportation Safety Board of Canada,48.7
+2019,CPA,Western Economic Diversification Canada,43.1
+2019,SA,Office of the Auditor General of Canada,40.9
+2019,SA,Parks Canada,43.9
+2019,SA,Financial Transactions and Reports Analysis Centre of Canada,40.2
+2019,SA,Polar Knowledge Canada,43.3
+2019,SA,Canadian Institutes of Health Research,41.4
+2019,SA,Communications Security Establishment,41.9
+2019,SA,Canadian Nuclear Safety Commission,44.9
+2019,SA,Canada Energy Regulator,46.7
+2019,SA,Financial Consumer Agency of Canada,41.9
+2019,SA,Canadian Food Inspection Agency,45
+2019,SA,Indian Oil and Gas Canada,51.4
+2019,SA,Canada Revenue Agency,44.5
+2019,SA,National Film Board,46.2
+2019,SA,National Research Council Canada,46.3
+2019,SA,Natural Sciences and Engineering Research Canada,43.5
+2019,SA,The Correctional Investigator Canada,43.1
+2019,SA,Office of the Superintendent of Financial Institutions Canada,45.1
+2019,SA,Security Intelligence Review Committee,39.7
+2019,SA,Social Sciences and Humanities Research Council of Canada,43.3
+2019,SA,Statistical Survey Operations,47.2
+2020,CPA,Atlantic Canada Opportunities Agency,46.2
+2020,CPA,Agriculture and Agri-Food Canada,43.9
+2020,CPA,Public Health Agency of Canada,42.6
+2020,CPA,Canadian Transportation Agency,42.9
+2020,CPA,Administrative Tribunals Support Service of Canada,43.7
+2020,CPA,Veterans Review and Appeal Board,50
+2020,CPA,Library and Archives Canada,44
+2020,CPA,Canada Border Services Agency,41.9
+2020,CPA,Courts Administration Service,41.4
+2020,CPA,Canadian Dairy Commission,42.4
+2020,CPA,Elections Canada,41.4
+2020,CPA,Canada School of Public Service,42.4
+2020,CPA,Canadian Grain Commission,45.1
+2020,CPA,Canadian Intergovernmental Conference Secretariat,43.9
+2020,CPA,Office of the Commissioner of Official Languages,40.9
+2020,CPA,Copyright Board Canada,43.8
+2020,CPA,Military Police Complaints Commission of Canada,41.8
+2020,CPA,Canadian Space Agency,46.5
+2020,CPA,Employment and Social Development Canada,43.2
+2020,CPA,Women and Gender Equality Canada,39.8
+2020,CPA,Fisheries and Oceans Canada,43.3
+2020,CPA,National Defence,47.6
+2020,CPA,Environment and Climate Change Canada,42.4
+2020,CPA,"Innovation, Science and Economic Development Canada",42.4
+2020,CPA,Veterans Affairs Canada,44.7
+2020,CPA,Impact Assessment Agency of Canada,39.3
+2020,CPA,Federal Economic Development Agency for Southern Ontario,40.5
+2020,CPA,Global Affairs Canada,43.1
+2020,CPA,Military Grievances External Review Committee,47.2
+2020,CPA,Department of Finance Canada,40.6
+2020,CPA,Office of the Commissioner for Federal Judicial Affairs Canada,46.1
+2020,CPA,Canada Economic Development for Quebec Regions,44.5
+2020,CPA,Office of the Governor General's Secretary,42
+2020,CPA,Shared Services Canada,45
+2020,CPA,Canadian Human Rights Commission,42.4
+2020,CPA,Crown-Indigenous Relations and Northern Affairs Canada,42.8
+2020,CPA,International Joint Commission,43.4
+2020,CPA,"Immigration, Refugees and Citizenship Canada",40.6
+2020,CPA,"Housing, Infrastructure and Communities Canada",38.5
+2020,CPA,Office of the Public Sector Integrity Commissioner of Canada,42.1
+2020,CPA,Offices of the Information and Privacy Commissioners of Canada,40.4
+2020,CPA,Immigration and Refugee Board of Canada,43.3
+2020,CPA,Federal Judges not part of any department,61.9
+2020,CPA,Department of Justice Canada,44.1
+2020,CPA,Office of the Commissioner of Lobbying of Canada,47.2
+2020,CPA,Transport Canada,45
+2020,CPA,Canadian Northern Economic Development Agency,41.3
+2020,CPA,Health Canada,43.6
+2020,CPA,Parole Board of Canada,43.7
+2020,CPA,Secretariat of the National Security and Intelligence Committee of Parliamentarians,46.2
+2020,CPA,Canadian Heritage,43.2
+2020,CPA,Privy Council Office,41.2
+2020,CPA,Correctional Service Canada,44.2
+2020,CPA,Public Prosecution Service of Canada,44.1
+2020,CPA,Public Service Commission of Canada,42.1
+2020,CPA,Public Safety Canada,40
+2020,CPA,Patented Medicine Prices Review Board Canada,43
+2020,CPA,Royal Canadian Mounted Police (Civilian Staff),44.2
+2020,CPA,RCMP External Review Committee,41.7
+2020,CPA,Civilian Review and Complaints Commission for the RCMP,41.5
+2020,CPA,Natural Resources Canada,44.1
+2020,CPA,Canadian Radio-television and Telecommunications Commission,42.6
+2020,CPA,Statistics Canada,42.7
+2020,CPA,Registrar of the Supreme Court of Canada,40.9
+2020,CPA,Public Services and Procurement Canada,43.2
+2020,CPA,Treasury Board of Canada Secretariat,41.2
+2020,CPA,Transportation Safety Board of Canada,48.6
+2020,CPA,Western Economic Diversification Canada,43.4
+2020,SA,Office of the Auditor General of Canada,40.3
+2020,SA,Parks Canada,43.7
+2020,SA,Financial Transactions and Reports Analysis Centre of Canada,39.7
+2020,SA,Polar Knowledge Canada,39.7
+2020,SA,Canadian Institutes of Health Research,41.5
+2020,SA,Communications Security Establishment,41.4
+2020,SA,Canadian Nuclear Safety Commission,45.5
+2020,SA,Canada Energy Regulator,46.8
+2020,SA,Financial Consumer Agency of Canada,41.5
+2020,SA,Canadian Food Inspection Agency,45.3
+2020,SA,Indian Oil and Gas Canada,51.6
+2020,SA,Canada Revenue Agency,44.2
+2020,SA,National Film Board,46.8
+2020,SA,National Research Council Canada,46.3
+2020,SA,Natural Sciences and Engineering Research Canada,42.4
+2020,SA,The Correctional Investigator Canada,43.9
+2020,SA,Office of the Superintendent of Financial Institutions Canada,44.7
+2020,SA,Security Intelligence Review Committee,44.4
+2020,SA,Social Sciences and Humanities Research Council of Canada,43.9
+2020,SA,Statistical Survey Operations,48.6
+2021,CPA,Atlantic Canada Opportunities Agency,46.3
+2021,CPA,Agriculture and Agri-Food Canada,44.5
+2021,CPA,Public Health Agency of Canada,40.9
+2021,CPA,Canadian Transportation Agency,41.6
+2021,CPA,Administrative Tribunals Support Service of Canada,43.6
+2021,CPA,Veterans Review and Appeal Board,48.8
+2021,CPA,Library and Archives Canada,44.9
+2021,CPA,Canada Border Services Agency,42.3
+2021,CPA,Courts Administration Service,42.1
+2021,CPA,Canadian Dairy Commission,41.8
+2021,CPA,Elections Canada,40.4
+2021,CPA,Canada School of Public Service,42.2
+2021,CPA,Canadian Grain Commission,45
+2021,CPA,Canadian Intergovernmental Conference Secretariat,43.5
+2021,CPA,Office of the Commissioner of Official Languages,41.5
+2021,CPA,Copyright Board Canada,42
+2021,CPA,Military Police Complaints Commission of Canada,43.4
+2021,CPA,Canadian Space Agency,46
+2021,CPA,Employment and Social Development Canada,42.6
+2021,CPA,Women and Gender Equality Canada,39.5
+2021,CPA,Fisheries and Oceans Canada,42.9
+2021,CPA,Indigenous Services Canada,44.5
+2021,CPA,National Defence,47.9
+2021,CPA,Environment and Climate Change Canada,42.7
+2021,CPA,"Innovation, Science and Economic Development Canada",42.2
+2021,CPA,Veterans Affairs Canada,44.4
+2021,CPA,Impact Assessment Agency of Canada,39.9
+2021,CPA,Federal Economic Development Agency for Southern Ontario,40.5
+2021,CPA,Global Affairs Canada,43.3
+2021,CPA,Military Grievances External Review Committee,46.3
+2021,CPA,Department of Finance Canada,40.6
+2021,CPA,Office of the Commissioner for Federal Judicial Affairs Canada,45.9
+2021,CPA,Canada Economic Development for Quebec Regions,44.8
+2021,CPA,Office of the Governor General's Secretary,41.2
+2021,CPA,Shared Services Canada,45
+2021,CPA,Canadian Human Rights Commission,41.9
+2021,CPA,Crown-Indigenous Relations and Northern Affairs Canada,41.7
+2021,CPA,International Joint Commission,44.5
+2021,CPA,"Immigration, Refugees and Citizenship Canada",40.9
+2021,CPA,"Housing, Infrastructure and Communities Canada",39.1
+2021,CPA,Office of the Public Sector Integrity Commissioner of Canada,39.2
+2021,CPA,Offices of the Information and Privacy Commissioners of Canada,41.1
+2021,CPA,Immigration and Refugee Board of Canada,43
+2021,CPA,Federal Judges not part of any department,61.8
+2021,CPA,Department of Justice Canada,44.2
+2021,CPA,Office of the Commissioner of Lobbying of Canada,43.6
+2021,CPA,Transport Canada,44.8
+2021,CPA,Canadian Northern Economic Development Agency,41.8
+2021,CPA,Health Canada,42.7
+2021,CPA,Parole Board of Canada,44.2
+2021,CPA,Secretariat of the National Security and Intelligence Committee of Parliamentarians,40
+2021,CPA,Office of the Prime Minister,*
+2021,CPA,Canadian Heritage,43.6
+2021,CPA,Privy Council Office,41.3
+2021,CPA,Correctional Service Canada,44.4
+2021,CPA,Public Prosecution Service of Canada,43.8
+2021,CPA,Public Service Commission of Canada,43.1
+2021,CPA,Public Safety Canada,40.2
+2021,CPA,Patented Medicine Prices Review Board Canada,43.2
+2021,CPA,Royal Canadian Mounted Police (Civilian Staff),44.2
+2021,CPA,RCMP External Review Committee,43.2
+2021,CPA,Civilian Review and Complaints Commission for the RCMP,42.6
+2021,CPA,Natural Resources Canada,44.3
+2021,CPA,Canadian Radio-television and Telecommunications Commission,42.9
+2021,CPA,Statistics Canada,43.5
+2021,CPA,Registrar of the Supreme Court of Canada,41.3
+2021,CPA,Public Services and Procurement Canada,43.6
+2021,CPA,Treasury Board of Canada Secretariat,41.8
+2021,CPA,Transportation Safety Board of Canada,48.4
+2021,CPA,Western Economic Diversification Canada,43.1
+2021,SA,Office of the Auditor General of Canada,40
+2021,SA,Parks Canada,43.7
+2021,SA,Financial Transactions and Reports Analysis Centre of Canada,40.7
+2021,SA,Polar Knowledge Canada,40.5
+2021,SA,Canadian Institutes of Health Research,41
+2021,SA,Communications Security Establishment,41.6
+2021,SA,Canadian Nuclear Safety Commission,45.5
+2021,SA,Canada Energy Regulator,46.6
+2021,SA,Financial Consumer Agency of Canada,42.4
+2021,SA,Canadian Food Inspection Agency,44.9
+2021,SA,Indian Oil and Gas Canada,50.9
+2021,SA,Canada Revenue Agency,44.2
+2021,SA,National Film Board,47.2
+2021,SA,National Security Intelligence and Review Agency,39.4
+2021,SA,National Research Council Canada,46.4
+2021,SA,Natural Sciences and Engineering Research Canada,42.7
+2021,SA,The Correctional Investigator Canada,42.9
+2021,SA,Office of the Superintendent of Financial Institutions Canada,45
+2021,SA,Social Sciences and Humanities Research Council of Canada,43.4
+2021,SA,Statistical Survey Operations,46
+2022,CPA,Atlantic Canada Opportunities Agency,46.1
+2022,CPA,Agriculture and Agri-Food Canada,43.8
+2022,CPA,Public Health Agency of Canada,40
+2022,CPA,Canadian Transportation Agency,43.2
+2022,CPA,Administrative Tribunals Support Service of Canada,42.7
+2022,CPA,Veterans Review and Appeal Board,48.2
+2022,CPA,Library and Archives Canada,45.5
+2022,CPA,Canada Border Services Agency,42.2
+2022,CPA,Courts Administration Service,41.9
+2022,CPA,Accessibility Standards Canada,44.5
+2022,CPA,Canadian Dairy Commission,42.8
+2022,CPA,Elections Canada,41.4
+2022,CPA,Canada School of Public Service,41.6
+2022,CPA,Canadian Grain Commission,45
+2022,CPA,Canadian Intergovernmental Conference Secretariat,42.2
+2022,CPA,Office of the Commissioner of Official Languages,41.6
+2022,CPA,Copyright Board Canada,43.7
+2022,CPA,Military Police Complaints Commission of Canada,43.4
+2022,CPA,Canadian Space Agency,45.4
+2022,CPA,Employment and Social Development Canada,42.5
+2022,CPA,Women and Gender Equality Canada,40.3
+2022,CPA,Fisheries and Oceans Canada,42.8
+2022,CPA,Indigenous Services Canada,44.2
+2022,CPA,National Defence,47.6
+2022,CPA,Environment and Climate Change Canada,42.2
+2022,CPA,"Innovation, Science and Economic Development Canada",41.6
+2022,CPA,Veterans Affairs Canada,44.6
+2022,CPA,Impact Assessment Agency of Canada,40.4
+2022,CPA,Federal Economic Development Agency for Southern Ontario,39.9
+2022,CPA,Global Affairs Canada,43.1
+2022,CPA,Military Grievances External Review Committee,45.8
+2022,CPA,Department of Finance Canada,40.8
+2022,CPA,Office of the Commissioner for Federal Judicial Affairs Canada,46.8
+2022,CPA,Canada Economic Development for Quebec Regions,44.5
+2022,CPA,Office of the Governor General's Secretary,40.2
+2022,CPA,Shared Services Canada,44.9
+2022,CPA,Canadian Human Rights Commission,41.6
+2022,CPA,Crown-Indigenous Relations and Northern Affairs Canada,41.4
+2022,CPA,International Joint Commission,43.5
+2022,CPA,"Immigration, Refugees and Citizenship Canada",40.5
+2022,CPA,"Housing, Infrastructure and Communities Canada",37.7
+2022,CPA,Office of the Public Sector Integrity Commissioner of Canada,40
+2022,CPA,Offices of the Information and Privacy Commissioners of Canada,40.3
+2022,CPA,Immigration and Refugee Board of Canada,42.1
+2022,CPA,Federal Judges not part of any department,61.9
+2022,CPA,Department of Justice Canada,44
+2022,CPA,Office of the Commissioner of Lobbying of Canada,43.1
+2022,CPA,Transport Canada,45.2
+2022,CPA,Canadian Northern Economic Development Agency,41.4
+2022,CPA,Health Canada,42.4
+2022,CPA,Parole Board of Canada,44.4
+2022,CPA,Secretariat of the National Security and Intelligence Committee of Parliamentarians,40.8
+2022,CPA,Canadian Heritage,43.1
+2022,CPA,Privy Council Office,41.1
+2022,CPA,Correctional Service Canada,44.2
+2022,CPA,Public Prosecution Service of Canada,43.8
+2022,CPA,Public Service Commission of Canada,42.9
+2022,CPA,Public Safety Canada,39.9
+2022,CPA,Patented Medicine Prices Review Board Canada,42.9
+2022,CPA,Royal Canadian Mounted Police (Civilian Staff),43.8
+2022,CPA,RCMP External Review Committee,41.5
+2022,CPA,Civilian Review and Complaints Commission for the RCMP,42.1
+2022,CPA,Natural Resources Canada,43.9
+2022,CPA,Canadian Radio-television and Telecommunications Commission,43
+2022,CPA,Statistics Canada,41.9
+2022,CPA,Registrar of the Supreme Court of Canada,41.3
+2022,CPA,Public Services and Procurement Canada,43.8
+2022,CPA,Treasury Board of Canada Secretariat,41.7
+2022,CPA,Transportation Safety Board of Canada,49.3
+2022,CPA,Western Economic Diversification Canada,42.9
+2022,SA,Office of the Auditor General of Canada,40.2
+2022,SA,Parks Canada,43.2
+2022,SA,Financial Transactions and Reports Analysis Centre of Canada,39
+2022,SA,Polar Knowledge Canada,40.1
+2022,SA,Canadian Institutes of Health Research,40.8
+2022,SA,Communications Security Establishment,41.5
+2022,SA,Canadian Nuclear Safety Commission,45.5
+2022,SA,Canada Energy Regulator,46.4
+2022,SA,Financial Consumer Agency of Canada,42.6
+2022,SA,Canadian Food Inspection Agency,44.7
+2022,SA,Indian Oil and Gas Canada,51.9
+2022,SA,Canada Revenue Agency,43
+2022,SA,National Film Board,47.1
+2022,SA,National Security Intelligence and Review Agency,40.2
+2022,SA,National Research Council Canada,46.5
+2022,SA,Natural Sciences and Engineering Research Canada,43.2
+2022,SA,The Correctional Investigator Canada,44.2
+2022,SA,Office of the Intelligence Commissioner,*
+2022,SA,Office of the Superintendent of Financial Institutions Canada,44.8
+2022,SA,Social Sciences and Humanities Research Council of Canada,43.1
+2022,SA,Statistical Survey Operations,48.7
+2023,CPA,Atlantic Canada Opportunities Agency,46.6
+2023,CPA,Agriculture and Agri-Food Canada,43.8
+2023,CPA,Public Health Agency of Canada,40.2
+2023,CPA,Canadian Transportation Agency,43.3
+2023,CPA,Administrative Tribunals Support Service of Canada,42.7
+2023,CPA,Veterans Review and Appeal Board,45.9
+2023,CPA,Library and Archives Canada,43.8
+2023,CPA,Canada Border Services Agency,41.9
+2023,CPA,Courts Administration Service,41
+2023,CPA,Accessibility Standards Canada,43.2
+2023,CPA,Canadian Dairy Commission,42.4
+2023,CPA,Elections Canada,41.9
+2023,CPA,Canada School of Public Service,41.7
+2023,CPA,Canadian Grain Commission,44.7
+2023,CPA,Canadian Intergovernmental Conference Secretariat,41.3
+2023,CPA,Office of the Commissioner of Official Languages,42.3
+2023,CPA,Copyright Board Canada,42.1
+2023,CPA,Military Police Complaints Commission of Canada,42.3
+2023,CPA,Canadian Space Agency,44.5
+2023,CPA,Employment and Social Development Canada,42.5
+2023,CPA,Women and Gender Equality Canada,39.5
+2023,CPA,Fisheries and Oceans Canada,42.3
+2023,CPA,Indigenous Services Canada,43.8
+2023,CPA,National Defence,47.3
+2023,CPA,Environment and Climate Change Canada,41.7
+2023,CPA,"Innovation, Science and Economic Development Canada",41.3
+2023,CPA,Veterans Affairs Canada,44.9
+2023,CPA,Impact Assessment Agency of Canada,40.4
+2023,CPA,Federal Economic Development Agency for Southern Ontario,40.6
+2023,CPA,Global Affairs Canada,42.9
+2023,CPA,Military Grievances External Review Committee,45.3
+2023,CPA,Department of Finance Canada,40.8
+2023,CPA,Office of the Commissioner for Federal Judicial Affairs Canada,46.6
+2023,CPA,Canada Economic Development for Quebec Regions,44
+2023,CPA,Office of the Governor General's Secretary,39.9
+2023,CPA,Shared Services Canada,44.6
+2023,CPA,Canadian Human Rights Commission,42.1
+2023,CPA,Crown-Indigenous Relations and Northern Affairs Canada,41.2
+2023,CPA,International Joint Commission,45.3
+2023,CPA,"Immigration, Refugees and Citizenship Canada",40.1
+2023,CPA,"Housing, Infrastructure and Communities Canada",37.8
+2023,CPA,Office of the Public Sector Integrity Commissioner of Canada,42.1
+2023,CPA,Offices of the Information and Privacy Commissioners of Canada,41.4
+2023,CPA,Immigration and Refugee Board of Canada,41.9
+2023,CPA,Federal Judges not part of any department,61.7
+2023,CPA,Department of Justice Canada,43.5
+2023,CPA,Office of the Commissioner of Lobbying of Canada,42.4
+2023,CPA,Transport Canada,44.9
+2023,CPA,Canadian Northern Economic Development Agency,41.9
+2023,CPA,Health Canada,42.8
+2023,CPA,Parole Board of Canada,43.5
+2023,CPA,Secretariat of the National Security and Intelligence Committee of Parliamentarians,40.2
+2023,CPA,Canadian Heritage,43.6
+2023,CPA,Privy Council Office,40.3
+2023,CPA,Correctional Service Canada,44
+2023,CPA,Public Prosecution Service of Canada,43.5
+2023,CPA,Public Service Commission of Canada,42.5
+2023,CPA,Public Safety Canada,39.7
+2023,CPA,Patented Medicine Prices Review Board Canada,42.7
+2023,CPA,Royal Canadian Mounted Police (Civilian Staff),43.5
+2023,CPA,RCMP External Review Committee,42.7
+2023,CPA,Civilian Review and Complaints Commission for the RCMP,41.3
+2023,CPA,Natural Resources Canada,43.3
+2023,CPA,Canadian Radio-television and Telecommunications Commission,42.5
+2023,CPA,Statistics Canada,42.6
+2023,CPA,Registrar of the Supreme Court of Canada,40.6
+2023,CPA,Public Services and Procurement Canada,43.7
+2023,CPA,Treasury Board of Canada Secretariat,41.8
+2023,CPA,Transportation Safety Board of Canada,49.2
+2023,CPA,Western Economic Diversification Canada,42.5
+2023,SA,Office of the Auditor General of Canada,41.2
+2023,SA,Parks Canada,43.2
+2023,SA,Financial Transactions and Reports Analysis Centre of Canada,39.4
+2023,SA,Polar Knowledge Canada,40.2
+2023,SA,Canadian Institutes of Health Research,40.5
+2023,SA,Communications Security Establishment,41.5
+2023,SA,Canadian Nuclear Safety Commission,44.6
+2023,SA,Canada Energy Regulator,47.4
+2023,SA,Financial Consumer Agency of Canada,41.3
+2023,SA,Canadian Food Inspection Agency,44.4
+2023,SA,Indian Oil and Gas Canada,51.2
+2023,SA,Canada Revenue Agency,42.8
+2023,SA,National Film Board,46.8
+2023,SA,National Security Intelligence and Review Agency,37.5
+2023,SA,National Research Council Canada,46.6
+2023,SA,Natural Sciences and Engineering Research Canada,43.5
+2023,SA,The Correctional Investigator Canada,43.5
+2023,SA,Office of the Intelligence Commissioner,45.2
+2023,SA,Office of the Superintendent of Financial Institutions Canada,43.7
+2023,SA,Social Sciences and Humanities Research Council of Canada,42.2
+2023,SA,Statistical Survey Operations,50.5
+2024,CPA,Atlantic Canada Opportunities Agency,47
+2024,CPA,Agriculture and Agri-Food Canada,43.7
+2024,CPA,Public Health Agency of Canada,40.6
+2024,CPA,Canadian Transportation Agency,42.7
+2024,CPA,Administrative Tribunals Support Service of Canada,43
+2024,CPA,Veterans Review and Appeal Board,42
+2024,CPA,Library and Archives Canada,42.7
+2024,CPA,Canada Border Services Agency,41.7
+2024,CPA,Courts Administration Service,40.5
+2024,CPA,Accessibility Standards Canada,43.6
+2024,CPA,Canadian Dairy Commission,41.3
+2024,CPA,Elections Canada,41.5
+2024,CPA,Canada School of Public Service,42
+2024,CPA,Canadian Grain Commission,44.9
+2024,CPA,Canadian Intergovernmental Conference Secretariat,38.3
+2024,CPA,Law Commission of Canada,*
+2024,CPA,Office of the Commissioner of Official Languages,41.8
+2024,CPA,Copyright Board Canada,42.7
+2024,CPA,Military Police Complaints Commission of Canada,43.3
+2024,CPA,Canadian Space Agency,43.9
+2024,CPA,Employment and Social Development Canada,43.1
+2024,CPA,Women and Gender Equality Canada,40.6
+2024,CPA,Fisheries and Oceans Canada,42.3
+2024,CPA,Indigenous Services Canada,43.4
+2024,CPA,National Defence,47
+2024,CPA,Environment and Climate Change Canada,41.5
+2024,CPA,"Innovation, Science and Economic Development Canada",41.4
+2024,CPA,Veterans Affairs Canada,44.6
+2024,CPA,Impact Assessment Agency of Canada,39.8
+2024,CPA,Federal Economic Development Agency for Southern Ontario,40.9
+2024,CPA,Global Affairs Canada,43.2
+2024,CPA,Military Grievances External Review Committee,44.6
+2024,CPA,Department of Finance Canada,40.7
+2024,CPA,Office of the Commissioner for Federal Judicial Affairs Canada,46.3
+2024,CPA,Canada Economic Development for Quebec Regions,44.1
+2024,CPA,Office of the Governor General's Secretary,42.3
+2024,CPA,Shared Services Canada,44.6
+2024,CPA,Canadian Human Rights Commission,42.1
+2024,CPA,Crown-Indigenous Relations and Northern Affairs Canada,41.6
+2024,CPA,International Joint Commission,45.4
+2024,CPA,"Immigration, Refugees and Citizenship Canada",40.6
+2024,CPA,"Housing, Infrastructure and Communities Canada",38.4
+2024,CPA,Office of the Public Sector Integrity Commissioner of Canada,42.2
+2024,CPA,Offices of the Information and Privacy Commissioners of Canada,42
+2024,CPA,Immigration and Refugee Board of Canada,41.9
+2024,CPA,Federal Judges not part of any department,61.7
+2024,CPA,Department of Justice Canada,43.4
+2024,CPA,Office of the Commissioner of Lobbying of Canada,40
+2024,CPA,Transport Canada,44.5
+2024,CPA,Canadian Northern Economic Development Agency,42.6
+2024,CPA,Health Canada,43
+2024,CPA,Federal Economic Development Agency for Northern Ontario,45.8
+2024,CPA,Parole Board of Canada,43
+2024,CPA,Secretariat of the National Security and Intelligence Committee of Parliamentarians,40.1
+2024,CPA,Canadian Heritage,43.6
+2024,CPA,Privy Council Office,40.2
+2024,CPA,Correctional Service Canada,43.8
+2024,CPA,Public Prosecution Service of Canada,43.6
+2024,CPA,Public Service Commission of Canada,43.5
+2024,CPA,Public Safety Canada,39.9
+2024,CPA,Patented Medicine Prices Review Board Canada,43.1
+2024,CPA,Royal Canadian Mounted Police (Civilian Staff),43.1
+2024,CPA,RCMP External Review Committee,44.1
+2024,CPA,Civilian Review and Complaints Commission for the RCMP,39.7
+2024,CPA,Natural Resources Canada,42.9
+2024,CPA,Canadian Radio-television and Telecommunications Commission,41.7
+2024,CPA,Statistics Canada,45.2
+2024,CPA,Registrar of the Supreme Court of Canada,40.9
+2024,CPA,Public Services and Procurement Canada,43.8
+2024,CPA,Treasury Board of Canada Secretariat,42.4
+2024,CPA,Transportation Safety Board of Canada,49
+2024,CPA,Western Economic Diversification Canada,43.7
+2024,SA,Office of the Auditor General of Canada,41.5
+2024,SA,Parks Canada,43.4
+2024,SA,Financial Transactions and Reports Analysis Centre of Canada,39.4
+2024,SA,Polar Knowledge Canada,40.7
+2024,SA,Canadian Institutes of Health Research,40.7
+2024,SA,Communications Security Establishment,41.3
+2024,SA,Canadian Nuclear Safety Commission,44.6
+2024,SA,Canada Energy Regulator,47.5
+2024,SA,Financial Consumer Agency of Canada,41.6
+2024,SA,Canadian Food Inspection Agency,44.9
+2024,SA,Indian Oil and Gas Canada,52.2
+2024,SA,Canada Revenue Agency,43.1
+2024,SA,National Film Board,47.1
+2024,SA,National Security Intelligence and Review Agency,37.4
+2024,SA,National Research Council Canada,46.5
+2024,SA,Natural Sciences and Engineering Research Canada,43.7
+2024,SA,The Correctional Investigator Canada,44.6
+2024,SA,Office of the Intelligence Commissioner,*
+2024,SA,Office of the Superintendent of Financial Institutions Canada,43.7
+2024,SA,Social Sciences and Humanities Research Council of Canada,42.3
+2024,SA,Statistical Survey Operations,49.8
+2025,CPA,Accessibility Standards Canada,44.2
+2025,CPA,Administrative Tribunals Support Service of Canada,43.8
+2025,CPA,Agriculture and Agri-Food Canada,43.7
+2025,CPA,Atlantic Canada Opportunities Agency,47.2
+2025,CPA,Canada Border Services Agency,41.9
+2025,CPA,Canada Economic Development for Quebec Regions,44.5
+2025,CPA,Canada School of Public Service,41.9
+2025,CPA,Canadian Dairy Commission,42.5
+2025,CPA,Canadian Grain Commission,45.7
+2025,CPA,Canadian Heritage,43.8
+2025,CPA,Canadian Human Rights Commission,43.2
+2025,CPA,Canadian Intergovernmental Conference Secretariat,37.4
+2025,CPA,Canadian Northern Economic Development Agency,42.3
+2025,CPA,Canadian Radio-television and Telecommunications Commission,41.2
+2025,CPA,Canadian Space Agency,43.3
+2025,CPA,Canadian Transportation Agency,43.3
+2025,CPA,Civilian Review and Complaints Commission for the RCMP,41.6
+2025,CPA,Copyright Board Canada,42.3
+2025,CPA,Correctional Service Canada,43.9
+2025,CPA,Courts Administration Service,41.5
+2025,CPA,Crown-Indigenous Relations and Northern Affairs Canada,42.4
+2025,CPA,Department of Finance Canada,40.9
+2025,CPA,Department of Justice Canada,43.6
+2025,CPA,Elections Canada,40.3
+2025,CPA,Employment and Social Development Canada,43.4
+2025,CPA,Environment and Climate Change Canada,42
+2025,CPA,Federal Economic Development Agency for Northern Ontario,44.3
+2025,CPA,Federal Economic Development Agency for Southern Ontario,43.3
+2025,CPA,Federal Judges not part of any department,60.9
+2025,CPA,Fisheries and Oceans Canada,42.6
+2025,CPA,Global Affairs Canada,43.3
+2025,CPA,Health Canada,43.9
+2025,CPA,Immigration and Refugee Board of Canada,42.5
+2025,CPA,"Immigration, Refugees and Citizenship Canada",42
+2025,CPA,Impact Assessment Agency of Canada,40.1
+2025,CPA,Indigenous Services Canada,43.9
+2025,CPA,"Housing, Infrastructure and Communities Canada",39.1
+2025,CPA,"Innovation, Science and Economic Development Canada",41.7
+2025,CPA,International Joint Commission,47
+2025,CPA,Law Commission of Canada,38.3
+2025,CPA,Library and Archives Canada,43.9
+2025,CPA,Military Grievances External Review Committee,46.8
+2025,CPA,Military Police Complaints Commission of Canada,41.8
+2025,CPA,National Defence,47
+2025,CPA,Natural Resources Canada,42.7
+2025,CPA,Office of the Commissioner for Federal Judicial Affairs Canada,45.9
+2025,CPA,Office of the Commissioner of Lobbying of Canada,41.6
+2025,CPA,Office of the Commissioner of Official Languages,42.4
+2025,CPA,Office of the Governor General's Secretary,41.8
+2025,CPA,Office of the Public Sector Integrity Commissioner of Canada,42.4
+2025,CPA,Offices of the Information and Privacy Commissioners of Canada,41.6
+2025,CPA,Parole Board of Canada,44.6
+2025,CPA,Patented Medicine Prices Review Board Canada,43.5
+2025,CPA,Privy Council Office,40.6
+2025,CPA,Public Health Agency of Canada,42.4
+2025,CPA,Public Prosecution Service of Canada,44
+2025,CPA,Public Safety Canada,39.9
+2025,CPA,Public Service Commission of Canada,43.8
+2025,CPA,Public Services and Procurement Canada,44
+2025,CPA,RCMP External Review Committee,45
+2025,CPA,Registrar of the Supreme Court of Canada,40.2
+2025,CPA,Royal Canadian Mounted Police,42.8
+2025,CPA,Secretariat of the National Security and Intelligence Committee of Parliamentarians,42.2
+2025,CPA,Shared Services Canada,45.4
+2025,CPA,Statistics Canada,44.8
+2025,CPA,Transport Canada,44.9
+2025,CPA,Transportation Safety Board of Canada,48.4
+2025,CPA,Treasury Board of Canada Secretariat,43.2
+2025,CPA,Veterans Affairs Canada,44.8
+2025,CPA,Veterans Review and Appeal Board,41.3
+2025,CPA,Western Economic Diversification Canada,43.9
+2025,CPA,Women and Gender Equality Canada,41.7
+2025,SA,Canada Energy Regulator,47.7
+2025,SA,Canada Revenue Agency,44.3
+2025,SA,Canadian Food Inspection Agency,46.1
+2025,SA,Canadian Institutes of Health Research,43.3
+2025,SA,Canadian Nuclear Safety Commission,44.8
+2025,SA,Communications Security Establishment,41.3
+2025,SA,Financial Consumer Agency of Canada,42.6
+2025,SA,Financial Transactions and Reports Analysis Centre of Canada,39.8
+2025,SA,Indian Oil and Gas Canada,52.1
+2025,SA,National Film Board,46.9
+2025,SA,National Research Council Canada,46.1
+2025,SA,National Security Intelligence and Review Agency,39
+2025,SA,Natural Sciences and Engineering Research Canada,43.5
+2025,SA,Office of the Auditor General of Canada,42.8
+2025,SA,Office of the Intelligence Commissioner,*
+2025,SA,Office of the Superintendent of Financial Institutions Canada,45
+2025,SA,Parks Canada,43.7
+2025,SA,Polar Knowledge Canada,41.2
+2025,SA,Social Sciences and Humanities Research Council of Canada,42.3
+2025,SA,Statistical Survey Operations,*
+2025,SA,The Correctional Investigator Canada,42.5
