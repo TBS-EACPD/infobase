@@ -100,11 +100,23 @@ export class NivoLineBarToggle extends React.Component {
       .fromPairs()
       .value();
 
-    // Ensure all series have the same length by padding with 0s
-    const maxLength = _.max(_.map(series, (data) => data.length));
+    // Ensure all series have the same length as graph_options.ticks
+    // This is critical for react-spring interpolation to work correctly
+    const targetLength = graph_options.ticks ? graph_options.ticks.length : 0;
+    const maxLength =
+      targetLength > 0
+        ? targetLength
+        : _.max(_.map(series, (data) => data.length)) || 0;
+
     _.forEach(series, (data, label) => {
-      if (data.length < maxLength) {
+      if (!data || !Array.isArray(data)) {
+        series[label] = _.times(maxLength, () => 0);
+      } else if (data.length < maxLength) {
+        // Pad with 0s if shorter
         series[label] = [...data, ..._.times(maxLength - data.length, () => 0)];
+      } else if (data.length > maxLength) {
+        // Trim if longer to match ticks length
+        series[label] = data.slice(0, maxLength);
       }
     });
 
@@ -126,11 +138,18 @@ export class NivoLineBarToggle extends React.Component {
       }
     });
 
-    const data_bar = _.map(graph_options.ticks, (date, date_index) => {
+    const data_bar = _.map(graph_options.ticks || [], (date, date_index) => {
       // Create the base bar data
       const bar_data = {
         ..._.chain(series)
-          .map((data, label) => [label, data[date_index] || 0]) // Use 0 as fallback for missing data
+          .map((data, label) => {
+            // Ensure we don't access out of bounds
+            const value =
+              data && Array.isArray(data) && data[date_index] !== undefined
+                ? data[date_index]
+                : 0;
+            return [label, value];
+          })
           .fromPairs()
           .value(),
         date: date, // Add the date to each data point
@@ -154,13 +173,33 @@ export class NivoLineBarToggle extends React.Component {
           .value();
       });
 
-    const data_formatter_line = _.map(series, (data_array, data_label) => ({
-      id: data_label,
-      data: _.map(data_array, (spending_value, tick_index) => ({
-        x: graph_options.ticks[tick_index],
-        y: spending_value,
-      })),
-    }));
+    const data_formatter_line = _.map(series, (data_array, data_label) => {
+      // Ensure data_array length matches ticks length for react-spring interpolation
+      const normalizedData = data_array || [];
+      const ticksLength = graph_options.ticks ? graph_options.ticks.length : 0;
+      const safeDataArray =
+        normalizedData.length === ticksLength
+          ? normalizedData
+          : normalizedData
+              .slice(0, ticksLength)
+              .concat(
+                _.times(
+                  Math.max(0, ticksLength - normalizedData.length),
+                  () => 0
+                )
+              );
+
+      return {
+        id: data_label,
+        data: _.map(safeDataArray, (spending_value, tick_index) => ({
+          x:
+            graph_options.ticks && graph_options.ticks[tick_index]
+              ? graph_options.ticks[tick_index]
+              : tick_index,
+          y: spending_value,
+        })),
+      };
+    });
 
     const extended_graph_options_bar = {
       keys: Object.keys(series),
