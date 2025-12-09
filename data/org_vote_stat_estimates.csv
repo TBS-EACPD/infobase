@@ -1874,10 +1874,10 @@
 "TBC","S",0,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés","SEA",1762901,2277450.00,0,0.00,473823.00,0
 "TBC","S",0,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés","SEB",2336531,2076840.00,1506330,3204775.00,4099900.00,0
 "TBC","S",0,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés","SEC",645916,862920.00,331415,678896.00,0.00,0
-"TBC","S",0,"Employer contributions made under the Public Service Superannuation Act and other retirement acts and the Employment Insurance Act","Contributions aux régimes d'avantages sociaux des employés","SA",-94302,7805000000.00,,,,
+"TBC","S",0,"Employer contributions made under the Public Service Superannuation Act and other retirement acts and the Employment Insurance Act","Contributions aux régimes d'avantages sociaux des employés","SA",-94302,7805000000.00,,,6425000000.02,
 "TBC","S",0,"Payments under the Public Service Pension Adjustment Act","Versements en vertu de la Loi sur la mise au point des pensions du service public","SA",7521,1458.00,1430,1514.49,1578.96,
 "TBC","S",0,"Salary and Motor Car Allowance","Traitement et allocation pour automobile","MAINS",91300,92500.00,92500,94700.00,98600.00,102300
-"TBC","S",0,"Salary and Motor Car Allowance","Traitement et allocation pour automobile","SA",-100,-633.00,-100,354.77,6425000200.10,0
+"TBC","S",0,"Salary and Motor Car Allowance","Traitement et allocation pour automobile","SA",-100,-633.00,-100,354.84,200.08,0
 "TBC","S",0,"Spending of proceeds from the disposal of surplus Crown assets","Dépenses des produits de la vente de biens excédentaires de l'État","SA",907,,14843,14842.91,15050.59,
 "TC",1,1,"Operating AND Program","Fonctionnement AND Programme","MAINS",726021429,741693237.00,717960052,1019788928.00,1010983880.00,956317643
 "TC",1,1,"Operating AND Program","Fonctionnement AND Programme","SEA",4671425,2868901.00,29796369,0.00,1685202.00,0

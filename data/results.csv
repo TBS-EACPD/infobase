@@ -453,14 +453,17 @@ DR-drr20-1012,DR-321,PCO-BWW00,Government‘s priorities are achieved,Les priori
 DR-drr21-1012,DR-321,PCO-BWW00,Government‘s priorities are achieved,Les priorités du gouvernement sont réalisées,drr21
 DR-drr22-1012,DR-321,PCO-BWW00,Government‘s priorities are achieved,Les priorités du gouvernement sont réalisées,drr22
 DR-drr23-1012,DR-321,PCO-BWW00,Government‘s priorities are achieved,Les priorités du gouvernement sont réalisées,drr23
+DR-dp25-1012,DR-321,PCO-BWW00,Government‘s priorities are achieved,Les priorités du gouvernement sont réalisées,dp25
 DR-drr20-1013,DR-322,PCO-BWW00,Cabinet receives high quality advice,Le Cabinet reçoit des avis de grande qualité,drr20
 DR-drr21-1013,DR-322,PCO-BWW00,Cabinet receives high quality advice,Le Cabinet reçoit des avis de grande qualité,drr21
 DR-drr22-1013,DR-322,PCO-BWW00,Cabinet receives high quality advice,Le Cabinet reçoit des avis de grande qualité,drr22
 DR-drr23-1013,DR-322,PCO-BWW00,Cabinet receives high quality advice,Le Cabinet reçoit des avis de grande qualité,drr23
+DR-dp25-1013,DR-322,PCO-BWW00,Cabinet receives high quality advice,Le Cabinet reçoit des avis de grande qualité,dp25
 DR-drr20-1014,DR-323,PCO-BWW00,Cabinet and its committees focus on priorities,Le Cabinet et ses comités axent leurs efforts sur les priorités,drr20
 DR-drr21-1014,DR-323,PCO-BWW00,Cabinet and its committees focus on priorities,Le Cabinet et ses comités axent leurs efforts sur les priorités,drr21
 DR-drr22-1014,DR-323,PCO-BWW00,Cabinet and its committees focus on priorities,Le Cabinet et ses comités axent leurs efforts sur les priorités,drr22
 DR-drr23-1014,DR-323,PCO-BWW00,Cabinet and its committees focus on priorities,Le Cabinet et ses comités axent leurs efforts sur les priorités,drr23
+DR-dp25-1014,DR-323,PCO-BWW00,Cabinet and its committees focus on priorities,Le Cabinet et ses comités axent leurs efforts sur les priorités,dp25
 DR-drr20-1019,DR-71,CGC-BGB00,Farmers are fairly compensated for their grain.,Les producteurs sont dûment rémunérés pour leur grain.,drr20
 DR-drr21-1019,DR-71,CGC-BGB00,Farmers are fairly compensated for their grain.,Les producteurs sont dûment rémunérés pour leur grain.,drr21
 DR-drr22-1019,DR-71,CGC-BGB00,Farmers are fairly compensated for their grain.,Les producteurs sont dûment rémunérés pour leur grain.,drr22
@@ -538,6 +541,7 @@ Program-drr23-1031,Program-1031,FCAC-BUT01,"Federally regulated financial entiti
 DR-drr24-1031,DR-326,NEB-BXY00,Energy adjudication processes are timely.,Les processus décisionnels sont rapides.,drr24
 Program-drr24-1031,Program-1031,FCAC-BUT01,"Federally regulated financial entities are compliant with consumer protection legislation, their public commitments and codes of conduct","Les entités financières sous réglementation fédérale respectent les lois sur la protection des consommateurs, leurs engagements publics et leurs codes de conduite",drr24
 DR-dp25-1031,DR-326,NEB-BXY00,Energy adjudication processes are timely.,Les processus décisionnels sont rapides.,dp25
+Program-dp25-1031,Program-1031,FCAC-BUT01,"Federally regulated financial entities are compliant with consumer protection legislation, their public commitments and codes of conduct","Les entités financières sous réglementation fédérale respectent les lois sur la protection des consommateurs, leurs engagements publics et leurs codes de conduite",dp25
 DR-drr20-1032,DR-325,NEB-BXY00,Energy adjudication processes are fair.,Les processus décisionnels sont justes.,drr20
 Program-drr20-1032,Program-1032,FCAC-BUT01,Canadian consumers are aware of their rights and responsibilities when dealing with financial institutions,Les consommateurs canadiens connaissent leurs droits et leurs responsabilités lorsqu’ils traitent avec des institutions financières,drr20
 DR-drr21-1032,DR-325,NEB-BXY00,Energy adjudication processes are fair.,Les processus décisionnels sont justes.,drr21
@@ -643,14 +647,17 @@ DR-drr20-1063,DR-462,PCC-BXF00,Public complaints dealt with in a timely manner,R
 DR-drr21-1063,DR-462,PCC-BXF00,Public complaints dealt with in a timely manner,Régler les plaintes en temps opportun,drr21
 DR-drr22-1063,DR-462,PCC-BXF00,Public complaints dealt with in a timely manner,Régler les plaintes en temps opportun,drr22
 DR-drr23-1063,DR-462,PCC-BXF00,Public complaints dealt with in a timely manner,Régler les plaintes en temps opportun,drr23
+DR-dp25-1063,DR-462,PCC-BXF00,Public complaints dealt with in a timely manner,Régler les plaintes en temps opportun,dp25
 DR-drr20-1064,DR-463,PCC-BXF00,Public Interest Investigations and Reviews of Specified RCMP Activities are conducted in a timely manner,Mener les enquêtes d'intérêt public et les examens d'activités précises de la GRC en temps opportun,drr20
 DR-drr21-1064,DR-463,PCC-BXF00,Public Interest Investigations and Reviews of Specified RCMP Activities are conducted in a timely manner,Mener les enquêtes d'intérêt public et les examens d'activités précises de la GRC en temps opportun,drr21
 DR-drr22-1064,DR-463,PCC-BXF00,Public Interest Investigations and Reviews of Specified RCMP Activities are conducted in a timely manner,Mener les enquêtes d'intérêt public et les examens d'activités précises de la GRC en temps opportun,drr22
 DR-drr23-1064,DR-463,PCC-BXF00,Public Interest Investigations and Reviews of Specified RCMP Activities are conducted in a timely manner,Mener les enquêtes d'intérêt public et les examens d'activités précises de la GRC en temps opportun,drr23
+DR-dp25-1064,DR-463,PCC-BXF00,Public Interest Investigations and Reviews of Specified RCMP Activities are conducted in a timely manner,Mener les enquêtes d'intérêt public et les examens d'activités précises de la GRC en temps opportun,dp25
 DR-drr20-1065,DR-464,PCC-BXF00,Increased public awareness of and confidence in the CRCC,Accroître la sensibilisation et la confiance du public à l’égard de la CCETP,drr20
 DR-drr21-1065,DR-464,PCC-BXF00,Increased public awareness of and confidence in the CRCC,Accroître la sensibilisation et la confiance du public à l’égard de la CCETP,drr21
 DR-drr22-1065,DR-464,PCC-BXF00,Increased public awareness of and confidence in the CRCC,Accroître la sensibilisation et la confiance du public à l’égard de la CCETP,drr22
 DR-drr23-1065,DR-464,PCC-BXF00,Increased public awareness of and confidence in the CRCC,Accroître la sensibilisation et la confiance du public à l’égard de la CCETP,drr23
+DR-dp25-1065,DR-464,PCC-BXF00,Increased public awareness of and confidence in the CRCC,Accroître la sensibilisation et la confiance du public à l’égard de la CCETP,dp25
 DR-drr20-1066,DR-4,SSHRC-BNT00,Canada’s social sciences and humanities research knowledge is used,Les connaissances canadiennes en sciences humaines sont utilisées.,drr20
 DR-drr21-1066,DR-4,SSHRC-BNT00,Canada’s social sciences and humanities research knowledge is used,Les connaissances canadiennes en sciences humaines sont utilisées.,drr21
 DR-drr22-1066,DR-4,SSHRC-BNT00,Canada’s social sciences and humanities research knowledge is used,Les connaissances canadiennes en sciences humaines sont utilisées.,drr22
@@ -2038,6 +2045,7 @@ DR-drr20-1469,DR-324,PCO-BWW00,Public Service priorities are achieved,Les priori
 DR-drr21-1469,DR-324,PCO-BWW00,Public Service priorities are achieved,Les priorités de la fonction publique sont réalisées,drr21
 DR-drr22-1469,DR-324,PCO-BWW00,Public Service priorities are achieved,Les priorités de la fonction publique sont réalisées,drr22
 DR-drr23-1469,DR-324,PCO-BWW00,Public Service priorities are achieved,Les priorités de la fonction publique sont réalisées,drr23
+DR-dp25-1469,DR-324,PCO-BWW00,Public Service priorities are achieved,Les priorités de la fonction publique sont réalisées,dp25
 DR-drr21-1472,DR-498,CASDO-BXZ00,"Research informs the next generation
 of standards.","La recherche informe Ia prochaine
 génération de normes.",drr21
@@ -2226,6 +2234,7 @@ DR-dp25-1564,DR-529,SIRC-BXW00,National security-related complaints are independ
 DR-drr21-1565,DR-506,OCSEC-BXS00,Enhancing transparency and accountability of the national security framework,Renforcer la transparence et la responsabilisation du cadre de sécurité nationale,drr21
 DR-drr22-1565,DR-506,OCSEC-BXS00,Enhancing transparency and accountability of the national security framework,Renforcer la transparence et la responsabilisation du cadre de sécurité nationale,drr22
 DR-drr23-1565,DR-506,OCSEC-BXS00,Enhancing transparency and accountability of the national security framework,Renforcer la transparence et la responsabilisation du cadre de sécurité nationale,drr23
+DR-drr24-1565,DR-506,OCSEC-BXS00,Enhancing transparency and accountability of the national security framework,Renforcer la transparence et la responsabilisation du cadre de sécurité nationale,drr24
 DR-dp25-1565,DR-506,OCSEC-BXS00,Enhancing transparency and accountability of the national security framework,Renforcer la transparence et la responsabilisation du cadre de sécurité nationale,dp25
 DR-drr21-1567,DR-361,SHARE-BYE00,Government departments and agencies receive secure and reliable Information Technology (IT) infrastructure and services,Les ministères et les organismes du gouvernement reçoivent une infrastructure et des services de technologie de l’information (TI) fiables et sécuritaires,drr21
 DR-drr22-1567,DR-361,SHARE-BYE00,Government departments and agencies receive secure and reliable Information Technology (IT) infrastructure and services,Les ministères et les organismes du gouvernement reçoivent une infrastructure et des services de technologie de l’information (TI) fiables et sécuritaires,drr22
@@ -2514,10 +2523,14 @@ DR-drr23-1738,DR-545,WDO-BYM00,Businesses are commercializing technology and ado
 DR-drr24-1738,DR-545,WDO-BYM00,Businesses are commercializing technology and adopting it in the Prairies.,Les entreprises commercialisent des technologies et les adoptent dans les Prairies.,drr24
 DR-dp25-1738,DR-545,WDO-BYM00,Businesses are commercializing technology and adopting it in the Prairies.,Les entreprises commercialisent des technologies et les adoptent dans les Prairies.,dp25
 DR-drr23-1742,DR-569,FCAC-BUT00,Regulated entities comply with consumer protection measures,Les entités réglementées se conforment aux mesures de protection des consommateurs,drr23
+DR-drr24-1742,DR-569,FCAC-BUT00,Regulated entities comply with consumer protection measures,Les entités réglementées se conforment aux mesures de protection des consommateurs,drr24
+DR-dp25-1742,DR-569,FCAC-BUT00,Regulated entities comply with consumer protection measures,Les entités réglementées se conforment aux mesures de protection des consommateurs,dp25
 DR-drr23-1743,DR-177,GSC-BVV00,"Federal organizations have the products and services they need, when they need them, at the best value.","Les organisations fédérales disposent des produits et des services dont elles ont besoin, au moment opportun et au meilleur rapport qualité-prix.",drr23
 DR-drr24-1743,DR-177,GSC-BVV00,"Federal organizations have the products and services they need, when they need them, at the best value.","Les organisations fédérales disposent des produits et des services dont elles ont besoin, au moment opportun et au meilleur rapport qualité-prix.",drr24
 DR-dp25-1743,DR-177,GSC-BVV00,"Federal organizations have the products and services they need, when they need them, at the best value.","Les organisations fédérales disposent des produits et des services dont elles ont besoin, au moment opportun et au meilleur rapport qualité-prix.",dp25
 DR-drr23-1744,DR-570,FCAC-BUT00,Canadians’ financial resilience is improved,La résilience financière des Canadiens est améliorée,drr23
+DR-drr24-1744,DR-570,FCAC-BUT00,Canadians’ financial resilience is improved,La résilience financière des Canadiens est améliorée,drr24
+DR-dp25-1744,DR-570,FCAC-BUT00,Canadians’ financial resilience is improved,La résilience financière des Canadiens est améliorée,dp25
 DR-drr23-1745,DR-546,WDO-BYM00,Communities are developing economically in the Prairies.,Les collectivités se développent sur le plan économique dans les Prairies.,drr23
 DR-drr24-1745,DR-546,WDO-BYM00,Communities are developing economically in the Prairies.,Les collectivités se développent sur le plan économique dans les Prairies.,drr24
 DR-dp25-1745,DR-546,WDO-BYM00,Communities are developing economically in the Prairies.,Les collectivités se développent sur le plan économique dans les Prairies.,dp25
@@ -3848,19 +3861,23 @@ Program-drr20-2791,Program-746,PCO-BWW01,"Vacant positions are filled through op
 Program-drr21-2791,Program-746,PCO-BWW01,"Vacant positions are filled through open, transparent and merit based selection processes","Les postes vacants sont dotés au moyen de processus de sélection ouverts, transparents et fondés sur le mérite",drr21
 Program-drr22-2791,Program-746,PCO-BWW01,"Vacant positions are filled through open, transparent and merit based selection processes","Les postes vacants sont dotés au moyen de processus de sélection ouverts, transparents et fondés sur le mérite",drr22
 Program-drr23-2791,Program-746,PCO-BWW01,"Vacant positions are filled through open, transparent and merit based selection processes","Les postes vacants sont dotés au moyen de processus de sélection ouverts, transparents et fondés sur le mérite",drr23
+Program-dp25-2791,Program-746,PCO-BWW01,"Vacant positions are filled through open, transparent and merit based selection processes","Les postes vacants sont dotés au moyen de processus de sélection ouverts, transparents et fondés sur le mérite",dp25
 Program-drr20-2792,Program-733,PCO-BWW02,"The Prime Minister is informed, advised and supported with respect to national security files","Le premier ministre est informé, conseillé et appuyé en ce qui concerne les dossiers liés à la sécurité nationale",drr20
 Program-drr20-2793,Program-744,PCO-BWW03,Cabinet receives high quality advice,Le Cabinet reçoit des avis de grande qualité,drr20
 Program-drr21-2793,Program-744,PCO-BWW03,Cabinet receives high quality advice,Le Cabinet reçoit des avis de grande qualité,drr21
 Program-drr22-2793,Program-744,PCO-BWW03,Cabinet receives high quality advice,Le Cabinet reçoit des avis de grande qualité,drr22
 Program-drr23-2793,Program-744,PCO-BWW03,Cabinet receives high quality advice,Le Cabinet reçoit des avis de grande qualité,drr23
+Program-dp25-2793,Program-744,PCO-BWW03,Cabinet receives high quality advice,Le Cabinet reçoit des avis de grande qualité,dp25
 Program-drr20-2804,Program-734,PCO-BWW08,Foundation set for enhanced FPT coordination and cooperation,"Les bases sont jetées pour accroître la coordination et la collaboration à l’échelle fédérale, provinciale et territoriale (FPT).",drr20
 Program-drr21-2804,Program-734,PCO-BWW08,Foundation set for enhanced FPT coordination and cooperation,"Les bases sont jetées pour accroître la coordination et la collaboration à l’échelle fédérale, provinciale et territoriale (FPT).",drr21
 Program-drr22-2804,Program-734,PCO-BWW08,Foundation set for enhanced FPT coordination and cooperation,"Les bases sont jetées pour accroître la coordination et la collaboration à l’échelle fédérale, provinciale et territoriale (FPT).",drr22
 Program-drr23-2804,Program-734,PCO-BWW08,Foundation set for enhanced FPT coordination and cooperation,"Les bases sont jetées pour accroître la coordination et la collaboration à l’échelle fédérale, provinciale et territoriale (FPT).",drr23
+Program-dp25-2804,Program-734,PCO-BWW08,Foundation set for enhanced FPT coordination and cooperation,"Les bases sont jetées pour accroître la coordination et la collaboration à l’échelle fédérale, provinciale et territoriale (FPT).",dp25
 Program-drr20-2805,Program-736,PCO-BWW09,Cabinet receives high quality advice,Le Cabinet reçoit des avis de grande qualité,drr20
 Program-drr21-2805,Program-736,PCO-BWW09,Cabinet receives high quality advice,Le Cabinet reçoit des avis de grande qualité,drr21
 Program-drr22-2805,Program-736,PCO-BWW09,Cabinet receives high quality advice,Le Cabinet reçoit des avis de grande qualité,drr22
 Program-drr23-2805,Program-736,PCO-BWW09,Cabinet receives high quality advice,Le Cabinet reçoit des avis de grande qualité,drr23
+Program-dp25-2805,Program-736,PCO-BWW09,Cabinet receives high quality advice,Le Cabinet reçoit des avis de grande qualité,dp25
 Program-drr20-2806,Program-102,CEAA-BGV01,Increase awareness of process from participants and proponents.,Meilleure connaissance du processus chez les participants et les promoteurs.,drr20
 Program-drr20-2807,Program-103,CEAA-BGV01,Support to government decision makers.,Appui aux décideurs gouvernementaux.,drr20
 Program-drr20-2812,Program-166,CGC-BGB01,Canadian grain sector has a relevant and validated grain grading system to facilitate grain transactions.,L'industrie canadienne des grains dispose d'un système pertinent et validé de classement des grains qui vise à faciliter le commerce de ceux-ci.,drr20
@@ -4046,14 +4063,17 @@ Program-drr20-2871,Program-1198,PCC-BXF01,Public complaints dealt with in a time
 Program-drr21-2871,Program-1198,PCC-BXF01,Public complaints dealt with in a timely manner.,Régler les plaintes du public en temps opportune.,drr21
 Program-drr22-2871,Program-1198,PCC-BXF01,Public complaints dealt with in a timely manner.,Régler les plaintes du public en temps opportune.,drr22
 Program-drr23-2871,Program-1198,PCC-BXF01,Public complaints dealt with in a timely manner.,Régler les plaintes du public en temps opportune.,drr23
+Program-dp25-2871,Program-1198,PCC-BXF01,Public complaints dealt with in a timely manner.,Régler les plaintes du public en temps opportune.,dp25
 Program-drr20-2872,Program-1199,PCC-BXF02,Public Interest Investigations and Reviews of Specified RCMP Activities are conducted in a timely manner,Mener les enquêtes d’intérêt public et les examens d’activités précises de la GRC en temps opportun,drr20
 Program-drr21-2872,Program-1199,PCC-BXF02,Public Interest Investigations and Reviews of Specified RCMP Activities are conducted in a timely manner,Mener les enquêtes d’intérêt public et les examens d’activités précises de la GRC en temps opportun,drr21
 Program-drr22-2872,Program-1199,PCC-BXF02,Public Interest Investigations and Reviews of Specified RCMP Activities are conducted in a timely manner,Mener les enquêtes d’intérêt public et les examens d’activités précises de la GRC en temps opportun,drr22
 Program-drr23-2872,Program-1199,PCC-BXF02,Public Interest Investigations and Reviews of Specified RCMP Activities are conducted in a timely manner,Mener les enquêtes d’intérêt public et les examens d’activités précises de la GRC en temps opportun,drr23
+Program-dp25-2872,Program-1199,PCC-BXF02,Public Interest Investigations and Reviews of Specified RCMP Activities are conducted in a timely manner,Mener les enquêtes d’intérêt public et les examens d’activités précises de la GRC en temps opportun,dp25
 Program-drr20-2873,Program-1200,PCC-BXF03,Increased public awareness of and confidence in the CRCC,Accroître la sensibilisation et la confiance du public à l’égard de la CCETP,drr20
 Program-drr21-2873,Program-1200,PCC-BXF03,Increased public awareness of and confidence in the CRCC,Accroître la sensibilisation et la confiance du public à l’égard de la CCETP,drr21
 Program-drr22-2873,Program-1200,PCC-BXF03,Increased public awareness of and confidence in the CRCC,Accroître la sensibilisation et la confiance du public à l’égard de la CCETP,drr22
 Program-drr23-2873,Program-1200,PCC-BXF03,Increased public awareness of and confidence in the CRCC,Accroître la sensibilisation et la confiance du public à l’égard de la CCETP,drr23
+Program-dp25-2873,Program-1200,PCC-BXF03,Increased public awareness of and confidence in the CRCC,Accroître la sensibilisation et la confiance du public à l’égard de la CCETP,dp25
 Program-drr20-2874,Program-2,SSHRC-BNT01,Individuals and teams engage in research and research-related activities,Des chercheurs seuls et en équipe participent à des travaux de recherche et à des activités connexes,drr20
 Program-drr21-2874,Program-2,SSHRC-BNT01,Individuals and teams engage in research and research-related activities,Des chercheurs seuls et en équipe participent à des travaux de recherche et à des activités connexes,drr21
 Program-drr22-2874,Program-2,SSHRC-BNT01,Individuals and teams engage in research and research-related activities,Des chercheurs seuls et en équipe participent à des travaux de recherche et à des activités connexes,drr22
@@ -6912,10 +6932,12 @@ Program-drr20-3962,Program-1363,PCO-BWW06,Cabinet receives high quality advice,L
 Program-drr21-3962,Program-1363,PCO-BWW06,Cabinet receives high quality advice,Le Cabinet reçoit des avis de grande qualité,drr21
 Program-drr22-3962,Program-1363,PCO-BWW06,Cabinet receives high quality advice,Le Cabinet reçoit des avis de grande qualité,drr22
 Program-drr23-3962,Program-1363,PCO-BWW06,Cabinet receives high quality advice,Le Cabinet reçoit des avis de grande qualité,drr23
+Program-dp25-3962,Program-1363,PCO-BWW06,Cabinet receives high quality advice,Le Cabinet reçoit des avis de grande qualité,dp25
 Program-drr20-3972,Program-739,PCO-BWW07,Outcomes-based policy approaches  tested,Les approches stratégiques fondées sur les résultats sont mises à l'essai.,drr20
 Program-drr21-3972,Program-739,PCO-BWW07,Outcomes-based policy approaches  tested,Les approches stratégiques fondées sur les résultats sont mises à l'essai.,drr21
 Program-drr22-3972,Program-739,PCO-BWW07,Outcomes-based policy approaches  tested,Les approches stratégiques fondées sur les résultats sont mises à l'essai.,drr22
 Program-drr23-3972,Program-739,PCO-BWW07,Outcomes-based policy approaches  tested,Les approches stratégiques fondées sur les résultats sont mises à l'essai.,drr23
+Program-dp25-3972,Program-739,PCO-BWW07,Outcomes-based policy approaches  tested,Les approches stratégiques fondées sur les résultats sont mises à l'essai.,dp25
 Program-drr20-3973,Program-1365,ORL-BVA04,Transparent and ethical lobbying,Lobbying transparent et éthique,drr20
 Program-drr21-3973,Program-1365,ORL-BVA04,Transparent and ethical lobbying,Lobbying transparent et éthique,drr21
 Program-drr22-3973,Program-1365,ORL-BVA04,Transparent and ethical lobbying,Lobbying transparent et éthique,drr22
@@ -7584,6 +7606,7 @@ Program-dp25-4267,Program-1433,NPA-BWQ01,"The Agency will maintain the appropria
 Program-drr21-4268,Program-1434,OCSEC-BXS01,Enhancing transparency and accountability of the national security framework,Renforcer la transparence et la responsabilisation du cadre de sécurité nationale,drr21
 Program-drr22-4268,Program-1434,OCSEC-BXS01,Enhancing transparency and accountability of the national security framework,Renforcer la transparence et la responsabilisation du cadre de sécurité nationale,drr22
 Program-drr23-4268,Program-1434,OCSEC-BXS01,Enhancing transparency and accountability of the national security framework,Renforcer la transparence et la responsabilisation du cadre de sécurité nationale,drr23
+Program-drr24-4268,Program-1434,OCSEC-BXS01,Enhancing transparency and accountability of the national security framework,Renforcer la transparence et la responsabilisation du cadre de sécurité nationale,drr24
 Program-dp25-4268,Program-1434,OCSEC-BXS01,Enhancing transparency and accountability of the national security framework,Renforcer la transparence et la responsabilisation du cadre de sécurité nationale,dp25
 Program-drr21-4269,Program-1435,SIRC-BXW01,"Ministers and Canadians are informed whether national security and intelligence activities undertaken by Government of Canada institutions are lawful, reasonable and necessary.","Les ministres et les Canadiens sont informés si les activités de sécurité nationale et de renseignement réalisées par les institutions du gouvernement du Canada sont légales, raisonnables et nécessaires.",drr21
 Program-drr22-4269,Program-1435,SIRC-BXW01,"Ministers and Canadians are informed whether national security and intelligence activities undertaken by Government of Canada institutions are lawful, reasonable and necessary.","Les ministres et les Canadiens sont informés si les activités de sécurité nationale et de renseignement réalisées par les institutions du gouvernement du Canada sont légales, raisonnables et nécessaires.",drr22
@@ -7628,6 +7651,7 @@ Program-dp25-4277,Program-568,SC-BNV05,High-quality statistical information is a
 Program-drr21-4278,Program-733,PCO-BWW02,"The Prime Minister is informed, advised and supported with respect to national security and international files","Le premier ministre est informé, conseillé et appuyé en ce qui concerne les dossiers liés à la sécurité nationale et aux affaires internationales",drr21
 Program-drr22-4278,Program-733,PCO-BWW02,"The Prime Minister is informed, advised and supported with respect to national security and international files","Le premier ministre est informé, conseillé et appuyé en ce qui concerne les dossiers liés à la sécurité nationale et aux affaires internationales",drr22
 Program-drr23-4278,Program-733,PCO-BWW02,"The Prime Minister is informed, advised and supported with respect to national security and international files","Le premier ministre est informé, conseillé et appuyé en ce qui concerne les dossiers liés à la sécurité nationale et aux affaires internationales",drr23
+Program-dp25-4278,Program-733,PCO-BWW02,"The Prime Minister is informed, advised and supported with respect to national security and international files","Le premier ministre est informé, conseillé et appuyé en ce qui concerne les dossiers liés à la sécurité nationale et aux affaires internationales",dp25
 Program-drr21-4279,Program-663,CI-BGE02,Benefits of regional economic immigration are distributed across all regions of the country,Les avantages liés à l'immigration économique régionale sont répartis dans toutes les régions du pays,drr21
 Program-drr22-4279,Program-663,CI-BGE02,Benefits of regional economic immigration are distributed across all regions of the country,Les avantages liés à l'immigration économique régionale sont répartis dans toutes les régions du pays,drr22
 Program-drr23-4279,Program-663,CI-BGE02,Benefits of regional economic immigration are distributed across all regions of the country,Les avantages liés à l'immigration économique régionale sont répartis dans toutes les régions du pays,drr23
@@ -8424,6 +8448,8 @@ Program-drr23-4677,Program-1554,H-BVG21,Provinces and Territories and health car
 Program-drr24-4677,Program-1554,H-BVG21,Provinces and Territories and health care providers fulfil legislative or regulatory requirements,Les provinces et territoires et les fournisseurs de soins de santé satisfont aux exigences législatives ou réglementaires,drr24
 Program-drr23-4678,Program-1555,H-BVG21,Stakeholders implement improvements in health or social services across health care systems,Les intervenants mettent en œuvre des améliorations aux services de santé ou services sociaux dans tous les systèmes de soins de santé,drr23
 Program-drr23-4682,Program-1556,FCAC-BUT02,"Canadians’ financial resilience is strengthened by FCAC initiatives, including mobilizing the financial ecosystem","La résilience financière des Canadiens est renforcée par les initiatives de l’ACFC, y compris la mobilisation de l’écosystème financier",drr23
+Program-drr24-4682,Program-1556,FCAC-BUT02,"Canadians’ financial resilience is strengthened by FCAC initiatives, including mobilizing the financial ecosystem","La résilience financière des Canadiens est renforcée par les initiatives de l’ACFC, y compris la mobilisation de l’écosystème financier",drr24
+Program-dp25-4682,Program-1556,FCAC-BUT02,"Canadians’ financial resilience is strengthened by FCAC initiatives, including mobilizing the financial ecosystem","La résilience financière des Canadiens est renforcée par les initiatives de l’ACFC, y compris la mobilisation de l’écosystème financier",dp25
 Program-drr23-4686,Program-1509,WDO-BYM04,Prairie community economic development is supported.,Le développement économique communautaire des Prairies est soutenu.,drr23
 Program-drr24-4686,Program-1509,WDO-BYM04,Prairie community economic development is supported.,Le développement économique communautaire des Prairies est soutenu.,drr24
 Program-dp25-4686,Program-1509,WDO-BYM04,Prairie community economic development is supported.,Le développement économique communautaire des Prairies est soutenu.,dp25
