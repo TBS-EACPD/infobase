@@ -96,19 +96,23 @@ export default async function ({ models }) {
     ProgramServiceSummary,
   } = models;
 
-  const service_rows_raw = _.reject(
-    get_standard_csv_file_rows("si.csv", ";"),
-    (row) => {
-      return row.fiscal_yr === "2018-2019" || row.fiscal_yr === "2024-2025";
-    }
-  );
+  const current_report_year = 2024;
 
-  const standard_rows_raw = _.reject(
-    get_standard_csv_file_rows("ss.csv", ";"),
-    (row) => {
-      return row.fiscal_yr === "2018-2019" || row.fiscal_yr === "2024-2025";
-    }
-  );
+  const service_rows_raw = _.chain(get_standard_csv_file_rows("si.csv", ";"))
+    .map(({ fiscal_yr, ...other_fields }) => ({
+      fiscal_yr: get_fiscal_yr(fiscal_yr),
+      ...other_fields,
+    }))
+    .filter((row) => row.fiscal_yr >= current_report_year - 4)
+    .value();
+
+  const standard_rows_raw = _.chain(get_standard_csv_file_rows("ss.csv", ";"))
+    .map(({ fiscal_yr, ...other_fields }) => ({
+      fiscal_yr: get_fiscal_yr(fiscal_yr),
+      ...other_fields,
+    }))
+    .filter((row) => row.fiscal_yr >= current_report_year - 4)
+    .value();
 
   const program_rows = get_standard_csv_file_rows("program.csv");
 
