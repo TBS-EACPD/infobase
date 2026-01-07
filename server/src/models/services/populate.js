@@ -88,6 +88,16 @@ function isvalidURL(str) {
   return pattern.test(str);
 }
 
+const current_report_year = 2024;
+
+const get_most_recent_rows = (filename, delimiter = ";") =>
+  get_standard_csv_file_rows(filename, delimiter)
+    .map(({ fiscal_yr, ...rest }) => ({
+      fiscal_yr: get_fiscal_yr(fiscal_yr),
+      ...rest,
+    }))
+    .filter(({ fiscal_yr }) => fiscal_yr >= current_report_year - 4);
+
 export default async function ({ models }) {
   const {
     Service,
@@ -96,23 +106,9 @@ export default async function ({ models }) {
     ProgramServiceSummary,
   } = models;
 
-  const current_report_year = 2024;
+  const service_rows_raw = get_most_recent_rows("si.csv");
 
-  const service_rows_raw = _.chain(get_standard_csv_file_rows("si.csv", ";"))
-    .map(({ fiscal_yr, ...other_fields }) => ({
-      fiscal_yr: get_fiscal_yr(fiscal_yr),
-      ...other_fields,
-    }))
-    .filter((row) => row.fiscal_yr >= current_report_year - 4)
-    .value();
-
-  const standard_rows_raw = _.chain(get_standard_csv_file_rows("ss.csv", ";"))
-    .map(({ fiscal_yr, ...other_fields }) => ({
-      fiscal_yr: get_fiscal_yr(fiscal_yr),
-      ...other_fields,
-    }))
-    .filter((row) => row.fiscal_yr >= current_report_year - 4)
-    .value();
+  const standard_rows_raw = get_most_recent_rows("ss.csv");
 
   const program_rows = get_standard_csv_file_rows("program.csv");
 
