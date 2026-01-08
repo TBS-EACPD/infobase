@@ -2,7 +2,7 @@ import _ from "lodash";
 
 import { businessConstants } from "src/models/businessConstants";
 
-import { Program, CRSO } from "src/models/subjects";
+import { Program, CRSO, Dept } from "src/models/subjects";
 
 import { trivial_text_maker, run_template } from "src/models/text";
 
@@ -577,6 +577,94 @@ const get_result_doc_keys = (doc_type) =>
 const current_drr_key = _.last(get_result_doc_keys("drr"));
 const current_dp_key = _.last(get_result_doc_keys("dp"));
 
+const detect_late_results_orgs = (doc_key) => {
+  try {
+    // Get all departments that should have results (DP organizations)
+    const expected_depts = _.chain(Dept.store.get_all())
+      .filter((dept) => dept.is_dp_org && !dept.is_dead)
+      .map("id")
+      .value();
+
+    if (_.isEmpty(expected_depts)) {
+      return [];
+    }
+
+    // Check if ResultCounts is loaded
+    if (_.isEmpty(ResultCounts.data)) {
+      // If ResultCounts isn't loaded yet, return empty array
+      // This will fall back to hardcoded values
+      return [];
+    }
+
+    // Determine the count key based on document type
+    // Note: This matches the pattern used in result_drilldown.js
+    // For DRR documents, we check `${doc_key}_total`
+    // For DP documents, we check `${doc_key}_indicators`
+    const is_drr = /drr/.test(doc_key);
+    const count_key = is_drr ? `${doc_key}_total` : `${doc_key}_indicators`;
+
+    // Find departments that should have data but don't
+    const late_orgs = _.chain(expected_depts)
+      .filter((dept_id) => {
+        const dept_counts = ResultCounts.get_dept_counts(dept_id);
+        if (!dept_counts) {
+          // Department has no result counts at all - likely late
+          return true;
+        }
+        const count_value = dept_counts[count_key];
+        // Department is late if count is undefined, null, or 0
+        return (
+          _.isUndefined(count_value) ||
+          _.isNull(count_value) ||
+          count_value === 0
+        );
+      })
+      .value();
+
+    // Exempt orgs (as defined in dynamic_footnotes.ts)
+    const EXEMPT_ORGS = ["151"];
+    return _.difference(late_orgs, EXEMPT_ORGS);
+  } catch (error) {
+    // If there's any error, return empty array to fall back to hardcoded values
+    console.warn(`Error detecting late results orgs for ${doc_key}:`, error);
+    return [];
+  }
+};
+
+const detect_late_resources_orgs = () => {
+  try {
+    // Get all departments that should have planned resources (DP organizations with planned spending)
+    const expected_depts = _.chain(Dept.store.get_all())
+      .filter(
+        (dept) => dept.is_dp_org && dept.has_planned_spending && !dept.is_dead
+      )
+      .value();
+
+    if (_.isEmpty(expected_depts)) {
+      return [];
+    }
+
+    // Find departments that should have planned resources data but don't
+    // A department is late if it doesn't have "programSpending" in its table_ids
+    const late_orgs = _.chain(expected_depts)
+      .filter((dept) => {
+        // Department is late if it doesn't have programSpending in table_ids
+        // This indicates the department should have planned spending data but doesn't
+        return !_.includes(dept.table_ids, "programSpending");
+      })
+      .map("id")
+      .value();
+
+    // Exempt orgs (as defined in dynamic_footnotes.ts)
+    const EXEMPT_ORGS = ["151"];
+    return _.difference(late_orgs, EXEMPT_ORGS);
+  } catch (error) {
+    // If there's any error, return empty array to fall back to hardcoded values
+    console.warn("Error detecting late resources orgs:", error);
+    return [];
+  }
+};
+
 export {
   Result,
   Indicator,
@@ -594,6 +682,8 @@ export {
   get_result_doc_keys,
   current_drr_key,
   current_dp_key,
+  detect_late_results_orgs,
+  detect_late_resources_orgs,
 };
 
 assign_to_dev_helper_namespace({

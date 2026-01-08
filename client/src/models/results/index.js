@@ -15,4 +15,6 @@ export {
   get_result_doc_keys,
   current_drr_key,
   current_dp_key,
+  detect_late_results_orgs,
+  detect_late_resources_orgs,
 } from "./results";

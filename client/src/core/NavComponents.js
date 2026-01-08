@@ -8,7 +8,11 @@ import { MultiColumnList } from "src/components/misc_util_components";
 
 import { isSpecialWarrants } from "src/models/estimates";
 import { PRE_DRR_PUBLIC_ACCOUNTS_LATE_FTE_MOCK_DOC } from "src/models/footnotes/dynamic_footnotes";
-import { result_docs_in_tabling_order } from "src/models/results";
+import {
+  result_docs_in_tabling_order,
+  detect_late_results_orgs,
+  detect_late_resources_orgs,
+} from "src/models/results";
 import { Dept } from "src/models/subjects";
 import { trivial_text_maker } from "src/models/text";
 
@@ -160,9 +164,22 @@ const LateResultsBanner = () => {
   const route_filter = (match, _history) => /^\/(start)/.test(match.path);
 
   // TODO what if DPs table and some DRRs are still late? Do we just want the prominent DRR banner, or do we want both?
-  return _.map(result_docs_in_tabling_order, (doc) => {
-    const late_orgs = doc.late_results_orgs;
-    if (late_orgs.length === 0) {
+  return _.map(result_docs_in_tabling_order, (doc, index) => {
+    // For the latest document, try auto-detection if hardcoded list is empty
+    // This allows automation of late_results_orgs detection based on missing data
+    let late_orgs = doc.late_results_orgs;
+    const is_latest_doc = index === result_docs_in_tabling_order.length - 1;
+
+    if (is_latest_doc && _.isEmpty(late_orgs)) {
+      // Try to auto-detect late organizations by checking which departments
+      // should have results data but don't
+      const auto_detected = detect_late_results_orgs(doc.doc_key);
+      if (auto_detected.length > 0) {
+        late_orgs = auto_detected;
+      }
+    }
+
+    if (_.isEmpty(late_orgs)) {
       return null;
     }
     const banner_content = (
@@ -247,9 +264,20 @@ const LateDpResourcesBanner = () => {
     return null;
   }
 
-  const late_orgs = latest_dp_doc.late_resources_orgs;
+  // For the latest DP document, try auto-detection if hardcoded list is empty
+  // This allows automation of late_resources_orgs detection based on missing data
+  let late_orgs = latest_dp_doc.late_resources_orgs;
 
-  if (late_orgs.length === 0) {
+  if (_.isEmpty(late_orgs)) {
+    // Try to auto-detect late organizations by checking which departments
+    // should have planned resources data but don't
+    const auto_detected = detect_late_resources_orgs();
+    if (auto_detected.length > 0) {
+      late_orgs = auto_detected;
+    }
+  }
+
+  if (_.isEmpty(late_orgs)) {
     return null;
   }
 
