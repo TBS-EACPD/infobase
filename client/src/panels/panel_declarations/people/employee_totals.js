@@ -80,31 +80,35 @@ const EmployeeTotalsPanel = ({
     };
   }, [data]);
 
-  if (loading) {
-    return <LeafSpinner config_name="subroute" />;
-  }
-
   if (
-    !calculations ||
-    !calculations.series ||
-    calculations.series.length === 0
+    !loading &&
+    (!calculations ||
+      !calculations.series ||
+      calculations.series.length === 0)
   ) {
     return null;
   }
 
-  const { series, ticks } = calculations;
-
-  const first_active_year_index = _.findIndex(series, (pop) => pop !== 0);
-  const last_active_year_index = _.findLastIndex(series, (pop) => pop !== 0);
-  const first_active_year = run_template(
-    `${people_years[first_active_year_index]}`
-  );
-  const last_active_year = run_template(
-    `${people_years[last_active_year_index]}`
-  );
+  // Only calculate these when we have data (not loading)
+  const { series, ticks } = calculations || { series: [], ticks: [] };
+  const first_active_year_index =
+    series.length > 0 ? _.findIndex(series, (pop) => pop !== 0) : -1;
+  const last_active_year_index =
+    series.length > 0 ? _.findLastIndex(series, (pop) => pop !== 0) : -1;
+  const first_active_year =
+    first_active_year_index >= 0
+      ? run_template(`${people_years[first_active_year_index]}`)
+      : "";
+  const last_active_year =
+    last_active_year_index >= 0
+      ? run_template(`${people_years[last_active_year_index]}`)
+      : "";
   const avg_num_emp =
-    _.sum(series) / (last_active_year_index - first_active_year_index + 1);
-  const last_year_num_emp = series[last_active_year_index];
+    last_active_year_index >= first_active_year_index && first_active_year_index >= 0
+      ? _.sum(series) / (last_active_year_index - first_active_year_index + 1)
+      : 0;
+  const last_year_num_emp =
+    last_active_year_index >= 0 ? series[last_active_year_index] : 0;
 
   const text_calculations = {
     first_active_year,
@@ -118,7 +122,7 @@ const EmployeeTotalsPanel = ({
     {
       id: months[3].text,
       data: _.map(series, (data, index) => ({
-        x: ticks[index],
+        x: ticks[index] || "",
         y: data,
       })),
     },
@@ -126,62 +130,70 @@ const EmployeeTotalsPanel = ({
 
   return (
     <StdPanel {...{ title, footnotes, sources }}>
-      <Col size={4} isText>
-        <TM
-          k={subject_type + "_employee_totals_text"}
-          args={text_calculations}
-        />
-      </Col>
-      <Col size={8} isGraph>
-        <WrappedNivoLine
-          data={data_formatter()}
-          raw_data={series}
-          colors={primaryColor}
-          is_money={false}
-          yScale={{ toggle: true }}
-          tooltip={({ slice }) => (
-            <div
-              style={{
-                padding: "5px",
-                borderRadius: "10px",
-                backgroundColor: backgroundColor,
-                color: textColor,
-                boxShadow: "rgb(0 0 0 / 25%) 0px 1px 2px",
-              }}
-            >
-              <table style={{ width: "100%", borderCollapse: "collapse" }}>
-                <tbody>
-                  {slice.points.map((tooltip_item) => (
-                    <tr key={tooltip_item.serieId}>
-                      <td className="nivo-tooltip__icon">
-                        <div
-                          style={{
-                            height: "12px",
-                            width: "12px",
-                            backgroundColor: tooltip_item.serieColor,
+      {loading ? (
+        <Col size={12}>
+          <LeafSpinner config_name="subroute" />
+        </Col>
+      ) : (
+        <>
+          <Col size={4} isText>
+            <TM
+              k={subject_type + "_employee_totals_text"}
+              args={text_calculations}
+            />
+          </Col>
+          <Col size={8} isGraph>
+            <WrappedNivoLine
+            data={data_formatter()}
+            raw_data={series}
+            colors={primaryColor}
+            is_money={false}
+            yScale={{ toggle: true }}
+            tooltip={({ slice }) => (
+              <div
+                style={{
+                  padding: "5px",
+                  borderRadius: "10px",
+                  backgroundColor: backgroundColor,
+                  color: textColor,
+                  boxShadow: "rgb(0 0 0 / 25%) 0px 1px 2px",
+                }}
+              >
+                <table style={{ width: "100%", borderCollapse: "collapse" }}>
+                  <tbody>
+                    {slice.points.map((tooltip_item) => (
+                      <tr key={tooltip_item.serieId}>
+                        <td className="nivo-tooltip__icon">
+                          <div
+                            style={{
+                              height: "12px",
+                              width: "12px",
+                              backgroundColor: tooltip_item.serieColor,
+                            }}
+                          />
+                        </td>
+                        <td className="nivo-tooltip__label">
+                          {tooltip_item.serieId}
+                        </td>
+                        <td className="nivo-tooltip__label">
+                          {tooltip_item.data.x}
+                        </td>
+                        <td
+                          className="nivo-tooltip__value"
+                          dangerouslySetInnerHTML={{
+                            __html: formats.big_int(tooltip_item.data.y),
                           }}
                         />
-                      </td>
-                      <td className="nivo-tooltip__label">
-                        {tooltip_item.serieId}
-                      </td>
-                      <td className="nivo-tooltip__label">
-                        {tooltip_item.data.x}
-                      </td>
-                      <td
-                        className="nivo-tooltip__value"
-                        dangerouslySetInnerHTML={{
-                          __html: formats.big_int(tooltip_item.data.y),
-                        }}
-                      />
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-          )}
-        />
-      </Col>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            )}
+          />
+          </Col>
+        </>
+      )}
     </StdPanel>
   );
 };
@@ -193,8 +205,15 @@ export const declare_employee_totals_panel = () =>
     panel_config_func: (subject_type) => ({
       get_dataset_keys: () => ["employee_type"],
       get_title: () => text_maker(subject_type + "_employee_totals_title"),
-      render(props) {
-        return <EmployeeTotalsPanel {...props} subject_type={subject_type} />;
+      calculate: ({ subject }) => {
+        // For gov, always return true. For dept, check if people_data exists
+        if (subject_type === "gov") {
+          return true;
+        }
+        return subject.has_data("people_data");
       },
+      render: (props) => (
+        <EmployeeTotalsPanel {...props} subject_type={subject_type} />
+      ),
     }),
   });

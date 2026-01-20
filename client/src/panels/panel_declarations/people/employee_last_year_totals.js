@@ -82,41 +82,48 @@ const EmployeeLastYearTotalsPanel = ({
     };
   }, [orgData, govData]);
 
-  if (orgLoading || govLoading) {
-    return <LeafSpinner config_name="subroute" />;
-  }
+  const loading = orgLoading || govLoading;
 
   if (
-    !calculations ||
-    calculations.vals[0].value === 0 ||
-    calculations.vals[1].value === 0
+    !loading &&
+    (!calculations ||
+      calculations.vals[0].value === 0 ||
+      calculations.vals[1].value === 0)
   ) {
     return null;
   }
 
-  const dept_emp_value = calculations.vals[1].value;
-  const gov_emp_value = calculations.vals[0].value;
-
-  const dept_emp_pct = dept_emp_value / gov_emp_value;
+  // Only calculate these values when we have data
+  const dept_emp_value = calculations?.vals[1]?.value ?? 0;
+  const gov_emp_value = calculations?.vals[0]?.value ?? 0;
+  const dept_emp_pct = gov_emp_value > 0 ? dept_emp_value / gov_emp_value : 0;
 
   const text_calculations = { dept_emp_value, dept_emp_pct, subject };
 
   return (
     <StdPanel {...{ title, footnotes, sources }} allowOverflow={true}>
-      <Col size={!is_a11y_mode ? 5 : 12} isText>
-        <TM k="dept_employee_last_year_totals_text" args={text_calculations} />
-      </Col>
-      {!is_a11y_mode && (
-        <Col size={7} isGraph>
-          <CircleProportionGraph
-            height={200}
-            is_money={false}
-            child_value={dept_emp_value}
-            child_name={text_maker("dept_headcount", { subject })}
-            parent_value={gov_emp_value}
-            parent_name={text_maker("all_fps")}
-          />
+      {loading ? (
+        <Col size={12}>
+          <LeafSpinner config_name="subroute" />
         </Col>
+      ) : (
+        <>
+          <Col size={!is_a11y_mode ? 5 : 12} isText>
+            <TM k="dept_employee_last_year_totals_text" args={text_calculations} />
+          </Col>
+          {!is_a11y_mode && (
+            <Col size={7} isGraph>
+              <CircleProportionGraph
+              height={200}
+              is_money={false}
+              child_value={dept_emp_value}
+              child_name={text_maker("dept_headcount", { subject })}
+              parent_value={gov_emp_value}
+              parent_name={text_maker("all_fps")}
+            />
+            </Col>
+          )}
+        </>
       )}
     </StdPanel>
   );
@@ -129,8 +136,10 @@ export const declare_employee_last_year_totals_panel = () =>
     panel_config_func: () => ({
       get_dataset_keys: () => ["employee_type"],
       get_title: () => text_maker("dept_employee_last_year_totals_title"),
-      render(props) {
-        return <EmployeeLastYearTotalsPanel {...props} />;
+      calculate: ({ subject }) => {
+        // For dept, check if people_data exists
+        return subject.has_data("people_data");
       },
+      render: (props) => <EmployeeLastYearTotalsPanel {...props} />,
     }),
   });
