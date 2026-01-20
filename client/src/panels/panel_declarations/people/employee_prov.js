@@ -49,24 +49,25 @@ const EmployeeProvPanel = ({
   const data = subject_type === "gov" ? govData : orgData;
   const loading = subject_type === "gov" ? govLoading : orgLoading;
 
-  if (loading) {
-    return <LeafSpinner config_name="subroute" />;
-  }
-
-  if (!data?.region) {
+  if (!loading && !data?.region) {
     return null;
   }
 
-  const formatted_data = data.region
-    .filter((region) => region && region.yearly_data)
-    .map((region) => ({
-      label: region.dimension,
-      data: region.yearly_data
-        .filter((entry) => entry)
-        .map((year) => year.value),
-      five_year_percent: region.avg_share,
-    }))
-    .filter((item) => _.some(item.data, (val) => val !== null && val !== 0));
+  const formatted_data =
+    loading || !data?.region
+      ? []
+      : data.region
+          .filter((region) => region && region.yearly_data)
+          .map((region) => ({
+            label: region.dimension,
+            data: region.yearly_data
+              .filter((entry) => entry)
+              .map((year) => year.value),
+            five_year_percent: region.avg_share,
+          }))
+          .filter((item) =>
+            _.some(item.data, (val) => val !== null && val !== 0)
+          );
 
   // Map of full province names to dimension codes
   const regionToProvinceCode = {
@@ -90,26 +91,35 @@ const EmployeeProvPanel = ({
 
   // Transform data for the Canada component
   const yearly_data = [];
-  formatted_data.forEach((region) => {
-    region.data.forEach((value, index) => {
-      if (!yearly_data[index]) {
-        yearly_data[index] = {};
-      }
-      const dimensionCode = regionToProvinceCode[region.label];
-      if (dimensionCode && value !== null && value !== 0) {
-        yearly_data[index][dimensionCode] = value;
-      }
+  if (!loading && formatted_data.length > 0) {
+    formatted_data.forEach((region) => {
+      region.data.forEach((value, index) => {
+        if (!yearly_data[index]) {
+          yearly_data[index] = {};
+        }
+        const dimensionCode = regionToProvinceCode[region.label];
+        if (dimensionCode && value !== null && value !== 0) {
+          yearly_data[index][dimensionCode] = value;
+        }
+      });
     });
-  });
+  }
 
   // Calculate totals by year for the bar chart
-  const alt_totals_by_year = yearly_data.map((yearData) =>
-    _.sum(Object.values(yearData))
-  );
+  const alt_totals_by_year =
+    loading || yearly_data.length === 0
+      ? []
+      : yearly_data.map((yearData) => _.sum(Object.values(yearData)));
 
   // Calculate color scale
-  const max_value = Math.max(...formatted_data.flatMap((d) => d.data));
-  const color_scale = scaleLinear().domain([0, max_value]).range([0.2, 1]);
+  const max_value =
+    loading || formatted_data.length === 0
+      ? 0
+      : Math.max(...formatted_data.flatMap((d) => d.data));
+  const color_scale =
+    loading || max_value === 0
+      ? scaleLinear().domain([0, 1]).range([0.2, 1])
+      : scaleLinear().domain([0, max_value]).range([0.2, 1]);
 
   const graph_args = {
     data: yearly_data,
@@ -119,7 +129,10 @@ const EmployeeProvPanel = ({
     alt_totals_by_year,
   };
 
-  const common_text_args = calculate_common_text_args(formatted_data);
+  const common_text_args =
+    loading || formatted_data.length === 0
+      ? {}
+      : calculate_common_text_args(formatted_data);
   const text_calculations = {
     ...common_text_args,
     subject,
@@ -130,43 +143,51 @@ const EmployeeProvPanel = ({
 
   return (
     <StdPanel {...{ title, footnotes, sources }}>
-      <Col size={12} isText>
-        <TM k={subject_type + "_employee_prov_text"} args={text_calculations} />
-      </Col>
-      {!is_a11y_mode && (
-        <Col size={12} isGraph>
-          <MemoizedCanada graph_args={graph_args} />
+      {loading ? (
+        <Col size={12}>
+          <LeafSpinner config_name="subroute" />
         </Col>
-      )}
-      {is_a11y_mode && (
-        <Col size={12} isGraph>
-          <DisplayTable
-            column_configs={{
-              label: {
-                index: 0,
-                header: text_maker("prov"),
-                is_searchable: true,
-              },
-              five_year_percent: {
-                index: years.length + 1,
-                header: text_maker("five_year_percent_header"),
-                formatter: "percentage1",
-              },
-              ..._.chain(years)
-                .map((year, idx) => [
-                  year,
-                  {
-                    index: idx + 1,
-                    header: year,
-                    formatter: "big_int",
-                  },
-                ])
-                .fromPairs()
-                .value(),
-            }}
-            data={formatted_data}
-          />
-        </Col>
+      ) : (
+        <>
+          <Col size={12} isText>
+            <TM k={subject_type + "_employee_prov_text"} args={text_calculations} />
+          </Col>
+          {!is_a11y_mode && (
+            <Col size={12} isGraph>
+              <MemoizedCanada graph_args={graph_args} />
+            </Col>
+          )}
+          {is_a11y_mode && (
+            <Col size={12} isGraph>
+              <DisplayTable
+              column_configs={{
+                label: {
+                  index: 0,
+                  header: text_maker("prov"),
+                  is_searchable: true,
+                },
+                five_year_percent: {
+                  index: years.length + 1,
+                  header: text_maker("five_year_percent_header"),
+                  formatter: "percentage1",
+                },
+                ..._.chain(years)
+                  .map((year, idx) => [
+                    year,
+                    {
+                      index: idx + 1,
+                      header: year,
+                      formatter: "big_int",
+                    },
+                  ])
+                  .fromPairs()
+                  .value(),
+              }}
+              data={formatted_data}
+            />
+            </Col>
+          )}
+        </>
       )}
     </StdPanel>
   );
@@ -179,8 +200,15 @@ export const declare_employee_prov_panel = () =>
     panel_config_func: (subject_type) => ({
       get_dataset_keys: () => ["employee_region"],
       get_title: () => text_maker("employee_prov_title"),
-      render(props) {
-        return <EmployeeProvPanel {...props} subject_type={subject_type} />;
+      calculate: ({ subject }) => {
+        // For gov, always return true. For dept, check if people_data exists
+        if (subject_type === "gov") {
+          return true;
+        }
+        return subject.has_data("people_data");
       },
+      render: (props) => (
+        <EmployeeProvPanel {...props} subject_type={subject_type} />
+      ),
     }),
   });
