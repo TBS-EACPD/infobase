@@ -1,5 +1,14 @@
-import { log_standard_event } from "src/core/analytics";
-import { is_dev, local_ip, is_ci } from "src/core/injected_build_constants";
+import _ from "lodash";
+
+import { get_client_id, log_standard_event } from "src/core/analytics";
+import {
+  is_dev,
+  local_ip,
+  is_ci,
+  is_a11y_mode,
+  lang,
+  sha,
+} from "src/core/injected_build_constants";
 
 import { make_request } from "src/request_utils";
 
@@ -47,10 +56,19 @@ const get_form_template = (template_name: string) =>
     )
     .catch((error) => format_error_as_form_template(error.toString()));
 
+interface CompletedTemplate {
+  issue_type?: string[];
+  issue_details?: string;
+  url?: string;
+  lang?: string;
+  app_version?: string;
+  sha?: string;
+  [key: string]: unknown;
+}
+
 const send_completed_form_template = (
   template_name: string,
-  /* eslint-disable-next-line @typescript-eslint/no-explicit-any */
-  completed_template: Record<string, any>
+  completed_template: CompletedTemplate
 ) =>
   make_request(`${form_backend_url}/submit_form`, {
     ...request_logging_options,
@@ -64,19 +82,64 @@ const send_completed_form_template = (
       }),
     },
   })
-    .then((resp) =>
-      resp.text().then((response_text) => {
-        const is_error = /2[0-9][0-9]/.test(resp.status.toString());
-        is_error && log_error_to_analytics(response_text);
+    .then((resp) => {
+      const is_success = /2[0-9][0-9]/.test(resp.status.toString());
+
+      // First try to parse as JSON, if that fails, get as text
+      return resp.text().then((textResponse) => {
+        let parsedResponse;
+        try {
+          parsedResponse = JSON.parse(textResponse);
+        } catch (e) {
+          parsedResponse = textResponse;
+        }
+
+        if (!is_success) {
+          log_error_to_analytics(
+            parsedResponse.error_message || parsedResponse
+          );
+        }
+
         return {
-          success: is_error,
-          error_message: response_text,
+          success: is_success,
+          error_message: parsedResponse.error_message || parsedResponse,
+          issueUrl: parsedResponse.issueUrl,
         };
-      })
-    )
+      });
+    })
     .catch((error) => ({
       success: false,
       error_message: error.toString(),
     }));
 
-export { form_backend_url, get_form_template, send_completed_form_template };
+interface AutomaticField {
+  is_user_hidden?: boolean;
+  [key: string]: unknown;
+}
+
+const get_values_for_automatic_fields = (
+  automatic_fields: Record<string, AutomaticField>
+) => {
+  const automatic_field_getters = {
+    sha: () => sha,
+    route: () => window.location.hash.replace("#", "") || "start",
+    lang: () => lang,
+    app_version: () => (is_a11y_mode ? "a11y" : "standard"),
+    client_id: () => get_client_id(),
+    url: () => window.location.href,
+    additional: () => ({}),
+  } as const;
+
+  return _.mapValues(
+    automatic_fields,
+    (key: keyof typeof automatic_field_getters) =>
+      automatic_field_getters[key]?.()
+  );
+};
+
+export {
+  form_backend_url,
+  get_form_template,
+  send_completed_form_template,
+  get_values_for_automatic_fields,
+};

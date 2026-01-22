@@ -13,6 +13,7 @@ import {
 
 import { FormFrontend } from "src/FormFrontend";
 
+import { IssueConfirmationModal } from "src/FormFrontend/IssueConfirmationModal";
 import { IconGitHub } from "src/icons/icons";
 
 import { ExternalLink } from "./misc_util_components";
@@ -58,6 +59,8 @@ interface PageDetailsProps extends RouteComponentProps {
 }
 interface PageDetailsState {
   showReportProblem: boolean;
+  showIssueConfirmation: boolean;
+  issueUrl: string | null;
 }
 
 const PageDetails = withRouter(
@@ -67,9 +70,26 @@ const PageDetails = withRouter(
   > {
     state = {
       showReportProblem: false,
+      showIssueConfirmation: false,
+      issueUrl: null,
     };
+
+    handleFormSuccess = (issueUrl: string) => {
+      this.setState({
+        showIssueConfirmation: true,
+        issueUrl,
+      });
+    };
+
+    closeIssueConfirmation = () => {
+      this.setState({
+        showIssueConfirmation: false,
+        issueUrl: null,
+      });
+    };
+
     render() {
-      const { showReportProblem } = this.state;
+      const { showReportProblem, showIssueConfirmation, issueUrl } = this.state;
       const { location, toggleSurvey, showSurvey, non_survey_routes } =
         this.props;
 
@@ -92,7 +112,20 @@ const PageDetails = withRouter(
               this.setState({ showReportProblem: false })
             }
           >
-            <FormFrontend template_name="report_a_problem" />
+            <FormFrontend
+              template_name="report_a_problem"
+              onClose={() => this.setState({ showReportProblem: false })}
+              onSuccessWithIssue={this.handleFormSuccess}
+            />
+          </StatelessModal>
+
+          <StatelessModal
+            title={text_maker("form_submission_successful")}
+            show={showIssueConfirmation}
+            on_close_callback={this.closeIssueConfirmation}
+            size="lg"
+          >
+            <IssueConfirmationModal issueUrl={issueUrl || ""} />
           </StatelessModal>
 
           {!_.includes(non_survey_routes, location.pathname) && (
@@ -108,7 +141,11 @@ const PageDetails = withRouter(
             show={showSurvey}
             on_close_callback={() => toggleSurvey(false)}
           >
-            <FormFrontend top_border={false} template_name="feedback" />
+            <FormFrontend
+              top_border={false}
+              template_name="feedback"
+              onClose={() => toggleSurvey(false)}
+            />
           </StatelessModal>
 
           <div className="pagedetails__version-number col-12 col-lg-4 col-md-6">
