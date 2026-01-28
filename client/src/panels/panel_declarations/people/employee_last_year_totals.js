@@ -109,18 +109,21 @@ const EmployeeLastYearTotalsPanel = ({
       ) : (
         <>
           <Col size={!is_a11y_mode ? 5 : 12} isText>
-            <TM k="dept_employee_last_year_totals_text" args={text_calculations} />
+            <TM
+              k="dept_employee_last_year_totals_text"
+              args={text_calculations}
+            />
           </Col>
           {!is_a11y_mode && (
             <Col size={7} isGraph>
               <CircleProportionGraph
-              height={200}
-              is_money={false}
-              child_value={dept_emp_value}
-              child_name={text_maker("dept_headcount", { subject })}
-              parent_value={gov_emp_value}
-              parent_name={text_maker("all_fps")}
-            />
+                height={200}
+                is_money={false}
+                child_value={dept_emp_value}
+                child_name={text_maker("dept_headcount", { subject })}
+                parent_value={gov_emp_value}
+                parent_name={text_maker("all_fps")}
+              />
             </Col>
           )}
         </>

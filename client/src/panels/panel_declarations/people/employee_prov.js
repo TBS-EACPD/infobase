@@ -150,7 +150,10 @@ const EmployeeProvPanel = ({
       ) : (
         <>
           <Col size={12} isText>
-            <TM k={subject_type + "_employee_prov_text"} args={text_calculations} />
+            <TM
+              k={subject_type + "_employee_prov_text"}
+              args={text_calculations}
+            />
           </Col>
           {!is_a11y_mode && (
             <Col size={12} isGraph>
@@ -160,31 +163,31 @@ const EmployeeProvPanel = ({
           {is_a11y_mode && (
             <Col size={12} isGraph>
               <DisplayTable
-              column_configs={{
-                label: {
-                  index: 0,
-                  header: text_maker("prov"),
-                  is_searchable: true,
-                },
-                five_year_percent: {
-                  index: years.length + 1,
-                  header: text_maker("five_year_percent_header"),
-                  formatter: "percentage1",
-                },
-                ..._.chain(years)
-                  .map((year, idx) => [
-                    year,
-                    {
-                      index: idx + 1,
-                      header: year,
-                      formatter: "big_int",
-                    },
-                  ])
-                  .fromPairs()
-                  .value(),
-              }}
-              data={formatted_data}
-            />
+                column_configs={{
+                  label: {
+                    index: 0,
+                    header: text_maker("prov"),
+                    is_searchable: true,
+                  },
+                  five_year_percent: {
+                    index: years.length + 1,
+                    header: text_maker("five_year_percent_header"),
+                    formatter: "percentage1",
+                  },
+                  ..._.chain(years)
+                    .map((year, idx) => [
+                      year,
+                      {
+                        index: idx + 1,
+                        header: year,
+                        formatter: "big_int",
+                      },
+                    ])
+                    .fromPairs()
+                    .value(),
+                }}
+                data={formatted_data}
+              />
             </Col>
           )}
         </>
