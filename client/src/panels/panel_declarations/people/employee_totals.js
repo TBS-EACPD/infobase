@@ -82,9 +82,7 @@ const EmployeeTotalsPanel = ({
 
   if (
     !loading &&
-    (!calculations ||
-      !calculations.series ||
-      calculations.series.length === 0)
+    (!calculations || !calculations.series || calculations.series.length === 0)
   ) {
     return null;
   }
@@ -104,7 +102,8 @@ const EmployeeTotalsPanel = ({
       ? run_template(`${people_years[last_active_year_index]}`)
       : "";
   const avg_num_emp =
-    last_active_year_index >= first_active_year_index && first_active_year_index >= 0
+    last_active_year_index >= first_active_year_index &&
+    first_active_year_index >= 0
       ? _.sum(series) / (last_active_year_index - first_active_year_index + 1)
       : 0;
   const last_year_num_emp =
@@ -144,53 +143,53 @@ const EmployeeTotalsPanel = ({
           </Col>
           <Col size={8} isGraph>
             <WrappedNivoLine
-            data={data_formatter()}
-            raw_data={series}
-            colors={primaryColor}
-            is_money={false}
-            yScale={{ toggle: true }}
-            tooltip={({ slice }) => (
-              <div
-                style={{
-                  padding: "5px",
-                  borderRadius: "10px",
-                  backgroundColor: backgroundColor,
-                  color: textColor,
-                  boxShadow: "rgb(0 0 0 / 25%) 0px 1px 2px",
-                }}
-              >
-                <table style={{ width: "100%", borderCollapse: "collapse" }}>
-                  <tbody>
-                    {slice.points.map((tooltip_item) => (
-                      <tr key={tooltip_item.serieId}>
-                        <td className="nivo-tooltip__icon">
-                          <div
-                            style={{
-                              height: "12px",
-                              width: "12px",
-                              backgroundColor: tooltip_item.serieColor,
+              data={data_formatter()}
+              raw_data={series}
+              colors={primaryColor}
+              is_money={false}
+              yScale={{ toggle: true }}
+              tooltip={({ slice }) => (
+                <div
+                  style={{
+                    padding: "5px",
+                    borderRadius: "10px",
+                    backgroundColor: backgroundColor,
+                    color: textColor,
+                    boxShadow: "rgb(0 0 0 / 25%) 0px 1px 2px",
+                  }}
+                >
+                  <table style={{ width: "100%", borderCollapse: "collapse" }}>
+                    <tbody>
+                      {slice.points.map((tooltip_item) => (
+                        <tr key={tooltip_item.serieId}>
+                          <td className="nivo-tooltip__icon">
+                            <div
+                              style={{
+                                height: "12px",
+                                width: "12px",
+                                backgroundColor: tooltip_item.serieColor,
+                              }}
+                            />
+                          </td>
+                          <td className="nivo-tooltip__label">
+                            {tooltip_item.serieId}
+                          </td>
+                          <td className="nivo-tooltip__label">
+                            {tooltip_item.data.x}
+                          </td>
+                          <td
+                            className="nivo-tooltip__value"
+                            dangerouslySetInnerHTML={{
+                              __html: formats.big_int(tooltip_item.data.y),
                             }}
                           />
-                        </td>
-                        <td className="nivo-tooltip__label">
-                          {tooltip_item.serieId}
-                        </td>
-                        <td className="nivo-tooltip__label">
-                          {tooltip_item.data.x}
-                        </td>
-                        <td
-                          className="nivo-tooltip__value"
-                          dangerouslySetInnerHTML={{
-                            __html: formats.big_int(tooltip_item.data.y),
-                          }}
-                        />
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </div>
-            )}
-          />
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              )}
+            />
           </Col>
         </>
       )}

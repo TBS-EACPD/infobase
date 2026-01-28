@@ -92,26 +92,29 @@ const EmployeeTypePanel = ({
       ) : (
         <>
           <Col size={12} isText>
-            <TM k={subject_type + "_employee_type_text"} args={text_calculations} />
+            <TM
+              k={subject_type + "_employee_type_text"}
+              args={text_calculations}
+            />
           </Col>
           <Col size={12} isGraph>
             <MemoizedNivoLineBarToggle
-            legend_title={text_maker("employee_type")}
-            bar={true}
-            graph_options={{
-              ticks,
-              y_axis: text_maker("employees"),
-              formatter: formats.big_int_raw,
-              responsive: true,
-              animate: window.matchMedia(
-                "(prefers-reduced-motion: no-preference)"
-              ).matches,
-              role: "img",
-              ariaLabel: `${text_maker("employee_type")} ${subject.name}`,
-            }}
-            initial_graph_mode="bar_stacked"
-            data={calculations}
-          />
+              legend_title={text_maker("employee_type")}
+              bar={true}
+              graph_options={{
+                ticks,
+                y_axis: text_maker("employees"),
+                formatter: formats.big_int_raw,
+                responsive: true,
+                animate: window.matchMedia(
+                  "(prefers-reduced-motion: no-preference)"
+                ).matches,
+                role: "img",
+                ariaLabel: `${text_maker("employee_type")} ${subject.name}`,
+              }}
+              initial_graph_mode="bar_stacked"
+              data={calculations}
+            />
           </Col>
         </>
       )}

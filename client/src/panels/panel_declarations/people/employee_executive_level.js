@@ -70,8 +70,8 @@ const EmployeeExecutiveLevelPanel = ({
     loading || !data?.ex_lvl
       ? []
       : data.ex_lvl.map((level) => ({
-          label: businessConstants.ex_levels[formatExLevel(level.dimension)]
-            .text,
+          label:
+            businessConstants.ex_levels[formatExLevel(level.dimension)].text,
           data: level.yearly_data.map((year) => year.value),
           five_year_percent: level.avg_share,
           active: formatExLevel(level.dimension) !== "non",
@@ -161,18 +161,18 @@ const EmployeeExecutiveLevelPanel = ({
           </Col>
           <Col size={12} isGraph>
             <NivoLineBarToggle
-            {...{
-              legend_title: text_maker("ex_level"),
-              bar: true,
-              graph_options: {
-                y_axis: text_maker("employees"),
-                ticks: ticks,
-                formatter: formats.big_int_raw,
-              },
-              initial_graph_mode: "bar_stacked",
-              data: formatted_data,
-            }}
-          />
+              {...{
+                legend_title: text_maker("ex_level"),
+                bar: true,
+                graph_options: {
+                  y_axis: text_maker("employees"),
+                  ticks: ticks,
+                  formatter: formats.big_int_raw,
+                },
+                initial_graph_mode: "bar_stacked",
+                data: formatted_data,
+              }}
+            />
           </Col>
         </>
       )}

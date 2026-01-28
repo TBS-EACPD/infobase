@@ -154,24 +154,15 @@ const EmployeeAgePanel = ({
     0.7 // You can adjust this threshold as needed
   );
 
-  if (
-    !loading &&
-    (!calculations ||
-      !age_group ||
-      age_group.length === 0)
-  ) {
+  if (!loading && (!calculations || !age_group || age_group.length === 0)) {
     return null;
   }
 
   // Fix for gov_avgage values when viewing at government level
   const dept_avg_first_active_year =
-    loading || avg_age.length === 0
-      ? null
-      : _.first(avg_age[0]?.data) ?? null;
+    loading || avg_age.length === 0 ? null : _.first(avg_age[0]?.data) ?? null;
   const dept_avg_last_active_year =
-    loading || avg_age.length === 0
-      ? null
-      : _.last(avg_age[0]?.data) ?? null;
+    loading || avg_age.length === 0 ? null : _.last(avg_age[0]?.data) ?? null;
 
   // When subject_type is 'gov', avg_age[0] contains the government data
   // When subject_type is 'dept', avg_age[1] contains the government data (if available)
@@ -227,7 +218,8 @@ const EmployeeAgePanel = ({
       ? false
       : _.some(
           age_group,
-          (ageGroup) => ageGroup.suppressedFlags && _.some(ageGroup.suppressedFlags)
+          (ageGroup) =>
+            ageGroup.suppressedFlags && _.some(ageGroup.suppressedFlags)
         );
 
   // Check for suppressed data in average age
@@ -420,67 +412,67 @@ const EmployeeAgePanel = ({
           </Col>
           <Col size={12} isGraph>
             <TabsStateful
-            tabs={{
-              age_group: {
-                label: text_maker("age_group"),
-                content: (
-                  <div id={"emp_age_tab_pane"}>
-                    <GraphOverlay>
-                      <NivoLineBarToggle {...age_group_options} />
-                      {hasSuppressedData && (
-                        <div className="graph-note mt-2 font-italic">
-                          <small>
-                            <span
-                              className="mr-2"
-                              style={{
-                                display: "inline-block",
-                                width: "20px",
-                                height: "10px",
-                                backgroundImage:
-                                  "linear-gradient(135deg, #ffffff 25%, #666666 25%, #666666 50%, #ffffff 50%, #ffffff 75%, #666666 75%)",
-                                backgroundSize: "6px 6px",
-                              }}
-                            ></span>
-                            {text_maker("suppressed_data_pattern_note")}
-                          </small>
-                        </div>
-                      )}
-                    </GraphOverlay>
-                    <div className="clearfix"></div>
-                  </div>
-                ),
-              },
-              avgage: {
-                label: text_maker("avgage"),
-                content: (
-                  <div id={"emp_age_tab_pane"}>
-                    <GraphOverlay>
-                      <NivoLineBarToggle {...avg_age_options} />
-                      {hasAvgAgeSuppressedData && (
-                        <div className="graph-note mt-2 font-italic">
-                          <small>
-                            <span
-                              className="mr-2"
-                              style={{
-                                display: "inline-block",
-                                width: "20px",
-                                height: "10px",
-                                backgroundImage:
-                                  "linear-gradient(135deg, #ffffff 25%, #666666 25%, #666666 50%, #ffffff 50%, #ffffff 75%, #666666 75%)",
-                                backgroundSize: "6px 6px",
-                              }}
-                            ></span>
-                            {text_maker("suppressed_data_pattern_note")}
-                          </small>
-                        </div>
-                      )}
-                    </GraphOverlay>
-                    <div className="clearfix"></div>
-                  </div>
-                ),
-              },
-            }}
-          />
+              tabs={{
+                age_group: {
+                  label: text_maker("age_group"),
+                  content: (
+                    <div id={"emp_age_tab_pane"}>
+                      <GraphOverlay>
+                        <NivoLineBarToggle {...age_group_options} />
+                        {hasSuppressedData && (
+                          <div className="graph-note mt-2 font-italic">
+                            <small>
+                              <span
+                                className="mr-2"
+                                style={{
+                                  display: "inline-block",
+                                  width: "20px",
+                                  height: "10px",
+                                  backgroundImage:
+                                    "linear-gradient(135deg, #ffffff 25%, #666666 25%, #666666 50%, #ffffff 50%, #ffffff 75%, #666666 75%)",
+                                  backgroundSize: "6px 6px",
+                                }}
+                              ></span>
+                              {text_maker("suppressed_data_pattern_note")}
+                            </small>
+                          </div>
+                        )}
+                      </GraphOverlay>
+                      <div className="clearfix"></div>
+                    </div>
+                  ),
+                },
+                avgage: {
+                  label: text_maker("avgage"),
+                  content: (
+                    <div id={"emp_age_tab_pane"}>
+                      <GraphOverlay>
+                        <NivoLineBarToggle {...avg_age_options} />
+                        {hasAvgAgeSuppressedData && (
+                          <div className="graph-note mt-2 font-italic">
+                            <small>
+                              <span
+                                className="mr-2"
+                                style={{
+                                  display: "inline-block",
+                                  width: "20px",
+                                  height: "10px",
+                                  backgroundImage:
+                                    "linear-gradient(135deg, #ffffff 25%, #666666 25%, #666666 50%, #ffffff 50%, #ffffff 75%, #666666 75%)",
+                                  backgroundSize: "6px 6px",
+                                }}
+                              ></span>
+                              {text_maker("suppressed_data_pattern_note")}
+                            </small>
+                          </div>
+                        )}
+                      </GraphOverlay>
+                      <div className="clearfix"></div>
+                    </div>
+                  ),
+                },
+              }}
+            />
           </Col>
         </>
       )}
