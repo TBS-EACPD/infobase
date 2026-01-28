@@ -61,83 +61,92 @@ const EmployeeExecutiveLevelPanel = ({
   const data = subject_type === "gov" ? govData : orgData;
   const loading = subject_type === "gov" ? govLoading : orgLoading;
 
-  if (!data || !data.ex_lvl) {
+  if (!loading && (!data || !data.ex_lvl || data.ex_lvl.length === 0)) {
     return null;
   }
 
-  if (data.ex_lvl.length === 0) {
-    return null;
-  }
+  // Only process data when we have it (not loading)
+  const formatted_data =
+    loading || !data?.ex_lvl
+      ? []
+      : data.ex_lvl.map((level) => ({
+          label:
+            businessConstants.ex_levels[formatExLevel(level.dimension)].text,
+          data: level.yearly_data.map((year) => year.value),
+          five_year_percent: level.avg_share,
+          active: formatExLevel(level.dimension) !== "non",
+        }));
 
-  const formatted_data = data.ex_lvl.map((level) => ({
-    label: businessConstants.ex_levels[formatExLevel(level.dimension)].text,
-    data: level.yearly_data.map((year) => year.value),
-    five_year_percent: level.avg_share,
-    active: formatExLevel(level.dimension) !== "non",
-  }));
+  const has_non_ex_only =
+    loading || formatted_data.length === 0
+      ? false
+      : _.chain(formatted_data)
+          .filter(({ label }) => label !== "Non-EX")
+          .isEmpty()
+          .value();
 
-  const has_non_ex_only = _.chain(formatted_data)
-    .filter(({ label }) => label !== "Non-EX")
-    .isEmpty()
-    .value();
+  const text_calculations =
+    loading || formatted_data.length === 0
+      ? { subject }
+      : (() => {
+          if (has_non_ex_only) {
+            return {
+              ...calculate_common_text_args(formatted_data),
+              subject,
+              avg_num_non_ex: _.chain(formatted_data)
+                .first(({ label }) => label === "Non-EX")
+                .thru(({ data }) => _.mean(data))
+                .value(),
+            };
+          } else {
+            const ex_only_series = _.filter(
+              formatted_data,
+              ({ label }) => label !== "Non-EX"
+            );
 
-  const text_calculations = (() => {
-    if (has_non_ex_only) {
-      return {
-        ...calculate_common_text_args(formatted_data),
-        subject,
-        avg_num_non_ex: _.chain(formatted_data)
-          .first(({ label }) => label === "Non-EX")
-          .thru(({ data }) => _.mean(data))
-          .value(),
-      };
-    } else {
-      const ex_only_series = _.filter(
-        formatted_data,
-        ({ label }) => label !== "Non-EX"
-      );
+            const sum_exec = _.reduce(
+              ex_only_series,
+              (result, ex_lvl) => result + _.sum(ex_lvl.data),
+              0
+            );
 
-      const sum_exec = _.reduce(
-        ex_only_series,
-        (result, ex_lvl) => result + _.sum(ex_lvl.data),
-        0
-      );
+            const common_text_args = calculate_common_text_args(
+              ex_only_series,
+              sum_exec
+            );
 
-      const common_text_args = calculate_common_text_args(
-        ex_only_series,
-        sum_exec
-      );
+            const { first_active_year_index, last_active_year_index } =
+              common_text_args;
 
-      const { first_active_year_index, last_active_year_index } =
-        common_text_args;
+            const avg_num_employees =
+              _.reduce(
+                formatted_data,
+                (result, ex_lvl) => result + _.sum(ex_lvl.data),
+                0
+              ) /
+              (last_active_year_index - first_active_year_index + 1);
 
-      const avg_num_employees =
-        _.reduce(
-          formatted_data,
-          (result, ex_lvl) => result + _.sum(ex_lvl.data),
-          0
-        ) /
-        (last_active_year_index - first_active_year_index + 1);
+            const avg_num_execs =
+              sum_exec / (last_active_year_index - first_active_year_index + 1);
+            const avg_pct_execs = avg_num_execs / avg_num_employees;
 
-      const avg_num_execs =
-        sum_exec / (last_active_year_index - first_active_year_index + 1);
-      const avg_pct_execs = avg_num_execs / avg_num_employees;
-
-      return {
-        ...common_text_args,
-        subject,
-        avg_num_execs,
-        avg_pct_execs,
-      };
-    }
-  })();
+            return {
+              ...common_text_args,
+              subject,
+              avg_num_execs,
+              avg_pct_execs,
+            };
+          }
+        })();
 
   const ticks = _.map(people_years, (y) => `${run_template(y)}`);
 
   return (
     <StdPanel {...{ title, footnotes, sources }}>
       {loading ? (
-        <LeafSpinner config_name="subroute" />
+        <Col size={12}>
+          <LeafSpinner config_name="subroute" />
+        </Col>
       ) : (
         <>
           <Col size={12} isText>
@@ -178,10 +187,15 @@ export const declare_employee_executive_level_panel = () =>
     panel_config_func: (subject_type) => ({
       get_dataset_keys: () => ["ex_level"],
       get_title: () => text_maker("employee_executive_level_title"),
-      render(props) {
-        return (
-          <EmployeeExecutiveLevelPanel {...props} subject_type={subject_type} />
-        );
+      calculate: ({ subject }) => {
+        // For gov, always return true. For dept, check if people_data exists
+        if (subject_type === "gov") {
+          return true;
+        }
+        return subject.has_data("people_data");
       },
+      render: (props) => (
+        <EmployeeExecutiveLevelPanel {...props} subject_type={subject_type} />
+      ),
     }),
   });

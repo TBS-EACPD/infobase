@@ -144,50 +144,50 @@ const EmployeeAgePanel = ({
     };
   }, [data, govData, subject.name, subject_type]);
 
+  // Destructure calculations first with safe defaults
+  const { avg_age, age_group } = calculations || { avg_age: [], age_group: [] };
+
   // After calculating age_group data
   // Use the suppressed data detection hook
   const { isHeavilySuppressed } = useSuppressedDataDetection(
-    calculations?.age_group || [],
+    age_group,
     0.7 // You can adjust this threshold as needed
   );
 
-  if (loading) {
-    return <LeafSpinner config_name="subroute" />;
-  }
-
-  if (
-    !calculations ||
-    !calculations.age_group ||
-    calculations.age_group.length === 0
-  ) {
+  if (!loading && (!calculations || !age_group || age_group.length === 0)) {
     return null;
   }
 
-  const { avg_age, age_group } = calculations;
-
   // Fix for gov_avgage values when viewing at government level
   const dept_avg_first_active_year =
-    avg_age.length > 0 ? _.first(avg_age[0].data) : null;
+    loading || avg_age.length === 0 ? null : _.first(avg_age[0]?.data) ?? null;
   const dept_avg_last_active_year =
-    avg_age.length > 0 ? _.last(avg_age[0].data) : null;
+    loading || avg_age.length === 0 ? null : _.last(avg_age[0]?.data) ?? null;
 
   // When subject_type is 'gov', avg_age[0] contains the government data
   // When subject_type is 'dept', avg_age[1] contains the government data (if available)
   const gov_avgage_last_year_5 =
-    subject_type === "gov"
-      ? _.first(avg_age[0].data)
+    loading || avg_age.length === 0
+      ? null
+      : subject_type === "gov"
+      ? _.first(avg_age[0]?.data) ?? null
       : avg_age.length > 1
-      ? _.first(avg_age[1].data)
+      ? _.first(avg_age[1]?.data) ?? null
       : null;
 
   const gov_avgage_last_year =
-    subject_type === "gov"
-      ? _.last(avg_age[0].data)
+    loading || avg_age.length === 0
+      ? null
+      : subject_type === "gov"
+      ? _.last(avg_age[0]?.data) ?? null
       : avg_age.length > 1
-      ? _.last(avg_age[1].data)
+      ? _.last(avg_age[1]?.data) ?? null
       : null;
 
-  const common_text_args = calculate_common_text_args(age_group);
+  const common_text_args =
+    loading || age_group.length === 0
+      ? {}
+      : calculate_common_text_args(age_group);
 
   const text_calculations = {
     ...common_text_args,
@@ -213,15 +213,22 @@ const EmployeeAgePanel = ({
   const ticks = _.map(people_years, (y) => `${run_template(y)}`);
 
   // Single, consistent check for suppressed data
-  const hasSuppressedData = _.some(
-    calculations.age_group,
-    (ageGroup) => ageGroup.suppressedFlags && _.some(ageGroup.suppressedFlags)
-  );
+  const hasSuppressedData =
+    loading || age_group.length === 0
+      ? false
+      : _.some(
+          age_group,
+          (ageGroup) =>
+            ageGroup.suppressedFlags && _.some(ageGroup.suppressedFlags)
+        );
 
   // Check for suppressed data in average age
-  const hasAvgAgeSuppressedData = _.some(calculations.avg_age, (avgAgeData) =>
-    _.some(avgAgeData.data, (value) => value === 5)
-  );
+  const hasAvgAgeSuppressedData =
+    loading || avg_age.length === 0
+      ? false
+      : _.some(avg_age, (avgAgeData) =>
+          _.some(avgAgeData.data, (value) => value === 5)
+        );
 
   const required_footnotes =
     hasSuppressedData || hasAvgAgeSuppressedData
@@ -265,7 +272,7 @@ const EmployeeAgePanel = ({
             {
               match: (bar) => {
                 // Find the age group that matches this bar
-                const ageGroup = calculations.age_group.find(
+                const ageGroup = age_group.find(
                   (group) => group.label === bar.data.id
                 );
 
@@ -290,7 +297,7 @@ const EmployeeAgePanel = ({
     },
     disable_toggle: hasSuppressedData,
     initial_graph_mode: "bar_grouped",
-    data: calculations.age_group,
+    data: age_group,
     formatter: formats.big_int_raw,
     tooltip_formatter: (value) => {
       // Check if this is a suppressed data point
@@ -370,7 +377,7 @@ const EmployeeAgePanel = ({
     },
     disable_toggle: true,
     initial_graph_mode: hasAvgAgeSuppressedData ? "bar_grouped" : "line",
-    data: calculations.avg_age,
+    data: avg_age,
     formatter: formats.decimal2,
     tooltip_formatter: hasAvgAgeSuppressedData
       ? (value) => {
@@ -385,82 +392,90 @@ const EmployeeAgePanel = ({
 
   return (
     <StdPanel {...{ title, footnotes: required_footnotes, sources }}>
-      <Col size={12} isText>
-        {isHeavilySuppressed ? (
-          <div className="mb-3">
-            <TM k="suppressed_data_warning" />
-          </div>
-        ) : (
-          <TM
-            k={subject_type + "_employee_age_text"}
-            args={text_calculations}
-          />
-        )}
-      </Col>
-      <Col size={12} isGraph>
-        <TabsStateful
-          tabs={{
-            age_group: {
-              label: text_maker("age_group"),
-              content: (
-                <div id={"emp_age_tab_pane"}>
-                  <GraphOverlay>
-                    <NivoLineBarToggle {...age_group_options} />
-                    {hasSuppressedData && (
-                      <div className="graph-note mt-2 font-italic">
-                        <small>
-                          <span
-                            className="mr-2"
-                            style={{
-                              display: "inline-block",
-                              width: "20px",
-                              height: "10px",
-                              backgroundImage:
-                                "linear-gradient(135deg, #ffffff 25%, #666666 25%, #666666 50%, #ffffff 50%, #ffffff 75%, #666666 75%)",
-                              backgroundSize: "6px 6px",
-                            }}
-                          ></span>
-                          {text_maker("suppressed_data_pattern_note")}
-                        </small>
-                      </div>
-                    )}
-                  </GraphOverlay>
-                  <div className="clearfix"></div>
-                </div>
-              ),
-            },
-            avgage: {
-              label: text_maker("avgage"),
-              content: (
-                <div id={"emp_age_tab_pane"}>
-                  <GraphOverlay>
-                    <NivoLineBarToggle {...avg_age_options} />
-                    {hasAvgAgeSuppressedData && (
-                      <div className="graph-note mt-2 font-italic">
-                        <small>
-                          <span
-                            className="mr-2"
-                            style={{
-                              display: "inline-block",
-                              width: "20px",
-                              height: "10px",
-                              backgroundImage:
-                                "linear-gradient(135deg, #ffffff 25%, #666666 25%, #666666 50%, #ffffff 50%, #ffffff 75%, #666666 75%)",
-                              backgroundSize: "6px 6px",
-                            }}
-                          ></span>
-                          {text_maker("suppressed_data_pattern_note")}
-                        </small>
-                      </div>
-                    )}
-                  </GraphOverlay>
-                  <div className="clearfix"></div>
-                </div>
-              ),
-            },
-          }}
-        />
-      </Col>
+      {loading ? (
+        <Col size={12}>
+          <LeafSpinner config_name="subroute" />
+        </Col>
+      ) : (
+        <>
+          <Col size={12} isText>
+            {isHeavilySuppressed ? (
+              <div className="mb-3">
+                <TM k="suppressed_data_warning" />
+              </div>
+            ) : (
+              <TM
+                k={subject_type + "_employee_age_text"}
+                args={text_calculations}
+              />
+            )}
+          </Col>
+          <Col size={12} isGraph>
+            <TabsStateful
+              tabs={{
+                age_group: {
+                  label: text_maker("age_group"),
+                  content: (
+                    <div id={"emp_age_tab_pane"}>
+                      <GraphOverlay>
+                        <NivoLineBarToggle {...age_group_options} />
+                        {hasSuppressedData && (
+                          <div className="graph-note mt-2 font-italic">
+                            <small>
+                              <span
+                                className="mr-2"
+                                style={{
+                                  display: "inline-block",
+                                  width: "20px",
+                                  height: "10px",
+                                  backgroundImage:
+                                    "linear-gradient(135deg, #ffffff 25%, #666666 25%, #666666 50%, #ffffff 50%, #ffffff 75%, #666666 75%)",
+                                  backgroundSize: "6px 6px",
+                                }}
+                              ></span>
+                              {text_maker("suppressed_data_pattern_note")}
+                            </small>
+                          </div>
+                        )}
+                      </GraphOverlay>
+                      <div className="clearfix"></div>
+                    </div>
+                  ),
+                },
+                avgage: {
+                  label: text_maker("avgage"),
+                  content: (
+                    <div id={"emp_age_tab_pane"}>
+                      <GraphOverlay>
+                        <NivoLineBarToggle {...avg_age_options} />
+                        {hasAvgAgeSuppressedData && (
+                          <div className="graph-note mt-2 font-italic">
+                            <small>
+                              <span
+                                className="mr-2"
+                                style={{
+                                  display: "inline-block",
+                                  width: "20px",
+                                  height: "10px",
+                                  backgroundImage:
+                                    "linear-gradient(135deg, #ffffff 25%, #666666 25%, #666666 50%, #ffffff 50%, #ffffff 75%, #666666 75%)",
+                                  backgroundSize: "6px 6px",
+                                }}
+                              ></span>
+                              {text_maker("suppressed_data_pattern_note")}
+                            </small>
+                          </div>
+                        )}
+                      </GraphOverlay>
+                      <div className="clearfix"></div>
+                    </div>
+                  ),
+                },
+              }}
+            />
+          </Col>
+        </>
+      )}
     </StdPanel>
   );
 };
@@ -472,8 +487,15 @@ export const declare_employee_age_panel = () =>
     panel_config_func: (subject_type) => ({
       get_dataset_keys: () => ["age_group", "avg_age"],
       get_title: () => text_maker("employee_age_title"),
-      render(props) {
-        return <EmployeeAgePanel {...props} subject_type={subject_type} />;
+      calculate: ({ subject }) => {
+        // For gov, always return true. For dept, check if people_data exists
+        if (subject_type === "gov") {
+          return true;
+        }
+        return subject.has_data("people_data");
       },
+      render: (props) => (
+        <EmployeeAgePanel {...props} subject_type={subject_type} />
+      ),
     }),
   });

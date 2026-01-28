@@ -89,10 +89,6 @@ const EmployeeFOLPanel = ({
     calculations || [] // Pass empty array if calculations is null
   );
 
-  if (loading) {
-    return <LeafSpinner config_name="subroute" />;
-  }
-
   if (!calculations || calculations.length === 0) {
     return null;
   }
@@ -137,81 +133,89 @@ const EmployeeFOLPanel = ({
 
   return (
     <StdPanel {...{ title, footnotes: required_footnotes, sources }}>
-      <Col size={12} isText>
-        {isHeavilySuppressed ? (
-          <div className="mb-3">
-            <TM k="suppressed_data_warning" />
-          </div>
-        ) : (
-          <TM
-            k={subject_type + "_employee_fol_text"}
-            args={text_calculations}
-          />
-        )}
-      </Col>
-      <Col size={12} isGraph>
-        <NivoLineBarToggle
-          legend_title={text_maker("FOL")}
-          bar={true}
-          graph_options={{
-            y_axis: text_maker("employees"),
-            ticks: ticks,
-            formatter: formats.big_int_raw,
-            responsive: true,
-            animate: window.matchMedia(
-              "(prefers-reduced-motion: no-preference)"
-            ).matches,
-            role: "img",
-            ariaLabel: `${text_maker("FOL")} ${subject.name}`,
-            // Define patterns for suppressed data
-            defs: [
-              {
-                id: "pattern-suppressed-data",
-                type: "patternLines",
-                background: "inherit", // Light grey background
-                color: "#999999", // Darker grey lines
-                lineWidth: 3,
-                spacing: 8,
-                rotation: -45,
-              },
-            ],
-            fill: hasSuppressedData
-              ? [
+      {loading ? (
+        <Col size={12}>
+          <LeafSpinner config_name="subroute" />
+        </Col>
+      ) : (
+        <>
+          <Col size={12} isText>
+            {isHeavilySuppressed ? (
+              <div className="mb-3">
+                <TM k="suppressed_data_warning" />
+              </div>
+            ) : (
+              <TM
+                k={subject_type + "_employee_fol_text"}
+                args={text_calculations}
+              />
+            )}
+          </Col>
+          <Col size={12} isGraph>
+            <NivoLineBarToggle
+              legend_title={text_maker("FOL")}
+              bar={true}
+              graph_options={{
+                y_axis: text_maker("employees"),
+                ticks: ticks,
+                formatter: formats.big_int_raw,
+                responsive: true,
+                animate: window.matchMedia(
+                  "(prefers-reduced-motion: no-preference)"
+                ).matches,
+                role: "img",
+                ariaLabel: `${text_maker("FOL")} ${subject.name}`,
+                // Define patterns for suppressed data
+                defs: [
                   {
-                    match: (bar) => {
-                      const fol = calculations.find(
-                        (group) => group.label === bar.data.id
-                      );
-
-                      if (!fol || !fol.suppressedFlags) return false;
-
-                      const barKey = bar.key;
-                      const datePart = barKey.split(".")[1];
-
-                      const tickIndex = ticks.indexOf(datePart);
-                      if (tickIndex === -1) return false;
-
-                      return fol.suppressedFlags[tickIndex] === true;
-                    },
                     id: "pattern-suppressed-data",
+                    type: "patternLines",
+                    background: "inherit", // Light grey background
+                    color: "#999999", // Darker grey lines
+                    lineWidth: 3,
+                    spacing: 8,
+                    rotation: -45,
                   },
-                ]
-              : [],
-          }}
-          // Disable toggle if there's suppressed data, since we only want to use bar charts
-          disable_toggle={hasSuppressedData}
-          tooltip_formatter={(value) => {
-            // Check if this is a suppressed data point
-            if (value === 5) {
-              return "*";
-            }
-            return formats.big_int_raw(value);
-          }}
-          initial_graph_mode="bar_grouped"
-          data={calculations}
-        />
-        {hasSuppressedData && <SuppressedDataPattern />}
-      </Col>
+                ],
+                fill: hasSuppressedData
+                  ? [
+                      {
+                        match: (bar) => {
+                          const fol = calculations.find(
+                            (group) => group.label === bar.data.id
+                          );
+
+                          if (!fol || !fol.suppressedFlags) return false;
+
+                          const barKey = bar.key;
+                          const datePart = barKey.split(".")[1];
+
+                          const tickIndex = ticks.indexOf(datePart);
+                          if (tickIndex === -1) return false;
+
+                          return fol.suppressedFlags[tickIndex] === true;
+                        },
+                        id: "pattern-suppressed-data",
+                      },
+                    ]
+                  : [],
+              }}
+              // Disable toggle if there's suppressed data, since we only want to use bar charts
+              disable_toggle={hasSuppressedData}
+              tooltip_formatter={(value) => {
+                // Check if this is a suppressed data point
+                if (value === 5) {
+                  return "*";
+                }
+                return formats.big_int_raw(value);
+              }}
+              initial_graph_mode="bar_grouped"
+              data={calculations}
+            />
+            {hasSuppressedData && <SuppressedDataPattern />}
+          </Col>
+        </>
+      )}
     </StdPanel>
   );
 };
@@ -223,8 +227,15 @@ export const declare_employee_fol_panel = () =>
     panel_config_func: (subject_type) => ({
       get_dataset_keys: () => ["employee_fol"],
       get_title: () => text_maker("employee_fol_title"),
-      render(props) {
-        return <EmployeeFOLPanel {...props} subject_type={subject_type} />;
+      calculate: ({ subject }) => {
+        // For gov, always return true. For dept, check if people_data exists
+        if (subject_type === "gov") {
+          return true;
+        }
+        return subject.has_data("people_data");
       },
+      render: (props) => (
+        <EmployeeFOLPanel {...props} subject_type={subject_type} />
+      ),
     }),
   });
