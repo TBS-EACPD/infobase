@@ -106,6 +106,9 @@ export default {
     } else {
       row.splice(3, 1);
     }
+    // Remove est_last_year_5 column to align year columns correctly
+    // After language removal, est_last_year_5 is at position 6
+    row.splice(6, 1);
     if (_.isNaN(+row[1])) {
       row[1] = "S";
       row[2] = 999;
