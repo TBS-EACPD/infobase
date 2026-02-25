@@ -1,8 +1,13 @@
 import _ from "lodash";
 
-import { result_docs_in_tabling_order } from "src/models/results";
+import {
+  result_docs_in_tabling_order,
+  get_late_results_orgs,
+  get_late_resources_orgs,
+  get_pre_drr_late_fte_mock_doc,
+} from "src/models/results";
 import { Gov, Dept, class_subject_types } from "src/models/subjects";
-import { create_text_maker, run_template } from "src/models/text";
+import { create_text_maker } from "src/models/text";
 import {
   actual_to_planned_gap_year,
   fiscal_year_to_year,
@@ -13,17 +18,6 @@ import type { FootNoteDef, TopicKey } from "./footnotes";
 import text from "./dynamic_footnotes.yaml";
 
 const text_maker = create_text_maker(text);
-
-// late DRR resources (FTE only) can happen pre-DRR if the PA tabling is early...
-// list late orgs in this mock results doc object to get the requisite footnotes showing up
-// in the meantime
-// TODO should belong to results code
-export const PRE_DRR_PUBLIC_ACCOUNTS_LATE_FTE_MOCK_DOC = {
-  doc_type: "drr",
-  year: run_template("{{pa_last_year}}"),
-  late_results_orgs: [] as string[],
-  late_resources_orgs: [] as string[],
-};
 
 const expand_dept_cr_and_programs = (dept: InstanceType<typeof Dept>) => [
   dept,
@@ -88,17 +82,20 @@ export const get_dynamic_footnote_definitions = (): FootNoteDef[] => {
       };
 
       const late_org_property = `late_${result_or_resource}_orgs`;
-      const docs_with_late_orgs = _.chain(result_docs_in_tabling_order)
-        .clone() // ...reverse mutates, clone first!
+      const docs_with_resolved_late = _.map(
+        result_docs_in_tabling_order,
+        (doc) => ({
+          ...doc,
+          late_results_orgs: get_late_results_orgs(doc.doc_key),
+          late_resources_orgs: get_late_resources_orgs(doc.doc_key),
+        })
+      ).concat([get_pre_drr_late_fte_mock_doc()]);
+      const docs_with_late_orgs = _.chain(docs_with_resolved_late)
         .reverse()
-        .concat(PRE_DRR_PUBLIC_ACCOUNTS_LATE_FTE_MOCK_DOC)
-        .filter((doc) => doc[late_org_property].length > 0)
+        .filter((doc) => (doc[late_org_property] || []).length > 0)
         .value();
 
-      // might make more sense for this validation to happen for results doc configs in /models/results.js, but
-      // for now doing it here to catch exempt orgs in PRE_DRR_PUBLIC_ACCOUNTS_LATE_FTE_MOCK_DOC too. TODO, maybe
-      // move PRE_DRR_PUBLIC_ACCOUNTS_LATE_FTE_MOCK_DOC in to the results models file, apply (some of) the results
-      // config validation to it? A little hacky either way
+      // Validation: exempt orgs must not appear in any late-org list (config or auto-detected).
       const EXEMPT_ORGS = ["151"];
       const docs_with_late_expempt_orgs = _.chain(docs_with_late_orgs)
         .map(({ [late_org_property]: late_orgs, doc_type, year }) => ({

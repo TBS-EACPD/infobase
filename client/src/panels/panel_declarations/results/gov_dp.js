@@ -21,6 +21,7 @@ import {
   result_docs,
   link_to_results_infograph,
   get_year_for_doc_key,
+  get_late_dept_count_for_dp,
 } from "./results_common";
 
 import text from "./gov_dp.yaml";
@@ -78,7 +79,7 @@ const get_dp_data = (dp_key) => {
       formatter: "big_int",
     },
   };
-  const late_dept_count = result_docs[dp_key].late_results_orgs.length;
+  const late_dept_count = get_late_dept_count_for_dp(dp_key);
 
   return {
     column_configs,

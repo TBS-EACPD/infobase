@@ -6,7 +6,7 @@ import { declare_panel } from "src/panels/PanelRegistry";
 
 import { create_text_maker_component } from "src/components/index";
 
-import { PRE_DRR_PUBLIC_ACCOUNTS_LATE_FTE_MOCK_DOC } from "src/models/footnotes/dynamic_footnotes";
+import { get_late_actual_fte_orgs } from "src/models/results";
 import { get_footnotes_by_subject_and_topic } from "src/models/footnotes/footnotes";
 
 import { PlannedActualTable } from "./PlannedActualTable";
@@ -24,23 +24,18 @@ export const declare_planned_actual_comparison_panel = () =>
       get_dataset_keys: () => ["program_spending", "program_ftes"],
       get_title: () => text_maker("planned_actual_title"),
       calculate: ({ subject, tables }) => {
+        const late_actual_fte_orgs = get_late_actual_fte_orgs();
         if (subject.subject_type === "dept") {
           if (
             !subject.is_dp_org ||
-            _.includes(
-              PRE_DRR_PUBLIC_ACCOUNTS_LATE_FTE_MOCK_DOC.late_resources_orgs,
-              subject.id
-            )
+            _.includes(late_actual_fte_orgs, subject.id)
           ) {
             return false;
           }
         } else {
           if (
             !subject.dept.is_dp_org ||
-            _.includes(
-              PRE_DRR_PUBLIC_ACCOUNTS_LATE_FTE_MOCK_DOC.late_resources_orgs,
-              subject.dept.id
-            )
+            _.includes(late_actual_fte_orgs, subject.dept.id)
           ) {
             return false;
           }
