@@ -20,6 +20,7 @@ import {
   link_to_results_infograph,
   get_result_doc_keys,
   get_year_for_doc_key,
+  get_late_dept_count_for_drr,
 } from "./results_common";
 
 import text from "./gov_drr.yaml";
@@ -122,9 +123,7 @@ const get_drr_data = (drr_key) => {
       .fromPairs()
       .value(),
   };
-  const late_dept_count =
-    result_docs[drr_key].late_results_orgs.length +
-    result_docs[drr_key].temp_untabled_orgs.length;
+  const late_dept_count = get_late_dept_count_for_drr(drr_key);
 
   return {
     gov_counts,

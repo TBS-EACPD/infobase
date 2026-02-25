@@ -26,6 +26,8 @@ const {
   get_result_doc_keys,
   current_drr_key,
   current_dp_key,
+  get_late_dept_count_for_drr,
+  get_late_dept_count_for_dp,
 } = Results;
 
 const { result_statuses } = businessConstants;
@@ -337,6 +339,8 @@ export {
   get_result_doc_keys,
   current_drr_key,
   current_dp_key,
+  get_late_dept_count_for_drr,
+  get_late_dept_count_for_dp,
   results_resource_fragment,
   link_to_results_infograph,
   isDeptWithoutResults,

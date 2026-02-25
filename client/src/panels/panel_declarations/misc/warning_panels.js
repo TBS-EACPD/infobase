@@ -13,10 +13,15 @@ import {
 } from "src/components/index";
 
 import { isSpecialWarrants } from "src/models/estimates";
-import { PRE_DRR_PUBLIC_ACCOUNTS_LATE_FTE_MOCK_DOC } from "src/models/footnotes/dynamic_footnotes";
 
 import dynamic_footnote_text from "src/models/footnotes/dynamic_footnotes.yaml";
 import * as Results from "src/models/results";
+import {
+  get_late_results_orgs,
+  get_late_resources_orgs,
+  get_late_actual_fte_orgs,
+  get_late_planned_fte_orgs,
+} from "src/models/results";
 import { useServiceSummaryOrg } from "src/models/services/queries";
 
 import { Dept } from "src/models/subjects";
@@ -307,8 +312,12 @@ export const declare_late_results_warning_panel = () =>
     subject_types: ["gov", "dept", "crso", "program"],
     panel_config_func: (subject_type) => {
       const docs_with_late_orgs = _.chain(result_docs_in_tabling_order)
+        .map((doc) => ({
+          ...doc,
+          late_results_orgs: get_late_results_orgs(doc.doc_key),
+        }))
+        .filter((doc) => (doc.late_results_orgs || []).length > 0)
         .reverse()
-        .filter(({ late_results_orgs }) => (late_results_orgs || []).length > 0)
         .value();
 
       const get_per_doc_late_results_alert = (
@@ -411,8 +420,13 @@ export const declare_late_results_warning_panel = () =>
     },
   });
 
-const get_declare_late_resources_panel = (planned_or_actual, late_orgs) => () =>
-  declare_panel({
+const get_declare_late_resources_panel = (planned_or_actual, late_orgs_or_getter) => () => {
+  const get_orgs = () =>
+    typeof late_orgs_or_getter === "function"
+      ? late_orgs_or_getter()
+      : late_orgs_or_getter;
+
+  return declare_panel({
     panel_key: `late_${planned_or_actual}_resources_warning`,
     subject_types: ["gov", "dept", "crso", "program"],
     panel_config_func: (subject_type) => {
@@ -421,19 +435,22 @@ const get_declare_late_resources_panel = (planned_or_actual, late_orgs) => () =>
           return {
             ...late_panel_config,
 
-            calculate: () => !_.isEmpty(late_orgs),
-            render: () => (
-              <WarningPanel center_text={false} banner_class="warning">
-                <TM k={`late_${planned_or_actual}_resources_warning_gov`} />
-                <MultiColumnList
-                  list_items={_.map(
-                    late_orgs,
-                    (org_id) => Dept.store.lookup(org_id).name
-                  )}
-                  column_count={2}
-                />
-              </WarningPanel>
-            ),
+            calculate: () => !_.isEmpty(get_orgs()),
+            render: () => {
+              const late_orgs = get_orgs();
+              return (
+                <WarningPanel center_text={false} banner_class="warning">
+                  <TM k={`late_${planned_or_actual}_resources_warning_gov`} />
+                  <MultiColumnList
+                    list_items={_.map(
+                      late_orgs,
+                      (org_id) => Dept.store.lookup(org_id).name
+                    )}
+                    column_count={2}
+                  />
+                </WarningPanel>
+              );
+            },
           };
         default:
           return {
@@ -441,7 +458,7 @@ const get_declare_late_resources_panel = (planned_or_actual, late_orgs) => () =>
 
             calculate: ({ subject }) =>
               _.includes(
-                late_orgs,
+                get_orgs(),
                 subject_type === "dept" ? subject.id : subject.dept.id
               ),
             render: () => (
@@ -455,36 +472,20 @@ const get_declare_late_resources_panel = (planned_or_actual, late_orgs) => () =>
       }
     },
   });
+};
 
-const depts_with_late_actual_resources = _.chain(result_docs_in_tabling_order)
-  .filter(({ doc_type }) => doc_type === "drr")
-  .last()
-  .get("late_resources_orgs")
-  .concat(PRE_DRR_PUBLIC_ACCOUNTS_LATE_FTE_MOCK_DOC.late_resources_orgs)
-  .uniq()
-  .value();
 export const declare_late_actual_resources_panel =
-  get_declare_late_resources_panel("actual", depts_with_late_actual_resources);
+  get_declare_late_resources_panel("actual", get_late_actual_fte_orgs);
 
-const depts_with_late_planned_resources = _.chain(result_docs_in_tabling_order)
-  .filter(({ doc_type }) => doc_type === "dp")
-  .last()
-  .get("late_resources_orgs")
-  .value();
 export const declare_late_planned_resources_panel =
   get_declare_late_resources_panel(
     "planned",
-    depts_with_late_planned_resources
+    () => get_late_resources_orgs(Results.current_dp_key)
   );
 
-const depts_with_late_planned_fte = _.chain(result_docs_in_tabling_order)
-  .filter(({ doc_type }) => doc_type === "dp")
-  .last()
-  .get("late_planned_fte_orgs")
-  .value();
 export const declare_late_planned_fte_panel = get_declare_late_resources_panel(
   "planned_fte",
-  depts_with_late_planned_fte
+  get_late_planned_fte_orgs
 );
 
 export const declare_special_warrants_warning_panel = () =>

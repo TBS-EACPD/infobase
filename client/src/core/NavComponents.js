@@ -7,15 +7,17 @@ import { AlertBanner } from "src/components/AlertBanner/AlertBanner";
 import { MultiColumnList } from "src/components/misc_util_components";
 
 import { isSpecialWarrants } from "src/models/estimates";
-import { PRE_DRR_PUBLIC_ACCOUNTS_LATE_FTE_MOCK_DOC } from "src/models/footnotes/dynamic_footnotes";
 import {
   result_docs_in_tabling_order,
-  detect_late_results_orgs,
-  detect_late_resources_orgs,
+  get_late_results_orgs,
+  get_late_resources_orgs,
+  get_late_actual_fte_orgs,
+  get_late_planned_fte_orgs,
 } from "src/models/results";
 import { Dept } from "src/models/subjects";
 import { trivial_text_maker } from "src/models/text";
 
+import { ensure_loaded } from "src/core/ensure_loaded";
 import { lang, is_a11y_mode } from "src/core/injected_build_constants";
 
 import { IconHome } from "src/icons/icons";
@@ -158,30 +160,13 @@ const HeaderBanner = withRouter(
   }
 );
 
-// TODO all three of these late results banners are hacky AND aren't dry against dynamic footnote content/infographic warning panels
-// whole late results ecosystem needs a cleanup
 const LateResultsBanner = () => {
   const route_filter = (match, _history) => /^\/(start)/.test(match.path);
 
-  // TODO what if DPs table and some DRRs are still late? Do we just want the prominent DRR banner, or do we want both?
-  return _.map(result_docs_in_tabling_order, (doc, index) => {
-    // For the latest document, try auto-detection if hardcoded list is empty
-    // This allows automation of late_results_orgs detection based on missing data
-    let late_orgs = doc.late_results_orgs;
-    const is_latest_doc = index === result_docs_in_tabling_order.length - 1;
+  return _.map(result_docs_in_tabling_order, (doc) => {
+    const late_orgs = get_late_results_orgs(doc.doc_key);
+    if (_.isEmpty(late_orgs)) return null;
 
-    if (is_latest_doc && _.isEmpty(late_orgs)) {
-      // Try to auto-detect late organizations by checking which departments
-      // should have results data but don't
-      const auto_detected = detect_late_results_orgs(doc.doc_key);
-      if (auto_detected.length > 0) {
-        late_orgs = auto_detected;
-      }
-    }
-
-    if (_.isEmpty(late_orgs)) {
-      return null;
-    }
     const banner_content = (
       <Fragment key={doc.name}>
         {
@@ -215,9 +200,8 @@ const LateResultsBanner = () => {
 const TempUntabledBanner = () => {
   const route_filter = (match, _history) => /^\/(start)/.test(match.path);
 
-  // TODO what if DPs table and some DRRs are still late? Do we just want the prominent DRR banner, or do we want both?
   return _.map(result_docs_in_tabling_order, (doc) => {
-    const late_orgs = doc.temp_untabled_orgs;
+    const late_orgs = doc.temp_untabled_orgs || [];
     if (late_orgs.length === 0) {
       return null;
     }
@@ -260,26 +244,10 @@ const LateDpResourcesBanner = () => {
     .last()
     .value();
 
-  if (!latest_dp_doc) {
-    return null;
-  }
+  if (!latest_dp_doc) return null;
 
-  // For the latest DP document, try auto-detection if hardcoded list is empty
-  // This allows automation of late_resources_orgs detection based on missing data
-  let late_orgs = latest_dp_doc.late_resources_orgs;
-
-  if (_.isEmpty(late_orgs)) {
-    // Try to auto-detect late organizations by checking which departments
-    // should have planned resources data but don't
-    const auto_detected = detect_late_resources_orgs();
-    if (auto_detected.length > 0) {
-      late_orgs = auto_detected;
-    }
-  }
-
-  if (_.isEmpty(late_orgs)) {
-    return null;
-  }
+  const late_orgs = get_late_resources_orgs(latest_dp_doc.doc_key);
+  if (_.isEmpty(late_orgs)) return null;
 
   const banner_content = (
     <Fragment>
@@ -312,12 +280,8 @@ const LateDrrFteResources = () => {
   const route_filter = (match, _history) =>
     /^\/(start|tag-explorer|rpb)/.test(match.path);
 
-  const late_orgs =
-    PRE_DRR_PUBLIC_ACCOUNTS_LATE_FTE_MOCK_DOC.late_resources_orgs;
-
-  if (late_orgs.length === 0) {
-    return null;
-  }
+  const late_orgs = get_late_actual_fte_orgs();
+  if (_.isEmpty(late_orgs)) return null;
 
   const banner_content = (
     <Fragment>
@@ -352,12 +316,10 @@ const LatePlannedFteBanner = () => {
     /^\/(start|tag-explorer|rpb)/.test(match.path);
 
   const latest_doc = _.last(result_docs_in_tabling_order);
+  if (!latest_doc || !latest_doc.is_dp) return null;
 
-  const late_orgs = latest_doc.late_planned_fte_orgs;
-
-  if (!latest_doc.is_dp || late_orgs.length === 0) {
-    return null;
-  }
+  const late_orgs = get_late_planned_fte_orgs();
+  if (_.isEmpty(late_orgs)) return null;
 
   const banner_content = (
     <Fragment>
@@ -412,12 +374,38 @@ const SpecialWarrantsBanner = () => {
   );
 };
 
-export class StandardRouteContainer extends React.Component {
+const ROUTES_WITH_FTE_BANNERS = /^\/(start|tag-explorer|rpb)/;
+
+const StandardRouteContainerInner = class StandardRouteContainerInner extends React.Component {
+  state = { fte_tables_loaded: false };
+
   componentDidMount() {
-    //unless a route's component is sufficiently complicated, it should never unmount/remount a StandardRouteContainer
-    //therefore, this component being unmounted/remounted implies a change between routes, which should always re-scroll
+    this._mounted = true;
     scroll_to_top();
+    this._maybeLoadFteTables();
   }
+
+  componentWillUnmount() {
+    this._mounted = false;
+  }
+
+  componentDidUpdate(prevProps) {
+    if (this.props.match.path !== prevProps.match.path) {
+      this._maybeLoadFteTables();
+    }
+  }
+
+  _maybeLoadFteTables() {
+    const { match } = this.props;
+    if (!ROUTES_WITH_FTE_BANNERS.test(match.path)) return;
+    if (this.state.fte_tables_loaded) return;
+    ensure_loaded({ table_keys: ["programFtes"] }).then(() => {
+      if (this._mounted) {
+        this.setState({ fte_tables_loaded: true });
+      }
+    });
+  }
+
   render() {
     const {
       description,
@@ -448,7 +436,9 @@ export class StandardRouteContainer extends React.Component {
       </div>
     );
   }
-}
+};
+
+export const StandardRouteContainer = withRouter(StandardRouteContainerInner);
 
 export const scroll_into_view_and_focus = (
   element,
