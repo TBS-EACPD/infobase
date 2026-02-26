@@ -10,6 +10,10 @@ import {
   write_to_db,
 } from "./db_utils/index.js";
 import {
+  create_github_issue,
+  make_github_issue_from_completed_template,
+} from "./github_utils/index.js";
+import {
   make_slack_message_from_completed_template,
   send_to_slack,
 } from "./slack_utils/index.js";
@@ -105,7 +109,7 @@ const make_form_backend = (templates) => {
     next();
   });
 
-  form_backend.post("/submit_form", async (request, response, next) => {
+  form_backend.post("/submit_form", async (request, response) => {
     const { template_name, completed_template } = get_request_content(request);
 
     const original_template = templates[template_name];
@@ -119,6 +123,7 @@ const make_form_backend = (templates) => {
         "or does not validate against its corresponding template";
       response.status(400).send(error_message);
       log_error_case(request, error_message);
+      return;
     } else {
       const this_client_is_in_timeout = throttle_requests_by_client(
         `${request.ip}${completed_template.client_id || ""}`
@@ -128,33 +133,51 @@ const make_form_backend = (templates) => {
           "Bad Request: too many recent requests from your IP, try again later.";
         response.status(400).send(error_message);
         log_error_case(request, error_message);
-        return null;
+        return;
       } else {
-        send_to_slack(
-          make_slack_message_from_completed_template(
+        if (template_name === "report_a_problem") {
+          const githubIssue = make_github_issue_from_completed_template(
             template_name,
             original_template,
             completed_template
-          )
-        ).catch((error) => log_error_case(request, error));
-
-        await write_to_db(
-          request,
-          template_name,
-          original_template,
-          completed_template
-        )
-          .then(() => {
-            response.status(200).send();
-            log_success_case(request);
-          })
-          .catch((error) => {
-            response.status(500).send(`Internal Server Error: ${error}`);
+          );
+          try {
+            const issueResult = await create_github_issue(githubIssue);
+            if (issueResult.success) {
+              response.status(200).json({ issueUrl: issueResult.url });
+              log_success_case(request);
+              return;
+            }
+          } catch (error) {
             log_error_case(request, error);
-          });
-      }
+            response.status(500).send(`Internal Server Error: ${error}`);
+            return;
+          }
+        }
 
-      next();
+        try {
+          await send_to_slack(
+            make_slack_message_from_completed_template(
+              template_name,
+              original_template,
+              completed_template
+            )
+          );
+
+          await write_to_db(
+            request,
+            template_name,
+            original_template,
+            completed_template
+          );
+
+          response.status(200).send();
+          log_success_case(request);
+        } catch (error) {
+          response.status(500).send(`Internal Server Error: ${error}`);
+          log_error_case(request, error);
+        }
+      }
     }
   });
 

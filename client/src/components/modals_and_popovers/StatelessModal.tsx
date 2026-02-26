@@ -9,6 +9,7 @@ import "./bootstrap_modal_exstension.scss";
 const StatelessModalDefaultProps = {
   close_text: _.upperFirst(trivial_text_maker("close")) as React.ReactNode,
   include_close_button_in_header: false,
+  size: "xl" as "sm" | "lg" | "xl",
 };
 type StatelessModalProps = typeof StatelessModalDefaultProps & {
   on_close_callback: () => void;
@@ -48,6 +49,7 @@ export class StatelessModal extends React.Component<
       include_close_button_in_header,
       additional_dialog_class,
       children,
+      size,
     } = this.props;
 
     const common_layout = (
@@ -90,7 +92,7 @@ export class StatelessModal extends React.Component<
     return (
       <Modal
         show={show}
-        size="xl"
+        size={size}
         onHide={this.closeModal}
         dialogClassName={classNames("modal-dialog", additional_dialog_class)}
         centered

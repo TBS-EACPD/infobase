@@ -114,7 +114,6 @@ class FormFrontend extends React.Component {
     const {
       sent_to_backend,
       awaiting_backend_response,
-
       template_name,
       template,
       completed_template,
@@ -140,11 +139,25 @@ class FormFrontend extends React.Component {
           MISC2: `${template_name}: ${backend_response.error_message}`,
         });
 
-        this._is_mounted &&
+        if (this._is_mounted) {
           this.setState({
             awaiting_backend_response: false,
             backend_response,
           });
+
+          // If submission was successful and there's an issue URL, close this modal and notify parent
+          if (backend_response.success && !!backend_response.issueUrl) {
+            // Close the parent modal
+            if (typeof this.props.onClose === "function") {
+              this.props.onClose();
+            }
+
+            // Notify parent about the successful submission with the issue URL
+            if (typeof this.props.onSuccessWithIssue === "function") {
+              this.props.onSuccessWithIssue(backend_response.issueUrl);
+            }
+          }
+        }
       });
 
       this.setState({ sent_to_backend: true });
@@ -152,6 +165,24 @@ class FormFrontend extends React.Component {
       this.props.on_submitted();
     }
   }
+
+  resetForm = () => {
+    _.chain(this.state.template)
+      .pickBy(({ form_type }) => form_type === "textarea")
+      .forEach(
+        (field_info, key) =>
+          (document.getElementById(get_field_id(key)).value = "")
+      )
+      .value();
+
+    this.setState({
+      sent_to_backend: false,
+      awaiting_backend_response: false,
+      backend_response: {},
+      completed_template: {},
+    });
+  };
+
   render() {
     const {
       loading,
@@ -414,24 +445,7 @@ class FormFrontend extends React.Component {
                         style={{ float: "right" }}
                         onClick={(event) => {
                           event.preventDefault();
-
-                          _.chain(user_fields)
-                            .pickBy(({ form_type }) => form_type === "textarea")
-                            .forEach(
-                              (field_info, key) =>
-                                (document.getElementById(
-                                  get_field_id(key)
-                                ).value = "")
-                            )
-                            .value();
-
-                          this.setState({
-                            ...this.state,
-                            sent_to_backend: false,
-                            awaiting_backend_response: false,
-                            backend_response: {},
-                            completed_template: {},
-                          });
+                          this.resetForm();
                         }}
                       >
                         {text_maker("form_frontend_reset")}
