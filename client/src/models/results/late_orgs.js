@@ -20,7 +20,7 @@ import {
   LATE_ACTUAL_FTE_ORG_OVERRIDE,
 } from "./results";
 
-const EXEMPT_ORGS = ["151"];
+const EXEMPT_ORGS = ["151", "350", "563", "564"];
 
 const apply_exempt = (org_ids) => _.difference(org_ids, EXEMPT_ORGS);
 

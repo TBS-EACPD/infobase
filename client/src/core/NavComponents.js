@@ -11,7 +11,6 @@ import {
   result_docs_in_tabling_order,
   get_late_results_orgs,
   get_late_resources_orgs,
-  get_late_actual_fte_orgs,
   get_late_planned_fte_orgs,
 } from "src/models/results";
 import { Dept } from "src/models/subjects";
@@ -276,40 +275,8 @@ const LateDpResourcesBanner = () => {
     />
   );
 };
-const LateDrrFteResources = () => {
-  const route_filter = (match, _history) =>
-    /^\/(start|tag-explorer|rpb)/.test(match.path);
-
-  const late_orgs = get_late_actual_fte_orgs();
-  if (_.isEmpty(late_orgs)) return null;
-
-  const banner_content = (
-    <Fragment>
-      {
-        {
-          en: "The latest actual FTE values do not include values from the organizations listed below, as their data is not yet available. Updates will follow.",
-          fr: "Les dernières valeurs ETP réelles des organisations ci-dessous ne sont pas encore disponibles. Des mises à jour suivront au fur et à mesure de la transmission de ces données.",
-        }[lang]
-      }
-      <MultiColumnList
-        list_items={_.map(
-          late_orgs,
-          (org_id) => Dept.store.lookup(org_id).name
-        )}
-        column_count={2}
-      />
-    </Fragment>
-  );
-
-  return (
-    <HeaderBanner
-      route_filter={route_filter}
-      banner_content={banner_content}
-      banner_class="warning"
-      additional_class_names="medium-panel-text"
-    />
-  );
-};
+// TODO: temporary – hidden until LDC/WATER/MJRC etc. handling is fixed; restore from git history if needed
+const LateDrrFteResources = () => null;
 
 const LatePlannedFteBanner = () => {
   const route_filter = (match, _history) =>
