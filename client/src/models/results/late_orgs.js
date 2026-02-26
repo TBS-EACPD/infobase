@@ -6,17 +6,17 @@
 
 import _ from "lodash";
 
-import { Table } from "src/tables/TableClass";
 import { Dept } from "src/models/subjects";
 import { run_template } from "src/models/text";
 import { year_templates } from "src/models/years";
+
+import { Table } from "src/tables/TableClass";
+
 import {
   ResultCounts,
   result_docs,
   result_docs_in_tabling_order,
   get_result_doc_keys,
-  current_drr_key,
-  current_dp_key,
   LATE_ACTUAL_FTE_ORG_OVERRIDE,
 } from "./results";
 
@@ -34,9 +34,7 @@ const get_expected_results_depts = () =>
 
 const get_expected_planned_resources_depts = () =>
   _.chain(Dept.store.get_all())
-    .filter(
-      (d) => d.is_dp_org && d.has_planned_spending && !d.is_dead
-    )
+    .filter((d) => d.is_dp_org && d.has_planned_spending && !d.is_dead)
     .value();
 
 // ---- Detection (internal): return [] when data not ready or on error ----
@@ -80,7 +78,8 @@ const detect_late_resources_orgs = () => {
 
 const detect_late_actual_fte_orgs = () => {
   try {
-    const table = Table.store.has("programFtes") && Table.store.lookup("programFtes");
+    const table =
+      Table.store.has("programFtes") && Table.store.lookup("programFtes");
     if (!table || !table.data || _.isEmpty(table.data)) return [];
 
     const expected = get_expected_results_depts();
@@ -102,7 +101,8 @@ const detect_late_actual_fte_orgs = () => {
 
 const detect_late_planned_fte_orgs = () => {
   try {
-    const table = Table.store.has("programFtes") && Table.store.lookup("programFtes");
+    const table =
+      Table.store.has("programFtes") && Table.store.lookup("programFtes");
     if (!table || !table.data || _.isEmpty(table.data)) return [];
 
     const expected = get_expected_planned_resources_depts();
