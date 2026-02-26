@@ -16,7 +16,6 @@ import {
   ResultDrCounts,
   ResultPrCounts,
   result_statuses,
-  result_docs,
   link_to_results_infograph,
   get_result_doc_keys,
   get_year_for_doc_key,

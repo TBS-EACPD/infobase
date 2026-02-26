@@ -6,8 +6,8 @@ import { declare_panel } from "src/panels/PanelRegistry";
 
 import { create_text_maker_component } from "src/components/index";
 
-import { get_late_actual_fte_orgs } from "src/models/results";
 import { get_footnotes_by_subject_and_topic } from "src/models/footnotes/footnotes";
+import { get_late_actual_fte_orgs } from "src/models/results";
 
 import { PlannedActualTable } from "./PlannedActualTable";
 

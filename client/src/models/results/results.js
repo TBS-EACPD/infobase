@@ -2,7 +2,7 @@ import _ from "lodash";
 
 import { businessConstants } from "src/models/businessConstants";
 
-import { Program, CRSO, Dept } from "src/models/subjects";
+import { Program, CRSO } from "src/models/subjects";
 
 import { trivial_text_maker, run_template } from "src/models/text";
 
