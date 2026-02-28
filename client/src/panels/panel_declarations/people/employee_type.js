@@ -65,15 +65,14 @@ const EmployeeTypePanel = ({
       .sort((a, b) => b.total_employees - a.total_employees);
   }, [data]);
 
-  if (loading) {
-    return <LeafSpinner config_name="subroute" />;
-  }
-
-  if (!calculations || calculations.length === 0) {
+  if (!loading && (!calculations || calculations.length === 0)) {
     return null;
   }
 
-  const common_text_args = calculate_common_text_args(calculations);
+  const common_text_args =
+    loading || !calculations || calculations.length === 0
+      ? {}
+      : calculate_common_text_args(calculations);
 
   const text_calculations = {
     ...common_text_args,
@@ -86,28 +85,39 @@ const EmployeeTypePanel = ({
 
   return (
     <StdPanel {...{ title, footnotes, sources, glossary_keys }}>
-      <Col size={12} isText>
-        <TM k={subject_type + "_employee_type_text"} args={text_calculations} />
-      </Col>
-      <Col size={12} isGraph>
-        <MemoizedNivoLineBarToggle
-          legend_title={text_maker("employee_type")}
-          bar={true}
-          graph_options={{
-            ticks,
-            y_axis: text_maker("employees"),
-            formatter: formats.big_int_raw,
-            responsive: true,
-            animate: window.matchMedia(
-              "(prefers-reduced-motion: no-preference)"
-            ).matches,
-            role: "img",
-            ariaLabel: `${text_maker("employee_type")} ${subject.name}`,
-          }}
-          initial_graph_mode="bar_stacked"
-          data={calculations}
-        />
-      </Col>
+      {loading ? (
+        <Col size={12}>
+          <LeafSpinner config_name="subroute" />
+        </Col>
+      ) : (
+        <>
+          <Col size={12} isText>
+            <TM
+              k={subject_type + "_employee_type_text"}
+              args={text_calculations}
+            />
+          </Col>
+          <Col size={12} isGraph>
+            <MemoizedNivoLineBarToggle
+              legend_title={text_maker("employee_type")}
+              bar={true}
+              graph_options={{
+                ticks,
+                y_axis: text_maker("employees"),
+                formatter: formats.big_int_raw,
+                responsive: true,
+                animate: window.matchMedia(
+                  "(prefers-reduced-motion: no-preference)"
+                ).matches,
+                role: "img",
+                ariaLabel: `${text_maker("employee_type")} ${subject.name}`,
+              }}
+              initial_graph_mode="bar_stacked"
+              data={calculations}
+            />
+          </Col>
+        </>
+      )}
     </StdPanel>
   );
 };
@@ -125,8 +135,15 @@ export const declare_employee_type_panel = () =>
         "CASUAL_PEOPLE",
         "STUD_PEOPLE",
       ],
-      render(props) {
-        return <EmployeeTypePanel {...props} subject_type={subject_type} />;
+      calculate: ({ subject }) => {
+        // For gov, always return true. For dept, check if people_data exists
+        if (subject_type === "gov") {
+          return true;
+        }
+        return subject.has_data("people_data");
       },
+      render: (props) => (
+        <EmployeeTypePanel {...props} subject_type={subject_type} />
+      ),
     }),
   });
