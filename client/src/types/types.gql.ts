@@ -176,8 +176,12 @@ export type Gov = {
   covid_summary?: Maybe<Array<Maybe<CovidGovSummary>>>;
   dr_target_counts_granular?: Maybe<Array<Maybe<AllDocResultCount>>>;
   dr_target_counts_summary?: Maybe<Array<Maybe<AllDocResultCount>>>;
+  has_finance_data?: Maybe<Scalars['Boolean']>;
   id?: Maybe<Scalars['String']>;
   name?: Maybe<Scalars['String']>;
+  org_transfer_payments?: Maybe<Array<Maybe<OrgTransferPayments>>>;
+  org_vote_stat_estimates?: Maybe<Array<Maybe<OrgVoteStatEstimates>>>;
+  org_vote_stat_pa?: Maybe<Array<Maybe<OrgVoteStatPa>>>;
   people_data?: Maybe<GovPeopleSummary>;
   pr_target_counts_granular?: Maybe<Array<Maybe<AllDocResultCount>>>;
   pr_target_counts_summary?: Maybe<Array<Maybe<AllDocResultCount>>>;
@@ -289,6 +293,7 @@ export type Org = SubjectI & {
   faa_schedule_hr_status?: Maybe<Scalars['String']>;
   faa_schedule_institutional?: Maybe<Scalars['String']>;
   federal_ownership?: Maybe<Scalars['String']>;
+  has_finance_data?: Maybe<Scalars['Boolean']>;
   has_people_data?: Maybe<Scalars['Boolean']>;
   has_results?: Maybe<Scalars['Boolean']>;
   has_services?: Maybe<Scalars['Boolean']>;
@@ -354,6 +359,7 @@ export type OrgPeopleData = {
 
 export type OrgTransferPayments = {
   __typename?: 'OrgTransferPayments';
+  dept_code?: Maybe<Scalars['String']>;
   name?: Maybe<Scalars['String']>;
   pa_last_year_1_auth?: Maybe<Scalars['Float']>;
   pa_last_year_1_exp?: Maybe<Scalars['Float']>;
@@ -370,6 +376,7 @@ export type OrgTransferPayments = {
 
 export type OrgVoteStatEstimates = {
   __typename?: 'OrgVoteStatEstimates';
+  dept_code?: Maybe<Scalars['String']>;
   doc?: Maybe<Scalars['String']>;
   est_in_year?: Maybe<Scalars['Float']>;
   est_last_year?: Maybe<Scalars['Float']>;
@@ -383,6 +390,7 @@ export type OrgVoteStatEstimates = {
 
 export type OrgVoteStatPa = {
   __typename?: 'OrgVoteStatPa';
+  dept_code?: Maybe<Scalars['String']>;
   name?: Maybe<Scalars['String']>;
   pa_last_year_2_auth?: Maybe<Scalars['Float']>;
   pa_last_year_2_exp?: Maybe<Scalars['Float']>;
@@ -422,6 +430,7 @@ export type Program = SubjectI & {
   crso?: Maybe<Crso>;
   description?: Maybe<Scalars['String']>;
   drs?: Maybe<Array<Maybe<Result>>>;
+  has_finance_data?: Maybe<Scalars['Boolean']>;
   has_results?: Maybe<Scalars['Boolean']>;
   has_services?: Maybe<Scalars['Boolean']>;
   id?: Maybe<Scalars['String']>;
