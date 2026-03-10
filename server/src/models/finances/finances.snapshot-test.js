@@ -154,6 +154,63 @@ query ($lang: String = "en") {
   }
 }`;
 
+const org_has_finance_data_query = `
+query ($lang: String = "en") {
+  root(lang: $lang) {
+    org_with_finance: org(dept_code: "CPCC") {
+      id
+      dept_code
+      has_finance_data
+    }
+    org_without_finance: org(dept_code: "ZZZZ") {
+      id
+      dept_code
+      has_finance_data
+    }
+  }
+}`;
+
+const program_has_finance_data_query = `
+query ($lang: String = "en") {
+  root(lang: $lang) {
+    program_with_finance: program(id: "CPCC-ISC00") {
+      id
+      has_finance_data
+    }
+    program_without_finance: program(id: "ND-ISS01") {
+      id
+      has_finance_data
+    }
+  }
+}`;
+
+const gov_has_finance_data_query = `
+query ($lang: String = "en") {
+  root(lang: $lang) {
+    gov {
+      id
+      has_finance_data
+    }
+  }
+}`;
+
+const gov_finance_data_query = `
+query ($lang: String = "en") {
+  root(lang: $lang) {
+    gov {
+      id
+      org_vote_stat_pa {
+        vote_num
+        dept_code
+      }
+      org_vote_stat_estimates {
+        vote_num
+        dept_code
+      }
+    }
+  }
+}`;
+
 describe("finance data", () => {
   it("org vote stat pa snapshot", async () => {
     const data = await execQuery(org_vote_stat_pa_query, {});
@@ -181,6 +238,22 @@ describe("finance data", () => {
   });
   it("program fte snapshot", async () => {
     const data = await execQuery(program_fte_query, {});
+    return expect(data).toMatchSnapshot();
+  });
+  it("org has_finance_data snapshot", async () => {
+    const data = await execQuery(org_has_finance_data_query, {});
+    return expect(data).toMatchSnapshot();
+  });
+  it("program has_finance_data snapshot", async () => {
+    const data = await execQuery(program_has_finance_data_query, {});
+    return expect(data).toMatchSnapshot();
+  });
+  it("gov has_finance_data snapshot", async () => {
+    const data = await execQuery(gov_has_finance_data_query, {});
+    return expect(data).toMatchSnapshot();
+  });
+  it("gov org_vote_stat_pa and org_vote_stat_estimates snapshot", async () => {
+    const data = await execQuery(gov_finance_data_query, {});
     return expect(data).toMatchSnapshot();
   });
 });
