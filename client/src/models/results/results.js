@@ -537,9 +537,25 @@ const dp_docs = build_doc_info_objects("dp", [
       "{{planning_year_3}}",
     ],
     doc_url_en:
-      "https://www.canada.ca/en/treasury-board-secretariat/services/planned-government-spending/reports-plans-priorities/2024-25-departmental-plans.html",
+      "https://www.canada.ca/en/treasury-board-secretariat/services/planned-government-spending/reports-plans-priorities/2025-26-departmental-plans.html",
     doc_url_fr:
-      "https://www.canada.ca/fr/secretariat-conseil-tresor/services/depenses-prevues/rapports-plans-priorites/plans-ministeriels-2024-2025.html",
+      "https://www.canada.ca/fr/secretariat-conseil-tresor/services/depenses-prevues/rapports-plans-priorites/plans-ministeriels-2025-2025.html",
+    late_results_orgs: ["297", "278"],
+    late_resources_orgs: [],
+    late_planned_fte_orgs: [],
+    temp_untabled_orgs: [],
+  },
+  {
+    year_short: "2026",
+    resource_years: [
+      "{{planning_year_1}}",
+      "{{planning_year_2}}",
+      "{{planning_year_3}}",
+    ],
+    doc_url_en:
+      "https://www.canada.ca/en/treasury-board-secretariat/services/planned-government-spending/reports-plans-priorities/2026-27-departmental-plans.html",
+    doc_url_fr:
+      "https://www.canada.ca/fr/secretariat-conseil-tresor/services/depenses-prevues/rapports-plans-priorites/plans-ministeriels-2026-2027.html",
     late_results_orgs: ["297", "278"],
     late_resources_orgs: [],
     late_planned_fte_orgs: [],

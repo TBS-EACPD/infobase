@@ -14,10 +14,10 @@ export type Scalars = {
 
 export type AllDocResultCount = {
   __typename?: 'AllDocResultCount';
-  dp24_indicators?: Maybe<Scalars['Int']>;
-  dp24_results?: Maybe<Scalars['Int']>;
   dp25_indicators?: Maybe<Scalars['Int']>;
   dp25_results?: Maybe<Scalars['Int']>;
+  dp26_indicators?: Maybe<Scalars['Int']>;
+  dp26_results?: Maybe<Scalars['Int']>;
   drr19_indicators_future?: Maybe<Scalars['Int']>;
   drr19_indicators_met?: Maybe<Scalars['Int']>;
   drr19_indicators_not_available?: Maybe<Scalars['Int']>;
