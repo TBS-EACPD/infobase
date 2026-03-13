@@ -20,7 +20,7 @@ import {
   LATE_ACTUAL_FTE_ORG_OVERRIDE,
 } from "./results";
 
-const EXEMPT_ORGS = ["151", "350", "563", "564"];
+const EXEMPT_ORGS = ["151"];
 
 const apply_exempt = (org_ids) => _.difference(org_ids, EXEMPT_ORGS);
 
@@ -142,14 +142,16 @@ export const get_late_results_orgs = (doc_key) => {
   return detected.length > 0 ? detected : config;
 };
 
-/** Late planned spending/resources for the latest DP. Config first, then auto-detect. */
+/** Late planned spending/resources for the latest DP. Config first, then auto-detect. Excludes orgs already in late results (whole DP missing) to avoid redundant banners. */
 export const get_late_resources_orgs = (doc_key) => {
   const doc = result_docs[doc_key];
   if (!doc || !doc.is_dp) return [];
   const config = doc.late_resources_orgs || [];
   if (!is_latest_dp_doc(doc_key)) return config;
   const detected = detect_late_resources_orgs();
-  return detected.length > 0 ? detected : config;
+  const list = detected.length > 0 ? detected : config;
+  const late_results = get_late_results_orgs(doc_key);
+  return _.difference(list, late_results);
 };
 
 /** Late actual FTE (DRR). Override first, then auto-detect. */
@@ -159,7 +161,7 @@ export const get_late_actual_fte_orgs = () => {
   return LATE_ACTUAL_FTE_ORG_OVERRIDE || [];
 };
 
-/** Late planned FTE for the latest DP. Config first, then auto-detect. */
+/** Late planned FTE for the latest DP. Config first, then auto-detect. Excludes orgs already in late results (whole DP missing) to avoid redundant banners. */
 export const get_late_planned_fte_orgs = () => {
   const dp_keys = get_result_doc_keys("dp");
   if (_.isEmpty(dp_keys)) return [];
@@ -168,7 +170,9 @@ export const get_late_planned_fte_orgs = () => {
   if (!doc || !doc.is_dp) return [];
   const config = doc.late_planned_fte_orgs || [];
   const detected = detect_late_planned_fte_orgs();
-  return detected.length > 0 ? detected : config;
+  const list = detected.length > 0 ? detected : config;
+  const late_results = get_late_results_orgs(latest_key);
+  return _.difference(list, late_results);
 };
 
 /** Late-dept count for DRR gov panel: late results + temp_untabled (manual only). */

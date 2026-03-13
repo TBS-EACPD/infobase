@@ -366,7 +366,12 @@ const StandardRouteContainerInner = class StandardRouteContainerInner extends Re
     const { match } = this.props;
     if (!ROUTES_WITH_FTE_BANNERS.test(match.path)) return;
     if (this.state.fte_tables_loaded) return;
-    ensure_loaded({ table_keys: ["programFtes"] }).then(() => {
+    // On home (start), also load result counts so LateResultsBanner can show 2026 DP late orgs
+    const isStart = /^\/(start)/.test(match.path);
+    ensure_loaded({
+      table_keys: ["programFtes"],
+      ...(isStart ? { requires_result_counts: true } : {}),
+    }).then(() => {
       if (this._mounted) {
         this.setState({ fte_tables_loaded: true });
       }
