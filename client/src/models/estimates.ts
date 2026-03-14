@@ -15,7 +15,19 @@ export const estimates_docs = {
     fr: "Budget principal",
     order: 0,
   },
+  // Alias used in some CSV sources, equivalent to MAINS
+  ME: {
+    en: "Main Estimates",
+    fr: "Budget principal",
+    order: 0,
+  },
   MYA: {
+    en: "Multi Year Appropriations",
+    fr: "Crédits disponibles des précédents exercices",
+    order: 1,
+  },
+  // Alias used in some CSV sources, equivalent to MYA
+  MULTI: {
     en: "Multi Year Appropriations",
     fr: "Crédits disponibles des précédents exercices",
     order: 1,
