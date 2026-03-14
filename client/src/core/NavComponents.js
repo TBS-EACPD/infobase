@@ -341,15 +341,17 @@ const SpecialWarrantsBanner = () => {
   );
 };
 
-const ROUTES_WITH_FTE_BANNERS = /^\/(start|tag-explorer|rpb)/;
+// Routes that show late-warning header banners and/or in-page late-warning panels.
+// Load result counts + programFtes so late warnings load consistently (initial load, breadcrumb, return).
+const ROUTES_WITH_LATE_WARNINGS = /^\/(start|tag-explorer|rpb|gov|dept|crso|program)/;
 
 const StandardRouteContainerInner = class StandardRouteContainerInner extends React.Component {
-  state = { fte_tables_loaded: false };
+  state = { late_warning_data_loaded: false };
 
   componentDidMount() {
     this._mounted = true;
     scroll_to_top();
-    this._maybeLoadFteTables();
+    this._maybeLoadLateWarningData();
   }
 
   componentWillUnmount() {
@@ -358,22 +360,20 @@ const StandardRouteContainerInner = class StandardRouteContainerInner extends Re
 
   componentDidUpdate(prevProps) {
     if (this.props.match.path !== prevProps.match.path) {
-      this._maybeLoadFteTables();
+      this._maybeLoadLateWarningData();
     }
   }
 
-  _maybeLoadFteTables() {
+  _maybeLoadLateWarningData() {
     const { match } = this.props;
-    if (!ROUTES_WITH_FTE_BANNERS.test(match.path)) return;
-    if (this.state.fte_tables_loaded) return;
-    // On home (start), also load result counts so LateResultsBanner can show 2026 DP late orgs
-    const isStart = /^\/(start)/.test(match.path);
+    if (!ROUTES_WITH_LATE_WARNINGS.test(match.path)) return;
+    if (this.state.late_warning_data_loaded) return;
     ensure_loaded({
       table_keys: ["programFtes"],
-      ...(isStart ? { requires_result_counts: true } : {}),
+      requires_result_counts: true,
     }).then(() => {
       if (this._mounted) {
-        this.setState({ fte_tables_loaded: true });
+        this.setState({ late_warning_data_loaded: true });
       }
     });
   }

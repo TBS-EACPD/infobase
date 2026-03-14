@@ -593,8 +593,8 @@ const get_result_doc_keys = (doc_type) =>
 const current_drr_key = _.last(get_result_doc_keys("drr"));
 const current_dp_key = _.last(get_result_doc_keys("dp"));
 
-/** Manual override for "late actual FTE" orgs when auto-detect is not used (e.g. before data load). */
-export const LATE_ACTUAL_FTE_ORG_OVERRIDE = [];
+/** Manual override for "late actual FTE" orgs. When non-empty, used instead of auto-detect (e.g. CRCC 297, PCO 278). */
+export const LATE_ACTUAL_FTE_ORG_OVERRIDE = ["297", "278"];
 
 export {
   Result,
