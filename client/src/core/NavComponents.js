@@ -343,7 +343,8 @@ const SpecialWarrantsBanner = () => {
 
 // Routes that show late-warning header banners and/or in-page late-warning panels.
 // Load result counts + programFtes so late warnings load consistently (initial load, breadcrumb, return).
-const ROUTES_WITH_LATE_WARNINGS = /^\/(start|tag-explorer|rpb|gov|dept|crso|program)/;
+const ROUTES_WITH_LATE_WARNINGS =
+  /^\/(start|tag-explorer|rpb|gov|dept|crso|program)/;
 
 const StandardRouteContainerInner = class StandardRouteContainerInner extends React.Component {
   state = { late_warning_data_loaded: false };

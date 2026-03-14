@@ -148,7 +148,10 @@ export const get_late_results_orgs = (doc_key) => {
  * in-page panels (e.g. Finance bubble) where the late-results banner is not shown; in that case
  * we also include late-results orgs so the banner lists all orgs missing 2026 DP data (consistent
  * with the planned-FTE banner and the homepage late-results banner). */
-export const get_late_resources_orgs = (doc_key, { exclude_late_results = true } = {}) => {
+export const get_late_resources_orgs = (
+  doc_key,
+  { exclude_late_results = true } = {}
+) => {
   const doc = result_docs[doc_key];
   if (!doc || !doc.is_dp) return [];
   const config = doc.late_resources_orgs || [];
@@ -165,7 +168,8 @@ export const get_late_resources_orgs = (doc_key, { exclude_late_results = true }
 
 /** Late actual FTE (DRR). Override first when set, then auto-detect. */
 export const get_late_actual_fte_orgs = () => {
-  if (!_.isEmpty(LATE_ACTUAL_FTE_ORG_OVERRIDE)) return LATE_ACTUAL_FTE_ORG_OVERRIDE;
+  if (!_.isEmpty(LATE_ACTUAL_FTE_ORG_OVERRIDE))
+    return LATE_ACTUAL_FTE_ORG_OVERRIDE;
   const detected = detect_late_actual_fte_orgs();
   if (detected.length > 0) return detected;
   return [];
