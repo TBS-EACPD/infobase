@@ -17,6 +17,7 @@
     "tmux_env": "sh scripts/dev_scripts/tmux_env.sh",
     "refresh_pipeline_data": "sh scripts/dev_scripts/refresh_pipeline_data.sh",
     "download_service_data": "sh scripts/dev_scripts/download_service_data.sh",
+    "convert_csv": "node scripts/convert_csv_format.js",
     "prepare": "husky install",
     "tests": "(cd client && npm run tests); (cd server && npm run tests); (cd form_backend && npm run tests)"
   },
