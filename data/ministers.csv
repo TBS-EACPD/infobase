@@ -1,55 +1,54 @@
-﻿"id","name_en","name_fr"
-1,"Minister of Energy and Natural Resources","Ministre de l’Énergie et des Ressources naturelles"
-3,"Minister of Jobs and Families","Ministre de l’Emploi et des Familles"
-4,"Prime Minister","Premier ministre"
-5,"Minister of Canadian Identity and Culture","Ministre de l’Identité et de la Culture canadiennes"
-6,"Minister of Women and Gender Equality","Ministre des Femmes et de l’Égalité des genres"
-8,"Minister of Public Safety","Ministre de la Sécurité publique"
+id,name_en,name_fr
+1,Minister of Energy and Natural Resources,Ministre de l’Énergie et des Ressources naturelles
+3,Minister of Jobs and Families,Ministre de l’Emploi et des Familles
+4,Prime Minister,Premier ministre
+5,Minister of Canadian Identity and Culture,Ministre de l’Identité et de la Culture canadiennes
+6,Minister of Women and Gender Equality,Ministre des Femmes et de l’Égalité des genres
+8,Minister of Public Safety,Ministre de la Sécurité publique
 9,"Minister of Government Transformation, Public Works and Procurement","Ministre de la Transformation du gouvernement, des Travaux publics et de l’Approvisionnement"
-10,"Minister responsible for Official Languages","Ministre responsable des Langues officielles"
-11,"Minister of Industry","Ministre de l'Industrie"
+10,Minister responsible for Official Languages,Ministre responsable des Langues officielles
+11,Minister of Industry,Ministre de l'Industrie
 12,"Minister of Immigration, Refugees and Citizenship","Ministre de l'Immigration, des Réfugiés et de la Citoyenneté"
-13,"President of the Treasury Board","Président du Conseil du Trésor"
-14,"Minister of Indigenous Services","Ministre des Services aux autochtones"
+13,President of the Treasury Board,Président du Conseil du Trésor
+14,Minister of Indigenous Services,Ministre des Services aux autochtones
 15,"Minister of Environment, Climate Change and Nature","Ministre de l'Environnement, du Changement climatique et de la Nature"
-16,"Secretary of State (Canada Revenue Agency and Financial Institutions)","Secrétaire d’État (Agence du revenu du Canada et Institutions financières)"
-18,"Minister of Agriculture and Agri-Food","Ministre de l'Agriculture et de l'Agroalimentaire"
-19,"President of the King’s Privy Council for Canada","Président du Conseil privé du Roi pour le Canada"
-20,"Attorney General of Canada","Procureur général du Canada"
-21,"Minister of Justice","Ministre de la Justice"
-22,"Leader of the Government in the House of Commons","Leader du gouvernement à la Chambre des communes"
-24,"Minister of National Defence","Ministre de la Défense nationale"
-25,"Minister of Transport","Ministre des Transports"
-26,"Secretary of State (International Development)","Secrétaire d’État (Développement international)"
-27,"Minister of Foreign Affairs","Ministre des Affaires étrangères"
-28,"Minister of Fisheries","Ministre des Pêches"
-29,"Minister of Health","Ministre de la Santé"
-30,"Minister of Crown-Indigenous Relations","Ministre des Relations Couronne-Autochtones"
-31,"Minister of Northern and Arctic Affairs","Ministre des Affaires du Nord et de l’Arctique"
-32,"Minister of Veterans Affairs","Ministre des Anciens Combattants"
-33,"Secretary of State (Children and Youth)","Secrétaire d’État (Enfance et Jeunesse)"
-34,"Secretary of State (Defence Procurement)","Secrétaire d’État (Approvisionnement en matière de défense)"
-35,"Minister of Housing and Infrastructure","Ministre du Logement et de l’Infrastructure"
-36,"Minister of Finance and National Revenue","Ministre des Finances et du Revenu national"
-37,"Secretary of State (Sport)","Secrétaire d’État (Sports)"
-38,"Secretary of State (Rural Development)","Secrétaire d’État (Développement rural)"
+16,Secretary of State (Canada Revenue Agency and Financial Institutions),Secrétaire d’État (Agence du revenu du Canada et Institutions financières)
+18,Minister of Agriculture and Agri-Food,Ministre de l'Agriculture et de l'Agroalimentaire
+19,President of the King’s Privy Council for Canada,Président du Conseil privé du Roi pour le Canada
+20,Attorney General of Canada,Procureur général du Canada
+21,Minister of Justice,Ministre de la Justice
+22,Leader of the Government in the House of Commons,Leader du gouvernement à la Chambre des communes
+24,Minister of National Defence,Ministre de la Défense nationale
+25,Minister of Transport,Ministre des Transports
+26,Secretary of State (International Development),Secrétaire d’État (Développement international)
+27,Minister of Foreign Affairs,Ministre des Affaires étrangères
+28,Minister of Fisheries,Ministre des Pêches
+29,Minister of Health,Ministre de la Santé
+30,Minister of Crown-Indigenous Relations,Ministre des Relations Couronne-Autochtones
+31,Minister of Northern and Arctic Affairs,Ministre des Affaires du Nord et de l’Arctique
+32,Minister of Veterans Affairs,Ministre des Anciens Combattants
+33,Secretary of State (Children and Youth),Secrétaire d’État (Enfance et Jeunesse)
+34,Secretary of State (Defence Procurement),Secrétaire d’État (Approvisionnement en matière de défense)
+35,Minister of Housing and Infrastructure,Ministre du Logement et de l’Infrastructure
+36,Minister of Finance and National Revenue,Ministre des Finances et du Revenu national
+37,Secretary of State (Sport),Secrétaire d’État (Sports)
+38,Secretary of State (Rural Development),Secrétaire d’État (Développement rural)
 39,"Minister responsible for Canada-U.S. Trade, Intergovernmental Affairs and One Canadian Economy","Ministre responsable du Commerce Canada–États-Unis, des Affaires intergouvernementales et de l’Unité de l’économie canadienne"
-40,"Minister of Internal Trade","Ministre du Commerce intérieur"
-41,"Secretary of State (Labour)","Secrétaire d’État (Travail)"
-42,"Secretary of State (Small Business and Tourism)","Secrétaire d’État (Petites Entreprises et Tourisme)"
-43,"Minister of Artificial Intelligence and Digital Innovation","Ministre de l’Intelligence artificielle et de l’Innovation numérique"
-44,"Minister of International Trade","Ministre du Commerce international"
-45,"Minister responsible for Pacific Economic Development Canada","Ministre responsable de Développement économique Canada pour le Pacifique"
-46,"Minister responsible for the Federal Economic Development Agency for Southern Ontario","Ministre responsable de l’Agence fédérale de développement économique pour le Sud de l’Ontario"
-47,"Minister responsible for the Federal Economic Development Agency for Northern Ontario","Ministre responsable de l’Agence fédérale de développement économique pour le Nord de l’Ontario"
-48,"Associate Minister of National Defence","Ministre associée de la Défense nationale"
-49,"Secretary of State (Combatting Crime)","Secrétaire d’État (Lutte contre la criminalité)"
-50,"Minister responsible for the Atlantic Canada Opportunities Agency","Ministre responsable de l’Agence de promotion économique du Canada atlantique"
-51,"Minister responsible for Prairies Economic Development Canada","Ministre responsable de Développement économique Canada pour les Prairies"
-52,"Minister responsible for the Canadian Northern Economic Development Agency","Ministre responsable de l’Agence canadienne de développement économique du Nord"
-53,"Secretary of State (Seniors)","Secrétaire d’État (Aînés)"
-54,"Minister responsible for Canada Economic Development for Quebec Regions","Ministre responsable de Développement économique Canada pour les régions du Québec"
-55,"Minister of Emergency Management and Community Resilience","Ministre de la Gestion des urgences et de la Résilience des communautés"
-56,"Secretary of State (Nature)","Secrétaire d’État (Nature)"
-57,"Unspecified","Non spécifié"
-
+40,Minister of Internal Trade,Ministre du Commerce intérieur
+41,Secretary of State (Labour),Secrétaire d’État (Travail)
+42,Secretary of State (Small Business and Tourism),Secrétaire d’État (Petites Entreprises et Tourisme)
+43,Minister of Artificial Intelligence and Digital Innovation,Ministre de l’Intelligence artificielle et de l’Innovation numérique
+44,Minister of International Trade,Ministre du Commerce international
+45,Minister responsible for Pacific Economic Development Canada,Ministre responsable de Développement économique Canada pour le Pacifique
+46,Minister responsible for the Federal Economic Development Agency for Southern Ontario,Ministre responsable de l’Agence fédérale de développement économique pour le Sud de l’Ontario
+47,Minister responsible for the Federal Economic Development Agency for Northern Ontario,Ministre responsable de l’Agence fédérale de développement économique pour le Nord de l’Ontario
+48,Associate Minister of National Defence,Ministre associée de la Défense nationale
+49,Secretary of State (Combatting Crime),Secrétaire d’État (Lutte contre la criminalité)
+50,Minister responsible for the Atlantic Canada Opportunities Agency,Ministre responsable de l’Agence de promotion économique du Canada atlantique
+51,Minister responsible for Prairies Economic Development Canada,Ministre responsable de Développement économique Canada pour les Prairies
+52,Minister responsible for the Canadian Northern Economic Development Agency,Ministre responsable de l’Agence canadienne de développement économique du Nord
+53,Secretary of State (Seniors),Secrétaire d’État (Aînés)
+54,Minister responsible for Canada Economic Development for Quebec Regions,Ministre responsable de Développement économique Canada pour les régions du Québec
+55,Minister of Emergency Management and Community Resilience,Ministre de la Gestion des urgences et de la Résilience des communautés
+56,Secretary of State (Nature),Secrétaire d’État (Nature)
+57,Unspecified,Non spécifié
