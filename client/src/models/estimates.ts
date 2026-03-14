@@ -69,7 +69,9 @@ export type est_doc = keyof typeof estimates_docs;
 export const get_est_doc_glossary_key = (est_doc: est_doc) =>
   ({
     MAINS: "MAINS",
+    ME: "MAINS",
     MYA: "MYA",
+    MULTI: "MYA",
     VA: "VOTED",
     SA: "ADJUS",
     SEA: "SUPPSA",
