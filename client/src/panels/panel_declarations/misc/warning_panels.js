@@ -310,6 +310,8 @@ export const declare_late_results_warning_panel = () =>
   declare_panel({
     panel_key: "late_results_warning",
     subject_types: ["gov", "dept", "crso", "program"],
+    legacy_non_table_dependencies: ["requires_result_counts"],
+    legacy_table_dependencies: ["programFtes"],
     panel_config_func: (subject_type) => {
       const docs_with_late_orgs = _.chain(result_docs_in_tabling_order)
         .map((doc) => ({
@@ -430,6 +432,8 @@ const get_declare_late_resources_panel =
     return declare_panel({
       panel_key: `late_${planned_or_actual}_resources_warning`,
       subject_types: ["gov", "dept", "crso", "program"],
+      legacy_non_table_dependencies: ["requires_result_counts"],
+      legacy_table_dependencies: ["programFtes"],
       panel_config_func: (subject_type) => {
         switch (subject_type) {
           case "gov":
@@ -480,12 +484,18 @@ export const declare_late_actual_resources_panel =
 
 export const declare_late_planned_resources_panel =
   get_declare_late_resources_panel("planned", () =>
-    get_late_resources_orgs(Results.current_dp_key)
+    get_late_resources_orgs(Results.current_dp_key, {
+      exclude_late_results: false,
+    })
   );
 
 export const declare_late_planned_fte_panel = get_declare_late_resources_panel(
   "planned_fte",
-  get_late_planned_fte_orgs
+  () =>
+    get_late_planned_fte_orgs({
+      exclude_late_results: false,
+      exclude_orgs_in_late_resources: true,
+    })
 );
 
 export const declare_special_warrants_warning_panel = () =>

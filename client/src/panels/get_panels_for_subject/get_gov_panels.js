@@ -48,9 +48,15 @@ import {
   declare_personnel_spend_panel,
 } from "src/panels/panel_declarations/index";
 
+import { ensure_loaded } from "src/core/ensure_loaded";
 import { services_feature_flag } from "src/core/injected_build_constants";
 
-export const get_gov_panels = () => ({
+// Late warning panels need result counts + programFtes so they show correctly regardless of nav path.
+export const get_gov_panels = (subject) =>
+  ensure_loaded({
+    requires_result_counts: true,
+    table_keys: ["programFtes"],
+  }).then(() => ({
   intro: [declare_simplographic_panel()],
   financial: [
     declare_financial_key_concepts_panel(),
@@ -102,4 +108,4 @@ export const get_gov_panels = () => ({
   ],
   related: [declare_gov_related_info_panel()],
   all_data: [declare_links_to_rpb_panel()],
-});
+}));

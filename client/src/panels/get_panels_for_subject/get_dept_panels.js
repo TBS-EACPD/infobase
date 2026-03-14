@@ -70,7 +70,8 @@ import { ensure_loaded } from "src/core/ensure_loaded";
 
 import { services_feature_flag } from "src/core/injected_build_constants";
 
-// To be safe, ensure all used has_<data> checks are loaded
+// To be safe, ensure all used has_<data> checks are loaded.
+// Late warning panels need result counts + programFtes so they show correctly regardless of nav path.
 export const get_dept_panels = (subject) =>
   ensure_loaded({
     subject: subject,
@@ -78,6 +79,8 @@ export const get_dept_panels = (subject) =>
     has_covid_data: true,
     has_services: services_feature_flag,
     has_people_data: true,
+    requires_result_counts: true,
+    table_keys: ["programFtes"],
   }).then(() => ({
     intro: [declare_profile_panel(), declare_portfolio_structure_intro_panel()],
     financial: !_.chain(subject.table_ids)

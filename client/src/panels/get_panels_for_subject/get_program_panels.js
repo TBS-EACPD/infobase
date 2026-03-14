@@ -41,12 +41,15 @@ import {
 import { ensure_loaded } from "src/core/ensure_loaded";
 import { services_feature_flag } from "src/core/injected_build_constants";
 
-// To be safe, ensure all used has_<data> checks are loaded
+// To be safe, ensure all used has_<data> checks are loaded.
+// Late warning panels need result counts + programFtes so they show correctly regardless of nav path.
 export const get_program_panels = (subject) =>
   ensure_loaded({
     subject: subject,
     has_results: true,
     has_services: services_feature_flag,
+    requires_result_counts: true,
+    table_keys: ["programFtes"],
   }).then(() => ({
     intro: [
       declare_dead_program_warning_panel(),

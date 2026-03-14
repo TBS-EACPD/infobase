@@ -29,11 +29,14 @@ import {
 
 import { ensure_loaded } from "src/core/ensure_loaded";
 
-// To be safe, ensure all used has_<data> checks are loaded
+// To be safe, ensure all used has_<data> checks are loaded.
+// Late warning panels need result counts + programFtes so they show correctly regardless of nav path.
 export const get_crso_panels = (subject) =>
   ensure_loaded({
     subject: subject,
     has_results: true,
+    requires_result_counts: true,
+    table_keys: ["programFtes"],
   }).then(() => ({
     intro: [
       declare_dead_crso_warning_panel(),
