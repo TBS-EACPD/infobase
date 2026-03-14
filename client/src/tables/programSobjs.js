@@ -84,7 +84,8 @@ export default {
     const program = Program.lookup_by_dept_id_and_activity_code(row[0], row[1]);
 
     row.splice(2, 0, program.name);
-    row.splice(4, 0, sos[row[3]].text);
+    const so_num = parseInt(row[3], 10);
+    row.splice(4, 0, sos[so_num].text);
 
     return row;
   },
