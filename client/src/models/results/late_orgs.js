@@ -20,7 +20,7 @@ import {
   LATE_ACTUAL_FTE_ORG_OVERRIDE,
 } from "./results";
 
-const EXEMPT_ORGS = ["151"];
+const EXEMPT_ORGS = ["151", "564", "350"];
 
 const apply_exempt = (org_ids) => _.difference(org_ids, EXEMPT_ORGS);
 
@@ -138,6 +138,9 @@ export const get_late_results_orgs = (doc_key) => {
   if (!doc) return [];
   const config = doc.late_results_orgs || [];
   if (!is_latest_doc(doc_key)) return config;
+  // For the latest doc, treat non-empty config as a manual override.
+  // Only auto-detect when config is empty.
+  if (!_.isEmpty(config)) return config;
   const detected = detect_late_results_orgs(doc_key);
   return detected.length > 0 ? detected : config;
 };
