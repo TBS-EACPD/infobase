@@ -47,11 +47,7 @@ export const populate_depts = (
   };
 
   const valid_ministry_ids = new Set(
-    _.chain(ministries)
-      .map("id")
-      .map(normalizeMinistryId)
-      .compact()
-      .value()
+    _.chain(ministries).map("id").map(normalizeMinistryId).compact().value()
   );
 
   _.each(ministries, ({ id, name_en, name_fr }) => {
