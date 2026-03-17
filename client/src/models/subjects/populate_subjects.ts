@@ -20,10 +20,49 @@ export const populate_depts = (
   dept_code_to_csv_name: ParsedCsvWithUndefineds,
   crso: ParsedCsvWithUndefineds
 ) => {
+  const normalizeMinistryId = (raw_id: unknown): string | undefined => {
+    if (raw_id === null || typeof raw_id === "undefined") {
+      return undefined;
+    }
+
+    if (typeof raw_id === "number") {
+      return String(raw_id).replace(/\.0+$/, "");
+    }
+
+    if (typeof raw_id === "string") {
+      const trimmed = raw_id.trim();
+      if (!trimmed) {
+        return undefined;
+      }
+
+      // New CSV format may express ids as e.g. "2.0" instead of "2"
+      if (/^\d+(\.0+)?$/.test(trimmed)) {
+        return trimmed.replace(/\.0+$/, "");
+      }
+
+      return trimmed;
+    }
+
+    return undefined;
+  };
+
+  const valid_ministry_ids = new Set(
+    _.chain(ministries)
+      .map("id")
+      .map(normalizeMinistryId)
+      .compact()
+      .value()
+  );
+
   _.each(ministries, ({ id, name_en, name_fr }) => {
+    const normalized_id = normalizeMinistryId(id);
+    if (!normalized_id) {
+      return;
+    }
+
     Dept.ministryStore.create_and_register({
       ...enforced_required_fields({
-        id,
+        id: normalized_id,
         name: is_en ? name_en : name_fr,
       }),
     });
@@ -80,6 +119,8 @@ export const populate_depts = (
       other_lang_applied_title,
       other_lang_legal_title,
     }) => {
+      const normalized_ministry_id = normalizeMinistryId(ministry_id);
+
       Dept.store.create_and_register({
         ...enforced_required_fields({
           id,
@@ -112,7 +153,11 @@ export const populate_depts = (
         le_la: article1 || "",
         du_de_la: article2 || "",
 
-        ministry_id,
+        ministry_id:
+          normalized_ministry_id &&
+          valid_ministry_ids.has(normalized_ministry_id)
+            ? normalized_ministry_id
+            : undefined,
         minister_ids: _.chain(org_to_minister)
           .filter(({ department }) => department === id)
           .map("minister")
