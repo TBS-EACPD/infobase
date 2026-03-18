@@ -128,12 +128,6 @@ export function get_client() {
           Root: {
             keyFields: [],
           },
-          Gov: {
-            merge: true,
-          },
-          Org: {
-            merge: true,
-          },
         },
       }),
       defaultOptions: {
