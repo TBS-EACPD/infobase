@@ -1,0 +1,25 @@
+query RecipientSummaryOrg($lang: String!, $id: String, $year: String!) {
+  root(lang: $lang) {
+    org(org_id: $id) {
+      recipient_summary(year: $year) {
+        subject_id
+        year
+        total_exp
+        top_ten {
+          row_id
+          recipient
+          total_exp
+          num_transfer_payments
+          transfer_payments {
+            program
+            recipient
+            city
+            province
+            country
+            expenditure
+          }
+        }
+      }
+    }
+  }
+}

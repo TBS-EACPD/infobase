@@ -1,0 +1,10 @@
+fragment RecipientsFragment on Recipients {
+  year
+  org_id
+  program
+  recipient
+  city
+  province
+  country
+  expenditure
+}

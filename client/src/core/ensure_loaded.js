@@ -8,6 +8,7 @@ import {
 } from "src/models/covid/populate";
 import { load_footnotes_bundle } from "src/models/footnotes/populate_footnotes";
 import { api_load_has_people_data } from "src/models/people/api_load_has_people_data";
+import { api_load_years_with_recipient_data } from "src/models/recipients/populate";
 import {
   api_load_results_bundle,
   api_load_results_counts,
@@ -41,6 +42,7 @@ function ensure_loaded({
   has_covid_data,
   years_with_covid_data,
   covid_measures,
+  has_recipients,
   footnotes_for: footnotes_subject,
   has_people_data,
 }) {
@@ -80,6 +82,9 @@ function ensure_loaded({
 
   const should_load_covid_measures =
     covid_measures || check_for_panel_dependency("requires_covid_measures");
+
+  const should_load_recipients =
+    has_recipients || check_for_panel_dependency("requires_recipients");
 
   const result_docs_to_load = !_.isEmpty(result_docs)
     ? result_docs
@@ -144,6 +149,10 @@ function ensure_loaded({
       ? api_load_has_people_data(subject)
       : Promise.resolve();
 
+  const recipients_report_years_prom = should_load_recipients
+    ? api_load_years_with_recipient_data(subject)
+    : Promise.resolve();
+
   return Promise.all([
     load_tables(table_set),
     results_prom,
@@ -159,6 +168,7 @@ function ensure_loaded({
     years_with_covid_data_prom,
     covid_measures_prom,
     has_people_data_prom,
+    recipients_report_years_prom,
   ]);
 }
 

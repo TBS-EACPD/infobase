@@ -6,6 +6,10 @@ transfer_payments_dataset:
   en: Transfer Payments
   fr: Paiements de transfert
 
+recipient_dataset:
+  en: Recipients of Transfer Payments
+  fr: Fill in 
+
 org_vote_stat_dataset:
   en: Authorities and Expenditures
   fr: Autorisations et dépenses

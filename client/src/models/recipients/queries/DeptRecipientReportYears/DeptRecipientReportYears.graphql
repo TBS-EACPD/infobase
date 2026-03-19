@@ -1,0 +1,7 @@
+query DeptRecipientReportYears($lang: String!, $id: String) {
+  root(lang: $lang) {
+    org(org_id: $id) {
+      years_with_recipient_data
+    }
+  }
+}
