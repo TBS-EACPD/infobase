@@ -56,6 +56,57 @@ export default function (model_singleton) {
       "subject_id"
     ),
 
+    // RecipientSummary is very large (embedded transfer payments + other fields).
+    // Many GraphQL resolvers ask for a single year, so we must fetch only
+    // { subject_id, year } instead of loading all years and filtering in JS.
+    //
+    // This loader is keyed by `${subject_id}::${year}`.
+    recipient_summary_by_subject_year_loader: new DataLoader(
+      async (keys) => {
+        const parsed = keys.map((key) => {
+          const [subject_id, year] = String(key).split("::");
+          return { subject_id, year };
+        });
+
+        const subject_ids = _.uniq(parsed.map(({ subject_id }) => subject_id));
+        const years = _.uniq(parsed.map(({ year }) => year));
+
+        const rows = await RecipientSummary.find(
+          {
+            subject_id: { $in: subject_ids },
+            year: { $in: years },
+          },
+          {
+            _id: 0,
+            subject_id: 1,
+            year: 1,
+            total_exp: 1,
+            // Include only the fields requested by GraphQL for RecipientSummary.
+            "top_ten.row_id": 1,
+            "top_ten.recipient": 1,
+            "top_ten.total_exp": 1,
+            "top_ten.num_transfer_payments": 1,
+            "top_ten.transfer_payments.program": 1,
+            "top_ten.transfer_payments.recipient": 1,
+            "top_ten.transfer_payments.city": 1,
+            "top_ten.transfer_payments.province": 1,
+            "top_ten.transfer_payments.country": 1,
+            "top_ten.transfer_payments.expenditure": 1,
+          }
+        )
+          .lean()
+          .exec();
+
+        const rows_by_key = _.keyBy(
+          rows,
+          (row) => `${row.subject_id}::${row.year}`
+        );
+
+        return keys.map((key) => rows_by_key[key] || null);
+      },
+      { cache: !!process.env.USE_REMOTE_DB }
+    ),
+
     recipient_years_loader: new DataLoader(
       async (subject_ids) => {
         const ids = _.uniq(subject_ids);
