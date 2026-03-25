@@ -188,9 +188,9 @@ describe("End-to-end tests for form_backend endpoints", () => {
       expect(data).toEqual({
         issueUrl: "https://github.com/TBS-EACPD/infobase/issues/123",
       }) &&
-      expect(mock_make_github_issue_from_completed_template).toHaveBeenCalledTimes(
-        1
-      ) &&
+      expect(
+        mock_make_github_issue_from_completed_template
+      ).toHaveBeenCalledTimes(1) &&
       expect(mock_create_github_issue).toHaveBeenCalledTimes(1) &&
       expect(mock_send_to_slack).not.toBeCalled() &&
       expect(mock_write_to_db).not.toBeCalled()
@@ -211,9 +211,9 @@ describe("End-to-end tests for form_backend endpoints", () => {
     return (
       expect(status).toBe(200) &&
       expect(data).toEqual("") &&
-      expect(mock_make_github_issue_from_completed_template).toHaveBeenCalledTimes(
-        1
-      ) &&
+      expect(
+        mock_make_github_issue_from_completed_template
+      ).toHaveBeenCalledTimes(1) &&
       expect(mock_create_github_issue).toHaveBeenCalledTimes(1) &&
       expect(mock_send_to_slack).toHaveBeenCalledTimes(1) &&
       expect(mock_write_to_db).toHaveBeenCalledTimes(1)
