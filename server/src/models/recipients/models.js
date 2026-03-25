@@ -1,3 +1,4 @@
+import DataLoader from "dataloader";
 import _ from "lodash";
 import mongoose from "mongoose";
 
@@ -53,6 +54,24 @@ export default function (model_singleton) {
     recipient_summary_loader: create_resource_by_foreignkey_attr_dataloader(
       RecipientSummary,
       "subject_id"
+    ),
+
+    recipient_years_loader: new DataLoader(
+      async (subject_ids) => {
+        const ids = _.uniq(subject_ids);
+        const rows = await RecipientSummary.find(
+          { subject_id: { $in: ids } },
+          { subject_id: 1, year: 1, _id: 0 }
+        )
+          .lean()
+          .exec();
+
+        const rows_by_subject_id = _.groupBy(rows, (row) => row.subject_id);
+        return _.map(subject_ids, (id) =>
+          _.isEmpty(rows_by_subject_id[id]) ? null : rows_by_subject_id[id]
+        );
+      },
+      { cache: !!process.env.USE_REMOTE_DB }
     ),
   };
 

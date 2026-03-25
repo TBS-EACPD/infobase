@@ -42,8 +42,12 @@ const schema = `
 `;
 
 export default function ({ loaders }) {
-  const { recipients_loader, recipients_by_org_id, recipient_summary_loader } =
-    loaders;
+  const {
+    recipients_loader,
+    recipients_by_org_id,
+    recipient_summary_loader,
+    recipient_years_loader,
+  } = loaders;
 
   const get_report_years = _.curry((data) => {
     return _.map(data, "year");
@@ -59,14 +63,14 @@ export default function ({ loaders }) {
     },
     Gov: {
       years_with_recipient_data: () =>
-        recipient_summary_loader.load("gov").then(get_report_years()),
+        recipient_years_loader.load("gov").then(get_report_years()),
       recipient_summary: (_x, { year }) =>
         recipient_summary_loader.load("gov").then(filter_for_year(year)),
     },
     Org: {
       recipients: ({ org_id }) => recipients_by_org_id.load(org_id),
       years_with_recipient_data: ({ org_id }) =>
-        recipient_summary_loader.load(org_id).then(get_report_years()),
+        recipient_years_loader.load(org_id).then(get_report_years()),
       recipient_summary: ({ org_id }, { year }) =>
         recipient_summary_loader.load(org_id).then(filter_for_year(year)),
     },
