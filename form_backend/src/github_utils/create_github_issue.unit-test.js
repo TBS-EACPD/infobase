@@ -33,4 +33,3 @@ describe("make_github_issue_from_completed_template", () => {
     expect(issue.labels).toEqual(["user-reported", "bug", "UX"]);
   });
 });
-
