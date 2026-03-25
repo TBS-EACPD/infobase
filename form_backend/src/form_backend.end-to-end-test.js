@@ -22,6 +22,21 @@ const mock_send_to_slack = send_to_slack.mockImplementation(() =>
   Promise.resolve()
 );
 
+jest.mock("./github_utils/index.js");
+import {
+  create_github_issue,
+  make_github_issue_from_completed_template,
+} from "./github_utils/index.js";
+const mock_create_github_issue = create_github_issue.mockImplementation(() =>
+  Promise.resolve({ success: false, error: "mock github error" })
+);
+const mock_make_github_issue_from_completed_template =
+  make_github_issue_from_completed_template.mockImplementation(() => ({
+    title: "[User Report] mock",
+    body: "mock",
+    labels: ["user-reported"],
+  }));
+
 import { run_form_backend } from "./form_backend.js";
 
 describe("End-to-end tests for form_backend endpoints", () => {
@@ -60,6 +75,36 @@ describe("End-to-end tests for form_backend endpoints", () => {
     required_automatic: "blah",
     optional_automatic: "bluh",
   };
+
+  const report_a_problem_template_name = "report_a_problem";
+  const completed_report_a_problem_template = {
+    issue_type: ["bug"],
+    issue_details: "Something is broken",
+    sha: "deadbee",
+    route: "start",
+    lang: "en",
+    app_version: "standard",
+    client_id: "jest-client-id",
+    additional: {},
+  };
+
+  beforeEach(() => {
+    jest.clearAllMocks();
+
+    // keep the mocks "wired" after clearAllMocks
+    connect_db.mockImplementation(() => Promise.resolve());
+    get_db_connection_status.mockImplementation(() => "connected");
+    write_to_db.mockImplementation(() => Promise.resolve());
+    send_to_slack.mockImplementation(() => Promise.resolve());
+    make_github_issue_from_completed_template.mockImplementation(() => ({
+      title: "[User Report] mock",
+      body: "mock",
+      labels: ["user-reported"],
+    }));
+    create_github_issue.mockImplementation(() =>
+      Promise.resolve({ success: false, error: "mock github error" })
+    );
+  });
 
   it("/form_template_names returns an array of template names", async () => {
     const { data: template_names } = await make_form_template_names_request();
@@ -122,6 +167,56 @@ describe("End-to-end tests for form_backend endpoints", () => {
       expect(mock_send_to_slack).toHaveBeenCalledTimes(1) &&
       expect(mock_write_to_db).toHaveBeenCalledTimes(1) &&
       expect(ok).toBe(200)
+    );
+  });
+
+  it("/submit_form report_a_problem returns 200 and issueUrl when github issue creation succeeds (and does not slack/db)", async () => {
+    mock_create_github_issue.mockResolvedValueOnce({
+      success: true,
+      url: "https://github.com/TBS-EACPD/infobase/issues/123",
+      issueNumber: 123,
+      title: "[User Report] bug",
+    });
+
+    const { status, data } = await make_submit_form_request(
+      report_a_problem_template_name,
+      completed_report_a_problem_template
+    );
+
+    return (
+      expect(status).toBe(200) &&
+      expect(data).toEqual({
+        issueUrl: "https://github.com/TBS-EACPD/infobase/issues/123",
+      }) &&
+      expect(mock_make_github_issue_from_completed_template).toHaveBeenCalledTimes(
+        1
+      ) &&
+      expect(mock_create_github_issue).toHaveBeenCalledTimes(1) &&
+      expect(mock_send_to_slack).not.toBeCalled() &&
+      expect(mock_write_to_db).not.toBeCalled()
+    );
+  });
+
+  it("/submit_form report_a_problem falls back to slack/db when github issue creation fails (no issueUrl)", async () => {
+    mock_create_github_issue.mockResolvedValueOnce({
+      success: false,
+      error: "Request error requires authentication (401)",
+    });
+
+    const { status, data } = await make_submit_form_request(
+      report_a_problem_template_name,
+      completed_report_a_problem_template
+    );
+
+    return (
+      expect(status).toBe(200) &&
+      expect(data).toEqual("") &&
+      expect(mock_make_github_issue_from_completed_template).toHaveBeenCalledTimes(
+        1
+      ) &&
+      expect(mock_create_github_issue).toHaveBeenCalledTimes(1) &&
+      expect(mock_send_to_slack).toHaveBeenCalledTimes(1) &&
+      expect(mock_write_to_db).toHaveBeenCalledTimes(1)
     );
   });
 });
