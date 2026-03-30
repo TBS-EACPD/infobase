@@ -11,7 +11,7 @@ query RecipientSummaryGov($lang: String!, $year: String!) {
           total_exp
           num_transfer_payments
           transfer_payments {
-            program
+            transfer_payment
             recipient
             city
             province

@@ -1,4 +1,5 @@
 import _ from "lodash";
+import { bilingual_field } from "../schema_utils.js";
 
 const schema = `  
   extend type Root {
@@ -32,7 +33,7 @@ const schema = `
     id: Float
     year: String
     org_id: String
-    program: String
+    transfer_payment: String
     recipient: String
     city: String
     province: String
@@ -69,6 +70,12 @@ export default function ({ loaders }) {
         recipient_years_loader.load(org_id).then(get_report_years()),
       recipient_summary: ({ org_id }, { year }) =>
         recipient_summary_by_subject_year_loader.load(`${org_id}::${year}`),
+    },
+    Recipients: {
+      transfer_payment: bilingual_field("transfer_payment"),
+      city: bilingual_field("city"),
+      province: bilingual_field("province"),
+      country: bilingual_field("country"),
     },
   };
   return {

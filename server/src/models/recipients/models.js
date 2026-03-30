@@ -3,18 +3,18 @@ import _ from "lodash";
 import mongoose from "mongoose";
 
 import { create_resource_by_foreignkey_attr_dataloader } from "../loader_utils.js";
-import { number_type, str_type } from "../model_utils.js";
+import { bilingual_str, number_type, str_type } from "../model_utils.js";
 
 export default function (model_singleton) {
   const common_fields = {
     id: number_type,
     year: str_type,
     org_id: str_type,
-    program: str_type,
+    ...bilingual_str("transfer_payment"),
     recipient: str_type,
-    city: str_type,
-    province: str_type,
-    country: str_type,
+    ...bilingual_str("city"),
+    ...bilingual_str("province"),
+    ...bilingual_str("country"),
     expenditure: number_type,
   };
 
@@ -86,11 +86,15 @@ export default function (model_singleton) {
             "top_ten.recipient": 1,
             "top_ten.total_exp": 1,
             "top_ten.num_transfer_payments": 1,
-            "top_ten.transfer_payments.program": 1,
+            "top_ten.transfer_payments.transfer_payment_en": 1,
+            "top_ten.transfer_payments.transfer_payment_fr": 1,
             "top_ten.transfer_payments.recipient": 1,
-            "top_ten.transfer_payments.city": 1,
-            "top_ten.transfer_payments.province": 1,
-            "top_ten.transfer_payments.country": 1,
+            "top_ten.transfer_payments.city_en": 1,
+            "top_ten.transfer_payments.city_fr": 1,
+            "top_ten.transfer_payments.province_en": 1,
+            "top_ten.transfer_payments.province_fr": 1,
+            "top_ten.transfer_payments.country_en": 1,
+            "top_ten.transfer_payments.country_fr": 1,
             "top_ten.transfer_payments.expenditure": 1,
           }
         )

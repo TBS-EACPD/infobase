@@ -9,7 +9,7 @@ export type RecipientsQueryVariables = Types.Exact<{
 }>;
 
 
-export type RecipientsQuery = { __typename?: 'Query', root: { __typename?: 'Root', org?: { __typename?: 'Org', recipients?: Array<{ __typename?: 'Recipients', year?: string | null, org_id?: string | null, program?: string | null, recipient?: string | null, city?: string | null, province?: string | null, country?: string | null, expenditure?: number | null } | null> | null } | null } };
+export type RecipientsQuery = { __typename?: 'Query', root: { __typename?: 'Root', org?: { __typename?: 'Org', recipients?: Array<{ __typename?: 'Recipients', year?: string | null, org_id?: string | null, transfer_payment?: string | null, recipient?: string | null, city?: string | null, province?: string | null, country?: string | null, expenditure?: number | null } | null> | null } | null } };
 
 
 export const RecipientsDocument = gql`
@@ -19,7 +19,7 @@ export const RecipientsDocument = gql`
       recipients {
         year
         org_id
-        program
+        transfer_payment
         recipient
         city
         province

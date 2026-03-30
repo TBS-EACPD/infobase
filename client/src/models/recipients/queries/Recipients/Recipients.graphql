@@ -4,7 +4,7 @@ query Recipients($lang: String!, $orgId: String) {
       recipients {
         year
         org_id
-        program
+        transfer_payment
         recipient
         city
         province

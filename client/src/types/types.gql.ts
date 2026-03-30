@@ -534,9 +534,9 @@ export type Recipients = {
   expenditure?: Maybe<Scalars['Float']>;
   id?: Maybe<Scalars['Float']>;
   org_id?: Maybe<Scalars['String']>;
-  program?: Maybe<Scalars['String']>;
   province?: Maybe<Scalars['String']>;
   recipient?: Maybe<Scalars['String']>;
+  transfer_payment?: Maybe<Scalars['String']>;
   year?: Maybe<Scalars['String']>;
 };
 

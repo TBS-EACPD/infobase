@@ -11,7 +11,7 @@ export default async function ({ models }) {
   const { Recipients, RecipientSummary } = models;
 
   const raw_recipient_rows = get_standard_csv_file_rows(
-    "transfer_payments.csv"
+    "transfer_payment_recipients.csv"
   );
 
   const recipient_id_by_recipient_name = _.chain(raw_recipient_rows)
@@ -24,23 +24,31 @@ export default async function ({ models }) {
   const recipient_rows = _.map(
     raw_recipient_rows,
     ({
-      fyear: year,
+      year,
       org_id,
-      tpname: program,
+      transfer_payment_en,
+      transfer_payment_fr,
       recipient,
-      city,
-      province,
-      country,
+      city_en,
+      city_fr,
+      province_en,
+      province_fr,
+      country_en,
+      country_fr,
       expenditure,
     }) => ({
       id: recipient_id_by_recipient_name[recipient],
-      year: format_year(year),
+      year,
       org_id,
-      program,
+      transfer_payment_en,
+      transfer_payment_fr,
       recipient,
-      city: no_data_or_na_to_null(city),
-      province: no_data_or_na_to_null(province),
-      country: no_data_or_na_to_null(country),
+      city_en: no_data_or_na_to_null(city_en),
+      city_fr: no_data_or_na_to_null(city_fr),
+      province_en: no_data_or_na_to_null(province_en),
+      province_fr: no_data_or_na_to_null(province_fr),
+      country_en: no_data_or_na_to_null(country_en),
+      country_fr: no_data_or_na_to_null(country_fr),
       expenditure: _.toNumber(expenditure) || 0,
     })
   );

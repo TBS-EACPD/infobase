@@ -18,6 +18,7 @@ import {
 } from "src/models/recipients/queries";
 
 import { RecipientReportYears } from "src/models/recipients/RecipientsSummaryDataStore";
+import { create_footnote } from "src/models/footnotes/footnotes";
 
 import { newIBLightCategoryColors } from "src/core/color_schemes";
 import { formats } from "src/core/format";
@@ -77,7 +78,7 @@ const RecipientTable = ({ data, table_data }) => {
   };
 
   const common_column_configs_tp = {
-    program: { index: 1, header: "Transfer Payment Program" },
+    transfer_payment: { index: 1, header: "Transfer Payment Program" },
     city: { index: 2, header: "City" },
     province: { index: 3, header: "Province" },
     country: { index: 4, header: "Country" },
@@ -224,9 +225,32 @@ export const declare_recipients_panel = () =>
         }
       },
       get_title: () => text_maker("recipients_title"),
-      render({ title, subject, sources }) {
+      render({ title, subject, sources, footnotes }) {
+        footnotes = _.concat(
+          create_footnote({
+            id: "payments_under_100k_footnote",
+            subject_type: subject.subject_type,
+            subject_id: subject.id,
+            text: text_maker("payments_under_100k_footnote"),
+            topic_keys: ["EXP"],
+          }),
+          create_footnote({
+            id: "recipient_name_mapping_footnote",
+            subject_type: subject.subject_type,
+            subject_id: subject.id,
+            text: text_maker("recipient_name_mapping_footnote"),
+            topic_keys: ["EXP"],
+          }),
+          create_footnote({
+            id: "recipient_name_footnote",
+            subject_type: subject.subject_type,
+            subject_id: subject.id,
+            text: text_maker("recipient_name_footnote"),
+            topic_keys: ["EXP"],
+          })
+        );
         return (
-          <InfographicPanel {...{ title, sources }}>
+          <InfographicPanel {...{ title, sources, footnotes }}>
             <RecipientsPanel subject={subject} />
           </InfographicPanel>
         );
