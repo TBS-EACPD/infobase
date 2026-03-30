@@ -5,8 +5,6 @@ import { get_standard_csv_file_rows } from "../load_utils.js";
 const no_data_or_na_to_null = (value) =>
   value === "Not Available" || value === null ? "-" : value;
 
-const format_year = (year) => _.split(year, "-")[0];
-
 export default async function ({ models }) {
   const { Recipients, RecipientSummary } = models;
 

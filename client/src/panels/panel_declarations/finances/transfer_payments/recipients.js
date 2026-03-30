@@ -12,13 +12,14 @@ import {
   Tabs,
 } from "src/components/index";
 
+import { create_footnote } from "src/models/footnotes/footnotes";
+
 import {
   useRecipientSummaryGov,
   useRecipientSummaryOrg,
 } from "src/models/recipients/queries";
 
 import { RecipientReportYears } from "src/models/recipients/RecipientsSummaryDataStore";
-import { create_footnote } from "src/models/footnotes/footnotes";
 
 import { newIBLightCategoryColors } from "src/core/color_schemes";
 import { formats } from "src/core/format";
