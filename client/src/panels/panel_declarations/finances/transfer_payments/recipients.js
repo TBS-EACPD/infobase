@@ -55,10 +55,10 @@ const RecipientTable = ({ data, table_data }) => {
   };
 
   const column_configs_recipients = {
-    recipient: { index: 0, header: "Recipients" },
+    recipient: { index: 0, header: text_maker("recipient") },
     id: {
       index: 1,
-      header: "Transfer Payments",
+      header: text_maker("transfer_payment"),
       formatter: (id) => (
         <button
           className="btn btn-link"
@@ -72,20 +72,20 @@ const RecipientTable = ({ data, table_data }) => {
     },
     total_exp: {
       index: 2,
-      header: "Total Payment Received",
+      header: text_maker("payment_received"),
       formatter: "compact2_written",
       is_summable: true,
     },
   };
 
   const common_column_configs_tp = {
-    transfer_payment: { index: 1, header: "Transfer Payment Program" },
-    city: { index: 2, header: "City" },
-    province: { index: 3, header: "Province" },
-    country: { index: 4, header: "Country" },
+    transfer_payment: { index: 1, header: text_maker("transfer_payment") },
+    city: { index: 2, header: text_maker("city") },
+    province: { index: 3, header: text_maker("province") },
+    country: { index: 4, header: text_maker("country") },
     expenditure: {
       index: 5,
-      header: "Payment",
+      header: text_maker("payment_received"),
       formatter: "compact2_written",
       is_summable: true,
     },
@@ -96,7 +96,7 @@ const RecipientTable = ({ data, table_data }) => {
   const modalData = get_tp_by_id(open_recipient);
   const modalColumns = isSpecialRecipient
     ? {
-        recipient: { index: 0, header: "Recipient" },
+        recipient: { index: 0, header: text_maker("recipient") },
         ...common_column_configs_tp,
       }
     : common_column_configs_tp;

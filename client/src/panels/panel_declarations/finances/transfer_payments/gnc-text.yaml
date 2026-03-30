@@ -140,9 +140,29 @@ recipient_name_footnote:
 
 recipient_name_mapping_footnote:
   transform: [handlebars]
-  en: Recipient names have been standardized for consistency. A mapping of original to standardized names is available on {{ext_link "Open Government" "https://github.com/TBS-EACPD/infobase/pull/1715/changes#diff-9adb76f607a451f39e58caf57dba3249f542efe572cb79ec353c1738bbcef34b"}}.
-  fr: Les noms des bénéficiaires ont été normalisés afin d'assurer la cohérence. Une table de correspondance entre les nom originaux et les noms normalisés est disponible sur {{ext_link "Gouvernement ouvert" "https://github.com/TBS-EACPD/infobase/pull/1715/changes#diff-9adb76f607a451f39e58caf57dba3249f542efe572cb79ec353c1738bbcef34b"}}.
+  en: Recipient names reported in the Public Accounts have been standardized for consistency. A mapping of original to standardized names is available on {{ext_link "Open Government" "https://github.com/TBS-EACPD/infobase/blob/tp-recipients/data/recipient_name_mapping.csv"}}.
+  fr: Les noms des bénéficiaires rapportés dans les Comptes public ont été normalisés afin d'assurer la cohérence. Une table de correspondance entre les nom originaux et les noms normalisés est disponible sur {{ext_link "Gouvernement ouvert" "https://github.com/TBS-EACPD/infobase/blob/tp-recipients/data/recipient_name_mapping.csv"}}.
 
 payments_under_100k_footnote:
   en: Transfer payments under $100,000 per recipient are aggregated and do not include recipient location details (city, province, or country).
   fr: Les paiements de transfert inférieurs à 100 000 $ par bénéficiaire sont regroupés et n'incluent pas les détails sur l'emplacement du bénéficiaires (ville, province ou pays).
+
+recipient:
+  en: Recipient
+  fr: Bénéficiaire
+
+payment_received:
+  en: Payment Received
+  fr: Paiement reçu
+
+city: 
+  en: City
+  fr: Ville
+
+province:
+  en: Province
+  fr: Province
+
+country:
+  en: Country
+  fr: Pays

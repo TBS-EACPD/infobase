@@ -81,7 +81,7 @@ const public_accounts = common_source_and_topic_data_set_defs(
     recipients: {
       name: text_maker("recipient_dataset"),
       infobase_link:
-        "#infographic/gov/gov/financial/.-.-(panel_key.-.-'recipients)",
+        "https://github.com/TBS-EACPD/infobase/blob/tp-recipients/data/transfer_payment_recipients.csv",
     },
   }
 );

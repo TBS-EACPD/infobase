@@ -8,7 +8,7 @@ transfer_payments_dataset:
 
 recipient_dataset:
   en: Recipients of Transfer Payments
-  fr: Fill in 
+  fr: Bénéficiaires des paiements de transfert
 
 org_vote_stat_dataset:
   en: Authorities and Expenditures
