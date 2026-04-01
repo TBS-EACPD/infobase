@@ -12,13 +12,6 @@ export default async function ({ models }) {
     "transfer_payment_recipients.csv"
   );
 
-  const recipient_id_by_recipient_name = _.chain(raw_recipient_rows)
-    .map("recipient")
-    .uniq()
-    .map((recipient, index) => [recipient, index])
-    .fromPairs()
-    .value();
-
   const recipient_rows = _.chain(raw_recipient_rows)
     .map(
       ({
@@ -51,7 +44,8 @@ export default async function ({ models }) {
     )
     .forEach((item, index) => {
       item.id = (index + 1).toString();
-    });
+    })
+    .value();
 
   const get_top_ten = (recipients) => {
     const all_recipients = _.chain(recipients)
