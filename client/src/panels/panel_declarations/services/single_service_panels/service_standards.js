@@ -70,7 +70,7 @@ export class ServiceStandards extends React.Component {
       }
     };
     const get_counts = (value) => (_.isNull(value) ? "N/A" : value);
-    console.log(uniq_standards);
+
     const data = _.flatMap(
       uniq_standards,
       ({ name, type, channel, standard_report }) =>
