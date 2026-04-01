@@ -70,7 +70,7 @@ export class ServiceStandards extends React.Component {
       }
     };
     const get_counts = (value) => (_.isNull(value) ? "N/A" : value);
-
+    console.log(uniq_standards);
     const data = _.flatMap(
       uniq_standards,
       ({ name, type, channel, standard_report }) =>
@@ -83,7 +83,10 @@ export class ServiceStandards extends React.Component {
             channel,
             count: get_counts(count),
             met_count: get_counts(met_count),
-            performance: met_count / count || 0,
+            performance:
+              _.isNil(met_count) || _.isNil(count)
+                ? "N/A"
+                : met_count / count || 0,
             is_target_met: get_is_target_met(is_target_met, count, met_count),
           }))
           .value()
