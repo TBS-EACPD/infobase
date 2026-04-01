@@ -18,6 +18,7 @@
     "refresh_pipeline_data": "sh scripts/dev_scripts/refresh_pipeline_data.sh",
     "download_service_data": "sh scripts/dev_scripts/download_service_data.sh",
     "convert_csv": "node scripts/convert_csv_format.js",
+    "update_csv_from_pipeline": "bash scripts/dev_scripts/update_csv_from_pipeline.sh",
     "prepare": "husky install",
     "tests": "(cd client && npm run tests); (cd server && npm run tests); (cd form_backend && npm run tests)"
   },
