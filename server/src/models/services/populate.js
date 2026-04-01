@@ -40,6 +40,9 @@ const no_data_or_na_to_null = (counts) =>
     ? null
     : counts;
 
+const target_to_percentage = (target) =>
+  target === null ? null : target * 100;
+
 const get_fiscal_yr = (range) => _.split(range, "-")[0];
 
 const combine_other_fax_email_counts = (
@@ -227,7 +230,7 @@ export default async function ({ models }) {
       standard_report_comment_en,
       standard_report_comment_fr,
       year: get_fiscal_yr(year),
-      lower: lower * 100,
+      lower: target_to_percentage(lower),
       met_count,
       count,
       org_id,
