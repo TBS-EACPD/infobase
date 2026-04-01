@@ -27,3 +27,15 @@ export {
   suspendedDeptRecipientReportYears,
   useDeptRecipientReportYears,
 } from "./DeptRecipientReportYears/DeptRecipientReportYears";
+
+export {
+  promisedRecipientDetailsGov,
+  suspendedRecipientDetailsGov,
+  useRecipientDetailsGov,
+} from "./RecipientDetailsGov/RecipientDetailsGov";
+
+export {
+  promisedRecipientDetailsOrg,
+  suspendedRecipientDetailsOrg,
+  useRecipientDetailsOrg,
+} from "./RecipientDetailsOrg/RecipientDetailsOrg";

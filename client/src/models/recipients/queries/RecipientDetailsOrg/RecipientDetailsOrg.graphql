@@ -1,0 +1,24 @@
+query RecipientDetailsOrg(
+  $lang: String!
+  $org_id: String
+  $year: String!
+  $row_id: String!
+  $subject: String!
+) {
+  root(lang: $lang) {
+    org(org_id: $org_id) {
+      recipient_details(year: $year, row_id: $row_id, subject: $subject) {
+        id
+        row_id
+        year
+        recipient
+        org_id
+        transfer_payment
+        city
+        province
+        country
+        expenditure
+      }
+    }
+  }
+}

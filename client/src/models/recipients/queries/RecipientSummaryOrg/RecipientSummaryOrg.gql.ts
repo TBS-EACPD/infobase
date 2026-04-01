@@ -10,7 +10,7 @@ export type RecipientSummaryOrgQueryVariables = Types.Exact<{
 }>;
 
 
-export type RecipientSummaryOrgQuery = { __typename?: 'Query', root: { __typename?: 'Root', org?: { __typename?: 'Org', recipient_summary?: { __typename?: 'TopTen', subject_id?: string | null, year?: string | null, total_exp?: number | null, top_ten?: Array<{ __typename?: 'TopTenSummary', row_id?: string | null, recipient?: string | null, total_exp?: number | null, num_transfer_payments?: number | null, transfer_payments?: Array<{ __typename?: 'Recipients', transfer_payment?: string | null, recipient?: string | null, city?: string | null, province?: string | null, country?: string | null, expenditure?: number | null } | null> | null } | null> | null } | null } | null } };
+export type RecipientSummaryOrgQuery = { __typename?: 'Query', root: { __typename?: 'Root', org?: { __typename?: 'Org', recipient_summary?: { __typename?: 'TopTen', subject_id?: string | null, year?: string | null, total_exp?: number | null, top_ten?: Array<{ __typename?: 'TopTenSummary', row_id?: string | null, recipient?: string | null, total_exp?: number | null, num_transfer_payments?: number | null } | null> | null } | null } | null } };
 
 
 export const RecipientSummaryOrgDocument = gql`
@@ -26,14 +26,6 @@ export const RecipientSummaryOrgDocument = gql`
           recipient
           total_exp
           num_transfer_payments
-          transfer_payments {
-            transfer_payment
-            recipient
-            city
-            province
-            country
-            expenditure
-          }
         }
       }
     }

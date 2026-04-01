@@ -6,7 +6,7 @@ const no_data_or_na_to_null = (value) =>
   value === "Not Available" || value === null ? "-" : value;
 
 export default async function ({ models }) {
-  const { Recipients, RecipientSummary } = models;
+  const { Recipients, RecipientSummary, RecipientDetails } = models;
 
   const raw_recipient_rows = get_standard_csv_file_rows(
     "transfer_payment_recipients.csv"
@@ -19,37 +19,39 @@ export default async function ({ models }) {
     .fromPairs()
     .value();
 
-  const recipient_rows = _.map(
-    raw_recipient_rows,
-    ({
-      year,
-      org_id,
-      transfer_payment_en,
-      transfer_payment_fr,
-      recipient,
-      city_en,
-      city_fr,
-      province_en,
-      province_fr,
-      country_en,
-      country_fr,
-      expenditure,
-    }) => ({
-      id: recipient_id_by_recipient_name[recipient],
-      year,
-      org_id,
-      transfer_payment_en,
-      transfer_payment_fr,
-      recipient,
-      city_en: no_data_or_na_to_null(city_en),
-      city_fr: no_data_or_na_to_null(city_fr),
-      province_en: no_data_or_na_to_null(province_en),
-      province_fr: no_data_or_na_to_null(province_fr),
-      country_en: no_data_or_na_to_null(country_en),
-      country_fr: no_data_or_na_to_null(country_fr),
-      expenditure: _.toNumber(expenditure) || 0,
-    })
-  );
+  const recipient_rows = _.chain(raw_recipient_rows)
+    .map(
+      ({
+        year,
+        org_id,
+        transfer_payment_en,
+        transfer_payment_fr,
+        recipient,
+        city_en,
+        city_fr,
+        province_en,
+        province_fr,
+        country_en,
+        country_fr,
+        expenditure,
+      }) => ({
+        year,
+        org_id,
+        transfer_payment_en,
+        transfer_payment_fr,
+        recipient,
+        city_en: no_data_or_na_to_null(city_en),
+        city_fr: no_data_or_na_to_null(city_fr),
+        province_en: no_data_or_na_to_null(province_en),
+        province_fr: no_data_or_na_to_null(province_fr),
+        country_en: no_data_or_na_to_null(country_en),
+        country_fr: no_data_or_na_to_null(country_fr),
+        expenditure: _.toNumber(expenditure) || 0,
+      })
+    )
+    .forEach((item, index) => {
+      item.id = (index + 1).toString();
+    });
 
   const get_top_ten = (recipients) => {
     const all_recipients = _.chain(recipients)
@@ -96,6 +98,45 @@ export default async function ({ models }) {
     }))
     .value();
 
+  const get_details = (data) =>
+    _.flatMap(data, ({ subject_id, top_ten = [] }) =>
+      _.flatMap(top_ten, ({ row_id, transfer_payments = [] }) =>
+        transfer_payments.map(
+          ({
+            id,
+            year,
+            org_id,
+            transfer_payment_en,
+            transfer_payment_fr,
+            recipient,
+            city_en,
+            city_fr,
+            province_en,
+            province_fr,
+            country_en,
+            country_fr,
+            expenditure,
+          }) => ({
+            subject_id,
+            row_id,
+            id,
+            year,
+            recipient,
+            org_id,
+            transfer_payment_en,
+            transfer_payment_fr,
+            city_en,
+            city_fr,
+            province_en,
+            province_fr,
+            country_en,
+            country_fr,
+            expenditure,
+          })
+        )
+      )
+    );
+
   const org_top_ten = _.chain(recipient_rows)
     .groupBy("org_id")
     .flatMap((recipients_per_org, org_id) =>
@@ -114,5 +155,9 @@ export default async function ({ models }) {
   return await Promise.all([
     Recipients.insertMany(recipient_rows),
     RecipientSummary.insertMany([...gov_top_ten, ...org_top_ten]),
+    RecipientDetails.insertMany([
+      ...get_details(gov_top_ten),
+      ...get_details(org_top_ten),
+    ]),
   ]);
 }

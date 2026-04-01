@@ -181,6 +181,7 @@ export type Gov = {
   people_data?: Maybe<GovPeopleSummary>;
   pr_target_counts_granular?: Maybe<Array<Maybe<AllDocResultCount>>>;
   pr_target_counts_summary?: Maybe<Array<Maybe<AllDocResultCount>>>;
+  recipient_details?: Maybe<Array<Maybe<RecipientDetails>>>;
   recipient_summary?: Maybe<TopTen>;
   service_summary?: Maybe<ServiceSummary>;
   subject_type?: Maybe<Scalars['String']>;
@@ -192,6 +193,13 @@ export type Gov = {
 
 export type GovCovid_SummaryArgs = {
   fiscal_year?: InputMaybe<Scalars['Int']>;
+};
+
+
+export type GovRecipient_DetailsArgs = {
+  row_id: Scalars['String'];
+  subject: Scalars['String'];
+  year: Scalars['String'];
 };
 
 
@@ -316,6 +324,7 @@ export type Org = SubjectI & {
   pas_code?: Maybe<Scalars['String']>;
   people_data?: Maybe<OrgPeopleData>;
   programs?: Maybe<Array<Maybe<Program>>>;
+  recipient_details?: Maybe<Array<Maybe<RecipientDetails>>>;
   recipient_summary?: Maybe<TopTen>;
   recipients?: Maybe<Array<Maybe<Recipients>>>;
   service_summary?: Maybe<ServiceSummary>;
@@ -334,6 +343,13 @@ export type OrgCovid_MeasuresArgs = {
 
 export type OrgCovid_SummaryArgs = {
   fiscal_year?: InputMaybe<Scalars['Int']>;
+};
+
+
+export type OrgRecipient_DetailsArgs = {
+  row_id: Scalars['String'];
+  subject: Scalars['String'];
+  year: Scalars['String'];
 };
 
 
@@ -525,6 +541,20 @@ export type Query = {
 
 export type QueryRootArgs = {
   lang: Scalars['String'];
+};
+
+export type RecipientDetails = {
+  __typename?: 'RecipientDetails';
+  city?: Maybe<Scalars['String']>;
+  country?: Maybe<Scalars['String']>;
+  expenditure?: Maybe<Scalars['Float']>;
+  id?: Maybe<Scalars['Float']>;
+  org_id?: Maybe<Scalars['String']>;
+  province?: Maybe<Scalars['String']>;
+  recipient?: Maybe<Scalars['String']>;
+  row_id?: Maybe<Scalars['String']>;
+  transfer_payment?: Maybe<Scalars['String']>;
+  year?: Maybe<Scalars['String']>;
 };
 
 export type Recipients = {

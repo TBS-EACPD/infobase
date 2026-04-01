@@ -37,8 +37,15 @@ export default function (model_singleton) {
     total_exp: number_type,
   });
 
+  const RecipientDetailsSchema = mongoose.Schema({
+    subject_id: str_type,
+    row_id: str_type,
+    ...common_fields,
+  });
+
   model_singleton.define_model("Recipients", RecipientsSchema);
   model_singleton.define_model("RecipientSummary", RecipientSummarySchema);
+  model_singleton.define_model("RecipientDetails", RecipientDetailsSchema);
 
   const { Recipients, RecipientSummary } = model_singleton.models;
 

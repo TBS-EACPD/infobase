@@ -17,6 +17,8 @@ import { create_footnote } from "src/models/footnotes/footnotes";
 import {
   useRecipientSummaryGov,
   useRecipientSummaryOrg,
+  useRecipientDetailsGov,
+  useRecipientDetailsOrg,
 } from "src/models/recipients/queries";
 
 import { RecipientReportYears } from "src/models/recipients/RecipientsSummaryDataStore";
@@ -32,51 +34,54 @@ import { text_maker, TM } from "./gnc_text_provider";
 
 const { year_to_fiscal_year } = formats;
 
-const RecipientTable = ({ data, table_data }) => {
+const RecipientDetailTable = ({ subject, tab_key, open_recipient }) => {
   const all_other_recipients_row = "11";
-  const [open_recipient, set_open_recipient] = useState(null);
+  const isSpecialRecipient = open_recipient === all_other_recipients_row;
 
-  const get_recipient_by_id = (id) => {
-    if (!id) return null;
-    const row = data.find((row) => row.row_id === id);
-    return row ? row.recipient : null;
-  };
+  const useRecipientDetails = (subject) =>
+    ({
+      gov: useRecipientDetailsGov({
+        year: tab_key,
+        row_id: open_recipient,
+        subject: subject.id,
+      }),
+      dept: useRecipientDetailsOrg({
+        year: tab_key,
+        row_id: open_recipient,
+        org_id: subject.id,
+        subject: subject.id,
+      }),
+    }[subject.subject_type]);
 
-  const get_tp_by_id = (id) => {
-    if (!id) return [];
-    const tp_rows = _.chain(data)
-      .find((row) => row.row_id === id)
-      .get("transfer_payments")
-      .map(({ __typename, ...rest }) => rest)
-      .value();
-    return id === all_other_recipients_row
-      ? tp_rows
-      : _.map(tp_rows, ({ recipient, ...rest }) => rest);
-  };
+  const { loading, data } = useRecipientDetails(subject);
 
-  const column_configs_recipients = {
-    recipient: { index: 0, header: text_maker("recipient") },
-    id: {
-      index: 1,
-      header: text_maker("transfer_payment"),
-      formatter: (id) => (
-        <button
-          className="btn btn-link"
-          onClick={() => set_open_recipient(id)}
-          style={{ color: secondaryColor }}
-        >
-          {get_tp_by_id(id).length}
-        </button>
-      ),
-      plain_formatter: (id) => get_tp_by_id(id).length,
-    },
-    total_exp: {
-      index: 2,
-      header: text_maker("payment_received"),
-      formatter: "compact2_written",
-      is_summable: true,
-    },
-  };
+  if (loading) {
+    return <LeafSpinner config_name="subroute" />;
+  }
+
+  const modal_data = isSpecialRecipient
+    ? _.chain(data)
+        .map((row) =>
+          _.pick(row, [
+            "city",
+            "province",
+            "country",
+            "expenditure",
+            "transfer_payment",
+            "recipient",
+          ])
+        )
+        .sortBy(["recipient", "expenditure"], ["asc", "asc"])
+        .value()
+    : _.map(data, (row) =>
+        _.pick(row, [
+          "city",
+          "province",
+          "country",
+          "expenditure",
+          "transfer_payment",
+        ])
+      );
 
   const common_column_configs_tp = {
     transfer_payment: { index: 1, header: text_maker("transfer_payment") },
@@ -91,15 +96,59 @@ const RecipientTable = ({ data, table_data }) => {
     },
   };
 
-  const showModal = open_recipient !== null;
-  const isSpecialRecipient = open_recipient === all_other_recipients_row;
-  const modalData = get_tp_by_id(open_recipient);
   const modalColumns = isSpecialRecipient
     ? {
         recipient: { index: 0, header: text_maker("recipient") },
         ...common_column_configs_tp,
       }
     : common_column_configs_tp;
+
+  return <DisplayTable data={modal_data} column_configs={modalColumns} />;
+};
+
+const RecipientTable = ({ data, table_data, subject, tab_key }) => {
+  const [open_recipient, set_open_recipient] = useState(null);
+
+  const get_recipient_by_id = (id) => {
+    if (!id) return null;
+    const row = data.find((row) => row.row_id === id);
+    return row ? row.recipient : null;
+  };
+
+  const get_tp_by_id = (id) => {
+    if (!id) return [];
+    const tp_rows = _.chain(data)
+      .find((row) => row.row_id === id)
+      .get("num_transfer_payments")
+      .value();
+    return tp_rows;
+  };
+
+  const column_configs_recipients = {
+    recipient: { index: 0, header: text_maker("recipient") },
+    id: {
+      index: 1,
+      header: text_maker("transfer_payment"),
+      formatter: (id) => (
+        <button
+          className="btn btn-link"
+          onClick={() => set_open_recipient(id)}
+          style={{ color: secondaryColor }}
+        >
+          {get_tp_by_id(id)}
+        </button>
+      ),
+      plain_formatter: (id) => get_tp_by_id(id),
+    },
+    total_exp: {
+      index: 2,
+      header: text_maker("payment_received"),
+      formatter: "compact2_written",
+      is_summable: true,
+    },
+  };
+
+  const showModal = open_recipient !== null;
 
   return (
     <Fragment>
@@ -116,7 +165,11 @@ const RecipientTable = ({ data, table_data }) => {
         })}
       >
         {showModal && (
-          <DisplayTable data={modalData} column_configs={modalColumns} />
+          <RecipientDetailTable
+            subject={subject}
+            tab_key={tab_key}
+            open_recipient={open_recipient}
+          />
         )}
       </StatelessModal>
     </Fragment>
@@ -174,7 +227,12 @@ const RecipientPanelContent = ({ subject, tab_key }) => {
       </div>
       <div className="row align-items-center">
         <div className="col-12 col-lg-6">
-          <RecipientTable data={top_ten} table_data={table_data} />
+          <RecipientTable
+            data={top_ten}
+            table_data={table_data}
+            subject={subject}
+            tab_key={tab_key}
+          />
         </div>
         <div
           className="col-12 col-lg-6"
