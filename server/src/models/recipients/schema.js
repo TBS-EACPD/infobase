@@ -9,13 +9,13 @@ const schema = `
   extend type Gov {
     years_with_recipient_data: [String]
     recipient_summary(year: String!): TopTen
-    recipient_details(year: String!, row_id: String!, subject: String!): [RecipientDetails]
+    recipient_details(year: String!, row_id: String!): [RecipientDetails]
   }
   extend type Org {
     recipients: [Recipients]
     years_with_recipient_data: [String]
     recipient_summary(year: String!): TopTen
-    recipient_details(year: String!, row_id: String!, subject: String!): [RecipientDetails]
+    recipient_details(year: String!, row_id: String!): [RecipientDetails]
   }
 
   type TopTen {
@@ -30,7 +30,6 @@ const schema = `
     recipient: String
     total_exp: Float
     num_transfer_payments: Float
-    transfer_payments: [Recipients]
   }
   type Recipients {
     id: Float
@@ -58,27 +57,17 @@ const schema = `
 `;
 
 export default function ({ models, loaders }) {
-  const { RecipientDetails } = models;
-
   const {
     recipients_loader,
     recipients_by_org_id,
     recipient_summary_by_subject_year_loader,
     recipient_years_loader,
+    recipient_details_by_subject_year_row_loader,
   } = loaders;
 
   const get_report_years = _.curry((data) => {
     return _.map(data, "year");
   });
-
-  async function get_recipient_details(year, org_id, row_id, subject) {
-    const details = await RecipientDetails.find({
-      year,
-      subject_id: subject,
-      row_id,
-    });
-    return details;
-  }
 
   const resolvers = {
     Root: {
@@ -89,8 +78,10 @@ export default function ({ models, loaders }) {
         recipient_years_loader.load("gov").then(get_report_years()),
       recipient_summary: (_x, { year }) =>
         recipient_summary_by_subject_year_loader.load(`gov::${year}`),
-      recipient_details: (_x, { year, row_id, subject }) =>
-        get_recipient_details(year, "gov", row_id, subject),
+      recipient_details: (_x, { year, row_id }) =>
+        recipient_details_by_subject_year_row_loader.load(
+          `gov::${year}::${row_id}`
+        ),
     },
     Org: {
       recipients: ({ org_id }) => recipients_by_org_id.load(org_id),
@@ -98,8 +89,10 @@ export default function ({ models, loaders }) {
         recipient_years_loader.load(org_id).then(get_report_years()),
       recipient_summary: ({ org_id }, { year }) =>
         recipient_summary_by_subject_year_loader.load(`${org_id}::${year}`),
-      recipient_details: ({ org_id }, { year, row_id, subject }) =>
-        get_recipient_details(year, org_id, row_id, subject),
+      recipient_details: ({ org_id }, { year, row_id }) =>
+        recipient_details_by_subject_year_row_loader.load(
+          `${org_id}::${year}::${row_id}`
+        ),
     },
     Recipients: {
       transfer_payment: bilingual_field("transfer_payment"),

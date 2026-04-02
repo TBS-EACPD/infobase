@@ -198,7 +198,6 @@ export type GovCovid_SummaryArgs = {
 
 export type GovRecipient_DetailsArgs = {
   row_id: Scalars['String'];
-  subject: Scalars['String'];
   year: Scalars['String'];
 };
 
@@ -348,7 +347,6 @@ export type OrgCovid_SummaryArgs = {
 
 export type OrgRecipient_DetailsArgs = {
   row_id: Scalars['String'];
-  subject: Scalars['String'];
   year: Scalars['String'];
 };
 
@@ -908,7 +906,6 @@ export type TopTenSummary = {
   recipient?: Maybe<Scalars['String']>;
   row_id?: Maybe<Scalars['String']>;
   total_exp?: Maybe<Scalars['Float']>;
-  transfer_payments?: Maybe<Array<Maybe<Recipients>>>;
 };
 
 export type YearlyData = {

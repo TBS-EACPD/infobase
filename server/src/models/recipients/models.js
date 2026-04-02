@@ -31,7 +31,6 @@ export default function (model_singleton) {
         recipient: str_type,
         total_exp: number_type,
         num_transfer_payments: number_type,
-        transfer_payments: [common_fields],
       },
     ],
     total_exp: number_type,
@@ -47,7 +46,8 @@ export default function (model_singleton) {
   model_singleton.define_model("RecipientSummary", RecipientSummarySchema);
   model_singleton.define_model("RecipientDetails", RecipientDetailsSchema);
 
-  const { Recipients, RecipientSummary } = model_singleton.models;
+  const { Recipients, RecipientSummary, RecipientDetails } =
+    model_singleton.models;
 
   const loaders = {
     recipients_loader: create_resource_by_foreignkey_attr_dataloader(
@@ -93,16 +93,6 @@ export default function (model_singleton) {
             "top_ten.recipient": 1,
             "top_ten.total_exp": 1,
             "top_ten.num_transfer_payments": 1,
-            "top_ten.transfer_payments.transfer_payment_en": 1,
-            "top_ten.transfer_payments.transfer_payment_fr": 1,
-            "top_ten.transfer_payments.recipient": 1,
-            "top_ten.transfer_payments.city_en": 1,
-            "top_ten.transfer_payments.city_fr": 1,
-            "top_ten.transfer_payments.province_en": 1,
-            "top_ten.transfer_payments.province_fr": 1,
-            "top_ten.transfer_payments.country_en": 1,
-            "top_ten.transfer_payments.country_fr": 1,
-            "top_ten.transfer_payments.expenditure": 1,
           }
         )
           .lean()
@@ -132,6 +122,55 @@ export default function (model_singleton) {
         return _.map(subject_ids, (id) =>
           _.isEmpty(rows_by_subject_id[id]) ? null : rows_by_subject_id[id]
         );
+      },
+      { cache: !!process.env.USE_REMOTE_DB }
+    ),
+    recipient_details_by_subject_year_row_loader: new DataLoader(
+      async (keys) => {
+        const parsed = keys.map((key) => {
+          const [subject_id, year, row_id] = String(key).split("::");
+          return { subject_id, year, row_id };
+        });
+
+        const subject_ids = _.uniq(parsed.map(({ subject_id }) => subject_id));
+        const years = _.uniq(parsed.map(({ year }) => year));
+        const row_ids = _.uniq(parsed.map(({ row_id }) => row_id));
+
+        const rows = await RecipientDetails.find(
+          {
+            subject_id: { $in: subject_ids },
+            year: { $in: years },
+            row_id: { $in: row_ids },
+          },
+          {
+            _id: 0,
+            id: 1,
+            subject_id: 1,
+            year: 1,
+            row_id: 1,
+            recipient: 1,
+            org_id: 1,
+            transfer_payment_en: 1,
+            transfer_payment_fr: 1,
+            city_en: 1,
+            city_fr: 1,
+            province_en: 1,
+            province_fr: 1,
+            country_en: 1,
+            country_fr: 1,
+            expenditure: 1,
+            // Include only the fields requested by GraphQL for RecipientSummary.
+          }
+        )
+          .lean()
+          .exec();
+
+        const rows_by_key = _.groupBy(
+          rows,
+          (row) => `${row.subject_id}::${row.year}::${row.row_id}`
+        );
+
+        return keys.map((key) => rows_by_key[key] || null);
       },
       { cache: !!process.env.USE_REMOTE_DB }
     ),

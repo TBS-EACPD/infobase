@@ -43,13 +43,11 @@ const RecipientDetailTable = ({ subject, tab_key, open_recipient }) => {
       gov: useRecipientDetailsGov({
         year: tab_key,
         row_id: open_recipient,
-        subject: subject.id,
       }),
       dept: useRecipientDetailsOrg({
         year: tab_key,
         row_id: open_recipient,
         org_id: subject.id,
-        subject: subject.id,
       }),
     }[subject.subject_type]);
 

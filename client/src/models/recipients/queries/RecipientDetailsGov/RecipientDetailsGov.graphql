@@ -1,12 +1,7 @@
-query RecipientDetailsGov(
-  $lang: String!
-  $year: String!
-  $row_id: String!
-  $subject: String!
-) {
+query RecipientDetailsGov($lang: String!, $year: String!, $row_id: String!) {
   root(lang: $lang) {
     gov {
-      recipient_details(year: $year, row_id: $row_id, subject: $subject) {
+      recipient_details(year: $year, row_id: $row_id) {
         id
         row_id
         year

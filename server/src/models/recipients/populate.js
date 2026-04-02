@@ -92,6 +92,21 @@ export default async function ({ models }) {
     }))
     .value();
 
+  const org_top_ten = _.chain(recipient_rows)
+    .groupBy("org_id")
+    .flatMap((recipients_per_org, org_id) =>
+      _.chain(recipients_per_org)
+        .groupBy("year")
+        .flatMap((recipients_per_year, year) => ({
+          subject_id: org_id,
+          year,
+          top_ten: get_top_ten(recipients_per_year),
+          total_exp: _.sumBy(get_top_ten(recipients_per_year), "total_exp"),
+        }))
+        .value()
+    )
+    .value();
+
   const get_details = (data) =>
     _.flatMap(data, ({ subject_id, top_ten = [] }) =>
       _.flatMap(top_ten, ({ row_id, transfer_payments = [] }) =>
@@ -131,24 +146,18 @@ export default async function ({ models }) {
       )
     );
 
-  const org_top_ten = _.chain(recipient_rows)
-    .groupBy("org_id")
-    .flatMap((recipients_per_org, org_id) =>
-      _.chain(recipients_per_org)
-        .groupBy("year")
-        .flatMap((recipients_per_year, year) => ({
-          subject_id: org_id,
-          year,
-          top_ten: get_top_ten(recipients_per_year),
-          total_exp: _.sumBy(get_top_ten(recipients_per_year), "total_exp"),
-        }))
-        .value()
-    )
-    .value();
+  const get_summary = (data) =>
+    data.map((item) => ({
+      ...item,
+      top_ten: item.top_ten.map(({ transfer_payments, ...rest }) => rest),
+    }));
 
   return await Promise.all([
     Recipients.insertMany(recipient_rows),
-    RecipientSummary.insertMany([...gov_top_ten, ...org_top_ten]),
+    RecipientSummary.insertMany([
+      ...get_summary(gov_top_ten),
+      ...get_summary(org_top_ten),
+    ]),
     RecipientDetails.insertMany([
       ...get_details(gov_top_ten),
       ...get_details(org_top_ten),

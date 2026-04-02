@@ -3,11 +3,10 @@ query RecipientDetailsOrg(
   $org_id: String
   $year: String!
   $row_id: String!
-  $subject: String!
 ) {
   root(lang: $lang) {
     org(org_id: $org_id) {
-      recipient_details(year: $year, row_id: $row_id, subject: $subject) {
+      recipient_details(year: $year, row_id: $row_id) {
         id
         row_id
         year
