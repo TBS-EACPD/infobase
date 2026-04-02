@@ -56,7 +56,7 @@ const schema = `
   }
 `;
 
-export default function ({ models, loaders }) {
+export default function ({ loaders }) {
   const {
     recipients_loader,
     recipients_by_org_id,
