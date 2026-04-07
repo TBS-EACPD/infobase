@@ -34,29 +34,9 @@ import { text_maker, TM } from "./gnc_text_provider";
 
 const { year_to_fiscal_year } = formats;
 
-const RecipientDetailTable = ({ subject, tab_key, open_recipient }) => {
+const RecipientDetailTable = ({ loading, data, open_recipient }) => {
   const all_other_recipients_row = "11";
   const isSpecialRecipient = open_recipient === all_other_recipients_row;
-
-  const useRecipientDetails = (subject) => {
-    switch (subject.subject_type) {
-      case "gov":
-        return useRecipientDetailsGov({
-          year: tab_key,
-          row_id: open_recipient,
-        });
-      case "dept":
-        return useRecipientDetailsOrg({
-          year: tab_key,
-          row_id: open_recipient,
-          org_id: subject.id,
-        });
-      default:
-        return { loading: false, data: null };
-    }
-  };
-
-  const { loading, data } = useRecipientDetails(subject);
 
   if (loading) {
     return <LeafSpinner config_name="subroute" />;
@@ -107,6 +87,37 @@ const RecipientDetailTable = ({ subject, tab_key, open_recipient }) => {
     : common_column_configs_tp;
 
   return <DisplayTable data={modal_data} column_configs={modalColumns} />;
+};
+
+const GovRecipientDetailTable = ({ tab_key, open_recipient }) => {
+  const { loading, data } = useRecipientDetailsGov({
+    year: tab_key,
+    row_id: open_recipient,
+  });
+
+  return (
+    <RecipientDetailTable
+      loading={loading}
+      data={data}
+      open_recipient={open_recipient}
+    />
+  );
+};
+
+const DeptRecipientDetailTable = ({ tab_key, open_recipient, subject }) => {
+  const { loading, data } = useRecipientDetailsOrg({
+    year: tab_key,
+    row_id: open_recipient,
+    org_id: subject.id,
+  });
+
+  return (
+    <RecipientDetailTable
+      loading={loading}
+      data={data}
+      open_recipient={open_recipient}
+    />
+  );
 };
 
 const RecipientTable = ({ data, table_data, subject, tab_key }) => {
@@ -167,8 +178,15 @@ const RecipientTable = ({ data, table_data, subject, tab_key }) => {
           recipient: get_recipient_by_id(open_recipient),
         })}
       >
-        {showModal && (
-          <RecipientDetailTable
+        {showModal && subject.subject_type === "gov" && (
+          <GovRecipientDetailTable
+            subject={subject}
+            tab_key={tab_key}
+            open_recipient={open_recipient}
+          />
+        )}
+        {showModal && subject.subject_type === "dept" && (
+          <DeptRecipientDetailTable
             subject={subject}
             tab_key={tab_key}
             open_recipient={open_recipient}
