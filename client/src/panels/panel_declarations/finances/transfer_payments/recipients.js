@@ -38,18 +38,23 @@ const RecipientDetailTable = ({ subject, tab_key, open_recipient }) => {
   const all_other_recipients_row = "11";
   const isSpecialRecipient = open_recipient === all_other_recipients_row;
 
-  const useRecipientDetails = (subject) =>
-    ({
-      gov: useRecipientDetailsGov({
-        year: tab_key,
-        row_id: open_recipient,
-      }),
-      dept: useRecipientDetailsOrg({
-        year: tab_key,
-        row_id: open_recipient,
-        org_id: subject.id,
-      }),
-    }[subject.subject_type]);
+  const useRecipientDetails = (subject) => {
+    switch (subject.subject_type) {
+      case "gov":
+        return useRecipientDetailsGov({
+          year: tab_key,
+          row_id: open_recipient,
+        });
+      case "dept":
+        return useRecipientDetailsOrg({
+          year: tab_key,
+          row_id: open_recipient,
+          org_id: subject.id,
+        });
+      default:
+        return { loading: false, data: null };
+    }
+  };
 
   const { loading, data } = useRecipientDetails(subject);
 
