@@ -112,8 +112,8 @@ historical_g_and_c_custom_new_row:
 
 recipients_title:
   transform: [handlebars]
-  en: Recipients of Transfer Payments ({{pa_last_year_5}} to {{pa_last_year}})
-  fr: Bénéficiaires des paiements de transfert ({{pa_last_year_5}} à {{pa_last_year}}))
+  en: Recipients of Transfer Payments (2019-20 to 2023-24)
+  fr: Bénéficiaires des paiements de transfert (2019-20 à 2023-24)
 
 recipient_gov_text:
   transform: [handlebars, markdown]
