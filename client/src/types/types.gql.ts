@@ -197,6 +197,8 @@ export type GovCovid_SummaryArgs = {
 
 
 export type GovRecipient_DetailsArgs = {
+  limit: Scalars['Int'];
+  offset: Scalars['Int'];
   row_id: Scalars['String'];
   year: Scalars['String'];
 };
@@ -346,6 +348,8 @@ export type OrgCovid_SummaryArgs = {
 
 
 export type OrgRecipient_DetailsArgs = {
+  limit: Scalars['Int'];
+  offset: Scalars['Int'];
   row_id: Scalars['String'];
   year: Scalars['String'];
 };

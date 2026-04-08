@@ -128,13 +128,16 @@ export default function (model_singleton) {
     recipient_details_by_subject_year_row_loader: new DataLoader(
       async (keys) => {
         const parsed = keys.map((key) => {
-          const [subject_id, year, row_id] = String(key).split("::");
-          return { subject_id, year, row_id };
+          const [subject_id, year, row_id, offset, limit] =
+            String(key).split("::");
+          return { subject_id, year, row_id, offset, limit };
         });
 
         const subject_ids = _.uniq(parsed.map(({ subject_id }) => subject_id));
         const years = _.uniq(parsed.map(({ year }) => year));
         const row_ids = _.uniq(parsed.map(({ row_id }) => row_id));
+        const offsets = _.uniq(parsed.map(({ offset }) => offset))[0];
+        const limits = _.uniq(parsed.map(({ limit }) => limit))[0];
 
         const rows = await RecipientDetails.find(
           {
@@ -159,15 +162,18 @@ export default function (model_singleton) {
             country_en: 1,
             country_fr: 1,
             expenditure: 1,
-            // Include only the fields requested by GraphQL for RecipientSummary.
           }
         )
+          .sort({ expenditure: -1 })
+          .skip(offsets)
+          .limit(limits)
           .lean()
           .exec();
 
         const rows_by_key = _.groupBy(
           rows,
-          (row) => `${row.subject_id}::${row.year}::${row.row_id}`
+          (row) =>
+            `${row.subject_id}::${row.year}::${row.row_id}::${offsets}::${limits}`
         );
 
         return keys.map((key) => rows_by_key[key] || null);

@@ -7,6 +7,8 @@ export type RecipientDetailsGovQueryVariables = Types.Exact<{
   lang: Types.Scalars['String'];
   year: Types.Scalars['String'];
   row_id: Types.Scalars['String'];
+  offset: Types.Scalars['Int'];
+  limit: Types.Scalars['Int'];
 }>;
 
 
@@ -14,10 +16,10 @@ export type RecipientDetailsGovQuery = { __typename?: 'Query', root: { __typenam
 
 
 export const RecipientDetailsGovDocument = gql`
-    query RecipientDetailsGov($lang: String!, $year: String!, $row_id: String!) {
+    query RecipientDetailsGov($lang: String!, $year: String!, $row_id: String!, $offset: Int!, $limit: Int!) {
   root(lang: $lang) {
     gov {
-      recipient_details(year: $year, row_id: $row_id) {
+      recipient_details(year: $year, row_id: $row_id, offset: $offset, limit: $limit) {
         id
         row_id
         year
@@ -49,6 +51,8 @@ export const RecipientDetailsGovDocument = gql`
  *      lang: // value for 'lang'
  *      year: // value for 'year'
  *      row_id: // value for 'row_id'
+ *      offset: // value for 'offset'
+ *      limit: // value for 'limit'
  *   },
  * });
  */

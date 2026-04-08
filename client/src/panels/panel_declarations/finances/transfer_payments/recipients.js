@@ -1,6 +1,6 @@
 import { scaleOrdinal } from "d3-scale";
 import _ from "lodash";
-import React, { Fragment, useState } from "react";
+import React, { Fragment, useState, useEffect } from "react";
 
 import { InfographicPanel } from "src/panels/panel_declarations/InfographicPanel";
 import { declare_panel } from "src/panels/PanelRegistry";
@@ -34,7 +34,16 @@ import { text_maker, TM } from "./gnc_text_provider";
 
 const { year_to_fiscal_year } = formats;
 
-const RecipientDetailTable = ({ loading, data, open_recipient }) => {
+const PAGE_SIZE = 50;
+
+const RecipientDetailTable = ({
+  loading,
+  data,
+  open_recipient,
+  page,
+  on_page_change,
+  num_table_rows,
+}) => {
   const all_other_recipients_row = "11";
   const isSpecialRecipient = open_recipient === all_other_recipients_row;
 
@@ -54,7 +63,6 @@ const RecipientDetailTable = ({ loading, data, open_recipient }) => {
             "recipient",
           ])
         )
-        .sortBy(["recipient", "expenditure"], ["asc", "asc"])
         .value()
     : _.map(data, (row) =>
         _.pick(row, [
@@ -67,7 +75,10 @@ const RecipientDetailTable = ({ loading, data, open_recipient }) => {
       );
 
   const common_column_configs_tp = {
-    transfer_payment: { index: 1, header: text_maker("transfer_payment") },
+    transfer_payment: {
+      index: 1,
+      header: text_maker("transfer_payment"),
+    },
     city: { index: 2, header: text_maker("city") },
     province: { index: 3, header: text_maker("province") },
     country: { index: 4, header: text_maker("country") },
@@ -75,40 +86,48 @@ const RecipientDetailTable = ({ loading, data, open_recipient }) => {
       index: 5,
       header: text_maker("payment_received"),
       formatter: "compact2_written",
-      is_summable: true,
     },
   };
 
   const modalColumns = isSpecialRecipient
     ? {
-        recipient: { index: 0, header: text_maker("recipient") },
+        recipient: {
+          index: 0,
+          header: text_maker("recipient"),
+        },
         ...common_column_configs_tp,
       }
     : common_column_configs_tp;
 
-  return <DisplayTable data={modal_data} column_configs={modalColumns} />;
-};
-
-const GovRecipientDetailTable = ({ tab_key, open_recipient }) => {
-  const { loading, data } = useRecipientDetailsGov({
-    year: tab_key,
-    row_id: open_recipient,
-  });
-
   return (
-    <RecipientDetailTable
-      loading={loading}
-      data={data}
-      open_recipient={open_recipient}
+    <DisplayTable
+      data={modal_data}
+      column_configs={modalColumns}
+      recipient_page={page}
+      recipient_on_page_change={on_page_change}
+      num_table_rows={num_table_rows}
+      recipient_page_size={PAGE_SIZE}
+      show_sort={false}
     />
   );
 };
 
-const DeptRecipientDetailTable = ({ tab_key, open_recipient, subject }) => {
-  const { loading, data } = useRecipientDetailsOrg({
+const GovRecipientDetailTable = ({
+  tab_key,
+  open_recipient,
+  num_table_rows,
+}) => {
+  const [page, set_page] = useState(0);
+
+  useEffect(() => {
+    set_page(0);
+  }, [tab_key, open_recipient]);
+
+  const { loading, data } = useRecipientDetailsGov({
     year: tab_key,
     row_id: open_recipient,
-    org_id: subject.id,
+    offset: page * PAGE_SIZE,
+    limit: PAGE_SIZE,
   });
 
   return (
@@ -116,6 +135,41 @@ const DeptRecipientDetailTable = ({ tab_key, open_recipient, subject }) => {
       loading={loading}
       data={data}
       open_recipient={open_recipient}
+      page={page}
+      on_page_change={set_page}
+      num_table_rows={num_table_rows}
+    />
+  );
+};
+
+const DeptRecipientDetailTable = ({
+  tab_key,
+  open_recipient,
+  subject,
+  num_table_rows,
+}) => {
+  const [page, set_page] = useState(0);
+
+  useEffect(() => {
+    set_page(0);
+  }, [tab_key, open_recipient]);
+
+  const { loading, data } = useRecipientDetailsOrg({
+    year: tab_key,
+    row_id: open_recipient,
+    org_id: subject.id,
+    offset: page * PAGE_SIZE,
+    limit: PAGE_SIZE,
+  });
+
+  return (
+    <RecipientDetailTable
+      loading={loading}
+      data={data}
+      open_recipient={open_recipient}
+      page={page}
+      on_page_change={set_page}
+      num_table_rows={num_table_rows}
     />
   );
 };
@@ -183,6 +237,7 @@ const RecipientTable = ({ data, table_data, subject, tab_key }) => {
             subject={subject}
             tab_key={tab_key}
             open_recipient={open_recipient}
+            num_table_rows={get_tp_by_id(open_recipient)}
           />
         )}
         {showModal && subject.subject_type === "dept" && (
@@ -190,6 +245,7 @@ const RecipientTable = ({ data, table_data, subject, tab_key }) => {
             subject={subject}
             tab_key={tab_key}
             open_recipient={open_recipient}
+            num_table_rows={get_tp_by_id(open_recipient)}
           />
         )}
       </StatelessModal>
@@ -308,13 +364,6 @@ export const declare_recipients_panel = () =>
       render({ title, subject, sources, footnotes }) {
         footnotes = _.concat(
           create_footnote({
-            id: "payments_under_100k_footnote",
-            subject_type: subject.subject_type,
-            subject_id: subject.id,
-            text: text_maker("payments_under_100k_footnote"),
-            topic_keys: ["EXP"],
-          }),
-          create_footnote({
             id: "recipient_name_mapping_footnote",
             subject_type: subject.subject_type,
             subject_id: subject.id,
@@ -326,6 +375,13 @@ export const declare_recipients_panel = () =>
             subject_type: subject.subject_type,
             subject_id: subject.id,
             text: text_maker("recipient_name_footnote"),
+            topic_keys: ["EXP"],
+          }),
+          create_footnote({
+            id: "payments_under_100k_footnote",
+            subject_type: subject.subject_type,
+            subject_id: subject.id,
+            text: text_maker("payments_under_100k_footnote"),
             topic_keys: ["EXP"],
           })
         );

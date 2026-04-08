@@ -9,13 +9,13 @@ const schema = `
   extend type Gov {
     years_with_recipient_data: [String]
     recipient_summary(year: String!): TopTen
-    recipient_details(year: String!, row_id: String!): [RecipientDetails]
+    recipient_details(year: String!, row_id: String!, offset: Int!, limit: Int!): [RecipientDetails]
   }
   extend type Org {
     recipients: [Recipients]
     years_with_recipient_data: [String]
     recipient_summary(year: String!): TopTen
-    recipient_details(year: String!, row_id: String!): [RecipientDetails]
+    recipient_details(year: String!, row_id: String!, offset: Int!, limit: Int!): [RecipientDetails]
   }
 
   type TopTen {
@@ -78,9 +78,9 @@ export default function ({ loaders }) {
         recipient_years_loader.load("gov").then(get_report_years()),
       recipient_summary: (_x, { year }) =>
         recipient_summary_by_subject_year_loader.load(`gov::${year}`),
-      recipient_details: (_x, { year, row_id }) =>
+      recipient_details: (_x, { year, row_id, offset, limit }) =>
         recipient_details_by_subject_year_row_loader.load(
-          `gov::${year}::${row_id}`
+          `gov::${year}::${row_id}::${offset}::${limit}`
         ),
     },
     Org: {
@@ -89,9 +89,9 @@ export default function ({ loaders }) {
         recipient_years_loader.load(org_id).then(get_report_years()),
       recipient_summary: ({ org_id }, { year }) =>
         recipient_summary_by_subject_year_loader.load(`${org_id}::${year}`),
-      recipient_details: ({ org_id }, { year, row_id }) =>
+      recipient_details: ({ org_id }, { year, row_id, offset, limit }) =>
         recipient_details_by_subject_year_row_loader.load(
-          `${org_id}::${year}::${row_id}`
+          `${org_id}::${year}::${row_id}::${offset}::${limit}`
         ),
     },
     Recipients: {
