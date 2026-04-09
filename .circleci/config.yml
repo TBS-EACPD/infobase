@@ -577,13 +577,13 @@ workflows:
   # CircleCI loads schedule definitions from the default branch; merge this config there
   # for the cron to run. filters.branches.only controls which branch(es) get a pipeline.
   # After merge: point only: at master (or keep both master and feature during transition).
-  # Cron is UTC. https://circleci.com/docs/workflows/#scheduling-a-workflow
+  # Schedule cron is UTC only (no timezone key in this schema). https://circleci.com/docs/workflows/#scheduling-a-workflow
   scheduled_open_gov_refresh:
     triggers:
       - schedule:
-          # 2:30 PM Eastern (EST/EDT via America/New_York)
-          cron: "30 14 * * *"
-          timezone: America/New_York
+          # 19:30 UTC = 2:30 PM EST (winter). During EDT, same cron runs at 3:30 PM Eastern.
+          # This project's CircleCI schema does not allow `timezone` on schedule; use UTC only.
+          cron: "30 19 * * *"
           filters:
             branches:
               only:
