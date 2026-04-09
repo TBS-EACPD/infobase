@@ -572,3 +572,23 @@ workflows:
       - refresh_open_gov_remote:
           dataset_keys: << pipeline.parameters.open_gov_refresh_datasets >>
           dry_run: << pipeline.parameters.open_gov_refresh_dry_run >>
+
+  # Nightly Open Gov fetch + conditional remote populate (MDB_NAME = branch name).
+  # CircleCI loads schedule definitions from the default branch; merge this config there
+  # for the cron to run. filters.branches.only controls which branch(es) get a pipeline.
+  # After merge: point only: at master (or keep both master and feature during transition).
+  # Cron is UTC. https://circleci.com/docs/workflows/#scheduling-a-workflow
+  scheduled_open_gov_refresh:
+    triggers:
+      - schedule:
+          # 2:30 PM Eastern (EST/EDT via America/New_York)
+          cron: "30 14 * * *"
+          timezone: America/New_York
+          filters:
+            branches:
+              only:
+                - people_open_gov
+    jobs:
+      - refresh_open_gov_remote:
+          dataset_keys: org_employee_type
+          dry_run: false
