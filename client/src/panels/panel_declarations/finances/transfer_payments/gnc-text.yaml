@@ -109,3 +109,60 @@ historical_g_and_c_custom_new_row:
       </div>
       <div class='clearfix'></div>
     </div>
+
+recipients_title:
+  transform: [handlebars]
+  en: Recipients of Transfer Payments (2019-20 to 2023-24)
+  fr: Bénéficiaires des paiements de transfert (2019-20 à 2023-24)
+
+recipient_gov_text:
+  transform: [handlebars, markdown]
+  en: |
+    In {{year}}, the government spent **{{fmt_compact2_written total_exp}}** in {{gl_sidebar_link "transfer payments" "TP"}} and of that amount the top **10** recipients were:
+  fr: |
+    En {{year}}, le gouvernement a dépense **{{fmt_compact2_written total_exp}}** en paiements de transfert et, de ce montant, les **10** principaux bénéficiaires étaient:
+
+recipient_dept_text:
+  transform: [handlebars, markdown]
+  en: |
+    In {{year}}, **{{subject.name}}** spent **{{fmt_compact2_written total_exp}}** in {{gl_sidebar_link "transfer payments" "TP"}} and of that amount the top **10** recipients were:
+  fr: |
+    En {{year}}, **{{subject.name}}** a dépense **{{fmt_compact2_written total_exp}}** en paiements de transfert et, de ce montant, les **10** principaux bénéficiaires étaient:
+
+transfer_payment_table_title:
+  transform: [handlebars]
+  en: Transfer Payments to {{recipient}}
+  fr: Paiements de transfert à {{recipient}}
+
+recipient_name_footnote:
+  en: Recipient names in French are currently unavailable, so English names are displayed in both language views. French values will be made available in a future release.
+  fr: Les noms des bénéficiaires en français ne sont actuellement pas disponibles. Les nom anglais s'affichent dans les deux versions linguistiques. Les valeurs en français seront disponibles dans une version ultérieure.
+
+recipient_name_mapping_footnote:
+  transform: [handlebars]
+  en: Recipient names reported in the Public Accounts have been standardized for consistency. A mapping of original to standardized names is available on {{ext_link "Open Government" "https://github.com/TBS-EACPD/infobase/blob/tp-recipients/data/recipient_name_mapping.csv"}}.
+  fr: Les noms des bénéficiaires rapportés dans les Comptes public ont été normalisés afin d'assurer la cohérence. Une table de correspondance entre les nom originaux et les noms normalisés est disponible sur {{ext_link "Gouvernement ouvert" "https://github.com/TBS-EACPD/infobase/blob/tp-recipients/data/recipient_name_mapping.csv"}}.
+
+payments_under_100k_footnote:
+  en: Transfer payments under $100,000 per recipient are aggregated and do not include recipient location details (city, province, or country).
+  fr: Les paiements de transfert inférieurs à 100 000 $ par bénéficiaire sont regroupés et n'incluent pas les détails sur l'emplacement du bénéficiaires (ville, province ou pays).
+
+recipient:
+  en: Recipient
+  fr: Bénéficiaire
+
+payment_received:
+  en: Payment Received
+  fr: Paiement reçu
+
+city: 
+  en: City
+  fr: Ville
+
+province:
+  en: Province
+  fr: Province
+
+country:
+  en: Country
+  fr: Pays
