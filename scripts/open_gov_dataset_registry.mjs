@@ -20,7 +20,9 @@ export function getRequestedKeys(selectedKeys) {
 
   if (unknownKeys.length > 0) {
     throw new Error(
-      `Unknown dataset key(s): ${unknownKeys.join(", ")}. Use --list to inspect available keys.`
+      `Unknown dataset key(s): ${unknownKeys.join(
+        ", "
+      )}. Use --list to inspect available keys.`
     );
   }
 

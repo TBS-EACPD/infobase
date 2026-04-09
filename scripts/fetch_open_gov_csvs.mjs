@@ -64,7 +64,12 @@ function parseArgs(argv) {
       if (!next || next.startsWith("--")) {
         throw new Error("--only requires a comma-separated value");
       }
-      selectedKeys.push(...next.split(",").map((s) => s.trim()).filter(Boolean));
+      selectedKeys.push(
+        ...next
+          .split(",")
+          .map((s) => s.trim())
+          .filter(Boolean)
+      );
       i++;
       continue;
     }
@@ -81,13 +86,18 @@ async function fetchResourceDownloadUrl(resourceId) {
   const url = `${CKAN_API_BASE}/resource_show?id=${resourceId}`;
   const res = await fetch(url, { headers: { Accept: "application/json" } });
   if (!res.ok) {
-    throw new Error(`CKAN resource_show failed: ${res.status} ${res.statusText}`);
+    throw new Error(
+      `CKAN resource_show failed: ${res.status} ${res.statusText}`
+    );
   }
 
   const body = await res.json();
   if (!body.success || !body.result?.url) {
     throw new Error(
-      `CKAN resource_show unexpected response: ${JSON.stringify(body).slice(0, 500)}`
+      `CKAN resource_show unexpected response: ${JSON.stringify(body).slice(
+        0,
+        500
+      )}`
     );
   }
   return body.result.url;
@@ -128,7 +138,9 @@ async function fetchOneDataset(datasetKey, datasetConfig, dryRun) {
   if (!headersMatchExpected(headerCells, expected_header_parts)) {
     throw new Error(
       `[${datasetKey}] Unexpected CSV header. Got: ${headerLine}\n` +
-        `[${datasetKey}] Expected columns to start with: ${expected_header_parts.join(", ")}`
+        `[${datasetKey}] Expected columns to start with: ${expected_header_parts.join(
+          ", "
+        )}`
     );
   }
 

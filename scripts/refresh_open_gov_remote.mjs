@@ -60,7 +60,12 @@ function parseArgs(argv) {
       if (!next || next.startsWith("--")) {
         throw new Error("--only requires a comma-separated value");
       }
-      selectedKeys.push(...next.split(",").map((s) => s.trim()).filter(Boolean));
+      selectedKeys.push(
+        ...next
+          .split(",")
+          .map((s) => s.trim())
+          .filter(Boolean)
+      );
       i++;
       continue;
     }
@@ -99,7 +104,11 @@ async function runCommand(command, args, cwd) {
       if (code === 0) {
         resolve();
       } else {
-        reject(new Error(`Command failed (${command} ${args.join(" ")}), exit ${code}`));
+        reject(
+          new Error(
+            `Command failed (${command} ${args.join(" ")}), exit ${code}`
+          )
+        );
       }
     });
   });
@@ -153,7 +162,9 @@ async function main() {
     join(dataDir, OPEN_GOV_DATASET_REGISTRY[key].out_file)
   );
 
-  const beforeHashes = await Promise.all(watchedPaths.map((path) => getFileSha256(path)));
+  const beforeHashes = await Promise.all(
+    watchedPaths.map((path) => getFileSha256(path))
+  );
   console.log("Pre-fetch hashes:");
   keys.forEach((key, idx) => {
     console.log(`- ${key}: ${beforeHashes[idx] || "<missing file>"}`);
@@ -167,7 +178,9 @@ async function main() {
   console.log("Running fetch...");
   await runCommand("npm", fetchArgs, repoRoot);
 
-  const afterHashes = await Promise.all(watchedPaths.map((path) => getFileSha256(path)));
+  const afterHashes = await Promise.all(
+    watchedPaths.map((path) => getFileSha256(path))
+  );
   console.log("Post-fetch hashes:");
   keys.forEach((key, idx) => {
     console.log(`- ${key}: ${afterHashes[idx] || "<missing file>"}`);
@@ -194,10 +207,16 @@ async function main() {
   if (!shouldBypassGuard(yes)) {
     await confirmRemotePopulate();
   } else {
-    console.log("Safety prompt bypassed (--yes/CI/SKIP_REMOTE_POPULATE_GUARD).");
+    console.log(
+      "Safety prompt bypassed (--yes/CI/SKIP_REMOTE_POPULATE_GUARD)."
+    );
   }
 
-  await runCommand("npm", ["run", "populate_db:remote"], join(repoRoot, "server"));
+  await runCommand(
+    "npm",
+    ["run", "populate_db:remote"],
+    join(repoRoot, "server")
+  );
   console.log("Remote populate completed.");
 }
 
