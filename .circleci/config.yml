@@ -6,7 +6,8 @@ parameters:
     default: false
   open_gov_refresh_datasets:
     type: string
-    default: "org_employee_type"
+    # Sync keys with scripts/open_gov_dataset_registry.mjs (comma-separated)
+    default: "org_employee_type,org_employee_region,org_employee_age_group,org_employee_ex_lvl,org_employee_gender,org_employee_fol,org_employee_avg_age,org_employee_dept"
   open_gov_refresh_dry_run:
     type: boolean
     default: true
@@ -488,7 +489,8 @@ jobs:
     parameters:
       dataset_keys:
         type: string
-        default: "org_employee_type"
+        # Sync with scripts/open_gov_dataset_registry.mjs (comma-separated)
+        default: "org_employee_type,org_employee_region,org_employee_age_group,org_employee_ex_lvl,org_employee_gender,org_employee_fol,org_employee_avg_age,org_employee_dept"
       dry_run:
         type: boolean
         default: true
@@ -590,5 +592,5 @@ workflows:
                 - people_open_gov
     jobs:
       - refresh_open_gov_remote:
-          dataset_keys: org_employee_type
+          dataset_keys: "org_employee_type,org_employee_region,org_employee_age_group,org_employee_ex_lvl,org_employee_gender,org_employee_fol,org_employee_avg_age,org_employee_dept"
           dry_run: false
