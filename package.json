@@ -19,6 +19,10 @@
     "download_service_data": "sh scripts/dev_scripts/download_service_data.sh",
     "convert_csv": "node scripts/convert_csv_format.js",
     "update_csv_from_pipeline": "bash scripts/dev_scripts/update_csv_from_pipeline.sh",
+    "fetch_open_gov_csvs": "node scripts/fetch_open_gov_csvs.mjs",
+    "fetch_open_gov_org_employee_type": "node scripts/fetch_open_gov_csvs.mjs --only org_employee_type",
+    "refresh_open_gov_remote": "node scripts/refresh_open_gov_remote.mjs",
+    "refresh_people_employee_type_remote": "node scripts/refresh_open_gov_remote.mjs --only org_employee_type",
     "prepare": "husky install",
     "tests": "(cd client && npm run tests); (cd server && npm run tests); (cd form_backend && npm run tests)"
   },
