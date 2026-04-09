@@ -133,8 +133,7 @@ async function fetchOneDataset(datasetKey, datasetConfig, dryRun) {
   const rawText = await csvRes.text();
   const text = normalizeOpenGovCsvText(rawText);
   const firstNewline = text.indexOf("\n");
-  const headerLine =
-    firstNewline === -1 ? text : text.slice(0, firstNewline);
+  const headerLine = firstNewline === -1 ? text : text.slice(0, firstNewline);
   const headerCells = parseHeaderLine(headerLine);
 
   if (!headersMatchExpected(headerCells, expected_header_parts)) {
@@ -148,7 +147,10 @@ async function fetchOneDataset(datasetKey, datasetConfig, dryRun) {
 
   await writeFile(outPath, text, "utf8");
   console.log(
-    `[${datasetKey}] Wrote ${outPath} (${Buffer.byteLength(text, "utf8")} bytes)`
+    `[${datasetKey}] Wrote ${outPath} (${Buffer.byteLength(
+      text,
+      "utf8"
+    )} bytes)`
   );
 }
 
