@@ -21,6 +21,7 @@ import { writeFile } from "fs/promises";
 import { dirname, join } from "path";
 import { fileURLToPath } from "url";
 
+import { normalizeOpenGovCsvText } from "./open_gov_csv_normalize.mjs";
 import {
   OPEN_GOV_DATASET_REGISTRY,
   getRequestedKeys,
@@ -129,10 +130,11 @@ async function fetchOneDataset(datasetKey, datasetConfig, dryRun) {
     );
   }
 
-  const text = await csvRes.text();
+  const rawText = await csvRes.text();
+  const text = normalizeOpenGovCsvText(rawText);
   const firstNewline = text.indexOf("\n");
   const headerLine =
-    firstNewline === -1 ? text : text.slice(0, firstNewline).replace(/\r$/, "");
+    firstNewline === -1 ? text : text.slice(0, firstNewline);
   const headerCells = parseHeaderLine(headerLine);
 
   if (!headersMatchExpected(headerCells, expected_header_parts)) {
@@ -145,7 +147,9 @@ async function fetchOneDataset(datasetKey, datasetConfig, dryRun) {
   }
 
   await writeFile(outPath, text, "utf8");
-  console.log(`[${datasetKey}] Wrote ${outPath} (${text.length} bytes)`);
+  console.log(
+    `[${datasetKey}] Wrote ${outPath} (${Buffer.byteLength(text, "utf8")} bytes)`
+  );
 }
 
 async function main() {

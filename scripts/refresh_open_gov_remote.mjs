@@ -25,6 +25,7 @@ import { dirname, join } from "path";
 import { createInterface } from "readline/promises";
 import { fileURLToPath } from "url";
 
+import { normalizeOpenGovCsvText } from "./open_gov_csv_normalize.mjs";
 import {
   OPEN_GOV_DATASET_REGISTRY,
   getRequestedKeys,
@@ -83,10 +84,11 @@ function parseArgs(argv) {
   };
 }
 
-async function getFileSha256(path) {
+async function getNormalizedCsvSha256(path) {
   try {
-    const buf = await readFile(path);
-    return createHash("sha256").update(buf).digest("hex");
+    const text = await readFile(path, "utf8");
+    const normalized = normalizeOpenGovCsvText(text);
+    return createHash("sha256").update(normalized, "utf8").digest("hex");
   } catch (err) {
     return null;
   }
@@ -163,7 +165,7 @@ async function main() {
   );
 
   const beforeHashes = await Promise.all(
-    watchedPaths.map((path) => getFileSha256(path))
+    watchedPaths.map((path) => getNormalizedCsvSha256(path))
   );
   console.log("Pre-fetch hashes:");
   keys.forEach((key, idx) => {
@@ -179,7 +181,7 @@ async function main() {
   await runCommand("npm", fetchArgs, repoRoot);
 
   const afterHashes = await Promise.all(
-    watchedPaths.map((path) => getFileSha256(path))
+    watchedPaths.map((path) => getNormalizedCsvSha256(path))
   );
   console.log("Post-fetch hashes:");
   keys.forEach((key, idx) => {
