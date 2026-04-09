@@ -425,7 +425,11 @@ jobs:
             - data-is-deployed-{{ .Branch }}-{{ checksum "./data-checksums" }}-v2
       - run:
           command: |
-            [ -f "./this-data-is-deployed" ] || (cd server && npm run populate_db:remote)
+            if [ "<< pipeline.parameters.run_open_gov_refresh >>" = "true" ] && [ "<< pipeline.parameters.open_gov_refresh_dry_run >>" = "false" ]; then
+              echo "Skipping deploy_data populate_db:remote (refresh_open_gov_remote will handle populate)."
+            else
+              [ -f "./this-data-is-deployed" ] || (cd server && npm run populate_db:remote)
+            fi
       - run: touch ./this-data-is-deployed
       - save_cache:
           key: data-is-deployed--{{ .Branch }}-{{ checksum "./data-checksums" }}-v2
