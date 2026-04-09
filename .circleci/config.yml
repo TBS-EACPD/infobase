@@ -1,5 +1,16 @@
 version: 2.1
 
+parameters:
+  run_open_gov_refresh:
+    type: boolean
+    default: false
+  open_gov_refresh_datasets:
+    type: string
+    default: "org_employee_type"
+  open_gov_refresh_dry_run:
+    type: boolean
+    default: true
+
 dockerhub_auth: &dockerhub_auth
   auth:
     username: $DOCKERHUB_USERNAME
@@ -465,6 +476,34 @@ jobs:
       # only saving master stats right now since they're somewhat large files (~1 mb each)
       - run: if [[ $CIRCLE_BRANCH = master ]]; then ./scripts/ci_scripts/store_bundle_stats.sh; fi
 
+  refresh_open_gov_remote:
+    docker:
+      - image: eaadtbs/ib-ci:1.4
+        <<: *dockerhub_auth
+    working_directory: "~/InfoBase"
+    parameters:
+      dataset_keys:
+        type: string
+        default: "org_employee_type"
+      dry_run:
+        type: boolean
+        default: true
+    steps:
+      - checkout:
+          path: "~/InfoBase"
+      - run: ./scripts/ci_scripts/create_envs.sh
+      - top_level_install
+      - server_install
+      - run:
+          name: refresh_open_gov_remote
+          command: |
+            CMD="npm run refresh_open_gov_remote -- --yes --only '<< parameters.dataset_keys >>'"
+            if [ "<< parameters.dry_run >>" = "true" ]; then
+              CMD="$CMD --dry-run"
+            fi
+            echo "Running: $CMD"
+            eval "$CMD"
+
 workflows:
   static_analysis:
     jobs:
@@ -522,3 +561,10 @@ workflows:
             - build_client
             # - test_end_to_end
           <<: *deploy_filter
+
+  manual_open_gov_refresh:
+    when: << pipeline.parameters.run_open_gov_refresh >>
+    jobs:
+      - refresh_open_gov_remote:
+          dataset_keys: << pipeline.parameters.open_gov_refresh_datasets >>
+          dry_run: << pipeline.parameters.open_gov_refresh_dry_run >>
