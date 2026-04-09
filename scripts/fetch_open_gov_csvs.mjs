@@ -21,22 +21,12 @@ import { writeFile } from "fs/promises";
 import { dirname, join } from "path";
 import { fileURLToPath } from "url";
 
-const CKAN_API_BASE = "https://open.canada.ca/data/api/3/action";
+import {
+  OPEN_GOV_DATASET_REGISTRY,
+  getRequestedKeys,
+} from "./open_gov_dataset_registry.mjs";
 
-const DATASET_REGISTRY = {
-  org_employee_type: {
-    description:
-      "Population of the federal public service by department and tenure",
-    resource_id: "6d238af7-2212-4d36-8ee3-abbfba4392c7",
-    out_file: "org_employee_type.csv",
-    expected_header_parts: [
-      "year",
-      "department or agency",
-      "tenure",
-      "number of employees",
-    ],
-  },
-};
+const CKAN_API_BASE = "https://open.canada.ca/data/api/3/action";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const repoRoot = join(__dirname, "..");
@@ -85,18 +75,6 @@ function parseArgs(argv) {
   }
 
   return { list, dryRun, selectedKeys };
-}
-
-function getRequestedKeys(selectedKeys) {
-  const allKeys = Object.keys(DATASET_REGISTRY);
-  const keys = selectedKeys.length > 0 ? [...new Set(selectedKeys)] : allKeys;
-  const unknownKeys = keys.filter((key) => !DATASET_REGISTRY[key]);
-  if (unknownKeys.length > 0) {
-    throw new Error(
-      `Unknown dataset key(s): ${unknownKeys.join(", ")}. Use --list to inspect available keys.`
-    );
-  }
-  return keys;
 }
 
 async function fetchResourceDownloadUrl(resourceId) {
@@ -164,7 +142,7 @@ async function main() {
 
   if (list) {
     console.log("Available Open Gov datasets:");
-    Object.entries(DATASET_REGISTRY).forEach(([key, value]) => {
+    Object.entries(OPEN_GOV_DATASET_REGISTRY).forEach(([key, value]) => {
       console.log(`- ${key}: ${value.description}`);
     });
     return;
@@ -173,7 +151,7 @@ async function main() {
   console.log(`Fetching ${keys.length} dataset(s) into ${outDir}`);
 
   for (const key of keys) {
-    await fetchOneDataset(key, DATASET_REGISTRY[key], dryRun);
+    await fetchOneDataset(key, OPEN_GOV_DATASET_REGISTRY[key], dryRun);
   }
 
   console.log("\nDone.");

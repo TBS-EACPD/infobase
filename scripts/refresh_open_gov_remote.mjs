@@ -1,8 +1,8 @@
 /**
- * Orchestrate Open Gov refresh for org_employee_type:
- * 1) fetch latest CSV
- * 2) compare content hash before/after
- * 3) run server populate_db:remote only if changed
+ * Orchestrate Open Gov refresh for selected datasets:
+ * 1) hash selected CSV files
+ * 2) fetch latest CSVs from Open Gov
+ * 3) hash again and run populate_db:remote only if any selected file changed
  *
  * Safety guard:
  * - Interactive runs require confirmation before remote populate
@@ -10,9 +10,12 @@
  * - CI automatically bypasses prompt
  *
  * Usage:
- *   npm run refresh_people_employee_type_remote
- *   npm run refresh_people_employee_type_remote -- --yes
- *   npm run refresh_people_employee_type_remote -- --fetch-dry-run
+ *   npm run refresh_open_gov_remote
+ *   npm run refresh_open_gov_remote -- --list
+ *   npm run refresh_open_gov_remote -- --only org_employee_type
+ *   npm run refresh_open_gov_remote -- org_employee_type
+ *   npm run refresh_open_gov_remote -- --dry-run --only org_employee_type
+ *   npm run refresh_open_gov_remote -- --yes --only org_employee_type
  */
 
 import { spawn } from "child_process";
@@ -22,15 +25,56 @@ import { dirname, join } from "path";
 import { createInterface } from "readline/promises";
 import { fileURLToPath } from "url";
 
+import {
+  OPEN_GOV_DATASET_REGISTRY,
+  getRequestedKeys,
+} from "./open_gov_dataset_registry.mjs";
+
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const repoRoot = join(__dirname, "..");
-const csvPath = join(repoRoot, "data", "org_employee_type.csv");
+const dataDir = join(repoRoot, "data");
 
 function parseArgs(argv) {
   const args = argv.slice(2);
+  const selectedKeys = [];
+  let list = false;
+  let yes = false;
+  let dryRun = false;
+
+  for (let i = 0; i < args.length; i++) {
+    const arg = args[i];
+    if (arg === "--list") {
+      list = true;
+      continue;
+    }
+    if (arg === "--yes") {
+      yes = true;
+      continue;
+    }
+    if (arg === "--dry-run") {
+      dryRun = true;
+      continue;
+    }
+    if (arg === "--only") {
+      const next = args[i + 1];
+      if (!next || next.startsWith("--")) {
+        throw new Error("--only requires a comma-separated value");
+      }
+      selectedKeys.push(...next.split(",").map((s) => s.trim()).filter(Boolean));
+      i++;
+      continue;
+    }
+    if (arg.startsWith("--")) {
+      throw new Error(`Unknown option: ${arg}`);
+    }
+    selectedKeys.push(arg);
+  }
+
   return {
-    yes: args.includes("--yes"),
-    fetchDryRun: args.includes("--fetch-dry-run"),
+    list,
+    yes,
+    dryRun,
+    selectedKeys,
   };
 }
 
@@ -94,29 +138,54 @@ async function confirmRemotePopulate() {
 }
 
 async function main() {
-  const { yes, fetchDryRun } = parseArgs(process.argv);
+  const { list, yes, dryRun, selectedKeys } = parseArgs(process.argv);
+  const keys = getRequestedKeys(selectedKeys);
 
-  const beforeHash = await getFileSha256(csvPath);
-  console.log(`Pre-fetch hash: ${beforeHash || "<missing file>"}`);
+  if (list) {
+    console.log("Available Open Gov datasets:");
+    Object.entries(OPEN_GOV_DATASET_REGISTRY).forEach(([key, value]) => {
+      console.log(`- ${key}: ${value.description}`);
+    });
+    return;
+  }
 
-  const fetchArgs = ["run", "fetch_open_gov_csvs", "--", "--only", "org_employee_type"];
-  if (fetchDryRun) {
+  const watchedPaths = keys.map((key) =>
+    join(dataDir, OPEN_GOV_DATASET_REGISTRY[key].out_file)
+  );
+
+  const beforeHashes = await Promise.all(watchedPaths.map((path) => getFileSha256(path)));
+  console.log("Pre-fetch hashes:");
+  keys.forEach((key, idx) => {
+    console.log(`- ${key}: ${beforeHashes[idx] || "<missing file>"}`);
+  });
+
+  const fetchArgs = ["run", "fetch_open_gov_csvs", "--", ...keys];
+  if (dryRun) {
     fetchArgs.push("--dry-run");
   }
 
   console.log("Running fetch...");
   await runCommand("npm", fetchArgs, repoRoot);
 
-  const afterHash = await getFileSha256(csvPath);
-  console.log(`Post-fetch hash: ${afterHash || "<missing file>"}`);
+  const afterHashes = await Promise.all(watchedPaths.map((path) => getFileSha256(path)));
+  console.log("Post-fetch hashes:");
+  keys.forEach((key, idx) => {
+    console.log(`- ${key}: ${afterHashes[idx] || "<missing file>"}`);
+  });
 
-  if (!fetchDryRun && beforeHash && afterHash && beforeHash === afterHash) {
+  const hasChanged = keys.some((key, idx) => {
+    const beforeHash = beforeHashes[idx];
+    const afterHash = afterHashes[idx];
+    return !(beforeHash && afterHash && beforeHash === afterHash);
+  });
+
+  if (!dryRun && !hasChanged) {
     console.log("No data change detected. Skipping populate_db:remote.");
     return;
   }
 
-  if (fetchDryRun) {
-    console.log("Fetch dry-run mode. Skipping populate_db:remote.");
+  if (dryRun) {
+    console.log("Dry-run mode. Skipping populate_db:remote.");
     return;
   }
 
