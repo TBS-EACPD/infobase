@@ -14,6 +14,7 @@ import {
 import {
   Indicator,
   result_docs,
+  show_gba_plus_ui,
 } from "src/panels/panel_declarations/results/results_common";
 
 import {
@@ -326,7 +327,7 @@ export default class ResultsExplorerDisplay extends React.Component {
                 )}
               </form>
             </div>
-            {result_docs[doc].can_have_gba_plus && (
+            {show_gba_plus_ui && result_docs[doc].can_have_gba_plus && (
               <div
                 style={{
                   display: "flex",
