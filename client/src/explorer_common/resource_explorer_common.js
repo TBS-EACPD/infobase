@@ -10,7 +10,8 @@ import { year_templates } from "src/models/years";
 import { Table } from "src/tables/TableClass";
 
 const is_planning_year = (year) =>
-  _.includes(year_templates.planning_years, year);
+  _.includes(year_templates.planning_years, year) ||
+  year === "pa_last_year_planned";
 
 const pick_table = (type) =>
   Table.store.lookup(type === "spending" ? "programSpending" : "programFtes");
