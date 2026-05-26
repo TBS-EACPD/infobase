@@ -142,7 +142,7 @@ const link_to_results_infograph = (subject) =>
   infographic_href_template(subject, "results");
 
 const results_resource_fragment = (subject, doc) => {
-  const doc_resource_year = result_docs[doc].primary_resource_year;
+  const doc_resource_year = result_docs[doc].primary_resource_data_year;
 
   if (doc_resource_year) {
     return get_resources_for_subject(subject, doc_resource_year);

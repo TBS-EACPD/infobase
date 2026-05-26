@@ -435,13 +435,21 @@ const get_doc_name = (doc_type, year) => {
 const build_doc_info_objects = (doc_type, docs) =>
   _.chain(docs)
     .map((doc_properties, index) => {
-      const { year_short, resource_years } = doc_properties;
+      const {
+        year_short,
+        resource_years,
+        resource_data_years = resource_years,
+      } = doc_properties;
 
       const is_drr = doc_type === "drr";
 
       const primary_resource_year = is_drr
         ? _.last(resource_years)
         : _.first(resource_years);
+
+      const primary_resource_data_year = is_drr
+        ? _.last(resource_data_years)
+        : _.first(resource_data_years);
 
       return {
         doc_type,
@@ -452,6 +460,7 @@ const build_doc_info_objects = (doc_type, docs) =>
         primary_resource_year,
         primary_resource_year_written:
           primary_resource_year && run_template(primary_resource_year),
+        primary_resource_data_year,
         has_resources: !_.isEmpty(resource_years),
         could_have_previous: index > 0,
         // GBA Plus marking might be available on DPs at some point, but isn't currently
@@ -531,10 +540,17 @@ const drr_docs = build_doc_info_objects("drr", [
 const dp_docs = build_doc_info_objects("dp", [
   {
     year_short: "2025",
+    // Labels use the 2025-26 DP planning horizon. The first-year planned column in
+    // program_spending.csv is pa_last_year_planned after the planning-year globals roll.
     resource_years: [
+      "{{est_last_year}}",
       "{{planning_year_1}}",
       "{{planning_year_2}}",
-      "{{planning_year_3}}",
+    ],
+    resource_data_years: [
+      "pa_last_year_planned",
+      "{{planning_year_1}}",
+      "{{planning_year_2}}",
     ],
     doc_url_en:
       "https://www.canada.ca/en/treasury-board-secretariat/services/planned-government-spending/reports-plans-priorities/2025-26-departmental-plans.html",
