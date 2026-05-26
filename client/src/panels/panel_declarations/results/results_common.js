@@ -32,6 +32,9 @@ const {
 
 const { result_statuses } = businessConstants;
 
+/** Set to true to restore GBA Plus badges, drilldown filter, and intro copy. */
+export const show_gba_plus_ui = false;
+
 const results_hierarchy = (data) => {
   switch (data.__typename) {
     case "Program":

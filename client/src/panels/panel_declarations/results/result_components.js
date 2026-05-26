@@ -30,6 +30,7 @@ import {
   get_result_doc_keys,
   result_docs,
   result_color_scale,
+  show_gba_plus_ui,
 } from "./results_common";
 
 import "./result_components.scss";
@@ -82,7 +83,8 @@ const IndicatorDisplay = ({ indicator, show_doc }) => {
         <dd>
           {indicator.name}
           <div style={{ display: "flex", justifyContent: "flex-end" }}>
-            {result_docs[indicator.doc].can_have_gba_plus &&
+            {show_gba_plus_ui &&
+              result_docs[indicator.doc].can_have_gba_plus &&
               indicator.gba_plus && <GBAPlusBadge use_icon={true} />}
             {should_display_new_status &&
               _.isNull(indicator.previous_year_target_type) && <NewBadge />}
