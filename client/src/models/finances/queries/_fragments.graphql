@@ -1,0 +1,35 @@
+fragment ProgramSpendingFields on ProgramSpending {
+  pa_last_year_5_exp
+  pa_last_year_4_exp
+  pa_last_year_3_exp
+  pa_last_year_2_exp
+  pa_last_year_exp
+  pa_last_year_planned
+  planning_year_1
+  planning_year_2
+  planning_year_3
+}
+
+fragment ProgramFteFields on ProgramFte {
+  pa_last_year_5
+  pa_last_year_4
+  pa_last_year_3
+  pa_last_year_2
+  pa_last_year
+  pa_last_year_planned
+  planning_year_1
+  planning_year_2
+  planning_year_3
+}
+
+fragment OrgVoteStatPaExpFields on OrgVoteStatPa {
+  pa_last_year_5_exp
+  pa_last_year_4_exp
+  pa_last_year_3_exp
+  pa_last_year_2_exp
+  pa_last_year_exp
+}
+
+fragment OrgVoteStatEstimatesFields on OrgVoteStatEstimates {
+  est_in_year
+}

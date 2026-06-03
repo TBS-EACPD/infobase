@@ -1,0 +1,14 @@
+#import "../_fragments.graphql"
+
+query ProgramWelcomeMatFinance($lang: String!, $program_id: String!) {
+  root(lang: $lang) {
+    program(id: $program_id) {
+      program_spending {
+        ...ProgramSpendingFields
+      }
+      program_fte {
+        ...ProgramFteFields
+      }
+    }
+  }
+}
