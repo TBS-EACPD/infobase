@@ -6,8 +6,8 @@ import {
   api_load_years_with_covid_data,
   api_load_all_covid_measures,
 } from "src/models/covid/populate";
-import { load_footnotes_bundle } from "src/models/footnotes/populate_footnotes";
 import { api_load_has_finance_data } from "src/models/finances/api_load_has_finance_data";
+import { load_footnotes_bundle } from "src/models/footnotes/populate_footnotes";
 import { api_load_has_people_data } from "src/models/people/api_load_has_people_data";
 import {
   api_load_results_bundle,

@@ -9,11 +9,11 @@ import { declare_panel } from "src/panels/PanelRegistry";
 import { DisplayTable, LeafSpinner } from "src/components/index";
 
 import { isSpecialWarrants } from "src/models/estimates";
-import { Dept } from "src/models/subjects";
 
 import { calculate_in_year_vote_stat_breakdown_from_finance_data } from "src/models/finances/org_vote_stat_estimates_calculations";
 import { useOrgVoteStatEstimatesFinanceData } from "src/models/finances/useOrgVoteStatEstimatesFinanceData";
 import { est_in_year_col } from "src/models/finances/vote_stat_utils";
+import { Dept } from "src/models/subjects";
 
 import { newIBLightCategoryColors } from "src/core/color_schemes";
 import { formats } from "src/core/format";

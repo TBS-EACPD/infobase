@@ -1,4 +1,3 @@
-import { sum } from "d3-array";
 import { scaleOrdinal } from "d3-scale";
 import _ from "lodash";
 import React, { useMemo } from "react";
@@ -19,10 +18,9 @@ import {
   SelectAllControl,
 } from "src/components/index";
 
+import { businessConstants } from "src/models/businessConstants";
 import { calculate_detailed_program_spending_split_from_finance_data } from "src/models/finances/detailed_program_spending_split_calculations";
 import { useDetailedProgramSpendingSplitFinanceData } from "src/models/finances/useDetailedProgramSpendingSplitFinanceData";
-
-import { businessConstants } from "src/models/businessConstants";
 
 import { run_template } from "src/models/text";
 import { year_templates } from "src/models/years";
