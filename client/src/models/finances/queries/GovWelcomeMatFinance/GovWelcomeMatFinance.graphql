@@ -12,6 +12,9 @@ query GovWelcomeMatFinance($lang: String!) {
       org_vote_stat_estimates {
         ...OrgVoteStatEstimatesFields
       }
+      org_sobjs {
+        ...OrgSobjsFields
+      }
     }
   }
 }

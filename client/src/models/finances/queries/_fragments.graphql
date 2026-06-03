@@ -47,3 +47,19 @@ fragment ProgramVoteStatFields on ProgramVoteStat {
   pa_last_year_2
   pa_last_year
 }
+
+fragment OrgSobjsFields on OrgSobjs {
+  so_num
+  pa_last_year_5
+  pa_last_year_4
+  pa_last_year_3
+  pa_last_year_2
+  pa_last_year_1
+}
+
+fragment ProgramSobjsFields on ProgramSobjs {
+  so_num
+  pa_last_year_3
+  pa_last_year_2
+  pa_last_year
+}

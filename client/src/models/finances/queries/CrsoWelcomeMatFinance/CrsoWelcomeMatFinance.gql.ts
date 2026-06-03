@@ -1,7 +1,7 @@
 import * as Types from '../../../../types/types.gql';
 
 import { gql } from '@apollo/client';
-import { ProgramSpendingFieldsFragmentDoc, ProgramFteFieldsFragmentDoc, OrgVoteStatEstimatesFieldsFragmentDoc, OrgVoteStatPaExpFieldsFragmentDoc, ProgramVoteStatFieldsFragmentDoc } from '../_fragments.gql';
+import { ProgramSpendingFieldsFragmentDoc, ProgramFteFieldsFragmentDoc, OrgVoteStatEstimatesFieldsFragmentDoc, OrgSobjsFieldsFragmentDoc, OrgVoteStatPaExpFieldsFragmentDoc, ProgramVoteStatFieldsFragmentDoc, ProgramSobjsFieldsFragmentDoc } from '../_fragments.gql';
 import * as Apollo from '@apollo/client';
 const defaultOptions = {} as const;
 export type CrsoWelcomeMatFinanceQueryVariables = Types.Exact<{

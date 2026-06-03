@@ -182,6 +182,7 @@ export type Gov = {
   has_finance_data?: Maybe<Scalars['Boolean']>;
   id?: Maybe<Scalars['String']>;
   name?: Maybe<Scalars['String']>;
+  org_sobjs?: Maybe<Array<Maybe<OrgSobjs>>>;
   org_transfer_payments?: Maybe<Array<Maybe<OrgTransferPayments>>>;
   org_vote_stat_estimates?: Maybe<Array<Maybe<OrgVoteStatEstimates>>>;
   org_vote_stat_pa?: Maybe<Array<Maybe<OrgVoteStatPa>>>;
