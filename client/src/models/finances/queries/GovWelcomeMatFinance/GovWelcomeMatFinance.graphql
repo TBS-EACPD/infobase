@@ -18,6 +18,9 @@ query GovWelcomeMatFinance($lang: String!) {
       org_sobjs {
         ...OrgSobjsFields
       }
+      org_transfer_payments {
+        ...OrgTransferPaymentsFields
+      }
     }
   }
 }

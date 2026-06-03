@@ -18,6 +18,9 @@ query OrgWelcomeMatFinance($lang: String!, $org_id: String!) {
       org_sobjs {
         ...OrgSobjsFields
       }
+      org_transfer_payments {
+        ...OrgTransferPaymentsFields
+      }
     }
   }
 }

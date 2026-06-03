@@ -89,3 +89,14 @@ fragment ProgramSobjsFields on ProgramSobjs {
   pa_last_year_2
   pa_last_year
 }
+
+fragment OrgTransferPaymentsFields on OrgTransferPayments {
+  dept_code
+  type
+  name
+  pa_last_year_5_exp
+  pa_last_year_4_exp
+  pa_last_year_3_exp
+  pa_last_year_2_exp
+  pa_last_year_1_exp
+}
