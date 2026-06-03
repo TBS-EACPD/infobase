@@ -1,4 +1,5 @@
 fragment ProgramSpendingFields on ProgramSpending {
+  program_id
   pa_last_year_5_exp
   pa_last_year_4_exp
   pa_last_year_3_exp
@@ -11,6 +12,7 @@ fragment ProgramSpendingFields on ProgramSpending {
 }
 
 fragment ProgramFteFields on ProgramFte {
+  program_id
   pa_last_year_5
   pa_last_year_4
   pa_last_year_3

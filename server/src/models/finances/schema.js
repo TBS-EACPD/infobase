@@ -111,6 +111,7 @@ const schema = `
     pa_last_year: Float
   }
   type ProgramSpending{
+    program_id: String
     pa_last_year_5_exp: Float
     pa_last_year_4_exp: Float
     pa_last_year_3_exp: Float
@@ -124,6 +125,7 @@ const schema = `
     planning_year_3: Float
   }
   type ProgramFte{
+    program_id: String
     pa_last_year_5: Float,
     pa_last_year_4: Float,
     pa_last_year_3: Float,

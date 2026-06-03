@@ -490,6 +490,7 @@ export type ProgramFte = {
   planning_year_1?: Maybe<Scalars['Float']>;
   planning_year_2?: Maybe<Scalars['Float']>;
   planning_year_3?: Maybe<Scalars['Float']>;
+  program_id?: Maybe<Scalars['String']>;
 };
 
 export type ProgramSobjs = {
@@ -511,6 +512,7 @@ export type ProgramSpending = {
   planning_year_1?: Maybe<Scalars['Float']>;
   planning_year_2?: Maybe<Scalars['Float']>;
   planning_year_3?: Maybe<Scalars['Float']>;
+  program_id?: Maybe<Scalars['String']>;
 };
 
 export type ProgramVoteStat = {
