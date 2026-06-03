@@ -65,3 +65,15 @@ export const sum_org_vote_stat_estimates_in_year = (rows) =>
   sum_field_across_rows(rows, "est_in_year");
 
 export const compact_finance_rows = (rows) => _.compact(rows || []);
+
+export const sum_field_for_program_ids = (rows, program_ids, field) => {
+  const id_set = new Set(program_ids);
+  return _.sumBy(rows || [], (row) =>
+    row && id_set.has(row.program_id) ? row[field] || 0 : 0
+  );
+};
+
+export const filter_rows_by_program_ids = (rows, program_ids) => {
+  const id_set = new Set(program_ids);
+  return _.filter(rows || [], (row) => row && id_set.has(row.program_id));
+};
