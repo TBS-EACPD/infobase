@@ -10,7 +10,7 @@ query OrgWelcomeMatFinance($lang: String!, $org_id: String!) {
         ...ProgramFteFields
       }
       org_vote_stat_pa {
-        ...OrgVoteStatPaExpFields
+        ...OrgVoteStatPaFields
       }
       org_vote_stat_estimates {
         ...OrgVoteStatEstimatesFields

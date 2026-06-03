@@ -32,12 +32,38 @@ fragment OrgVoteStatPaExpFields on OrgVoteStatPa {
   pa_last_year_exp
 }
 
+fragment OrgVoteStatPaFields on OrgVoteStatPa {
+  dept_code
+  vote_num
+  vs_type
+  name
+  pa_last_year_5_auth
+  pa_last_year_4_auth
+  pa_last_year_3_auth
+  pa_last_year_2_auth
+  pa_last_year_auth
+  pa_last_year_5_exp
+  pa_last_year_4_exp
+  pa_last_year_3_exp
+  pa_last_year_2_exp
+  pa_last_year_exp
+  pa_last_year_5_unlapsed
+  pa_last_year_4_unlapsed
+  pa_last_year_3_unlapsed
+  pa_last_year_2_unlapsed
+  pa_last_year_unlapsed
+}
+
 fragment OrgVoteStatEstimatesFields on OrgVoteStatEstimates {
   dept_code
   vote_num
   vs_type
   name
   doc
+  est_last_year_4
+  est_last_year_3
+  est_last_year_2
+  est_last_year
   est_in_year
 }
 
