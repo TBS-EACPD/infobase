@@ -70,6 +70,7 @@ program_vote_stat{
 }`;
 const program_spending_field = `
 program_spending{
+  program_id
   pa_last_year_5_exp
   pa_last_year_4_exp
   pa_last_year_3_exp
@@ -84,6 +85,7 @@ program_spending{
 }`;
 const program_fte_field = `
 program_fte{
+  program_id
   pa_last_year_5
   pa_last_year_4
   pa_last_year_3
