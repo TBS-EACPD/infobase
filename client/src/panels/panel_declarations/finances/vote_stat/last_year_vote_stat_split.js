@@ -9,7 +9,6 @@ import { LeafSpinner } from "src/components/index";
 import { calculate_program_vote_stat_split_from_finance_data } from "src/models/finances/program_vote_stat_calculations";
 import { useProgramVoteStatFinanceData } from "src/models/finances/useProgramVoteStatFinanceData";
 
-
 import { is_a11y_mode } from "src/core/injected_build_constants";
 
 import { WrappedNivoPie } from "src/charts/wrapped_nivo/index";
