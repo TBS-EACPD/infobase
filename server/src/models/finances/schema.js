@@ -177,13 +177,18 @@ export default function ({ loaders, models }) {
 
   const org_has_finance_data = async (org) => {
     if (!org.dept_code) return false;
-    const [pa, estimates] = await Promise.all([
-      orgVoteStatPa_loader.load(org.dept_code),
+    const [estimates, programs] = await Promise.all([
       orgVoteStatEstimates_loader.load(org.dept_code),
+      prog_dept_code_loader.load(org.dept_code),
     ]);
-    return (
-      (pa && pa.length > 0) || (estimates && estimates.length > 0)
+    if (estimates && estimates.length > 0) {
+      return true;
+    }
+    const spending = await flatten_program_finance_rows(
+      programs,
+      programSpending_loader
     );
+    return !_.isEmpty(spending);
   };
 
   const program_has_finance_data = async (prog) => {
