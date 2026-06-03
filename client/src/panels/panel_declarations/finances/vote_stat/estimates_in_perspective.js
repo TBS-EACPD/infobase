@@ -10,8 +10,6 @@ import { calculate_estimates_in_perspective_from_finance_data } from "src/models
 import { useOrgVoteStatEstimatesFinanceData } from "src/models/finances/useOrgVoteStatEstimatesFinanceData";
 import { create_footnote } from "src/models/footnotes/footnotes";
 
-
-
 import { is_a11y_mode } from "src/core/injected_build_constants";
 
 import { CircleProportionGraph } from "src/charts/wrapped_nivo/index";

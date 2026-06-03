@@ -9,7 +9,6 @@ import { LeafSpinner } from "src/components/index";
 import { calculate_in_year_estimates_split_from_finance_data } from "src/models/finances/org_vote_stat_estimates_calculations";
 import { useOrgVoteStatEstimatesFinanceData } from "src/models/finances/useOrgVoteStatEstimatesFinanceData";
 
-
 import { formats } from "src/core/format";
 import { is_a11y_mode } from "src/core/injected_build_constants";
 
