@@ -9,6 +9,9 @@ query GovWelcomeMatFinance($lang: String!) {
       program_fte {
         ...ProgramFteFields
       }
+      org_vote_stat_estimates {
+        ...OrgVoteStatEstimatesFields
+      }
     }
   }
 }

@@ -33,5 +33,17 @@ fragment OrgVoteStatPaExpFields on OrgVoteStatPa {
 }
 
 fragment OrgVoteStatEstimatesFields on OrgVoteStatEstimates {
+  dept_code
+  vote_num
+  vs_type
+  name
+  doc
   est_in_year
+}
+
+fragment ProgramVoteStatFields on ProgramVoteStat {
+  vs_type
+  pa_last_year_3
+  pa_last_year_2
+  pa_last_year
 }
