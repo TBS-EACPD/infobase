@@ -1,6 +1,6 @@
 import { scaleOrdinal } from "d3-scale";
 import _ from "lodash";
-import React, { Fragment } from "react";
+import React, { Fragment, useMemo } from "react";
 
 import { TspanLineWrapper } from "src/panels/panel_declarations/common_panel_components";
 import { InfographicPanel } from "src/panels/panel_declarations/InfographicPanel";
@@ -10,9 +10,11 @@ import {
   create_text_maker_component,
   DisplayTable,
   GraphOverlay,
+  LeafSpinner,
 } from "src/components/index";
 
-import { ProgramTag } from "src/models/subjects";
+import { calculate_gocographic_from_finance_data } from "src/models/finances/goco_calculations";
+import { useWelcomeMatFinanceData } from "src/models/finances/useWelcomeMatFinanceData";
 
 import { newIBCategoryColors } from "src/core/color_schemes";
 import { get_formatter } from "src/core/format";
@@ -21,7 +23,6 @@ import { is_a11y_mode } from "src/core/injected_build_constants";
 import { StandardLegend } from "src/charts/legends/index";
 import { WrappedNivoBar } from "src/charts/wrapped_nivo/index";
 import { textColor, backgroundColor } from "src/style_constants/index";
-import { Table } from "src/tables/TableClass";
 
 import text from "./goco.yaml";
 
@@ -41,90 +42,26 @@ class Goco extends React.Component {
   render() {
     const { child_graph, clicked_spending, clicked_fte, clicked_id } =
       this.state;
-    const programSpending = Table.store.lookup("programSpending");
-    const programFtes = Table.store.lookup("programFtes");
-    const spend_col = "{{pa_last_year}}exp";
-    const fte_col = "{{pa_last_year}}";
-    const series_labels = [text_maker("spending"), text_maker("ftes")];
+    const {
+      graph_data,
+      spend_fte_text_data,
+      tick_map,
+      parent_table_data,
+      child_tables,
+      spending_text,
+      ftes_text,
+    } = this.props.calculations;
+
+    const series_labels = [spending_text, ftes_text];
     const sa_text = text_maker("spending_area");
-    const spending_text = text_maker("spending");
-    const ftes_text = text_maker("ftes");
 
     let graph_content;
 
     const colors = scaleOrdinal().range(newIBCategoryColors);
 
-    const gocos_by_spendarea = ProgramTag.tag_roots_by_id["GOCO"].children_tags;
-
-    const total_fte_spend = _.reduce(
-      gocos_by_spendarea,
-      (result, sa) => {
-        result[sa.id] = _.reduce(
-          sa.children_tags,
-          (child_result, goco) => {
-            child_result.total_child_spending =
-              child_result.total_child_spending +
-              programSpending.q(goco).sum(spend_col);
-            child_result.total_child_ftes =
-              child_result.total_child_ftes + programFtes.q(goco).sum(fte_col);
-            return child_result;
-          },
-          {
-            total_child_spending: 0,
-            total_child_ftes: 0,
-          }
-        );
-        result.total_spending =
-          result.total_spending + result[sa.id].total_child_spending;
-        result.total_ftes = result.total_ftes + result[sa.id].total_child_ftes;
-        return result;
-      },
-      {
-        total_spending: 0,
-        total_ftes: 0,
-      }
-    );
-
-    const graph_data = _.chain(gocos_by_spendarea)
-      .map((sa) => {
-        const children = _.map(sa.children_tags, (goco) => {
-          const actual_spending = programSpending.q(goco).sum(spend_col);
-          const actual_ftes = programFtes.q(goco).sum(fte_col);
-          return {
-            label: goco.name,
-            actual_spending: actual_spending || 0,
-            actual_ftes: actual_ftes || 0,
-            [spending_text]:
-              actual_spending / total_fte_spend[sa.id].total_child_spending ||
-              0,
-            [ftes_text]:
-              actual_ftes / total_fte_spend[sa.id].total_child_ftes || 0,
-          };
-        });
-        return {
-          label: sa.name,
-          actual_spending: total_fte_spend[sa.id].total_child_spending || 0,
-          actual_ftes: total_fte_spend[sa.id].total_child_ftes || 0,
-          [spending_text]:
-            total_fte_spend[sa.id].total_child_spending /
-              total_fte_spend.total_spending || 0,
-          [ftes_text]:
-            total_fte_spend[sa.id].total_child_ftes /
-              total_fte_spend.total_ftes || 0,
-          children: _.sortBy(children, (d) => -d[spending_text]),
-        };
-      })
-      .sortBy((d) => -d[spending_text])
-      .value();
-
     const spend_table_formatter = get_formatter(true, undefined, true, false);
     const fte_table_formatter = get_formatter(false, undefined, true, false);
 
-    const parent_table_data = _.map(gocos_by_spendarea, (sa) => ({
-      [sa_text]: sa.name,
-      [spending_text]: total_fte_spend[sa.id].total_child_spending,
-      [ftes_text]: total_fte_spend[sa.id].total_child_ftes,
-    }));
     const table_column_configs = {
       [sa_text]: {
         index: 0,
@@ -150,36 +87,18 @@ class Goco extends React.Component {
       />
     );
 
-    const child_tables = _.map(gocos_by_spendarea, (sa) => {
-      const child_table_data = _.map(sa.children_tags, (goco) => ({
-        [sa_text]: goco.name,
-        [spending_text]: programSpending.q(goco).sum(spend_col),
-        [ftes_text]: programFtes.q(goco).sum(fte_col),
-      }));
-      return {
-        key: sa.name,
-        table: (
-          <DisplayTable
-            data={child_table_data}
-            column_configs={table_column_configs}
-          />
-        ),
-      };
-    });
-
-    const maxSpending = _.maxBy(graph_data, spending_text);
-    const spend_fte_text_data = {
-      ...total_fte_spend,
-      max_sa: maxSpending.label,
-      max_sa_share:
-        maxSpending.actual_spending / total_fte_spend.total_spending,
-    };
+    const child_tables_with_display = _.map(child_tables, ({ key, data }) => ({
+      key,
+      table: (
+        <DisplayTable data={data} column_configs={table_column_configs} />
+      ),
+    }));
 
     if (is_a11y_mode) {
       graph_content = (
         <Fragment>
           {custom_table}
-          {_.map(child_tables, ({ table, key }) => (
+          {_.map(child_tables_with_display, ({ table, key }) => (
             <Fragment key={key}>
               <span style={{ fontWeight: 700 }}>{key}</span>
               {table}
@@ -332,22 +251,6 @@ class Goco extends React.Component {
         }
       };
 
-      const tick_map = _.reduce(
-        gocos_by_spendarea,
-        (final_result, sa) => {
-          const sa_href_result = _.reduce(
-            sa.children_tags,
-            (child_result, goco) => {
-              child_result[`${goco.name}`] = `#infographic/tag/${goco.id}`;
-              return child_result;
-            },
-            {}
-          );
-          return _.assignIn(sa_href_result, final_result);
-        },
-        {}
-      );
-
       const handleClick = (node, targetElement, data) => {
         const allGroupedElements = targetElement.parentNode.parentNode;
         const childrenGroupedElements = _.map(
@@ -398,7 +301,7 @@ class Goco extends React.Component {
               {...nivo_default_props}
               data={node.data.children}
               custom_table={
-                _.find(child_tables, ["key", node.indexValue]).table
+                _.find(child_tables_with_display, ["key", node.indexValue]).table
               }
               onMouseEnter={(child_node, e) =>
                 handleHover(child_node, e.target, node.data.children)
@@ -516,25 +419,49 @@ class Goco extends React.Component {
   }
 }
 
-function render({ title, footnotes, sources, datasets, glossary_keys }) {
+const GocographicContainer = (props) => {
+  const { subject } = props;
+  const { loading, finance_data } = useWelcomeMatFinanceData(subject);
+
+  const spending_text = text_maker("spending");
+  const ftes_text = text_maker("ftes");
+  const sa_text = text_maker("spending_area");
+
+  const calculations = useMemo(() => {
+    if (loading) {
+      return null;
+    }
+    return calculate_gocographic_from_finance_data(finance_data, {
+      spending_text,
+      ftes_text,
+      sa_text,
+    });
+  }, [loading, finance_data, spending_text, ftes_text, sa_text]);
+
+  if (loading) {
+    return <LeafSpinner config_name="subroute" />;
+  }
+
+  if (!calculations) {
+    return null;
+  }
+
   return (
-    <InfographicPanel
-      {...{ title, sources, datasets, footnotes, glossary_keys }}
-    >
-      <Goco />
+    <InfographicPanel {...props}>
+      <Goco calculations={calculations} />
     </InfographicPanel>
   );
-}
+};
 
 export const declare_gocographic_panel = () =>
   declare_panel({
     panel_key: "gocographic",
     subject_types: ["gov"],
     panel_config_func: () => ({
-      legacy_table_dependencies: ["programSpending", "programFtes"],
       get_dataset_keys: () => ["program_spending", "program_ftes"],
       get_title: () => text_maker("gocographic_title"),
       glossary_keys: ["GOCO"],
-      render,
+      calculate: () => true,
+      render: (props) => <GocographicContainer {...props} />,
     }),
   });

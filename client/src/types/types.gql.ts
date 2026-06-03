@@ -321,6 +321,7 @@ export type Org = SubjectI & {
   pas_code?: Maybe<Scalars['String']>;
   people_data?: Maybe<OrgPeopleData>;
   program_fte?: Maybe<Array<Maybe<ProgramFte>>>;
+  program_sobjs?: Maybe<Array<Maybe<ProgramSobjs>>>;
   program_spending?: Maybe<Array<Maybe<ProgramSpending>>>;
   programs?: Maybe<Array<Maybe<Program>>>;
   service_summary?: Maybe<ServiceSummary>;
@@ -499,6 +500,7 @@ export type ProgramSobjs = {
   pa_last_year?: Maybe<Scalars['Float']>;
   pa_last_year_2?: Maybe<Scalars['Float']>;
   pa_last_year_3?: Maybe<Scalars['Float']>;
+  program_id?: Maybe<Scalars['String']>;
   so_num?: Maybe<Scalars['Float']>;
 };
 

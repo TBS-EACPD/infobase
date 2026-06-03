@@ -84,6 +84,7 @@ fragment OrgSobjsFields on OrgSobjs {
 }
 
 fragment ProgramSobjsFields on ProgramSobjs {
+  program_id
   so_num
   pa_last_year_3
   pa_last_year_2
