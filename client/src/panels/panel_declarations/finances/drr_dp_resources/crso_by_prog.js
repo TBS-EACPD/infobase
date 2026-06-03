@@ -11,7 +11,6 @@ import { calculate_crso_by_prog_from_finance_data } from "src/models/finances/cr
 import { useCrsoByProgFinanceData } from "src/models/finances/useCrsoByProgFinanceData";
 
 import { run_template } from "src/models/text";
-import { year_templates } from "src/models/years";
 
 import { infobase_colors } from "src/core/color_schemes";
 import { is_a11y_mode } from "src/core/injected_build_constants";

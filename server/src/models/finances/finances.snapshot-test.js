@@ -54,15 +54,6 @@ org_transfer_payments{
   pa_last_year_2_exp
   pa_last_year_1_exp
 }`;
-const org_sobjs_field = `
-org_sobjs{
-  so_num
-  pa_last_year_5
-  pa_last_year_4
-  pa_last_year_3
-  pa_last_year_2
-  pa_last_year_1
-}`;
 const program_sobjs_field = `
 program_sobjs{
   so_num
