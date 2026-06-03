@@ -17,6 +17,8 @@ export type OrgSobjsFieldsFragment = { __typename?: 'OrgSobjs', so_num?: number 
 
 export type ProgramSobjsFieldsFragment = { __typename?: 'ProgramSobjs', so_num?: number | null, pa_last_year_3?: number | null, pa_last_year_2?: number | null, pa_last_year?: number | null };
 
+export type OrgTransferPaymentsFieldsFragment = { __typename?: 'OrgTransferPayments', dept_code?: string | null, type?: string | null, name?: string | null, pa_last_year_5_exp?: number | null, pa_last_year_4_exp?: number | null, pa_last_year_3_exp?: number | null, pa_last_year_2_exp?: number | null, pa_last_year_1_exp?: number | null };
+
 export const ProgramSpendingFieldsFragmentDoc = gql`
     fragment ProgramSpendingFields on ProgramSpending {
   program_id
@@ -115,5 +117,17 @@ export const ProgramSobjsFieldsFragmentDoc = gql`
   pa_last_year_3
   pa_last_year_2
   pa_last_year
+}
+    `;
+export const OrgTransferPaymentsFieldsFragmentDoc = gql`
+    fragment OrgTransferPaymentsFields on OrgTransferPayments {
+  dept_code
+  type
+  name
+  pa_last_year_5_exp
+  pa_last_year_4_exp
+  pa_last_year_3_exp
+  pa_last_year_2_exp
+  pa_last_year_1_exp
 }
     `;
