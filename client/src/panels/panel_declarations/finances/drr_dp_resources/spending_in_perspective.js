@@ -1,30 +1,23 @@
 import _ from "lodash";
-import React from "react";
+import React, { useMemo } from "react";
 
 import { InfographicPanel } from "src/panels/panel_declarations/InfographicPanel";
 import { declare_panel } from "src/panels/PanelRegistry";
 
-import { create_text_maker_component, Select } from "src/components/index";
+import {
+  create_text_maker_component,
+  LeafSpinner,
+  Select,
+} from "src/components/index";
 
-import { is_a11y_mode } from "src/core/injected_build_constants";
+import { calculate_spending_in_tag_perspective_from_finance_data } from "src/models/finances/spending_in_tag_perspective_calculations";
+import { useSpendingInTagPerspectiveFinanceData } from "src/models/finances/useSpendingInTagPerspectiveFinanceData";
 
 import { WrappedNivoPie } from "src/charts/wrapped_nivo/index";
 
 import text from "./perspective_text.yaml";
 
 const { text_maker, TM } = create_text_maker_component(text);
-
-const col = "{{planning_year_1}}";
-
-const sum_a_tag_col = (tag, table, col) =>
-  _.chain(tag.programs)
-    .map((p) => table.programs.get(p))
-    .flatten()
-    .compact()
-    .filter(col)
-    .map(col)
-    .reduce((acc, amt) => acc + amt, 0)
-    .value();
 
 class SpendInTagPerspective extends React.Component {
   constructor() {
@@ -103,54 +96,53 @@ class SpendInTagPerspective extends React.Component {
   }
 }
 
-//spending in tag perspective also included
+const SpendingInTagPerspectiveContainer = (props) => {
+  const { subject } = props;
+  const { loading, finance_data } =
+    useSpendingInTagPerspectiveFinanceData(subject);
+
+  const calculations = useMemo(() => {
+    if (loading) {
+      return null;
+    }
+    return calculate_spending_in_tag_perspective_from_finance_data(
+      subject,
+      finance_data
+    );
+  }, [loading, subject, finance_data]);
+
+  if (loading) {
+    return <LeafSpinner config_name="subroute" />;
+  }
+
+  if (!calculations) {
+    return null;
+  }
+
+  const { tag_exps, prog_exp } = calculations;
+
+  return (
+    <InfographicPanel
+      {...props}
+      title={text_maker("program_spending_in_tag_perspective_title")}
+    >
+      <SpendInTagPerspective
+        tag_exps={tag_exps}
+        subject={subject}
+        prog_exp={prog_exp}
+      />
+    </InfographicPanel>
+  );
+};
+
 export const declare_spending_in_tag_perspective_panel = () =>
   declare_panel({
     panel_key: "spending_in_tag_perspective",
     subject_types: ["program"],
     panel_config_func: () => ({
       get_title: () => text_maker("program_spending_in_tag_perspective_title"),
-      legacy_table_dependencies: ["programSpending"],
       get_dataset_keys: () => ["program_spending"],
-      calculate: ({ subject, tables }) => {
-        if (is_a11y_mode) {
-          //turn off this panel in a11y mode
-          return false;
-        }
-        if (subject.is_dead) {
-          return false;
-        }
-        const { programSpending } = tables;
-        //analysis: as of writing this (oct 2016) the max number of tags encountered is 13.
-        const prog_row = _.first(programSpending.programs.get(subject));
-
-        if (!prog_row || !(prog_row[col] > 0)) {
-          return false;
-        }
-
-        const prog_exp = prog_row["{{planning_year_1}}"];
-
-        const tags = subject.tags;
-
-        const tag_exps = _.map(tags, (tag) => ({
-          tag,
-          amount: sum_a_tag_col(tag, programSpending, col),
-        }));
-        return { tag_exps, prog_exp };
-      },
-
-      render({ title, subject, calculations, footnotes, sources, datasets }) {
-        const { tag_exps, prog_exp } = calculations;
-
-        return (
-          <InfographicPanel {...{ title, footnotes, sources, datasets }}>
-            <SpendInTagPerspective
-              tag_exps={tag_exps}
-              subject={subject}
-              prog_exp={prog_exp}
-            />
-          </InfographicPanel>
-        );
-      },
+      calculate: () => true,
+      render: (props) => <SpendingInTagPerspectiveContainer {...props} />,
     }),
   });
