@@ -7,7 +7,9 @@ export type ProgramFteFieldsFragment = { __typename?: 'ProgramFte', program_id?:
 
 export type OrgVoteStatPaExpFieldsFragment = { __typename?: 'OrgVoteStatPa', pa_last_year_5_exp?: number | null, pa_last_year_4_exp?: number | null, pa_last_year_3_exp?: number | null, pa_last_year_2_exp?: number | null, pa_last_year_exp?: number | null };
 
-export type OrgVoteStatEstimatesFieldsFragment = { __typename?: 'OrgVoteStatEstimates', est_in_year?: number | null };
+export type OrgVoteStatEstimatesFieldsFragment = { __typename?: 'OrgVoteStatEstimates', dept_code?: string | null, vote_num?: string | null, vs_type?: number | null, name?: string | null, doc?: string | null, est_in_year?: number | null };
+
+export type ProgramVoteStatFieldsFragment = { __typename?: 'ProgramVoteStat', vs_type?: string | null, pa_last_year_3?: number | null, pa_last_year_2?: number | null, pa_last_year?: number | null };
 
 export const ProgramSpendingFieldsFragmentDoc = gql`
     fragment ProgramSpendingFields on ProgramSpending {
@@ -48,6 +50,19 @@ export const OrgVoteStatPaExpFieldsFragmentDoc = gql`
     `;
 export const OrgVoteStatEstimatesFieldsFragmentDoc = gql`
     fragment OrgVoteStatEstimatesFields on OrgVoteStatEstimates {
+  dept_code
+  vote_num
+  vs_type
+  name
+  doc
   est_in_year
+}
+    `;
+export const ProgramVoteStatFieldsFragmentDoc = gql`
+    fragment ProgramVoteStatFields on ProgramVoteStat {
+  vs_type
+  pa_last_year_3
+  pa_last_year_2
+  pa_last_year
 }
     `;

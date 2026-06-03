@@ -1,7 +1,7 @@
 import * as Types from '../../../../types/types.gql';
 
 import { gql } from '@apollo/client';
-import { ProgramSpendingFieldsFragmentDoc, ProgramFteFieldsFragmentDoc, OrgVoteStatPaExpFieldsFragmentDoc, OrgVoteStatEstimatesFieldsFragmentDoc } from '../_fragments.gql';
+import { ProgramSpendingFieldsFragmentDoc, ProgramFteFieldsFragmentDoc, OrgVoteStatEstimatesFieldsFragmentDoc, OrgVoteStatPaExpFieldsFragmentDoc, ProgramVoteStatFieldsFragmentDoc } from '../_fragments.gql';
 import * as Apollo from '@apollo/client';
 const defaultOptions = {} as const;
 export type GovWelcomeMatFinanceQueryVariables = Types.Exact<{
@@ -9,7 +9,7 @@ export type GovWelcomeMatFinanceQueryVariables = Types.Exact<{
 }>;
 
 
-export type GovWelcomeMatFinanceQuery = { __typename?: 'Query', root: { __typename?: 'Root', gov?: { __typename?: 'Gov', program_spending?: Array<{ __typename?: 'ProgramSpending', program_id?: string | null, pa_last_year_5_exp?: number | null, pa_last_year_4_exp?: number | null, pa_last_year_3_exp?: number | null, pa_last_year_2_exp?: number | null, pa_last_year_exp?: number | null, pa_last_year_planned?: number | null, planning_year_1?: number | null, planning_year_2?: number | null, planning_year_3?: number | null } | null> | null, program_fte?: Array<{ __typename?: 'ProgramFte', program_id?: string | null, pa_last_year_5?: number | null, pa_last_year_4?: number | null, pa_last_year_3?: number | null, pa_last_year_2?: number | null, pa_last_year?: number | null, pa_last_year_planned?: number | null, planning_year_1?: number | null, planning_year_2?: number | null, planning_year_3?: number | null } | null> | null } | null } };
+export type GovWelcomeMatFinanceQuery = { __typename?: 'Query', root: { __typename?: 'Root', gov?: { __typename?: 'Gov', program_spending?: Array<{ __typename?: 'ProgramSpending', program_id?: string | null, pa_last_year_5_exp?: number | null, pa_last_year_4_exp?: number | null, pa_last_year_3_exp?: number | null, pa_last_year_2_exp?: number | null, pa_last_year_exp?: number | null, pa_last_year_planned?: number | null, planning_year_1?: number | null, planning_year_2?: number | null, planning_year_3?: number | null } | null> | null, program_fte?: Array<{ __typename?: 'ProgramFte', program_id?: string | null, pa_last_year_5?: number | null, pa_last_year_4?: number | null, pa_last_year_3?: number | null, pa_last_year_2?: number | null, pa_last_year?: number | null, pa_last_year_planned?: number | null, planning_year_1?: number | null, planning_year_2?: number | null, planning_year_3?: number | null } | null> | null, org_vote_stat_estimates?: Array<{ __typename?: 'OrgVoteStatEstimates', dept_code?: string | null, vote_num?: string | null, vs_type?: number | null, name?: string | null, doc?: string | null, est_in_year?: number | null } | null> | null } | null } };
 
 
 export const GovWelcomeMatFinanceDocument = gql`
@@ -22,11 +22,15 @@ export const GovWelcomeMatFinanceDocument = gql`
       program_fte {
         ...ProgramFteFields
       }
+      org_vote_stat_estimates {
+        ...OrgVoteStatEstimatesFields
+      }
     }
   }
 }
     ${ProgramSpendingFieldsFragmentDoc}
-${ProgramFteFieldsFragmentDoc}`;
+${ProgramFteFieldsFragmentDoc}
+${OrgVoteStatEstimatesFieldsFragmentDoc}`;
 
 /**
  * __useGovWelcomeMatFinanceQuery__

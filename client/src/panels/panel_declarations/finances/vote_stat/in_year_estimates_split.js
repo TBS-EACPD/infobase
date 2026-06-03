@@ -1,11 +1,13 @@
-import { sum } from "d3-array";
 import _ from "lodash";
-import React from "react";
+import React, { useMemo } from "react";
 
 import { StdPanel, Col } from "src/panels/panel_declarations/InfographicPanel";
 import { declare_panel } from "src/panels/PanelRegistry";
 
-import { estimates_docs } from "src/models/estimates";
+import { calculate_in_year_estimates_split_from_finance_data } from "src/models/finances/org_vote_stat_estimates_calculations";
+import { useOrgVoteStatEstimatesFinanceData } from "src/models/finances/useOrgVoteStatEstimatesFinanceData";
+
+import { LeafSpinner } from "src/components/index";
 
 import { formats } from "src/core/format";
 import { is_a11y_mode } from "src/core/injected_build_constants";
@@ -17,40 +19,8 @@ import {
   secondaryColor,
   textColor,
 } from "src/style_constants/index";
-import { filter_row_by_subj } from "src/tables/TableClass";
 
 import { text_maker, TM } from "./vote_stat_text_provider";
-
-const est_in_year_col = "{{est_in_year}}_estimates";
-
-const estimates_split_calculate = ({ subject, tables }) => {
-  const { orgVoteStatEstimates } = tables;
-  const q = orgVoteStatEstimates.q(subject);
-
-  const in_year_estimates_split = _.chain(orgVoteStatEstimates.data)
-    .filter((row) => filter_row_by_subj(row, subject))
-    .groupBy("est_doc")
-    .toPairs()
-    .sortBy(
-      (est_doc_lines) => estimates_docs[est_doc_lines[1][0].est_doc_code].order
-    )
-    .map((est_doc_lines) => {
-      const est_amnt = sum(_.map(est_doc_lines[1], est_in_year_col));
-      return [est_doc_lines[0], est_amnt];
-    })
-    .filter((row) => row[1] !== 0)
-    .value();
-
-  const calculations = {
-    subject,
-    tabled_est_in_year: q.sum(est_in_year_col),
-    in_year_estimates_split,
-  };
-  if (_.isEmpty(in_year_estimates_split)) {
-    return false;
-  }
-  return calculations;
-};
 
 const estimates_split_render_w_text_key =
   (text_key) =>
@@ -114,11 +84,38 @@ const estimates_split_render_w_text_key =
     );
   };
 
+const InYearEstimatesSplitContainer = ({ subject, text_key, ...props }) => {
+  const { loading, finance_data } = useOrgVoteStatEstimatesFinanceData(subject);
+
+  const calculations = useMemo(() => {
+    if (loading) {
+      return null;
+    }
+    return calculate_in_year_estimates_split_from_finance_data(
+      subject,
+      finance_data
+    );
+  }, [loading, subject, finance_data]);
+
+  if (loading) {
+    return <LeafSpinner config_name="subroute" />;
+  }
+
+  if (!calculations) {
+    return null;
+  }
+
+  return estimates_split_render_w_text_key(text_key)({
+    ...props,
+    subject,
+    calculations,
+  });
+};
+
 const common_panel_config = {
-  legacy_table_dependencies: ["orgVoteStatEstimates"],
   get_dataset_keys: () => ["tabled_estimates"],
   get_title: () => text_maker("in_year_estimates_split_title"),
-  calculate: estimates_split_calculate,
+  calculate: () => true,
 };
 
 export const declare_in_year_estimates_split_panel = () =>
@@ -130,15 +127,21 @@ export const declare_in_year_estimates_split_panel = () =>
         case "gov":
           return {
             ...common_panel_config,
-            render: estimates_split_render_w_text_key(
-              "gov_in_year_estimates_split_text"
+            render: (props) => (
+              <InYearEstimatesSplitContainer
+                {...props}
+                text_key="gov_in_year_estimates_split_text"
+              />
             ),
           };
         case "dept":
           return {
             ...common_panel_config,
-            render: estimates_split_render_w_text_key(
-              "dept_in_year_estimates_split_text"
+            render: (props) => (
+              <InYearEstimatesSplitContainer
+                {...props}
+                text_key="dept_in_year_estimates_split_text"
+              />
             ),
           };
       }
