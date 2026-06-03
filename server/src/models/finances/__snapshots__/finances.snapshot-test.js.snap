@@ -19,6 +19,65 @@ Object {
     "root": Object {
       "gov": Object {
         "id": "gov",
+        "org_sobjs": Array [
+          Object {
+            "so_num": 1,
+          },
+          Object {
+            "so_num": 2,
+          },
+          Object {
+            "so_num": 3,
+          },
+          Object {
+            "so_num": 4,
+          },
+          Object {
+            "so_num": 5,
+          },
+          Object {
+            "so_num": 6,
+          },
+          Object {
+            "so_num": 7,
+          },
+          Object {
+            "so_num": 9,
+          },
+          Object {
+            "so_num": 10,
+          },
+          Object {
+            "so_num": 12,
+          },
+          Object {
+            "so_num": 1,
+          },
+          Object {
+            "so_num": 2,
+          },
+          Object {
+            "so_num": 3,
+          },
+          Object {
+            "so_num": 4,
+          },
+          Object {
+            "so_num": 5,
+          },
+          Object {
+            "so_num": 6,
+          },
+          Object {
+            "so_num": 7,
+          },
+          Object {
+            "so_num": 9,
+          },
+          Object {
+            "so_num": 10,
+          },
+        ],
         "org_vote_stat_estimates": Array [
           Object {
             "dept_code": "CPCC",
