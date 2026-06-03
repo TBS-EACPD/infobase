@@ -154,10 +154,14 @@ export function calculate_in_year_vote_stat_breakdown_from_finance_data(
     ),
   });
 
-  const voted_stat_totals = sum_est_in_year_by_vote_vs_stat(rows, { subject_type: "gov" }, {
-    stat: text_maker("stat"),
-    voted: text_maker("voted"),
-  });
+  const voted_stat_totals = sum_est_in_year_by_vote_vs_stat(
+    rows,
+    { subject_type: "gov" },
+    {
+      stat: text_maker("stat"),
+      voted: text_maker("voted"),
+    }
+  );
 
   return {
     data,

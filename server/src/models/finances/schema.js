@@ -197,9 +197,7 @@ export default function ({ loaders, models }) {
       programSpending_loader.load(prog.program_id),
       programFte_loader.load(prog.program_id),
     ]);
-    return (
-      (spending && spending.length > 0) || (fte && fte.length > 0)
-    );
+    return (spending && spending.length > 0) || (fte && fte.length > 0);
   };
 
   const crso_has_finance_data = async (crso) => {
@@ -209,10 +207,7 @@ export default function ({ loaders, models }) {
       programs,
       programSpending_loader
     );
-    const fte = await flatten_program_finance_rows(
-      programs,
-      programFte_loader
-    );
+    const fte = await flatten_program_finance_rows(programs, programFte_loader);
     return !(_.isEmpty(spending) && _.isEmpty(fte));
   };
 
@@ -226,12 +221,10 @@ export default function ({ loaders, models }) {
 
   const resolvers = {
     Gov: {
-      org_vote_stat_pa: () =>
-        OrgVoteStatPa.find({}).lean().exec(),
+      org_vote_stat_pa: () => OrgVoteStatPa.find({}).lean().exec(),
       org_vote_stat_estimates: () =>
         OrgVoteStatEstimates.find({}).lean().exec(),
-      org_transfer_payments: () =>
-        OrgTransferPayments.find({}).lean().exec(),
+      org_transfer_payments: () => OrgTransferPayments.find({}).lean().exec(),
       org_sobjs: () => OrgSobjs.find({}).lean().exec(),
       program_spending: () => ProgramSpending.find({}).lean().exec(),
       program_fte: () => ProgramFte.find({}).lean().exec(),

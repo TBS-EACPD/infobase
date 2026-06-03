@@ -46,9 +46,7 @@ export const useTransferPaymentsFinanceData = (
     if (is_dept) {
       const org = org_query.data?.root?.org;
       return {
-        org_transfer_payments: compact_finance_rows(
-          org?.org_transfer_payments
-        ),
+        org_transfer_payments: compact_finance_rows(org?.org_transfer_payments),
         gov_org_transfer_payments: compact_finance_rows(
           gov_query.data?.root?.gov?.org_transfer_payments
         ),

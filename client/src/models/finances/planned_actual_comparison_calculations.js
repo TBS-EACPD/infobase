@@ -9,14 +9,11 @@ function is_eligible_subject(subject) {
   const late_actual_fte_orgs = get_late_actual_fte_orgs();
 
   if (subject.subject_type === "dept") {
-    return (
-      subject.is_dp_org && !_.includes(late_actual_fte_orgs, subject.id)
-    );
+    return subject.is_dp_org && !_.includes(late_actual_fte_orgs, subject.id);
   }
 
   return (
-    subject.dept.is_dp_org &&
-    !_.includes(late_actual_fte_orgs, subject.dept.id)
+    subject.dept.is_dp_org && !_.includes(late_actual_fte_orgs, subject.dept.id)
   );
 }
 

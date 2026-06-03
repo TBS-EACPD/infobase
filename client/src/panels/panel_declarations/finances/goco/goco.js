@@ -89,9 +89,7 @@ class Goco extends React.Component {
 
     const child_tables_with_display = _.map(child_tables, ({ key, data }) => ({
       key,
-      table: (
-        <DisplayTable data={data} column_configs={table_column_configs} />
-      ),
+      table: <DisplayTable data={data} column_configs={table_column_configs} />,
     }));
 
     if (is_a11y_mode) {
@@ -301,7 +299,8 @@ class Goco extends React.Component {
               {...nivo_default_props}
               data={node.data.children}
               custom_table={
-                _.find(child_tables_with_display, ["key", node.indexValue]).table
+                _.find(child_tables_with_display, ["key", node.indexValue])
+                  .table
               }
               onMouseEnter={(child_node, e) =>
                 handleHover(child_node, e.target, node.data.children)

@@ -75,9 +75,7 @@ export default async function ({ models }) {
     .map((obj) => new ProgramFte(obj))
     .value();
 
-  const orgSobjs_records = _.chain(
-    get_standard_csv_file_rows("org_sobjs.csv")
-  )
+  const orgSobjs_records = _.chain(get_standard_csv_file_rows("org_sobjs.csv"))
     .map((obj) => new OrgSobjs(obj))
     .value();
 

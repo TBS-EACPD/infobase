@@ -6,8 +6,8 @@ import { get_footnotes_by_subject_and_topic } from "src/models/footnotes/footnot
 import { Program } from "src/models/subjects";
 import { year_templates } from "src/models/years";
 
-import { get_sobj_label } from "./sobj_utils";
 import { program_spending_rows_to_table_rows } from "./program_finance_utils";
+import { get_sobj_label } from "./sobj_utils";
 
 const { std_years } = year_templates;
 const { sos } = businessConstants;
@@ -107,10 +107,7 @@ export function calculate_detailed_program_spending_split_from_finance_data(
     .map(({ program }) => program)
     .uniqBy((program) => program.activity_code)
     .flatMap((program) =>
-      get_footnotes_by_subject_and_topic(program, [
-        ...footnote_topics,
-        "EXP",
-      ])
+      get_footnotes_by_subject_and_topic(program, [...footnote_topics, "EXP"])
     )
     .filter()
     .value();

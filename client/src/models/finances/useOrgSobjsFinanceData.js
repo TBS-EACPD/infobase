@@ -50,7 +50,8 @@ export const useOrgSobjsFinanceData = (subject) => {
     [is_dept, org_query.data, gov_query.data]
   );
 
-  const loading = (is_dept && org_query.loading) || (is_gov && gov_query.loading);
+  const loading =
+    (is_dept && org_query.loading) || (is_gov && gov_query.loading);
 
   return { loading, finance_data };
 };

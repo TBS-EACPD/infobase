@@ -4,10 +4,7 @@ import React, { useMemo } from "react";
 import { StdPanel, Col } from "src/panels/panel_declarations/InfographicPanel";
 import { declare_panel } from "src/panels/PanelRegistry";
 
-import {
-  create_text_maker_component,
-  LeafSpinner,
-} from "src/components/index";
+import { create_text_maker_component, LeafSpinner } from "src/components/index";
 
 import {
   calculate_dept_spend_rev_split_from_finance_data,

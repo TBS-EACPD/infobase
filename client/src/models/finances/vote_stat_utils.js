@@ -51,7 +51,11 @@ export const sum_est_in_year_for_subject = (rows, subject) =>
     "est_in_year"
   );
 
-export const sum_est_in_year_by_vote_vs_stat = (rows, subject, { stat, voted }) => {
+export const sum_est_in_year_by_vote_vs_stat = (
+  rows,
+  subject,
+  { stat, voted }
+) => {
   const filtered = filter_org_vote_stat_estimates_by_subject(rows, subject);
   return {
     [stat]: _.sumBy(_.filter(filtered, is_stat_estimate_row), (row) =>

@@ -123,7 +123,10 @@ const TopSpendingAreasContainer = (props) => {
     if (loading) {
       return null;
     }
-    return calculate_top_spending_areas_from_finance_data(subject, finance_data);
+    return calculate_top_spending_areas_from_finance_data(
+      subject,
+      finance_data
+    );
   }, [loading, subject, finance_data]);
 
   if (loading) {

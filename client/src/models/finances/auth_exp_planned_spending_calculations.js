@@ -25,12 +25,17 @@ export function calculate_auth_exp_planned_spending_from_finance_data(
   finance_data,
   { text_maker }
 ) {
-  const query_subject = subject.subject_type === "gov" ? { subject_type: "gov" } : subject;
+  const query_subject =
+    subject.subject_type === "gov" ? { subject_type: "gov" } : subject;
   const pa_rows = finance_data.org_vote_stat_pa;
   const gov_pa_rows = finance_data.gov_org_vote_stat_pa || pa_rows;
   const estimate_rows = finance_data.org_vote_stat_estimates;
 
-  const exp_values = sum_org_vote_stat_pa_fields(pa_rows, query_subject, PA_EXP_FIELDS);
+  const exp_values = sum_org_vote_stat_pa_fields(
+    pa_rows,
+    query_subject,
+    PA_EXP_FIELDS
+  );
 
   const historical_auth_values = sum_org_vote_stat_pa_fields(
     pa_rows,
@@ -130,7 +135,10 @@ export function calculate_auth_exp_planned_spending_from_finance_data(
     filter_org_vote_stat_pa_by_subject(pa_rows, query_subject),
     map_org_vote_stat_pa_row_to_table_row
   );
-  const gov_table_vote_rows = _.map(gov_pa_rows, map_org_vote_stat_pa_row_to_table_row);
+  const gov_table_vote_rows = _.map(
+    gov_pa_rows,
+    map_org_vote_stat_pa_row_to_table_row
+  );
 
   const get_five_year_auth_average = (auth_or_exp) =>
     _.chain(std_years)
@@ -196,12 +204,14 @@ export function calculate_auth_exp_planned_spending_from_finance_data(
         .value()
     )
     .thru((gov_aggregated_lapse_by_year) =>
-      _.map(std_years, (yr) =>
-        calculate_lapse(
-          gov_aggregated_lapse_by_year[`${yr}auth`],
-          gov_aggregated_lapse_by_year[`${yr}exp`],
-          gov_aggregated_lapse_by_year[`${yr}unlapsed`]
-        ) / gov_aggregated_lapse_by_year[`${yr}auth`]
+      _.map(
+        std_years,
+        (yr) =>
+          calculate_lapse(
+            gov_aggregated_lapse_by_year[`${yr}auth`],
+            gov_aggregated_lapse_by_year[`${yr}exp`],
+            gov_aggregated_lapse_by_year[`${yr}unlapsed`]
+          ) / gov_aggregated_lapse_by_year[`${yr}auth`]
       )
     )
     .mean()

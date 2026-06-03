@@ -19,7 +19,9 @@ const { transfer_payments } = businessConstants;
 const last_year_exp_field = _.last(TRANSFER_PAYMENT_EXP_FIELDS);
 const exp_pa_last_year = "{{pa_last_year}}exp";
 
-export function calculate_gov_historical_g_and_c_from_finance_data(finance_data) {
+export function calculate_gov_historical_g_and_c_from_finance_data(
+  finance_data
+) {
   const payments = sum_transfer_payments_grouped_by_type(
     finance_data.org_transfer_payments,
     { subject_type: "gov" }
