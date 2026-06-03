@@ -1,7 +1,7 @@
 import * as Types from '../../../../types/types.gql';
 
 import { gql } from '@apollo/client';
-import { ProgramSpendingFieldsFragmentDoc, ProgramFteFieldsFragmentDoc, OrgVoteStatEstimatesFieldsFragmentDoc, OrgVoteStatPaExpFieldsFragmentDoc, ProgramVoteStatFieldsFragmentDoc } from '../_fragments.gql';
+import { ProgramSpendingFieldsFragmentDoc, ProgramFteFieldsFragmentDoc, OrgVoteStatEstimatesFieldsFragmentDoc, OrgSobjsFieldsFragmentDoc, OrgVoteStatPaExpFieldsFragmentDoc, ProgramVoteStatFieldsFragmentDoc, ProgramSobjsFieldsFragmentDoc } from '../_fragments.gql';
 import * as Apollo from '@apollo/client';
 const defaultOptions = {} as const;
 export type ProgramWelcomeMatFinanceQueryVariables = Types.Exact<{
@@ -10,7 +10,7 @@ export type ProgramWelcomeMatFinanceQueryVariables = Types.Exact<{
 }>;
 
 
-export type ProgramWelcomeMatFinanceQuery = { __typename?: 'Query', root: { __typename?: 'Root', program?: { __typename?: 'Program', program_spending?: Array<{ __typename?: 'ProgramSpending', program_id?: string | null, pa_last_year_5_exp?: number | null, pa_last_year_4_exp?: number | null, pa_last_year_3_exp?: number | null, pa_last_year_2_exp?: number | null, pa_last_year_exp?: number | null, pa_last_year_planned?: number | null, planning_year_1?: number | null, planning_year_2?: number | null, planning_year_3?: number | null } | null> | null, program_fte?: Array<{ __typename?: 'ProgramFte', program_id?: string | null, pa_last_year_5?: number | null, pa_last_year_4?: number | null, pa_last_year_3?: number | null, pa_last_year_2?: number | null, pa_last_year?: number | null, pa_last_year_planned?: number | null, planning_year_1?: number | null, planning_year_2?: number | null, planning_year_3?: number | null } | null> | null, program_vote_stat?: Array<{ __typename?: 'ProgramVoteStat', vs_type?: string | null, pa_last_year_3?: number | null, pa_last_year_2?: number | null, pa_last_year?: number | null } | null> | null } | null } };
+export type ProgramWelcomeMatFinanceQuery = { __typename?: 'Query', root: { __typename?: 'Root', program?: { __typename?: 'Program', program_spending?: Array<{ __typename?: 'ProgramSpending', program_id?: string | null, pa_last_year_5_exp?: number | null, pa_last_year_4_exp?: number | null, pa_last_year_3_exp?: number | null, pa_last_year_2_exp?: number | null, pa_last_year_exp?: number | null, pa_last_year_planned?: number | null, planning_year_1?: number | null, planning_year_2?: number | null, planning_year_3?: number | null } | null> | null, program_fte?: Array<{ __typename?: 'ProgramFte', program_id?: string | null, pa_last_year_5?: number | null, pa_last_year_4?: number | null, pa_last_year_3?: number | null, pa_last_year_2?: number | null, pa_last_year?: number | null, pa_last_year_planned?: number | null, planning_year_1?: number | null, planning_year_2?: number | null, planning_year_3?: number | null } | null> | null, program_vote_stat?: Array<{ __typename?: 'ProgramVoteStat', vs_type?: string | null, pa_last_year_3?: number | null, pa_last_year_2?: number | null, pa_last_year?: number | null } | null> | null, program_sobjs?: Array<{ __typename?: 'ProgramSobjs', so_num?: number | null, pa_last_year_3?: number | null, pa_last_year_2?: number | null, pa_last_year?: number | null } | null> | null } | null } };
 
 
 export const ProgramWelcomeMatFinanceDocument = gql`
@@ -26,12 +26,16 @@ export const ProgramWelcomeMatFinanceDocument = gql`
       program_vote_stat {
         ...ProgramVoteStatFields
       }
+      program_sobjs {
+        ...ProgramSobjsFields
+      }
     }
   }
 }
     ${ProgramSpendingFieldsFragmentDoc}
 ${ProgramFteFieldsFragmentDoc}
-${ProgramVoteStatFieldsFragmentDoc}`;
+${ProgramVoteStatFieldsFragmentDoc}
+${ProgramSobjsFieldsFragmentDoc}`;
 
 /**
  * __useProgramWelcomeMatFinanceQuery__

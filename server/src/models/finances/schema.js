@@ -7,6 +7,7 @@ const schema = `
     org_vote_stat_pa: [OrgVoteStatPa]
     org_vote_stat_estimates: [OrgVoteStatEstimates]
     org_transfer_payments: [OrgTransferPayments]
+    org_sobjs: [OrgSobjs]
     program_spending: [ProgramSpending]
     program_fte: [ProgramFte]
     has_finance_data: Boolean
@@ -167,6 +168,7 @@ export default function ({ loaders, models }) {
     OrgVoteStatPa,
     OrgVoteStatEstimates,
     OrgTransferPayments,
+    OrgSobjs,
     ProgramSpending,
     ProgramFte,
   } = models;
@@ -223,6 +225,7 @@ export default function ({ loaders, models }) {
         OrgVoteStatEstimates.find({}).lean().exec(),
       org_transfer_payments: () =>
         OrgTransferPayments.find({}).lean().exec(),
+      org_sobjs: () => OrgSobjs.find({}).lean().exec(),
       program_spending: () => ProgramSpending.find({}).lean().exec(),
       program_fte: () => ProgramFte.find({}).lean().exec(),
       has_finance_data: () => gov_has_finance_data(),

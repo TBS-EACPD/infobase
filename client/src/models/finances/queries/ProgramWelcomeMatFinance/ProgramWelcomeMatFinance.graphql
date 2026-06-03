@@ -12,6 +12,9 @@ query ProgramWelcomeMatFinance($lang: String!, $program_id: String!) {
       program_vote_stat {
         ...ProgramVoteStatFields
       }
+      program_sobjs {
+        ...ProgramSobjsFields
+      }
     }
   }
 }

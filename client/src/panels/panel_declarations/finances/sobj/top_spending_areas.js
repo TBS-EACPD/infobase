@@ -1,6 +1,5 @@
-import { sum } from "d3-array";
 import _ from "lodash";
-import React from "react";
+import React, { useMemo } from "react";
 
 import { InfographicPanel } from "src/panels/panel_declarations/InfographicPanel";
 import { declare_panel } from "src/panels/PanelRegistry";
@@ -8,7 +7,11 @@ import { declare_panel } from "src/panels/PanelRegistry";
 import {
   create_text_maker_component,
   DisplayTable,
+  LeafSpinner,
 } from "src/components/index";
+
+import { calculate_top_spending_areas_from_finance_data } from "src/models/finances/sobj_calculations";
+import { useProgramSobjsFinanceData } from "src/models/finances/useProgramSobjsFinanceData";
 
 import { formats } from "src/core/format";
 
@@ -19,30 +22,6 @@ import { highlightColor, secondaryColor, textColor } from "src/style_constants";
 import text from "./top_spending_areas.yaml";
 
 const { text_maker, TM } = create_text_maker_component(text);
-
-const is_non_revenue = (d) => +d.so_num < 19;
-
-const collapse_by_so = function (programs, table, filter) {
-  // common calculation for organizing program/so row data by so
-  // and summing up all the programs for the last year of spending
-  // then sorting by largest to smallest
-
-  return _.chain(programs)
-    .map((prog) => table.programs.get(prog))
-    .compact()
-    .flatten()
-    .compact()
-    .groupBy("so")
-    .toPairs()
-    .map((key_value) => ({
-      label: key_value[0],
-      so_num: key_value[1][0].so_num,
-      value: sum(key_value[1], (d) => d["{{pa_last_year}}"]),
-    }))
-    .filter(filter || (() => true))
-    .sortBy((d) => -d.value)
-    .value();
-};
 
 const render_w_options =
   ({ text_key }) =>
@@ -58,11 +37,9 @@ const render_w_options =
       .orderBy("id", "desc")
       .value();
 
-    // Increase height of the graph region for y-axis labels to have sufficient room
-    // This is required to corretly display the labels when too many programs are present
-    const divHeight = _.chain([1000 * (graph_data.length / 30) * 2, 100]) // 100 is the minimum graph height
+    const divHeight = _.chain([1000 * (graph_data.length / 30) * 2, 100])
       .max()
-      .thru((maxVal) => [maxVal, 500]) // 500 is the max graph height
+      .thru((maxVal) => [maxVal, 500])
       .min()
       .value();
 
@@ -76,7 +53,7 @@ const render_w_options =
       },
       legend: formats.compact1_raw(value),
       legendOffsetX: -60,
-      legendOffsetY: Math.max(-(divHeight / (3.3 * graph_data.length)), -18), // Math.max so that there would be a set value for when the graph has one bar/data point
+      legendOffsetY: Math.max(-(divHeight / (3.3 * graph_data.length)), -18),
     }));
 
     const custom_table_data = _.chain(rows_by_so)
@@ -138,48 +115,40 @@ const render_w_options =
     );
   };
 
+const TopSpendingAreasContainer = (props) => {
+  const { subject } = props;
+  const { loading, finance_data } = useProgramSobjsFinanceData(subject);
+
+  const calculations = useMemo(() => {
+    if (loading) {
+      return null;
+    }
+    return calculate_top_spending_areas_from_finance_data(subject, finance_data);
+  }, [loading, subject, finance_data]);
+
+  if (loading) {
+    return <LeafSpinner config_name="subroute" />;
+  }
+
+  if (!calculations) {
+    return null;
+  }
+
+  return render_w_options({ text_key: "program_top_spending_areas_text" })({
+    ...props,
+    title: text_maker("top_spending_areas_title"),
+    calculations,
+  });
+};
+
 export const declare_top_spending_areas_panel = () =>
   declare_panel({
     panel_key: "top_spending_areas",
     subject_types: ["program"],
     panel_config_func: () => ({
-      legacy_table_dependencies: ["programSobjs"],
       get_dataset_keys: () => ["program_standard_objects"],
       get_title: () => text_maker("top_spending_areas_title"),
-      calculate: ({ subject, tables }) => {
-        if (_.isEmpty(tables.programSobjs.programs.get(subject))) {
-          return false;
-        }
-
-        const rows_by_so = _.filter(
-          collapse_by_so([subject], tables.programSobjs, is_non_revenue),
-          (row) => row.value
-        );
-
-        if (_.isEmpty(rows_by_so)) {
-          return false;
-        }
-
-        const total_spent = _.sum(_.map(rows_by_so, (so) => so.value));
-
-        const top_so = _.maxBy(rows_by_so, "value");
-
-        const low_so = _.minBy(rows_by_so, "value");
-
-        const text_calculations = {
-          subject,
-          top_so_name: top_so.label,
-          top_so_value: top_so.value,
-          low_so_name: low_so.label,
-          low_so_value: low_so.value,
-          total_spent,
-        };
-
-        return {
-          text_calculations,
-          rows_by_so,
-        };
-      },
-      render: render_w_options({ text_key: "program_top_spending_areas_text" }),
+      calculate: () => true,
+      render: (props) => <TopSpendingAreasContainer {...props} />,
     }),
   });
