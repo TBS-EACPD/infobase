@@ -23,7 +23,12 @@ export function calculate_personnel_spend_from_finance_data(finance_data) {
   const personnel_so_num = sos[1].so_num;
 
   const series = _.map(ORG_SOBJ_STD_YEAR_FIELDS, (field) =>
-    sum_org_sobjs_for_so_num(rows, { subject_type: "gov" }, personnel_so_num, field)
+    sum_org_sobjs_for_so_num(
+      rows,
+      { subject_type: "gov" },
+      personnel_so_num,
+      field
+    )
   );
 
   const five_year_avg = _.sum(series) / series.length;

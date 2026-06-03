@@ -159,10 +159,14 @@ const InternalServicesContainer = (props) => {
     if (loading) {
       return null;
     }
-    return calculate_internal_services_from_finance_data(subject, finance_data, {
-      isc_label,
-      non_isc_label,
-    });
+    return calculate_internal_services_from_finance_data(
+      subject,
+      finance_data,
+      {
+        isc_label,
+        non_isc_label,
+      }
+    );
   }, [loading, subject, finance_data, isc_label, non_isc_label]);
 
   if (loading) {

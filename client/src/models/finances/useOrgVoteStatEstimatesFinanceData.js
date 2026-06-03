@@ -12,7 +12,10 @@ const query_variables = {
   _query_name: "OrgVoteStatEstimatesFinance",
 };
 
-export const useOrgVoteStatEstimatesFinanceData = (subject, { with_gov = false } = {}) => {
+export const useOrgVoteStatEstimatesFinanceData = (
+  subject,
+  { with_gov = false } = {}
+) => {
   const is_dept = subject?.subject_type === "dept";
   const is_gov = subject?.subject_type === "gov";
 

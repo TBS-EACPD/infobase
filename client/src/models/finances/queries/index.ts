@@ -82,10 +82,7 @@ export const {
   promisedDeptHasFinanceData,
   suspendedDeptHasFinanceData,
   useDeptHasFinanceData,
-} = query_factory<
-  DeptHasFinanceDataQuery,
-  DeptHasFinanceDataQueryVariables
->()({
+} = query_factory<DeptHasFinanceDataQuery, DeptHasFinanceDataQueryVariables>()({
   query_name: "DeptHasFinanceData",
   query: DeptHasFinanceDataDocument,
   resolver: (response) => response?.root?.org,

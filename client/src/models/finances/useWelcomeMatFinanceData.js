@@ -114,7 +114,13 @@ export const useWelcomeMatFinanceData = (subject) => {
           org_vote_stat_estimates: [],
         };
     }
-  }, [subject_type, gov_query.data, org_query.data, program_query.data, crso_query.data]);
+  }, [
+    subject_type,
+    gov_query.data,
+    org_query.data,
+    program_query.data,
+    crso_query.data,
+  ]);
 
   return {
     loading: active_query.loading,

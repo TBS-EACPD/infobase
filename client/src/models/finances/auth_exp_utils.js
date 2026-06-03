@@ -39,8 +39,9 @@ export const ESTIMATES_AUTH_FIELD_BY_TEMPLATE = {
 
 export const auth_cols = _.map(std_years, (yr) => `${yr}auth`);
 export const exp_cols = _.map(std_years, (yr) => `${yr}exp`);
-export const flat_auth_exp_years = _.flatMap(["exp", "auth", "unlapsed"], (type) =>
-  _.map(std_years, (yr) => `${yr}${type}`)
+export const flat_auth_exp_years = _.flatMap(
+  ["exp", "auth", "unlapsed"],
+  (type) => _.map(std_years, (yr) => `${yr}${type}`)
 );
 
 export const filter_org_vote_stat_pa_by_subject = (rows, subject) => {

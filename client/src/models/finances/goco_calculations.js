@@ -64,8 +64,7 @@ export function calculate_gocographic_from_finance_data(
           actual_spending: actual_spending || 0,
           actual_ftes: actual_ftes || 0,
           [spending_text]:
-            actual_spending / total_fte_spend[sa.id].total_child_spending ||
-            0,
+            actual_spending / total_fte_spend[sa.id].total_child_spending || 0,
           [ftes_text]:
             actual_ftes / total_fte_spend[sa.id].total_child_ftes || 0,
         };
@@ -78,8 +77,8 @@ export function calculate_gocographic_from_finance_data(
           total_fte_spend[sa.id].total_child_spending /
             total_fte_spend.total_spending || 0,
         [ftes_text]:
-          total_fte_spend[sa.id].total_child_ftes / total_fte_spend.total_ftes ||
-          0,
+          total_fte_spend[sa.id].total_child_ftes /
+            total_fte_spend.total_ftes || 0,
         children: _.sortBy(children, (d) => -d[spending_text]),
       };
     })

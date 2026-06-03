@@ -5,10 +5,7 @@ import MediaQuery from "react-responsive";
 import { InfographicPanel } from "src/panels/panel_declarations/InfographicPanel";
 import { declare_panel } from "src/panels/PanelRegistry";
 
-import {
-  create_text_maker_component,
-  LeafSpinner,
-} from "src/components/index";
+import { create_text_maker_component, LeafSpinner } from "src/components/index";
 
 import { calculate_crso_by_prog_from_finance_data } from "src/models/finances/crso_by_prog_calculations";
 import { useCrsoByProgFinanceData } from "src/models/finances/useCrsoByProgFinanceData";

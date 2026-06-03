@@ -542,7 +542,8 @@ const render = function ({
 
 const AuthExpPlannedSpendingContainer = (props) => {
   const { subject } = props;
-  const { loading, finance_data } = useAuthExpPlannedSpendingFinanceData(subject);
+  const { loading, finance_data } =
+    useAuthExpPlannedSpendingFinanceData(subject);
 
   const calculations = useMemo(() => {
     if (loading) {
