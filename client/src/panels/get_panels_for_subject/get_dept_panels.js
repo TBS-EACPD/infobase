@@ -79,14 +79,12 @@ export const get_dept_panels = (subject) =>
     has_covid_data: true,
     has_services: services_feature_flag,
     has_people_data: true,
+    has_finance_data: true,
     requires_result_counts: true,
     table_keys: ["programFtes"],
   }).then(() => ({
     intro: [declare_profile_panel(), declare_portfolio_structure_intro_panel()],
-    financial: !_.chain(subject.table_ids)
-      .intersection(["programSpending", "orgVoteStatEstimates"])
-      .isEmpty()
-      .value() && [
+    financial: subject.has_data("finance_data") && [
       declare_financial_key_concepts_panel(),
       declare_late_actual_resources_panel(),
       declare_late_planned_resources_panel(),
