@@ -19,8 +19,6 @@ import { create_footnote } from "src/models/footnotes/footnotes";
 
 import { run_template } from "src/models/text";
 
-import { year_templates } from "src/models/years";
-
 import { is_a11y_mode } from "src/core/injected_build_constants";
 
 import { format_and_get_exp_program_spending } from "./welcome_mat_exp_program_spending";
@@ -28,10 +26,6 @@ import { format_and_get_fte } from "./welcome_mat_fte";
 
 import text from "./welcome_mat.yaml";
 import "./welcome-mat.scss";
-
-const { std_years, fte_years } = year_templates;
-const actual_history_years = _.map(std_years, run_template);
-const actual_history_years_fte = _.map(fte_years, run_template);
 
 const { text_maker, TM } = create_text_maker_component(text);
 
