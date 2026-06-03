@@ -1,6 +1,6 @@
 import classNames from "classnames";
 import _ from "lodash";
-import React, { Fragment } from "react";
+import React, { Fragment, useMemo } from "react";
 
 import { InfographicPanel } from "src/panels/panel_declarations/InfographicPanel";
 import { declare_panel } from "src/panels/PanelRegistry";
@@ -8,8 +8,12 @@ import { declare_panel } from "src/panels/PanelRegistry";
 import {
   create_text_maker_component,
   Format,
+  LeafSpinner,
   TabsStateful,
 } from "src/components/index";
+
+import { useWelcomeMatFinanceData } from "src/models/finances/useWelcomeMatFinanceData";
+import { calculate_welcome_mat_from_finance_data } from "src/models/finances/welcome_mat_calculations";
 
 import { create_footnote } from "src/models/footnotes/footnotes";
 
@@ -25,8 +29,7 @@ import { format_and_get_fte } from "./welcome_mat_fte";
 import text from "./welcome_mat.yaml";
 import "./welcome-mat.scss";
 
-const { std_years, planning_years, fte_years } = year_templates;
-const exp_cols = _.map(std_years, (yr) => `${yr}exp`);
+const { std_years, fte_years } = year_templates;
 const actual_history_years = _.map(std_years, run_template);
 const actual_history_years_fte = _.map(fte_years, run_template);
 
@@ -139,7 +142,7 @@ const WelcomeMatShell = ({
 */
 
 const WelcomeMat = (props) => {
-  const { type, subject, calcs } = props;
+  const { type, subject, calcs, finance_data } = props;
   const {
     latest_hist_spend_data,
     oldest_hist_spend_data,
@@ -317,10 +320,11 @@ const WelcomeMat = (props) => {
   const no_hist_spending = <TM k="no_historical_spending__new" />;
   const spending_auths_are = <TM k="spending_authorities_are" />;
 
-  const fte_graph = format_and_get_fte(type, subject);
+  const fte_graph = format_and_get_fte(type, subject, finance_data);
   const exp_program_spending_graph = format_and_get_exp_program_spending(
     type,
-    subject
+    subject,
+    finance_data
   );
 
   if (type === "hist") {
@@ -925,18 +929,39 @@ const MobileOrA11YContent = ({ children }) => [
   </PaneItem>,
 ];
 
-function render({
-  title,
+const WelcomeMatContainer = ({
   subject,
-  calculations,
   footnotes,
   glossary_keys,
   sources,
   datasets,
-}) {
+  subject_type,
+}) => {
+  const { loading, finance_data } = useWelcomeMatFinanceData(subject);
+
+  const calculations = useMemo(() => {
+    if (loading) {
+      return null;
+    }
+    return calculate_welcome_mat_from_finance_data(subject, finance_data);
+  }, [loading, subject, finance_data]);
+
+  if (loading) {
+    return <LeafSpinner config_name="subroute" />;
+  }
+
+  if (!calculations) {
+    return null;
+  }
+
+  const title =
+    subject_type === "gov" || !calculations.calcs.has_fte
+      ? text_maker("welcome_mat_spending_title")
+      : text_maker("welcome_mat_title");
+
   const { oldest_hist_spend_data } = calculations.calcs;
 
-  footnotes =
+  const panel_footnotes =
     subject.id === "326"
       ? _.concat(
           create_footnote({
@@ -946,7 +971,6 @@ function render({
             text: text_maker("tbs_exp_variance_footnote"),
             topic_keys: ["PLANNED_EXP", "EXP", "DRR_EXP", "DRR_FTE"],
           }),
-          // will stop displaying this footnote when the range of years being displayed on infobase include "2021-22"
           ...(oldest_hist_spend_data.year <= "2021-22"
             ? [
                 create_footnote({
@@ -966,324 +990,59 @@ function render({
 
   return (
     <InfographicPanel
-      {...{ sources, datasets, glossary_keys, footnotes, title }}
+      {...{
+        sources,
+        datasets,
+        glossary_keys,
+        footnotes: panel_footnotes,
+        title,
+      }}
     >
-      <WelcomeMat subject={subject} {...calculations} />
+      <WelcomeMat
+        subject={subject}
+        {...calculations}
+        finance_data={finance_data}
+      />
     </InfographicPanel>
   );
-}
-
-//assumes programSpending/12 are loaded
-function has_hist_data(subject, q6) {
-  return _.chain(exp_cols)
-    .map((yr) => q6.sum(yr) || 0)
-    .some()
-    .value();
-}
-
-function has_planning_data(subject, q6) {
-  let has_dp;
-  switch (subject.subject_type) {
-    case "dept":
-      has_dp = subject.is_dp_org;
-      break;
-    case "program":
-    case "crso":
-      has_dp = subject.dept.is_dp_org;
-      break;
-    case "gov":
-      has_dp = true;
-  }
-
-  return (
-    has_dp &&
-    _.chain(planning_years)
-      .map((yr) => q6.sum(yr) || 0)
-      .some()
-      .value()
-  );
-}
-
-function get_calcs(subject, q6, q12) {
-  const has_planned = has_planning_data(subject, q6);
-  const has_hist = has_hist_data(subject, q6);
-
-  const hist_spend_data = _.map(exp_cols, (col) => q6.sum(col) || 0);
-  const planned_spend_data = _.map(planning_years, (col) => q6.sum(col) || 0);
-  const spend_data = _.concat(hist_spend_data, planned_spend_data);
-
-  const hist_fte_data = _.map(std_years, (col) => q12.sum(col) || 0);
-  const planned_fte_data = _.map(planning_years, (col) => q12.sum(col) || 0);
-  const fte_data = _.concat(hist_fte_data, planned_fte_data);
-
-  const has_data = (data) =>
-    !(_.isEmpty(data) || _.every(data, (e) => e === 0));
-  const has_spending = has_data(spend_data);
-  const has_fte = has_data(fte_data);
-
-  const get_non_zero_data_year = (data, years, reverse) => {
-    const loop = reverse ? _.forEachRight : _.forEach;
-    let matched_data;
-    loop(data, (value, key) => {
-      if (value > 0) {
-        matched_data = {
-          year: years[key],
-          value: value,
-        };
-        return false;
-      }
-    });
-    matched_data = matched_data
-      ? matched_data
-      : {
-          year: reverse ? _.last(years) : _.first(years),
-          value: 0,
-        };
-    return matched_data;
-  };
-
-  const oldest_hist_spend_data = get_non_zero_data_year(
-    hist_spend_data,
-    actual_history_years
-  );
-  const latest_hist_spend_data = get_non_zero_data_year(
-    hist_spend_data,
-    actual_history_years,
-    true
-  );
-
-  const spend_latest_year = latest_hist_spend_data.value;
-  const spend_plan_1 = _.first(planned_spend_data);
-  const spend_plan_3 = _.last(planned_spend_data);
-
-  const latest_year_hist_spend_diff =
-    (latest_hist_spend_data.value - oldest_hist_spend_data.value) /
-    oldest_hist_spend_data.value;
-  const planned_spend_diff =
-    (spend_plan_3 - spend_latest_year) / spend_latest_year;
-
-  // Use FTEs from latest years with planned spending. They're in the same column under the same year heading (latest_hist_year_text)
-  // so they should be in sync... assuming that there can't be a case where there's a year with 0 spending and non-0 FTEs (in which case
-  // the years from oldest_hist_spend_data etc are the wrong ones)
-
-  /*
-  const get_data_by_historical_year = (data, year) =>
-    _.chain(actual_history_years_fte)
-      .indexOf(year)
-      .thru((index) => ({ year, value: data[index] }))
-      .value();
-  const oldest_hist_fte_data = get_data_by_historical_year(
-    hist_fte_data,
-    oldest_hist_spend_data.year
-  );
-  const latest_hist_fte_data = get_data_by_historical_year(
-    hist_fte_data,
-    latest_hist_spend_data.year
-  );
-  */
-
-  const fte_oldest_hist_spend_data = get_non_zero_data_year(
-    hist_fte_data,
-    actual_history_years_fte
-  );
-  const fte_latest_hist_spend_data = get_non_zero_data_year(
-    hist_fte_data,
-    actual_history_years_fte,
-    true
-  );
-
-  const fte_latest_year = fte_latest_hist_spend_data.value;
-  const fte_plan_1 = _.first(planned_fte_data);
-  const fte_plan_3 = _.last(planned_fte_data);
-
-  const latest_year_hist_fte_diff =
-    (fte_latest_hist_spend_data.value - fte_oldest_hist_spend_data.value) /
-    fte_oldest_hist_spend_data.value;
-  const planned_fte_diff = (fte_plan_3 - fte_latest_year) / fte_latest_year;
-
-  return {
-    oldest_hist_spend_data,
-    latest_hist_spend_data,
-    fte_oldest_hist_spend_data,
-    fte_latest_hist_spend_data,
-    has_hist,
-    has_planned,
-    spend_latest_year,
-    spend_plan_1,
-    spend_plan_3,
-    latest_year_hist_spend_diff,
-    planned_spend_diff,
-    has_spending,
-
-    fte_latest_year,
-    fte_plan_1,
-    fte_plan_3,
-    latest_year_hist_fte_diff,
-    planned_fte_diff,
-    has_fte,
-
-    fte_data,
-  };
-}
-
-const common_program_crso_calculate = ({ subject, tables }) => {
-  const { programSpending, programFtes } = tables;
-  const q6 = programSpending.q(subject);
-  const q12 = programFtes.q(subject);
-
-  const has_planned = has_planning_data(subject, q6);
-  const has_hist = has_hist_data(subject, q6);
-  const calcs = get_calcs(subject, q6, q12);
-
-  let type;
-  if (has_hist && has_planned) {
-    type = "hist_planned";
-  } else if (has_planned) {
-    type = "planned";
-  } else if (has_hist) {
-    type = "hist";
-  } else {
-    // No data, bail
-    return false;
-  }
-
-  return { type, calcs };
 };
 
-const common_panel_config = {
-  legacy_table_dependencies: ["programSpending", "programFtes"],
-  get_dataset_keys: () => ["program_spending", "program_ftes"],
-  get_title: ({ calculations }) => {
-    const has_fte_data = calculations.calcs.has_fte;
-    if (has_fte_data) {
-      return text_maker("welcome_mat_title");
-    } else {
-      return text_maker("welcome_mat_spending_title");
-    }
-  },
+const get_welcome_mat_dataset_keys = (subject_type, calculation_type) => {
+  if (subject_type === "gov") {
+    return ["program_spending"];
+  }
+
+  switch (calculation_type) {
+    case "hist":
+    case "planned":
+    case "hist_planned":
+      return ["program_spending", "program_ftes"];
+    case "estimates":
+      return ["tabled_estimates"];
+    case "hist_estimates":
+      return ["tabled_estimates", "program_spending"];
+    default:
+      return ["program_spending", "program_ftes"];
+  }
 };
 
 export const declare_welcome_mat_panel = () =>
   declare_panel({
     panel_key: "welcome_mat",
     subject_types: ["gov", "dept", "program", "crso"],
-    panel_config_func: (subject_type) => {
-      switch (subject_type) {
-        case "gov":
-          return {
-            ...common_panel_config,
-            get_title: () => text_maker("welcome_mat_spending_title"),
-            get_dataset_keys: () => ["program_spending"],
-
-            calculate: ({ subject, tables }) => {
-              const { programSpending, programFtes } = tables;
-              const q6 = programSpending.q(subject);
-              const q12 = programFtes.q(subject);
-
-              const calcs = get_calcs(subject, q6, q12);
-
-              return {
-                type: "hist_planned",
-                calcs,
-              };
-            },
-            render,
-          };
-        case "dept":
-          return {
-            ...common_panel_config,
-            missing_info: "ok",
-            legacy_table_dependencies: [
-              ...common_panel_config.legacy_table_dependencies,
-              "orgVoteStatEstimates",
-              "orgVoteStatPa",
-            ],
-            get_dataset_keys: ({ calculations: { type } }) => {
-              switch (type) {
-                case "hist":
-                case "planned":
-                case "hist_planned":
-                  return ["program_spending", "program_ftes"];
-                case "estimates":
-                  return ["tabled_estimates"];
-                case "hist_estimates":
-                  return ["tabled_estimates", "program_spending"];
-              }
-            },
-
-            //[
-            //  ...common_panel_config.get_dataset_keys(),
-            //  "tabled_estimates",
-            //  "org_vote_stat",
-            //],
-            calculate: ({ subject, tables }) => {
-              const { programSpending, programFtes, orgVoteStatEstimates } =
-                tables;
-              const q6 = programSpending.q(subject);
-              const q12 = programFtes.q(subject);
-
-              const has_planned = has_planning_data(subject, q6);
-              const has_hist = has_hist_data(subject, q6);
-              const estimates_amt = orgVoteStatEstimates
-                .q(subject)
-                .sum("{{est_in_year}}_estimates");
-              const calcs = get_calcs(subject, q6, q12);
-
-              if (!(has_planned || has_hist)) {
-                if (estimates_amt) {
-                  return {
-                    type: "estimates",
-                    calcs: Object.assign({}, calcs, {
-                      spend_plan_1: estimates_amt,
-                    }),
-                  };
-                } else {
-                  return false;
-                }
-              }
-
-              if (!subject.is_dp_org) {
-                //for non-dp orgs, we refer to estimate authorities. Must use orgVoteStatEstimates to get amounts
-                const proper_calcs = Object.assign({}, calcs, {
-                  spend_plan_1: orgVoteStatEstimates
-                    .q(subject)
-                    .sum("{{est_in_year}}_estimates"),
-                });
-                return {
-                  type: "hist_estimates",
-                  calcs: proper_calcs,
-                };
-              } else {
-                // DP org, could have hist and/or planned
-                const type =
-                  has_hist && has_planned
-                    ? "hist_planned"
-                    : (has_hist && "hist") || (has_planned && "planned");
-
-                return (
-                  type && {
-                    type,
-                    calcs,
-                  }
-                );
-              }
-            },
-            render,
-          };
-        case "program":
-          return {
-            ...common_panel_config,
-            glossary_keys: ["FTE"],
-            calculate: common_program_crso_calculate,
-            render,
-          };
-        case "crso":
-          return {
-            ...common_panel_config,
-            glossary_keys: ["FTE"],
-            calculate: common_program_crso_calculate,
-            render,
-          };
-      }
-    },
+    panel_config_func: (subject_type) => ({
+      get_dataset_keys: () =>
+        get_welcome_mat_dataset_keys(subject_type, "hist_planned"),
+      get_title: () =>
+        subject_type === "gov"
+          ? text_maker("welcome_mat_spending_title")
+          : text_maker("welcome_mat_title"),
+      glossary_keys: _.includes(["program", "crso"], subject_type)
+        ? ["FTE"]
+        : [],
+      calculate: () => true,
+      render: (props) => (
+        <WelcomeMatContainer {...props} subject_type={subject_type} />
+      ),
+    }),
   });

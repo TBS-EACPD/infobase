@@ -1,3 +1,5 @@
+import _ from "lodash";
+
 import { bilingual_field } from "../schema_utils.js";
 
 const schema = `
@@ -5,6 +7,8 @@ const schema = `
     org_vote_stat_pa: [OrgVoteStatPa]
     org_vote_stat_estimates: [OrgVoteStatEstimates]
     org_transfer_payments: [OrgTransferPayments]
+    program_spending: [ProgramSpending]
+    program_fte: [ProgramFte]
     has_finance_data: Boolean
   }
 
@@ -12,6 +16,15 @@ const schema = `
     org_vote_stat_pa: [OrgVoteStatPa]
     org_vote_stat_estimates: [OrgVoteStatEstimates]
     org_transfer_payments: [OrgTransferPayments]
+    org_sobjs: [OrgSobjs]
+    program_spending: [ProgramSpending]
+    program_fte: [ProgramFte]
+    has_finance_data: Boolean
+  }
+
+  extend type Crso {
+    program_spending: [ProgramSpending]
+    program_fte: [ProgramFte]
     has_finance_data: Boolean
   }
   
@@ -77,6 +90,14 @@ const schema = `
     pa_last_year_2_exp: Float,
     pa_last_year_1_exp: Float,
   }
+  type OrgSobjs {
+    so_num: Float
+    pa_last_year_5: Float
+    pa_last_year_4: Float
+    pa_last_year_3: Float
+    pa_last_year_2: Float
+    pa_last_year_1: Float
+  }
   type ProgramSobjs{
     so_num: Float
     pa_last_year_3: Float
@@ -117,21 +138,35 @@ const schema = `
   }
 `;
 
+const flatten_program_finance_rows = async (programs, loader) => {
+  if (_.isEmpty(programs)) {
+    return [];
+  }
+
+  const nested = await loader.loadMany(_.map(programs, "program_id"));
+  return _.chain(nested).flatten().compact().value();
+};
+
 export default function ({ loaders, models }) {
   const {
     orgVoteStatPa_loader,
     orgVoteStatEstimates_loader,
     orgTransferPayments_loader,
+    orgSobjs_loader,
     programSobjs_loader,
     programVoteStat_loader,
     programSpending_loader,
     programFte_loader,
+    prog_dept_code_loader,
+    prog_crso_id_loader,
   } = loaders;
 
   const {
     OrgVoteStatPa,
     OrgVoteStatEstimates,
     OrgTransferPayments,
+    ProgramSpending,
+    ProgramFte,
   } = models;
 
   const org_has_finance_data = async (org) => {
@@ -156,6 +191,20 @@ export default function ({ loaders, models }) {
     );
   };
 
+  const crso_has_finance_data = async (crso) => {
+    if (!crso.crso_id) return false;
+    const programs = await prog_crso_id_loader.load(crso.crso_id);
+    const spending = await flatten_program_finance_rows(
+      programs,
+      programSpending_loader
+    );
+    const fte = await flatten_program_finance_rows(
+      programs,
+      programFte_loader
+    );
+    return !(_.isEmpty(spending) && _.isEmpty(fte));
+  };
+
   const gov_has_finance_data = async () => {
     const [pa, estimates] = await Promise.all([
       OrgVoteStatPa.findOne({}).select("_id").lean().exec(),
@@ -172,6 +221,8 @@ export default function ({ loaders, models }) {
         OrgVoteStatEstimates.find({}).lean().exec(),
       org_transfer_payments: () =>
         OrgTransferPayments.find({}).lean().exec(),
+      program_spending: () => ProgramSpending.find({}).lean().exec(),
+      program_fte: () => ProgramFte.find({}).lean().exec(),
       has_finance_data: () => gov_has_finance_data(),
     },
     Org: {
@@ -181,7 +232,32 @@ export default function ({ loaders, models }) {
         org.dept_code ? orgVoteStatEstimates_loader.load(org.dept_code) : null,
       org_transfer_payments: (org) =>
         org.dept_code ? orgTransferPayments_loader.load(org.dept_code) : null,
+      org_sobjs: (org) =>
+        org.dept_code ? orgSobjs_loader.load(org.dept_code) : null,
+      program_spending: async (org) => {
+        if (!org.dept_code) return null;
+        const programs = await prog_dept_code_loader.load(org.dept_code);
+        return flatten_program_finance_rows(programs, programSpending_loader);
+      },
+      program_fte: async (org) => {
+        if (!org.dept_code) return null;
+        const programs = await prog_dept_code_loader.load(org.dept_code);
+        return flatten_program_finance_rows(programs, programFte_loader);
+      },
       has_finance_data: (org) => org_has_finance_data(org),
+    },
+    Crso: {
+      program_spending: async (crso) => {
+        if (!crso.crso_id) return null;
+        const programs = await prog_crso_id_loader.load(crso.crso_id);
+        return flatten_program_finance_rows(programs, programSpending_loader);
+      },
+      program_fte: async (crso) => {
+        if (!crso.crso_id) return null;
+        const programs = await prog_crso_id_loader.load(crso.crso_id);
+        return flatten_program_finance_rows(programs, programFte_loader);
+      },
+      has_finance_data: (crso) => crso_has_finance_data(crso),
     },
     Program: {
       program_sobjs: (prog) => programSobjs_loader.load(prog.program_id),

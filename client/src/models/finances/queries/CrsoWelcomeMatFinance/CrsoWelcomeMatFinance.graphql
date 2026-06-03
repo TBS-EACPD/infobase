@@ -1,0 +1,14 @@
+#import "../_fragments.graphql"
+
+query CrsoWelcomeMatFinance($lang: String!, $crso_id: String!) {
+  root(lang: $lang) {
+    crso(id: $crso_id) {
+      program_spending {
+        ...ProgramSpendingFields
+      }
+      program_fte {
+        ...ProgramFteFields
+      }
+    }
+  }
+}

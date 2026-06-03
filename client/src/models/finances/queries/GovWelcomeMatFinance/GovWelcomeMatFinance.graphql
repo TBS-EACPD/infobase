@@ -1,0 +1,14 @@
+#import "../_fragments.graphql"
+
+query GovWelcomeMatFinance($lang: String!) {
+  root(lang: $lang) {
+    gov {
+      program_spending {
+        ...ProgramSpendingFields
+      }
+      program_fte {
+        ...ProgramFteFields
+      }
+    }
+  }
+}
