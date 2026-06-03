@@ -4,10 +4,11 @@ import React, { useMemo } from "react";
 import { StdPanel, Col } from "src/panels/panel_declarations/InfographicPanel";
 import { declare_panel } from "src/panels/PanelRegistry";
 
+import { LeafSpinner } from "src/components/index";
+
 import { calculate_program_vote_stat_split_from_finance_data } from "src/models/finances/program_vote_stat_calculations";
 import { useProgramVoteStatFinanceData } from "src/models/finances/useProgramVoteStatFinanceData";
 
-import { LeafSpinner } from "src/components/index";
 
 import { is_a11y_mode } from "src/core/injected_build_constants";
 

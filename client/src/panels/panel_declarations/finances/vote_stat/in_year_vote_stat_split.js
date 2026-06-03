@@ -4,12 +4,13 @@ import React, { useMemo } from "react";
 import { StdPanel, Col } from "src/panels/panel_declarations/InfographicPanel";
 import { declare_panel } from "src/panels/PanelRegistry";
 
+import { LeafSpinner } from "src/components/index";
+
 import { isSpecialWarrants } from "src/models/estimates";
 
 import { calculate_in_year_voted_stat_split_from_finance_data } from "src/models/finances/org_vote_stat_estimates_calculations";
 import { useOrgVoteStatEstimatesFinanceData } from "src/models/finances/useOrgVoteStatEstimatesFinanceData";
 
-import { LeafSpinner } from "src/components/index";
 
 import { is_a11y_mode } from "src/core/injected_build_constants";
 

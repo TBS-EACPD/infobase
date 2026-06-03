@@ -16,13 +16,13 @@ import {
   LeafSpinner,
 } from "src/components/index";
 
-import { create_footnote } from "src/models/footnotes/footnotes";
+import { calculate_auth_exp_planned_spending_from_finance_data } from "src/models/finances/auth_exp_planned_spending_calculations";
 import {
   calculate_lapse,
   flat_auth_exp_years,
 } from "src/models/finances/auth_exp_utils";
-import { calculate_auth_exp_planned_spending_from_finance_data } from "src/models/finances/auth_exp_planned_spending_calculations";
 import { useAuthExpPlannedSpendingFinanceData } from "src/models/finances/useAuthExpPlannedSpendingFinanceData";
+import { create_footnote } from "src/models/footnotes/footnotes";
 import { run_template } from "src/models/text";
 import { year_templates } from "src/models/years";
 
