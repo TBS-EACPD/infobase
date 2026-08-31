@@ -1,0 +1,103 @@
+fragment ProgramSpendingFields on ProgramSpending {
+  program_id
+  pa_last_year_5_exp
+  pa_last_year_4_exp
+  pa_last_year_3_exp
+  pa_last_year_2_exp
+  pa_last_year_exp
+  pa_last_year_planned
+  planning_year_1
+  planning_year_2
+  planning_year_3
+}
+
+fragment ProgramFteFields on ProgramFte {
+  program_id
+  pa_last_year_5
+  pa_last_year_4
+  pa_last_year_3
+  pa_last_year_2
+  pa_last_year
+  pa_last_year_planned
+  planning_year_1
+  planning_year_2
+  planning_year_3
+}
+
+fragment OrgVoteStatPaExpFields on OrgVoteStatPa {
+  pa_last_year_5_exp
+  pa_last_year_4_exp
+  pa_last_year_3_exp
+  pa_last_year_2_exp
+  pa_last_year_exp
+}
+
+fragment OrgVoteStatPaFields on OrgVoteStatPa {
+  dept_code
+  vote_num
+  vs_type
+  name
+  pa_last_year_5_auth
+  pa_last_year_4_auth
+  pa_last_year_3_auth
+  pa_last_year_2_auth
+  pa_last_year_auth
+  pa_last_year_5_exp
+  pa_last_year_4_exp
+  pa_last_year_3_exp
+  pa_last_year_2_exp
+  pa_last_year_exp
+  pa_last_year_5_unlapsed
+  pa_last_year_4_unlapsed
+  pa_last_year_3_unlapsed
+  pa_last_year_2_unlapsed
+  pa_last_year_unlapsed
+}
+
+fragment OrgVoteStatEstimatesFields on OrgVoteStatEstimates {
+  dept_code
+  vote_num
+  vs_type
+  name
+  doc
+  est_last_year_4
+  est_last_year_3
+  est_last_year_2
+  est_last_year
+  est_in_year
+}
+
+fragment ProgramVoteStatFields on ProgramVoteStat {
+  vs_type
+  pa_last_year_3
+  pa_last_year_2
+  pa_last_year
+}
+
+fragment OrgSobjsFields on OrgSobjs {
+  so_num
+  pa_last_year_5
+  pa_last_year_4
+  pa_last_year_3
+  pa_last_year_2
+  pa_last_year_1
+}
+
+fragment ProgramSobjsFields on ProgramSobjs {
+  program_id
+  so_num
+  pa_last_year_3
+  pa_last_year_2
+  pa_last_year
+}
+
+fragment OrgTransferPaymentsFields on OrgTransferPayments {
+  dept_code
+  type
+  name
+  pa_last_year_5_exp
+  pa_last_year_4_exp
+  pa_last_year_3_exp
+  pa_last_year_2_exp
+  pa_last_year_1_exp
+}

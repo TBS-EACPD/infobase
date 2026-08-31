@@ -1,10 +1,17 @@
 import _ from "lodash";
-import React from "react";
+import React, { useMemo } from "react";
 
 import { StdPanel, Col } from "src/panels/panel_declarations/InfographicPanel";
 import { declare_panel } from "src/panels/PanelRegistry";
 
-import { create_text_maker_component } from "src/components/index";
+import { create_text_maker_component, LeafSpinner } from "src/components/index";
+
+import {
+  calculate_dept_spend_rev_split_from_finance_data,
+  calculate_program_spend_rev_split_from_finance_data,
+} from "src/models/finances/sobj_calculations";
+import { useOrgSobjsFinanceData } from "src/models/finances/useOrgSobjsFinanceData";
+import { useProgramSobjsFinanceData } from "src/models/finances/useProgramSobjsFinanceData";
 
 import { formats } from "src/core/format";
 
@@ -22,29 +29,6 @@ const text_keys_by_subject_type = {
   program: "program_spend_rev_split_text",
 };
 
-const is_revenue = (so_num) => +so_num > 19;
-const last_year_col = "{{pa_last_year}}";
-
-const sum_last_year_exp = (rows) =>
-  _.chain(rows)
-    .map((row) => row[last_year_col])
-    .filter(_.isNumber)
-    .reduce((acc, item) => acc + item, 0)
-    .value();
-
-const rows_to_rev_split = (rows) => {
-  const [neg_exp, gross_exp] = _.chain(rows)
-    .filter((x) => x) //TODO remove this
-    .partition((row) => is_revenue(row.so_num))
-    .map(sum_last_year_exp)
-    .value();
-  const net_exp = gross_exp + neg_exp;
-  if (neg_exp === 0) {
-    return false;
-  }
-  return { neg_exp, gross_exp, net_exp };
-};
-
 function render({
   title,
   subject,
@@ -60,7 +44,6 @@ function render({
   const series = [last_year_gross_exp, last_year_rev];
   const _ticks = ["gross", "revenues"];
 
-  // if last_year_rev is 0, then no point in showing the net bar
   if (last_year_rev !== 0) {
     series.push(last_year_net_exp);
     _ticks.push("net");
@@ -72,30 +55,24 @@ function render({
     [text_maker("value")]: spend_rev_value,
   }));
 
-  const graph_content = (() => {
-    if (is_a11y_mode) {
-      return null;
-    } else {
-      return (
-        <div>
-          <WrappedNivoBar
-            data={spend_rev_data}
-            keys={[text_maker("value")]}
-            indexBy="title"
-            enableLabel={true}
-            isInteractive={false}
-            label={(d) => (
-              <tspan y={-10}>
-                {formats.compact1(d.formattedValue, { raw: true })}
-              </tspan>
-            )}
-            colors={(d) => (d.data[d.id] < 0 ? highlightColor : secondaryColor)}
-            enableGridX={false}
-          />
-        </div>
-      );
-    }
-  })();
+  const graph_content = is_a11y_mode ? null : (
+    <div>
+      <WrappedNivoBar
+        data={spend_rev_data}
+        keys={[text_maker("value")]}
+        indexBy="title"
+        enableLabel={true}
+        isInteractive={false}
+        label={(d) => (
+          <tspan y={-10}>
+            {formats.compact1(d.formattedValue, { raw: true })}
+          </tspan>
+        )}
+        colors={(d) => (d.data[d.id] < 0 ? highlightColor : secondaryColor)}
+        enableGridX={false}
+      />
+    </div>
+  );
 
   return (
     <StdPanel {...{ title, footnotes, sources, datasets }}>
@@ -112,9 +89,48 @@ function render({
   );
 }
 
+const SpendRevSplitContainer = ({ subject, ...props }) => {
+  const org_query = useOrgSobjsFinanceData(subject);
+  const program_query = useProgramSobjsFinanceData(subject);
+  const { loading, finance_data } =
+    subject.subject_type === "program" ? program_query : org_query;
+
+  const calculations = useMemo(() => {
+    if (loading) {
+      return null;
+    }
+    if (subject.subject_type === "program") {
+      return calculate_program_spend_rev_split_from_finance_data(
+        subject,
+        finance_data
+      );
+    }
+    return calculate_dept_spend_rev_split_from_finance_data(
+      subject,
+      finance_data
+    );
+  }, [loading, subject, finance_data]);
+
+  if (loading) {
+    return <LeafSpinner config_name="subroute" />;
+  }
+
+  if (!calculations) {
+    return null;
+  }
+
+  return render({
+    ...props,
+    subject,
+    title: text_maker("spend_rev_split_title"),
+    calculations,
+  });
+};
+
 const common_panel_config = {
   get_title: () => text_maker("spend_rev_split_title"),
-  render,
+  calculate: () => true,
+  render: (props) => <SpendRevSplitContainer {...props} />,
 };
 
 export const declare_spend_rev_split_panel = () =>
@@ -126,61 +142,12 @@ export const declare_spend_rev_split_panel = () =>
         case "dept":
           return {
             ...common_panel_config,
-            legacy_table_dependencies: ["orgSobjs"],
             get_dataset_keys: () => ["org_standard_objects"],
-            calculate: ({ subject, tables }) => {
-              const { orgSobjs } = tables;
-              const last_year_spend = orgSobjs.sum_cols_by_grouped_data(
-                "{{pa_last_year}}",
-                "so_num",
-                subject
-              );
-              const last_year_rev =
-                (last_year_spend[22] || 0) + (last_year_spend[21] || 0);
-              const minus_last_year_rev = -last_year_rev;
-              const last_year_gross_exp = _.sum(
-                _.map(_.range(1, 13), (i) => last_year_spend[i] || 0)
-              );
-              if (last_year_rev === 0) {
-                return false;
-              }
-              const last_year_net_exp =
-                last_year_gross_exp - minus_last_year_rev;
-
-              const text_calculations = {
-                subject,
-                last_year_rev,
-                minus_last_year_rev,
-                last_year_gross_exp,
-                last_year_net_exp,
-              };
-
-              return {
-                text_calculations,
-              };
-            },
           };
         case "program":
           return {
             ...common_panel_config,
-            legacy_table_dependencies: ["programSobjs"],
             get_dataset_keys: () => ["program_standard_objects"],
-            calculate: ({ subject, tables }) => {
-              const { programSobjs } = tables;
-              const prog_rows = programSobjs.programs.get(subject);
-              const rev_split = rows_to_rev_split(prog_rows);
-              if (!rev_split || rev_split.neg_exp === 0) {
-                return false;
-              }
-              const text_calculations = {
-                subject,
-                last_year_rev: rev_split.neg_exp,
-                minus_last_year_rev: -rev_split.neg_exp,
-                last_year_gross_exp: rev_split.gross_exp,
-                last_year_net_exp: rev_split.net_exp,
-              };
-              return { text_calculations };
-            },
           };
       }
     },

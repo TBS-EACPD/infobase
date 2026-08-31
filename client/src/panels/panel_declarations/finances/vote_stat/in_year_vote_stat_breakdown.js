@@ -1,14 +1,18 @@
 import { sum } from "d3-array";
 import { scaleOrdinal } from "d3-scale";
 import _ from "lodash";
-import React from "react";
+import React, { useMemo } from "react";
 
 import { StdPanel, Col } from "src/panels/panel_declarations/InfographicPanel";
 import { declare_panel } from "src/panels/PanelRegistry";
 
-import { DisplayTable } from "src/components/index";
+import { DisplayTable, LeafSpinner } from "src/components/index";
 
 import { isSpecialWarrants } from "src/models/estimates";
+
+import { calculate_in_year_vote_stat_breakdown_from_finance_data } from "src/models/finances/org_vote_stat_estimates_calculations";
+import { useOrgVoteStatEstimatesFinanceData } from "src/models/finances/useOrgVoteStatEstimatesFinanceData";
+import { est_in_year_col } from "src/models/finances/vote_stat_utils";
 import { Dept } from "src/models/subjects";
 
 import { newIBLightCategoryColors } from "src/core/color_schemes";
@@ -20,8 +24,6 @@ import { WrappedNivoTreemap } from "src/charts/wrapped_nivo/index";
 import { infographic_href_template } from "src/infographic/infographic_href_template";
 
 import { text_maker, TM } from "./vote_stat_text_provider";
-
-const main_col = "{{est_in_year}}_estimates";
 
 const text_func = (vs, d, break_str) => {
   if (vs == "voted") {
@@ -52,7 +54,7 @@ const planned_vote_or_stat_render = (vs) =>
     const { data, voted_stat_est_in_year } = calculations;
 
     const top_10_rows = _.take(data, 10);
-    const total_amt = sum(data, _.property(main_col));
+    const total_amt = sum(data, _.property(est_in_year_col));
 
     const subj_map = _.chain(top_10_rows)
       .map((obj) => [
@@ -64,7 +66,7 @@ const planned_vote_or_stat_render = (vs) =>
     const table_data = _.map(top_10_rows, (obj) => ({
       name: obj.dept,
       voted_stat: obj.desc,
-      amount: obj[main_col],
+      amount: obj[est_in_year_col],
     }));
 
     const column_configs = {
@@ -100,7 +102,7 @@ const planned_vote_or_stat_render = (vs) =>
         voted_stat: text_maker(
           isVoted ? "all_other_voted_items" : "all_other_stat_items"
         ),
-        amount: _.last(data)[main_col],
+        amount: _.last(data)[est_in_year_col],
       },
     ]);
 
@@ -141,7 +143,7 @@ const planned_vote_or_stat_render = (vs) =>
               <WrappedNivoTreemap
                 data={packing_data}
                 colorScale={color_scale(vs)}
-                value_string="{{est_in_year}}_estimates"
+                value_string={est_in_year_col}
                 formatter={formats.compact1}
                 label_id="desc"
               />
@@ -152,95 +154,69 @@ const planned_vote_or_stat_render = (vs) =>
     );
   };
 
-const planned_vote_or_stat_calculate =
-  (vs) =>
-  ({ subject, tables }) => {
-    const { orgVoteStatEstimates } = tables;
-    const { group_by_func, grouping_col_values_func } = orgVoteStatEstimates;
+const InYearVoteStatBreakdownContainer = ({ vs, title_key, ...props }) => {
+  const { subject } = props;
+  const { loading, finance_data } = useOrgVoteStatEstimatesFinanceData(subject);
 
-    const text = text_maker(vs);
-
-    const all_rows = _.chain(orgVoteStatEstimates.data)
-      .thru((data) => group_by_func(data, "vote_vs_stat"))
-      .map((data_group) => [
-        grouping_col_values_func(data_group[0], "vote_vs_stat")[1],
-        data_group,
-      ])
-      .fromPairs()
-      .get(text)
-      .groupBy("dept")
-      .flatMap((dept_group, dept) =>
-        _.chain(dept_group)
-          .groupBy("desc")
-          .map((desc_group, desc) => ({
-            dept,
-            desc,
-            [main_col]: _.reduce(
-              desc_group,
-              (memo, row) => memo + row[main_col],
-              0
-            ),
-          }))
-          .value()
-      )
-      .sortBy((x) => -x[main_col])
-      .value();
-
-    const ret = {};
-    ret.data = _.take(all_rows, 10);
-    if (vs === "voted") {
-      //vote descriptions are of the form "<vote desc> - <vote num>"
-      //lets strip out the hyphen and everything that follows
-      ret.data.forEach((row) => (row.desc = row.desc.replace(/-.+$/, "")));
+  const calculations = useMemo(() => {
+    if (loading || (vs === "stat" && isSpecialWarrants())) {
+      return null;
     }
-    ret.data.push({
-      desc: text_maker(`all_other_${vs}_items`),
-      others: true,
-      [main_col]: sum(
-        _.takeRight(all_rows, all_rows.length - 10),
-        (d) => d[main_col]
-      ),
-    });
-    const voted_stat_est_in_year =
-      orgVoteStatEstimates.sum_cols_by_grouped_data(
-        main_col,
-        "vote_vs_stat",
-        subject
-      )[text] || 0;
+    return calculate_in_year_vote_stat_breakdown_from_finance_data(
+      vs,
+      finance_data,
+      { text_maker }
+    );
+  }, [loading, vs, finance_data]);
 
-    return { ...ret, voted_stat_est_in_year };
-  };
+  if (loading) {
+    return <LeafSpinner config_name="subroute" />;
+  }
+
+  if (!calculations) {
+    return null;
+  }
+
+  return planned_vote_or_stat_render(vs)({
+    ...props,
+    title: text_maker(title_key),
+    calculations,
+  });
+};
 
 const declare_in_year_voted_breakdown_panel = () =>
   declare_panel({
     panel_key: "in_year_voted_breakdown",
     subject_types: ["gov"],
     panel_config_func: () => ({
-      legacy_table_dependencies: ["orgVoteStatEstimates"],
       get_dataset_keys: () => ["tabled_estimates"],
       get_title: () => text_maker("in_year_voted_breakdown_title"),
-      calculate: planned_vote_or_stat_calculate("voted"),
-      render: planned_vote_or_stat_render("voted"),
+      calculate: () => true,
+      render: (props) => (
+        <InYearVoteStatBreakdownContainer
+          {...props}
+          vs="voted"
+          title_key="in_year_voted_breakdown_title"
+        />
+      ),
     }),
   });
+
 const declare_in_year_stat_breakdown_panel = () =>
   declare_panel({
     panel_key: "in_year_stat_breakdown",
     subject_types: ["gov"],
     panel_config_func: () => ({
-      legacy_table_dependencies: ["orgVoteStatEstimates"],
       get_dataset_keys: () => ["tabled_estimates"],
       get_title: () => text_maker("in_year_stat_breakdown_title"),
-      calculate: ({ subject, tables }) => {
-        // Don't show the panel for Special Warrants
-        if (isSpecialWarrants()) {
-          return false;
-        }
-
-        // Continue with the original calculation
-        return planned_vote_or_stat_calculate("stat")({ subject, tables });
-      },
-      render: planned_vote_or_stat_render("stat"),
+      calculate: () => true,
+      render: (props) => (
+        <InYearVoteStatBreakdownContainer
+          {...props}
+          vs="stat"
+          title_key="in_year_stat_breakdown_title"
+        />
+      ),
     }),
   });
 

@@ -1,13 +1,12 @@
-import _ from "lodash";
-import React from "react";
+import React, { useMemo } from "react";
 
 import { TextPanel } from "src/panels/panel_declarations/InfographicPanel";
 import { declare_panel } from "src/panels/PanelRegistry";
 
-import { create_text_maker_component } from "src/components/index";
+import { create_text_maker_component, LeafSpinner } from "src/components/index";
 
-import { get_footnotes_by_subject_and_topic } from "src/models/footnotes/footnotes";
-import { get_late_actual_fte_orgs } from "src/models/results";
+import { calculate_planned_actual_comparison_from_finance_data } from "src/models/finances/planned_actual_comparison_calculations";
+import { useWelcomeMatFinanceData } from "src/models/finances/useWelcomeMatFinanceData";
 
 import { PlannedActualTable } from "./PlannedActualTable";
 
@@ -15,112 +14,86 @@ import text from "./planned_actual_comparison.yaml";
 
 const { text_maker, TM } = create_text_maker_component(text);
 
-export const declare_planned_actual_comparison_panel = () =>
-  declare_panel({
-    panel_key: "planned_actual_comparison",
-    subject_types: ["dept", "crso", "program"],
-    panel_config_func: () => ({
-      legacy_table_dependencies: ["programSpending", "programFtes"],
-      get_dataset_keys: () => ["program_spending", "program_ftes"],
-      get_title: () => text_maker("planned_actual_title"),
-      calculate: ({ subject, tables }) => {
-        const late_actual_fte_orgs = get_late_actual_fte_orgs();
-        if (subject.subject_type === "dept") {
-          if (
-            !subject.is_dp_org ||
-            _.includes(late_actual_fte_orgs, subject.id)
-          ) {
-            return false;
-          }
-        } else {
-          if (
-            !subject.dept.is_dp_org ||
-            _.includes(late_actual_fte_orgs, subject.dept.id)
-          ) {
-            return false;
-          }
-        }
+const PlannedActualComparisonPanel = ({
+  title,
+  subject,
+  calculations,
+  sources,
+  datasets,
+}) => {
+  const {
+    actual_spend,
+    actual_ftes,
+    planned_spend,
+    planned_ftes,
+    diff_ftes,
+    diff_spend,
+    footnotes,
+    text_calculations,
+  } = calculations;
 
-        const { programSpending, programFtes } = tables;
-        const spend_q = programSpending.q(subject);
-        const fte_q = programFtes.q(subject);
-
-        const planned_spend = spend_q.sum("pa_last_year_planned");
-        const planned_ftes = fte_q.sum("pa_last_year_planned");
-
-        const actual_spend = spend_q.sum("{{pa_last_year}}exp");
-        const actual_ftes = fte_q.sum("{{pa_last_year}}");
-
-        //program has been dead before pa_last_year_planned
-        if (!_.some([actual_spend, actual_ftes, planned_ftes, planned_spend])) {
-          return false;
-        }
-
-        const footnotes = get_footnotes_by_subject_and_topic(subject, [
-          "DRR_EXP",
-          "DRR_FTE",
-        ]);
-
-        const text_calculations = {
-          subject,
-          planned_spend: planned_spend,
-          planned_ftes: planned_ftes,
-          actual_spend: actual_spend,
-          actual_ftes: actual_ftes,
-          program_count_last_year:
-            subject.subject_type === "crso" &&
-            _.chain(spend_q.data)
-              .zip(fte_q.data)
-              .filter(
-                ([spend_row, fte_row]) =>
-                  spend_row["{{pa_last_year}}exp"] !== 0 ||
-                  fte_row["{{pa_last_year}}"] !== 0
-              )
-              .value().length,
-        };
-
-        return {
-          text_calculations,
-          planned_ftes,
-          planned_spend,
-          actual_ftes,
-          actual_spend,
-          diff_spend: actual_spend - planned_spend,
-          diff_ftes: actual_ftes - planned_ftes,
-          footnotes,
-        };
-      },
-
-      render({ title, subject, calculations, sources, datasets }) {
-        const {
+  return (
+    <TextPanel {...{ title, footnotes, sources, datasets }}>
+      <TM
+        k={`${subject.subject_type}_planned_actual_text`}
+        args={text_calculations}
+      />
+      <PlannedActualTable
+        {...{
           actual_spend,
           actual_ftes,
           planned_spend,
           planned_ftes,
           diff_ftes,
           diff_spend,
-          footnotes,
-          text_calculations,
-        } = calculations;
+        }}
+      />
+    </TextPanel>
+  );
+};
 
-        return (
-          <TextPanel {...{ title, footnotes, sources, datasets }}>
-            <TM
-              k={`${subject.subject_type}_planned_actual_text`}
-              args={text_calculations}
-            />
-            <PlannedActualTable
-              {...{
-                actual_spend,
-                actual_ftes,
-                planned_spend,
-                planned_ftes,
-                diff_ftes,
-                diff_spend,
-              }}
-            />
-          </TextPanel>
-        );
-      },
+const PlannedActualComparisonContainer = (props) => {
+  const { subject, sources, datasets } = props;
+  const { loading, finance_data } = useWelcomeMatFinanceData(subject);
+
+  const calculations = useMemo(() => {
+    if (loading) {
+      return null;
+    }
+    return calculate_planned_actual_comparison_from_finance_data(
+      subject,
+      finance_data
+    );
+  }, [loading, subject, finance_data]);
+
+  if (loading) {
+    return <LeafSpinner config_name="subroute" />;
+  }
+
+  if (!calculations) {
+    return null;
+  }
+
+  return (
+    <PlannedActualComparisonPanel
+      {...props}
+      title={text_maker("planned_actual_title")}
+      calculations={calculations}
+      footnotes={calculations.footnotes}
+      sources={sources}
+      datasets={datasets}
+    />
+  );
+};
+
+export const declare_planned_actual_comparison_panel = () =>
+  declare_panel({
+    panel_key: "planned_actual_comparison",
+    subject_types: ["dept", "crso", "program"],
+    panel_config_func: () => ({
+      get_dataset_keys: () => ["program_spending", "program_ftes"],
+      get_title: () => text_maker("planned_actual_title"),
+      calculate: () => true,
+      render: (props) => <PlannedActualComparisonContainer {...props} />,
     }),
   });

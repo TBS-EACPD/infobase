@@ -1,6 +1,6 @@
 import { scaleOrdinal } from "d3-scale";
 import _ from "lodash";
-import React, { Fragment } from "react";
+import React, { Fragment, useMemo } from "react";
 
 import { InfographicPanel } from "src/panels/panel_declarations/InfographicPanel";
 import { declare_panel } from "src/panels/PanelRegistry";
@@ -13,12 +13,18 @@ import {
   RadioButtons,
   DisplayTable,
   SelectAllControl,
+  LeafSpinner,
 } from "src/components/index";
 
-import { isSpecialWarrants } from "src/models/estimates";
+import { calculate_auth_exp_planned_spending_from_finance_data } from "src/models/finances/auth_exp_planned_spending_calculations";
+import {
+  calculate_lapse,
+  flat_auth_exp_years,
+} from "src/models/finances/auth_exp_utils";
+import { useAuthExpPlannedSpendingFinanceData } from "src/models/finances/useAuthExpPlannedSpendingFinanceData";
 import { create_footnote } from "src/models/footnotes/footnotes";
 import { run_template } from "src/models/text";
-import { year_templates, actual_to_planned_gap_year } from "src/models/years";
+import { year_templates } from "src/models/years";
 
 import { newIBCategoryColors } from "src/core/color_schemes";
 import { formats } from "src/core/format";
@@ -35,22 +41,11 @@ import {
 import text from "./auth_exp_planned_spending.yaml";
 import "./auth_exp_planned_spending.scss";
 
-const { std_years, planning_years, estimates_years } = year_templates;
+const { std_years } = year_templates;
 const { text_maker, TM } = create_text_maker_component(text);
 const colors = scaleOrdinal().range(newIBCategoryColors);
 
-const auth_cols = _.map(std_years, (yr) => `${yr}auth`);
-const exp_cols = _.map(std_years, (yr) => `${yr}exp`);
-const flat_auth_exp_years = _.flatMap(["exp", "auth", "unlapsed"], (type) =>
-  _.map(std_years, (yr) => `${yr}${type}`)
-);
-
 const include_verbose_gap_year_explanation = false;
-
-const calculate_lapse = (auth, exp, unlapsed, is_pct = false) => {
-  const lapse = auth - exp - unlapsed;
-  return is_pct ? lapse / auth || 0 : lapse;
-};
 const get_auth_exp_diff = ([larger_data_point, smaller_data_point]) =>
   Math.abs(larger_data_point.data.y - smaller_data_point.data.y);
 const auth_exp_planned_spending_tooltip = ({ slice }, tooltip_formatter) => {
@@ -545,219 +540,31 @@ const render = function ({
   );
 };
 
-const calculate = ({ subject, tables }) => {
-  const { orgVoteStatPa, programSpending, orgVoteStatEstimates } = tables;
+const AuthExpPlannedSpendingContainer = (props) => {
+  const { subject } = props;
+  const { loading, finance_data } =
+    useAuthExpPlannedSpendingFinanceData(subject);
 
-  const query_subject = subject.subject_type === "gov" ? undefined : subject;
-  const gov_queried_subject = orgVoteStatPa.q();
-  const queried_subject = orgVoteStatPa.q(query_subject);
+  const calculations = useMemo(() => {
+    if (loading) {
+      return null;
+    }
+    return calculate_auth_exp_planned_spending_from_finance_data(
+      subject,
+      finance_data,
+      { text_maker }
+    );
+  }, [loading, subject, finance_data]);
 
-  const exp_values = queried_subject.sum(exp_cols, { as_object: false });
-
-  const history_years_written = _.map(std_years, run_template);
-  const future_auth_year_templates = _.takeRightWhile(
-    estimates_years,
-    (est_year) => !_.includes(history_years_written, run_template(est_year))
-  );
-
-  const historical_auth_values = queried_subject.sum(auth_cols, {
-    as_object: false,
-  });
-
-  // Get future authority values
-  let future_auth_values = _.map(
-    future_auth_year_templates,
-    (future_auth_year_template) =>
-      orgVoteStatEstimates
-        .q(query_subject)
-        .sum(`${future_auth_year_template}_estimates`, {
-          as_object: false,
-        })
-  );
-
-  // Check if we're in Special Warrants mode
-  const is_special_warrants = isSpecialWarrants();
-
-  // If in Special Warrants mode and future values exist, remove the latest year
-  // since it would only contain voted authorities (not statutory)
-  if (is_special_warrants && future_auth_values.length > 0) {
-    future_auth_values = future_auth_values.slice(0, -1);
+  if (loading) {
+    return <LeafSpinner config_name="subroute" />;
   }
 
-  const auth_values = _.concat(historical_auth_values, future_auth_values);
+  if (!calculations) {
+    return null;
+  }
 
-  const planned_spending_values = programSpending
-    .q(query_subject)
-    .sum(planning_years, { as_object: false });
-
-  const data_series = _.chain([
-    {
-      key: "budgetary_expenditures",
-      untrimmed_year_templates: std_years,
-      untrimmed_values: exp_values,
-    },
-    {
-      key: "authorities",
-      untrimmed_year_templates: _.concat(std_years, future_auth_year_templates),
-      untrimmed_values: auth_values,
-    },
-    subject.has_planned_spending && {
-      key: "planned_spending",
-      untrimmed_year_templates: planning_years,
-      untrimmed_values: planned_spending_values,
-      year_templates: planning_years,
-      values: planned_spending_values,
-    },
-  ])
-    .compact()
-    .map((series) => {
-      const { year_templates, values } = (() => {
-        if (series.year_templates && series.values) {
-          return series;
-        } else {
-          const [trimmed_year_templates, trimmed_values] = _.chain(
-            series.untrimmed_year_templates
-          )
-            .zip(series.untrimmed_values)
-            .dropWhile(([_year_template, value]) => !value)
-            .unzip()
-            .value();
-
-          return {
-            year_templates: trimmed_year_templates,
-            values: trimmed_values,
-          };
-        }
-      })();
-
-      return {
-        ...series,
-
-        year_templates,
-        values,
-
-        years: _.map(year_templates, run_template),
-        label: text_maker(series.key),
-      };
-    })
-    .value();
-
-  const last_shared_index = _.min([exp_values.length, auth_values.length]) - 1;
-
-  const hist_unspent_avg_pct =
-    _.reduce(
-      exp_values,
-      (result, value, i) => result + auth_values[i] - value,
-      0
-    ) /
-    _.reduce(
-      auth_values,
-      (result, value, index) =>
-        index <= last_shared_index ? result + value : result,
-      0
-    );
-
-  const unspent_last_year =
-    auth_values[last_shared_index] - exp_values[last_shared_index];
-
-  const get_five_year_auth_average = (auth_or_exp) =>
-    _.chain(std_years)
-      .map((year) => orgVoteStatPa.q(query_subject).sum([year + auth_or_exp]))
-      .sum()
-      .divide(std_years.length)
-      .value();
-
-  const gov_stat_filtered_votes = _.reject(
-    gov_queried_subject.data,
-    ({ votenum }) => votenum === "S"
-  );
-  const gov_aggregated_votes = _.chain(gov_stat_filtered_votes)
-    .reduce(
-      (result, vote_row) => ({
-        ...result,
-        [vote_row.votestattype]: {
-          ...result[vote_row.votestattype],
-          ..._.chain(flat_auth_exp_years)
-            .map((yr) => [yr, result[vote_row.votestattype][yr] + vote_row[yr]])
-            .fromPairs()
-            .value(),
-        },
-      }),
-      _.chain(gov_stat_filtered_votes)
-        .map(({ votestattype }) => [
-          votestattype,
-          {
-            desc: text_maker(`vstype${votestattype}`),
-            ..._.chain(flat_auth_exp_years)
-              .map((yr) => [yr, 0])
-              .fromPairs()
-              .value(),
-          },
-        ])
-        .fromPairs()
-        .value()
-    )
-    .map((aggregated_sum, votestattype) => ({
-      votestattype: _.toInteger(votestattype),
-      ...aggregated_sum,
-    }))
-    .value();
-  const queried_votes =
-    subject.subject_type === "gov"
-      ? gov_aggregated_votes
-      : _.reject(queried_subject.data, ({ votenum }) => votenum === "S");
-
-  // Sum up all votes by year, take lapse percentage for each year, then take the average
-  const gov_avg_lapsed_by_votes_pct = _.chain(gov_aggregated_votes)
-    .reduce(
-      (result, vote_row) => ({
-        ..._.chain(flat_auth_exp_years)
-          .map((yr) => [yr, result[yr] + vote_row[yr]])
-          .fromPairs()
-          .value(),
-      }),
-      _.chain(flat_auth_exp_years)
-        .map((yr) => [yr, 0])
-        .fromPairs()
-        .value()
-    )
-    .thru((gov_aggregated_lapse_by_year) =>
-      _.map(
-        std_years,
-        (yr) =>
-          calculate_lapse(
-            gov_aggregated_lapse_by_year[`${yr}auth`],
-            gov_aggregated_lapse_by_year[`${yr}exp`],
-            gov_aggregated_lapse_by_year[`${yr}unlapsed`]
-          ) / gov_aggregated_lapse_by_year[`${yr}auth`]
-      )
-    )
-    .mean()
-    .value();
-
-  const additional_info = {
-    five_year_auth_average: get_five_year_auth_average("auth"),
-    five_year_exp_average: get_five_year_auth_average("exp"),
-    has_planned_spending: subject.has_planned_spending,
-    last_planned_spending: _.last(planned_spending_values),
-    last_planned_year: run_template(_.last(planning_years)),
-    plan_change: _.last(planned_spending_values) - _.last(exp_values),
-    last_history_year: run_template(_.last(std_years)),
-    gap_year:
-      (subject.has_planned_spending && actual_to_planned_gap_year) || null,
-    hist_avg_tot_pct: hist_unspent_avg_pct,
-    last_year_lapse_amt: unspent_last_year || 0,
-    last_year_lapse_pct:
-      (unspent_last_year || 0) / auth_values[last_shared_index],
-    gov_avg_lapsed_by_votes_pct,
-  };
-
-  return {
-    data_series,
-    additional_info,
-    queried_votes,
-    is_special_warrants,
-  };
+  return render({ ...props, calculations });
 };
 
 export const declare_auth_exp_planned_spending_panel = () =>
@@ -765,11 +572,6 @@ export const declare_auth_exp_planned_spending_panel = () =>
     panel_key: "auth_exp_planned_spending",
     subject_types: ["gov", "dept"],
     panel_config_func: () => ({
-      legacy_table_dependencies: [
-        "orgVoteStatPa",
-        "programSpending",
-        "orgVoteStatEstimates",
-      ],
       get_dataset_keys: () => [
         "org_vote_stat",
         "program_spending",
@@ -783,7 +585,7 @@ export const declare_auth_exp_planned_spending_panel = () =>
         text_maker("auth_exp_planned_spending_title", {
           has_planned_spending: subject.has_planned_spending,
         }),
-      calculate,
-      render,
+      calculate: () => true,
+      render: (props) => <AuthExpPlannedSpendingContainer {...props} />,
     }),
   });

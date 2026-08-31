@@ -1,12 +1,14 @@
 import _ from "lodash";
-import React from "react";
+import React, { useMemo } from "react";
 
 import { StdPanel, Col } from "src/panels/panel_declarations/InfographicPanel";
 import { declare_panel } from "src/panels/PanelRegistry";
 
-import { create_footnote } from "src/models/footnotes/footnotes";
+import { LeafSpinner } from "src/components/index";
 
-import { Gov } from "src/models/subjects";
+import { calculate_estimates_in_perspective_from_finance_data } from "src/models/finances/org_vote_stat_estimates_calculations";
+import { useOrgVoteStatEstimatesFinanceData } from "src/models/finances/useOrgVoteStatEstimatesFinanceData";
+import { create_footnote } from "src/models/footnotes/footnotes";
 
 import { is_a11y_mode } from "src/core/injected_build_constants";
 
@@ -14,7 +16,80 @@ import { CircleProportionGraph } from "src/charts/wrapped_nivo/index";
 
 import { TM, text_maker } from "./vote_stat_text_provider";
 
-const est_in_year_col = "{{est_in_year}}_estimates";
+const EstimatesInPerspectivePanel = ({
+  title,
+  subject,
+  calculations,
+  footnotes,
+  sources,
+  datasets,
+}) => {
+  const { gov_tabled_est_in_year, dept_tabled_est_in_year } = calculations;
+
+  footnotes = _.concat(
+    create_footnote({
+      id: text_maker("auth_footnote"),
+      subject_type: subject.subject_type,
+      subject_id: subject.id,
+      text: text_maker("auth_footnote"),
+      topic_keys: ["AUTH"],
+    }),
+    footnotes
+  );
+
+  return (
+    <StdPanel {...{ title, footnotes, sources, datasets }} allowOverflow={true}>
+      <Col isText size={!is_a11y_mode ? 5 : 12}>
+        <TM k="estimates_perspective_text" args={calculations} />
+      </Col>
+      {!is_a11y_mode && (
+        <Col isGraph size={7}>
+          <CircleProportionGraph
+            height={250}
+            child_value={dept_tabled_est_in_year}
+            child_name={text_maker("dept_estimates", { subject })}
+            parent_value={gov_tabled_est_in_year}
+            parent_name={text_maker("gov_estimates")}
+          />
+        </Col>
+      )}
+    </StdPanel>
+  );
+};
+
+const EstimatesInPerspectiveContainer = (props) => {
+  const { subject } = props;
+  const { loading, finance_data } = useOrgVoteStatEstimatesFinanceData(
+    subject,
+    { with_gov: true }
+  );
+
+  const calculations = useMemo(() => {
+    if (loading) {
+      return null;
+    }
+    return calculate_estimates_in_perspective_from_finance_data(
+      subject,
+      finance_data
+    );
+  }, [loading, subject, finance_data]);
+
+  if (loading) {
+    return <LeafSpinner config_name="subroute" />;
+  }
+
+  if (!calculations) {
+    return null;
+  }
+
+  return (
+    <EstimatesInPerspectivePanel
+      {...props}
+      title={text_maker("estimates_perspective_title")}
+      calculations={calculations}
+    />
+  );
+};
 
 export const declare_estimates_in_perspective_panel = () =>
   declare_panel({
@@ -22,60 +97,8 @@ export const declare_estimates_in_perspective_panel = () =>
     subject_types: ["dept"],
     panel_config_func: () => ({
       get_title: () => text_maker("estimates_perspective_title"),
-      legacy_table_dependencies: ["orgVoteStatEstimates"],
       get_dataset_keys: () => ["tabled_estimates"],
-      calculate: ({ subject, tables }) => {
-        const { orgVoteStatEstimates } = tables;
-        const gov_q = orgVoteStatEstimates.q(Gov.instance);
-        const dept_q = orgVoteStatEstimates.q(subject);
-        const gov_tabled_est_in_year = gov_q.sum(est_in_year_col);
-        const dept_tabled_est_in_year = dept_q.sum(est_in_year_col);
-
-        if (!dept_tabled_est_in_year) {
-          return false;
-        }
-        return {
-          subject,
-          gov_tabled_est_in_year,
-          dept_tabled_est_in_year,
-        };
-      },
-
-      render({ title, subject, calculations, footnotes, sources, datasets }) {
-        const { gov_tabled_est_in_year, dept_tabled_est_in_year } =
-          calculations;
-
-        footnotes = _.concat(
-          create_footnote({
-            id: text_maker("auth_footnote"),
-            subject_type: subject.subject_type,
-            subject_id: subject.id,
-            text: text_maker("auth_footnote"),
-            topic_keys: ["AUTH"],
-          }),
-          footnotes
-        );
-        return (
-          <StdPanel
-            {...{ title, footnotes, sources, datasets }}
-            allowOverflow={true}
-          >
-            <Col isText size={!is_a11y_mode ? 5 : 12}>
-              <TM k="estimates_perspective_text" args={calculations} />
-            </Col>
-            {!is_a11y_mode && (
-              <Col isGraph size={7}>
-                <CircleProportionGraph
-                  height={250}
-                  child_value={dept_tabled_est_in_year}
-                  child_name={text_maker("dept_estimates", { subject })}
-                  parent_value={gov_tabled_est_in_year}
-                  parent_name={text_maker("gov_estimates")}
-                />
-              </Col>
-            )}
-          </StdPanel>
-        );
-      },
+      calculate: () => true,
+      render: (props) => <EstimatesInPerspectiveContainer {...props} />,
     }),
   });

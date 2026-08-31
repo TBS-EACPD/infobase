@@ -1,7 +1,6 @@
-import { sum } from "d3-array";
 import { scaleOrdinal } from "d3-scale";
 import _ from "lodash";
-import React from "react";
+import React, { useMemo } from "react";
 
 import {
   HeightClippedGraph,
@@ -15,12 +14,13 @@ import {
   Select,
   DisplayTable,
   GraphOverlay,
+  LeafSpinner,
   SelectAllControl,
 } from "src/components/index";
 
 import { businessConstants } from "src/models/businessConstants";
-import { get_footnotes_by_subject_and_topic } from "src/models/footnotes/footnotes";
-import { Program } from "src/models/subjects";
+import { calculate_detailed_program_spending_split_from_finance_data } from "src/models/finances/detailed_program_spending_split_calculations";
+import { useDetailedProgramSpendingSplitFinanceData } from "src/models/finances/useDetailedProgramSpendingSplitFinanceData";
 
 import { run_template } from "src/models/text";
 import { year_templates } from "src/models/years";
@@ -49,8 +49,6 @@ const { std_years } = year_templates;
 const { sos } = businessConstants;
 
 const { text_maker, TM } = create_text_maker_component(text);
-
-const footnote_topics = ["PROG", "SOBJ"];
 
 class HistoricalProgramBars extends React.Component {
   constructor(props) {
@@ -439,187 +437,109 @@ class DetailedProgramSplit extends React.Component {
   }
 }
 
+const DetailedProgramSpendingSplitContainer = (props) => {
+  const { subject, title, footnotes, sources, datasets } = props;
+  const { loading, finance_data } =
+    useDetailedProgramSpendingSplitFinanceData(subject);
+
+  const calculations = useMemo(() => {
+    if (loading) {
+      return null;
+    }
+    return calculate_detailed_program_spending_split_from_finance_data(
+      subject,
+      finance_data,
+      { text_maker }
+    );
+  }, [loading, subject, finance_data]);
+
+  if (loading) {
+    return <LeafSpinner config_name="subroute" />;
+  }
+
+  if (!calculations) {
+    return null;
+  }
+
+  const {
+    text_calculations,
+    flat_data,
+    higher_level_mapping,
+    top_3_so_nums,
+    processed_spending_data,
+    program_footnotes,
+  } = calculations;
+
+  const filter_to_specific_so = (so_num) => (test_so_num) =>
+    test_so_num === so_num ? sos[+so_num].text : null;
+
+  const arrangements = [
+    {
+      label: text_maker("all"),
+      id: text_maker("all"),
+      mapping: (so_num) => higher_level_mapping(so_num),
+    },
+  ].concat(
+    _.chain(flat_data)
+      .map("so_num")
+      .uniqBy()
+      .map((so_num) => ({
+        id: sos[so_num].text,
+        label: sos[so_num].text,
+        mapping: filter_to_specific_so(so_num),
+      }))
+      .sortBy("label")
+      .value()
+  );
+
+  return (
+    <InfographicPanel
+      allowOverflow={true}
+      {...{
+        title,
+        sources,
+        datasets,
+        footnotes: [...footnotes, ...program_footnotes],
+      }}
+    >
+      <div className="medium-panel-text">
+        <TM
+          k={"dept_historical_program_spending_text"}
+          args={text_calculations}
+        />
+      </div>
+      <div>
+        <div>
+          <HistoricalProgramBars
+            data={_.map(processed_spending_data, ({ label, data }, ix) => ({
+              label,
+              data,
+              id: `${ix}-${label}`,
+            }))}
+          />
+        </div>
+        <div>
+          <HeightClippedGraph clipHeight={300}>
+            <DetailedProgramSplit
+              flat_data={flat_data}
+              arrangements={arrangements}
+              top_3_so_nums={top_3_so_nums}
+            />
+          </HeightClippedGraph>
+        </div>
+      </div>
+    </InfographicPanel>
+  );
+};
+
 export const declare_detailed_program_spending_split_panel = () =>
   declare_panel({
     panel_key: "detailed_program_spending_split",
     subject_types: ["dept"],
     panel_config_func: () => ({
-      legacy_table_dependencies: ["programSobjs", "programSpending"],
       get_dataset_keys: () => ["program_standard_objects", "program_spending"],
       get_title: () => text_maker("detailed_program_spending_split_title"),
-      calculate: ({ subject, tables }) => {
-        const { programSobjs, programSpending } = tables;
-
-        const table_data = programSobjs.q(subject).data;
-
-        if (_.isEmpty(table_data)) {
-          return false;
-        }
-
-        const flat_data = _.map(table_data, (row) => ({
-          program: Program.lookup_by_dept_id_and_activity_code(
-            row.dept,
-            row.activity_code
-          ),
-          so_num: row.so_num,
-          so_label: row.so,
-          value: row["{{pa_last_year}}"],
-        }));
-
-        const top_3_so_nums = _.chain(flat_data)
-          .compact()
-          .groupBy("so_num")
-          .toPairs()
-          .map(([so_num, group]) => ({
-            so_num: +so_num,
-            sum: sum(group, _.property("value")),
-          }))
-          .sortBy("sum")
-          .reverse()
-          .map("so_num")
-          .take(3)
-          .value();
-
-        //maps so_nums to new so_labels
-        const higher_level_mapping = (so_num) => {
-          if (+so_num > 19) {
-            return text_maker("revenues");
-          } else if (_.includes(top_3_so_nums, +so_num)) {
-            return sos[+so_num].text;
-          } else {
-            return text_maker("other_sos");
-          }
-        };
-
-        const exp_years = _.map(std_years, (yr) => yr + "exp");
-        const processed_spending_data = _.chain(programSpending.q(subject).data)
-          .map((row) => ({
-            label: row.prgm,
-            data: exp_years.map((exp_year) => row[exp_year] || 0),
-            active: false,
-          }))
-          .filter(({ data }) => _.some(data))
-          .sortBy((x) => -sum(x.data))
-          .value();
-
-        const in_year_prog_count = _.filter(
-          processed_spending_data,
-          ({ data }) => _.last(data)
-        ).length;
-
-        const in_year_top_2_programs = _.chain(processed_spending_data)
-          .sortBy(({ data }) => _.last(data))
-          .takeRight(2)
-          .reverse()
-          .value();
-
-        const text_calculations = {
-          subject,
-          in_year_prog_count,
-          ..._.chain(in_year_top_2_programs)
-            .flatMap(({ label, data }, ix) => [
-              [`top_${ix + 1}_prgm_name`, label],
-              [`top_${ix + 1}_prgm_amt`, _.last(data)],
-            ])
-            .fromPairs()
-            .value(),
-        };
-
-        const program_footnotes = _.chain(flat_data)
-          .map(({ program }) => program)
-          .uniqBy((program) => program.activity_code)
-          .flatMap((program) =>
-            get_footnotes_by_subject_and_topic(program, [
-              ...footnote_topics,
-              "EXP",
-            ])
-          )
-          .filter()
-          .value();
-
-        return {
-          text_calculations,
-          top_3_so_nums,
-          flat_data,
-          higher_level_mapping,
-          processed_spending_data,
-          program_footnotes,
-        };
-      },
-
-      render({ title, calculations, footnotes, sources, datasets }) {
-        const {
-          text_calculations,
-          flat_data,
-          higher_level_mapping,
-          top_3_so_nums,
-          processed_spending_data,
-          program_footnotes,
-        } = calculations;
-
-        const filter_to_specific_so = (so_num) => (test_so_num) =>
-          test_so_num === so_num ? sos[+so_num].text : null;
-
-        const arrangements = [
-          {
-            label: text_maker("all"),
-            id: text_maker("all"),
-            mapping: (so_num) => higher_level_mapping(so_num),
-          },
-        ].concat(
-          _.chain(flat_data)
-            .map("so_num")
-            .uniqBy()
-            .map((so_num) => ({
-              id: sos[so_num].text,
-              label: sos[so_num].text,
-              mapping: filter_to_specific_so(so_num),
-            }))
-            .sortBy("label")
-            .value()
-        );
-
-        return (
-          <InfographicPanel
-            allowOverflow={true}
-            {...{
-              title,
-              sources,
-              datasets,
-              footnotes: [...footnotes, ...program_footnotes],
-            }}
-          >
-            <div className="medium-panel-text">
-              <TM
-                k={"dept_historical_program_spending_text"}
-                args={text_calculations}
-              />
-            </div>
-            <div>
-              <div>
-                <HistoricalProgramBars
-                  data={_.map(
-                    processed_spending_data,
-                    ({ label, data }, ix) => ({
-                      label,
-                      data,
-                      id: `${ix}-${label}`, //need unique id, program names don't always work!
-                    })
-                  )}
-                />
-              </div>
-              <div>
-                <HeightClippedGraph clipHeight={300}>
-                  <DetailedProgramSplit
-                    flat_data={flat_data}
-                    arrangements={arrangements}
-                    top_3_so_nums={top_3_so_nums}
-                  />
-                </HeightClippedGraph>
-              </div>
-            </div>
-          </InfographicPanel>
-        );
-      },
+      calculate: () => true,
+      render: (props) => <DetailedProgramSpendingSplitContainer {...props} />,
     }),
   });

@@ -1,0 +1,8 @@
+query DeptHasFinanceData($lang: String!, $org_id: String!) {
+  root(lang: $lang) {
+    org(org_id: $org_id) {
+      id
+      has_finance_data
+    }
+  }
+}

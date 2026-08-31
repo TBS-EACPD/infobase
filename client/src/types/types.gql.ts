@@ -148,11 +148,14 @@ export type CovidSummaryCounts = {
 export type Crso = SubjectI & {
   __typename?: 'Crso';
   description?: Maybe<Scalars['String']>;
+  has_finance_data?: Maybe<Scalars['Boolean']>;
   has_results?: Maybe<Scalars['Boolean']>;
   id?: Maybe<Scalars['String']>;
   is_active?: Maybe<Scalars['Boolean']>;
   name?: Maybe<Scalars['String']>;
   org?: Maybe<Org>;
+  program_fte?: Maybe<Array<Maybe<ProgramFte>>>;
+  program_spending?: Maybe<Array<Maybe<ProgramSpending>>>;
   programs?: Maybe<Array<Maybe<Program>>>;
   results?: Maybe<Array<Maybe<Result>>>;
   subject_type?: Maybe<Scalars['String']>;
@@ -176,11 +179,18 @@ export type Gov = {
   covid_summary?: Maybe<Array<Maybe<CovidGovSummary>>>;
   dr_target_counts_granular?: Maybe<Array<Maybe<AllDocResultCount>>>;
   dr_target_counts_summary?: Maybe<Array<Maybe<AllDocResultCount>>>;
+  has_finance_data?: Maybe<Scalars['Boolean']>;
   id?: Maybe<Scalars['String']>;
   name?: Maybe<Scalars['String']>;
+  org_sobjs?: Maybe<Array<Maybe<OrgSobjs>>>;
+  org_transfer_payments?: Maybe<Array<Maybe<OrgTransferPayments>>>;
+  org_vote_stat_estimates?: Maybe<Array<Maybe<OrgVoteStatEstimates>>>;
+  org_vote_stat_pa?: Maybe<Array<Maybe<OrgVoteStatPa>>>;
   people_data?: Maybe<GovPeopleSummary>;
   pr_target_counts_granular?: Maybe<Array<Maybe<AllDocResultCount>>>;
   pr_target_counts_summary?: Maybe<Array<Maybe<AllDocResultCount>>>;
+  program_fte?: Maybe<Array<Maybe<ProgramFte>>>;
+  program_spending?: Maybe<Array<Maybe<ProgramSpending>>>;
   service_summary?: Maybe<ServiceSummary>;
   subject_type?: Maybe<Scalars['String']>;
   target_counts?: Maybe<ResultCount>;
@@ -289,6 +299,7 @@ export type Org = SubjectI & {
   faa_schedule_hr_status?: Maybe<Scalars['String']>;
   faa_schedule_institutional?: Maybe<Scalars['String']>;
   federal_ownership?: Maybe<Scalars['String']>;
+  has_finance_data?: Maybe<Scalars['Boolean']>;
   has_people_data?: Maybe<Scalars['Boolean']>;
   has_results?: Maybe<Scalars['Boolean']>;
   has_services?: Maybe<Scalars['Boolean']>;
@@ -303,11 +314,15 @@ export type Org = SubjectI & {
   notes?: Maybe<Scalars['String']>;
   old_applied_title?: Maybe<Scalars['String']>;
   org_id?: Maybe<Scalars['String']>;
+  org_sobjs?: Maybe<Array<Maybe<OrgSobjs>>>;
   org_transfer_payments?: Maybe<Array<Maybe<OrgTransferPayments>>>;
   org_vote_stat_estimates?: Maybe<Array<Maybe<OrgVoteStatEstimates>>>;
   org_vote_stat_pa?: Maybe<Array<Maybe<OrgVoteStatPa>>>;
   pas_code?: Maybe<Scalars['String']>;
   people_data?: Maybe<OrgPeopleData>;
+  program_fte?: Maybe<Array<Maybe<ProgramFte>>>;
+  program_sobjs?: Maybe<Array<Maybe<ProgramSobjs>>>;
+  program_spending?: Maybe<Array<Maybe<ProgramSpending>>>;
   programs?: Maybe<Array<Maybe<Program>>>;
   service_summary?: Maybe<ServiceSummary>;
   services?: Maybe<Array<Maybe<Service>>>;
@@ -352,8 +367,19 @@ export type OrgPeopleData = {
   type?: Maybe<Array<Maybe<OrgHeadcountData>>>;
 };
 
+export type OrgSobjs = {
+  __typename?: 'OrgSobjs';
+  pa_last_year_1?: Maybe<Scalars['Float']>;
+  pa_last_year_2?: Maybe<Scalars['Float']>;
+  pa_last_year_3?: Maybe<Scalars['Float']>;
+  pa_last_year_4?: Maybe<Scalars['Float']>;
+  pa_last_year_5?: Maybe<Scalars['Float']>;
+  so_num?: Maybe<Scalars['Float']>;
+};
+
 export type OrgTransferPayments = {
   __typename?: 'OrgTransferPayments';
+  dept_code?: Maybe<Scalars['String']>;
   name?: Maybe<Scalars['String']>;
   pa_last_year_1_auth?: Maybe<Scalars['Float']>;
   pa_last_year_1_exp?: Maybe<Scalars['Float']>;
@@ -370,6 +396,7 @@ export type OrgTransferPayments = {
 
 export type OrgVoteStatEstimates = {
   __typename?: 'OrgVoteStatEstimates';
+  dept_code?: Maybe<Scalars['String']>;
   doc?: Maybe<Scalars['String']>;
   est_in_year?: Maybe<Scalars['Float']>;
   est_last_year?: Maybe<Scalars['Float']>;
@@ -383,6 +410,7 @@ export type OrgVoteStatEstimates = {
 
 export type OrgVoteStatPa = {
   __typename?: 'OrgVoteStatPa';
+  dept_code?: Maybe<Scalars['String']>;
   name?: Maybe<Scalars['String']>;
   pa_last_year_2_auth?: Maybe<Scalars['Float']>;
   pa_last_year_2_exp?: Maybe<Scalars['Float']>;
@@ -422,6 +450,7 @@ export type Program = SubjectI & {
   crso?: Maybe<Crso>;
   description?: Maybe<Scalars['String']>;
   drs?: Maybe<Array<Maybe<Result>>>;
+  has_finance_data?: Maybe<Scalars['Boolean']>;
   has_results?: Maybe<Scalars['Boolean']>;
   has_services?: Maybe<Scalars['Boolean']>;
   id?: Maybe<Scalars['String']>;
@@ -463,6 +492,7 @@ export type ProgramFte = {
   planning_year_1?: Maybe<Scalars['Float']>;
   planning_year_2?: Maybe<Scalars['Float']>;
   planning_year_3?: Maybe<Scalars['Float']>;
+  program_id?: Maybe<Scalars['String']>;
 };
 
 export type ProgramSobjs = {
@@ -470,6 +500,7 @@ export type ProgramSobjs = {
   pa_last_year?: Maybe<Scalars['Float']>;
   pa_last_year_2?: Maybe<Scalars['Float']>;
   pa_last_year_3?: Maybe<Scalars['Float']>;
+  program_id?: Maybe<Scalars['String']>;
   so_num?: Maybe<Scalars['Float']>;
 };
 
@@ -484,6 +515,7 @@ export type ProgramSpending = {
   planning_year_1?: Maybe<Scalars['Float']>;
   planning_year_2?: Maybe<Scalars['Float']>;
   planning_year_3?: Maybe<Scalars['Float']>;
+  program_id?: Maybe<Scalars['String']>;
 };
 
 export type ProgramVoteStat = {

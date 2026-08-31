@@ -1,5 +1,5 @@
 import _ from "lodash";
-import React, { Fragment } from "react";
+import React, { Fragment, useMemo } from "react";
 
 import { InfographicPanel } from "src/panels/panel_declarations/InfographicPanel";
 import { declare_panel } from "src/panels/PanelRegistry";
@@ -7,10 +7,17 @@ import { declare_panel } from "src/panels/PanelRegistry";
 import {
   DisplayTable,
   GraphOverlay,
+  LeafSpinner,
   SelectAllControl,
 } from "src/components/index";
 
 import { businessConstants } from "src/models/businessConstants";
+import {
+  calculate_dept_historical_g_and_c_from_finance_data,
+  calculate_gov_historical_g_and_c_from_finance_data,
+} from "src/models/finances/transfer_payments_calculations";
+import { useTransferPaymentsFinanceData } from "src/models/finances/useTransferPaymentsFinanceData";
+
 import { run_template } from "src/models/text";
 import { year_templates } from "src/models/years";
 
@@ -352,9 +359,93 @@ class DetailedHistTPItems extends React.Component {
   }
 }
 
+const GovHistoricalGAndCContainer = (props) => {
+  const { subject, title, footnotes, sources, datasets } = props;
+  const { loading, finance_data } = useTransferPaymentsFinanceData(subject);
+
+  const calculations = useMemo(() => {
+    if (loading) {
+      return null;
+    }
+    return calculate_gov_historical_g_and_c_from_finance_data(finance_data);
+  }, [loading, finance_data]);
+
+  if (loading) {
+    return <LeafSpinner config_name="subroute" />;
+  }
+
+  if (!calculations) {
+    return null;
+  }
+
+  const {
+    payments: series,
+    five_year_avg,
+    largest_avg,
+    largest_type,
+  } = calculations;
+
+  return (
+    <InfographicPanel
+      allowOverflow={true}
+      {...{ title, footnotes, sources, datasets }}
+    >
+      <HistTPTypes
+        text={
+          <TM
+            k="gov_historical_g_and_c_text"
+            args={{ five_year_avg, largest_avg, largest_type }}
+          />
+        }
+        text_split={4}
+        series={series}
+      />
+    </InfographicPanel>
+  );
+};
+
+const DeptHistoricalGAndCContainer = (props) => {
+  const { subject, title, footnotes, sources, datasets } = props;
+  const { loading, finance_data } = useTransferPaymentsFinanceData(subject);
+
+  const calculations = useMemo(() => {
+    if (loading) {
+      return null;
+    }
+    return calculate_dept_historical_g_and_c_from_finance_data(
+      subject,
+      finance_data
+    );
+  }, [loading, subject, finance_data]);
+
+  if (loading) {
+    return <LeafSpinner config_name="subroute" />;
+  }
+
+  if (!calculations) {
+    return null;
+  }
+
+  const { rows, rolled_up, text_calculations } = calculations;
+
+  return (
+    <InfographicPanel
+      allowOverflow={true}
+      {...{ title, sources, datasets, footnotes }}
+    >
+      <HistTPTypes
+        text={<TM k="dept_historical_g_and_c_text" args={text_calculations} />}
+        text_split={6}
+        series={rolled_up}
+      />
+      <div className="panel-separator" />
+      <DetailedHistTPItems rows={rows} />
+    </InfographicPanel>
+  );
+};
+
 const common_panel_config = {
   get_title: () => text_maker("historical_g_and_c_title"),
-  legacy_table_dependencies: ["orgTransferPayments"],
   get_dataset_keys: () => ["transfer_payments"],
   get_topic_keys: ({ derived_topic_keys }) => {
     return [
@@ -364,6 +455,7 @@ const common_panel_config = {
       "ACTUAL_SOBJ10",
     ];
   },
+  calculate: () => true,
 };
 
 export const declare_historical_g_and_c_panel = () =>
@@ -375,150 +467,13 @@ export const declare_historical_g_and_c_panel = () =>
         case "gov":
           return {
             ...common_panel_config,
-
-            calculate: ({ tables }) => {
-              const { orgTransferPayments } = tables;
-
-              const payments = orgTransferPayments.sum_cols_by_grouped_data(
-                exp_years,
-                "type_id"
-              );
-
-              const five_year_avg =
-                (_.sum(payments.c) + _.sum(payments.g) + _.sum(payments.o)) /
-                std_years.length;
-              const avgs = _.map(payments, (payment, type) => ({
-                type,
-                value: _.sum(payment) / payment.length,
-              }));
-              const largest_avg_payment = _.maxBy(avgs, "value");
-
-              const largest_type =
-                transfer_payments[largest_avg_payment.type].text;
-
-              return {
-                payments,
-                five_year_avg,
-                largest_avg: largest_avg_payment.value,
-                largest_type,
-              };
-            },
-            render({ title, calculations, footnotes, sources, datasets }) {
-              const {
-                payments: series,
-                five_year_avg,
-                largest_avg,
-                largest_type,
-              } = calculations;
-              return (
-                <InfographicPanel
-                  allowOverflow={true}
-                  {...{ title, footnotes, sources, datasets }}
-                >
-                  <HistTPTypes
-                    text={
-                      <TM
-                        k="gov_historical_g_and_c_text"
-                        args={{ five_year_avg, largest_avg, largest_type }}
-                      />
-                    }
-                    text_split={4}
-                    series={series}
-                  />
-                </InfographicPanel>
-              );
-            },
+            render: (props) => <GovHistoricalGAndCContainer {...props} />,
           };
         case "dept":
           return {
             ...common_panel_config,
             key: "historical_g_and_c",
-            calculate: ({ subject, tables }) => {
-              const { orgTransferPayments } = tables;
-
-              const rolled_up_transfer_payments =
-                orgTransferPayments.sum_cols_by_grouped_data(
-                  exp_years,
-                  "type_id",
-                  subject
-                );
-
-              const five_year_avg =
-                (_.sum(rolled_up_transfer_payments.c) +
-                  _.sum(rolled_up_transfer_payments.g) +
-                  _.sum(rolled_up_transfer_payments.o)) /
-                std_years.length;
-
-              const avgs = _.map(
-                rolled_up_transfer_payments,
-                (payments, type) => ({
-                  type,
-                  value: _.sum(payments) / payments.length,
-                })
-              );
-              const max_payment = _.maxBy(avgs, "value");
-
-              const max_type = transfer_payments[max_payment.type].text;
-              const has_transfer_payments = _.chain(rolled_up_transfer_payments)
-                .values()
-                .flatten()
-                .some((value) => value !== 0)
-                .value();
-
-              const rows = _.chain(orgTransferPayments.q(subject).data)
-                .sortBy("{{pa_last_year}}exp")
-                .reverse()
-                .value();
-
-              const tp_average_payments = _.map(
-                rows,
-                (row) =>
-                  _.reduce(exp_years, (sum, year) => sum + row[year], 0) /
-                  exp_years.length
-              );
-
-              const max_tp_avg = _.max(tp_average_payments);
-              const max_tp =
-                rows[_.indexOf(tp_average_payments, max_tp_avg)].tp;
-
-              const text_calculations = {
-                dept: subject,
-                five_year_avg,
-                max_avg: max_payment.value,
-                max_type,
-                max_tp_avg,
-                max_tp,
-              };
-
-              return (
-                has_transfer_payments && {
-                  rolled_up: rolled_up_transfer_payments,
-                  rows: rows,
-                  text_calculations,
-                }
-              );
-            },
-            render({ title, calculations, footnotes, sources, datasets }) {
-              const { rows, rolled_up, text_calculations } = calculations;
-              const text_content = (
-                <TM k="dept_historical_g_and_c_text" args={text_calculations} />
-              );
-
-              return (
-                <InfographicPanel
-                  allowOverflow={true}
-                  {...{ title, sources, datasets, footnotes }}
-                >
-                  <HistTPTypes
-                    text={text_content}
-                    text_split={6}
-                    series={rolled_up}
-                  />
-                  <div className="panel-separator" />
-                  <DetailedHistTPItems rows={rows} />
-                </InfographicPanel>
-              );
-            },
+            render: (props) => <DeptHistoricalGAndCContainer {...props} />,
           };
       }
     },

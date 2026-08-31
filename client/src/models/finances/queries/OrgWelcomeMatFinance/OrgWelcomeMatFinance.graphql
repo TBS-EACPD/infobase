@@ -1,0 +1,29 @@
+#import "../_fragments.graphql"
+
+query OrgWelcomeMatFinance($lang: String!, $org_id: String!) {
+  root(lang: $lang) {
+    org(org_id: $org_id) {
+      program_spending {
+        ...ProgramSpendingFields
+      }
+      program_fte {
+        ...ProgramFteFields
+      }
+      org_vote_stat_pa {
+        ...OrgVoteStatPaFields
+      }
+      org_vote_stat_estimates {
+        ...OrgVoteStatEstimatesFields
+      }
+      org_sobjs {
+        ...OrgSobjsFields
+      }
+      program_sobjs {
+        ...ProgramSobjsFields
+      }
+      org_transfer_payments {
+        ...OrgTransferPaymentsFields
+      }
+    }
+  }
+}

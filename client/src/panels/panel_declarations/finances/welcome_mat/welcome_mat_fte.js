@@ -3,6 +3,7 @@ import _ from "lodash";
 import React, { Fragment } from "react";
 import MediaQuery from "react-responsive";
 
+import { sum_program_fte_col } from "src/models/finances/finance_utils";
 import { run_template, trivial_text_maker } from "src/models/text";
 import { year_templates, actual_to_planned_gap_year } from "src/models/years";
 
@@ -11,11 +12,10 @@ import { is_a11y_mode } from "src/core/injected_build_constants";
 
 import { WrappedNivoLine } from "src/charts/wrapped_nivo/index";
 import { tertiaryColor } from "src/style_constants/index";
-import { Table } from "src/tables/TableClass";
 
 const { std_years, planning_years } = year_templates;
 
-export const format_and_get_fte = (type, subject) => {
+export const format_and_get_fte = (type, subject, finance_data) => {
   const colors = scaleOrdinal().range(newIBCategoryColors);
 
   const gap_year =
@@ -28,15 +28,17 @@ export const format_and_get_fte = (type, subject) => {
   const historical_ticks = _.map(std_years, run_template);
   const planned_ticks = _.map(planning_years, run_template);
 
-  const programFtes = Table.store.lookup("programFtes");
-  const q = programFtes.q(subject);
+  const fte_rows = finance_data.program_fte;
 
   const historical_ftes = _.chain(std_years)
-    .map((year, i) => [historical_ticks[i], q.sum(year, i)])
+    .map((year, i) => [
+      historical_ticks[i],
+      sum_program_fte_col(fte_rows, year),
+    ])
     .fromPairs()
     .value();
   const planned_ftes = _.chain(planning_years)
-    .map((year, i) => [planned_ticks[i], q.sum(year, i)])
+    .map((year, i) => [planned_ticks[i], sum_program_fte_col(fte_rows, year)])
     .fromPairs()
     .value();
 

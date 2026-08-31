@@ -1,5 +1,676 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`finance data gov has_finance_data snapshot 1`] = `
+Object {
+  "data": Object {
+    "root": Object {
+      "gov": Object {
+        "has_finance_data": true,
+        "id": "gov",
+      },
+    },
+  },
+}
+`;
+
+exports[`finance data gov org_vote_stat_pa and org_vote_stat_estimates snapshot 1`] = `
+Object {
+  "data": Object {
+    "root": Object {
+      "gov": Object {
+        "id": "gov",
+        "org_sobjs": Array [
+          Object {
+            "so_num": 1,
+          },
+          Object {
+            "so_num": 2,
+          },
+          Object {
+            "so_num": 3,
+          },
+          Object {
+            "so_num": 4,
+          },
+          Object {
+            "so_num": 5,
+          },
+          Object {
+            "so_num": 6,
+          },
+          Object {
+            "so_num": 7,
+          },
+          Object {
+            "so_num": 9,
+          },
+          Object {
+            "so_num": 10,
+          },
+          Object {
+            "so_num": 12,
+          },
+          Object {
+            "so_num": 1,
+          },
+          Object {
+            "so_num": 2,
+          },
+          Object {
+            "so_num": 3,
+          },
+          Object {
+            "so_num": 4,
+          },
+          Object {
+            "so_num": 5,
+          },
+          Object {
+            "so_num": 6,
+          },
+          Object {
+            "so_num": 7,
+          },
+          Object {
+            "so_num": 9,
+          },
+          Object {
+            "so_num": 10,
+          },
+        ],
+        "org_vote_stat_estimates": Array [
+          Object {
+            "dept_code": "CPCC",
+            "vote_num": "1",
+          },
+          Object {
+            "dept_code": "CPCC",
+            "vote_num": "1",
+          },
+          Object {
+            "dept_code": "CPCC",
+            "vote_num": "1",
+          },
+          Object {
+            "dept_code": "CPCC",
+            "vote_num": "1",
+          },
+          Object {
+            "dept_code": "CPCC",
+            "vote_num": "1",
+          },
+          Object {
+            "dept_code": "CPCC",
+            "vote_num": "7",
+          },
+          Object {
+            "dept_code": "CPCC",
+            "vote_num": "7",
+          },
+          Object {
+            "dept_code": "CPCC",
+            "vote_num": "9",
+          },
+          Object {
+            "dept_code": "CPCC",
+            "vote_num": "9",
+          },
+          Object {
+            "dept_code": "CPCC",
+            "vote_num": "S",
+          },
+          Object {
+            "dept_code": "CPCC",
+            "vote_num": "S",
+          },
+          Object {
+            "dept_code": "ND",
+            "vote_num": "1",
+          },
+          Object {
+            "dept_code": "ND",
+            "vote_num": "1",
+          },
+          Object {
+            "dept_code": "ND",
+            "vote_num": "1",
+          },
+          Object {
+            "dept_code": "ND",
+            "vote_num": "1",
+          },
+          Object {
+            "dept_code": "ND",
+            "vote_num": "1",
+          },
+          Object {
+            "dept_code": "ND",
+            "vote_num": "10",
+          },
+          Object {
+            "dept_code": "ND",
+            "vote_num": "10",
+          },
+          Object {
+            "dept_code": "ND",
+            "vote_num": "10",
+          },
+          Object {
+            "dept_code": "ND",
+            "vote_num": "10",
+          },
+          Object {
+            "dept_code": "ND",
+            "vote_num": "10",
+          },
+          Object {
+            "dept_code": "ND",
+            "vote_num": "15",
+          },
+          Object {
+            "dept_code": "ND",
+            "vote_num": "15",
+          },
+          Object {
+            "dept_code": "ND",
+            "vote_num": "20",
+          },
+          Object {
+            "dept_code": "ND",
+            "vote_num": "20",
+          },
+          Object {
+            "dept_code": "ND",
+            "vote_num": "25",
+          },
+          Object {
+            "dept_code": "ND",
+            "vote_num": "30",
+          },
+          Object {
+            "dept_code": "ND",
+            "vote_num": "35",
+          },
+          Object {
+            "dept_code": "ND",
+            "vote_num": "5",
+          },
+          Object {
+            "dept_code": "ND",
+            "vote_num": "5",
+          },
+          Object {
+            "dept_code": "ND",
+            "vote_num": "5",
+          },
+          Object {
+            "dept_code": "ND",
+            "vote_num": "5",
+          },
+          Object {
+            "dept_code": "ND",
+            "vote_num": "5",
+          },
+          Object {
+            "dept_code": "ND",
+            "vote_num": "S",
+          },
+          Object {
+            "dept_code": "ND",
+            "vote_num": "S",
+          },
+          Object {
+            "dept_code": "ND",
+            "vote_num": "S",
+          },
+          Object {
+            "dept_code": "ND",
+            "vote_num": "S",
+          },
+          Object {
+            "dept_code": "ND",
+            "vote_num": "S",
+          },
+          Object {
+            "dept_code": "ND",
+            "vote_num": "S",
+          },
+          Object {
+            "dept_code": "ND",
+            "vote_num": "S",
+          },
+          Object {
+            "dept_code": "ND",
+            "vote_num": "S",
+          },
+          Object {
+            "dept_code": "ND",
+            "vote_num": "S",
+          },
+          Object {
+            "dept_code": "ND",
+            "vote_num": "S",
+          },
+          Object {
+            "dept_code": "ND",
+            "vote_num": "S",
+          },
+          Object {
+            "dept_code": "ND",
+            "vote_num": "S",
+          },
+          Object {
+            "dept_code": "ND",
+            "vote_num": "S",
+          },
+          Object {
+            "dept_code": "ND",
+            "vote_num": "S",
+          },
+          Object {
+            "dept_code": "ND",
+            "vote_num": "S",
+          },
+          Object {
+            "dept_code": "ND",
+            "vote_num": "S",
+          },
+          Object {
+            "dept_code": "ND",
+            "vote_num": "S",
+          },
+          Object {
+            "dept_code": "ND",
+            "vote_num": "S",
+          },
+          Object {
+            "dept_code": "ND",
+            "vote_num": "S",
+          },
+          Object {
+            "dept_code": "ND",
+            "vote_num": "S",
+          },
+          Object {
+            "dept_code": "TBC",
+            "vote_num": "1",
+          },
+          Object {
+            "dept_code": "TBC",
+            "vote_num": "1",
+          },
+          Object {
+            "dept_code": "TBC",
+            "vote_num": "1",
+          },
+          Object {
+            "dept_code": "TBC",
+            "vote_num": "1",
+          },
+          Object {
+            "dept_code": "TBC",
+            "vote_num": "1",
+          },
+          Object {
+            "dept_code": "TBC",
+            "vote_num": "10",
+          },
+          Object {
+            "dept_code": "TBC",
+            "vote_num": "10",
+          },
+          Object {
+            "dept_code": "TBC",
+            "vote_num": "10",
+          },
+          Object {
+            "dept_code": "TBC",
+            "vote_num": "10",
+          },
+          Object {
+            "dept_code": "TBC",
+            "vote_num": "15",
+          },
+          Object {
+            "dept_code": "TBC",
+            "vote_num": "15",
+          },
+          Object {
+            "dept_code": "TBC",
+            "vote_num": "15",
+          },
+          Object {
+            "dept_code": "TBC",
+            "vote_num": "15",
+          },
+          Object {
+            "dept_code": "TBC",
+            "vote_num": "20",
+          },
+          Object {
+            "dept_code": "TBC",
+            "vote_num": "20",
+          },
+          Object {
+            "dept_code": "TBC",
+            "vote_num": "20",
+          },
+          Object {
+            "dept_code": "TBC",
+            "vote_num": "20",
+          },
+          Object {
+            "dept_code": "TBC",
+            "vote_num": "25",
+          },
+          Object {
+            "dept_code": "TBC",
+            "vote_num": "25",
+          },
+          Object {
+            "dept_code": "TBC",
+            "vote_num": "30",
+          },
+          Object {
+            "dept_code": "TBC",
+            "vote_num": "30",
+          },
+          Object {
+            "dept_code": "TBC",
+            "vote_num": "30",
+          },
+          Object {
+            "dept_code": "TBC",
+            "vote_num": "30",
+          },
+          Object {
+            "dept_code": "TBC",
+            "vote_num": "30",
+          },
+          Object {
+            "dept_code": "TBC",
+            "vote_num": "35",
+          },
+          Object {
+            "dept_code": "TBC",
+            "vote_num": "35",
+          },
+          Object {
+            "dept_code": "TBC",
+            "vote_num": "40",
+          },
+          Object {
+            "dept_code": "TBC",
+            "vote_num": "45",
+          },
+          Object {
+            "dept_code": "TBC",
+            "vote_num": "5",
+          },
+          Object {
+            "dept_code": "TBC",
+            "vote_num": "5",
+          },
+          Object {
+            "dept_code": "TBC",
+            "vote_num": "5",
+          },
+          Object {
+            "dept_code": "TBC",
+            "vote_num": "50",
+          },
+          Object {
+            "dept_code": "TBC",
+            "vote_num": "55",
+          },
+          Object {
+            "dept_code": "TBC",
+            "vote_num": "S",
+          },
+          Object {
+            "dept_code": "TBC",
+            "vote_num": "S",
+          },
+          Object {
+            "dept_code": "TBC",
+            "vote_num": "S",
+          },
+          Object {
+            "dept_code": "TBC",
+            "vote_num": "S",
+          },
+          Object {
+            "dept_code": "TBC",
+            "vote_num": "S",
+          },
+          Object {
+            "dept_code": "TBC",
+            "vote_num": "S",
+          },
+          Object {
+            "dept_code": "TBC",
+            "vote_num": "S",
+          },
+          Object {
+            "dept_code": "TBC",
+            "vote_num": "S",
+          },
+          Object {
+            "dept_code": "TBC",
+            "vote_num": "S",
+          },
+          Object {
+            "dept_code": "TBC",
+            "vote_num": "S",
+          },
+          Object {
+            "dept_code": "TBC",
+            "vote_num": "S",
+          },
+          Object {
+            "dept_code": "TBC",
+            "vote_num": "S",
+          },
+          Object {
+            "dept_code": "TBC",
+            "vote_num": "S",
+          },
+        ],
+        "org_vote_stat_pa": Array [
+          Object {
+            "dept_code": "CPCC",
+            "vote_num": "1",
+          },
+          Object {
+            "dept_code": "CPCC",
+            "vote_num": "3",
+          },
+          Object {
+            "dept_code": "CPCC",
+            "vote_num": "7",
+          },
+          Object {
+            "dept_code": "CPCC",
+            "vote_num": "9",
+          },
+          Object {
+            "dept_code": "CPCC",
+            "vote_num": "S",
+          },
+          Object {
+            "dept_code": "ND",
+            "vote_num": "1",
+          },
+          Object {
+            "dept_code": "ND",
+            "vote_num": "5",
+          },
+          Object {
+            "dept_code": "ND",
+            "vote_num": "10",
+          },
+          Object {
+            "dept_code": "ND",
+            "vote_num": "15",
+          },
+          Object {
+            "dept_code": "ND",
+            "vote_num": "15",
+          },
+          Object {
+            "dept_code": "ND",
+            "vote_num": "20",
+          },
+          Object {
+            "dept_code": "ND",
+            "vote_num": "20",
+          },
+          Object {
+            "dept_code": "ND",
+            "vote_num": "25",
+          },
+          Object {
+            "dept_code": "ND",
+            "vote_num": "30",
+          },
+          Object {
+            "dept_code": "ND",
+            "vote_num": "35",
+          },
+          Object {
+            "dept_code": "ND",
+            "vote_num": "S",
+          },
+          Object {
+            "dept_code": "ND",
+            "vote_num": "S",
+          },
+          Object {
+            "dept_code": "ND",
+            "vote_num": "S",
+          },
+          Object {
+            "dept_code": "ND",
+            "vote_num": "S",
+          },
+          Object {
+            "dept_code": "ND",
+            "vote_num": "S",
+          },
+          Object {
+            "dept_code": "ND",
+            "vote_num": "S",
+          },
+          Object {
+            "dept_code": "ND",
+            "vote_num": "S",
+          },
+          Object {
+            "dept_code": "ND",
+            "vote_num": "S",
+          },
+          Object {
+            "dept_code": "ND",
+            "vote_num": "S",
+          },
+          Object {
+            "dept_code": "TBC",
+            "vote_num": "1",
+          },
+          Object {
+            "dept_code": "TBC",
+            "vote_num": "5",
+          },
+          Object {
+            "dept_code": "TBC",
+            "vote_num": "10",
+          },
+          Object {
+            "dept_code": "TBC",
+            "vote_num": "15",
+          },
+          Object {
+            "dept_code": "TBC",
+            "vote_num": "20",
+          },
+          Object {
+            "dept_code": "TBC",
+            "vote_num": "25",
+          },
+          Object {
+            "dept_code": "TBC",
+            "vote_num": "30",
+          },
+          Object {
+            "dept_code": "TBC",
+            "vote_num": "33",
+          },
+          Object {
+            "dept_code": "TBC",
+            "vote_num": "35",
+          },
+          Object {
+            "dept_code": "TBC",
+            "vote_num": "40",
+          },
+          Object {
+            "dept_code": "TBC",
+            "vote_num": "45",
+          },
+          Object {
+            "dept_code": "TBC",
+            "vote_num": "50",
+          },
+          Object {
+            "dept_code": "TBC",
+            "vote_num": "55",
+          },
+          Object {
+            "dept_code": "TBC",
+            "vote_num": "S",
+          },
+          Object {
+            "dept_code": "TBC",
+            "vote_num": "S",
+          },
+          Object {
+            "dept_code": "TBC",
+            "vote_num": "S",
+          },
+          Object {
+            "dept_code": "TBC",
+            "vote_num": "S",
+          },
+          Object {
+            "dept_code": "TBC",
+            "vote_num": "S",
+          },
+          Object {
+            "dept_code": "TBC",
+            "vote_num": "S",
+          },
+        ],
+      },
+    },
+  },
+}
+`;
+
+exports[`finance data org has_finance_data snapshot 1`] = `
+Object {
+  "data": Object {
+    "root": Object {
+      "org_with_finance": Object {
+        "dept_code": "CPCC",
+        "has_finance_data": true,
+        "id": "552",
+      },
+      "org_without_finance": null,
+    },
+  },
+}
+`;
+
 exports[`finance data org transfer payments snapshot 1`] = `
 Object {
   "data": Object {
@@ -332,8 +1003,26 @@ Object {
             "planning_year_1": null,
             "planning_year_2": null,
             "planning_year_3": null,
+            "program_id": "ND-ISC00",
           },
         ],
+      },
+    },
+  },
+}
+`;
+
+exports[`finance data program has_finance_data snapshot 1`] = `
+Object {
+  "data": Object {
+    "root": Object {
+      "program_with_finance": Object {
+        "has_finance_data": true,
+        "id": "CPCC-ISC00",
+      },
+      "program_without_finance": Object {
+        "has_finance_data": true,
+        "id": "ND-ISS01",
       },
     },
   },
@@ -429,6 +1118,7 @@ Object {
             "planning_year_1": null,
             "planning_year_2": null,
             "planning_year_3": null,
+            "program_id": "CPCC-ISC00",
           },
         ],
       },

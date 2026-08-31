@@ -1,7 +1,6 @@
-import { sum } from "d3-array";
 import { scaleOrdinal } from "d3-scale";
 import _ from "lodash";
-import React from "react";
+import React, { useMemo } from "react";
 
 import { InfographicPanel } from "src/panels/panel_declarations/InfographicPanel";
 import { declare_panel } from "src/panels/PanelRegistry";
@@ -9,10 +8,13 @@ import { declare_panel } from "src/panels/PanelRegistry";
 import {
   DisplayTable,
   GraphOverlay,
+  LeafSpinner,
   SelectAllControl,
 } from "src/components/index";
 
-import { businessConstants } from "src/models/businessConstants";
+import { calculate_spend_by_so_hist_from_finance_data } from "src/models/finances/sobj_calculations";
+import { useOrgSobjsFinanceData } from "src/models/finances/useOrgSobjsFinanceData";
+
 import { run_template } from "src/models/text";
 import { year_templates } from "src/models/years";
 
@@ -31,9 +33,7 @@ import { toggle_list } from "src/general_utils";
 
 import { text_maker, TM } from "./sobj_text_provider";
 
-const { sos } = businessConstants;
 const { std_years } = year_templates;
-
 const years = _.map(std_years, run_template);
 
 const get_custom_table = (data, active_sobjs) => {
@@ -194,76 +194,56 @@ class SobjLine extends React.Component {
   }
 }
 
+const SpendBySoHistContainer = (props) => {
+  const { subject } = props;
+  const { loading, finance_data } = useOrgSobjsFinanceData(subject);
+
+  const calculations = useMemo(() => {
+    if (loading) {
+      return null;
+    }
+    return calculate_spend_by_so_hist_from_finance_data(subject, finance_data);
+  }, [loading, subject, finance_data]);
+
+  if (loading) {
+    return <LeafSpinner config_name="subroute" />;
+  }
+
+  if (!calculations) {
+    return null;
+  }
+
+  const { data, text_calculations } = calculations;
+  const graph_content = is_a11y_mode ? (
+    get_custom_table(data, _.map(data, "label"))
+  ) : (
+    <SobjLine data={data} />
+  );
+
+  return (
+    <InfographicPanel
+      {...props}
+      title={text_maker("dept_fin_spend_by_so_hist_title")}
+    >
+      <div className="medium-panel-text">
+        <TM k="dept_fin_spend_by_so_hist_text" args={text_calculations} />
+      </div>
+      <div>{graph_content}</div>
+    </InfographicPanel>
+  );
+};
+
 export const declare_spend_by_so_hist_panel = () =>
   declare_panel({
     panel_key: "spend_by_so_hist",
     subject_types: ["dept"],
     panel_config_func: () => ({
-      legacy_table_dependencies: ["orgSobjs"],
       get_dataset_keys: () => ["org_standard_objects"],
       get_topic_keys: ({ derived_topic_keys }) => {
         return [...derived_topic_keys, "5YEAR_TREND", "AVG_SOBJ"];
       },
       get_title: () => text_maker("dept_fin_spend_by_so_hist_title"),
-      calculate: ({ subject, tables }) => {
-        const { orgSobjs } = tables;
-
-        const data = _.chain(sos)
-          .sortBy((sobj) => sobj.so_num)
-          .map((sobj) => ({
-            label: sobj.text,
-            data: std_years.map(
-              (year) =>
-                orgSobjs.sum_cols_by_grouped_data(year, "so_num", subject)[
-                  sobj.so_num
-                ]
-            ),
-          }))
-          .filter((d) => sum(d.data))
-          .value();
-
-        const avg_data = _.map(
-          data,
-          (object) => _.sum(object.data) / object.data.length
-        );
-
-        const max_avg = _.max(avg_data);
-        const max_index = avg_data.indexOf(max_avg);
-        const max_share = data[max_index].label;
-
-        const five_year_avg_spending = _.sum(avg_data);
-
-        const text_calculations = {
-          subject,
-          max_avg,
-          max_share,
-          five_year_avg_spending,
-        };
-
-        return {
-          data,
-          text_calculations,
-        };
-      },
-      render({ title, calculations, footnotes, sources, datasets }) {
-        const { data, text_calculations } = calculations;
-
-        const graph_content = (() => {
-          if (is_a11y_mode) {
-            return get_custom_table(data, _.map(data, "label"));
-          } else {
-            return <SobjLine data={data} />;
-          }
-        })();
-
-        return (
-          <InfographicPanel {...{ title, sources, datasets, footnotes }}>
-            <div className="medium-panel-text">
-              <TM k="dept_fin_spend_by_so_hist_text" args={text_calculations} />
-            </div>
-            <div>{graph_content}</div>
-          </InfographicPanel>
-        );
-      },
+      calculate: () => true,
+      render: (props) => <SpendBySoHistContainer {...props} />,
     }),
   });
