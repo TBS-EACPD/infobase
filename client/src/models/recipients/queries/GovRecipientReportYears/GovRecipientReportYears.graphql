@@ -1,0 +1,7 @@
+query GovRecipientReportYears($lang: String!) {
+  root(lang: $lang) {
+    gov {
+      years_with_recipient_data
+    }
+  }
+}

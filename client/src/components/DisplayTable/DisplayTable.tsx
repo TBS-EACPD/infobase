@@ -50,6 +50,10 @@ type _DisplayTableProps = typeof _DisplayTablePropsDefaultProps & {
   enable_pagination?: boolean;
   page_size_num_options_max?: number;
   disable_column_select?: boolean;
+  recipient_page?: number;
+  recipient_on_page_change?: number;
+  recipient_page_size?: number;
+  num_table_rows?: number;
 };
 
 interface _DisplayTableState {
@@ -336,6 +340,10 @@ export class _DisplayTable extends React.Component<
       enable_pagination,
       page_size_num_options_max,
       disable_column_select,
+      recipient_page,
+      recipient_on_page_change,
+      recipient_page_size,
+      num_table_rows,
     } = this.props;
     const {
       sort_by,
@@ -525,7 +533,7 @@ export class _DisplayTable extends React.Component<
       ),
     };
 
-    const selectPageUtil = enable_pagination && (
+    const selectPageUtil = enable_pagination && num_table_rows == null && (
       <SelectPageSize
         selected={page_size}
         on_select={this.change_page_size}
@@ -549,14 +557,29 @@ export class _DisplayTable extends React.Component<
     );
 
     const number_of_pages = paginated_data.length;
+    const recipient_number_of_pages =
+      num_table_rows == null || recipient_page_size == null
+        ? 0
+        : Math.ceil(num_table_rows / recipient_page_size);
 
-    const page_selector = enable_pagination && (
-      <SelectPage
-        num_pages={number_of_pages}
-        current_page={current_page}
-        change_page={this.change_page}
-        num_col={_.size(visible_ordered_col_keys)}
-      />
+    const page_selector = enable_pagination ? (
+      num_table_rows == null ? (
+        <SelectPage
+          num_pages={number_of_pages}
+          current_page={current_page}
+          change_page={this.change_page}
+          num_col={_.size(visible_ordered_col_keys)}
+        />
+      ) : (
+        <SelectPage
+          num_pages={recipient_number_of_pages}
+          current_page={recipient_page}
+          change_page={recipient_on_page_change}
+          num_col={_.size(visible_ordered_col_keys)}
+        />
+      )
+    ) : (
+      enable_pagination
     );
 
     return (
@@ -830,12 +853,25 @@ export class _DisplayTable extends React.Component<
 interface DisplayTableProps extends _DisplayTableProps {
   show_search?: boolean;
   show_sort?: boolean;
+  recipient_page?: number;
+  recipient_on_page_change?: number;
+  recipient_page_size?: number;
+  num_table_rows?: number;
 }
 
 // Wrapper component that picks column configs based on the size of data. Currently cannot pick table utils
 export class DisplayTable extends React.Component<DisplayTableProps> {
   render() {
-    const { data, show_search, show_sort, column_configs } = this.props;
+    const {
+      data,
+      show_search,
+      show_sort,
+      column_configs,
+      recipient_page,
+      recipient_on_page_change,
+      recipient_page_size,
+      num_table_rows,
+    } = this.props;
     const col_configs_with_defaults =
       get_col_configs_with_defaults(column_configs);
 
@@ -855,13 +891,20 @@ export class DisplayTable extends React.Component<DisplayTableProps> {
       })
     );
 
+    const should_paginate =
+      num_table_rows == null || recipient_page_size == null
+        ? _.size(data) > _DisplayTable.defaultProps.page_size_increment
+        : num_table_rows > recipient_page_size;
+
     return (
       <_DisplayTable
         {...this.props}
         column_configs={smart_column_configs}
-        enable_pagination={
-          _.size(data) > _DisplayTable.defaultProps.page_size_increment
-        }
+        enable_pagination={should_paginate}
+        recipient_page={recipient_page}
+        recipient_on_page_change={recipient_on_page_change}
+        recipient_page_size={recipient_page_size}
+        num_table_rows={num_table_rows}
       />
     );
   }

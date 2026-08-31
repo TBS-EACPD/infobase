@@ -1,0 +1,29 @@
+query RecipientDetailsGov(
+  $lang: String!
+  $year: String!
+  $row_id: String!
+  $offset: Int!
+  $limit: Int!
+) {
+  root(lang: $lang) {
+    gov {
+      recipient_details(
+        year: $year
+        row_id: $row_id
+        offset: $offset
+        limit: $limit
+      ) {
+        id
+        row_id
+        year
+        recipient
+        org_id
+        transfer_payment
+        city
+        province
+        country
+        expenditure
+      }
+    }
+  }
+}
