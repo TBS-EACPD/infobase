@@ -12,7 +12,6 @@ import { EasyAccess } from "src/core/EasyAccess";
 import { ErrorBoundary } from "src/core/ErrorBoundary";
 import { has_local_storage } from "src/core/feature_detection";
 import { lang, is_a11y_mode, is_dev } from "src/core/injected_build_constants";
-import { InsertRuntimeFooterLinks } from "src/core/InsertRuntimeFooterLinks";
 import { RedirectHeader } from "src/core/RedirectHeader";
 
 import { GlossarySidebarController } from "src/glossary/GlossarySidebar/GlossarySidebarController";
@@ -88,7 +87,6 @@ export class App extends React.Component {
       <ErrorBoundary>
         {is_a11y_mode && <NoIndex />}
         <DevFip />
-        <InsertRuntimeFooterLinks />
         <EasyAccess />
         {outage_msg && (
           <HeaderNotification

@@ -94,27 +94,47 @@
       </div>
     </main>
     <footer id="wb-info">
-      <div class="bonus-footer-landscape">
-        <nav class="container wb-navcurr" aria-labelledby="canada-ca-footer-nav">
-          <h2 id="canada-ca-footer-nav" class="wb-inv">{{canada_ca_footer_nav}}</h2>
-          <ul class="list-unstyled colcount-sm-2 colcount-md-3 bonus-footer-list">
-            {{{bonus_footer_list}}}
-          </ul>
-        </nav>
-      </div>
-      <div class="brand">
+      <h2 class="wb-inv">{{about_this_site}}</h2>
+      <div class="gc-contextual">
         <div class="container">
-          <div class="row">
-            <nav class="col-md-10 ftr-urlt-lnk" aria-labelledby="footer-nav">
-              <h2 id="footer-nav" class="wb-inv">{{footer_nav}}</h2>
-              <ul id="footer_survey_link_area">
-                {{{footer_list}}}
-              </ul>
-            </nav>
-            <div class="col-xs-6 visible-sm visible-xs tofpg"></div>
-            <div class="col-xs-6 col-md-2 text-right">
-              <object type="image/svg+xml" tabindex="-1" role="img" data="{{CDN_URL}}/svg/wmms-blk.svg" aria-label="{{logo_a11y_label_2}}"></object>
-            </div>
+          <nav>
+            <h3>{{contextual_footer_header}}</h3>
+            <ul class="list-col-xs-1 list-col-sm-2 list-col-md-3">
+              {{{contextual_footer_list}}}
+              {{#unless is_a11y_mode}}
+                <li><a id="footer-a11y-link" href="{{a11y_version_url}}">{{a11y_version_title}}</a></li>
+              {{/unless}}
+              {{#if is_a11y_mode}}
+                <li><a id="footer-standard-link" href="{{standard_version_url}}">{{standard_version_title}}</a></li>
+              {{/if}}
+            </ul>
+          </nav>
+        </div>
+      </div>
+      <div class="gc-main-footer">
+        <div class="container">
+          <nav>
+            <h3>{{main_footer_header}}</h3>
+            <ul class="list-col-xs-1 list-col-sm-2 list-col-md-3">
+              {{{main_footer_global_list}}}
+            </ul>
+            <h4><span class="wb-inv">{{themes_and_topics}}</span></h4>
+            <ul class="list-unstyled colcount-sm-2 colcount-md-3">
+              {{{main_footer_theme_list}}}
+            </ul>
+          </nav>
+        </div>
+      </div>
+      <div class="gc-sub-footer">
+        <div class="container d-flex align-items-center">
+          <nav>
+            <h3 class="wb-inv">{{sub_footer_nav}}</h3>
+            <ul>
+              {{{footer_list}}}
+            </ul>
+          </nav>
+          <div class="wtrmrk align-self-end">
+            <img src="{{CDN_URL}}/svg/wmms-blk.svg" alt="{{logo_a11y_label_2}}" />
           </div>
         </div>
       </div>
