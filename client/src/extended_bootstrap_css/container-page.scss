@@ -85,21 +85,3 @@
     margin-bottom: 15px;
   }
 }
-
-#wb-info > .brand {
-  border-top-width: 0px;
-}
-
-.bonus-footer-landscape {
-  background: $primaryColor
-    url(https://www.canada.ca/etc/designs/canada/wet-boew/assets/landscape.png)
-    no-repeat right bottom;
-}
-
-.bonus-footer-list {
-  font-weight: $lightFontWeight;
-
-  & > li > a {
-    color: $textLightColor;
-  }
-}
