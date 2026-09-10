@@ -223,67 +223,282 @@ h6,
 }
 
 /*
- Site information
+ Site information — Canada.ca global footer (GCWeb)
+
+ InfoBase sets html { font-size: 10px }, so GCWeb rem values would render ~60% of
+ the intended size. Spacing below uses px equivalents of GCWeb rem @ 16px root.
 */
 #wb-info {
-  background: #e1e4e7;
   position: relative;
   z-index: 5;
+  font-family: "Noto Sans", "Noto Sans Canadian Aboriginal", sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.4375;
+  // Match Canada.ca rendering so type doesn't look heavier/bolder
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+
+  h3 {
+    color: inherit;
+    font-family: Lato, "Noto Sans", sans-serif;
+    font-size: 26px;
+    font-weight: 700;
+    line-height: 1.23;
+    margin-bottom: 24px;
+    margin-top: 0;
+  }
+
+  a {
+    font-family: "Noto Sans", "Noto Sans Canadian Aboriginal", sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 1.4375;
+    text-decoration: none;
+
+    &:hover,
+    &:focus {
+      text-decoration: underline;
+    }
+  }
+
+  nav {
+    padding-bottom: 12px;
+    padding-top: 36px;
+    position: relative;
+
+    ul {
+      margin-bottom: 0;
+      margin-top: 0;
+      padding-left: 0;
+    }
+
+    ul[class*="colcount-"] {
+      column-count: 1;
+      column-gap: 0;
+    }
+
+    li {
+      margin-bottom: 24px;
+    }
+  }
+
+  .gc-contextual {
+    background-color: #33465c;
+    color: #fff;
+    // Contain list margins so they don't collapse into a gap above the main band
+    overflow: auto;
+
+    nav {
+      padding-bottom: 0;
+    }
+
+    a {
+      color: #fff;
+
+      &:hover,
+      &:focus {
+        color: #fff;
+        text-decoration: underline;
+      }
+    }
+  }
+
+  .gc-main-footer {
+    background: #26374a
+      url(https://www.canada.ca/etc/designs/canada/wet-boew/assets/landscape.png)
+      no-repeat right bottom;
+    color: #fff;
+    overflow: auto;
+
+    nav {
+      padding-bottom: 24px;
+    }
+
+    h4 {
+      margin-bottom: 32px;
+      margin-top: 28px;
+      position: relative;
+
+      &::before {
+        border-bottom: 4px solid #fff;
+        content: "";
+        display: block;
+        position: absolute;
+        top: -24px;
+        width: 40px;
+      }
+    }
+
+    a {
+      color: #fff;
+
+      &:hover,
+      &:focus {
+        color: #fff;
+        text-decoration: underline;
+      }
+    }
+  }
+
+  .gc-sub-footer {
+    background: #f8f8f8;
+    color: #333;
+    padding: 28px 0 36px;
+
+    object,
+    img {
+      height: 40px;
+      width: auto;
+    }
+
+    nav {
+      flex: 1 1 auto;
+      padding-bottom: 0;
+      padding-top: 0;
+
+      ul {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+
+        li {
+          display: inline-block;
+          margin-bottom: 0;
+          margin-inline-end: 8px;
+
+          &:not(:first-child)::before {
+            color: #333;
+            content: "\2022";
+            margin-inline-end: 11px;
+          }
+        }
+      }
+    }
+
+    a {
+      color: $linkColor;
+
+      &:hover,
+      &:focus {
+        color: $linkFocusColor;
+      }
+    }
+
+    .wtrmrk {
+      text-align: right;
+    }
+  }
 }
-#wb-info a {
-  font-size: 0.875em;
-  text-decoration: none;
+
+@media screen and (min-width: 768px) {
+  #wb-info nav ul.colcount-sm-2 {
+    column-count: 2;
+  }
+
+  #wb-info nav ul.colcount-sm-3 {
+    column-count: 3;
+  }
 }
-#wb-info a.wb-navcurr {
-  font-weight: 800;
+
+@media screen and (min-width: 992px) {
+  #wb-info nav ul.colcount-md-2 {
+    column-count: 2;
+  }
+
+  #wb-info nav ul.colcount-md-3 {
+    column-count: 3;
+  }
 }
-#wb-info .brand {
-  background: #f8f8f8;
-  border-top: 4px solid #335175;
-  line-height: 30px;
+
+@media screen and (max-width: 991px) {
+  #wb-info .gc-sub-footer {
+    .container {
+      flex-wrap: wrap;
+    }
+
+    nav {
+      flex: 1 1 100%;
+    }
+
+    nav ul li {
+      display: block;
+      margin-inline-end: 0;
+
+      &:not(:last-child) {
+        margin-bottom: 24px;
+      }
+
+      &::before {
+        display: none;
+      }
+    }
+
+    .wtrmrk {
+      flex: 1 1 100%;
+      margin-top: 15px;
+    }
+  }
 }
-#wb-info .brand object,
-#wb-info .brand img {
-  height: 40px;
-  margin-bottom: 10px;
-  margin-top: 20px;
-  width: auto;
+
+@media screen and (max-width: 479px) {
+  #wb-info .gc-sub-footer object,
+  #wb-info .gc-sub-footer img {
+    height: 25px;
+    margin-top: 15px;
+    max-width: 100%;
+    padding-right: 10px;
+  }
 }
-#wb-info .ftr-urlt-lnk ul {
-  margin: 0;
-  padding: 0;
+
+/* GCWeb list-col utilities (flex-based multi-column lists) */
+[class*="list-col"] {
+  display: flex;
+  flex-wrap: wrap;
+  list-style: none;
+  padding-left: 0;
+  padding-right: 0;
+
+  > li {
+    flex-basis: 100%;
+    flex-grow: 0;
+    flex-shrink: 0;
+  }
 }
-#wb-info .ftr-urlt-lnk ul li {
-  display: inline-block;
-  margin-right: 0.5em;
-  padding: 0;
+
+ul.list-col-xs-1 > li {
+  flex-basis: 100%;
 }
-#wb-info .ftr-urlt-lnk ul li:before {
-  content: "\2022";
-  margin-right: 0.7em;
+ul.list-col-xs-2 > li {
+  flex-basis: 50%;
 }
-#wb-info .ftr-urlt-lnk ul li:first-child:before {
-  content: none;
+ul.list-col-xs-3 > li {
+  flex-basis: 33.33%;
 }
-#wb-info .tofpg {
-  line-height: 90px;
+
+@media screen and (min-width: 768px) {
+  ul.list-col-sm-1 > li {
+    flex-basis: 100%;
+  }
+  ul.list-col-sm-2 > li {
+    flex-basis: 50%;
+  }
+  ul.list-col-sm-3 > li {
+    flex-basis: 33.33%;
+  }
 }
-#wb-info .tofpg a {
-  color: #000;
-}
-#wb-info .tofpg a span {
-  margin-left: 25px;
-}
-#wb-info .tofpg a:hover {
-  text-decoration: none;
-}
-#wb-info nav {
-  padding-bottom: 2em;
-  padding-top: 2em;
-  position: relative;
-}
-#wb-info nav li {
-  margin-bottom: 0.75em;
+
+@media screen and (min-width: 992px) {
+  ul.list-col-md-1 > li {
+    flex-basis: 100%;
+  }
+  ul.list-col-md-2 > li {
+    flex-basis: 50%;
+  }
+  ul.list-col-md-3 > li {
+    flex-basis: 33.33%;
+  }
 }
 
 /*

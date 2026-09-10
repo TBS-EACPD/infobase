@@ -72,48 +72,110 @@ const index_lang_lookups = {
     en: "Top of page",
     fr: "Haut de la page",
   },
-  canada_ca_footer_nav: {
-    en: "Other government websites",
-    fr: "Autres sites Web gouvernementaux",
+  about_this_site: {
+    en: "About this site",
+    fr: "À propos de ce site",
   },
-  footer_nav: {
-    en: "Additional navigation links",
-    fr: "Additional navigation links",
+  contextual_footer_header: {
+    en: "GC InfoBase",
+    fr: "InfoBase du GC",
+  },
+  main_footer_header: {
+    en: "Government of Canada",
+    fr: "Gouvernement du Canada",
+  },
+  themes_and_topics: {
+    en: "Themes and topics",
+    fr: "Thèmes et sujets",
+  },
+  sub_footer_nav: {
+    en: "Government of Canada Corporate",
+    fr: "Organisation du gouvernement du Canada",
   },
   skip_to_main_content: {
     en: "Skip to main content",
     fr: "Passer au contenu principal",
   },
-  bonus_footer_list: {
+  contextual_footer_list: {
     en: `
-     <li><a href="#contact">Contact us</a></li>
-     <li><a target="_blank" rel="noopener noreferrer" href="https://www.canada.ca/en/government/dept.html">Departments and agencies</a></li>
-     <li><a target="_blank" rel="noopener noreferrer" href="https://www.canada.ca/en/government/publicservice.html">Public service and military</a></li>
-     <li><a target="_blank" rel="noopener noreferrer" href="https://www.canada.ca/en/news.html">News</a></li>
-     <li><a target="_blank" rel="noopener noreferrer" href="https://www.canada.ca/en/government/system/laws.html">Treaties, laws and regulations</a></li>
-     <li><a target="_blank" rel="noopener noreferrer" href="https://www.canada.ca/en/transparency/reporting.html">Government-wide reporting</a></li>
-     <li><a target="_blank" rel="noopener noreferrer" href="https://pm.gc.ca/eng">Prime Minister</a></li>
-     <li><a target="_blank" rel="noopener noreferrer" href="https://www.canada.ca/en/government/system.html">How government works</a></li>
-     <li><a target="_blank" rel="noopener noreferrer" href="https://open.canada.ca/en/">Open government</a></li>
+      <li><a href="#contact">Contact us</a></li>
+      <li><a href="#about">About</a></li>
     `,
     fr: `
       <li><a href="#contact">Contactez-nous</a></li>
+      <li><a href="#about">À propos</a></li>
+    `,
+  },
+  main_footer_global_list: {
+    en: `
+      <li><a target="_blank" rel="noopener noreferrer" href="https://www.canada.ca/en/contact.html">All contacts</a></li>
+      <li><a target="_blank" rel="noopener noreferrer" href="https://www.canada.ca/en/government/dept.html">Departments and agencies</a></li>
+      <li><a target="_blank" rel="noopener noreferrer" href="https://www.canada.ca/en/government/system.html">About government</a></li>
+    `,
+    fr: `
+      <li><a target="_blank" rel="noopener noreferrer" href="https://www.canada.ca/fr/contact.html">Toutes les coordonnées</a></li>
       <li><a target="_blank" rel="noopener noreferrer" href="https://www.canada.ca/fr/gouvernement/min.html">Ministères et organismes</a></li>
-      <li><a target="_blank" rel="noopener noreferrer" href="https://www.canada.ca/fr/gouvernement/fonctionpublique.html">Fonction publique et force militaire</a></li>
-      <li><a target="_blank" rel="noopener noreferrer" href="https://www.canada.ca/fr/nouvelles.html">Nouvelles</a></li>
-      <li><a target="_blank" rel="noopener noreferrer" href="https://www.canada.ca/fr/gouvernement/systeme/lois.html">Traités, lois et règlements</a></li>
-      <li><a target="_blank" rel="noopener noreferrer" href="https://www.canada.ca/fr/transparence/rapports.html">Rapports à l'échelle du gouvernement</a></li>
-      <li><a target="_blank" rel="noopener noreferrer" href="https://pm.gc.ca/fra">Premier ministre</a></li>
-      <li><a target="_blank" rel="noopener noreferrer" href="https://www.canada.ca/fr/gouvernement/systeme.html">Comment le gouvernement fonctionne</a></li>
-      <li><a target="_blank" rel="noopener noreferrer" href="https://ouvert.canada.ca/">Gouvernement ouvert</a></li>
+      <li><a target="_blank" rel="noopener noreferrer" href="https://www.canada.ca/fr/gouvernement/systeme.html">À propos du gouvernement</a></li>
+    `,
+  },
+  main_footer_theme_list: {
+    en: `
+      <li><a target="_blank" rel="noopener noreferrer" href="https://www.canada.ca/en/services/jobs.html">Jobs</a></li>
+      <li><a target="_blank" rel="noopener noreferrer" href="https://www.canada.ca/en/services/immigration-citizenship.html">Immigration and citizenship</a></li>
+      <li><a target="_blank" rel="noopener noreferrer" href="https://travel.gc.ca/">Travel and tourism</a></li>
+      <li><a target="_blank" rel="noopener noreferrer" href="https://www.canada.ca/en/services/business.html">Business</a></li>
+      <li><a target="_blank" rel="noopener noreferrer" href="https://www.canada.ca/en/services/benefits.html">Benefits</a></li>
+      <li><a target="_blank" rel="noopener noreferrer" href="https://www.canada.ca/en/services/health.html">Health</a></li>
+      <li><a target="_blank" rel="noopener noreferrer" href="https://www.canada.ca/en/services/taxes.html">Taxes</a></li>
+      <li><a target="_blank" rel="noopener noreferrer" href="https://www.canada.ca/en/services/environment.html">Environment and natural resources</a></li>
+      <li><a target="_blank" rel="noopener noreferrer" href="https://www.canada.ca/en/services/defence.html">National security and defence</a></li>
+      <li><a target="_blank" rel="noopener noreferrer" href="https://www.canada.ca/en/services/culture.html">Culture, history and sport</a></li>
+      <li><a target="_blank" rel="noopener noreferrer" href="https://www.canada.ca/en/services/policing.html">Policing, justice and emergencies</a></li>
+      <li><a target="_blank" rel="noopener noreferrer" href="https://www.canada.ca/en/services/transport.html">Transport and infrastructure</a></li>
+      <li><a target="_blank" rel="noopener noreferrer" href="https://www.international.gc.ca/world-monde/index.aspx?lang=eng">Canada and the world</a></li>
+      <li><a target="_blank" rel="noopener noreferrer" href="https://www.canada.ca/en/services/finance.html">Money and finances</a></li>
+      <li><a target="_blank" rel="noopener noreferrer" href="https://www.canada.ca/en/services/science.html">Science and innovation</a></li>
+      <li><a target="_blank" rel="noopener noreferrer" href="https://www.canada.ca/en/services/indigenous-peoples.html">Indigenous Peoples</a></li>
+      <li><a target="_blank" rel="noopener noreferrer" href="https://www.canada.ca/en/services/veterans-military.html">Veterans and military</a></li>
+      <li><a target="_blank" rel="noopener noreferrer" href="https://www.canada.ca/en/services/youth.html">Youth</a></li>
+      <li><a target="_blank" rel="noopener noreferrer" href="https://www.canada.ca/en/services/life-events.html">Manage life events</a></li>
+    `,
+    fr: `
+      <li><a target="_blank" rel="noopener noreferrer" href="https://www.canada.ca/fr/services/emplois.html">Emplois</a></li>
+      <li><a target="_blank" rel="noopener noreferrer" href="https://www.canada.ca/fr/services/immigration-citoyennete.html">Immigration et citoyenneté</a></li>
+      <li><a target="_blank" rel="noopener noreferrer" href="https://voyage.gc.ca/">Voyage et tourisme</a></li>
+      <li><a target="_blank" rel="noopener noreferrer" href="https://www.canada.ca/fr/services/entreprises.html">Entreprises</a></li>
+      <li><a target="_blank" rel="noopener noreferrer" href="https://www.canada.ca/fr/services/prestations.html">Prestations</a></li>
+      <li><a target="_blank" rel="noopener noreferrer" href="https://www.canada.ca/fr/services/sante.html">Santé</a></li>
+      <li><a target="_blank" rel="noopener noreferrer" href="https://www.canada.ca/fr/services/impots.html">Impôts</a></li>
+      <li><a target="_blank" rel="noopener noreferrer" href="https://www.canada.ca/fr/services/environnement.html">Environnement et ressources naturelles</a></li>
+      <li><a target="_blank" rel="noopener noreferrer" href="https://www.canada.ca/fr/services/defense.html">Sécurité nationale et défense</a></li>
+      <li><a target="_blank" rel="noopener noreferrer" href="https://www.canada.ca/fr/services/culture.html">Culture, histoire et sport</a></li>
+      <li><a target="_blank" rel="noopener noreferrer" href="https://www.canada.ca/fr/services/police.html">Services de police, justice et urgences</a></li>
+      <li><a target="_blank" rel="noopener noreferrer" href="https://www.canada.ca/fr/services/transport.html">Transport et infrastructure</a></li>
+      <li><a target="_blank" rel="noopener noreferrer" href="https://www.international.gc.ca/world-monde/index.aspx?lang=fra">Le Canada et le monde</a></li>
+      <li><a target="_blank" rel="noopener noreferrer" href="https://www.canada.ca/fr/services/finance.html">Argent et finances</a></li>
+      <li><a target="_blank" rel="noopener noreferrer" href="https://www.canada.ca/fr/services/science.html">Science et innovation</a></li>
+      <li><a target="_blank" rel="noopener noreferrer" href="https://www.canada.ca/fr/services/autochtones.html">Autochtones</a></li>
+      <li><a target="_blank" rel="noopener noreferrer" href="https://www.canada.ca/fr/services/veterans-militaire.html">Vétérans et militaires</a></li>
+      <li><a target="_blank" rel="noopener noreferrer" href="https://www.canada.ca/fr/services/jeunesse.html">Jeunesse</a></li>
+      <li><a target="_blank" rel="noopener noreferrer" href="https://www.canada.ca/fr/services/evenements-vie.html">Gérer les événements de la vie</a></li>
     `,
   },
   footer_list: {
     en: `
-      <li><a target="_blank" rel="noopener noreferrer" href="https://www.canada.ca/en.html">Visit Canada.ca</a></li>
+      <li><a target="_blank" rel="noopener noreferrer" href="https://www.canada.ca/en/social.html">Social media</a></li>
+      <li><a target="_blank" rel="noopener noreferrer" href="https://www.canada.ca/en/mobile.html">Mobile applications</a></li>
+      <li><a target="_blank" rel="noopener noreferrer" href="https://canada.ca/en/government/about-canada-ca.html">About Canada.ca</a></li>
+      <li><a target="_blank" rel="noopener noreferrer" href="https://www.canada.ca/en/transparency/terms.html">Terms and conditions</a></li>
+      <li><a href="#privacy">Privacy</a></li>
     `,
     fr: `
-      <li><a target="_blank" rel="noopener noreferrer" href="https://www.canada.ca/fr.html">Visiter Canada.ca</a></li>
+      <li><a target="_blank" rel="noopener noreferrer" href="https://www.canada.ca/fr/sociaux.html">Médias sociaux</a></li>
+      <li><a target="_blank" rel="noopener noreferrer" href="https://www.canada.ca/fr/mobile.html">Applications mobiles</a></li>
+      <li><a target="_blank" rel="noopener noreferrer" href="https://canada.ca/fr/gouvernement/a-propos-canada-ca.html">À propos de Canada.ca</a></li>
+      <li><a target="_blank" rel="noopener noreferrer" href="https://www.canada.ca/fr/transparence/avis.html">Avis</a></li>
+      <li><a href="#privacy">Confidentialité</a></li>
     `,
   },
   script_url: {
