@@ -452,6 +452,113 @@ h6,
   }
 }
 
+/*
+  LEGACY footer styles for Azure-hosted index-*.html shells that still use
+  .bonus-footer-landscape / .brand. Keep until IMTD publishes the new HTML
+  entry points (gc-contextual / gc-main-footer / gc-sub-footer). Safe to
+  remove once those four shells are updated on tbs-sct.
+*/
+#wb-info .bonus-footer-landscape {
+  background: $primaryColor
+    url(https://www.canada.ca/etc/designs/canada/wet-boew/assets/landscape.png)
+    no-repeat right bottom;
+
+  nav {
+    padding-bottom: 2em;
+    padding-top: 2em;
+  }
+
+  nav li {
+    margin-bottom: 0.75em;
+  }
+
+  a {
+    color: $textLightColor;
+    font-size: 0.875em;
+    font-weight: $lightFontWeight;
+
+    &:hover,
+    &:focus {
+      color: $textLightColor;
+      text-decoration: underline;
+    }
+  }
+}
+
+#wb-info .bonus-footer-list {
+  font-weight: $lightFontWeight;
+
+  > li > a {
+    color: $textLightColor;
+  }
+}
+
+#wb-info .brand {
+  background: #f8f8f8;
+  border-top: 0;
+  line-height: 30px;
+
+  object,
+  img {
+    height: 40px;
+    margin-bottom: 10px;
+    margin-top: 20px;
+    width: auto;
+  }
+
+  nav {
+    padding-bottom: 2em;
+    padding-top: 2em;
+  }
+}
+
+#wb-info .ftr-urlt-lnk ul {
+  margin: 0;
+  padding: 0;
+
+  li {
+    display: inline-block;
+    margin-bottom: 0;
+    margin-right: 0.5em;
+    padding: 0;
+
+    &::before {
+      content: "\2022";
+      margin-right: 0.7em;
+    }
+
+    &:first-child::before {
+      content: none;
+    }
+  }
+
+  a {
+    color: $linkColor;
+    font-size: 0.875em;
+
+    &:hover,
+    &:focus {
+      color: $linkFocusColor;
+    }
+  }
+}
+
+#wb-info .tofpg {
+  line-height: 90px;
+
+  a {
+    color: #000;
+
+    span {
+      margin-left: 25px;
+    }
+
+    &:hover {
+      text-decoration: none;
+    }
+  }
+}
+
 /* GCWeb list-col utilities (flex-based multi-column lists) */
 [class*="list-col"] {
   display: flex;
