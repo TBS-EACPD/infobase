@@ -99,6 +99,21 @@ export default {
         },
       ]);
     });
+    // Temporary hotfix: 2025-26 Departmental Plan figures. Must stay last so it
+    // lines up with the final column of program_spending.csv.
+    this.add_col({
+      type: "dollar",
+      nick: "planning_year_0",
+      hidden: true,
+      header: {
+        en: "2025-26 - Planned Spending",
+        fr: "2025-2026 - Dépenses prévues",
+      },
+      description: {
+        en: "Temporary column. Corresponds to planned spending from the 2025-26 Departmental Plans.",
+        fr: "Colonne temporaire. Correspond aux dépenses prévues des plans ministériels de 2025-2026.",
+      },
+    });
   },
 
   sort: function (mapped_rows) {

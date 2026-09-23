@@ -540,15 +540,15 @@ const drr_docs = build_doc_info_objects("drr", [
 const dp_docs = build_doc_info_objects("dp", [
   {
     year_short: "2025",
-    // Labels use the 2025-26 DP planning horizon. The first-year planned column in
-    // program_spending.csv is pa_last_year_planned after the planning-year globals roll.
+    // Labels use the 2025-26 DP planning horizon. Spending and FTEs come from the
+    // temporary planning_year_0 columns, which hold the 2025-26 Departmental Plan figures.
     resource_years: [
       "{{est_last_year}}",
       "{{planning_year_1}}",
       "{{planning_year_2}}",
     ],
     resource_data_years: [
-      "pa_last_year_planned",
+      "planning_year_0",
       "{{planning_year_1}}",
       "{{planning_year_2}}",
     ],

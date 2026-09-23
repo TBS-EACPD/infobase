@@ -95,6 +95,21 @@ export default {
         },
       });
     });
+    // Temporary hotfix: 2025-26 Departmental Plan figures. Must stay last so it
+    // lines up with the final column of program_ftes.csv.
+    this.add_col({
+      type: "decimal2",
+      nick: "planning_year_0",
+      hidden: true,
+      header: {
+        en: "2025-26 - " + run_template("Planned FTEs"),
+        fr: "2025-2026 - " + run_template("ETP prévus"),
+      },
+      description: {
+        en: "Temporary column. Corresponds to planned FTEs from the 2025-26 Departmental Plans.",
+        fr: "Colonne temporaire. Correspond aux ETP prévus des plans ministériels de 2025-2026.",
+      },
+    });
   },
 
   sort: function (mapped_rows) {

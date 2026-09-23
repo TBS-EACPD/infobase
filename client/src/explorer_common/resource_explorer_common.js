@@ -11,7 +11,9 @@ import { Table } from "src/tables/TableClass";
 
 const is_planning_year = (year) =>
   _.includes(year_templates.planning_years, year) ||
-  year === "pa_last_year_planned";
+  year === "pa_last_year_planned" ||
+  // Temporary 2025-26 Departmental Plan column used by the results drilldown.
+  year === "planning_year_0";
 
 const pick_table = (type) =>
   Table.store.lookup(type === "spending" ? "programSpending" : "programFtes");
