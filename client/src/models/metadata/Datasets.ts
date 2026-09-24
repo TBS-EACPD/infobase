@@ -78,6 +78,11 @@ const public_accounts = common_source_and_topic_data_set_defs(
         table: "orgTransferPayments",
       }),
     },
+    recipients: {
+      name: text_maker("recipient_dataset"),
+      infobase_link:
+        "https://github.com/TBS-EACPD/infobase/blob/tp-recipients/data/transfer_payment_recipients.csv",
+    },
   }
 );
 
