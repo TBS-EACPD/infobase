@@ -628,12 +628,11 @@ FEDNO,1,1,Operating/Program,Fonctionnement/Programme,SEA,,,,,,287270.0
 FEDNO,1,1,Operating/Program,Fonctionnement/Programme,SEB,787218.0,4149397.0,406348.0,465802.0,618890.0,
 FEDNO,1,1,Operating/Program,Fonctionnement/Programme,SEC,,-2500000.0,,,,
 FEDNO,1,1,Operating/Program,Fonctionnement/Programme,VA,8386863.0,330493.0,629044.0,813378.0,,
-FEDNO,5,2,Capital,Capital,VA,,,,,,
 FEDNO,5,3,Grants & Contributions,Subventions et Contributions,MAINS,,109618074.0,52733192.0,38172996.0,54179238.0,65156604.0
 FEDNO,5,3,Grants & Contributions,Subventions et Contributions,SEA,,,,,,10335600.0
 FEDNO,5,3,Grants & Contributions,Subventions et Contributions,SEB,21076585.0,4600000.0,5134230.0,9754230.0,15213987.0,
 FEDNO,5,3,Grants & Contributions,Subventions et Contributions,SEC,,5000000.0,,,13800000.0,
-FEDNO,5,3,Grants & Contributions,Subventions et Contributions,VA,,,,,,
+FEDNO,5,3,Grants & Contributions,Subventions et Contributions,VA,70251166.0,0.0,0.0,0.0,,
 FEDNO,S,0,Contributions to employee benefit plans,Contributions to employee benefit plans,MAINS,,1623946.0,2032194.0,1795304.0,2054114.0,2315785.0
 FEDNO,S,0,Contributions to employee benefit plans,Contributions to employee benefit plans,SA,664739.0,-956296.0,-606852.53,-302422.04000000004,,
 FEDNO,S,0,Spending of proceeds from the disposal of surplus Crown assets,Dépenses des produits de la vente de biens excédentaires de l'État,SA,,,,,,

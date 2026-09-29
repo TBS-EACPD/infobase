@@ -245,7 +245,7 @@ FBCL,S,999,Payments pursuant to the Public Health Events of National Concern Pay
 FCAC,S,999,Payments under section 13 of the Financial Consumer Agency of Canada Act,Paiements en vertu de l'article 13 de la Loi sur l'Agence de la consommation en matière financière du Canada,35035905.0,35035905.0,0.0,38654643.0,38654643.0,0.0,53951273.0,53951273.0,0.0,53367175.66,53367175.66,0.0,55267544.35,55267544.35,0.0
 FCAC,S,999,Spending of proceeds from the disposal of surplus Crown assets,Dépenses des produits de la vente de biens excédentaires de l'État,92.0,92.0,0.0,3694.0,3694.0,0.0,110.0,110.0,0.0,,,,,,
 FEDNO,1,1,Operating/Program,Fonctionnement/Programme,,,,9174081.0,8071688.0,0.0,14560768.0,12955734.0,0.0,17302939.0,13830633.0,0.0,16452454.0,14525013.0,0.0
-FEDNO,5,2,Capital,Capital,,,,91327751.0,80300881.0,0.0,119218074.0,117737927.0,0.0,57867422.0,56474878.0,0.0,47927226.0,47927226.0,0.0
+FEDNO,5,3,Grants & Contributions,Subventions et Contributions,,,,91327751.0,80300881.0,0.0,119218074.0,117737927.0,0.0,57867422.0,56474878.0,0.0,47927226.0,47927226.0,0.0
 FEDNO,S,999,Contributions to employee benefit plans,Contributions to employee benefit plans,,,,848382.0,848382.0,0.0,1384205.0,1384205.0,0.0,1470868.47,1470868.47,0.0,1610891.96,1610891.96,0.0
 FEDNO,S,999,Spending of proceeds from the disposal of surplus Crown assets,Dépenses des produits de la vente de biens excédentaires de l'État,,,,,,,1260.0,0.0,1260.0,1260.42,0.0,0.0,,,
 FEDSO,1,1,Operating/Program,Fonctionnement/Programme,37401325.0,33652330.0,0.0,40594035.0,38868660.0,0.0,44853081.0,41144584.0,0.0,42588252.0,41283994.0,0.0,38991000.0,38017713.0,0.0
