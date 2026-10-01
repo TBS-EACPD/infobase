@@ -224,6 +224,7 @@ export default async function ({ models }) {
       volume_meeting_target: met_count,
       total_volume: count,
       org_id,
+      service_id,
     }) => ({
       is_target_met: convert_to_bool_or_null(is_target_met, "Y", "N"),
       standard_id,
@@ -234,6 +235,7 @@ export default async function ({ models }) {
       met_count,
       count,
       org_id,
+      service_id,
     })
   );
 
@@ -265,11 +267,14 @@ export default async function ({ models }) {
         get_fiscal_yr(submission_year),
         "standard_urls"
       ),
+      // Standard IDs are reused within a department (for example "unknown"),
+      // so a result also has to belong to this service.
       standard_report: _.filter(
         standard_report_rows,
         (standard_report) =>
           standard_report.standard_id === standard_id &&
-          standard_report.org_id === org_id
+          standard_report.org_id === org_id &&
+          standard_report.service_id === service_id
       ),
     })
   );
@@ -477,7 +482,9 @@ export default async function ({ models }) {
   const get_standard_targets_counts = (services) =>
     _.chain(services)
       .flatMap("standards")
-      .groupBy("standard_id")
+      .groupBy(
+        ({ service_id, standard_id }) => `${service_id}::${standard_id}`
+      )
       .map((standards_across_years) =>
         _.chain(standards_across_years)
           .sortBy(({ submission_year }) => _.toInteger(submission_year))
