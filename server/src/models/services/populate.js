@@ -482,9 +482,7 @@ export default async function ({ models }) {
   const get_standard_targets_counts = (services) =>
     _.chain(services)
       .flatMap("standards")
-      .groupBy(
-        ({ service_id, standard_id }) => `${service_id}::${standard_id}`
-      )
+      .groupBy(({ service_id, standard_id }) => `${service_id}::${standard_id}`)
       .map((standards_across_years) =>
         _.chain(standards_across_years)
           .sortBy(({ submission_year }) => _.toInteger(submission_year))
