@@ -10,8 +10,12 @@ import {
   LeafSpinner,
 } from "src/components/index";
 
+import {
+  panel_finance_config,
+  useFinanceData,
+  with_loaded_finance_data,
+} from "src/models/finances/finance_panels";
 import { calculate_top_spending_areas_from_finance_data } from "src/models/finances/sobj_calculations";
-import { useProgramSobjsFinanceData } from "src/models/finances/useProgramSobjsFinanceData";
 
 import { formats } from "src/core/format";
 
@@ -117,7 +121,10 @@ const render_w_options =
 
 const TopSpendingAreasContainer = (props) => {
   const { subject } = props;
-  const { loading, finance_data } = useProgramSobjsFinanceData(subject);
+  const { loading, finance_data } = useFinanceData(
+    subject,
+    "top_spending_areas"
+  );
 
   const calculations = useMemo(() => {
     if (loading) {
@@ -151,7 +158,11 @@ export const declare_top_spending_areas_panel = () =>
     panel_config_func: () => ({
       get_dataset_keys: () => ["program_standard_objects"],
       get_title: () => text_maker("top_spending_areas_title"),
-      calculate: () => true,
+      ...panel_finance_config("top_spending_areas", "program"),
+      calculate: ({ subject }) =>
+        with_loaded_finance_data(subject, (finance_data) =>
+          calculate_top_spending_areas_from_finance_data(subject, finance_data)
+        ),
       render: (props) => <TopSpendingAreasContainer {...props} />,
     }),
   });

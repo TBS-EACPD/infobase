@@ -6,6 +6,7 @@ import {
   api_load_years_with_covid_data,
   api_load_all_covid_measures,
 } from "src/models/covid/populate";
+import { api_load_finance_data } from "src/models/finances/api_load_finance_data";
 import { api_load_has_finance_data } from "src/models/finances/api_load_has_finance_data";
 import { load_footnotes_bundle } from "src/models/footnotes/populate_footnotes";
 import { api_load_has_people_data } from "src/models/people/api_load_has_people_data";
@@ -151,6 +152,14 @@ function ensure_loaded({
       ? api_load_has_finance_data(subject)
       : Promise.resolve();
 
+  const finance_panels = _.filter(
+    panel_set,
+    (panel) => panel.finance_fields || panel.gov_finance_fields
+  );
+  const finance_data_prom = !_.isEmpty(finance_panels)
+    ? api_load_finance_data(subject, finance_panels)
+    : Promise.resolve();
+
   return Promise.all([
     load_tables(table_set),
     results_prom,
@@ -167,6 +176,7 @@ function ensure_loaded({
     covid_measures_prom,
     has_people_data_prom,
     has_finance_data_prom,
+    finance_data_prom,
   ]);
 }
 

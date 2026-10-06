@@ -13,10 +13,14 @@ import {
 
 import { businessConstants } from "src/models/businessConstants";
 import {
+  panel_finance_config,
+  useFinanceData,
+  with_loaded_finance_data,
+} from "src/models/finances/finance_panels";
+import {
   calculate_dept_historical_g_and_c_from_finance_data,
   calculate_gov_historical_g_and_c_from_finance_data,
 } from "src/models/finances/transfer_payments_calculations";
-import { useTransferPaymentsFinanceData } from "src/models/finances/useTransferPaymentsFinanceData";
 
 import { run_template } from "src/models/text";
 import { year_templates } from "src/models/years";
@@ -361,7 +365,10 @@ class DetailedHistTPItems extends React.Component {
 
 const GovHistoricalGAndCContainer = (props) => {
   const { subject, title, footnotes, sources, datasets } = props;
-  const { loading, finance_data } = useTransferPaymentsFinanceData(subject);
+  const { loading, finance_data } = useFinanceData(
+    subject,
+    "historical_g_and_c"
+  );
 
   const calculations = useMemo(() => {
     if (loading) {
@@ -406,7 +413,10 @@ const GovHistoricalGAndCContainer = (props) => {
 
 const DeptHistoricalGAndCContainer = (props) => {
   const { subject, title, footnotes, sources, datasets } = props;
-  const { loading, finance_data } = useTransferPaymentsFinanceData(subject);
+  const { loading, finance_data } = useFinanceData(
+    subject,
+    "historical_g_and_c"
+  );
 
   const calculations = useMemo(() => {
     if (loading) {
@@ -455,7 +465,6 @@ const common_panel_config = {
       "ACTUAL_SOBJ10",
     ];
   },
-  calculate: () => true,
 };
 
 export const declare_historical_g_and_c_panel = () =>
@@ -467,12 +476,25 @@ export const declare_historical_g_and_c_panel = () =>
         case "gov":
           return {
             ...common_panel_config,
+            ...panel_finance_config("historical_g_and_c", "gov"),
+            calculate: ({ subject }) =>
+              with_loaded_finance_data(subject, (finance_data) =>
+                calculate_gov_historical_g_and_c_from_finance_data(finance_data)
+              ),
             render: (props) => <GovHistoricalGAndCContainer {...props} />,
           };
         case "dept":
           return {
             ...common_panel_config,
+            ...panel_finance_config("historical_g_and_c", "dept"),
             key: "historical_g_and_c",
+            calculate: ({ subject }) =>
+              with_loaded_finance_data(subject, (finance_data) =>
+                calculate_dept_historical_g_and_c_from_finance_data(
+                  subject,
+                  finance_data
+                )
+              ),
             render: (props) => <DeptHistoricalGAndCContainer {...props} />,
           };
       }

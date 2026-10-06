@@ -6,8 +6,12 @@ import { declare_panel } from "src/panels/PanelRegistry";
 
 import { LeafSpinner } from "src/components/index";
 
+import {
+  panel_finance_config,
+  useFinanceData,
+  with_loaded_finance_data,
+} from "src/models/finances/finance_panels";
 import { calculate_program_vote_stat_split_from_finance_data } from "src/models/finances/program_vote_stat_calculations";
-import { useProgramVoteStatFinanceData } from "src/models/finances/useProgramVoteStatFinanceData";
 
 import { is_a11y_mode } from "src/core/injected_build_constants";
 
@@ -41,7 +45,7 @@ const render_w_options =
 
 const VoteStatSplitContainer = (props) => {
   const { subject } = props;
-  const { loading, finance_data } = useProgramVoteStatFinanceData(subject);
+  const { loading, finance_data } = useFinanceData(subject, "vote_stat_split");
 
   const voted_label = text_maker("voted");
   const stat_label = text_maker("stat");
@@ -83,7 +87,14 @@ export const declare_vote_stat_split_panel = () =>
       get_dataset_keys: () => ["program_vote_stat_objects"],
       glossary_keys: ["AUTH"],
       get_title: () => text_maker("vote_stat_split_title"),
-      calculate: () => true,
+      ...panel_finance_config("vote_stat_split", "program"),
+      calculate: ({ subject }) =>
+        with_loaded_finance_data(subject, (finance_data) =>
+          calculate_program_vote_stat_split_from_finance_data(finance_data, {
+            voted_label: text_maker("voted"),
+            stat_label: text_maker("stat"),
+          })
+        ),
       render: (props) => <VoteStatSplitContainer {...props} />,
     }),
   });

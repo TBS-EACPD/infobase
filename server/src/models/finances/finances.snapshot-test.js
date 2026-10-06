@@ -210,6 +210,7 @@ query ($lang: String = "en") {
         dept_code
       }
       org_sobjs {
+        dept_code
         so_num
       }
     }

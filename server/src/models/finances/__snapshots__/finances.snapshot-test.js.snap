@@ -21,60 +21,79 @@ Object {
         "id": "gov",
         "org_sobjs": Array [
           Object {
+            "dept_code": "ACOA",
             "so_num": 1,
           },
           Object {
+            "dept_code": "ACOA",
             "so_num": 2,
           },
           Object {
+            "dept_code": "ACOA",
             "so_num": 3,
           },
           Object {
+            "dept_code": "ACOA",
             "so_num": 4,
           },
           Object {
+            "dept_code": "ACOA",
             "so_num": 5,
           },
           Object {
+            "dept_code": "ACOA",
             "so_num": 6,
           },
           Object {
+            "dept_code": "ACOA",
             "so_num": 7,
           },
           Object {
+            "dept_code": "ACOA",
             "so_num": 9,
           },
           Object {
+            "dept_code": "ACOA",
             "so_num": 10,
           },
           Object {
+            "dept_code": "ACOA",
             "so_num": 12,
           },
           Object {
+            "dept_code": "AECB",
             "so_num": 1,
           },
           Object {
+            "dept_code": "AECB",
             "so_num": 2,
           },
           Object {
+            "dept_code": "AECB",
             "so_num": 3,
           },
           Object {
+            "dept_code": "AECB",
             "so_num": 4,
           },
           Object {
+            "dept_code": "AECB",
             "so_num": 5,
           },
           Object {
+            "dept_code": "AECB",
             "so_num": 6,
           },
           Object {
+            "dept_code": "AECB",
             "so_num": 7,
           },
           Object {
+            "dept_code": "AECB",
             "so_num": 9,
           },
           Object {
+            "dept_code": "AECB",
             "so_num": 10,
           },
         ],

@@ -12,8 +12,12 @@ import {
   SelectAllControl,
 } from "src/components/index";
 
+import {
+  panel_finance_config,
+  useFinanceData,
+  with_loaded_finance_data,
+} from "src/models/finances/finance_panels";
 import { calculate_spend_by_so_hist_from_finance_data } from "src/models/finances/sobj_calculations";
-import { useOrgSobjsFinanceData } from "src/models/finances/useOrgSobjsFinanceData";
 
 import { run_template } from "src/models/text";
 import { year_templates } from "src/models/years";
@@ -196,7 +200,7 @@ class SobjLine extends React.Component {
 
 const SpendBySoHistContainer = (props) => {
   const { subject } = props;
-  const { loading, finance_data } = useOrgSobjsFinanceData(subject);
+  const { loading, finance_data } = useFinanceData(subject, "spend_by_so_hist");
 
   const calculations = useMemo(() => {
     if (loading) {
@@ -243,7 +247,11 @@ export const declare_spend_by_so_hist_panel = () =>
         return [...derived_topic_keys, "5YEAR_TREND", "AVG_SOBJ"];
       },
       get_title: () => text_maker("dept_fin_spend_by_so_hist_title"),
-      calculate: () => true,
+      ...panel_finance_config("spend_by_so_hist", "dept"),
+      calculate: ({ subject }) =>
+        with_loaded_finance_data(subject, (finance_data) =>
+          calculate_spend_by_so_hist_from_finance_data(subject, finance_data)
+        ),
       render: (props) => <SpendBySoHistContainer {...props} />,
     }),
   });

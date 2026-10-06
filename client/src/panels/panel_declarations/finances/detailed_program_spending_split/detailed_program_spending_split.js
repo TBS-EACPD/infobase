@@ -20,7 +20,11 @@ import {
 
 import { businessConstants } from "src/models/businessConstants";
 import { calculate_detailed_program_spending_split_from_finance_data } from "src/models/finances/detailed_program_spending_split_calculations";
-import { useDetailedProgramSpendingSplitFinanceData } from "src/models/finances/useDetailedProgramSpendingSplitFinanceData";
+import {
+  panel_finance_config,
+  useFinanceData,
+  with_loaded_finance_data,
+} from "src/models/finances/finance_panels";
 
 import { run_template } from "src/models/text";
 import { year_templates } from "src/models/years";
@@ -439,8 +443,10 @@ class DetailedProgramSplit extends React.Component {
 
 const DetailedProgramSpendingSplitContainer = (props) => {
   const { subject, title, footnotes, sources, datasets } = props;
-  const { loading, finance_data } =
-    useDetailedProgramSpendingSplitFinanceData(subject);
+  const { loading, finance_data } = useFinanceData(
+    subject,
+    "detailed_program_spending_split"
+  );
 
   const calculations = useMemo(() => {
     if (loading) {
@@ -539,7 +545,15 @@ export const declare_detailed_program_spending_split_panel = () =>
     panel_config_func: () => ({
       get_dataset_keys: () => ["program_standard_objects", "program_spending"],
       get_title: () => text_maker("detailed_program_spending_split_title"),
-      calculate: () => true,
+      ...panel_finance_config("detailed_program_spending_split", "dept"),
+      calculate: ({ subject }) =>
+        with_loaded_finance_data(subject, (finance_data) =>
+          calculate_detailed_program_spending_split_from_finance_data(
+            subject,
+            finance_data,
+            { text_maker }
+          )
+        ),
       render: (props) => <DetailedProgramSpendingSplitContainer {...props} />,
     }),
   });

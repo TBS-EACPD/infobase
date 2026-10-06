@@ -10,8 +10,12 @@ import {
   LeafSpinner,
 } from "src/components/index";
 
+import {
+  panel_finance_config,
+  useFinanceData,
+  with_loaded_finance_data,
+} from "src/models/finances/finance_panels";
 import { calculate_internal_services_from_finance_data } from "src/models/finances/internal_services_calculations";
-import { useInternalServicesFinanceData } from "src/models/finances/useInternalServicesFinanceData";
 
 import { run_template } from "src/models/text";
 import { year_templates } from "src/models/years";
@@ -150,7 +154,10 @@ const InternalServicesPanel = ({
 
 const InternalServicesContainer = (props) => {
   const { subject } = props;
-  const { loading, finance_data } = useInternalServicesFinanceData(subject);
+  const { loading, finance_data } = useFinanceData(
+    subject,
+    "internal_services"
+  );
 
   const isc_label = text_maker("internal_services");
   const non_isc_label = text_maker("other_programs");
@@ -193,7 +200,14 @@ export const declare_internal_services_panel = () =>
     panel_config_func: () => ({
       get_dataset_keys: () => ["program_ftes"],
       get_title: () => text_maker("internal_service_panel_title"),
-      calculate: () => true,
+      ...panel_finance_config("internal_services", "dept"),
+      calculate: ({ subject }) =>
+        with_loaded_finance_data(subject, (finance_data) =>
+          calculate_internal_services_from_finance_data(subject, finance_data, {
+            isc_label: text_maker("internal_services"),
+            non_isc_label: text_maker("other_programs"),
+          })
+        ),
       render: (props) => <InternalServicesContainer {...props} />,
     }),
   });

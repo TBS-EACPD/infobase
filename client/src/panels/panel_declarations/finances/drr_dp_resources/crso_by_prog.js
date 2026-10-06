@@ -8,7 +8,11 @@ import { declare_panel } from "src/panels/PanelRegistry";
 import { create_text_maker_component, LeafSpinner } from "src/components/index";
 
 import { calculate_crso_by_prog_from_finance_data } from "src/models/finances/crso_by_prog_calculations";
-import { useCrsoByProgFinanceData } from "src/models/finances/useCrsoByProgFinanceData";
+import {
+  panel_finance_config,
+  useFinanceData,
+  with_loaded_finance_data,
+} from "src/models/finances/finance_panels";
 
 import { run_template } from "src/models/text";
 
@@ -219,7 +223,10 @@ class PlannedProgramResources extends React.Component {
 }
 
 const CrsoByProgContainer = ({ is_fte, subject, ...props }) => {
-  const { loading, finance_data } = useCrsoByProgFinanceData(subject);
+  const { loading, finance_data } = useFinanceData(
+    subject,
+    is_fte ? "crso_by_prog_fte" : "crso_by_prog_exp"
+  );
 
   const calculations = useMemo(() => {
     if (loading) {
@@ -254,7 +261,11 @@ export const declare_crso_by_prog_fte_panel = () =>
     panel_config_func: () => ({
       get_dataset_keys: () => ["program_ftes"],
       get_title: () => text_maker("crso_by_prog_fte_title"),
-      calculate: () => true,
+      ...panel_finance_config("crso_by_prog_fte", "crso"),
+      calculate: ({ subject }) =>
+        with_loaded_finance_data(subject, (finance_data) =>
+          calculate_crso_by_prog_from_finance_data(subject, finance_data, true)
+        ),
       render: (props) => <CrsoByProgContainer {...props} is_fte />,
     }),
   });
@@ -265,7 +276,11 @@ export const declare_crso_by_prog_exp_panel = () =>
     panel_config_func: () => ({
       get_dataset_keys: () => ["program_spending"],
       get_title: () => text_maker("crso_by_prog_exp_title"),
-      calculate: () => true,
+      ...panel_finance_config("crso_by_prog_exp", "crso"),
+      calculate: ({ subject }) =>
+        with_loaded_finance_data(subject, (finance_data) =>
+          calculate_crso_by_prog_from_finance_data(subject, finance_data, false)
+        ),
       render: (props) => <CrsoByProgContainer {...props} is_fte={false} />,
     }),
   });

@@ -13,7 +13,7 @@ export type OrgVoteStatEstimatesFieldsFragment = { __typename?: 'OrgVoteStatEsti
 
 export type ProgramVoteStatFieldsFragment = { __typename?: 'ProgramVoteStat', vs_type?: string | null, pa_last_year_3?: number | null, pa_last_year_2?: number | null, pa_last_year?: number | null };
 
-export type OrgSobjsFieldsFragment = { __typename?: 'OrgSobjs', so_num?: number | null, pa_last_year_5?: number | null, pa_last_year_4?: number | null, pa_last_year_3?: number | null, pa_last_year_2?: number | null, pa_last_year_1?: number | null };
+export type OrgSobjsFieldsFragment = { __typename?: 'OrgSobjs', dept_code?: string | null, so_num?: number | null, pa_last_year_5?: number | null, pa_last_year_4?: number | null, pa_last_year_3?: number | null, pa_last_year_2?: number | null, pa_last_year_1?: number | null };
 
 export type ProgramSobjsFieldsFragment = { __typename?: 'ProgramSobjs', program_id?: string | null, so_num?: number | null, pa_last_year_3?: number | null, pa_last_year_2?: number | null, pa_last_year?: number | null };
 
@@ -103,6 +103,7 @@ export const ProgramVoteStatFieldsFragmentDoc = gql`
     `;
 export const OrgSobjsFieldsFragmentDoc = gql`
     fragment OrgSobjsFields on OrgSobjs {
+  dept_code
   so_num
   pa_last_year_5
   pa_last_year_4

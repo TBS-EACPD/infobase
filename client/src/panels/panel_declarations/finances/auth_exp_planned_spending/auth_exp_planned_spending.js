@@ -21,7 +21,11 @@ import {
   calculate_lapse,
   flat_auth_exp_years,
 } from "src/models/finances/auth_exp_utils";
-import { useAuthExpPlannedSpendingFinanceData } from "src/models/finances/useAuthExpPlannedSpendingFinanceData";
+import {
+  panel_finance_config,
+  useFinanceData,
+  with_loaded_finance_data,
+} from "src/models/finances/finance_panels";
 import { create_footnote } from "src/models/footnotes/footnotes";
 import { run_template } from "src/models/text";
 import { year_templates } from "src/models/years";
@@ -542,8 +546,10 @@ const render = function ({
 
 const AuthExpPlannedSpendingContainer = (props) => {
   const { subject } = props;
-  const { loading, finance_data } =
-    useAuthExpPlannedSpendingFinanceData(subject);
+  const { loading, finance_data } = useFinanceData(
+    subject,
+    "auth_exp_planned_spending"
+  );
 
   const calculations = useMemo(() => {
     if (loading) {
@@ -571,7 +577,8 @@ export const declare_auth_exp_planned_spending_panel = () =>
   declare_panel({
     panel_key: "auth_exp_planned_spending",
     subject_types: ["gov", "dept"],
-    panel_config_func: () => ({
+    panel_config_func: (subject_type) => ({
+      ...panel_finance_config("auth_exp_planned_spending", subject_type),
       get_dataset_keys: () => [
         "org_vote_stat",
         "program_spending",
@@ -585,7 +592,14 @@ export const declare_auth_exp_planned_spending_panel = () =>
         text_maker("auth_exp_planned_spending_title", {
           has_planned_spending: subject.has_planned_spending,
         }),
-      calculate: () => true,
+      calculate: ({ subject }) =>
+        with_loaded_finance_data(subject, (finance_data) =>
+          calculate_auth_exp_planned_spending_from_finance_data(
+            subject,
+            finance_data,
+            { text_maker }
+          )
+        ),
       render: (props) => <AuthExpPlannedSpendingContainer {...props} />,
     }),
   });

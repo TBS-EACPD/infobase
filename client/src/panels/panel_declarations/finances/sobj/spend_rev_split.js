@@ -7,11 +7,14 @@ import { declare_panel } from "src/panels/PanelRegistry";
 import { create_text_maker_component, LeafSpinner } from "src/components/index";
 
 import {
+  panel_finance_config,
+  useFinanceData,
+  with_loaded_finance_data,
+} from "src/models/finances/finance_panels";
+import {
   calculate_dept_spend_rev_split_from_finance_data,
   calculate_program_spend_rev_split_from_finance_data,
 } from "src/models/finances/sobj_calculations";
-import { useOrgSobjsFinanceData } from "src/models/finances/useOrgSobjsFinanceData";
-import { useProgramSobjsFinanceData } from "src/models/finances/useProgramSobjsFinanceData";
 
 import { formats } from "src/core/format";
 
@@ -90,10 +93,7 @@ function render({
 }
 
 const SpendRevSplitContainer = ({ subject, ...props }) => {
-  const org_query = useOrgSobjsFinanceData(subject);
-  const program_query = useProgramSobjsFinanceData(subject);
-  const { loading, finance_data } =
-    subject.subject_type === "program" ? program_query : org_query;
+  const { loading, finance_data } = useFinanceData(subject, "spend_rev_split");
 
   const calculations = useMemo(() => {
     if (loading) {
@@ -129,7 +129,6 @@ const SpendRevSplitContainer = ({ subject, ...props }) => {
 
 const common_panel_config = {
   get_title: () => text_maker("spend_rev_split_title"),
-  calculate: () => true,
   render: (props) => <SpendRevSplitContainer {...props} />,
 };
 
@@ -142,11 +141,27 @@ export const declare_spend_rev_split_panel = () =>
         case "dept":
           return {
             ...common_panel_config,
+            ...panel_finance_config("spend_rev_split", "dept"),
+            calculate: ({ subject }) =>
+              with_loaded_finance_data(subject, (finance_data) =>
+                calculate_dept_spend_rev_split_from_finance_data(
+                  subject,
+                  finance_data
+                )
+              ),
             get_dataset_keys: () => ["org_standard_objects"],
           };
         case "program":
           return {
             ...common_panel_config,
+            ...panel_finance_config("spend_rev_split", "program"),
+            calculate: ({ subject }) =>
+              with_loaded_finance_data(subject, (finance_data) =>
+                calculate_program_spend_rev_split_from_finance_data(
+                  subject,
+                  finance_data
+                )
+              ),
             get_dataset_keys: () => ["program_standard_objects"],
           };
       }

@@ -5,8 +5,12 @@ import { declare_panel } from "src/panels/PanelRegistry";
 
 import { create_text_maker_component, LeafSpinner } from "src/components/index";
 
+import {
+  panel_finance_config,
+  useFinanceData,
+  with_loaded_finance_data,
+} from "src/models/finances/finance_panels";
 import { calculate_planned_actual_comparison_from_finance_data } from "src/models/finances/planned_actual_comparison_calculations";
-import { useWelcomeMatFinanceData } from "src/models/finances/useWelcomeMatFinanceData";
 
 import { PlannedActualTable } from "./PlannedActualTable";
 
@@ -54,7 +58,10 @@ const PlannedActualComparisonPanel = ({
 
 const PlannedActualComparisonContainer = (props) => {
   const { subject, sources, datasets } = props;
-  const { loading, finance_data } = useWelcomeMatFinanceData(subject);
+  const { loading, finance_data } = useFinanceData(
+    subject,
+    "planned_actual_comparison"
+  );
 
   const calculations = useMemo(() => {
     if (loading) {
@@ -90,10 +97,17 @@ export const declare_planned_actual_comparison_panel = () =>
   declare_panel({
     panel_key: "planned_actual_comparison",
     subject_types: ["dept", "crso", "program"],
-    panel_config_func: () => ({
+    panel_config_func: (subject_type) => ({
       get_dataset_keys: () => ["program_spending", "program_ftes"],
       get_title: () => text_maker("planned_actual_title"),
-      calculate: () => true,
+      ...panel_finance_config("planned_actual_comparison", subject_type),
+      calculate: ({ subject }) =>
+        with_loaded_finance_data(subject, (finance_data) =>
+          calculate_planned_actual_comparison_from_finance_data(
+            subject,
+            finance_data
+          )
+        ),
       render: (props) => <PlannedActualComparisonContainer {...props} />,
     }),
   });

@@ -10,8 +10,12 @@ import { DisplayTable, LeafSpinner } from "src/components/index";
 
 import { isSpecialWarrants } from "src/models/estimates";
 
+import {
+  panel_finance_config,
+  useFinanceData,
+  with_loaded_finance_data,
+} from "src/models/finances/finance_panels";
 import { calculate_in_year_vote_stat_breakdown_from_finance_data } from "src/models/finances/org_vote_stat_estimates_calculations";
-import { useOrgVoteStatEstimatesFinanceData } from "src/models/finances/useOrgVoteStatEstimatesFinanceData";
 import { est_in_year_col } from "src/models/finances/vote_stat_utils";
 import { Dept } from "src/models/subjects";
 
@@ -156,7 +160,10 @@ const planned_vote_or_stat_render = (vs) =>
 
 const InYearVoteStatBreakdownContainer = ({ vs, title_key, ...props }) => {
   const { subject } = props;
-  const { loading, finance_data } = useOrgVoteStatEstimatesFinanceData(subject);
+  const { loading, finance_data } = useFinanceData(
+    subject,
+    vs === "stat" ? "in_year_stat_breakdown" : "in_year_voted_breakdown"
+  );
 
   const calculations = useMemo(() => {
     if (loading || (vs === "stat" && isSpecialWarrants())) {
@@ -191,7 +198,15 @@ const declare_in_year_voted_breakdown_panel = () =>
     panel_config_func: () => ({
       get_dataset_keys: () => ["tabled_estimates"],
       get_title: () => text_maker("in_year_voted_breakdown_title"),
-      calculate: () => true,
+      ...panel_finance_config("in_year_voted_breakdown", "gov"),
+      calculate: ({ subject }) =>
+        with_loaded_finance_data(subject, (finance_data) =>
+          calculate_in_year_vote_stat_breakdown_from_finance_data(
+            "voted",
+            finance_data,
+            { text_maker }
+          )
+        ),
       render: (props) => (
         <InYearVoteStatBreakdownContainer
           {...props}
@@ -209,7 +224,19 @@ const declare_in_year_stat_breakdown_panel = () =>
     panel_config_func: () => ({
       get_dataset_keys: () => ["tabled_estimates"],
       get_title: () => text_maker("in_year_stat_breakdown_title"),
-      calculate: () => true,
+      ...panel_finance_config("in_year_stat_breakdown", "gov"),
+      calculate: ({ subject }) => {
+        if (isSpecialWarrants()) {
+          return false;
+        }
+        return with_loaded_finance_data(subject, (finance_data) =>
+          calculate_in_year_vote_stat_breakdown_from_finance_data(
+            "stat",
+            finance_data,
+            { text_maker }
+          )
+        );
+      },
       render: (props) => (
         <InYearVoteStatBreakdownContainer
           {...props}

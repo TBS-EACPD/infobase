@@ -369,6 +369,7 @@ export type OrgPeopleData = {
 
 export type OrgSobjs = {
   __typename?: 'OrgSobjs';
+  dept_code?: Maybe<Scalars['String']>;
   pa_last_year_1?: Maybe<Scalars['Float']>;
   pa_last_year_2?: Maybe<Scalars['Float']>;
   pa_last_year_3?: Maybe<Scalars['Float']>;

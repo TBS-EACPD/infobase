@@ -5,8 +5,12 @@ import { declare_panel } from "src/panels/PanelRegistry";
 
 import { LeafSpinner } from "src/components/index";
 
+import {
+  panel_finance_config,
+  useFinanceData,
+  with_loaded_finance_data,
+} from "src/models/finances/finance_panels";
 import { calculate_last_year_g_and_c_perspective_from_finance_data } from "src/models/finances/transfer_payments_calculations";
-import { useTransferPaymentsFinanceData } from "src/models/finances/useTransferPaymentsFinanceData";
 
 import { is_a11y_mode } from "src/core/injected_build_constants";
 
@@ -16,9 +20,10 @@ import { text_maker, TM } from "./gnc_text_provider";
 
 const LastYearGAndCPerspectiveContainer = (props) => {
   const { subject, title, footnotes, sources, datasets } = props;
-  const { loading, finance_data } = useTransferPaymentsFinanceData(subject, {
-    with_gov: true,
-  });
+  const { loading, finance_data } = useFinanceData(
+    subject,
+    "last_year_g_and_c_perspective"
+  );
 
   const calculations = useMemo(() => {
     if (loading) {
@@ -82,7 +87,14 @@ export const declare_last_year_g_and_c_perspective_panel = () =>
     panel_config_func: () => ({
       get_dataset_keys: () => ["transfer_payments", "program_spending"],
       get_title: () => text_maker("last_year_g_and_c_perspective_title"),
-      calculate: () => true,
+      ...panel_finance_config("last_year_g_and_c_perspective", "dept"),
+      calculate: ({ subject }) =>
+        with_loaded_finance_data(subject, (finance_data) =>
+          calculate_last_year_g_and_c_perspective_from_finance_data(
+            subject,
+            finance_data
+          )
+        ),
       render: (props) => <LastYearGAndCPerspectiveContainer {...props} />,
     }),
   });

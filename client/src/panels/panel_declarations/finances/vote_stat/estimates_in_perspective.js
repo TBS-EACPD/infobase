@@ -6,8 +6,12 @@ import { declare_panel } from "src/panels/PanelRegistry";
 
 import { LeafSpinner } from "src/components/index";
 
+import {
+  panel_finance_config,
+  useFinanceData,
+  with_loaded_finance_data,
+} from "src/models/finances/finance_panels";
 import { calculate_estimates_in_perspective_from_finance_data } from "src/models/finances/org_vote_stat_estimates_calculations";
-import { useOrgVoteStatEstimatesFinanceData } from "src/models/finances/useOrgVoteStatEstimatesFinanceData";
 import { create_footnote } from "src/models/footnotes/footnotes";
 
 import { is_a11y_mode } from "src/core/injected_build_constants";
@@ -59,9 +63,9 @@ const EstimatesInPerspectivePanel = ({
 
 const EstimatesInPerspectiveContainer = (props) => {
   const { subject } = props;
-  const { loading, finance_data } = useOrgVoteStatEstimatesFinanceData(
+  const { loading, finance_data } = useFinanceData(
     subject,
-    { with_gov: true }
+    "estimates_in_perspective"
   );
 
   const calculations = useMemo(() => {
@@ -98,7 +102,14 @@ export const declare_estimates_in_perspective_panel = () =>
     panel_config_func: () => ({
       get_title: () => text_maker("estimates_perspective_title"),
       get_dataset_keys: () => ["tabled_estimates"],
-      calculate: () => true,
+      ...panel_finance_config("estimates_in_perspective", "dept"),
+      calculate: ({ subject }) =>
+        with_loaded_finance_data(subject, (finance_data) =>
+          calculate_estimates_in_perspective_from_finance_data(
+            subject,
+            finance_data
+          )
+        ),
       render: (props) => <EstimatesInPerspectiveContainer {...props} />,
     }),
   });

@@ -12,7 +12,11 @@ import {
   TabsStateful,
 } from "src/components/index";
 
-import { useWelcomeMatFinanceData } from "src/models/finances/useWelcomeMatFinanceData";
+import {
+  panel_finance_config,
+  useFinanceData,
+  with_loaded_finance_data,
+} from "src/models/finances/finance_panels";
 import { calculate_welcome_mat_from_finance_data } from "src/models/finances/welcome_mat_calculations";
 
 import { create_footnote } from "src/models/footnotes/footnotes";
@@ -931,7 +935,7 @@ const WelcomeMatContainer = ({
   datasets,
   subject_type,
 }) => {
-  const { loading, finance_data } = useWelcomeMatFinanceData(subject);
+  const { loading, finance_data } = useFinanceData(subject, "welcome_mat");
 
   const calculations = useMemo(() => {
     if (loading) {
@@ -1034,7 +1038,11 @@ export const declare_welcome_mat_panel = () =>
       glossary_keys: _.includes(["program", "crso"], subject_type)
         ? ["FTE"]
         : [],
-      calculate: () => true,
+      ...panel_finance_config("welcome_mat", subject_type),
+      calculate: ({ subject }) =>
+        with_loaded_finance_data(subject, (finance_data) =>
+          calculate_welcome_mat_from_finance_data(subject, finance_data)
+        ),
       render: (props) => (
         <WelcomeMatContainer {...props} subject_type={subject_type} />
       ),

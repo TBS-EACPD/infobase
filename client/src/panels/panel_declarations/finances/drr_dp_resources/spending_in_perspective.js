@@ -10,8 +10,12 @@ import {
   Select,
 } from "src/components/index";
 
+import {
+  panel_finance_config,
+  useFinanceData,
+  with_loaded_finance_data,
+} from "src/models/finances/finance_panels";
 import { calculate_spending_in_tag_perspective_from_finance_data } from "src/models/finances/spending_in_tag_perspective_calculations";
-import { useSpendingInTagPerspectiveFinanceData } from "src/models/finances/useSpendingInTagPerspectiveFinanceData";
 
 import { WrappedNivoPie } from "src/charts/wrapped_nivo/index";
 
@@ -98,8 +102,10 @@ class SpendInTagPerspective extends React.Component {
 
 const SpendingInTagPerspectiveContainer = (props) => {
   const { subject } = props;
-  const { loading, finance_data } =
-    useSpendingInTagPerspectiveFinanceData(subject);
+  const { loading, finance_data } = useFinanceData(
+    subject,
+    "spending_in_tag_perspective"
+  );
 
   const calculations = useMemo(() => {
     if (loading) {
@@ -142,7 +148,14 @@ export const declare_spending_in_tag_perspective_panel = () =>
     panel_config_func: () => ({
       get_title: () => text_maker("program_spending_in_tag_perspective_title"),
       get_dataset_keys: () => ["program_spending"],
-      calculate: () => true,
+      ...panel_finance_config("spending_in_tag_perspective", "program"),
+      calculate: ({ subject }) =>
+        with_loaded_finance_data(subject, (finance_data) =>
+          calculate_spending_in_tag_perspective_from_finance_data(
+            subject,
+            finance_data
+          )
+        ),
       render: (props) => <SpendingInTagPerspectiveContainer {...props} />,
     }),
   });

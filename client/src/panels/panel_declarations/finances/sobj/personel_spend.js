@@ -6,8 +6,12 @@ import { declare_panel } from "src/panels/PanelRegistry";
 
 import { GraphOverlay, LeafSpinner } from "src/components/index";
 
+import {
+  panel_finance_config,
+  useFinanceData,
+  with_loaded_finance_data,
+} from "src/models/finances/finance_panels";
 import { calculate_personnel_spend_from_finance_data } from "src/models/finances/sobj_calculations";
-import { useOrgSobjsFinanceData } from "src/models/finances/useOrgSobjsFinanceData";
 
 import { run_template } from "src/models/text";
 import { year_templates } from "src/models/years";
@@ -64,7 +68,7 @@ const PersonnelSpendPanel = ({
 
 const PersonnelSpendContainer = (props) => {
   const { subject } = props;
-  const { loading, finance_data } = useOrgSobjsFinanceData(subject);
+  const { loading, finance_data } = useFinanceData(subject, "personnel_spend");
 
   const calculations = useMemo(() => {
     if (loading) {
@@ -97,7 +101,11 @@ export const declare_personnel_spend_panel = () =>
     panel_config_func: () => ({
       get_dataset_keys: () => ["org_standard_objects"],
       get_title: () => text_maker("personnel_spend_title"),
-      calculate: () => true,
+      ...panel_finance_config("personnel_spend", "gov"),
+      calculate: ({ subject }) =>
+        with_loaded_finance_data(subject, (finance_data) =>
+          calculate_personnel_spend_from_finance_data(finance_data)
+        ),
       render: (props) => <PersonnelSpendContainer {...props} />,
     }),
   });

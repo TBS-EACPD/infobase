@@ -93,6 +93,7 @@ const schema = `
     pa_last_year_1_exp: Float,
   }
   type OrgSobjs {
+    dept_code: String
     so_num: Float
     pa_last_year_5: Float
     pa_last_year_4: Float

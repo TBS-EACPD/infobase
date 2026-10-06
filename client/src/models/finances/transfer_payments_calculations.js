@@ -111,6 +111,17 @@ export function calculate_last_year_g_and_c_perspective_from_finance_data(
   subject,
   finance_data
 ) {
+  const org_transfer_rows = filter_org_transfer_payments_by_subject(
+    finance_data.org_transfer_payments,
+    subject
+  );
+  if (
+    _.isEmpty(org_transfer_rows) ||
+    _.isEmpty(finance_data.program_spending)
+  ) {
+    return false;
+  }
+
   const org_tp = sum_transfer_payment_exp(
     finance_data.org_transfer_payments,
     subject,
@@ -123,7 +134,7 @@ export function calculate_last_year_g_and_c_perspective_from_finance_data(
   );
   const dept_spending = sum_program_spending_col(
     finance_data.program_spending,
-    "{{pa_last_year}}"
+    exp_pa_last_year
   );
 
   return {

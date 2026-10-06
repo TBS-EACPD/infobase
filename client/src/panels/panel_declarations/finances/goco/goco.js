@@ -13,8 +13,12 @@ import {
   LeafSpinner,
 } from "src/components/index";
 
+import {
+  panel_finance_config,
+  useFinanceData,
+  with_loaded_finance_data,
+} from "src/models/finances/finance_panels";
 import { calculate_gocographic_from_finance_data } from "src/models/finances/goco_calculations";
-import { useWelcomeMatFinanceData } from "src/models/finances/useWelcomeMatFinanceData";
 
 import { newIBCategoryColors } from "src/core/color_schemes";
 import { get_formatter } from "src/core/format";
@@ -420,7 +424,7 @@ class Goco extends React.Component {
 
 const GocographicContainer = (props) => {
   const { subject } = props;
-  const { loading, finance_data } = useWelcomeMatFinanceData(subject);
+  const { loading, finance_data } = useFinanceData(subject, "gocographic");
 
   const spending_text = text_maker("spending");
   const ftes_text = text_maker("ftes");
@@ -460,7 +464,15 @@ export const declare_gocographic_panel = () =>
       get_dataset_keys: () => ["program_spending", "program_ftes"],
       get_title: () => text_maker("gocographic_title"),
       glossary_keys: ["GOCO"],
-      calculate: () => true,
+      ...panel_finance_config("gocographic", "gov"),
+      calculate: ({ subject }) =>
+        with_loaded_finance_data(subject, (finance_data) =>
+          calculate_gocographic_from_finance_data(finance_data, {
+            spending_text: text_maker("spending"),
+            ftes_text: text_maker("ftes"),
+            sa_text: text_maker("spending_area"),
+          })
+        ),
       render: (props) => <GocographicContainer {...props} />,
     }),
   });

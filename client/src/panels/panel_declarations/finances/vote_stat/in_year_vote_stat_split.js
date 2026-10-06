@@ -8,8 +8,12 @@ import { LeafSpinner } from "src/components/index";
 
 import { isSpecialWarrants } from "src/models/estimates";
 
+import {
+  panel_finance_config,
+  useFinanceData,
+  with_loaded_finance_data,
+} from "src/models/finances/finance_panels";
 import { calculate_in_year_voted_stat_split_from_finance_data } from "src/models/finances/org_vote_stat_estimates_calculations";
-import { useOrgVoteStatEstimatesFinanceData } from "src/models/finances/useOrgVoteStatEstimatesFinanceData";
 
 import { is_a11y_mode } from "src/core/injected_build_constants";
 
@@ -51,7 +55,10 @@ const InYearVotedStatSplitContainer = ({
   graph_col,
   ...props
 }) => {
-  const { loading, finance_data } = useOrgVoteStatEstimatesFinanceData(subject);
+  const { loading, finance_data } = useFinanceData(
+    subject,
+    "in_year_voted_stat_split"
+  );
 
   const calculations = useMemo(() => {
     if (loading || isSpecialWarrants()) {
@@ -83,7 +90,18 @@ const common_panel_config = {
   get_dataset_keys: () => ["tabled_estimates"],
   glossary_keys: ["AUTH"],
   get_title: () => text_maker("in_year_voted_stat_split_title"),
-  calculate: () => true,
+  calculate: ({ subject }) => {
+    if (isSpecialWarrants()) {
+      return false;
+    }
+    return with_loaded_finance_data(subject, (finance_data) =>
+      calculate_in_year_voted_stat_split_from_finance_data(
+        subject,
+        finance_data,
+        { stat, voted }
+      )
+    );
+  },
 };
 
 export const declare_in_year_voted_stat_split_panel = () =>
@@ -95,6 +113,7 @@ export const declare_in_year_voted_stat_split_panel = () =>
         case "gov":
           return {
             ...common_panel_config,
+            ...panel_finance_config("in_year_voted_stat_split", "gov"),
             render: (props) => (
               <InYearVotedStatSplitContainer
                 {...props}
@@ -107,6 +126,7 @@ export const declare_in_year_voted_stat_split_panel = () =>
         case "dept":
           return {
             ...common_panel_config,
+            ...panel_finance_config("in_year_voted_stat_split", "dept"),
             render: (props) => (
               <InYearVotedStatSplitContainer
                 {...props}

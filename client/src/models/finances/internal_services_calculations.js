@@ -24,7 +24,7 @@ export function calculate_internal_services_from_finance_data(
   const isc_tag = ProgramTag.store.lookup("GOC017");
   const tag_program_ids = _.map(isc_tag.programs, (program) => program.id);
 
-  const dept_fte_rows = finance_data.org_program_fte;
+  const dept_fte_rows = finance_data.program_fte;
   const gov_fte_rows = finance_data.gov_program_fte;
 
   const gov_fte_total = sum_program_fte_col(gov_fte_rows, last_year_fte_col);

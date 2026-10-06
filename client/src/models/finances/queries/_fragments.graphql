@@ -75,6 +75,7 @@ fragment ProgramVoteStatFields on ProgramVoteStat {
 }
 
 fragment OrgSobjsFields on OrgSobjs {
+  dept_code
   so_num
   pa_last_year_5
   pa_last_year_4
