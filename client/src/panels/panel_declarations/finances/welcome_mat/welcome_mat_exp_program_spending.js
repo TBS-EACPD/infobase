@@ -3,6 +3,10 @@ import _ from "lodash";
 import React, { Fragment } from "react";
 import MediaQuery from "react-responsive";
 
+import {
+  sum_org_vote_stat_pa_exp_cols,
+  sum_program_spending_col,
+} from "src/models/finances/finance_utils";
 import { run_template, trivial_text_maker } from "src/models/text";
 import { year_templates, actual_to_planned_gap_year } from "src/models/years";
 
@@ -11,36 +15,37 @@ import { is_a11y_mode } from "src/core/injected_build_constants";
 
 import { WrappedNivoLine } from "src/charts/wrapped_nivo/index";
 import { tertiaryColor } from "src/style_constants/index";
-import { Table } from "src/tables/TableClass";
 
 const { std_years, planning_years } = year_templates;
 const exp_cols = _.map(std_years, (yr) => `${yr}exp`);
 
-const calculate = (type, subject) => {
-  const orgVoteStatPa = Table.store.lookup("orgVoteStatPa");
-  const programSpending = Table.store.lookup("programSpending");
-  const query_subject = subject.subject_type === "gov" ? undefined : subject;
-  const qExp =
+const calculate = (type, subject, finance_data) => {
+  const spending_rows = finance_data.program_spending;
+
+  const exp =
     subject.subject_type === "dept"
       ? type != "planned"
-        ? orgVoteStatPa.q(query_subject)
+        ? sum_org_vote_stat_pa_exp_cols(finance_data.org_vote_stat_pa)
         : null
-      : programSpending.q(query_subject);
-  const exp = qExp && qExp.sum(exp_cols, { as_object: false });
+      : _.map(exp_cols, (col) => sum_program_spending_col(spending_rows, col));
 
-  const qProgSpending =
-    type != "hist" ? programSpending.q(query_subject) : null;
   const progSpending =
-    qProgSpending && subject.has_planned_spending
-      ? qProgSpending.sum(planning_years, { as_object: false })
+    type != "hist" && subject.has_planned_spending
+      ? _.map(planning_years, (col) =>
+          sum_program_spending_col(spending_rows, col)
+        )
       : null;
 
   return { exp, progSpending };
 };
 
-export const format_and_get_exp_program_spending = (type, subject) => {
+export const format_and_get_exp_program_spending = (
+  type,
+  subject,
+  finance_data
+) => {
   const colors = scaleOrdinal().range(newIBCategoryColors);
-  const { exp, progSpending } = calculate(type, subject);
+  const { exp, progSpending } = calculate(type, subject, finance_data);
   const raw_data = _.concat(exp, progSpending);
 
   const exp_exists =

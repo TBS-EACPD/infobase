@@ -79,33 +79,35 @@ export const get_dept_panels = (subject) =>
     has_covid_data: true,
     has_services: services_feature_flag,
     has_people_data: true,
+    has_finance_data: true,
     requires_result_counts: true,
     table_keys: ["programFtes"],
   }).then(() => ({
     intro: [declare_profile_panel(), declare_portfolio_structure_intro_panel()],
-    financial: !_.chain(subject.table_ids)
-      .intersection(["programSpending", "orgVoteStatEstimates"])
-      .isEmpty()
-      .value() && [
-      declare_financial_key_concepts_panel(),
-      declare_late_actual_resources_panel(),
-      declare_late_planned_resources_panel(),
-      declare_late_planned_fte_panel(),
-      declare_temp_untabled_warning_panel(),
-      declare_special_warrants_warning_panel(),
-      declare_welcome_mat_panel(),
-      declare_auth_exp_planned_spending_panel(),
-      declare_in_year_estimates_split_panel(),
-      declare_in_year_voted_stat_split_panel(),
-      declare_estimates_in_perspective_panel(),
-      declare_spend_by_so_hist_panel(),
-      declare_last_year_g_and_c_perspective_panel(),
-      declare_historical_g_and_c_panel(),
-      declare_spend_rev_split_panel(),
-      declare_detailed_program_spending_split_panel(),
-      declare_internal_services_panel(),
-      declare_planned_actual_comparison_panel(),
-    ],
+    ...(subject.has_data("finance_data")
+      ? {
+          financial: [
+            declare_financial_key_concepts_panel(),
+            declare_late_actual_resources_panel(),
+            declare_late_planned_resources_panel(),
+            declare_late_planned_fte_panel(),
+            declare_temp_untabled_warning_panel(),
+            declare_special_warrants_warning_panel(),
+            declare_welcome_mat_panel(),
+            declare_auth_exp_planned_spending_panel(),
+            declare_in_year_estimates_split_panel(),
+            declare_in_year_voted_stat_split_panel(),
+            declare_estimates_in_perspective_panel(),
+            declare_spend_by_so_hist_panel(),
+            declare_last_year_g_and_c_perspective_panel(),
+            declare_historical_g_and_c_panel(),
+            declare_spend_rev_split_panel(),
+            declare_detailed_program_spending_split_panel(),
+            declare_internal_services_panel(),
+            declare_planned_actual_comparison_panel(),
+          ],
+        }
+      : {}),
     covid: subject.has_data("covid") && [
       declare_covid_key_concepts_panel(),
       declare_covid_intro_panel(),

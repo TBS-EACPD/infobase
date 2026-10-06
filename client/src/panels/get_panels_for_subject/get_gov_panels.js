@@ -48,33 +48,41 @@ import {
   declare_personnel_spend_panel,
 } from "src/panels/panel_declarations/index";
 
+import { Gov } from "src/models/subjects";
+
 import { ensure_loaded } from "src/core/ensure_loaded";
 import { services_feature_flag } from "src/core/injected_build_constants";
 
 // Late warning panels need result counts + programFtes so they show correctly regardless of nav path.
 export const get_gov_panels = () =>
   ensure_loaded({
+    subject: Gov.instance,
+    has_finance_data: true,
     requires_result_counts: true,
     table_keys: ["programFtes"],
   }).then(() => ({
     intro: [declare_simplographic_panel()],
-    financial: [
-      declare_financial_key_concepts_panel(),
-      declare_late_actual_resources_panel(),
-      declare_late_planned_resources_panel(),
-      declare_late_planned_fte_panel(),
-      declare_temp_untabled_warning_panel(),
-      declare_special_warrants_warning_panel(),
-      declare_welcome_mat_panel(),
-      declare_auth_exp_planned_spending_panel(),
-      declare_in_year_estimates_split_panel(),
-      declare_in_year_voted_stat_split_panel(),
-      declare_in_year_stat_breakdown_panel(),
-      declare_in_year_voted_breakdown_panel(),
-      declare_gocographic_panel(),
-      declare_historical_g_and_c_panel(),
-      declare_personnel_spend_panel(),
-    ],
+    ...(Gov.instance.has_data("finance_data")
+      ? {
+          financial: [
+            declare_financial_key_concepts_panel(),
+            declare_late_actual_resources_panel(),
+            declare_late_planned_resources_panel(),
+            declare_late_planned_fte_panel(),
+            declare_temp_untabled_warning_panel(),
+            declare_special_warrants_warning_panel(),
+            declare_welcome_mat_panel(),
+            declare_auth_exp_planned_spending_panel(),
+            declare_in_year_estimates_split_panel(),
+            declare_in_year_voted_stat_split_panel(),
+            declare_in_year_stat_breakdown_panel(),
+            declare_in_year_voted_breakdown_panel(),
+            declare_gocographic_panel(),
+            declare_historical_g_and_c_panel(),
+            declare_personnel_spend_panel(),
+          ],
+        }
+      : {}),
     covid: [
       declare_covid_key_concepts_panel(),
       declare_covid_intro_panel(),
