@@ -1,6 +1,9 @@
+import _ from "lodash";
+
 import {
   bin_for_distance,
   build_departmental_result_distance_chart,
+  count_indicators_by_distance,
   indicator_distance,
 } from "./indicator_distance";
 
@@ -254,5 +257,21 @@ describe("build_departmental_result_distance_chart", () => {
         }),
       },
     ]);
+  });
+});
+
+describe("count_indicators_by_distance", () => {
+  it("counts plottable indicators and leaves the rest out", () => {
+    const summary = count_indicators_by_distance([
+      indicator({ actual_result: "100" }),
+      indicator({ actual_result: "80", status_key: "not_met" }),
+      indicator({ target_type: "text", actual_result: "narrative" }),
+    ]);
+
+    expect(summary.total_count).toBe(3);
+    expect(summary.included_count).toBe(2);
+    expect(summary.counts.met).toBe(1);
+    expect(summary.counts.neg_20).toBe(1);
+    expect(_.sum(_.values(summary.counts))).toBe(2);
   });
 });

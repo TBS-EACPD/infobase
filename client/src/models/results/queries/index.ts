@@ -1,4 +1,10 @@
 export {
+  promisedGovDrrIndicators,
+  suspendedGovDrrIndicators,
+  useGovDrrIndicators,
+} from "./GovDrrIndicators/GovDrrIndicators";
+
+export {
   promisedDeptResultsSummary,
   suspendedDeptResultsSummary,
   useDeptResultsSummary,

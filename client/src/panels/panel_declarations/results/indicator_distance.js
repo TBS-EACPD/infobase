@@ -250,6 +250,25 @@ export const bin_for_distance = (distance) => {
 const empty_bin_counts = () =>
   _.fromPairs(_.map(DISTANCE_BINS, ({ id }) => [id, 0]));
 
+export const count_indicators_by_distance = (indicators) => {
+  const counts = empty_bin_counts();
+  let included_count = 0;
+
+  _.forEach(indicators, (indicator) => {
+    const distance = indicator_distance(indicator);
+    if (!_.isNull(distance)) {
+      counts[bin_for_distance(distance)] += 1;
+      included_count += 1;
+    }
+  });
+
+  return {
+    counts,
+    included_count,
+    total_count: indicators.length,
+  };
+};
+
 export const build_departmental_result_distance_chart = (indicators) => {
   const rows_by_cr = {};
   const cr_order = [];
