@@ -286,7 +286,11 @@ export default function ({ models, loaders }) {
       _.map(results, "result_id")
     );
 
-    return _.chain(indicator_groups).flatten().compact().filter({ doc }).value();
+    return _.chain(indicator_groups)
+      .flatten()
+      .compact()
+      .filter({ doc })
+      .value();
   }
 
   const resolvers = {

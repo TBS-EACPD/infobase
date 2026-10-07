@@ -94,8 +94,7 @@ const is_type_switch = (indicator) => {
   );
 };
 
-const snap_near_zero = (value) =>
-  Math.abs(value) < ZERO_EPSILON ? 0 : value;
+const snap_near_zero = (value) => (Math.abs(value) < ZERO_EPSILON ? 0 : value);
 
 // Minimum target: meet when result >= target. Positive means the result beat the target.
 const minimum_target_distance = (result, target) => {
@@ -307,6 +306,5 @@ export const build_departmental_result_distance_chart = (indicators) => {
 export const visible_distance_bins = (rows) =>
   _.filter(
     DISTANCE_BINS,
-    (bin) =>
-      !bin.overflow || _.some(rows, (row) => row.counts[bin.id] > 0)
+    (bin) => !bin.overflow || _.some(rows, (row) => row.counts[bin.id] > 0)
   );
