@@ -174,6 +174,7 @@ export type Gov = {
   all_target_counts_granular?: Maybe<Array<Maybe<AllDocResultCount>>>;
   all_target_counts_summary?: Maybe<Array<Maybe<AllDocResultCount>>>;
   covid_summary?: Maybe<Array<Maybe<CovidGovSummary>>>;
+  departmental_result_indicators?: Maybe<Array<Maybe<Indicator>>>;
   dr_target_counts_granular?: Maybe<Array<Maybe<AllDocResultCount>>>;
   dr_target_counts_summary?: Maybe<Array<Maybe<AllDocResultCount>>>;
   id?: Maybe<Scalars['String']>;
@@ -190,6 +191,11 @@ export type Gov = {
 
 export type GovCovid_SummaryArgs = {
   fiscal_year?: InputMaybe<Scalars['Int']>;
+};
+
+
+export type GovDepartmental_Result_IndicatorsArgs = {
+  doc: Scalars['String'];
 };
 
 

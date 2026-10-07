@@ -18,6 +18,7 @@ import { WrappedNivoPie } from "src/charts/wrapped_nivo/index";
 
 import { toggle_list } from "src/general_utils";
 
+import { GovIndicatorDistanceChart } from "./GovIndicatorDistanceChart";
 import { IndicatorDistanceChart } from "./IndicatorDistanceChart";
 import { large_status_icons } from "./result_components";
 import {
@@ -312,6 +313,7 @@ const IndicatorSummary = ({
   rows_of_counts_by_dept,
   column_configs,
   distance_chart,
+  gov_distance_chart,
 }) => {
   return (
     <div id={"indicators_tab_pane"}>
@@ -360,6 +362,12 @@ const IndicatorSummary = ({
             included_count={distance_chart.included_count}
             total_count={distance_chart.total_count}
           />
+        </div>
+      )}
+      {gov_distance_chart && (
+        <div>
+          <div className="panel-separator" style={{ marginTop: "0px" }} />
+          <GovIndicatorDistanceChart drr_key={drr_key} />
         </div>
       )}
       {results_dept_count && (
@@ -430,6 +438,7 @@ export const CommonDrrSummary = ({
                   results_dept_count={results_dept_count}
                   rows_of_counts_by_dept={rows_of_counts_by_dept.dr}
                   column_configs={column_configs}
+                  gov_distance_chart
                 />
               ),
             },

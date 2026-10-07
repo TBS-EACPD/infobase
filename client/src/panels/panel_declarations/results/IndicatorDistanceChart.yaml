@@ -9,6 +9,15 @@ distance_chart_note:
   fr: |
     Indicateurs de résultats ministériels numériques seulement. Les indicateurs non numériques, les indicateurs dont le type de cible est passé de numérique à non numérique (ou l'inverse) et les indicateurs sans résultat numérique sont exclus.
 
+distance_histogram_y_axis:
+  en: Number of indicators
+  fr: Nombre d'indicateurs
+
+distance_histogram_table_caption:
+  transform: [handlebars]
+  en: Number of numeric departmental result indicators by distance from target, {{year}}
+  fr: Nombre d'indicateurs de résultats ministériels numériques selon l'écart par rapport à la cible, {{year}}
+
 distance_chart_counts:
   transform: [handlebars]
   en: "{{included}} of {{total}} departmental result indicators are shown."
