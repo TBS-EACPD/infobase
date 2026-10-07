@@ -2,10 +2,7 @@ import classNames from "classnames";
 import _ from "lodash";
 import React, { Fragment } from "react";
 
-import {
-  create_text_maker_component,
-  LeafSpinner,
-} from "src/components/index";
+import { create_text_maker_component, LeafSpinner } from "src/components/index";
 
 import { useGovDrrIndicators } from "src/models/results/queries";
 
@@ -149,7 +146,9 @@ const Histogram = ({ year, counts }) => {
           </caption>
           <thead>
             <tr>
-              <th scope="col">{text_maker("distance_chart_title", { year })}</th>
+              <th scope="col">
+                {text_maker("distance_chart_title", { year })}
+              </th>
               <th scope="col">{text_maker("distance_histogram_y_axis")}</th>
             </tr>
           </thead>

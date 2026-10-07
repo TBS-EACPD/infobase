@@ -74,9 +74,9 @@ describe("indicator_distance", () => {
       target_min: "100",
       target_max: "100",
     };
-    expect(indicator_distance(indicator({ ...exact, actual_result: "100" }))).toBe(
-      0
-    );
+    expect(
+      indicator_distance(indicator({ ...exact, actual_result: "100" }))
+    ).toBe(0);
     expect(
       indicator_distance(
         indicator({ ...exact, actual_result: "90", status_key: "not_met" })
