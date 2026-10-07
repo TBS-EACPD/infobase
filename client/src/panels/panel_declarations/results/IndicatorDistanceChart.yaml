@@ -1,0 +1,129 @@
+distance_chart_title:
+  transform: [handlebars]
+  en: Distance from target, {{year}}
+  fr: Écart par rapport à la cible, {{year}}
+
+distance_chart_note:
+  en: |
+    Numeric departmental result indicators only. Non-numeric indicators, indicators whose target type changed between numeric and non-numeric, and indicators without a numeric result are excluded.
+  fr: |
+    Indicateurs de résultats ministériels numériques seulement. Les indicateurs non numériques, les indicateurs dont le type de cible est passé de numérique à non numérique (ou l'inverse) et les indicateurs sans résultat numérique sont exclus.
+
+distance_histogram_y_axis:
+  en: Number of indicators
+  fr: Nombre d'indicateurs
+
+distance_histogram_table_caption:
+  transform: [handlebars]
+  en: Number of numeric departmental result indicators by distance from target, {{year}}
+  fr: Nombre d'indicateurs de résultats ministériels numériques selon l'écart par rapport à la cible, {{year}}
+
+distance_chart_counts:
+  transform: [handlebars]
+  en: "{{included}} of {{total}} departmental result indicators are shown."
+  fr: "{{included}} des {{total}} indicateurs de résultats ministériels sont présentés."
+
+distance_cell_title:
+  transform: [handlebars]
+  en: "{{label}}: {{count}}"
+  fr: "{{label}} : {{count}}"
+
+distance_result_column:
+  en: Core responsibility
+  fr: Responsabilité essentielle
+
+distance_legend_short:
+  en: Fell short of the target
+  fr: Inférieur à la cible
+
+distance_legend_met:
+  en: Met the target
+  fr: Cible atteinte
+
+distance_legend_exceeded:
+  en: Exceeded the target
+  fr: Supérieur à la cible
+
+distance_bin_lte_neg_100:
+  en: "≤ −100%"
+  fr: "≤ −100 %"
+
+distance_bin_neg_90:
+  en: "−90%"
+  fr: "−90 %"
+
+distance_bin_neg_80:
+  en: "−80%"
+  fr: "−80 %"
+
+distance_bin_neg_70:
+  en: "−70%"
+  fr: "−70 %"
+
+distance_bin_neg_60:
+  en: "−60%"
+  fr: "−60 %"
+
+distance_bin_neg_50:
+  en: "−50%"
+  fr: "−50 %"
+
+distance_bin_neg_40:
+  en: "−40%"
+  fr: "−40 %"
+
+distance_bin_neg_30:
+  en: "−30%"
+  fr: "−30 %"
+
+distance_bin_neg_20:
+  en: "−20%"
+  fr: "−20 %"
+
+distance_bin_neg_10:
+  en: "−10%"
+  fr: "−10 %"
+
+distance_bin_met:
+  en: Met
+  fr: Atteinte
+
+distance_bin_pos_10:
+  en: "+10%"
+  fr: "+10 %"
+
+distance_bin_pos_20:
+  en: "+20%"
+  fr: "+20 %"
+
+distance_bin_pos_30:
+  en: "+30%"
+  fr: "+30 %"
+
+distance_bin_pos_40:
+  en: "+40%"
+  fr: "+40 %"
+
+distance_bin_pos_50:
+  en: "+50%"
+  fr: "+50 %"
+
+distance_bin_pos_60:
+  en: "+60%"
+  fr: "+60 %"
+
+distance_bin_pos_70:
+  en: "+70%"
+  fr: "+70 %"
+
+distance_bin_pos_80:
+  en: "+80%"
+  fr: "+80 %"
+
+distance_bin_pos_90:
+  en: "+90%"
+  fr: "+90 %"
+
+distance_bin_gte_pos_100:
+  en: "≥ +100%"
+  fr: "≥ +100 %"

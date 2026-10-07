@@ -1,0 +1,16 @@
+query GovDrrIndicators($lang: String!, $doc: String!) {
+  root(lang: $lang) {
+    gov {
+      departmental_result_indicators(doc: $doc) {
+        doc
+        target_type
+        target_min
+        target_max
+        seeking_to
+        actual_result
+        status_key
+        previous_year_target_type
+      }
+    }
+  }
+}
