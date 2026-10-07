@@ -2,8 +2,10 @@ query DeptResultsSummary($lang: String!, $orgId: String) {
   root(lang: $lang) {
     org(org_id: $orgId) {
       crsos {
+        id
         name
         results {
+          id
           doc
           name
           indicators {
@@ -13,6 +15,7 @@ query DeptResultsSummary($lang: String!, $orgId: String) {
         programs {
           name
           results {
+            id
             doc
             name
             indicators {

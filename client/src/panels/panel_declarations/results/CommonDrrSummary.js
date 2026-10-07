@@ -18,6 +18,7 @@ import { WrappedNivoPie } from "src/charts/wrapped_nivo/index";
 
 import { toggle_list } from "src/general_utils";
 
+import { IndicatorDistanceChart } from "./IndicatorDistanceChart";
 import { large_status_icons } from "./result_components";
 import {
   ordered_status_keys,
@@ -310,6 +311,7 @@ const IndicatorSummary = ({
   results_dept_count,
   rows_of_counts_by_dept,
   column_configs,
+  distance_chart,
 }) => {
   return (
     <div id={"indicators_tab_pane"}>
@@ -349,6 +351,17 @@ const IndicatorSummary = ({
           />
         </div>
       </div>
+      {distance_chart && (
+        <div>
+          <div className="panel-separator" style={{ marginTop: "0px" }} />
+          <IndicatorDistanceChart
+            year={get_year_for_doc_key(drr_key)}
+            rows={distance_chart.rows}
+            included_count={distance_chart.included_count}
+            total_count={distance_chart.total_count}
+          />
+        </div>
+      )}
       {results_dept_count && (
         <div id={"gov_indicator_table"}>
           <div className="panel-separator" style={{ marginTop: "0px" }} />
@@ -378,6 +391,7 @@ export const CommonDrrSummary = ({
   results_dept_count,
   rows_of_counts_by_dept,
   column_configs,
+  distance_chart,
 }) => {
   const current_drr_counts_with_generic_keys = {
     total: filter_and_genericize_doc_counts(verbose_counts.total, drr_key),
@@ -445,6 +459,7 @@ export const CommonDrrSummary = ({
                   counts={counts.dept_indicators_status}
                   drr_key={drr_key}
                   summary_text_args={summary_text_args}
+                  distance_chart={distance_chart}
                 />
               ),
             },
