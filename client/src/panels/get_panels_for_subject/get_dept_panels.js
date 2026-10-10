@@ -37,6 +37,7 @@ import {
   declare_in_year_voted_stat_split_panel,
   declare_in_year_estimates_split_panel,
   declare_historical_g_and_c_panel,
+  declare_recipients_panel,
   declare_auth_exp_planned_spending_panel,
   declare_services_intro_panel,
   declare_subject_offering_services_panel,
@@ -81,6 +82,7 @@ export const get_dept_panels = (subject) =>
     has_people_data: true,
     requires_result_counts: true,
     table_keys: ["programFtes"],
+    has_recipients: true,
   }).then(() => ({
     intro: [declare_profile_panel(), declare_portfolio_structure_intro_panel()],
     financial: !_.chain(subject.table_ids)
@@ -101,6 +103,7 @@ export const get_dept_panels = (subject) =>
       declare_spend_by_so_hist_panel(),
       declare_last_year_g_and_c_perspective_panel(),
       declare_historical_g_and_c_panel(),
+      declare_recipients_panel(),
       declare_spend_rev_split_panel(),
       declare_detailed_program_spending_split_panel(),
       declare_internal_services_panel(),

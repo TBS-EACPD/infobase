@@ -219,6 +219,7 @@ export class Canada extends React.Component {
         color: applyOpacity(interpolateBlues(color_scale(tick))),
       })
     );
+
     return (
       <div className="row">
         <div className="col-12 col-lg-3">

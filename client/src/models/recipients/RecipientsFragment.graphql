@@ -1,0 +1,10 @@
+fragment RecipientsFragment on Recipients {
+  year
+  org_id
+  transfer_payment
+  recipient
+  city
+  province
+  country
+  expenditure
+}

@@ -6,6 +6,7 @@ import covid from "./covid/index.js";
 import resources from "./finances/index.js";
 import model_singleton from "./model_singleton.js";
 import people from "./people/index.js";
+import recipients from "./recipients/index.js";
 import results from "./results/index.js";
 import root_schema from "./schema_root.js";
 import services from "./services/index.js";
@@ -24,6 +25,7 @@ const sub_module_defs = _.compact([
   covid,
   services,
   people,
+  recipients,
   // pses,
   // sobjs,
   // search,
