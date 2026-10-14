@@ -1,7 +1,6 @@
 import _ from "lodash";
 import React from "react";
 
-
 import { create_text_maker_component, LeafSpinner } from "src/components/index";
 
 import { useIndicatorHistory } from "src/models/results/queries";
@@ -84,7 +83,10 @@ export const IndicatorHistoryChart = ({ stable_id }) => {
       ],
     ])
   );
-  const raw_data = _.filter(_.flatMap(lines, (line) => _.map(line.data, "y")), _.isNumber);
+  const raw_data = _.filter(
+    _.flatMap(lines, (line) => _.map(line.data, "y")),
+    _.isNumber
+  );
 
   return (
     <div className="indicator-history-chart">
