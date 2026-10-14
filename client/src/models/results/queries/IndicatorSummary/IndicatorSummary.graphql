@@ -4,11 +4,15 @@ fragment IndicatorSummary on Indicator {
   doc
   target_month
   target_year
+  target_type
   target_min
+  target_max
+  seeking_to
   actual_result
   status_key
   result_explanation
   methodology
+  previous_year_target_type
   previous_year_target_min
   previous_year_actual_result
 }

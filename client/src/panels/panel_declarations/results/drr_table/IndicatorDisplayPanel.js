@@ -2,6 +2,7 @@ import { gql } from "@apollo/client";
 
 import React from "react";
 
+import { IndicatorHistoryChart } from "src/panels/panel_declarations/results/IndicatorHistoryChart";
 import { IndicatorDisplay } from "src/panels/panel_declarations/results/result_components";
 
 import {
@@ -106,6 +107,9 @@ export default class IndicatorDisplayPanel extends React.Component {
         }
       >
         <IndicatorDisplay indicator={indicator} show_doc={true} />
+        {indicator.stable_id && (
+          <IndicatorHistoryChart stable_id={indicator.stable_id} />
+        )}
       </Panel>
     );
   }
