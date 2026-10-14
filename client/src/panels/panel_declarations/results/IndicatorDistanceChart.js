@@ -58,6 +58,8 @@ export const IndicatorDistanceChart = ({
   total_count,
 }) => {
   const bins = visible_distance_bins(rows);
+  const chart_min_width = `calc(${NAME_COLUMN} + ${bins.length} * ${BIN_COLUMN})`;
+  const chart_columns = `${NAME_COLUMN} repeat(${bins.length}, minmax(${BIN_COLUMN}, 1fr))`;
 
   return (
     <div className="indicator-distance-chart">
@@ -84,7 +86,8 @@ export const IndicatorDistanceChart = ({
               aria-hidden="true"
               className="indicator-distance-chart__axis"
               style={{
-                gridTemplateColumns: `${NAME_COLUMN} repeat(${bins.length}, ${BIN_COLUMN})`,
+                gridTemplateColumns: chart_columns,
+                minWidth: chart_min_width,
               }}
             >
               <div className="indicator-distance-chart__axis-name">
@@ -106,11 +109,12 @@ export const IndicatorDistanceChart = ({
             <table
               className="indicator-distance-chart__table"
               aria-labelledby="indicator-distance-chart-title"
+              style={{ minWidth: chart_min_width }}
             >
               <colgroup>
                 <col style={{ width: NAME_COLUMN }} />
                 {_.map(bins, (bin) => (
-                  <col key={bin.id} style={{ width: BIN_COLUMN }} />
+                  <col key={bin.id} />
                 ))}
               </colgroup>
               <thead>

@@ -19,8 +19,6 @@ import "./IndicatorDistanceHistogram.scss";
 
 const { text_maker, TM } = create_text_maker_component(text);
 
-const BIN_COLUMN = "2rem";
-
 const tone_class = {
   short: "results-icon-array-fail",
   met: "results-icon-array-pass",
@@ -78,6 +76,7 @@ const Histogram = ({ year, counts }) => {
         <div
           className="indicator-distance-histogram__figure"
           aria-hidden="true"
+          style={{ "--distance-bin-count": bins.length }}
         >
           <div className="indicator-distance-histogram__y-label">
             {text_maker("distance_histogram_y_axis")}
@@ -103,7 +102,6 @@ const Histogram = ({ year, counts }) => {
                     <div
                       key={bin.id}
                       className="indicator-distance-histogram__slot"
-                      style={{ width: BIN_COLUMN }}
                     >
                       {count > 0 && (
                         <div
@@ -128,7 +126,6 @@ const Histogram = ({ year, counts }) => {
                 <div
                   key={bin.id}
                   className="indicator-distance-histogram__axis-slot"
-                  style={{ width: BIN_COLUMN }}
                 >
                   {bin.show_axis_label && (
                     <span className="indicator-distance-histogram__axis-label">

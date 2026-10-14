@@ -4,17 +4,20 @@
 }
 
 .indicator-distance-histogram__chart {
+  flex: 1 1 auto;
+  min-width: calc(var(--distance-bin-count) * 2rem + 4.6rem);
   padding-right: 2rem;
 }
 
 .indicator-distance-histogram__figure {
   display: flex;
   align-items: stretch;
-  width: max-content;
+  width: 100%;
 }
 
 .indicator-distance-histogram__y-label {
   display: flex;
+  flex: none;
   align-items: center;
   justify-content: center;
   writing-mode: vertical-rl;
@@ -27,6 +30,8 @@
   position: relative;
   display: flex;
   align-items: flex-end;
+  box-sizing: border-box;
+  width: calc(100% - 2.6rem);
   height: 16rem;
   margin-left: 2.6rem;
   border-left: 1px solid #bbb;
@@ -53,6 +58,7 @@
 .indicator-distance-histogram__bars {
   display: flex;
   align-items: flex-end;
+  width: 100%;
   height: 100%;
   position: relative;
   z-index: 1;
@@ -60,8 +66,10 @@
 
 .indicator-distance-histogram__slot {
   display: flex;
+  flex: 1 1 2rem;
   align-items: flex-end;
   justify-content: center;
+  min-width: 2rem;
   height: 100%;
 }
 
@@ -72,14 +80,17 @@
 
 .indicator-distance-histogram__axis {
   display: flex;
+  box-sizing: border-box;
+  width: calc(100% - 2.6rem - 1px);
   margin-top: 0.45rem;
   margin-left: calc(2.6rem + 1px);
 }
 
 .indicator-distance-histogram__axis-slot {
   position: relative;
+  flex: 1 1 2rem;
   height: 1.25rem;
-  min-width: 0;
+  min-width: 2rem;
 }
 
 .indicator-distance-histogram__axis-label {

@@ -39,7 +39,7 @@
 .indicator-distance-chart__axis {
   display: grid;
   align-items: end;
-  width: max-content;
+  width: 100%;
   margin-bottom: 2px;
 }
 
@@ -70,7 +70,7 @@
 .indicator-distance-chart__table {
   border-collapse: separate;
   border-spacing: 0 2px;
-  width: max-content;
+  width: 100%;
   table-layout: fixed;
 }
 
