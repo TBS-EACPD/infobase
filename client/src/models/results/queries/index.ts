@@ -1,4 +1,10 @@
 export {
+  promisedIndicatorHistory,
+  suspendedIndicatorHistory,
+  useIndicatorHistory,
+} from "./IndicatorHistory/IndicatorHistory";
+
+export {
   promisedGovDrrIndicators,
   suspendedGovDrrIndicators,
   useGovDrrIndicators,

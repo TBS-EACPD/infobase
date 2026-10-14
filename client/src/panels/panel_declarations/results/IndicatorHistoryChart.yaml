@@ -1,0 +1,40 @@
+indicator_history_title:
+  en: Target and result
+  fr: Cible et résultat
+
+indicator_history_x_axis:
+  en: Fiscal year
+  fr: Exercice
+
+indicator_history_y_percent:
+  en: Percent (%)
+  fr: Pourcentage (%)
+
+indicator_history_y_number:
+  en: Number
+  fr: Nombre
+
+indicator_history_y_dollars:
+  en: Dollars
+  fr: Dollars
+
+indicator_history_target_minimum:
+  en: Target (at least)
+  fr: Cible (au moins)
+
+indicator_history_target_maximum:
+  en: Target (at most)
+  fr: Cible (au plus)
+
+indicator_history_target_exact:
+  en: Target
+  fr: Cible
+
+indicator_history_actual:
+  en: Actual result
+  fr: Résultat réel
+
+indicator_history_non_numeric:
+  transform: [handlebars]
+  en: Non-numeric in {{years}}. Those years are left off the chart.
+  fr: Non numérique en {{years}}. Ces années ne figurent pas sur le graphique.

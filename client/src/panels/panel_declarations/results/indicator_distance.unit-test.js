@@ -3,6 +3,7 @@ import _ from "lodash";
 import {
   bin_for_distance,
   build_departmental_result_distance_chart,
+  build_indicator_history_chart,
   count_indicators_by_distance,
   indicator_distance,
 } from "./indicator_distance";
@@ -273,5 +274,110 @@ describe("count_indicators_by_distance", () => {
     expect(summary.counts.met).toBe(1);
     expect(summary.counts.neg_20).toBe(1);
     expect(_.sum(_.values(summary.counts))).toBe(2);
+  });
+});
+
+describe("build_indicator_history_chart", () => {
+  const year_for_doc = (doc) =>
+    ({
+      drr21: "2021-22",
+      drr22: "2022-23",
+      drr23: "2023-24",
+      drr24: "2024-25",
+      dp25: "2025-26",
+    }[doc]);
+
+  const history_indicator = (overrides) => ({
+    doc: "drr24",
+    target_type: "percent",
+    seeking_to: "max",
+    target_min: "90",
+    target_max: "",
+    actual_result: "91",
+    status_key: "met",
+    ...overrides,
+  });
+
+  it("plots a minimum target and the actual result, including a planned year with no result", () => {
+    const chart = build_indicator_history_chart(
+      [
+        history_indicator({
+          doc: "drr22",
+          target_min: "95",
+          actual_result: "87",
+        }),
+        history_indicator({
+          doc: "drr21",
+          target_min: "70",
+          actual_result: "89",
+        }),
+        history_indicator({
+          doc: "dp25",
+          target_min: "90",
+          actual_result: "",
+          status_key: "future",
+        }),
+      ],
+      year_for_doc
+    );
+
+    expect(chart.years).toEqual(["2021-22", "2022-23", "2025-26"]);
+    expect(chart.series.minimum).toEqual([70, 95, 90]);
+    expect(chart.series.actual).toEqual([89, 87, null]);
+    expect(chart.series.maximum).toBeUndefined();
+    expect(chart.unit).toBe("percent");
+    expect(chart.non_numeric_years).toEqual([]);
+  });
+
+  it("leaves a non-numeric year out and names it", () => {
+    const chart = build_indicator_history_chart(
+      [
+        history_indicator({ doc: "drr22", actual_result: "100" }),
+        history_indicator({
+          doc: "drr23",
+          target_type: "text",
+          actual_result: "narrative",
+          status_key: "met",
+        }),
+        history_indicator({ doc: "drr24", actual_result: "94" }),
+      ],
+      year_for_doc
+    );
+
+    expect(chart.years).toEqual(["2022-23", "2024-25"]);
+    expect(chart.non_numeric_years).toEqual(["2023-24"]);
+    expect(chart.series.actual).toEqual([100, 94]);
+  });
+
+  it("keeps a single numeric year and both bounds of a range", () => {
+    const chart = build_indicator_history_chart(
+      [
+        history_indicator({
+          doc: "drr22",
+          seeking_to: "range",
+          target_min: "10",
+          target_max: "20",
+          target_type: "num",
+          actual_result: "32",
+          status_key: "not_met",
+        }),
+      ],
+      year_for_doc
+    );
+
+    expect(chart.years).toEqual(["2022-23"]);
+    expect(chart.series.minimum).toEqual([10]);
+    expect(chart.series.maximum).toEqual([20]);
+    expect(chart.series.actual).toEqual([32]);
+    expect(chart.unit).toBe("num");
+  });
+
+  it("returns nothing when every year is non-numeric", () => {
+    expect(
+      build_indicator_history_chart(
+        [history_indicator({ target_type: "text" })],
+        year_for_doc
+      )
+    ).toBeNull();
   });
 });

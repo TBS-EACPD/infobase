@@ -553,6 +553,7 @@ export type Root = {
   crso_search?: Maybe<Array<Maybe<Crso>>>;
   gov?: Maybe<Gov>;
   indicator?: Maybe<Indicator>;
+  indicators_by_stable_id?: Maybe<Array<Maybe<Indicator>>>;
   non_field?: Maybe<Scalars['String']>;
   org?: Maybe<Org>;
   org_search?: Maybe<Array<Maybe<Org>>>;
@@ -589,6 +590,11 @@ export type RootCrso_SearchArgs = {
 
 export type RootIndicatorArgs = {
   id?: InputMaybe<Scalars['String']>;
+};
+
+
+export type RootIndicators_By_Stable_IdArgs = {
+  stable_id: Scalars['String'];
 };
 
 

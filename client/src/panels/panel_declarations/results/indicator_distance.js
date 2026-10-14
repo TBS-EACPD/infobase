@@ -249,6 +249,119 @@ export const bin_for_distance = (distance) => {
 const empty_bin_counts = () =>
   _.fromPairs(_.map(DISTANCE_BINS, ({ id }) => [id, 0]));
 
+const target_values = (indicator) => {
+  const minimum = parse_finite_number(indicator.target_min);
+  const maximum = parse_finite_number(indicator.target_max);
+
+  switch (indicator.seeking_to) {
+    case "max":
+      return minimum === null ? {} : { minimum };
+    case "min":
+      return maximum === null ? {} : { maximum };
+    case "target": {
+      const exact = minimum === null ? maximum : minimum;
+      return exact === null ? {} : { exact };
+    }
+    case "range": {
+      const bounds = {};
+      if (minimum !== null) {
+        bounds.minimum = minimum;
+      }
+      if (maximum !== null) {
+        bounds.maximum = maximum;
+      }
+      return bounds;
+    }
+    default:
+      return {};
+  }
+};
+
+const plottable_actual = (indicator) =>
+  _.includes(PLOTTABLE_STATUSES, indicator.status_key)
+    ? parse_finite_number(indicator.actual_result)
+    : null;
+
+const history_unit = (target_type) => {
+  if (_.includes(["percent", "percent_range"], target_type)) {
+    return "percent";
+  }
+  if (_.includes(["dollar", "dollar_range"], target_type)) {
+    return "dollar";
+  }
+  return "num";
+};
+
+const prefer_history_record = (candidate, current) => {
+  const candidate_has_actual = plottable_actual(candidate) !== null;
+  const current_has_actual = plottable_actual(current) !== null;
+  if (candidate_has_actual !== current_has_actual) {
+    return candidate_has_actual;
+  }
+  return (
+    _.startsWith(candidate.doc, "drr") && !_.startsWith(current.doc, "drr")
+  );
+};
+
+// One point per fiscal year for a single indicator. Non-numeric years are
+// named and left out. Actuals are only included for met and not-met results.
+export const build_indicator_history_chart = (indicators, year_for_doc) => {
+  const chosen_by_year = {};
+  const non_numeric_years = [];
+
+  _.forEach(indicators, (indicator) => {
+    const year = year_for_doc(indicator.doc);
+    if (!year) {
+      return;
+    }
+    if (!is_numeric_target_type(indicator.target_type)) {
+      non_numeric_years.push(year);
+      return;
+    }
+
+    const current = chosen_by_year[year];
+    if (!current || prefer_history_record(indicator, current)) {
+      chosen_by_year[year] = indicator;
+    }
+  });
+
+  const years = _.sortBy(_.keys(chosen_by_year));
+  const series = {
+    minimum: [],
+    maximum: [],
+    exact: [],
+    actual: [],
+  };
+
+  _.forEach(years, (year) => {
+    const indicator = chosen_by_year[year];
+    const targets = target_values(indicator);
+    series.minimum.push(_.isNumber(targets.minimum) ? targets.minimum : null);
+    series.maximum.push(_.isNumber(targets.maximum) ? targets.maximum : null);
+    series.exact.push(_.isNumber(targets.exact) ? targets.exact : null);
+    series.actual.push(plottable_actual(indicator));
+  });
+
+  _.forEach(_.keys(series), (key) => {
+    if (!_.some(series[key], _.isNumber)) {
+      delete series[key];
+    }
+  });
+
+  if (_.isEmpty(series)) {
+    return null;
+  }
+
+  const latest = chosen_by_year[_.last(years)];
+
+  return {
+    years,
+    series,
+    non_numeric_years: _.uniq(non_numeric_years).sort(),
+    unit: history_unit(latest.target_type),
+  };
+};
+
 export const count_indicators_by_distance = (indicators) => {
   const counts = empty_bin_counts();
   let included_count = 0;

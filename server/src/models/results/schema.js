@@ -8,6 +8,7 @@ import { drr_docs, dp_docs } from "./results_common.js";
 const schema = `
   extend type Root { 
     indicator(id: String): Indicator
+    indicators_by_stable_id(stable_id: String!): [Indicator]
   }
   
   extend type Gov {
@@ -136,8 +137,15 @@ ${_.reduce(
 `;
 
 export default function ({ models, loaders }) {
-  const { Org, Crso, Program, ResultCount, ResultDrCount, ResultPrCount } =
-    models;
+  const {
+    Org,
+    Crso,
+    Program,
+    Indicator,
+    ResultCount,
+    ResultDrCount,
+    ResultPrCount,
+  } = models;
 
   const {
     prog_dept_code_loader,
@@ -296,6 +304,8 @@ export default function ({ models, loaders }) {
   const resolvers = {
     Root: {
       indicator: (_x, { id }) => indicator_id_loader.load(id),
+      indicators_by_stable_id: async (_x, { stable_id }) =>
+        await Indicator.find({ stable_id }),
     },
     Gov: {
       departmental_result_indicators: (_gov, { doc }) =>
