@@ -1,0 +1,13 @@
+query IndicatorHistory($lang: String!, $stableId: String!) {
+  root(lang: $lang) {
+    indicators_by_stable_id(stable_id: $stableId) {
+      doc
+      target_type
+      target_min
+      target_max
+      seeking_to
+      actual_result
+      status_key
+    }
+  }
+}
