@@ -413,10 +413,10 @@ Year,Department or agency,Province or territory of work,Number of employees
 2010,Office of the Commissioner of Official Languages,Ontario (minus the NCR),7
 2010,Office of the Commissioner of Official Languages,Quebec (minus the NCR),6
 2010,Office of the Commissioner of Official Languages,Saskatchewan,1
-2010,Office of the Governor General's Secretary,National Capital Region (NCR),169
-2010,Office of the Governor General's Secretary,Outside of Canada,1
-2010,Office of the Governor General's Secretary,Quebec (minus the NCR),1
 2010,Office of the Public Sector Integrity Commissioner of Canada,National Capital Region (NCR),23
+2010,Office of the Secretary to the Governor General,National Capital Region (NCR),169
+2010,Office of the Secretary to the Governor General,Outside of Canada,1
+2010,Office of the Secretary to the Governor General,Quebec (minus the NCR),1
 2010,Office of the Superintendent of Financial Institutions Canada,British Columbia,10
 2010,Office of the Superintendent of Financial Institutions Canada,National Capital Region (NCR),261
 2010,Office of the Superintendent of Financial Institutions Canada,Ontario (minus the NCR),257
@@ -527,21 +527,21 @@ Year,Department or agency,Province or territory of work,Number of employees
 2010,RCMP External Review Committee,National Capital Region (NCR),5
 2010,Registrar of the Supreme Court of Canada,National Capital Region (NCR),220
 2010,Registry of the Specific Claims Tribunal of Canada,National Capital Region (NCR),6
-2010,Royal Canadian Mounted Police (Civilian Staff),Alberta,573
-2010,Royal Canadian Mounted Police (Civilian Staff),British Columbia,1311
-2010,Royal Canadian Mounted Police (Civilian Staff),Manitoba,324
-2010,Royal Canadian Mounted Police (Civilian Staff),National Capital Region (NCR),1851
-2010,Royal Canadian Mounted Police (Civilian Staff),New Brunswick,416
-2010,Royal Canadian Mounted Police (Civilian Staff),Newfoundland and Labrador,166
-2010,Royal Canadian Mounted Police (Civilian Staff),Northwest Territories,29
-2010,Royal Canadian Mounted Police (Civilian Staff),Nova Scotia,268
-2010,Royal Canadian Mounted Police (Civilian Staff),Nunavut,10
-2010,Royal Canadian Mounted Police (Civilian Staff),Ontario (minus the NCR),300
-2010,Royal Canadian Mounted Police (Civilian Staff),Outside of Canada,1
-2010,Royal Canadian Mounted Police (Civilian Staff),Prince Edward Island,34
-2010,Royal Canadian Mounted Police (Civilian Staff),Quebec (minus the NCR),308
-2010,Royal Canadian Mounted Police (Civilian Staff),Saskatchewan,624
-2010,Royal Canadian Mounted Police (Civilian Staff),Yukon,35
+2010,Royal Canadian Mounted Police (RCMP),Alberta,573
+2010,Royal Canadian Mounted Police (RCMP),British Columbia,1311
+2010,Royal Canadian Mounted Police (RCMP),Manitoba,324
+2010,Royal Canadian Mounted Police (RCMP),National Capital Region (NCR),1851
+2010,Royal Canadian Mounted Police (RCMP),New Brunswick,416
+2010,Royal Canadian Mounted Police (RCMP),Newfoundland and Labrador,166
+2010,Royal Canadian Mounted Police (RCMP),Northwest Territories,29
+2010,Royal Canadian Mounted Police (RCMP),Nova Scotia,268
+2010,Royal Canadian Mounted Police (RCMP),Nunavut,10
+2010,Royal Canadian Mounted Police (RCMP),Ontario (minus the NCR),300
+2010,Royal Canadian Mounted Police (RCMP),Outside of Canada,1
+2010,Royal Canadian Mounted Police (RCMP),Prince Edward Island,34
+2010,Royal Canadian Mounted Police (RCMP),Quebec (minus the NCR),308
+2010,Royal Canadian Mounted Police (RCMP),Saskatchewan,624
+2010,Royal Canadian Mounted Police (RCMP),Yukon,35
 2010,Security Intelligence Review Committee,National Capital Region (NCR),14
 2010,Social Sciences and Humanities Research Council of Canada,National Capital Region (NCR),206
 2010,Statistical Survey Operations,Alberta,247
@@ -1051,10 +1051,10 @@ Year,Department or agency,Province or territory of work,Number of employees
 2011,Office of the Commissioner of Official Languages,Ontario (minus the NCR),6
 2011,Office of the Commissioner of Official Languages,Quebec (minus the NCR),4
 2011,Office of the Commissioner of Official Languages,Saskatchewan,1
-2011,Office of the Governor General's Secretary,National Capital Region (NCR),183
-2011,Office of the Governor General's Secretary,Outside of Canada,1
-2011,Office of the Governor General's Secretary,Quebec (minus the NCR),6
 2011,Office of the Public Sector Integrity Commissioner of Canada,National Capital Region (NCR),27
+2011,Office of the Secretary to the Governor General,National Capital Region (NCR),183
+2011,Office of the Secretary to the Governor General,Outside of Canada,1
+2011,Office of the Secretary to the Governor General,Quebec (minus the NCR),6
 2011,Office of the Superintendent of Financial Institutions Canada,British Columbia,12
 2011,Office of the Superintendent of Financial Institutions Canada,National Capital Region (NCR),278
 2011,Office of the Superintendent of Financial Institutions Canada,Ontario (minus the NCR),258
@@ -1168,20 +1168,20 @@ Year,Department or agency,Province or territory of work,Number of employees
 2011,RCMP External Review Committee,National Capital Region (NCR),4
 2011,Registrar of the Supreme Court of Canada,National Capital Region (NCR),210
 2011,Registry of the Specific Claims Tribunal of Canada,National Capital Region (NCR),9
-2011,Royal Canadian Mounted Police (Civilian Staff),Alberta,579
-2011,Royal Canadian Mounted Police (Civilian Staff),British Columbia,1209
-2011,Royal Canadian Mounted Police (Civilian Staff),Manitoba,335
-2011,Royal Canadian Mounted Police (Civilian Staff),National Capital Region (NCR),1842
-2011,Royal Canadian Mounted Police (Civilian Staff),New Brunswick,410
-2011,Royal Canadian Mounted Police (Civilian Staff),Newfoundland and Labrador,173
-2011,Royal Canadian Mounted Police (Civilian Staff),Northwest Territories,34
-2011,Royal Canadian Mounted Police (Civilian Staff),Nova Scotia,286
-2011,Royal Canadian Mounted Police (Civilian Staff),Nunavut,14
-2011,Royal Canadian Mounted Police (Civilian Staff),Ontario (minus the NCR),279
-2011,Royal Canadian Mounted Police (Civilian Staff),Prince Edward Island,36
-2011,Royal Canadian Mounted Police (Civilian Staff),Quebec (minus the NCR),314
-2011,Royal Canadian Mounted Police (Civilian Staff),Saskatchewan,602
-2011,Royal Canadian Mounted Police (Civilian Staff),Yukon,34
+2011,Royal Canadian Mounted Police (RCMP),Alberta,579
+2011,Royal Canadian Mounted Police (RCMP),British Columbia,1209
+2011,Royal Canadian Mounted Police (RCMP),Manitoba,335
+2011,Royal Canadian Mounted Police (RCMP),National Capital Region (NCR),1842
+2011,Royal Canadian Mounted Police (RCMP),New Brunswick,410
+2011,Royal Canadian Mounted Police (RCMP),Newfoundland and Labrador,173
+2011,Royal Canadian Mounted Police (RCMP),Northwest Territories,34
+2011,Royal Canadian Mounted Police (RCMP),Nova Scotia,286
+2011,Royal Canadian Mounted Police (RCMP),Nunavut,14
+2011,Royal Canadian Mounted Police (RCMP),Ontario (minus the NCR),279
+2011,Royal Canadian Mounted Police (RCMP),Prince Edward Island,36
+2011,Royal Canadian Mounted Police (RCMP),Quebec (minus the NCR),314
+2011,Royal Canadian Mounted Police (RCMP),Saskatchewan,602
+2011,Royal Canadian Mounted Police (RCMP),Yukon,34
 2011,Security Intelligence Review Committee,National Capital Region (NCR),15
 2011,Social Sciences and Humanities Research Council of Canada,National Capital Region (NCR),216
 2011,Statistical Survey Operations,Alberta,265
@@ -1687,10 +1687,10 @@ Year,Department or agency,Province or territory of work,Number of employees
 2012,Office of the Commissioner of Official Languages,Ontario (minus the NCR),5
 2012,Office of the Commissioner of Official Languages,Quebec (minus the NCR),5
 2012,Office of the Commissioner of Official Languages,Saskatchewan,1
-2012,Office of the Governor General's Secretary,National Capital Region (NCR),163
-2012,Office of the Governor General's Secretary,Outside of Canada,1
-2012,Office of the Governor General's Secretary,Quebec (minus the NCR),2
 2012,Office of the Public Sector Integrity Commissioner of Canada,National Capital Region (NCR),30
+2012,Office of the Secretary to the Governor General,National Capital Region (NCR),163
+2012,Office of the Secretary to the Governor General,Outside of Canada,1
+2012,Office of the Secretary to the Governor General,Quebec (minus the NCR),2
 2012,Office of the Superintendent of Financial Institutions Canada,British Columbia,13
 2012,Office of the Superintendent of Financial Institutions Canada,National Capital Region (NCR),277
 2012,Office of the Superintendent of Financial Institutions Canada,Ontario (minus the NCR),296
@@ -1804,20 +1804,20 @@ Year,Department or agency,Province or territory of work,Number of employees
 2012,RCMP External Review Committee,National Capital Region (NCR),3
 2012,Registrar of the Supreme Court of Canada,National Capital Region (NCR),226
 2012,Registry of the Specific Claims Tribunal of Canada,National Capital Region (NCR),11
-2012,Royal Canadian Mounted Police (Civilian Staff),Alberta,581
-2012,Royal Canadian Mounted Police (Civilian Staff),British Columbia,1208
-2012,Royal Canadian Mounted Police (Civilian Staff),Manitoba,338
-2012,Royal Canadian Mounted Police (Civilian Staff),National Capital Region (NCR),1890
-2012,Royal Canadian Mounted Police (Civilian Staff),New Brunswick,421
-2012,Royal Canadian Mounted Police (Civilian Staff),Newfoundland and Labrador,172
-2012,Royal Canadian Mounted Police (Civilian Staff),Northwest Territories,36
-2012,Royal Canadian Mounted Police (Civilian Staff),Nova Scotia,286
-2012,Royal Canadian Mounted Police (Civilian Staff),Nunavut,13
-2012,Royal Canadian Mounted Police (Civilian Staff),Ontario (minus the NCR),295
-2012,Royal Canadian Mounted Police (Civilian Staff),Prince Edward Island,33
-2012,Royal Canadian Mounted Police (Civilian Staff),Quebec (minus the NCR),304
-2012,Royal Canadian Mounted Police (Civilian Staff),Saskatchewan,598
-2012,Royal Canadian Mounted Police (Civilian Staff),Yukon,35
+2012,Royal Canadian Mounted Police (RCMP),Alberta,581
+2012,Royal Canadian Mounted Police (RCMP),British Columbia,1208
+2012,Royal Canadian Mounted Police (RCMP),Manitoba,338
+2012,Royal Canadian Mounted Police (RCMP),National Capital Region (NCR),1890
+2012,Royal Canadian Mounted Police (RCMP),New Brunswick,421
+2012,Royal Canadian Mounted Police (RCMP),Newfoundland and Labrador,172
+2012,Royal Canadian Mounted Police (RCMP),Northwest Territories,36
+2012,Royal Canadian Mounted Police (RCMP),Nova Scotia,286
+2012,Royal Canadian Mounted Police (RCMP),Nunavut,13
+2012,Royal Canadian Mounted Police (RCMP),Ontario (minus the NCR),295
+2012,Royal Canadian Mounted Police (RCMP),Prince Edward Island,33
+2012,Royal Canadian Mounted Police (RCMP),Quebec (minus the NCR),304
+2012,Royal Canadian Mounted Police (RCMP),Saskatchewan,598
+2012,Royal Canadian Mounted Police (RCMP),Yukon,35
 2012,Security Intelligence Review Committee,National Capital Region (NCR),17
 2012,Social Sciences and Humanities Research Council of Canada,National Capital Region (NCR),213
 2012,Statistical Survey Operations,Alberta,309
@@ -2309,10 +2309,10 @@ Year,Department or agency,Province or territory of work,Number of employees
 2013,Office of the Commissioner of Official Languages,Ontario (minus the NCR),5
 2013,Office of the Commissioner of Official Languages,Quebec (minus the NCR),4
 2013,Office of the Commissioner of Official Languages,Saskatchewan,1
-2013,Office of the Governor General's Secretary,National Capital Region (NCR),154
-2013,Office of the Governor General's Secretary,Outside of Canada,1
-2013,Office of the Governor General's Secretary,Quebec (minus the NCR),3
 2013,Office of the Public Sector Integrity Commissioner of Canada,National Capital Region (NCR),31
+2013,Office of the Secretary to the Governor General,National Capital Region (NCR),154
+2013,Office of the Secretary to the Governor General,Outside of Canada,1
+2013,Office of the Secretary to the Governor General,Quebec (minus the NCR),3
 2013,Office of the Superintendent of Financial Institutions Canada,British Columbia,13
 2013,Office of the Superintendent of Financial Institutions Canada,National Capital Region (NCR),299
 2013,Office of the Superintendent of Financial Institutions Canada,Ontario (minus the NCR),311
@@ -2422,20 +2422,20 @@ Year,Department or agency,Province or territory of work,Number of employees
 2013,RCMP External Review Committee,National Capital Region (NCR),6
 2013,Registrar of the Supreme Court of Canada,National Capital Region (NCR),216
 2013,Registry of the Specific Claims Tribunal of Canada,National Capital Region (NCR),10
-2013,Royal Canadian Mounted Police (Civilian Staff),Alberta,545
-2013,Royal Canadian Mounted Police (Civilian Staff),British Columbia,1150
-2013,Royal Canadian Mounted Police (Civilian Staff),Manitoba,328
-2013,Royal Canadian Mounted Police (Civilian Staff),National Capital Region (NCR),1805
-2013,Royal Canadian Mounted Police (Civilian Staff),New Brunswick,434
-2013,Royal Canadian Mounted Police (Civilian Staff),Newfoundland and Labrador,161
-2013,Royal Canadian Mounted Police (Civilian Staff),Northwest Territories,36
-2013,Royal Canadian Mounted Police (Civilian Staff),Nova Scotia,255
-2013,Royal Canadian Mounted Police (Civilian Staff),Nunavut,10
-2013,Royal Canadian Mounted Police (Civilian Staff),Ontario (minus the NCR),273
-2013,Royal Canadian Mounted Police (Civilian Staff),Prince Edward Island,32
-2013,Royal Canadian Mounted Police (Civilian Staff),Quebec (minus the NCR),295
-2013,Royal Canadian Mounted Police (Civilian Staff),Saskatchewan,612
-2013,Royal Canadian Mounted Police (Civilian Staff),Yukon,35
+2013,Royal Canadian Mounted Police (RCMP),Alberta,545
+2013,Royal Canadian Mounted Police (RCMP),British Columbia,1150
+2013,Royal Canadian Mounted Police (RCMP),Manitoba,328
+2013,Royal Canadian Mounted Police (RCMP),National Capital Region (NCR),1805
+2013,Royal Canadian Mounted Police (RCMP),New Brunswick,434
+2013,Royal Canadian Mounted Police (RCMP),Newfoundland and Labrador,161
+2013,Royal Canadian Mounted Police (RCMP),Northwest Territories,36
+2013,Royal Canadian Mounted Police (RCMP),Nova Scotia,255
+2013,Royal Canadian Mounted Police (RCMP),Nunavut,10
+2013,Royal Canadian Mounted Police (RCMP),Ontario (minus the NCR),273
+2013,Royal Canadian Mounted Police (RCMP),Prince Edward Island,32
+2013,Royal Canadian Mounted Police (RCMP),Quebec (minus the NCR),295
+2013,Royal Canadian Mounted Police (RCMP),Saskatchewan,612
+2013,Royal Canadian Mounted Police (RCMP),Yukon,35
 2013,Security Intelligence Review Committee,National Capital Region (NCR),15
 2013,Shared Services Canada,Alberta,92
 2013,Shared Services Canada,British Columbia,138
@@ -2929,10 +2929,10 @@ Year,Department or agency,Province or territory of work,Number of employees
 2014,Office of the Commissioner of Official Languages,Ontario (minus the NCR),4
 2014,Office of the Commissioner of Official Languages,Quebec (minus the NCR),4
 2014,Office of the Commissioner of Official Languages,Saskatchewan,1
-2014,Office of the Governor General's Secretary,National Capital Region (NCR),151
-2014,Office of the Governor General's Secretary,Outside of Canada,1
-2014,Office of the Governor General's Secretary,Quebec (minus the NCR),3
 2014,Office of the Public Sector Integrity Commissioner of Canada,National Capital Region (NCR),28
+2014,Office of the Secretary to the Governor General,National Capital Region (NCR),151
+2014,Office of the Secretary to the Governor General,Outside of Canada,1
+2014,Office of the Secretary to the Governor General,Quebec (minus the NCR),3
 2014,Office of the Superintendent of Financial Institutions Canada,British Columbia,13
 2014,Office of the Superintendent of Financial Institutions Canada,National Capital Region (NCR),309
 2014,Office of the Superintendent of Financial Institutions Canada,Ontario (minus the NCR),346
@@ -3029,20 +3029,20 @@ Year,Department or agency,Province or territory of work,Number of employees
 2014,RCMP External Review Committee,National Capital Region (NCR),5
 2014,Registrar of the Supreme Court of Canada,National Capital Region (NCR),219
 2014,Registry of the Specific Claims Tribunal of Canada,National Capital Region (NCR),9
-2014,Royal Canadian Mounted Police (Civilian Staff),Alberta,558
-2014,Royal Canadian Mounted Police (Civilian Staff),British Columbia,1147
-2014,Royal Canadian Mounted Police (Civilian Staff),Manitoba,341
-2014,Royal Canadian Mounted Police (Civilian Staff),National Capital Region (NCR),1868
-2014,Royal Canadian Mounted Police (Civilian Staff),New Brunswick,434
-2014,Royal Canadian Mounted Police (Civilian Staff),Newfoundland and Labrador,161
-2014,Royal Canadian Mounted Police (Civilian Staff),Northwest Territories,38
-2014,Royal Canadian Mounted Police (Civilian Staff),Nova Scotia,251
-2014,Royal Canadian Mounted Police (Civilian Staff),Nunavut,10
-2014,Royal Canadian Mounted Police (Civilian Staff),Ontario (minus the NCR),251
-2014,Royal Canadian Mounted Police (Civilian Staff),Prince Edward Island,31
-2014,Royal Canadian Mounted Police (Civilian Staff),Quebec (minus the NCR),284
-2014,Royal Canadian Mounted Police (Civilian Staff),Saskatchewan,653
-2014,Royal Canadian Mounted Police (Civilian Staff),Yukon,38
+2014,Royal Canadian Mounted Police (RCMP),Alberta,558
+2014,Royal Canadian Mounted Police (RCMP),British Columbia,1147
+2014,Royal Canadian Mounted Police (RCMP),Manitoba,341
+2014,Royal Canadian Mounted Police (RCMP),National Capital Region (NCR),1868
+2014,Royal Canadian Mounted Police (RCMP),New Brunswick,434
+2014,Royal Canadian Mounted Police (RCMP),Newfoundland and Labrador,161
+2014,Royal Canadian Mounted Police (RCMP),Northwest Territories,38
+2014,Royal Canadian Mounted Police (RCMP),Nova Scotia,251
+2014,Royal Canadian Mounted Police (RCMP),Nunavut,10
+2014,Royal Canadian Mounted Police (RCMP),Ontario (minus the NCR),251
+2014,Royal Canadian Mounted Police (RCMP),Prince Edward Island,31
+2014,Royal Canadian Mounted Police (RCMP),Quebec (minus the NCR),284
+2014,Royal Canadian Mounted Police (RCMP),Saskatchewan,653
+2014,Royal Canadian Mounted Police (RCMP),Yukon,38
 2014,Security Intelligence Review Committee,National Capital Region (NCR),16
 2014,Shared Services Canada,Alberta,91
 2014,Shared Services Canada,British Columbia,136
@@ -3531,10 +3531,10 @@ Year,Department or agency,Province or territory of work,Number of employees
 2015,Office of the Commissioner of Official Languages,Ontario (minus the NCR),3
 2015,Office of the Commissioner of Official Languages,Quebec (minus the NCR),4
 2015,Office of the Commissioner of Official Languages,Saskatchewan,1
-2015,Office of the Governor General's Secretary,National Capital Region (NCR),153
-2015,Office of the Governor General's Secretary,Quebec (minus the NCR),3
 2015,Office of the Prime Minister,National Capital Region (NCR),1
 2015,Office of the Public Sector Integrity Commissioner of Canada,National Capital Region (NCR),25
+2015,Office of the Secretary to the Governor General,National Capital Region (NCR),153
+2015,Office of the Secretary to the Governor General,Quebec (minus the NCR),3
 2015,Office of the Superintendent of Financial Institutions Canada,British Columbia,13
 2015,Office of the Superintendent of Financial Institutions Canada,National Capital Region (NCR),325
 2015,Office of the Superintendent of Financial Institutions Canada,Ontario (minus the NCR),344
@@ -3626,20 +3626,20 @@ Year,Department or agency,Province or territory of work,Number of employees
 2015,Public Services and Procurement Canada,Yukon,4
 2015,RCMP External Review Committee,National Capital Region (NCR),6
 2015,Registrar of the Supreme Court of Canada,National Capital Region (NCR),213
-2015,Royal Canadian Mounted Police (Civilian Staff),Alberta,592
-2015,Royal Canadian Mounted Police (Civilian Staff),British Columbia,1236
-2015,Royal Canadian Mounted Police (Civilian Staff),Manitoba,353
-2015,Royal Canadian Mounted Police (Civilian Staff),National Capital Region (NCR),1933
-2015,Royal Canadian Mounted Police (Civilian Staff),New Brunswick,473
-2015,Royal Canadian Mounted Police (Civilian Staff),Newfoundland and Labrador,175
-2015,Royal Canadian Mounted Police (Civilian Staff),Northwest Territories,33
-2015,Royal Canadian Mounted Police (Civilian Staff),Nova Scotia,272
-2015,Royal Canadian Mounted Police (Civilian Staff),Nunavut,12
-2015,Royal Canadian Mounted Police (Civilian Staff),Ontario (minus the NCR),272
-2015,Royal Canadian Mounted Police (Civilian Staff),Prince Edward Island,41
-2015,Royal Canadian Mounted Police (Civilian Staff),Quebec (minus the NCR),277
-2015,Royal Canadian Mounted Police (Civilian Staff),Saskatchewan,733
-2015,Royal Canadian Mounted Police (Civilian Staff),Yukon,35
+2015,Royal Canadian Mounted Police (RCMP),Alberta,592
+2015,Royal Canadian Mounted Police (RCMP),British Columbia,1236
+2015,Royal Canadian Mounted Police (RCMP),Manitoba,353
+2015,Royal Canadian Mounted Police (RCMP),National Capital Region (NCR),1933
+2015,Royal Canadian Mounted Police (RCMP),New Brunswick,473
+2015,Royal Canadian Mounted Police (RCMP),Newfoundland and Labrador,175
+2015,Royal Canadian Mounted Police (RCMP),Northwest Territories,33
+2015,Royal Canadian Mounted Police (RCMP),Nova Scotia,272
+2015,Royal Canadian Mounted Police (RCMP),Nunavut,12
+2015,Royal Canadian Mounted Police (RCMP),Ontario (minus the NCR),272
+2015,Royal Canadian Mounted Police (RCMP),Prince Edward Island,41
+2015,Royal Canadian Mounted Police (RCMP),Quebec (minus the NCR),277
+2015,Royal Canadian Mounted Police (RCMP),Saskatchewan,733
+2015,Royal Canadian Mounted Police (RCMP),Yukon,35
 2015,Security Intelligence Review Committee,National Capital Region (NCR),18
 2015,Shared Services Canada,Alberta,83
 2015,Shared Services Canada,British Columbia,135
@@ -4155,10 +4155,10 @@ Year,Department or agency,Province or territory of work,Number of employees
 2016,Office of the Commissioner of Official Languages,Ontario (minus the NCR),3
 2016,Office of the Commissioner of Official Languages,Quebec (minus the NCR),6
 2016,Office of the Commissioner of Official Languages,Saskatchewan,1
-2016,Office of the Governor General's Secretary,National Capital Region (NCR),163
-2016,Office of the Governor General's Secretary,Quebec (minus the NCR),2
-2016,Office of the Governor General's Secretary,Unknown,1
 2016,Office of the Public Sector Integrity Commissioner of Canada,National Capital Region (NCR),26
+2016,Office of the Secretary to the Governor General,National Capital Region (NCR),163
+2016,Office of the Secretary to the Governor General,Quebec (minus the NCR),2
+2016,Office of the Secretary to the Governor General,Unknown,1
 2016,Office of the Superintendent of Financial Institutions Canada,British Columbia,13
 2016,Office of the Superintendent of Financial Institutions Canada,National Capital Region (NCR),306
 2016,Office of the Superintendent of Financial Institutions Canada,Ontario (minus the NCR),328
@@ -4260,22 +4260,22 @@ Year,Department or agency,Province or territory of work,Number of employees
 2016,Public Services and Procurement Canada,Yukon,3
 2016,RCMP External Review Committee,National Capital Region (NCR),7
 2016,Registrar of the Supreme Court of Canada,National Capital Region (NCR),212
-2016,Royal Canadian Mounted Police (Civilian Staff),Alberta,632
-2016,Royal Canadian Mounted Police (Civilian Staff),British Columbia,1228
-2016,Royal Canadian Mounted Police (Civilian Staff),Manitoba,363
-2016,Royal Canadian Mounted Police (Civilian Staff),National Capital Region (NCR),1966
-2016,Royal Canadian Mounted Police (Civilian Staff),New Brunswick,469
-2016,Royal Canadian Mounted Police (Civilian Staff),Newfoundland and Labrador,188
-2016,Royal Canadian Mounted Police (Civilian Staff),Northwest Territories,34
-2016,Royal Canadian Mounted Police (Civilian Staff),Nova Scotia,272
-2016,Royal Canadian Mounted Police (Civilian Staff),Nunavut,11
-2016,Royal Canadian Mounted Police (Civilian Staff),Ontario (minus the NCR),255
-2016,Royal Canadian Mounted Police (Civilian Staff),Outside of Canada,1
-2016,Royal Canadian Mounted Police (Civilian Staff),Prince Edward Island,38
-2016,Royal Canadian Mounted Police (Civilian Staff),Quebec (minus the NCR),259
-2016,Royal Canadian Mounted Police (Civilian Staff),Saskatchewan,770
-2016,Royal Canadian Mounted Police (Civilian Staff),Unknown,48
-2016,Royal Canadian Mounted Police (Civilian Staff),Yukon,37
+2016,Royal Canadian Mounted Police (RCMP),Alberta,632
+2016,Royal Canadian Mounted Police (RCMP),British Columbia,1228
+2016,Royal Canadian Mounted Police (RCMP),Manitoba,363
+2016,Royal Canadian Mounted Police (RCMP),National Capital Region (NCR),1966
+2016,Royal Canadian Mounted Police (RCMP),New Brunswick,469
+2016,Royal Canadian Mounted Police (RCMP),Newfoundland and Labrador,188
+2016,Royal Canadian Mounted Police (RCMP),Northwest Territories,34
+2016,Royal Canadian Mounted Police (RCMP),Nova Scotia,272
+2016,Royal Canadian Mounted Police (RCMP),Nunavut,11
+2016,Royal Canadian Mounted Police (RCMP),Ontario (minus the NCR),255
+2016,Royal Canadian Mounted Police (RCMP),Outside of Canada,1
+2016,Royal Canadian Mounted Police (RCMP),Prince Edward Island,38
+2016,Royal Canadian Mounted Police (RCMP),Quebec (minus the NCR),259
+2016,Royal Canadian Mounted Police (RCMP),Saskatchewan,770
+2016,Royal Canadian Mounted Police (RCMP),Unknown,48
+2016,Royal Canadian Mounted Police (RCMP),Yukon,37
 2016,Security Intelligence Review Committee,National Capital Region (NCR),20
 2016,Shared Services Canada,Alberta,81
 2016,Shared Services Canada,British Columbia,128
@@ -4782,11 +4782,11 @@ Year,Department or agency,Province or territory of work,Number of employees
 2017,Office of the Commissioner of Official Languages,Quebec (minus the NCR),4
 2017,Office of the Commissioner of Official Languages,Saskatchewan,1
 2017,Office of the Commissioner of Official Languages,Unknown,3
-2017,Office of the Governor General's Secretary,National Capital Region (NCR),146
-2017,Office of the Governor General's Secretary,Quebec (minus the NCR),2
-2017,Office of the Governor General's Secretary,Unknown,1
 2017,Office of the Public Sector Integrity Commissioner of Canada,National Capital Region (NCR),21
 2017,Office of the Public Sector Integrity Commissioner of Canada,Unknown,3
+2017,Office of the Secretary to the Governor General,National Capital Region (NCR),146
+2017,Office of the Secretary to the Governor General,Quebec (minus the NCR),2
+2017,Office of the Secretary to the Governor General,Unknown,1
 2017,Office of the Superintendent of Financial Institutions Canada,British Columbia,14
 2017,Office of the Superintendent of Financial Institutions Canada,National Capital Region (NCR),310
 2017,Office of the Superintendent of Financial Institutions Canada,Ontario (minus the NCR),345
@@ -4891,21 +4891,21 @@ Year,Department or agency,Province or territory of work,Number of employees
 2017,Public Services and Procurement Canada,Yukon,4
 2017,RCMP External Review Committee,National Capital Region (NCR),6
 2017,Registrar of the Supreme Court of Canada,National Capital Region (NCR),216
-2017,Royal Canadian Mounted Police (Civilian Staff),Alberta,665
-2017,Royal Canadian Mounted Police (Civilian Staff),British Columbia,1260
-2017,Royal Canadian Mounted Police (Civilian Staff),Manitoba,360
-2017,Royal Canadian Mounted Police (Civilian Staff),National Capital Region (NCR),2081
-2017,Royal Canadian Mounted Police (Civilian Staff),New Brunswick,453
-2017,Royal Canadian Mounted Police (Civilian Staff),Newfoundland and Labrador,186
-2017,Royal Canadian Mounted Police (Civilian Staff),Northwest Territories,43
-2017,Royal Canadian Mounted Police (Civilian Staff),Nova Scotia,275
-2017,Royal Canadian Mounted Police (Civilian Staff),Nunavut,14
-2017,Royal Canadian Mounted Police (Civilian Staff),Ontario (minus the NCR),257
-2017,Royal Canadian Mounted Police (Civilian Staff),Prince Edward Island,37
-2017,Royal Canadian Mounted Police (Civilian Staff),Quebec (minus the NCR),254
-2017,Royal Canadian Mounted Police (Civilian Staff),Saskatchewan,802
-2017,Royal Canadian Mounted Police (Civilian Staff),Unknown,81
-2017,Royal Canadian Mounted Police (Civilian Staff),Yukon,33
+2017,Royal Canadian Mounted Police (RCMP),Alberta,665
+2017,Royal Canadian Mounted Police (RCMP),British Columbia,1260
+2017,Royal Canadian Mounted Police (RCMP),Manitoba,360
+2017,Royal Canadian Mounted Police (RCMP),National Capital Region (NCR),2081
+2017,Royal Canadian Mounted Police (RCMP),New Brunswick,453
+2017,Royal Canadian Mounted Police (RCMP),Newfoundland and Labrador,186
+2017,Royal Canadian Mounted Police (RCMP),Northwest Territories,43
+2017,Royal Canadian Mounted Police (RCMP),Nova Scotia,275
+2017,Royal Canadian Mounted Police (RCMP),Nunavut,14
+2017,Royal Canadian Mounted Police (RCMP),Ontario (minus the NCR),257
+2017,Royal Canadian Mounted Police (RCMP),Prince Edward Island,37
+2017,Royal Canadian Mounted Police (RCMP),Quebec (minus the NCR),254
+2017,Royal Canadian Mounted Police (RCMP),Saskatchewan,802
+2017,Royal Canadian Mounted Police (RCMP),Unknown,81
+2017,Royal Canadian Mounted Police (RCMP),Yukon,33
 2017,Security Intelligence Review Committee,National Capital Region (NCR),18
 2017,Security Intelligence Review Committee,Unknown,4
 2017,Shared Services Canada,Alberta,70
@@ -5414,11 +5414,11 @@ Year,Department or agency,Province or territory of work,Number of employees
 2018,Office of the Commissioner of Official Languages,Quebec (minus the NCR),4
 2018,Office of the Commissioner of Official Languages,Saskatchewan,1
 2018,Office of the Commissioner of Official Languages,Unknown,3
-2018,Office of the Governor General's Secretary,National Capital Region (NCR),144
-2018,Office of the Governor General's Secretary,Quebec (minus the NCR),2
-2018,Office of the Governor General's Secretary,Unknown,2
 2018,Office of the Public Sector Integrity Commissioner of Canada,National Capital Region (NCR),21
 2018,Office of the Public Sector Integrity Commissioner of Canada,Unknown,2
+2018,Office of the Secretary to the Governor General,National Capital Region (NCR),144
+2018,Office of the Secretary to the Governor General,Quebec (minus the NCR),2
+2018,Office of the Secretary to the Governor General,Unknown,2
 2018,Office of the Superintendent of Financial Institutions Canada,British Columbia,14
 2018,Office of the Superintendent of Financial Institutions Canada,National Capital Region (NCR),323
 2018,Office of the Superintendent of Financial Institutions Canada,Ontario (minus the NCR),364
@@ -5527,21 +5527,21 @@ Year,Department or agency,Province or territory of work,Number of employees
 2018,RCMP External Review Committee,Unknown,2
 2018,Registrar of the Supreme Court of Canada,National Capital Region (NCR),228
 2018,Registrar of the Supreme Court of Canada,Unknown,2
-2018,Royal Canadian Mounted Police (Civilian Staff),Alberta,711
-2018,Royal Canadian Mounted Police (Civilian Staff),British Columbia,1342
-2018,Royal Canadian Mounted Police (Civilian Staff),Manitoba,375
-2018,Royal Canadian Mounted Police (Civilian Staff),National Capital Region (NCR),2268
-2018,Royal Canadian Mounted Police (Civilian Staff),New Brunswick,464
-2018,Royal Canadian Mounted Police (Civilian Staff),Newfoundland and Labrador,194
-2018,Royal Canadian Mounted Police (Civilian Staff),Northwest Territories,42
-2018,Royal Canadian Mounted Police (Civilian Staff),Nova Scotia,303
-2018,Royal Canadian Mounted Police (Civilian Staff),Nunavut,16
-2018,Royal Canadian Mounted Police (Civilian Staff),Ontario (minus the NCR),267
-2018,Royal Canadian Mounted Police (Civilian Staff),Prince Edward Island,42
-2018,Royal Canadian Mounted Police (Civilian Staff),Quebec (minus the NCR),273
-2018,Royal Canadian Mounted Police (Civilian Staff),Saskatchewan,869
-2018,Royal Canadian Mounted Police (Civilian Staff),Unknown,31
-2018,Royal Canadian Mounted Police (Civilian Staff),Yukon,43
+2018,Royal Canadian Mounted Police (RCMP),Alberta,711
+2018,Royal Canadian Mounted Police (RCMP),British Columbia,1342
+2018,Royal Canadian Mounted Police (RCMP),Manitoba,375
+2018,Royal Canadian Mounted Police (RCMP),National Capital Region (NCR),2268
+2018,Royal Canadian Mounted Police (RCMP),New Brunswick,464
+2018,Royal Canadian Mounted Police (RCMP),Newfoundland and Labrador,194
+2018,Royal Canadian Mounted Police (RCMP),Northwest Territories,42
+2018,Royal Canadian Mounted Police (RCMP),Nova Scotia,303
+2018,Royal Canadian Mounted Police (RCMP),Nunavut,16
+2018,Royal Canadian Mounted Police (RCMP),Ontario (minus the NCR),267
+2018,Royal Canadian Mounted Police (RCMP),Prince Edward Island,42
+2018,Royal Canadian Mounted Police (RCMP),Quebec (minus the NCR),273
+2018,Royal Canadian Mounted Police (RCMP),Saskatchewan,869
+2018,Royal Canadian Mounted Police (RCMP),Unknown,31
+2018,Royal Canadian Mounted Police (RCMP),Yukon,43
 2018,Security Intelligence Review Committee,National Capital Region (NCR),21
 2018,Security Intelligence Review Committee,Unknown,4
 2018,Shared Services Canada,Alberta,76
@@ -6057,10 +6057,10 @@ Year,Department or agency,Province or territory of work,Number of employees
 2019,Office of the Commissioner of Official Languages,Quebec (minus the NCR),5
 2019,Office of the Commissioner of Official Languages,Saskatchewan,1
 2019,Office of the Commissioner of Official Languages,Unknown,3
-2019,Office of the Governor General's Secretary,National Capital Region (NCR),147
-2019,Office of the Governor General's Secretary,Quebec (minus the NCR),1
 2019,Office of the Public Sector Integrity Commissioner of Canada,National Capital Region (NCR),23
 2019,Office of the Public Sector Integrity Commissioner of Canada,Unknown,2
+2019,Office of the Secretary to the Governor General,National Capital Region (NCR),147
+2019,Office of the Secretary to the Governor General,Quebec (minus the NCR),1
 2019,Office of the Superintendent of Financial Institutions Canada,British Columbia,18
 2019,Office of the Superintendent of Financial Institutions Canada,National Capital Region (NCR),329
 2019,Office of the Superintendent of Financial Institutions Canada,Ontario (minus the NCR),403
@@ -6165,21 +6165,21 @@ Year,Department or agency,Province or territory of work,Number of employees
 2019,Public Services and Procurement Canada,Yukon,3
 2019,RCMP External Review Committee,National Capital Region (NCR),8
 2019,Registrar of the Supreme Court of Canada,National Capital Region (NCR),225
-2019,Royal Canadian Mounted Police (Civilian Staff),Alberta,773
-2019,Royal Canadian Mounted Police (Civilian Staff),British Columbia,1362
-2019,Royal Canadian Mounted Police (Civilian Staff),Manitoba,376
-2019,Royal Canadian Mounted Police (Civilian Staff),National Capital Region (NCR),2450
-2019,Royal Canadian Mounted Police (Civilian Staff),New Brunswick,503
-2019,Royal Canadian Mounted Police (Civilian Staff),Newfoundland and Labrador,200
-2019,Royal Canadian Mounted Police (Civilian Staff),Northwest Territories,43
-2019,Royal Canadian Mounted Police (Civilian Staff),Nova Scotia,304
-2019,Royal Canadian Mounted Police (Civilian Staff),Nunavut,16
-2019,Royal Canadian Mounted Police (Civilian Staff),Ontario (minus the NCR),266
-2019,Royal Canadian Mounted Police (Civilian Staff),Prince Edward Island,38
-2019,Royal Canadian Mounted Police (Civilian Staff),Quebec (minus the NCR),250
-2019,Royal Canadian Mounted Police (Civilian Staff),Saskatchewan,900
-2019,Royal Canadian Mounted Police (Civilian Staff),Unknown,41
-2019,Royal Canadian Mounted Police (Civilian Staff),Yukon,42
+2019,Royal Canadian Mounted Police (RCMP),Alberta,773
+2019,Royal Canadian Mounted Police (RCMP),British Columbia,1362
+2019,Royal Canadian Mounted Police (RCMP),Manitoba,376
+2019,Royal Canadian Mounted Police (RCMP),National Capital Region (NCR),2450
+2019,Royal Canadian Mounted Police (RCMP),New Brunswick,503
+2019,Royal Canadian Mounted Police (RCMP),Newfoundland and Labrador,200
+2019,Royal Canadian Mounted Police (RCMP),Northwest Territories,43
+2019,Royal Canadian Mounted Police (RCMP),Nova Scotia,304
+2019,Royal Canadian Mounted Police (RCMP),Nunavut,16
+2019,Royal Canadian Mounted Police (RCMP),Ontario (minus the NCR),266
+2019,Royal Canadian Mounted Police (RCMP),Prince Edward Island,38
+2019,Royal Canadian Mounted Police (RCMP),Quebec (minus the NCR),250
+2019,Royal Canadian Mounted Police (RCMP),Saskatchewan,900
+2019,Royal Canadian Mounted Police (RCMP),Unknown,41
+2019,Royal Canadian Mounted Police (RCMP),Yukon,42
 2019,Secretariat of the National Security and Intelligence Committee of Parliamentarians,Unknown,5
 2019,Security Intelligence Review Committee,National Capital Region (NCR),20
 2019,Security Intelligence Review Committee,Unknown,2
@@ -6690,11 +6690,11 @@ Year,Department or agency,Province or territory of work,Number of employees
 2020,Office of the Commissioner of Official Languages,Quebec (minus the NCR),3
 2020,Office of the Commissioner of Official Languages,Saskatchewan,1
 2020,Office of the Commissioner of Official Languages,Unknown,2
-2020,Office of the Governor General's Secretary,National Capital Region (NCR),163
-2020,Office of the Governor General's Secretary,Quebec (minus the NCR),2
-2020,Office of the Governor General's Secretary,Unknown,2
 2020,Office of the Public Sector Integrity Commissioner of Canada,National Capital Region (NCR),26
 2020,Office of the Public Sector Integrity Commissioner of Canada,Unknown,1
+2020,Office of the Secretary to the Governor General,National Capital Region (NCR),163
+2020,Office of the Secretary to the Governor General,Quebec (minus the NCR),2
+2020,Office of the Secretary to the Governor General,Unknown,2
 2020,Office of the Superintendent of Financial Institutions Canada,British Columbia,18
 2020,Office of the Superintendent of Financial Institutions Canada,National Capital Region (NCR),368
 2020,Office of the Superintendent of Financial Institutions Canada,Ontario (minus the NCR),434
@@ -6802,21 +6802,21 @@ Year,Department or agency,Province or territory of work,Number of employees
 2020,RCMP External Review Committee,Unknown,1
 2020,Registrar of the Supreme Court of Canada,National Capital Region (NCR),236
 2020,Registrar of the Supreme Court of Canada,Unknown,1
-2020,Royal Canadian Mounted Police (Civilian Staff),Alberta,847
-2020,Royal Canadian Mounted Police (Civilian Staff),British Columbia,1387
-2020,Royal Canadian Mounted Police (Civilian Staff),Manitoba,391
-2020,Royal Canadian Mounted Police (Civilian Staff),National Capital Region (NCR),2702
-2020,Royal Canadian Mounted Police (Civilian Staff),New Brunswick,515
-2020,Royal Canadian Mounted Police (Civilian Staff),Newfoundland and Labrador,199
-2020,Royal Canadian Mounted Police (Civilian Staff),Northwest Territories,47
-2020,Royal Canadian Mounted Police (Civilian Staff),Nova Scotia,303
-2020,Royal Canadian Mounted Police (Civilian Staff),Nunavut,15
-2020,Royal Canadian Mounted Police (Civilian Staff),Ontario (minus the NCR),278
-2020,Royal Canadian Mounted Police (Civilian Staff),Prince Edward Island,31
-2020,Royal Canadian Mounted Police (Civilian Staff),Quebec (minus the NCR),257
-2020,Royal Canadian Mounted Police (Civilian Staff),Saskatchewan,965
-2020,Royal Canadian Mounted Police (Civilian Staff),Unknown,44
-2020,Royal Canadian Mounted Police (Civilian Staff),Yukon,41
+2020,Royal Canadian Mounted Police (RCMP),Alberta,847
+2020,Royal Canadian Mounted Police (RCMP),British Columbia,1387
+2020,Royal Canadian Mounted Police (RCMP),Manitoba,391
+2020,Royal Canadian Mounted Police (RCMP),National Capital Region (NCR),2702
+2020,Royal Canadian Mounted Police (RCMP),New Brunswick,515
+2020,Royal Canadian Mounted Police (RCMP),Newfoundland and Labrador,199
+2020,Royal Canadian Mounted Police (RCMP),Northwest Territories,47
+2020,Royal Canadian Mounted Police (RCMP),Nova Scotia,303
+2020,Royal Canadian Mounted Police (RCMP),Nunavut,15
+2020,Royal Canadian Mounted Police (RCMP),Ontario (minus the NCR),278
+2020,Royal Canadian Mounted Police (RCMP),Prince Edward Island,31
+2020,Royal Canadian Mounted Police (RCMP),Quebec (minus the NCR),257
+2020,Royal Canadian Mounted Police (RCMP),Saskatchewan,965
+2020,Royal Canadian Mounted Police (RCMP),Unknown,44
+2020,Royal Canadian Mounted Police (RCMP),Yukon,41
 2020,Secretariat of the National Security and Intelligence Committee of Parliamentarians,National Capital Region (NCR),8
 2020,Secretariat of the National Security and Intelligence Committee of Parliamentarians,Unknown,1
 2020,Security Intelligence Review Committee,National Capital Region (NCR),18
@@ -7304,8 +7304,8 @@ Year,Department or agency,Province or territory of work,Number of employees
 2021,National Research Council Canada,Quebec (minus the NCR),658
 2021,National Research Council Canada,Saskatchewan,111
 2021,National Research Council Canada,Unknown,359
-2021,National Security Intelligence and Review Agency,National Capital Region (NCR),10
-2021,National Security Intelligence and Review Agency,Unknown,63
+2021,National Security and Intelligence Review Agency,National Capital Region (NCR),10
+2021,National Security and Intelligence Review Agency,Unknown,63
 2021,Natural Resources Canada,Alberta,315
 2021,Natural Resources Canada,British Columbia,237
 2021,Natural Resources Canada,Manitoba,5
@@ -7345,12 +7345,12 @@ Year,Department or agency,Province or territory of work,Number of employees
 2021,Office of the Commissioner of Official Languages,Quebec (minus the NCR),4
 2021,Office of the Commissioner of Official Languages,Saskatchewan,1
 2021,Office of the Commissioner of Official Languages,Unknown,1
-2021,Office of the Governor General's Secretary,National Capital Region (NCR),151
-2021,Office of the Governor General's Secretary,Quebec (minus the NCR),6
-2021,Office of the Governor General's Secretary,Unknown,1
 2021,Office of the Prime Minister,Unknown,1
 2021,Office of the Public Sector Integrity Commissioner of Canada,National Capital Region (NCR),33
 2021,Office of the Public Sector Integrity Commissioner of Canada,Unknown,1
+2021,Office of the Secretary to the Governor General,National Capital Region (NCR),151
+2021,Office of the Secretary to the Governor General,Quebec (minus the NCR),6
+2021,Office of the Secretary to the Governor General,Unknown,1
 2021,Office of the Superintendent of Financial Institutions Canada,British Columbia,21
 2021,Office of the Superintendent of Financial Institutions Canada,National Capital Region (NCR),397
 2021,Office of the Superintendent of Financial Institutions Canada,Ontario (minus the NCR),460
@@ -7470,21 +7470,21 @@ Year,Department or agency,Province or territory of work,Number of employees
 2021,RCMP External Review Committee,Unknown,1
 2021,Registrar of the Supreme Court of Canada,National Capital Region (NCR),232
 2021,Registrar of the Supreme Court of Canada,Unknown,1
-2021,Royal Canadian Mounted Police (Civilian Staff),Alberta,894
-2021,Royal Canadian Mounted Police (Civilian Staff),British Columbia,1499
-2021,Royal Canadian Mounted Police (Civilian Staff),Manitoba,391
-2021,Royal Canadian Mounted Police (Civilian Staff),National Capital Region (NCR),2843
-2021,Royal Canadian Mounted Police (Civilian Staff),New Brunswick,541
-2021,Royal Canadian Mounted Police (Civilian Staff),Newfoundland and Labrador,204
-2021,Royal Canadian Mounted Police (Civilian Staff),Northwest Territories,57
-2021,Royal Canadian Mounted Police (Civilian Staff),Nova Scotia,307
-2021,Royal Canadian Mounted Police (Civilian Staff),Nunavut,13
-2021,Royal Canadian Mounted Police (Civilian Staff),Ontario (minus the NCR),289
-2021,Royal Canadian Mounted Police (Civilian Staff),Prince Edward Island,37
-2021,Royal Canadian Mounted Police (Civilian Staff),Quebec (minus the NCR),254
-2021,Royal Canadian Mounted Police (Civilian Staff),Saskatchewan,969
-2021,Royal Canadian Mounted Police (Civilian Staff),Unknown,84
-2021,Royal Canadian Mounted Police (Civilian Staff),Yukon,54
+2021,Royal Canadian Mounted Police (RCMP),Alberta,894
+2021,Royal Canadian Mounted Police (RCMP),British Columbia,1499
+2021,Royal Canadian Mounted Police (RCMP),Manitoba,391
+2021,Royal Canadian Mounted Police (RCMP),National Capital Region (NCR),2843
+2021,Royal Canadian Mounted Police (RCMP),New Brunswick,541
+2021,Royal Canadian Mounted Police (RCMP),Newfoundland and Labrador,204
+2021,Royal Canadian Mounted Police (RCMP),Northwest Territories,57
+2021,Royal Canadian Mounted Police (RCMP),Nova Scotia,307
+2021,Royal Canadian Mounted Police (RCMP),Nunavut,13
+2021,Royal Canadian Mounted Police (RCMP),Ontario (minus the NCR),289
+2021,Royal Canadian Mounted Police (RCMP),Prince Edward Island,37
+2021,Royal Canadian Mounted Police (RCMP),Quebec (minus the NCR),254
+2021,Royal Canadian Mounted Police (RCMP),Saskatchewan,969
+2021,Royal Canadian Mounted Police (RCMP),Unknown,84
+2021,Royal Canadian Mounted Police (RCMP),Yukon,54
 2021,Secretariat of the National Security and Intelligence Committee of Parliamentarians,National Capital Region (NCR),6
 2021,Shared Services Canada,Alberta,125
 2021,Shared Services Canada,British Columbia,237
@@ -7977,8 +7977,8 @@ Year,Department or agency,Province or territory of work,Number of employees
 2022,National Research Council Canada,Quebec (minus the NCR),608
 2022,National Research Council Canada,Saskatchewan,107
 2022,National Research Council Canada,Unknown,641
-2022,National Security Intelligence and Review Agency,National Capital Region (NCR),11
-2022,National Security Intelligence and Review Agency,Unknown,56
+2022,National Security and Intelligence Review Agency,National Capital Region (NCR),11
+2022,National Security and Intelligence Review Agency,Unknown,56
 2022,Natural Resources Canada,Alberta,311
 2022,Natural Resources Canada,British Columbia,224
 2022,Natural Resources Canada,Manitoba,6
@@ -8017,11 +8017,11 @@ Year,Department or agency,Province or territory of work,Number of employees
 2022,Office of the Commissioner of Official Languages,Ontario (minus the NCR),2
 2022,Office of the Commissioner of Official Languages,Quebec (minus the NCR),5
 2022,Office of the Commissioner of Official Languages,Unknown,3
-2022,Office of the Governor General's Secretary,National Capital Region (NCR),170
-2022,Office of the Governor General's Secretary,Quebec (minus the NCR),5
-2022,Office of the Governor General's Secretary,Unknown,2
 2022,Office of the Intelligence Commissioner,Unknown,3
 2022,Office of the Public Sector Integrity Commissioner of Canada,National Capital Region (NCR),31
+2022,Office of the Secretary to the Governor General,National Capital Region (NCR),170
+2022,Office of the Secretary to the Governor General,Quebec (minus the NCR),5
+2022,Office of the Secretary to the Governor General,Unknown,2
 2022,Office of the Superintendent of Financial Institutions Canada,British Columbia,21
 2022,Office of the Superintendent of Financial Institutions Canada,National Capital Region (NCR),421
 2022,Office of the Superintendent of Financial Institutions Canada,Ontario (minus the NCR),471
@@ -8142,21 +8142,21 @@ Year,Department or agency,Province or territory of work,Number of employees
 2022,RCMP External Review Committee,National Capital Region (NCR),22
 2022,Registrar of the Supreme Court of Canada,National Capital Region (NCR),219
 2022,Registrar of the Supreme Court of Canada,Unknown,2
-2022,Royal Canadian Mounted Police (Civilian Staff),Alberta,911
-2022,Royal Canadian Mounted Police (Civilian Staff),British Columbia,1509
-2022,Royal Canadian Mounted Police (Civilian Staff),Manitoba,384
-2022,Royal Canadian Mounted Police (Civilian Staff),National Capital Region (NCR),3130
-2022,Royal Canadian Mounted Police (Civilian Staff),New Brunswick,504
-2022,Royal Canadian Mounted Police (Civilian Staff),Newfoundland and Labrador,194
-2022,Royal Canadian Mounted Police (Civilian Staff),Northwest Territories,53
-2022,Royal Canadian Mounted Police (Civilian Staff),Nova Scotia,309
-2022,Royal Canadian Mounted Police (Civilian Staff),Nunavut,19
-2022,Royal Canadian Mounted Police (Civilian Staff),Ontario (minus the NCR),282
-2022,Royal Canadian Mounted Police (Civilian Staff),Prince Edward Island,43
-2022,Royal Canadian Mounted Police (Civilian Staff),Quebec (minus the NCR),253
-2022,Royal Canadian Mounted Police (Civilian Staff),Saskatchewan,962
-2022,Royal Canadian Mounted Police (Civilian Staff),Unknown,90
-2022,Royal Canadian Mounted Police (Civilian Staff),Yukon,47
+2022,Royal Canadian Mounted Police (RCMP),Alberta,911
+2022,Royal Canadian Mounted Police (RCMP),British Columbia,1509
+2022,Royal Canadian Mounted Police (RCMP),Manitoba,384
+2022,Royal Canadian Mounted Police (RCMP),National Capital Region (NCR),3130
+2022,Royal Canadian Mounted Police (RCMP),New Brunswick,504
+2022,Royal Canadian Mounted Police (RCMP),Newfoundland and Labrador,194
+2022,Royal Canadian Mounted Police (RCMP),Northwest Territories,53
+2022,Royal Canadian Mounted Police (RCMP),Nova Scotia,309
+2022,Royal Canadian Mounted Police (RCMP),Nunavut,19
+2022,Royal Canadian Mounted Police (RCMP),Ontario (minus the NCR),282
+2022,Royal Canadian Mounted Police (RCMP),Prince Edward Island,43
+2022,Royal Canadian Mounted Police (RCMP),Quebec (minus the NCR),253
+2022,Royal Canadian Mounted Police (RCMP),Saskatchewan,962
+2022,Royal Canadian Mounted Police (RCMP),Unknown,90
+2022,Royal Canadian Mounted Police (RCMP),Yukon,47
 2022,Secretariat of the National Security and Intelligence Committee of Parliamentarians,National Capital Region (NCR),6
 2022,Shared Services Canada,Alberta,144
 2022,Shared Services Canada,British Columbia,274
@@ -8651,8 +8651,8 @@ Year,Department or agency,Province or territory of work,Number of employees
 2023,National Research Council Canada,Quebec (minus the NCR),564
 2023,National Research Council Canada,Saskatchewan,95
 2023,National Research Council Canada,Unknown,959
-2023,National Security Intelligence and Review Agency,National Capital Region (NCR),21
-2023,National Security Intelligence and Review Agency,Unknown,71
+2023,National Security and Intelligence Review Agency,National Capital Region (NCR),21
+2023,National Security and Intelligence Review Agency,Unknown,71
 2023,Natural Resources Canada,Alberta,328
 2023,Natural Resources Canada,British Columbia,287
 2023,Natural Resources Canada,Manitoba,11
@@ -8691,11 +8691,11 @@ Year,Department or agency,Province or territory of work,Number of employees
 2023,Office of the Commissioner of Official Languages,Ontario (minus the NCR),2
 2023,Office of the Commissioner of Official Languages,Quebec (minus the NCR),4
 2023,Office of the Commissioner of Official Languages,Unknown,1
-2023,Office of the Governor General's Secretary,National Capital Region (NCR),177
-2023,Office of the Governor General's Secretary,Quebec (minus the NCR),5
-2023,Office of the Governor General's Secretary,Unknown,2
 2023,Office of the Intelligence Commissioner,Unknown,6
 2023,Office of the Public Sector Integrity Commissioner of Canada,National Capital Region (NCR),36
+2023,Office of the Secretary to the Governor General,National Capital Region (NCR),177
+2023,Office of the Secretary to the Governor General,Quebec (minus the NCR),5
+2023,Office of the Secretary to the Governor General,Unknown,2
 2023,Office of the Superintendent of Financial Institutions Canada,British Columbia,27
 2023,Office of the Superintendent of Financial Institutions Canada,National Capital Region (NCR),483
 2023,Office of the Superintendent of Financial Institutions Canada,Ontario (minus the NCR),594
@@ -8816,21 +8816,21 @@ Year,Department or agency,Province or territory of work,Number of employees
 2023,RCMP External Review Committee,National Capital Region (NCR),25
 2023,Registrar of the Supreme Court of Canada,National Capital Region (NCR),242
 2023,Registrar of the Supreme Court of Canada,Unknown,6
-2023,Royal Canadian Mounted Police (Civilian Staff),Alberta,978
-2023,Royal Canadian Mounted Police (Civilian Staff),British Columbia,1537
-2023,Royal Canadian Mounted Police (Civilian Staff),Manitoba,407
-2023,Royal Canadian Mounted Police (Civilian Staff),National Capital Region (NCR),3614
-2023,Royal Canadian Mounted Police (Civilian Staff),New Brunswick,553
-2023,Royal Canadian Mounted Police (Civilian Staff),Newfoundland and Labrador,225
-2023,Royal Canadian Mounted Police (Civilian Staff),Northwest Territories,47
-2023,Royal Canadian Mounted Police (Civilian Staff),Nova Scotia,329
-2023,Royal Canadian Mounted Police (Civilian Staff),Nunavut,21
-2023,Royal Canadian Mounted Police (Civilian Staff),Ontario (minus the NCR),300
-2023,Royal Canadian Mounted Police (Civilian Staff),Prince Edward Island,48
-2023,Royal Canadian Mounted Police (Civilian Staff),Quebec (minus the NCR),272
-2023,Royal Canadian Mounted Police (Civilian Staff),Saskatchewan,981
-2023,Royal Canadian Mounted Police (Civilian Staff),Unknown,26
-2023,Royal Canadian Mounted Police (Civilian Staff),Yukon,48
+2023,Royal Canadian Mounted Police (RCMP),Alberta,978
+2023,Royal Canadian Mounted Police (RCMP),British Columbia,1537
+2023,Royal Canadian Mounted Police (RCMP),Manitoba,407
+2023,Royal Canadian Mounted Police (RCMP),National Capital Region (NCR),3614
+2023,Royal Canadian Mounted Police (RCMP),New Brunswick,553
+2023,Royal Canadian Mounted Police (RCMP),Newfoundland and Labrador,225
+2023,Royal Canadian Mounted Police (RCMP),Northwest Territories,47
+2023,Royal Canadian Mounted Police (RCMP),Nova Scotia,329
+2023,Royal Canadian Mounted Police (RCMP),Nunavut,21
+2023,Royal Canadian Mounted Police (RCMP),Ontario (minus the NCR),300
+2023,Royal Canadian Mounted Police (RCMP),Prince Edward Island,48
+2023,Royal Canadian Mounted Police (RCMP),Quebec (minus the NCR),272
+2023,Royal Canadian Mounted Police (RCMP),Saskatchewan,981
+2023,Royal Canadian Mounted Police (RCMP),Unknown,26
+2023,Royal Canadian Mounted Police (RCMP),Yukon,48
 2023,Secretariat of the National Security and Intelligence Committee of Parliamentarians,National Capital Region (NCR),7
 2023,Secretariat of the National Security and Intelligence Committee of Parliamentarians,Unknown,2
 2023,Shared Services Canada,Alberta,181
@@ -9342,7 +9342,7 @@ Year,Department or agency,Province or territory of work,Number of employees
 2024,National Research Council Canada,Quebec (minus the NCR),530
 2024,National Research Council Canada,Saskatchewan,91
 2024,National Research Council Canada,Unknown,1270
-2024,National Security Intelligence and Review Agency,National Capital Region (NCR),85
+2024,National Security and Intelligence Review Agency,National Capital Region (NCR),85
 2024,Natural Resources Canada,Alberta,361
 2024,Natural Resources Canada,British Columbia,304
 2024,Natural Resources Canada,Manitoba,8
@@ -9378,12 +9378,12 @@ Year,Department or agency,Province or territory of work,Number of employees
 2024,Office of the Commissioner of Official Languages,Ontario (minus the NCR),1
 2024,Office of the Commissioner of Official Languages,Quebec (minus the NCR),4
 2024,Office of the Commissioner of Official Languages,Unknown,1
-2024,Office of the Governor General's Secretary,National Capital Region (NCR),168
-2024,Office of the Governor General's Secretary,Quebec (minus the NCR),1
-2024,Office of the Governor General's Secretary,Unknown,3
 2024,Office of the Intelligence Commissioner,Unknown,5
 2024,Office of the Public Sector Integrity Commissioner of Canada,National Capital Region (NCR),33
 2024,Office of the Public Sector Integrity Commissioner of Canada,Unknown,1
+2024,Office of the Secretary to the Governor General,National Capital Region (NCR),168
+2024,Office of the Secretary to the Governor General,Quebec (minus the NCR),1
+2024,Office of the Secretary to the Governor General,Unknown,3
 2024,Office of the Superintendent of Financial Institutions Canada,British Columbia,33
 2024,Office of the Superintendent of Financial Institutions Canada,National Capital Region (NCR),566
 2024,Office of the Superintendent of Financial Institutions Canada,Ontario (minus the NCR),699
@@ -9500,21 +9500,21 @@ Year,Department or agency,Province or territory of work,Number of employees
 2024,RCMP External Review Committee,National Capital Region (NCR),24
 2024,Registrar of the Supreme Court of Canada,National Capital Region (NCR),247
 2024,Registrar of the Supreme Court of Canada,Unknown,2
-2024,Royal Canadian Mounted Police (Civilian Staff),Alberta,1086
-2024,Royal Canadian Mounted Police (Civilian Staff),British Columbia,1667
-2024,Royal Canadian Mounted Police (Civilian Staff),Manitoba,434
-2024,Royal Canadian Mounted Police (Civilian Staff),National Capital Region (NCR),4127
-2024,Royal Canadian Mounted Police (Civilian Staff),New Brunswick,570
-2024,Royal Canadian Mounted Police (Civilian Staff),Newfoundland and Labrador,229
-2024,Royal Canadian Mounted Police (Civilian Staff),Northwest Territories,45
-2024,Royal Canadian Mounted Police (Civilian Staff),Nova Scotia,357
-2024,Royal Canadian Mounted Police (Civilian Staff),Nunavut,22
-2024,Royal Canadian Mounted Police (Civilian Staff),Ontario (minus the NCR),332
-2024,Royal Canadian Mounted Police (Civilian Staff),Prince Edward Island,48
-2024,Royal Canadian Mounted Police (Civilian Staff),Quebec (minus the NCR),313
-2024,Royal Canadian Mounted Police (Civilian Staff),Saskatchewan,1019
-2024,Royal Canadian Mounted Police (Civilian Staff),Unknown,14
-2024,Royal Canadian Mounted Police (Civilian Staff),Yukon,46
+2024,Royal Canadian Mounted Police (RCMP),Alberta,1086
+2024,Royal Canadian Mounted Police (RCMP),British Columbia,1667
+2024,Royal Canadian Mounted Police (RCMP),Manitoba,434
+2024,Royal Canadian Mounted Police (RCMP),National Capital Region (NCR),4127
+2024,Royal Canadian Mounted Police (RCMP),New Brunswick,570
+2024,Royal Canadian Mounted Police (RCMP),Newfoundland and Labrador,229
+2024,Royal Canadian Mounted Police (RCMP),Northwest Territories,45
+2024,Royal Canadian Mounted Police (RCMP),Nova Scotia,357
+2024,Royal Canadian Mounted Police (RCMP),Nunavut,22
+2024,Royal Canadian Mounted Police (RCMP),Ontario (minus the NCR),332
+2024,Royal Canadian Mounted Police (RCMP),Prince Edward Island,48
+2024,Royal Canadian Mounted Police (RCMP),Quebec (minus the NCR),313
+2024,Royal Canadian Mounted Police (RCMP),Saskatchewan,1019
+2024,Royal Canadian Mounted Police (RCMP),Unknown,14
+2024,Royal Canadian Mounted Police (RCMP),Yukon,46
 2024,Secretariat of the National Security and Intelligence Committee of Parliamentarians,National Capital Region (NCR),6
 2024,Secretariat of the National Security and Intelligence Committee of Parliamentarians,Unknown,1
 2024,Shared Services Canada,Alberta,221
@@ -10013,7 +10013,7 @@ Year,Department or agency,Province or territory of work,Number of employees
 2025,National Research Council Canada,Quebec (minus the NCR),503
 2025,National Research Council Canada,Saskatchewan,85
 2025,National Research Council Canada,Unknown,1624
-2025,National Security Intelligence and Review Agency,National Capital Region (NCR),89
+2025,National Security and Intelligence Review Agency,National Capital Region (NCR),89
 2025,Natural Resources Canada,Alberta,393
 2025,Natural Resources Canada,British Columbia,362
 2025,Natural Resources Canada,Manitoba,9
@@ -10049,11 +10049,11 @@ Year,Department or agency,Province or territory of work,Number of employees
 2025,Office of the Commissioner of Official Languages,Ontario (minus the NCR),1
 2025,Office of the Commissioner of Official Languages,Quebec (minus the NCR),4
 2025,Office of the Commissioner of Official Languages,Saskatchewan,1
-2025,Office of the Governor General's Secretary,National Capital Region (NCR),160
-2025,Office of the Governor General's Secretary,Quebec (minus the NCR),3
 2025,Office of the Intelligence Commissioner,Unknown,4
 2025,Office of the Public Sector Integrity Commissioner of Canada,National Capital Region (NCR),34
 2025,Office of the Public Sector Integrity Commissioner of Canada,Unknown,1
+2025,Office of the Secretary to the Governor General,National Capital Region (NCR),160
+2025,Office of the Secretary to the Governor General,Quebec (minus the NCR),3
 2025,Office of the Superintendent of Financial Institutions Canada,British Columbia,30
 2025,Office of the Superintendent of Financial Institutions Canada,National Capital Region (NCR),523
 2025,Office of the Superintendent of Financial Institutions Canada,Ontario (minus the NCR),674
@@ -10173,21 +10173,21 @@ Year,Department or agency,Province or territory of work,Number of employees
 2025,Public Services and Procurement Canada,Yukon,5
 2025,RCMP External Review Committee,National Capital Region (NCR),23
 2025,Registrar of the Supreme Court of Canada,National Capital Region (NCR),249
-2025,Royal Canadian Mounted Police,Alberta,1135
-2025,Royal Canadian Mounted Police,British Columbia,1824
-2025,Royal Canadian Mounted Police,Manitoba,444
-2025,Royal Canadian Mounted Police,National Capital Region (NCR),4649
-2025,Royal Canadian Mounted Police,New Brunswick,618
-2025,Royal Canadian Mounted Police,Newfoundland and Labrador,237
-2025,Royal Canadian Mounted Police,Northwest Territories,49
-2025,Royal Canadian Mounted Police,Nova Scotia,364
-2025,Royal Canadian Mounted Police,Nunavut,22
-2025,Royal Canadian Mounted Police,Ontario (minus the NCR),354
-2025,Royal Canadian Mounted Police,Prince Edward Island,54
-2025,Royal Canadian Mounted Police,Quebec (minus the NCR),361
-2025,Royal Canadian Mounted Police,Saskatchewan,1052
-2025,Royal Canadian Mounted Police,Unknown,11
-2025,Royal Canadian Mounted Police,Yukon,46
+2025,Royal Canadian Mounted Police (RCMP),Alberta,1135
+2025,Royal Canadian Mounted Police (RCMP),British Columbia,1824
+2025,Royal Canadian Mounted Police (RCMP),Manitoba,444
+2025,Royal Canadian Mounted Police (RCMP),National Capital Region (NCR),4649
+2025,Royal Canadian Mounted Police (RCMP),New Brunswick,618
+2025,Royal Canadian Mounted Police (RCMP),Newfoundland and Labrador,237
+2025,Royal Canadian Mounted Police (RCMP),Northwest Territories,49
+2025,Royal Canadian Mounted Police (RCMP),Nova Scotia,364
+2025,Royal Canadian Mounted Police (RCMP),Nunavut,22
+2025,Royal Canadian Mounted Police (RCMP),Ontario (minus the NCR),354
+2025,Royal Canadian Mounted Police (RCMP),Prince Edward Island,54
+2025,Royal Canadian Mounted Police (RCMP),Quebec (minus the NCR),361
+2025,Royal Canadian Mounted Police (RCMP),Saskatchewan,1052
+2025,Royal Canadian Mounted Police (RCMP),Unknown,11
+2025,Royal Canadian Mounted Police (RCMP),Yukon,46
 2025,Secretariat of the National Security and Intelligence Committee of Parliamentarians,National Capital Region (NCR),10
 2025,Shared Services Canada,Alberta,213
 2025,Shared Services Canada,British Columbia,253
@@ -10282,3 +10282,665 @@ Year,Department or agency,Province or territory of work,Number of employees
 2025,Women and Gender Equality Canada,Ontario (minus the NCR),1
 2025,Women and Gender Equality Canada,Quebec (minus the NCR),11
 2025,Women and Gender Equality Canada,Unknown,1
+2026,Accessibility Standards Canada,National Capital Region (NCR),56
+2026,Administrative Tribunals Support Service of Canada,Alberta,3
+2026,Administrative Tribunals Support Service of Canada,British Columbia,14
+2026,Administrative Tribunals Support Service of Canada,Manitoba,1
+2026,Administrative Tribunals Support Service of Canada,National Capital Region (NCR),519
+2026,Administrative Tribunals Support Service of Canada,Nova Scotia,2
+2026,Administrative Tribunals Support Service of Canada,Ontario (minus the NCR),59
+2026,Administrative Tribunals Support Service of Canada,Quebec (minus the NCR),34
+2026,Agriculture and Agri-Food Canada,Alberta,516
+2026,Agriculture and Agri-Food Canada,British Columbia,261
+2026,Agriculture and Agri-Food Canada,Manitoba,606
+2026,Agriculture and Agri-Food Canada,National Capital Region (NCR),2124
+2026,Agriculture and Agri-Food Canada,New Brunswick,175
+2026,Agriculture and Agri-Food Canada,Newfoundland and Labrador,45
+2026,Agriculture and Agri-Food Canada,Nova Scotia,135
+2026,Agriculture and Agri-Food Canada,Ontario (minus the NCR),455
+2026,Agriculture and Agri-Food Canada,Prince Edward Island,87
+2026,Agriculture and Agri-Food Canada,Quebec (minus the NCR),544
+2026,Agriculture and Agri-Food Canada,Saskatchewan,527
+2026,Agriculture and Agri-Food Canada,Unknown,10
+2026,Atlantic Canada Opportunities Agency,National Capital Region (NCR),22
+2026,Atlantic Canada Opportunities Agency,New Brunswick,287
+2026,Atlantic Canada Opportunities Agency,Newfoundland and Labrador,84
+2026,Atlantic Canada Opportunities Agency,Nova Scotia,112
+2026,Atlantic Canada Opportunities Agency,Prince Edward Island,53
+2026,Canada Border Services Agency,Alberta,616
+2026,Canada Border Services Agency,British Columbia,2033
+2026,Canada Border Services Agency,Manitoba,482
+2026,Canada Border Services Agency,National Capital Region (NCR),5218
+2026,Canada Border Services Agency,New Brunswick,456
+2026,Canada Border Services Agency,Newfoundland and Labrador,84
+2026,Canada Border Services Agency,Northwest Territories,2
+2026,Canada Border Services Agency,Nova Scotia,268
+2026,Canada Border Services Agency,Nunavut,1
+2026,Canada Border Services Agency,Ontario (minus the NCR),4722
+2026,Canada Border Services Agency,Outside of Canada,31
+2026,Canada Border Services Agency,Prince Edward Island,4
+2026,Canada Border Services Agency,Quebec (minus the NCR),2629
+2026,Canada Border Services Agency,Saskatchewan,177
+2026,Canada Border Services Agency,Unknown,19
+2026,Canada Border Services Agency,Yukon,17
+2026,Canada Economic Development for Quebec Regions,National Capital Region (NCR),18
+2026,Canada Economic Development for Quebec Regions,Quebec (minus the NCR),331
+2026,Canada Energy Regulator,Alberta,578
+2026,Canada Energy Regulator,British Columbia,6
+2026,Canada Energy Regulator,Northwest Territories,1
+2026,Canada Energy Regulator,Quebec (minus the NCR),7
+2026,Canada Revenue Agency,Alberta,2848
+2026,Canada Revenue Agency,British Columbia,5006
+2026,Canada Revenue Agency,Manitoba,3581
+2026,Canada Revenue Agency,National Capital Region (NCR),14385
+2026,Canada Revenue Agency,New Brunswick,861
+2026,Canada Revenue Agency,Newfoundland and Labrador,2216
+2026,Canada Revenue Agency,Nova Scotia,846
+2026,Canada Revenue Agency,Ontario (minus the NCR),10923
+2026,Canada Revenue Agency,Prince Edward Island,1240
+2026,Canada Revenue Agency,Quebec (minus the NCR),6316
+2026,Canada Revenue Agency,Saskatchewan,552
+2026,Canada School of Public Service,Alberta,2
+2026,Canada School of Public Service,British Columbia,18
+2026,Canada School of Public Service,Manitoba,3
+2026,Canada School of Public Service,National Capital Region (NCR),510
+2026,Canada School of Public Service,New Brunswick,6
+2026,Canada School of Public Service,Nova Scotia,2
+2026,Canada School of Public Service,Ontario (minus the NCR),23
+2026,Canada School of Public Service,Quebec (minus the NCR),29
+2026,Canada School of Public Service,Unknown,5
+2026,Canadian Dairy Commission,National Capital Region (NCR),84
+2026,Canadian Food Inspection Agency,Alberta,563
+2026,Canadian Food Inspection Agency,British Columbia,535
+2026,Canadian Food Inspection Agency,Manitoba,321
+2026,Canadian Food Inspection Agency,National Capital Region (NCR),1690
+2026,Canadian Food Inspection Agency,New Brunswick,348
+2026,Canadian Food Inspection Agency,Newfoundland and Labrador,98
+2026,Canadian Food Inspection Agency,Nova Scotia,213
+2026,Canadian Food Inspection Agency,Ontario (minus the NCR),1095
+2026,Canadian Food Inspection Agency,Prince Edward Island,127
+2026,Canadian Food Inspection Agency,Quebec (minus the NCR),1008
+2026,Canadian Food Inspection Agency,Saskatchewan,208
+2026,Canadian Food Inspection Agency,Unknown,1
+2026,Canadian Grain Commission,Alberta,3
+2026,Canadian Grain Commission,British Columbia,110
+2026,Canadian Grain Commission,Manitoba,268
+2026,Canadian Grain Commission,National Capital Region (NCR),2
+2026,Canadian Grain Commission,Ontario (minus the NCR),25
+2026,Canadian Grain Commission,Quebec (minus the NCR),58
+2026,Canadian Grain Commission,Saskatchewan,7
+2026,Canadian Heritage,Alberta,21
+2026,Canadian Heritage,British Columbia,44
+2026,Canadian Heritage,Manitoba,35
+2026,Canadian Heritage,National Capital Region (NCR),1544
+2026,Canadian Heritage,New Brunswick,29
+2026,Canadian Heritage,Newfoundland and Labrador,10
+2026,Canadian Heritage,Northwest Territories,2
+2026,Canadian Heritage,Nova Scotia,13
+2026,Canadian Heritage,Ontario (minus the NCR),51
+2026,Canadian Heritage,Prince Edward Island,10
+2026,Canadian Heritage,Quebec (minus the NCR),75
+2026,Canadian Heritage,Saskatchewan,8
+2026,Canadian Heritage,Unknown,3
+2026,Canadian Heritage,Yukon,1
+2026,Canadian Human Rights Commission,Alberta,1
+2026,Canadian Human Rights Commission,British Columbia,3
+2026,Canadian Human Rights Commission,National Capital Region (NCR),260
+2026,Canadian Human Rights Commission,Ontario (minus the NCR),2
+2026,Canadian Human Rights Commission,Quebec (minus the NCR),8
+2026,Canadian Human Rights Commission,Unknown,2
+2026,Canadian Institutes of Health Research,National Capital Region (NCR),481
+2026,Canadian Intergovernmental Conference Secretariat,National Capital Region (NCR),37
+2026,Canadian Northern Economic Development Agency,National Capital Region (NCR),36
+2026,Canadian Northern Economic Development Agency,Northwest Territories,25
+2026,Canadian Northern Economic Development Agency,Nunavut,40
+2026,Canadian Northern Economic Development Agency,Unknown,1
+2026,Canadian Northern Economic Development Agency,Yukon,21
+2026,Canadian Nuclear Safety Commission,Alberta,9
+2026,Canadian Nuclear Safety Commission,National Capital Region (NCR),813
+2026,Canadian Nuclear Safety Commission,New Brunswick,8
+2026,Canadian Nuclear Safety Commission,Ontario (minus the NCR),45
+2026,Canadian Nuclear Safety Commission,Quebec (minus the NCR),8
+2026,Canadian Nuclear Safety Commission,Saskatchewan,9
+2026,Canadian Nuclear Safety Commission,Unknown,152
+2026,Canadian Radio-television and Telecommunications Commission,Alberta,1
+2026,Canadian Radio-television and Telecommunications Commission,British Columbia,1
+2026,Canadian Radio-television and Telecommunications Commission,National Capital Region (NCR),716
+2026,Canadian Radio-television and Telecommunications Commission,Nova Scotia,2
+2026,Canadian Radio-television and Telecommunications Commission,Ontario (minus the NCR),1
+2026,Canadian Radio-television and Telecommunications Commission,Saskatchewan,2
+2026,Canadian Radio-television and Telecommunications Commission,Unknown,5
+2026,Canadian Space Agency,National Capital Region (NCR),126
+2026,Canadian Space Agency,Quebec (minus the NCR),928
+2026,Canadian Space Agency,Unknown,6
+2026,Canadian Transportation Agency,Alberta,2
+2026,Canadian Transportation Agency,British Columbia,2
+2026,Canadian Transportation Agency,National Capital Region (NCR),348
+2026,Canadian Transportation Agency,New Brunswick,1
+2026,Canadian Transportation Agency,Ontario (minus the NCR),3
+2026,Canadian Transportation Agency,Quebec (minus the NCR),2
+2026,Civilian Review and Complaints Commission for the RCMP,National Capital Region (NCR),86
+2026,Civilian Review and Complaints Commission for the RCMP,Unknown,8
+2026,Communications Security Establishment,Unknown,4029
+2026,Copyright Board Canada,National Capital Region (NCR),23
+2026,Correctional Service Canada,Alberta,2229
+2026,Correctional Service Canada,British Columbia,2756
+2026,Correctional Service Canada,Manitoba,713
+2026,Correctional Service Canada,National Capital Region (NCR),1543
+2026,Correctional Service Canada,New Brunswick,1303
+2026,Correctional Service Canada,Newfoundland and Labrador,41
+2026,Correctional Service Canada,Northwest Territories,2
+2026,Correctional Service Canada,Nova Scotia,678
+2026,Correctional Service Canada,Nunavut,1
+2026,Correctional Service Canada,Ontario (minus the NCR),3919
+2026,Correctional Service Canada,Prince Edward Island,18
+2026,Correctional Service Canada,Quebec (minus the NCR),3936
+2026,Correctional Service Canada,Saskatchewan,1562
+2026,Correctional Service Canada,Unknown,144
+2026,Correctional Service Canada,Yukon,1
+2026,Courts Administration Service,Alberta,13
+2026,Courts Administration Service,British Columbia,29
+2026,Courts Administration Service,Manitoba,4
+2026,Courts Administration Service,National Capital Region (NCR),639
+2026,Courts Administration Service,New Brunswick,1
+2026,Courts Administration Service,Newfoundland and Labrador,1
+2026,Courts Administration Service,Nova Scotia,4
+2026,Courts Administration Service,Ontario (minus the NCR),91
+2026,Courts Administration Service,Quebec (minus the NCR),44
+2026,Crown-Indigenous Relations and Northern Affairs Canada,Alberta,30
+2026,Crown-Indigenous Relations and Northern Affairs Canada,British Columbia,166
+2026,Crown-Indigenous Relations and Northern Affairs Canada,Manitoba,20
+2026,Crown-Indigenous Relations and Northern Affairs Canada,National Capital Region (NCR),1149
+2026,Crown-Indigenous Relations and Northern Affairs Canada,New Brunswick,8
+2026,Crown-Indigenous Relations and Northern Affairs Canada,Newfoundland and Labrador,1
+2026,Crown-Indigenous Relations and Northern Affairs Canada,Northwest Territories,89
+2026,Crown-Indigenous Relations and Northern Affairs Canada,Nova Scotia,5
+2026,Crown-Indigenous Relations and Northern Affairs Canada,Nunavut,79
+2026,Crown-Indigenous Relations and Northern Affairs Canada,Ontario (minus the NCR),27
+2026,Crown-Indigenous Relations and Northern Affairs Canada,Quebec (minus the NCR),32
+2026,Crown-Indigenous Relations and Northern Affairs Canada,Saskatchewan,4
+2026,Crown-Indigenous Relations and Northern Affairs Canada,Unknown,8
+2026,Crown-Indigenous Relations and Northern Affairs Canada,Yukon,97
+2026,Department of Finance Canada,National Capital Region (NCR),911
+2026,Department of Finance Canada,Quebec (minus the NCR),2
+2026,Department of Finance Canada,Unknown,6
+2026,Department of Justice Canada,Alberta,241
+2026,Department of Justice Canada,British Columbia,497
+2026,Department of Justice Canada,Manitoba,116
+2026,Department of Justice Canada,National Capital Region (NCR),3006
+2026,Department of Justice Canada,New Brunswick,10
+2026,Department of Justice Canada,Newfoundland and Labrador,1
+2026,Department of Justice Canada,Northwest Territories,13
+2026,Department of Justice Canada,Nova Scotia,132
+2026,Department of Justice Canada,Nunavut,1
+2026,Department of Justice Canada,Ontario (minus the NCR),650
+2026,Department of Justice Canada,Prince Edward Island,9
+2026,Department of Justice Canada,Quebec (minus the NCR),419
+2026,Department of Justice Canada,Saskatchewan,75
+2026,Department of Justice Canada,Unknown,4
+2026,Department of Justice Canada,Yukon,14
+2026,Elections Canada,National Capital Region (NCR),1611
+2026,Elections Canada,Unknown,1
+2026,Employment and Social Development Canada,Alberta,2649
+2026,Employment and Social Development Canada,British Columbia,2740
+2026,Employment and Social Development Canada,Manitoba,1220
+2026,Employment and Social Development Canada,National Capital Region (NCR),8834
+2026,Employment and Social Development Canada,New Brunswick,2278
+2026,Employment and Social Development Canada,Newfoundland and Labrador,1274
+2026,Employment and Social Development Canada,Northwest Territories,19
+2026,Employment and Social Development Canada,Nova Scotia,979
+2026,Employment and Social Development Canada,Nunavut,11
+2026,Employment and Social Development Canada,Ontario (minus the NCR),8570
+2026,Employment and Social Development Canada,Prince Edward Island,238
+2026,Employment and Social Development Canada,Quebec (minus the NCR),5913
+2026,Employment and Social Development Canada,Saskatchewan,696
+2026,Employment and Social Development Canada,Unknown,102
+2026,Employment and Social Development Canada,Yukon,17
+2026,Environment and Climate Change Canada,Alberta,448
+2026,Environment and Climate Change Canada,British Columbia,734
+2026,Environment and Climate Change Canada,Manitoba,217
+2026,Environment and Climate Change Canada,National Capital Region (NCR),3347
+2026,Environment and Climate Change Canada,New Brunswick,186
+2026,Environment and Climate Change Canada,Newfoundland and Labrador,80
+2026,Environment and Climate Change Canada,Northwest Territories,59
+2026,Environment and Climate Change Canada,Nova Scotia,286
+2026,Environment and Climate Change Canada,Nunavut,14
+2026,Environment and Climate Change Canada,Ontario (minus the NCR),1446
+2026,Environment and Climate Change Canada,Prince Edward Island,1
+2026,Environment and Climate Change Canada,Quebec (minus the NCR),1156
+2026,Environment and Climate Change Canada,Saskatchewan,157
+2026,Environment and Climate Change Canada,Unknown,17
+2026,Environment and Climate Change Canada,Yukon,37
+2026,Federal Economic Development Agency for Northern Ontario,National Capital Region (NCR),6
+2026,Federal Economic Development Agency for Northern Ontario,Ontario (minus the NCR),103
+2026,Federal Economic Development Agency for Southern Ontario,National Capital Region (NCR),44
+2026,Federal Economic Development Agency for Southern Ontario,Ontario (minus the NCR),199
+2026,Federal Economic Development Agency for Southern Ontario,Quebec (minus the NCR),1
+2026,Federal Economic Development Agency for Southern Ontario,Unknown,2
+2026,Federal Judges not part of any department,National Capital Region (NCR),1
+2026,Federal Judges not part of any department,Unknown,1208
+2026,Financial Consumer Agency of Canada,National Capital Region (NCR),249
+2026,Financial Consumer Agency of Canada,Ontario (minus the NCR),9
+2026,Financial Transactions and Reports Analysis Centre of Canada,British Columbia,7
+2026,Financial Transactions and Reports Analysis Centre of Canada,National Capital Region (NCR),137
+2026,Financial Transactions and Reports Analysis Centre of Canada,Ontario (minus the NCR),6
+2026,Financial Transactions and Reports Analysis Centre of Canada,Quebec (minus the NCR),3
+2026,Financial Transactions and Reports Analysis Centre of Canada,Unknown,355
+2026,Fisheries and Oceans Canada,Alberta,46
+2026,Fisheries and Oceans Canada,British Columbia,3292
+2026,Fisheries and Oceans Canada,Manitoba,337
+2026,Fisheries and Oceans Canada,National Capital Region (NCR),2334
+2026,Fisheries and Oceans Canada,New Brunswick,826
+2026,Fisheries and Oceans Canada,Newfoundland and Labrador,1918
+2026,Fisheries and Oceans Canada,Northwest Territories,99
+2026,Fisheries and Oceans Canada,Nova Scotia,2061
+2026,Fisheries and Oceans Canada,Nunavut,55
+2026,Fisheries and Oceans Canada,Ontario (minus the NCR),986
+2026,Fisheries and Oceans Canada,Prince Edward Island,144
+2026,Fisheries and Oceans Canada,Quebec (minus the NCR),1690
+2026,Fisheries and Oceans Canada,Saskatchewan,11
+2026,Fisheries and Oceans Canada,Unknown,30
+2026,Fisheries and Oceans Canada,Yukon,39
+2026,Global Affairs Canada,Alberta,20
+2026,Global Affairs Canada,British Columbia,30
+2026,Global Affairs Canada,Manitoba,6
+2026,Global Affairs Canada,National Capital Region (NCR),6168
+2026,Global Affairs Canada,New Brunswick,2
+2026,Global Affairs Canada,Newfoundland and Labrador,2
+2026,Global Affairs Canada,Nova Scotia,8
+2026,Global Affairs Canada,Nunavut,1
+2026,Global Affairs Canada,Ontario (minus the NCR),37
+2026,Global Affairs Canada,Outside of Canada,1210
+2026,Global Affairs Canada,Prince Edward Island,1
+2026,Global Affairs Canada,Quebec (minus the NCR),35
+2026,Global Affairs Canada,Saskatchewan,4
+2026,Global Affairs Canada,Unknown,8
+2026,Health Canada,Alberta,124
+2026,Health Canada,British Columbia,274
+2026,Health Canada,Manitoba,144
+2026,Health Canada,National Capital Region (NCR),7288
+2026,Health Canada,New Brunswick,30
+2026,Health Canada,Newfoundland and Labrador,19
+2026,Health Canada,Nova Scotia,102
+2026,Health Canada,Ontario (minus the NCR),562
+2026,Health Canada,Prince Edward Island,7
+2026,Health Canada,Quebec (minus the NCR),446
+2026,Health Canada,Saskatchewan,15
+2026,Health Canada,Unknown,45
+2026,"Housing, Infrastructure and Communities Canada",Alberta,21
+2026,"Housing, Infrastructure and Communities Canada",British Columbia,38
+2026,"Housing, Infrastructure and Communities Canada",Manitoba,3
+2026,"Housing, Infrastructure and Communities Canada",National Capital Region (NCR),1411
+2026,"Housing, Infrastructure and Communities Canada",New Brunswick,2
+2026,"Housing, Infrastructure and Communities Canada",Newfoundland and Labrador,2
+2026,"Housing, Infrastructure and Communities Canada",Northwest Territories,1
+2026,"Housing, Infrastructure and Communities Canada",Nova Scotia,26
+2026,"Housing, Infrastructure and Communities Canada",Ontario (minus the NCR),15
+2026,"Housing, Infrastructure and Communities Canada",Prince Edward Island,1
+2026,"Housing, Infrastructure and Communities Canada",Quebec (minus the NCR),146
+2026,"Housing, Infrastructure and Communities Canada",Saskatchewan,1
+2026,"Housing, Infrastructure and Communities Canada",Unknown,5
+2026,Immigration and Refugee Board of Canada,Alberta,58
+2026,Immigration and Refugee Board of Canada,British Columbia,305
+2026,Immigration and Refugee Board of Canada,National Capital Region (NCR),542
+2026,Immigration and Refugee Board of Canada,Ontario (minus the NCR),846
+2026,Immigration and Refugee Board of Canada,Quebec (minus the NCR),680
+2026,Immigration and Refugee Board of Canada,Unknown,5
+2026,"Immigration, Refugees and Citizenship Canada",Alberta,616
+2026,"Immigration, Refugees and Citizenship Canada",British Columbia,380
+2026,"Immigration, Refugees and Citizenship Canada",Manitoba,170
+2026,"Immigration, Refugees and Citizenship Canada",National Capital Region (NCR),6081
+2026,"Immigration, Refugees and Citizenship Canada",New Brunswick,39
+2026,"Immigration, Refugees and Citizenship Canada",Newfoundland and Labrador,11
+2026,"Immigration, Refugees and Citizenship Canada",Northwest Territories,1
+2026,"Immigration, Refugees and Citizenship Canada",Nova Scotia,856
+2026,"Immigration, Refugees and Citizenship Canada",Ontario (minus the NCR),1272
+2026,"Immigration, Refugees and Citizenship Canada",Outside of Canada,321
+2026,"Immigration, Refugees and Citizenship Canada",Prince Edward Island,7
+2026,"Immigration, Refugees and Citizenship Canada",Quebec (minus the NCR),1022
+2026,"Immigration, Refugees and Citizenship Canada",Saskatchewan,54
+2026,"Immigration, Refugees and Citizenship Canada",Unknown,18
+2026,Impact Assessment Agency of Canada,Alberta,25
+2026,Impact Assessment Agency of Canada,British Columbia,40
+2026,Impact Assessment Agency of Canada,National Capital Region (NCR),395
+2026,Impact Assessment Agency of Canada,Newfoundland and Labrador,13
+2026,Impact Assessment Agency of Canada,Nova Scotia,17
+2026,Impact Assessment Agency of Canada,Ontario (minus the NCR),27
+2026,Impact Assessment Agency of Canada,Quebec (minus the NCR),33
+2026,Impact Assessment Agency of Canada,Unknown,7
+2026,Indian Oil and Gas Canada,Alberta,86
+2026,Indigenous Services Canada,Alberta,692
+2026,Indigenous Services Canada,British Columbia,370
+2026,Indigenous Services Canada,Manitoba,1100
+2026,Indigenous Services Canada,National Capital Region (NCR),3452
+2026,Indigenous Services Canada,New Brunswick,30
+2026,Indigenous Services Canada,Newfoundland and Labrador,6
+2026,Indigenous Services Canada,Northwest Territories,8
+2026,Indigenous Services Canada,Nova Scotia,355
+2026,Indigenous Services Canada,Ontario (minus the NCR),941
+2026,Indigenous Services Canada,Prince Edward Island,2
+2026,Indigenous Services Canada,Quebec (minus the NCR),449
+2026,Indigenous Services Canada,Saskatchewan,534
+2026,Indigenous Services Canada,Unknown,35
+2026,Indigenous Services Canada,Yukon,18
+2026,"Innovation, Science and Economic Development Canada",Alberta,103
+2026,"Innovation, Science and Economic Development Canada",British Columbia,152
+2026,"Innovation, Science and Economic Development Canada",Manitoba,46
+2026,"Innovation, Science and Economic Development Canada",National Capital Region (NCR),5208
+2026,"Innovation, Science and Economic Development Canada",New Brunswick,25
+2026,"Innovation, Science and Economic Development Canada",Newfoundland and Labrador,18
+2026,"Innovation, Science and Economic Development Canada",Nova Scotia,48
+2026,"Innovation, Science and Economic Development Canada",Ontario (minus the NCR),305
+2026,"Innovation, Science and Economic Development Canada",Prince Edward Island,1
+2026,"Innovation, Science and Economic Development Canada",Quebec (minus the NCR),267
+2026,"Innovation, Science and Economic Development Canada",Saskatchewan,20
+2026,"Innovation, Science and Economic Development Canada",Unknown,7
+2026,International Joint Commission,National Capital Region (NCR),23
+2026,International Joint Commission,Ontario (minus the NCR),9
+2026,Law Commission of Canada,Alberta,1
+2026,Law Commission of Canada,National Capital Region (NCR),11
+2026,Law Commission of Canada,Ontario (minus the NCR),1
+2026,Library and Archives Canada,British Columbia,7
+2026,Library and Archives Canada,Manitoba,43
+2026,Library and Archives Canada,National Capital Region (NCR),967
+2026,Library and Archives Canada,Nova Scotia,4
+2026,Library and Archives Canada,Unknown,5
+2026,Military Grievances External Review Committee,National Capital Region (NCR),52
+2026,Military Police Complaints Commission of Canada,National Capital Region (NCR),31
+2026,National Defence,Alberta,1668
+2026,National Defence,British Columbia,2755
+2026,National Defence,Manitoba,800
+2026,National Defence,National Capital Region (NCR),14149
+2026,National Defence,New Brunswick,977
+2026,National Defence,Newfoundland and Labrador,145
+2026,National Defence,Northwest Territories,36
+2026,National Defence,Nova Scotia,3430
+2026,National Defence,Ontario (minus the NCR),4272
+2026,National Defence,Outside of Canada,11
+2026,National Defence,Prince Edward Island,12
+2026,National Defence,Quebec (minus the NCR),3347
+2026,National Defence,Saskatchewan,178
+2026,National Defence,Unknown,58
+2026,National Film Board,Alberta,6
+2026,National Film Board,British Columbia,18
+2026,National Film Board,Manitoba,4
+2026,National Film Board,New Brunswick,3
+2026,National Film Board,Nova Scotia,3
+2026,National Film Board,Ontario (minus the NCR),21
+2026,National Film Board,Quebec (minus the NCR),302
+2026,National Research Council Canada,Alberta,84
+2026,National Research Council Canada,British Columbia,212
+2026,National Research Council Canada,Manitoba,36
+2026,National Research Council Canada,National Capital Region (NCR),1710
+2026,National Research Council Canada,New Brunswick,33
+2026,National Research Council Canada,Newfoundland and Labrador,77
+2026,National Research Council Canada,Nova Scotia,94
+2026,National Research Council Canada,Ontario (minus the NCR),102
+2026,National Research Council Canada,Prince Edward Island,12
+2026,National Research Council Canada,Quebec (minus the NCR),485
+2026,National Research Council Canada,Saskatchewan,80
+2026,National Research Council Canada,Unknown,1689
+2026,National Security and Intelligence Review Agency,National Capital Region (NCR),81
+2026,Natural Resources Canada,Alberta,382
+2026,Natural Resources Canada,British Columbia,310
+2026,Natural Resources Canada,Manitoba,9
+2026,Natural Resources Canada,National Capital Region (NCR),3859
+2026,Natural Resources Canada,New Brunswick,99
+2026,Natural Resources Canada,Newfoundland and Labrador,26
+2026,Natural Resources Canada,Northwest Territories,9
+2026,Natural Resources Canada,Nova Scotia,88
+2026,Natural Resources Canada,Nunavut,7
+2026,Natural Resources Canada,Ontario (minus the NCR),324
+2026,Natural Resources Canada,Quebec (minus the NCR),488
+2026,Natural Resources Canada,Saskatchewan,10
+2026,Natural Resources Canada,Unknown,11
+2026,Natural Resources Canada,Yukon,4
+2026,Natural Sciences and Engineering Research Canada,National Capital Region (NCR),583
+2026,Office of the Auditor General of Canada,Alberta,12
+2026,Office of the Auditor General of Canada,British Columbia,15
+2026,Office of the Auditor General of Canada,National Capital Region (NCR),641
+2026,Office of the Auditor General of Canada,Nova Scotia,13
+2026,Office of the Auditor General of Canada,Quebec (minus the NCR),20
+2026,Office of the Auditor General of Canada,Unknown,17
+2026,Office of the Commissioner for Federal Judicial Affairs Canada,National Capital Region (NCR),70
+2026,Office of the Commissioner for Federal Judicial Affairs Canada,Unknown,2
+2026,Office of the Commissioner of Lobbying of Canada,National Capital Region (NCR),32
+2026,Office of the Commissioner of Official Languages,Alberta,3
+2026,Office of the Commissioner of Official Languages,British Columbia,1
+2026,Office of the Commissioner of Official Languages,Manitoba,2
+2026,Office of the Commissioner of Official Languages,National Capital Region (NCR),167
+2026,Office of the Commissioner of Official Languages,New Brunswick,3
+2026,Office of the Commissioner of Official Languages,Ontario (minus the NCR),2
+2026,Office of the Commissioner of Official Languages,Quebec (minus the NCR),5
+2026,Office of the Commissioner of Official Languages,Saskatchewan,1
+2026,Office of the Commissioner of Official Languages,Unknown,1
+2026,Office of the Intelligence Commissioner,National Capital Region (NCR),3
+2026,Office of the Intelligence Commissioner,Unknown,1
+2026,Office of the Public Sector Integrity Commissioner of Canada,National Capital Region (NCR),40
+2026,Office of the Public Sector Integrity Commissioner of Canada,Unknown,1
+2026,Office of the Secretary to the Governor General,National Capital Region (NCR),168
+2026,Office of the Secretary to the Governor General,Quebec (minus the NCR),2
+2026,Office of the Superintendent of Financial Institutions Canada,British Columbia,27
+2026,Office of the Superintendent of Financial Institutions Canada,National Capital Region (NCR),459
+2026,Office of the Superintendent of Financial Institutions Canada,Ontario (minus the NCR),650
+2026,Office of the Superintendent of Financial Institutions Canada,Quebec (minus the NCR),27
+2026,Office of the Superintendent of Financial Institutions Canada,Unknown,28
+2026,Offices of the Information and Privacy Commissioners of Canada,National Capital Region (NCR),323
+2026,Offices of the Information and Privacy Commissioners of Canada,Ontario (minus the NCR),12
+2026,Parks Canada,Alberta,901
+2026,Parks Canada,British Columbia,567
+2026,Parks Canada,Manitoba,228
+2026,Parks Canada,National Capital Region (NCR),693
+2026,Parks Canada,New Brunswick,127
+2026,Parks Canada,Newfoundland and Labrador,147
+2026,Parks Canada,Northwest Territories,91
+2026,Parks Canada,Nova Scotia,315
+2026,Parks Canada,Nunavut,55
+2026,Parks Canada,Ontario (minus the NCR),697
+2026,Parks Canada,Prince Edward Island,71
+2026,Parks Canada,Quebec (minus the NCR),480
+2026,Parks Canada,Saskatchewan,135
+2026,Parks Canada,Unknown,193
+2026,Parks Canada,Yukon,73
+2026,Parole Board of Canada,Alberta,46
+2026,Parole Board of Canada,British Columbia,47
+2026,Parole Board of Canada,National Capital Region (NCR),189
+2026,Parole Board of Canada,New Brunswick,39
+2026,Parole Board of Canada,Ontario (minus the NCR),64
+2026,Parole Board of Canada,Quebec (minus the NCR),69
+2026,Parole Board of Canada,Saskatchewan,33
+2026,Patented Medicine Prices Review Board Canada,National Capital Region (NCR),78
+2026,Polar Knowledge Canada,National Capital Region (NCR),44
+2026,Polar Knowledge Canada,Nunavut,31
+2026,Polar Knowledge Canada,Unknown,1
+2026,Polar Knowledge Canada,Yukon,2
+2026,Privy Council Office,Alberta,13
+2026,Privy Council Office,British Columbia,6
+2026,Privy Council Office,Manitoba,3
+2026,Privy Council Office,National Capital Region (NCR),1059
+2026,Privy Council Office,New Brunswick,2
+2026,Privy Council Office,Newfoundland and Labrador,2
+2026,Privy Council Office,Northwest Territories,1
+2026,Privy Council Office,Nova Scotia,2
+2026,Privy Council Office,Nunavut,1
+2026,Privy Council Office,Ontario (minus the NCR),8
+2026,Privy Council Office,Prince Edward Island,2
+2026,Privy Council Office,Quebec (minus the NCR),10
+2026,Privy Council Office,Saskatchewan,2
+2026,Privy Council Office,Unknown,8
+2026,Privy Council Office,Yukon,2
+2026,Public Health Agency of Canada,Alberta,55
+2026,Public Health Agency of Canada,British Columbia,66
+2026,Public Health Agency of Canada,Manitoba,580
+2026,Public Health Agency of Canada,National Capital Region (NCR),1610
+2026,Public Health Agency of Canada,New Brunswick,10
+2026,Public Health Agency of Canada,Newfoundland and Labrador,15
+2026,Public Health Agency of Canada,Northwest Territories,1
+2026,Public Health Agency of Canada,Nova Scotia,48
+2026,Public Health Agency of Canada,Nunavut,1
+2026,Public Health Agency of Canada,Ontario (minus the NCR),302
+2026,Public Health Agency of Canada,Prince Edward Island,4
+2026,Public Health Agency of Canada,Quebec (minus the NCR),127
+2026,Public Health Agency of Canada,Saskatchewan,18
+2026,Public Health Agency of Canada,Unknown,33
+2026,Public Health Agency of Canada,Yukon,7
+2026,Public Prosecution Service of Canada,Alberta,113
+2026,Public Prosecution Service of Canada,British Columbia,120
+2026,Public Prosecution Service of Canada,Manitoba,48
+2026,Public Prosecution Service of Canada,National Capital Region (NCR),286
+2026,Public Prosecution Service of Canada,New Brunswick,12
+2026,Public Prosecution Service of Canada,Newfoundland and Labrador,10
+2026,Public Prosecution Service of Canada,Northwest Territories,53
+2026,Public Prosecution Service of Canada,Nova Scotia,47
+2026,Public Prosecution Service of Canada,Nunavut,33
+2026,Public Prosecution Service of Canada,Ontario (minus the NCR),217
+2026,Public Prosecution Service of Canada,Quebec (minus the NCR),92
+2026,Public Prosecution Service of Canada,Saskatchewan,31
+2026,Public Prosecution Service of Canada,Yukon,41
+2026,Public Safety Canada,Alberta,19
+2026,Public Safety Canada,British Columbia,35
+2026,Public Safety Canada,Manitoba,16
+2026,Public Safety Canada,National Capital Region (NCR),1522
+2026,Public Safety Canada,New Brunswick,8
+2026,Public Safety Canada,Newfoundland and Labrador,4
+2026,Public Safety Canada,Nova Scotia,18
+2026,Public Safety Canada,Ontario (minus the NCR),41
+2026,Public Safety Canada,Outside of Canada,1
+2026,Public Safety Canada,Prince Edward Island,2
+2026,Public Safety Canada,Quebec (minus the NCR),32
+2026,Public Safety Canada,Saskatchewan,11
+2026,Public Service Commission of Canada,British Columbia,13
+2026,Public Service Commission of Canada,National Capital Region (NCR),620
+2026,Public Service Commission of Canada,Nova Scotia,28
+2026,Public Service Commission of Canada,Ontario (minus the NCR),12
+2026,Public Service Commission of Canada,Quebec (minus the NCR),59
+2026,Public Service Commission of Canada,Unknown,8
+2026,Public Services and Procurement Canada,Alberta,404
+2026,Public Services and Procurement Canada,British Columbia,573
+2026,Public Services and Procurement Canada,Manitoba,276
+2026,Public Services and Procurement Canada,National Capital Region (NCR),10598
+2026,Public Services and Procurement Canada,New Brunswick,2815
+2026,Public Services and Procurement Canada,Newfoundland and Labrador,91
+2026,Public Services and Procurement Canada,Northwest Territories,9
+2026,Public Services and Procurement Canada,Nova Scotia,390
+2026,Public Services and Procurement Canada,Nunavut,9
+2026,Public Services and Procurement Canada,Ontario (minus the NCR),662
+2026,Public Services and Procurement Canada,Outside of Canada,6
+2026,Public Services and Procurement Canada,Prince Edward Island,164
+2026,Public Services and Procurement Canada,Quebec (minus the NCR),1406
+2026,Public Services and Procurement Canada,Saskatchewan,56
+2026,Public Services and Procurement Canada,Unknown,596
+2026,Public Services and Procurement Canada,Yukon,2
+2026,RCMP External Review Committee,National Capital Region (NCR),22
+2026,Registrar of the Supreme Court of Canada,National Capital Region (NCR),252
+2026,Royal Canadian Mounted Police (RCMP),Alberta,1149
+2026,Royal Canadian Mounted Police (RCMP),British Columbia,1883
+2026,Royal Canadian Mounted Police (RCMP),Manitoba,458
+2026,Royal Canadian Mounted Police (RCMP),National Capital Region (NCR),4508
+2026,Royal Canadian Mounted Police (RCMP),New Brunswick,634
+2026,Royal Canadian Mounted Police (RCMP),Newfoundland and Labrador,236
+2026,Royal Canadian Mounted Police (RCMP),Northwest Territories,61
+2026,Royal Canadian Mounted Police (RCMP),Nova Scotia,381
+2026,Royal Canadian Mounted Police (RCMP),Nunavut,26
+2026,Royal Canadian Mounted Police (RCMP),Ontario (minus the NCR),332
+2026,Royal Canadian Mounted Police (RCMP),Prince Edward Island,51
+2026,Royal Canadian Mounted Police (RCMP),Quebec (minus the NCR),372
+2026,Royal Canadian Mounted Police (RCMP),Saskatchewan,1067
+2026,Royal Canadian Mounted Police (RCMP),Unknown,1
+2026,Royal Canadian Mounted Police (RCMP),Yukon,59
+2026,Secretariat of the National Security and Intelligence Committee of Parliamentarians,National Capital Region (NCR),12
+2026,Shared Services Canada,Alberta,214
+2026,Shared Services Canada,British Columbia,248
+2026,Shared Services Canada,Manitoba,113
+2026,Shared Services Canada,National Capital Region (NCR),5900
+2026,Shared Services Canada,New Brunswick,418
+2026,Shared Services Canada,Newfoundland and Labrador,57
+2026,Shared Services Canada,Northwest Territories,2
+2026,Shared Services Canada,Nova Scotia,164
+2026,Shared Services Canada,Nunavut,2
+2026,Shared Services Canada,Ontario (minus the NCR),550
+2026,Shared Services Canada,Prince Edward Island,79
+2026,Shared Services Canada,Quebec (minus the NCR),820
+2026,Shared Services Canada,Saskatchewan,41
+2026,Shared Services Canada,Unknown,13
+2026,Shared Services Canada,Yukon,3
+2026,Social Sciences and Humanities Research Council of Canada,National Capital Region (NCR),383
+2026,Statistical Survey Operations,British Columbia,1
+2026,Statistical Survey Operations,Nova Scotia,1
+2026,Statistical Survey Operations,Ontario (minus the NCR),1
+2026,Statistical Survey Operations,Quebec (minus the NCR),1
+2026,Statistics Canada,Alberta,425
+2026,Statistics Canada,British Columbia,248
+2026,Statistics Canada,Manitoba,233
+2026,Statistics Canada,National Capital Region (NCR),4824
+2026,Statistics Canada,New Brunswick,3
+2026,Statistics Canada,Northwest Territories,6
+2026,Statistics Canada,Nova Scotia,333
+2026,Statistics Canada,Nunavut,2
+2026,Statistics Canada,Ontario (minus the NCR),751
+2026,Statistics Canada,Quebec (minus the NCR),522
+2026,Statistics Canada,Saskatchewan,2
+2026,Statistics Canada,Unknown,17
+2026,Statistics Canada,Yukon,5
+2026,The Correctional Investigator Canada,National Capital Region (NCR),38
+2026,The Correctional Investigator Canada,Quebec (minus the NCR),1
+2026,The Correctional Investigator Canada,Unknown,1
+2026,Transport Canada,Alberta,189
+2026,Transport Canada,British Columbia,575
+2026,Transport Canada,Manitoba,239
+2026,Transport Canada,National Capital Region (NCR),3751
+2026,Transport Canada,New Brunswick,229
+2026,Transport Canada,Newfoundland and Labrador,96
+2026,Transport Canada,Northwest Territories,4
+2026,Transport Canada,Nova Scotia,101
+2026,Transport Canada,Nunavut,2
+2026,Transport Canada,Ontario (minus the NCR),461
+2026,Transport Canada,Prince Edward Island,6
+2026,Transport Canada,Quebec (minus the NCR),610
+2026,Transport Canada,Saskatchewan,25
+2026,Transport Canada,Unknown,7
+2026,Transport Canada,Yukon,4
+2026,Transportation Safety Board of Canada,Alberta,15
+2026,Transportation Safety Board of Canada,British Columbia,16
+2026,Transportation Safety Board of Canada,Manitoba,9
+2026,Transportation Safety Board of Canada,National Capital Region (NCR),145
+2026,Transportation Safety Board of Canada,Newfoundland and Labrador,3
+2026,Transportation Safety Board of Canada,Nova Scotia,11
+2026,Transportation Safety Board of Canada,Ontario (minus the NCR),14
+2026,Transportation Safety Board of Canada,Prince Edward Island,1
+2026,Transportation Safety Board of Canada,Quebec (minus the NCR),12
+2026,Transportation Safety Board of Canada,Saskatchewan,1
+2026,Treasury Board of Canada Secretariat,Alberta,1
+2026,Treasury Board of Canada Secretariat,Manitoba,1
+2026,Treasury Board of Canada Secretariat,National Capital Region (NCR),2147
+2026,Treasury Board of Canada Secretariat,Quebec (minus the NCR),5
+2026,Treasury Board of Canada Secretariat,Unknown,7
+2026,Treasury Board of Canada Secretariat,Yukon,1
+2026,Veterans Affairs Canada,Alberta,140
+2026,Veterans Affairs Canada,British Columbia,191
+2026,Veterans Affairs Canada,Manitoba,138
+2026,Veterans Affairs Canada,National Capital Region (NCR),268
+2026,Veterans Affairs Canada,New Brunswick,178
+2026,Veterans Affairs Canada,Newfoundland and Labrador,56
+2026,Veterans Affairs Canada,Nova Scotia,254
+2026,Veterans Affairs Canada,Ontario (minus the NCR),454
+2026,Veterans Affairs Canada,Outside of Canada,20
+2026,Veterans Affairs Canada,Prince Edward Island,1481
+2026,Veterans Affairs Canada,Quebec (minus the NCR),340
+2026,Veterans Affairs Canada,Saskatchewan,21
+2026,Veterans Affairs Canada,Unknown,8
+2026,Veterans Review and Appeal Board,Prince Edward Island,118
+2026,Veterans Review and Appeal Board,Unknown,44
+2026,Western Economic Diversification Canada,Alberta,190
+2026,Western Economic Diversification Canada,British Columbia,158
+2026,Western Economic Diversification Canada,Manitoba,50
+2026,Western Economic Diversification Canada,National Capital Region (NCR),45
+2026,Western Economic Diversification Canada,Saskatchewan,46
+2026,Western Economic Diversification Canada,Unknown,5
+2026,Women and Gender Equality Canada,Alberta,9
+2026,Women and Gender Equality Canada,British Columbia,6
+2026,Women and Gender Equality Canada,Manitoba,1
+2026,Women and Gender Equality Canada,National Capital Region (NCR),332
+2026,Women and Gender Equality Canada,New Brunswick,6
+2026,Women and Gender Equality Canada,Quebec (minus the NCR),9
+2026,Women and Gender Equality Canada,Unknown,2
