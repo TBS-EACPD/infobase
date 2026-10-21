@@ -50,12 +50,19 @@ class CanadaGraphBarLegend extends React.Component {
       });
 
     const graph_data = _.chain(data)
-      .map((data, ix) => ({
-        year: run_template(years[ix]),
-        value: prov
-          ? data[prov]
-          : alt_totals_by_year?.[ix] || _.chain(data).values().sum().value(),
-      }))
+      .map((data_for_year, ix) => {
+        const raw_value = prov
+          ? data_for_year[prov]
+          : alt_totals_by_year?.[ix] ||
+            _.chain(data_for_year).values().sum().value();
+
+        // Gaps are omitted from the year map. Nivo places those bars at NaN,
+        // and react-spring throws while interpolating "translate(NaN, …)".
+        return {
+          year: run_template(years[ix]),
+          value: Number.isFinite(raw_value) ? raw_value : 0,
+        };
+      })
       .reverse()
       .value();
 
