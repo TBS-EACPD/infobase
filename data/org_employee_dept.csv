@@ -50,8 +50,8 @@ Year,Universe,Department or agency,Number of employees
 2010,CPA,Office of the Commissioner for Federal Judicial Affairs Canada,73
 2010,CPA,Office of the Commissioner of Lobbying of Canada,26
 2010,CPA,Office of the Commissioner of Official Languages,174
-2010,CPA,Office of the Governor General's Secretary,171
 2010,CPA,Office of the Public Sector Integrity Commissioner of Canada,23
+2010,CPA,Office of the Secretary to the Governor General,171
 2010,CPA,Offices of the Information and Privacy Commissioners of Canada,253
 2010,CPA,Parole Board of Canada,408
 2010,CPA,Passport Canada,2689
@@ -67,7 +67,7 @@ Year,Universe,Department or agency,Number of employees
 2010,CPA,RCMP External Review Committee,5
 2010,CPA,Registrar of the Supreme Court of Canada,220
 2010,CPA,Registry of the Specific Claims Tribunal of Canada,6
-2010,CPA,Royal Canadian Mounted Police (Civilian Staff),6250
+2010,CPA,Royal Canadian Mounted Police (RCMP),6250
 2010,CPA,Statistics Canada,5558
 2010,CPA,Transport Canada,5524
 2010,CPA,Transportation Appeal Tribunal of Canada,8
@@ -149,8 +149,8 @@ Year,Universe,Department or agency,Number of employees
 2011,CPA,Office of the Commissioner for Federal Judicial Affairs Canada,70
 2011,CPA,Office of the Commissioner of Lobbying of Canada,27
 2011,CPA,Office of the Commissioner of Official Languages,164
-2011,CPA,Office of the Governor General's Secretary,190
 2011,CPA,Office of the Public Sector Integrity Commissioner of Canada,27
+2011,CPA,Office of the Secretary to the Governor General,190
 2011,CPA,Offices of the Information and Privacy Commissioners of Canada,256
 2011,CPA,Parole Board of Canada,409
 2011,CPA,Passport Canada,2579
@@ -166,7 +166,7 @@ Year,Universe,Department or agency,Number of employees
 2011,CPA,RCMP External Review Committee,4
 2011,CPA,Registrar of the Supreme Court of Canada,210
 2011,CPA,Registry of the Specific Claims Tribunal of Canada,9
-2011,CPA,Royal Canadian Mounted Police (Civilian Staff),6147
+2011,CPA,Royal Canadian Mounted Police (RCMP),6147
 2011,CPA,Statistics Canada,6424
 2011,CPA,Transport Canada,5553
 2011,CPA,Transportation Appeal Tribunal of Canada,9
@@ -249,8 +249,8 @@ Year,Universe,Department or agency,Number of employees
 2012,CPA,Office of the Commissioner for Federal Judicial Affairs Canada,66
 2012,CPA,Office of the Commissioner of Lobbying of Canada,28
 2012,CPA,Office of the Commissioner of Official Languages,165
-2012,CPA,Office of the Governor General's Secretary,166
 2012,CPA,Office of the Public Sector Integrity Commissioner of Canada,30
+2012,CPA,Office of the Secretary to the Governor General,166
 2012,CPA,Offices of the Information and Privacy Commissioners of Canada,273
 2012,CPA,Parole Board of Canada,428
 2012,CPA,Passport Canada,2696
@@ -266,7 +266,7 @@ Year,Universe,Department or agency,Number of employees
 2012,CPA,RCMP External Review Committee,3
 2012,CPA,Registrar of the Supreme Court of Canada,226
 2012,CPA,Registry of the Specific Claims Tribunal of Canada,11
-2012,CPA,Royal Canadian Mounted Police (Civilian Staff),6210
+2012,CPA,Royal Canadian Mounted Police (RCMP),6210
 2012,CPA,Statistics Canada,5556
 2012,CPA,Transport Canada,5370
 2012,CPA,Transportation Appeal Tribunal of Canada,10
@@ -347,8 +347,8 @@ Year,Universe,Department or agency,Number of employees
 2013,CPA,Office of the Commissioner for Federal Judicial Affairs Canada,67
 2013,CPA,Office of the Commissioner of Lobbying of Canada,26
 2013,CPA,Office of the Commissioner of Official Languages,162
-2013,CPA,Office of the Governor General's Secretary,158
 2013,CPA,Office of the Public Sector Integrity Commissioner of Canada,31
+2013,CPA,Office of the Secretary to the Governor General,158
 2013,CPA,Offices of the Information and Privacy Commissioners of Canada,258
 2013,CPA,Parole Board of Canada,454
 2013,CPA,Passport Canada,2696
@@ -364,7 +364,7 @@ Year,Universe,Department or agency,Number of employees
 2013,CPA,RCMP External Review Committee,6
 2013,CPA,Registrar of the Supreme Court of Canada,216
 2013,CPA,Registry of the Specific Claims Tribunal of Canada,10
-2013,CPA,Royal Canadian Mounted Police (Civilian Staff),5971
+2013,CPA,Royal Canadian Mounted Police (RCMP),5971
 2013,CPA,Shared Services Canada,5299
 2013,CPA,Statistics Canada,4530
 2013,CPA,Transport Canada,4778
@@ -444,8 +444,8 @@ Year,Universe,Department or agency,Number of employees
 2014,CPA,Office of the Commissioner for Federal Judicial Affairs Canada,58
 2014,CPA,Office of the Commissioner of Lobbying of Canada,26
 2014,CPA,Office of the Commissioner of Official Languages,171
-2014,CPA,Office of the Governor General's Secretary,155
 2014,CPA,Office of the Public Sector Integrity Commissioner of Canada,28
+2014,CPA,Office of the Secretary to the Governor General,155
 2014,CPA,Offices of the Information and Privacy Commissioners of Canada,261
 2014,CPA,Parole Board of Canada,459
 2014,CPA,Patented Medicine Prices Review Board Canada,55
@@ -460,7 +460,7 @@ Year,Universe,Department or agency,Number of employees
 2014,CPA,RCMP External Review Committee,5
 2014,CPA,Registrar of the Supreme Court of Canada,219
 2014,CPA,Registry of the Specific Claims Tribunal of Canada,9
-2014,CPA,Royal Canadian Mounted Police (Civilian Staff),6065
+2014,CPA,Royal Canadian Mounted Police (RCMP),6065
 2014,CPA,Shared Services Canada,5394
 2014,CPA,Statistics Canada,4807
 2014,CPA,Transport Canada,4771
@@ -537,9 +537,9 @@ Year,Universe,Department or agency,Number of employees
 2015,CPA,Office of the Commissioner for Federal Judicial Affairs Canada,54
 2015,CPA,Office of the Commissioner of Lobbying of Canada,27
 2015,CPA,Office of the Commissioner of Official Languages,172
-2015,CPA,Office of the Governor General's Secretary,156
 2015,CPA,Office of the Prime Minister,1
 2015,CPA,Office of the Public Sector Integrity Commissioner of Canada,25
+2015,CPA,Office of the Secretary to the Governor General,156
 2015,CPA,Offices of the Information and Privacy Commissioners of Canada,282
 2015,CPA,Parole Board of Canada,467
 2015,CPA,Patented Medicine Prices Review Board Canada,60
@@ -551,7 +551,7 @@ Year,Universe,Department or agency,Number of employees
 2015,CPA,Public Services and Procurement Canada,12092
 2015,CPA,RCMP External Review Committee,6
 2015,CPA,Registrar of the Supreme Court of Canada,213
-2015,CPA,Royal Canadian Mounted Police (Civilian Staff),6437
+2015,CPA,Royal Canadian Mounted Police (RCMP),6437
 2015,CPA,Shared Services Canada,5236
 2015,CPA,Statistics Canada,4890
 2015,CPA,Transport Canada,5205
@@ -625,8 +625,8 @@ Year,Universe,Department or agency,Number of employees
 2016,CPA,Office of the Commissioner for Federal Judicial Affairs Canada,59
 2016,CPA,Office of the Commissioner of Lobbying of Canada,26
 2016,CPA,Office of the Commissioner of Official Languages,164
-2016,CPA,Office of the Governor General's Secretary,166
 2016,CPA,Office of the Public Sector Integrity Commissioner of Canada,26
+2016,CPA,Office of the Secretary to the Governor General,166
 2016,CPA,Offices of the Information and Privacy Commissioners of Canada,259
 2016,CPA,Parole Board of Canada,447
 2016,CPA,Patented Medicine Prices Review Board Canada,69
@@ -638,7 +638,7 @@ Year,Universe,Department or agency,Number of employees
 2016,CPA,Public Services and Procurement Canada,12061
 2016,CPA,RCMP External Review Committee,7
 2016,CPA,Registrar of the Supreme Court of Canada,212
-2016,CPA,Royal Canadian Mounted Police (Civilian Staff),6571
+2016,CPA,Royal Canadian Mounted Police (RCMP),6571
 2016,CPA,Shared Services Canada,5157
 2016,CPA,Statistics Canada,5717
 2016,CPA,Transport Canada,5154
@@ -711,8 +711,8 @@ Year,Universe,Department or agency,Number of employees
 2017,CPA,Office of the Commissioner for Federal Judicial Affairs Canada,59
 2017,CPA,Office of the Commissioner of Lobbying of Canada,24
 2017,CPA,Office of the Commissioner of Official Languages,155
-2017,CPA,Office of the Governor General's Secretary,149
 2017,CPA,Office of the Public Sector Integrity Commissioner of Canada,24
+2017,CPA,Office of the Secretary to the Governor General,149
 2017,CPA,Offices of the Information and Privacy Commissioners of Canada,261
 2017,CPA,Parole Board of Canada,448
 2017,CPA,Patented Medicine Prices Review Board Canada,69
@@ -724,7 +724,7 @@ Year,Universe,Department or agency,Number of employees
 2017,CPA,Public Services and Procurement Canada,12894
 2017,CPA,RCMP External Review Committee,6
 2017,CPA,Registrar of the Supreme Court of Canada,216
-2017,CPA,Royal Canadian Mounted Police (Civilian Staff),6801
+2017,CPA,Royal Canadian Mounted Police (RCMP),6801
 2017,CPA,Shared Services Canada,5257
 2017,CPA,Statistics Canada,5187
 2017,CPA,Transport Canada,4782
@@ -798,8 +798,8 @@ Year,Universe,Department or agency,Number of employees
 2018,CPA,Office of the Commissioner for Federal Judicial Affairs Canada,62
 2018,CPA,Office of the Commissioner of Lobbying of Canada,22
 2018,CPA,Office of the Commissioner of Official Languages,164
-2018,CPA,Office of the Governor General's Secretary,148
 2018,CPA,Office of the Public Sector Integrity Commissioner of Canada,23
+2018,CPA,Office of the Secretary to the Governor General,148
 2018,CPA,Offices of the Information and Privacy Commissioners of Canada,256
 2018,CPA,Parole Board of Canada,453
 2018,CPA,Patented Medicine Prices Review Board Canada,61
@@ -811,7 +811,7 @@ Year,Universe,Department or agency,Number of employees
 2018,CPA,Public Services and Procurement Canada,13988
 2018,CPA,RCMP External Review Committee,6
 2018,CPA,Registrar of the Supreme Court of Canada,230
-2018,CPA,Royal Canadian Mounted Police (Civilian Staff),7240
+2018,CPA,Royal Canadian Mounted Police (RCMP),7240
 2018,CPA,Shared Services Canada,5816
 2018,CPA,Statistics Canada,5210
 2018,CPA,Transport Canada,5362
@@ -885,8 +885,8 @@ Year,Universe,Department or agency,Number of employees
 2019,CPA,Office of the Commissioner for Federal Judicial Affairs Canada,58
 2019,CPA,Office of the Commissioner of Lobbying of Canada,25
 2019,CPA,Office of the Commissioner of Official Languages,174
-2019,CPA,Office of the Governor General's Secretary,148
 2019,CPA,Office of the Public Sector Integrity Commissioner of Canada,25
+2019,CPA,Office of the Secretary to the Governor General,148
 2019,CPA,Offices of the Information and Privacy Commissioners of Canada,252
 2019,CPA,Parole Board of Canada,462
 2019,CPA,Patented Medicine Prices Review Board Canada,74
@@ -898,7 +898,7 @@ Year,Universe,Department or agency,Number of employees
 2019,CPA,Public Services and Procurement Canada,15721
 2019,CPA,RCMP External Review Committee,8
 2019,CPA,Registrar of the Supreme Court of Canada,225
-2019,CPA,Royal Canadian Mounted Police (Civilian Staff),7564
+2019,CPA,Royal Canadian Mounted Police (RCMP),7564
 2019,CPA,Secretariat of the National Security and Intelligence Committee of Parliamentarians,5
 2019,CPA,Shared Services Canada,6528
 2019,CPA,Statistics Canada,5405
@@ -973,8 +973,8 @@ Year,Universe,Department or agency,Number of employees
 2020,CPA,Office of the Commissioner for Federal Judicial Affairs Canada,66
 2020,CPA,Office of the Commissioner of Lobbying of Canada,26
 2020,CPA,Office of the Commissioner of Official Languages,173
-2020,CPA,Office of the Governor General's Secretary,167
 2020,CPA,Office of the Public Sector Integrity Commissioner of Canada,27
+2020,CPA,Office of the Secretary to the Governor General,167
 2020,CPA,Offices of the Information and Privacy Commissioners of Canada,302
 2020,CPA,Parole Board of Canada,485
 2020,CPA,Patented Medicine Prices Review Board Canada,80
@@ -986,7 +986,7 @@ Year,Universe,Department or agency,Number of employees
 2020,CPA,Public Services and Procurement Canada,16892
 2020,CPA,RCMP External Review Committee,10
 2020,CPA,Registrar of the Supreme Court of Canada,237
-2020,CPA,Royal Canadian Mounted Police (Civilian Staff),8022
+2020,CPA,Royal Canadian Mounted Police (RCMP),8022
 2020,CPA,Secretariat of the National Security and Intelligence Committee of Parliamentarians,9
 2020,CPA,Shared Services Canada,7185
 2020,CPA,Statistics Canada,5452
@@ -1062,9 +1062,9 @@ Year,Universe,Department or agency,Number of employees
 2021,CPA,Office of the Commissioner for Federal Judicial Affairs Canada,72
 2021,CPA,Office of the Commissioner of Lobbying of Canada,25
 2021,CPA,Office of the Commissioner of Official Languages,177
-2021,CPA,Office of the Governor General's Secretary,158
 2021,CPA,Office of the Prime Minister,1
 2021,CPA,Office of the Public Sector Integrity Commissioner of Canada,34
+2021,CPA,Office of the Secretary to the Governor General,158
 2021,CPA,Offices of the Information and Privacy Commissioners of Canada,323
 2021,CPA,Parole Board of Canada,479
 2021,CPA,Patented Medicine Prices Review Board Canada,79
@@ -1076,7 +1076,7 @@ Year,Universe,Department or agency,Number of employees
 2021,CPA,Public Services and Procurement Canada,17085
 2021,CPA,RCMP External Review Committee,15
 2021,CPA,Registrar of the Supreme Court of Canada,233
-2021,CPA,Royal Canadian Mounted Police (Civilian Staff),8436
+2021,CPA,Royal Canadian Mounted Police (RCMP),8436
 2021,CPA,Secretariat of the National Security and Intelligence Committee of Parliamentarians,6
 2021,CPA,Shared Services Canada,7553
 2021,CPA,Statistics Canada,6360
@@ -1098,7 +1098,7 @@ Year,Universe,Department or agency,Number of employees
 2021,SA,Indian Oil and Gas Canada,88
 2021,SA,National Film Board,389
 2021,SA,National Research Council Canada,4380
-2021,SA,National Security Intelligence and Review Agency,73
+2021,SA,National Security and Intelligence Review Agency,73
 2021,SA,Natural Sciences and Engineering Research Canada,536
 2021,SA,Office of the Auditor General of Canada,749
 2021,SA,Office of the Superintendent of Financial Institutions Canada,903
@@ -1153,8 +1153,8 @@ Year,Universe,Department or agency,Number of employees
 2022,CPA,Office of the Commissioner for Federal Judicial Affairs Canada,68
 2022,CPA,Office of the Commissioner of Lobbying of Canada,28
 2022,CPA,Office of the Commissioner of Official Languages,178
-2022,CPA,Office of the Governor General's Secretary,177
 2022,CPA,Office of the Public Sector Integrity Commissioner of Canada,31
+2022,CPA,Office of the Secretary to the Governor General,177
 2022,CPA,Offices of the Information and Privacy Commissioners of Canada,356
 2022,CPA,Parole Board of Canada,463
 2022,CPA,Patented Medicine Prices Review Board Canada,77
@@ -1166,7 +1166,7 @@ Year,Universe,Department or agency,Number of employees
 2022,CPA,Public Services and Procurement Canada,17178
 2022,CPA,RCMP External Review Committee,22
 2022,CPA,Registrar of the Supreme Court of Canada,221
-2022,CPA,Royal Canadian Mounted Police (Civilian Staff),8690
+2022,CPA,Royal Canadian Mounted Police (RCMP),8690
 2022,CPA,Secretariat of the National Security and Intelligence Committee of Parliamentarians,6
 2022,CPA,Shared Services Canada,7948
 2022,CPA,Statistics Canada,6364
@@ -1188,7 +1188,7 @@ Year,Universe,Department or agency,Number of employees
 2022,SA,Indian Oil and Gas Canada,85
 2022,SA,National Film Board,379
 2022,SA,National Research Council Canada,4301
-2022,SA,National Security Intelligence and Review Agency,67
+2022,SA,National Security and Intelligence Review Agency,67
 2022,SA,Natural Sciences and Engineering Research Canada,524
 2022,SA,Office of the Auditor General of Canada,655
 2022,SA,Office of the Intelligence Commissioner,3
@@ -1244,8 +1244,8 @@ Year,Universe,Department or agency,Number of employees
 2023,CPA,Office of the Commissioner for Federal Judicial Affairs Canada,68
 2023,CPA,Office of the Commissioner of Lobbying of Canada,27
 2023,CPA,Office of the Commissioner of Official Languages,167
-2023,CPA,Office of the Governor General's Secretary,184
 2023,CPA,Office of the Public Sector Integrity Commissioner of Canada,36
+2023,CPA,Office of the Secretary to the Governor General,184
 2023,CPA,Offices of the Information and Privacy Commissioners of Canada,304
 2023,CPA,Parole Board of Canada,494
 2023,CPA,Patented Medicine Prices Review Board Canada,83
@@ -1257,7 +1257,7 @@ Year,Universe,Department or agency,Number of employees
 2023,CPA,Public Services and Procurement Canada,18114
 2023,CPA,RCMP External Review Committee,25
 2023,CPA,Registrar of the Supreme Court of Canada,248
-2023,CPA,Royal Canadian Mounted Police (Civilian Staff),9386
+2023,CPA,Royal Canadian Mounted Police (RCMP),9386
 2023,CPA,Secretariat of the National Security and Intelligence Committee of Parliamentarians,9
 2023,CPA,Shared Services Canada,8879
 2023,CPA,Statistics Canada,6219
@@ -1279,7 +1279,7 @@ Year,Universe,Department or agency,Number of employees
 2023,SA,Indian Oil and Gas Canada,75
 2023,SA,National Film Board,383
 2023,SA,National Research Council Canada,4423
-2023,SA,National Security Intelligence and Review Agency,92
+2023,SA,National Security and Intelligence Review Agency,92
 2023,SA,Natural Sciences and Engineering Research Canada,543
 2023,SA,Office of the Auditor General of Canada,793
 2023,SA,Office of the Intelligence Commissioner,6
@@ -1337,8 +1337,8 @@ Year,Universe,Department or agency,Number of employees
 2024,CPA,Office of the Commissioner for Federal Judicial Affairs Canada,65
 2024,CPA,Office of the Commissioner of Lobbying of Canada,32
 2024,CPA,Office of the Commissioner of Official Languages,178
-2024,CPA,Office of the Governor General's Secretary,172
 2024,CPA,Office of the Public Sector Integrity Commissioner of Canada,34
+2024,CPA,Office of the Secretary to the Governor General,172
 2024,CPA,Offices of the Information and Privacy Commissioners of Canada,323
 2024,CPA,Parole Board of Canada,554
 2024,CPA,Patented Medicine Prices Review Board Canada,81
@@ -1350,7 +1350,7 @@ Year,Universe,Department or agency,Number of employees
 2024,CPA,Public Services and Procurement Canada,18961
 2024,CPA,RCMP External Review Committee,24
 2024,CPA,Registrar of the Supreme Court of Canada,249
-2024,CPA,Royal Canadian Mounted Police (Civilian Staff),10309
+2024,CPA,Royal Canadian Mounted Police (RCMP),10309
 2024,CPA,Secretariat of the National Security and Intelligence Committee of Parliamentarians,7
 2024,CPA,Shared Services Canada,9502
 2024,CPA,Statistics Canada,7220
@@ -1372,7 +1372,7 @@ Year,Universe,Department or agency,Number of employees
 2024,SA,Indian Oil and Gas Canada,79
 2024,SA,National Film Board,388
 2024,SA,National Research Council Canada,4519
-2024,SA,National Security Intelligence and Review Agency,85
+2024,SA,National Security and Intelligence Review Agency,85
 2024,SA,Natural Sciences and Engineering Research Canada,522
 2024,SA,Office of the Auditor General of Canada,836
 2024,SA,Office of the Intelligence Commissioner,5
@@ -1430,8 +1430,8 @@ Year,Universe,Department or agency,Number of employees
 2025,CPA,Office of the Commissioner for Federal Judicial Affairs Canada,73
 2025,CPA,Office of the Commissioner of Lobbying of Canada,33
 2025,CPA,Office of the Commissioner of Official Languages,170
-2025,CPA,Office of the Governor General's Secretary,163
 2025,CPA,Office of the Public Sector Integrity Commissioner of Canada,35
+2025,CPA,Office of the Secretary to the Governor General,163
 2025,CPA,Offices of the Information and Privacy Commissioners of Canada,353
 2025,CPA,Parole Board of Canada,496
 2025,CPA,Patented Medicine Prices Review Board Canada,80
@@ -1443,7 +1443,7 @@ Year,Universe,Department or agency,Number of employees
 2025,CPA,Public Services and Procurement Canada,18936
 2025,CPA,RCMP External Review Committee,23
 2025,CPA,Registrar of the Supreme Court of Canada,249
-2025,CPA,Royal Canadian Mounted Police,11220
+2025,CPA,Royal Canadian Mounted Police (RCMP),11220
 2025,CPA,Secretariat of the National Security and Intelligence Committee of Parliamentarians,10
 2025,CPA,Shared Services Canada,8894
 2025,CPA,Statistics Canada,7274
@@ -1465,7 +1465,7 @@ Year,Universe,Department or agency,Number of employees
 2025,SA,Indian Oil and Gas Canada,87
 2025,SA,National Film Board,343
 2025,SA,National Research Council Canada,4688
-2025,SA,National Security Intelligence and Review Agency,89
+2025,SA,National Security and Intelligence Review Agency,89
 2025,SA,Natural Sciences and Engineering Research Canada,541
 2025,SA,Office of the Auditor General of Canada,746
 2025,SA,Office of the Intelligence Commissioner,4
@@ -1475,3 +1475,96 @@ Year,Universe,Department or agency,Number of employees
 2025,SA,Social Sciences and Humanities Research Council of Canada,387
 2025,SA,Statistical Survey Operations,4
 2025,SA,The Correctional Investigator Canada,36
+2026,CPA,Accessibility Standards Canada,56
+2026,CPA,Administrative Tribunals Support Service of Canada,632
+2026,CPA,Agriculture and Agri-Food Canada,5485
+2026,CPA,Atlantic Canada Opportunities Agency,558
+2026,CPA,Canada Border Services Agency,16759
+2026,CPA,Canada Economic Development for Quebec Regions,349
+2026,CPA,Canada School of Public Service,598
+2026,CPA,Canadian Dairy Commission,84
+2026,CPA,Canadian Grain Commission,473
+2026,CPA,Canadian Heritage,1846
+2026,CPA,Canadian Human Rights Commission,276
+2026,CPA,Canadian Intergovernmental Conference Secretariat,37
+2026,CPA,Canadian Northern Economic Development Agency,123
+2026,CPA,Canadian Radio-television and Telecommunications Commission,728
+2026,CPA,Canadian Space Agency,1060
+2026,CPA,Canadian Transportation Agency,358
+2026,CPA,Civilian Review and Complaints Commission for the RCMP,94
+2026,CPA,Copyright Board Canada,23
+2026,CPA,Correctional Service Canada,18846
+2026,CPA,Courts Administration Service,826
+2026,CPA,Crown-Indigenous Relations and Northern Affairs Canada,1715
+2026,CPA,Department of Finance Canada,919
+2026,CPA,Department of Justice Canada,5188
+2026,CPA,Elections Canada,1612
+2026,CPA,Employment and Social Development Canada,35540
+2026,CPA,Environment and Climate Change Canada,8185
+2026,CPA,Federal Economic Development Agency for Northern Ontario,109
+2026,CPA,Federal Economic Development Agency for Southern Ontario,246
+2026,CPA,Federal Judges not part of any department,1209
+2026,CPA,Fisheries and Oceans Canada,13868
+2026,CPA,Global Affairs Canada,7532
+2026,CPA,Health Canada,9056
+2026,CPA,"Housing, Infrastructure and Communities Canada",1672
+2026,CPA,Immigration and Refugee Board of Canada,2436
+2026,CPA,"Immigration, Refugees and Citizenship Canada",10848
+2026,CPA,Impact Assessment Agency of Canada,557
+2026,CPA,Indigenous Services Canada,7992
+2026,CPA,"Innovation, Science and Economic Development Canada",6200
+2026,CPA,International Joint Commission,32
+2026,CPA,Law Commission of Canada,13
+2026,CPA,Library and Archives Canada,1026
+2026,CPA,Military Grievances External Review Committee,52
+2026,CPA,Military Police Complaints Commission of Canada,31
+2026,CPA,National Defence,31838
+2026,CPA,Natural Resources Canada,5626
+2026,CPA,Office of the Commissioner for Federal Judicial Affairs Canada,72
+2026,CPA,Office of the Commissioner of Lobbying of Canada,32
+2026,CPA,Office of the Commissioner of Official Languages,185
+2026,CPA,Office of the Public Sector Integrity Commissioner of Canada,41
+2026,CPA,Office of the Secretary to the Governor General,170
+2026,CPA,Offices of the Information and Privacy Commissioners of Canada,335
+2026,CPA,Parole Board of Canada,487
+2026,CPA,Patented Medicine Prices Review Board Canada,78
+2026,CPA,Privy Council Office,1121
+2026,CPA,Public Health Agency of Canada,2877
+2026,CPA,Public Prosecution Service of Canada,1103
+2026,CPA,Public Safety Canada,1709
+2026,CPA,Public Service Commission of Canada,740
+2026,CPA,Public Services and Procurement Canada,18057
+2026,CPA,RCMP External Review Committee,22
+2026,CPA,Registrar of the Supreme Court of Canada,252
+2026,CPA,Royal Canadian Mounted Police (RCMP),11218
+2026,CPA,Secretariat of the National Security and Intelligence Committee of Parliamentarians,12
+2026,CPA,Shared Services Canada,8624
+2026,CPA,Statistics Canada,7371
+2026,CPA,Transport Canada,6299
+2026,CPA,Transportation Safety Board of Canada,227
+2026,CPA,Treasury Board of Canada Secretariat,2162
+2026,CPA,Veterans Affairs Canada,3549
+2026,CPA,Veterans Review and Appeal Board,162
+2026,CPA,Western Economic Diversification Canada,494
+2026,CPA,Women and Gender Equality Canada,365
+2026,SA,Canada Energy Regulator,592
+2026,SA,Canada Revenue Agency,48774
+2026,SA,Canadian Food Inspection Agency,6207
+2026,SA,Canadian Institutes of Health Research,481
+2026,SA,Canadian Nuclear Safety Commission,1044
+2026,SA,Communications Security Establishment,4029
+2026,SA,Financial Consumer Agency of Canada,258
+2026,SA,Financial Transactions and Reports Analysis Centre of Canada,508
+2026,SA,Indian Oil and Gas Canada,86
+2026,SA,National Film Board,357
+2026,SA,National Research Council Canada,4614
+2026,SA,National Security and Intelligence Review Agency,81
+2026,SA,Natural Sciences and Engineering Research Canada,583
+2026,SA,Office of the Auditor General of Canada,718
+2026,SA,Office of the Intelligence Commissioner,4
+2026,SA,Office of the Superintendent of Financial Institutions Canada,1191
+2026,SA,Parks Canada,4773
+2026,SA,Polar Knowledge Canada,78
+2026,SA,Social Sciences and Humanities Research Council of Canada,383
+2026,SA,Statistical Survey Operations,4
+2026,SA,The Correctional Investigator Canada,40
