@@ -36,6 +36,7 @@ export class Program extends BaseSubjectFactory<
 >(program_subject_type, trivial_text_maker("programs"), [
   "results",
   "services",
+  "finance_data",
 ]) {
   static store = make_store((def: ProgramDef) => new Program(def));
 

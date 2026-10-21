@@ -47,6 +47,7 @@ export const get_program_panels = (subject) =>
   ensure_loaded({
     subject: subject,
     has_results: true,
+    has_finance_data: true,
     has_services: services_feature_flag,
     requires_result_counts: true,
     table_keys: ["programFtes"],
@@ -56,20 +57,24 @@ export const get_program_panels = (subject) =>
       declare_profile_panel(),
       declare_program_fed_structure_panel(),
     ],
-    financial: [
-      declare_financial_key_concepts_panel(),
-      declare_dead_program_warning_panel(),
-      declare_late_actual_resources_panel(),
-      declare_late_planned_resources_panel(),
-      declare_late_planned_fte_panel(),
-      declare_temp_untabled_warning_panel(),
-      declare_welcome_mat_panel(),
-      declare_vote_stat_split_panel(),
-      declare_spend_rev_split_panel(),
-      declare_top_spending_areas_panel(),
-      declare_spending_in_tag_perspective_panel(),
-      declare_planned_actual_comparison_panel(),
-    ],
+    ...(subject.has_data("finance_data")
+      ? {
+          financial: [
+            declare_financial_key_concepts_panel(),
+            declare_dead_program_warning_panel(),
+            declare_late_actual_resources_panel(),
+            declare_late_planned_resources_panel(),
+            declare_late_planned_fte_panel(),
+            declare_temp_untabled_warning_panel(),
+            declare_welcome_mat_panel(),
+            declare_vote_stat_split_panel(),
+            declare_spend_rev_split_panel(),
+            declare_top_spending_areas_panel(),
+            declare_spending_in_tag_perspective_panel(),
+            declare_planned_actual_comparison_panel(),
+          ],
+        }
+      : {}),
     services: services_feature_flag &&
       subject.has_data("services") && [
         declare_provided_services_list_panel(),

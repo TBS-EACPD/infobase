@@ -35,6 +35,7 @@ export const get_crso_panels = (subject) =>
   ensure_loaded({
     subject: subject,
     has_results: true,
+    has_finance_data: true,
     requires_result_counts: true,
     table_keys: ["programFtes"],
   }).then(() => ({
@@ -43,18 +44,22 @@ export const get_crso_panels = (subject) =>
       declare_profile_panel(),
       declare_crso_in_gov_panel(),
     ],
-    financial: [
-      declare_financial_key_concepts_panel(),
-      declare_dead_crso_warning_panel(),
-      declare_late_actual_resources_panel(),
-      declare_late_planned_resources_panel(),
-      declare_late_planned_fte_panel(),
-      declare_temp_untabled_warning_panel(),
-      declare_welcome_mat_panel(),
-      declare_planned_actual_comparison_panel(),
-      declare_crso_by_prog_fte_panel(),
-      declare_crso_by_prog_exp_panel(),
-    ],
+    ...(subject.has_data("finance_data")
+      ? {
+          financial: [
+            declare_financial_key_concepts_panel(),
+            declare_dead_crso_warning_panel(),
+            declare_late_actual_resources_panel(),
+            declare_late_planned_resources_panel(),
+            declare_late_planned_fte_panel(),
+            declare_temp_untabled_warning_panel(),
+            declare_welcome_mat_panel(),
+            declare_planned_actual_comparison_panel(),
+            declare_crso_by_prog_fte_panel(),
+            declare_crso_by_prog_exp_panel(),
+          ],
+        }
+      : {}),
     results: !subject.is_internal_service &&
       subject.has_data("results") && [
         declare_dead_crso_warning_panel(),
