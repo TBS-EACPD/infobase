@@ -5,6 +5,7 @@ import React, { Fragment } from "react";
 import { create_text_maker_component } from "src/components/index";
 
 import { visible_distance_bins } from "./indicator_distance";
+import { IndicatorDistanceHeatmap } from "./IndicatorDistanceHeatmap";
 
 import text from "./IndicatorDistanceChart.yaml";
 
@@ -12,19 +13,10 @@ import "./IndicatorDistanceChart.scss";
 
 const { text_maker, TM } = create_text_maker_component(text);
 
-const NAME_COLUMN = "16rem";
-const BIN_COLUMN = "1.85rem";
-
 const tone_class = {
   short: "results-icon-array-fail",
   met: "results-icon-array-pass",
   exceeded: "results-icon-array-na",
-};
-
-const count_text_class = {
-  short: "indicator-distance-chart__count--short",
-  met: "indicator-distance-chart__count--met",
-  exceeded: "indicator-distance-chart__count--exceeded",
 };
 
 const Legend = () => (
@@ -58,8 +50,6 @@ export const IndicatorDistanceChart = ({
   total_count,
 }) => {
   const bins = visible_distance_bins(rows);
-  const chart_min_width = `calc(${NAME_COLUMN} + ${bins.length} * ${BIN_COLUMN})`;
-  const chart_columns = `${NAME_COLUMN} repeat(${bins.length}, minmax(${BIN_COLUMN}, 1fr))`;
 
   return (
     <div className="indicator-distance-chart">
@@ -80,106 +70,40 @@ export const IndicatorDistanceChart = ({
       </div>
       {included_count > 0 && (
         <Fragment>
+          <div className="medium-panel-text indicator-distance-chart__title indicator-distance-heatmap__heading">
+            <TM k="distance_heatmap_colours_heading" />
+          </div>
           <Legend />
-          <div className="indicator-distance-chart__scroll">
-            <div
-              aria-hidden="true"
-              className="indicator-distance-chart__axis"
-              style={{
-                gridTemplateColumns: chart_columns,
-                minWidth: chart_min_width,
-              }}
-            >
-              <div className="indicator-distance-chart__axis-name">
-                {text_maker("distance_result_column")}
-              </div>
-              {_.map(bins, (bin) => (
-                <div
-                  key={bin.id}
-                  className="indicator-distance-chart__axis-slot"
-                >
-                  {bin.show_axis_label && (
-                    <span className="indicator-distance-chart__axis-label">
-                      {text_maker(bin.label_key)}
-                    </span>
-                  )}
-                </div>
-              ))}
-            </div>
-            <table
-              className="indicator-distance-chart__table"
-              aria-labelledby="indicator-distance-chart-title"
-              style={{ minWidth: chart_min_width }}
-            >
-              <colgroup>
-                <col style={{ width: NAME_COLUMN }} />
+          <IndicatorDistanceHeatmap rows={rows} bins={bins} variant="colours" />
+          <div className="medium-panel-text indicator-distance-chart__title indicator-distance-heatmap__heading indicator-distance-heatmap__heading--follow">
+            <TM k="distance_heatmap_scale_heading" />
+          </div>
+          <IndicatorDistanceHeatmap rows={rows} bins={bins} variant="scale" />
+          <table
+            className="indicator-distance-chart__sr-only"
+            aria-labelledby="indicator-distance-chart-title"
+          >
+            <thead>
+              <tr>
+                <th scope="col">{text_maker("distance_result_column")}</th>
                 {_.map(bins, (bin) => (
-                  <col key={bin.id} />
-                ))}
-              </colgroup>
-              <thead>
-                <tr>
-                  <th
-                    scope="col"
-                    className="indicator-distance-chart__result-header"
-                  >
-                    <span className="indicator-distance-chart__sr-only">
-                      {text_maker("distance_result_column")}
-                    </span>
+                  <th key={bin.id} scope="col">
+                    {text_maker(bin.label_key)}
                   </th>
+                ))}
+              </tr>
+            </thead>
+            <tbody>
+              {_.map(rows, (row) => (
+                <tr key={row.id}>
+                  <th scope="row">{row.name}</th>
                   {_.map(bins, (bin) => (
-                    <th
-                      key={bin.id}
-                      scope="col"
-                      className="indicator-distance-chart__bin-header"
-                    >
-                      <span className="indicator-distance-chart__sr-only">
-                        {text_maker(bin.label_key)}
-                      </span>
-                    </th>
+                    <td key={bin.id}>{row.counts[bin.id]}</td>
                   ))}
                 </tr>
-              </thead>
-              <tbody>
-                {_.map(rows, (row) => (
-                  <tr key={row.id}>
-                    <th
-                      scope="row"
-                      className="indicator-distance-chart__result"
-                    >
-                      {row.name}
-                    </th>
-                    {_.map(bins, (bin) => {
-                      const count = row.counts[bin.id];
-                      const label = text_maker(bin.label_key);
-                      return (
-                        <td
-                          key={bin.id}
-                          className="indicator-distance-chart__cell"
-                        >
-                          {count > 0 && (
-                            <span
-                              className={classNames(
-                                "indicator-distance-chart__count",
-                                count_text_class[bin.tone],
-                                tone_class[bin.tone]
-                              )}
-                              title={text_maker("distance_cell_title", {
-                                label,
-                                count,
-                              })}
-                            >
-                              {count}
-                            </span>
-                          )}
-                        </td>
-                      );
-                    })}
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
+              ))}
+            </tbody>
+          </table>
         </Fragment>
       )}
     </div>

@@ -32,6 +32,14 @@ distance_result_column:
   en: Core responsibility
   fr: Responsabilité essentielle
 
+distance_heatmap_colours_heading:
+  en: Heat map, result colours
+  fr: Carte de chaleur, couleurs des résultats
+
+distance_heatmap_scale_heading:
+  en: Heat map, blue scale
+  fr: Carte de chaleur, échelle de bleu
+
 distance_legend_short:
   en: Fell short of the target
   fr: Inférieur à la cible
