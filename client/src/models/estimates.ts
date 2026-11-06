@@ -4,7 +4,7 @@ import { smart_sort_func } from "src/sort_utils";
 
 // TODO ideally CURRENT_EST_DOC could be derived from input data and injected in to the app at build time, or something like that
 // For now, needs to be manually updated on new estimates publication!
-export const CURRENT_EST_DOC: "MAINS" | "SEA" | "SEB" | "SEC" | "SW1" = "SEA";
+export const CURRENT_EST_DOC: "MAINS" | "SEA" | "SEB" | "SEC" | "SW1" = "SEB";
 
 // Add a new helper function to check for Special Warrants
 export const isSpecialWarrants = () => CURRENT_EST_DOC.startsWith("SW");
