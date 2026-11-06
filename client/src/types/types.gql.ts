@@ -48,6 +48,11 @@ export type AllDocResultCount = {
   drr24_indicators_not_available?: Maybe<Scalars['Int']>;
   drr24_indicators_not_met?: Maybe<Scalars['Int']>;
   drr24_results?: Maybe<Scalars['Int']>;
+  drr25_indicators_future?: Maybe<Scalars['Int']>;
+  drr25_indicators_met?: Maybe<Scalars['Int']>;
+  drr25_indicators_not_available?: Maybe<Scalars['Int']>;
+  drr25_indicators_not_met?: Maybe<Scalars['Int']>;
+  drr25_results?: Maybe<Scalars['Int']>;
   level?: Maybe<Scalars['String']>;
   subject_id?: Maybe<Scalars['String']>;
 };
