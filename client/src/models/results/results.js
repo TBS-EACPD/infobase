@@ -477,7 +477,7 @@ const build_doc_info_objects = (doc_type, docs) =>
 const drr_docs = build_doc_info_objects("drr", [
   {
     year_short: "2021",
-    resource_years: ["{{pa_last_year_4}}"],
+    resource_years: ["{{pa_last_year_5}}"],
     doc_url_en:
       "https://www.canada.ca/en/treasury-board-secretariat/services/departmental-performance-reports.html",
     doc_url_fr:
@@ -489,7 +489,7 @@ const drr_docs = build_doc_info_objects("drr", [
   },
   {
     year_short: "2022",
-    resource_years: ["{{pa_last_year_3}}"],
+    resource_years: ["{{pa_last_year_4}}"],
     doc_url_en:
       "https://www.canada.ca/en/treasury-board-secretariat/services/departmental-performance-reports.html",
     doc_url_fr:
@@ -501,7 +501,7 @@ const drr_docs = build_doc_info_objects("drr", [
   },
   {
     year_short: "2023",
-    resource_years: ["{{pa_last_year_2}}"],
+    resource_years: ["{{pa_last_year_3}}"],
     doc_url_en:
       "https://www.canada.ca/en/treasury-board-secretariat/services/departmental-performance-reports.html",
     doc_url_fr:
@@ -513,7 +513,7 @@ const drr_docs = build_doc_info_objects("drr", [
   },
   {
     year_short: "2024",
-    resource_years: ["{{pa_last_year}}"],
+    resource_years: ["{{pa_last_year_2}}"],
     doc_url_en:
       "https://www.canada.ca/en/treasury-board-secretariat/services/departmental-performance-reports.html",
     doc_url_fr:
@@ -525,8 +525,7 @@ const drr_docs = build_doc_info_objects("drr", [
   },
   {
     year_short: "2025",
-    // Actual spending and FTEs attach in the Public Accounts step, once pa_last_year rolls to 2025-26.
-    resource_years: [],
+    resource_years: ["{{pa_last_year}}"],
     doc_url_en:
       "https://www.canada.ca/en/treasury-board-secretariat/services/departmental-performance-reports.html",
     doc_url_fr:
