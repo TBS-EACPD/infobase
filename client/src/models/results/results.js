@@ -476,18 +476,6 @@ const build_doc_info_objects = (doc_type, docs) =>
 // for now, resource_years values will need to be updated manually as program_spending.csv, etc, roll forward
 const drr_docs = build_doc_info_objects("drr", [
   {
-    year_short: "2020",
-    resource_years: ["{{pa_last_year_5}}"],
-    doc_url_en:
-      "https://www.canada.ca/en/treasury-board-secretariat/services/departmental-performance-reports.html",
-    doc_url_fr:
-      "https://www.canada.ca/fr/secretariat-conseil-tresor/services/rapports-ministeriels-rendement.html",
-    late_results_orgs: [],
-    late_resources_orgs: [],
-    late_planned_fte_orgs: [],
-    temp_untabled_orgs: [],
-  },
-  {
     year_short: "2021",
     resource_years: ["{{pa_last_year_4}}"],
     doc_url_en:
@@ -531,6 +519,19 @@ const drr_docs = build_doc_info_objects("drr", [
     doc_url_fr:
       "https://www.canada.ca/fr/secretariat-conseil-tresor/services/rapports-ministeriels-rendement.html",
     late_results_orgs: ["297", "278"],
+    late_resources_orgs: [],
+    late_planned_fte_orgs: [],
+    temp_untabled_orgs: [],
+  },
+  {
+    year_short: "2025",
+    // Actual spending and FTEs attach in the Public Accounts step, once pa_last_year rolls to 2025-26.
+    resource_years: [],
+    doc_url_en:
+      "https://www.canada.ca/en/treasury-board-secretariat/services/departmental-performance-reports.html",
+    doc_url_fr:
+      "https://www.canada.ca/fr/secretariat-conseil-tresor/services/rapports-ministeriels-rendement.html",
+    late_results_orgs: [],
     late_resources_orgs: [],
     late_planned_fte_orgs: [],
     temp_untabled_orgs: [],
