@@ -518,7 +518,7 @@ const drr_docs = build_doc_info_objects("drr", [
       "https://www.canada.ca/en/treasury-board-secretariat/services/departmental-performance-reports.html",
     doc_url_fr:
       "https://www.canada.ca/fr/secretariat-conseil-tresor/services/rapports-ministeriels-rendement.html",
-    late_results_orgs: ["297", "278"],
+    late_results_orgs: [],
     late_resources_orgs: [],
     late_planned_fte_orgs: [],
     temp_untabled_orgs: [],
@@ -556,7 +556,7 @@ const dp_docs = build_doc_info_objects("dp", [
       "https://www.canada.ca/en/treasury-board-secretariat/services/planned-government-spending/reports-plans-priorities.html",
     doc_url_fr:
       "https://www.canada.ca/fr/secretariat-conseil-tresor/services/depenses-prevues/rapports-plans-priorites.html",
-    late_results_orgs: ["297", "278"],
+    late_results_orgs: [],
     late_resources_orgs: [],
     late_planned_fte_orgs: [],
     temp_untabled_orgs: [],
@@ -609,8 +609,8 @@ const get_result_doc_keys = (doc_type) =>
 const current_drr_key = _.last(get_result_doc_keys("drr"));
 const current_dp_key = _.last(get_result_doc_keys("dp"));
 
-/** Manual override for "late actual FTE" orgs. When non-empty, used instead of auto-detect (e.g. CRCC 297, PCO 278). */
-export const LATE_ACTUAL_FTE_ORG_OVERRIDE = ["297", "278"];
+/** Non-empty list replaces actual-FTE auto-detect. */
+export const LATE_ACTUAL_FTE_ORG_OVERRIDE = [];
 
 export {
   Result,

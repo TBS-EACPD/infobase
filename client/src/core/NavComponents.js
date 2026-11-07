@@ -6,12 +6,13 @@ import { withRouter } from "react-router";
 import { AlertBanner } from "src/components/AlertBanner/AlertBanner";
 import { MultiColumnList } from "src/components/misc_util_components";
 
-import { isSpecialWarrants } from "src/models/estimates";
 import {
   result_docs_in_tabling_order,
   get_late_results_orgs,
   get_late_resources_orgs,
   get_late_planned_fte_orgs,
+  get_late_actual_fte_orgs,
+  late_warning_data_ready,
 } from "src/models/results";
 import { Dept } from "src/models/subjects";
 import { trivial_text_maker } from "src/models/text";
@@ -159,8 +160,10 @@ const HeaderBanner = withRouter(
   }
 );
 
+const is_home = (match) => /^\/start/.test(match.path);
+
 const LateResultsBanner = () => {
-  const route_filter = (match, _history) => /^\/(start)/.test(match.path);
+  const route_filter = (match, _history) => is_home(match);
 
   return _.map(result_docs_in_tabling_order, (doc) => {
     const late_orgs = get_late_results_orgs(doc.doc_key);
@@ -197,7 +200,7 @@ const LateResultsBanner = () => {
   });
 };
 const TempUntabledBanner = () => {
-  const route_filter = (match, _history) => /^\/(start)/.test(match.path);
+  const route_filter = (match, _history) => is_home(match);
 
   return _.map(result_docs_in_tabling_order, (doc) => {
     const late_orgs = doc.temp_untabled_orgs || [];
@@ -234,10 +237,7 @@ const TempUntabledBanner = () => {
     );
   });
 };
-const LateDpResourcesBanner = () => {
-  const route_filter = (match, _history) =>
-    /^\/(start|tag-explorer|rpb)/.test(match.path);
-
+const LateDpResourcesBanner = ({ exclude_late_results, route_filter }) => {
   const latest_dp_doc = _.chain(result_docs_in_tabling_order)
     .filter((doc) => doc.is_dp)
     .last()
@@ -245,7 +245,9 @@ const LateDpResourcesBanner = () => {
 
   if (!latest_dp_doc) return null;
 
-  const late_orgs = get_late_resources_orgs(latest_dp_doc.doc_key);
+  const late_orgs = get_late_resources_orgs(latest_dp_doc.doc_key, {
+    exclude_late_results,
+  });
   if (_.isEmpty(late_orgs)) return null;
 
   const banner_content = (
@@ -275,17 +277,49 @@ const LateDpResourcesBanner = () => {
     />
   );
 };
-// TODO: temporary – hidden until LDC/WATER/MJRC etc. handling is fixed; restore from git history if needed
-const LateDrrFteResources = () => null;
+const LateDrrFteResources = () => {
+  const route_filter = (match, _history) => is_home(match);
 
-const LatePlannedFteBanner = () => {
-  const route_filter = (match, _history) =>
-    /^\/(start|tag-explorer|rpb)/.test(match.path);
+  const late_orgs = get_late_actual_fte_orgs();
+  if (_.isEmpty(late_orgs)) return null;
 
-  const latest_doc = _.last(result_docs_in_tabling_order);
-  if (!latest_doc || !latest_doc.is_dp) return null;
+  const banner_content = (
+    <Fragment>
+      {
+        {
+          en: "The latest actual FTE values do not include values from the organizations listed below, as their data is not yet available. Updates will follow.",
+          fr: "Les dernières valeurs ETP réelles des organisations ci-dessous ne sont pas encore disponibles. Des mises à jour suivront au fur et à mesure de la transmission de ces données.",
+        }[lang]
+      }
+      <MultiColumnList
+        list_items={_.map(
+          late_orgs,
+          (org_id) => Dept.store.lookup(org_id).name
+        )}
+        column_count={2}
+      />
+    </Fragment>
+  );
 
-  const late_orgs = get_late_planned_fte_orgs();
+  return (
+    <HeaderBanner
+      route_filter={route_filter}
+      banner_content={banner_content}
+      banner_class="warning"
+      additional_class_names="medium-panel-text"
+    />
+  );
+};
+
+const LatePlannedFteBanner = ({
+  exclude_late_results,
+  exclude_orgs_in_late_resources,
+  route_filter,
+}) => {
+  const late_orgs = get_late_planned_fte_orgs({
+    exclude_late_results,
+    exclude_orgs_in_late_resources,
+  });
   if (_.isEmpty(late_orgs)) return null;
 
   const banner_content = (
@@ -316,38 +350,13 @@ const LatePlannedFteBanner = () => {
   );
 };
 
-const SpecialWarrantsBanner = () => {
-  const route_filter = (match, _history) =>
-    /^\/(start|dept|gov)/.test(match.path) && isSpecialWarrants();
-
-  const banner_content = (
-    <Fragment>
-      {
-        {
-          en: "The latest GC InfoBase updates for 2025–26 reflect Governor General Special Warrants authorizing amounts to be drawn from the Consolidated Revenue Fund.",
-          fr: "La dernière mise à jour d'InfoBase du GC pour 2025–2026 reflète des mandats spéciaux du gouverneur général autorisant le prélèvement de fonds sur le Trésor.",
-        }[lang]
-      }
-    </Fragment>
-  );
-
-  return (
-    <HeaderBanner
-      route_filter={route_filter}
-      banner_content={banner_content}
-      banner_class="info"
-      additional_class_names="medium-panel-text"
-    />
-  );
-};
-
 // Routes that show late-warning header banners and/or in-page late-warning panels.
 // Load result counts + programFtes so late warnings load consistently (initial load, breadcrumb, return).
 const ROUTES_WITH_LATE_WARNINGS =
-  /^\/(start|tag-explorer|rpb|gov|dept|crso|program)/;
+  /^\/(start|infographic|tag-explorer|rpb|gov|dept|crso|program)/;
 
 const StandardRouteContainerInner = class StandardRouteContainerInner extends React.Component {
-  state = { late_warning_data_loaded: false };
+  state = { late_warning_data_loaded: late_warning_data_ready() };
 
   componentDidMount() {
     this._mounted = true;
@@ -395,12 +404,22 @@ const StandardRouteContainerInner = class StandardRouteContainerInner extends Re
         <DocumentDescription description_str={description} />
         <BreadCrumbs crumbs={breadcrumbs} />
         <HeaderBanner route_filter={_.constant(false)} />
-        <TempUntabledBanner />
-        <LateResultsBanner />
-        <LateDpResourcesBanner />
-        <LatePlannedFteBanner />
-        <LateDrrFteResources />
-        <SpecialWarrantsBanner />
+        {this.state.late_warning_data_loaded && (
+          <Fragment>
+            <TempUntabledBanner />
+            <LateResultsBanner />
+            <LateDpResourcesBanner
+              exclude_late_results
+              route_filter={(match) => is_home(match)}
+            />
+            <LatePlannedFteBanner
+              exclude_late_results
+              exclude_orgs_in_late_resources={false}
+              route_filter={(match) => is_home(match)}
+            />
+            <LateDrrFteResources />
+          </Fragment>
+        )}
         <AnalyticsSynchronizer route_key={route_key} />
         {shouldSyncLang !== false && <LangSynchronizer />}
         {!is_a11y_mode && <A11yLinkSynchronizer />}

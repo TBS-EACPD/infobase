@@ -15,8 +15,9 @@ import { Table } from "src/tables/TableClass";
 import {
   ResultCounts,
   result_docs,
-  result_docs_in_tabling_order,
   get_result_doc_keys,
+  current_drr_key,
+  current_dp_key,
   LATE_ACTUAL_FTE_ORG_OVERRIDE,
 } from "./results";
 
@@ -122,35 +123,29 @@ const detect_late_planned_fte_orgs = () => {
 
 // ---- Public getters: config first, then auto-detect for latest doc where applicable ----
 
-const is_latest_doc = (doc_key) => {
-  const order = result_docs_in_tabling_order;
-  return order.length > 0 && order[order.length - 1].doc_key === doc_key;
-};
-
 const is_latest_dp_doc = (doc_key) => {
   const dp_keys = get_result_doc_keys("dp");
   return dp_keys.length > 0 && doc_key === _.last(dp_keys);
 };
 
-/** Late results (indicators) for a given doc. Uses config; for latest doc only, auto-detects when config is empty. */
+const is_current_results_doc = (doc_key) =>
+  doc_key === current_drr_key || doc_key === current_dp_key;
+
+/** Manual list wins. Otherwise auto-detect, and only for the current DRR and the current DP. */
 export const get_late_results_orgs = (doc_key) => {
   const doc = result_docs[doc_key];
   if (!doc) return [];
   const config = doc.late_results_orgs || [];
-  if (!is_latest_doc(doc_key)) return config;
-  // For the latest doc, treat non-empty config as a manual override.
-  // Only auto-detect when config is empty.
   if (!_.isEmpty(config)) return config;
-  const detected = detect_late_results_orgs(doc_key);
-  return detected.length > 0 ? detected : config;
+  if (!is_current_results_doc(doc_key)) return [];
+  return detect_late_results_orgs(doc_key);
 };
 
-/** Late planned spending/resources for the latest DP. Config first, then auto-detect.
- * When exclude_late_results is true (default), excludes orgs in late results to avoid redundancy
- * where both late-results and late-resources banners appear (e.g. homepage). Set to false for
- * in-page panels (e.g. Finance bubble) where the late-results banner is not shown; in that case
- * we also include late-results orgs so the banner lists all orgs missing 2026 DP data (consistent
- * with the planned-FTE banner and the homepage late-results banner). */
+const manual_or_detected = (config, detected) =>
+  !_.isEmpty(config) ? config : detected;
+
+/** Late planned spending for a DP. Manual list wins; otherwise auto-detect the current DP.
+ * exclude_late_results drops orgs already named on the late-results banner. */
 export const get_late_resources_orgs = (
   doc_key,
   { exclude_late_results = true } = {}
@@ -158,35 +153,24 @@ export const get_late_resources_orgs = (
   const doc = result_docs[doc_key];
   if (!doc || !doc.is_dp) return [];
   const config = doc.late_resources_orgs || [];
-  if (!is_latest_dp_doc(doc_key)) return config;
-  const detected = detect_late_resources_orgs();
-  const list = detected.length > 0 ? detected : config;
+  const list = manual_or_detected(
+    config,
+    is_latest_dp_doc(doc_key) ? detect_late_resources_orgs() : []
+  );
   if (exclude_late_results) {
-    const late_results = get_late_results_orgs(doc_key);
-    return _.difference(list, late_results);
+    return _.difference(list, get_late_results_orgs(doc_key));
   }
-  const late_results = get_late_results_orgs(doc_key);
-  return _.union(list, late_results);
+  return list;
 };
 
-/** Late actual FTE (DRR). Override first when set, then auto-detect. */
-export const get_late_actual_fte_orgs = () => {
-  if (!_.isEmpty(LATE_ACTUAL_FTE_ORG_OVERRIDE))
-    return LATE_ACTUAL_FTE_ORG_OVERRIDE;
-  const detected = detect_late_actual_fte_orgs();
-  if (detected.length > 0) return detected;
-  return [];
-};
+/** Late actual FTE (DRR). A non-empty override replaces auto-detect. */
+export const get_late_actual_fte_orgs = () =>
+  manual_or_detected(
+    LATE_ACTUAL_FTE_ORG_OVERRIDE,
+    detect_late_actual_fte_orgs()
+  );
 
-/** Late planned FTE for the latest DP. Config first, then auto-detect.
- * When exclude_late_results is true (default), excludes orgs in late results to avoid redundancy
- * where both late-results and late-resources banners appear (e.g. homepage). Set to false for
- * in-page panels (e.g. Finance bubble) where the late-results banner is not shown; in that case
- * we also include late-results orgs so the banner lists all orgs missing 2026 DP data (consistent
- * with the planned-resources banner and the homepage late-results banner).
- * When exclude_orgs_in_late_resources is true (e.g. Finance bubble where both planned-resources
- * and planned-FTE panels exist), returns only orgs missing FTE but not in the planned-resources
- * list, so the planned-FTE banner is not redundant with the "Planned spending and planned FTE" banner. */
+/** Late planned FTE for the current DP. Manual list wins; otherwise auto-detect. */
 export const get_late_planned_fte_orgs = ({
   exclude_late_results = true,
   exclude_orgs_in_late_resources = false,
@@ -196,23 +180,26 @@ export const get_late_planned_fte_orgs = ({
   const latest_key = _.last(dp_keys);
   const doc = result_docs[latest_key];
   if (!doc || !doc.is_dp) return [];
-  const config = doc.late_planned_fte_orgs || [];
-  const detected = detect_late_planned_fte_orgs();
-  let list = detected.length > 0 ? detected : config;
+  let list = manual_or_detected(
+    doc.late_planned_fte_orgs || [],
+    detect_late_planned_fte_orgs()
+  );
   if (exclude_late_results) {
-    const late_results = get_late_results_orgs(latest_key);
-    list = _.difference(list, late_results);
-  } else {
-    const late_results = get_late_results_orgs(latest_key);
-    list = _.union(list, late_results);
+    list = _.difference(list, get_late_results_orgs(latest_key));
   }
   if (exclude_orgs_in_late_resources) {
-    const late_resources = get_late_resources_orgs(latest_key, {
-      exclude_late_results: false,
-    });
-    list = _.difference(list, late_resources);
+    list = _.difference(
+      list,
+      get_late_resources_orgs(latest_key, { exclude_late_results: false })
+    );
   }
   return list;
+};
+
+export const late_warning_data_ready = () => {
+  const table =
+    Table.store.has("programFtes") && Table.store.lookup("programFtes");
+  return !_.isEmpty(ResultCounts.data) && !!(table && table.loaded);
 };
 
 /** Late-dept count for DRR gov panel: late results + temp_untabled (manual only). */

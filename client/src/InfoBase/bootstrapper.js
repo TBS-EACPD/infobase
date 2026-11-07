@@ -20,6 +20,7 @@ import WebFont from "webfontloader";
 import { populate_initial_stores_from_lookups } from "src/models/populate_initial_stores_from_lookups";
 
 import { initialize_analytics } from "src/core/analytics";
+import { ensure_loaded } from "src/core/ensure_loaded";
 
 import {
   get_client,
@@ -84,19 +85,30 @@ function bootstrapper(App, done) {
     );
 
     const client = get_client();
-    done();
 
-    ReactDOM.render(
-      <ApolloProvider client={client}>
-        <Provider store={store}>
-          {/* ConnectedRouter will use the store from Provider automatically */}
-          <ConnectedRouter history={history}>
-            <App />
-          </ConnectedRouter>
-        </Provider>
-      </ApolloProvider>,
-      document.getElementById("app")
-    );
+    // Result counts and program FTEs feed every late banner. Load them before
+    // first paint so the banners are present with the page instead of popping in.
+    ensure_loaded({
+      table_keys: ["programFtes"],
+      requires_result_counts: true,
+    })
+      .catch((error) => {
+        console.warn("Failed to preload late-warning data", error);
+      })
+      .then(() => {
+        done();
+        ReactDOM.render(
+          <ApolloProvider client={client}>
+            <Provider store={store}>
+              {/* ConnectedRouter will use the store from Provider automatically */}
+              <ConnectedRouter history={history}>
+                <App />
+              </ConnectedRouter>
+            </Provider>
+          </ApolloProvider>,
+          document.getElementById("app")
+        );
+      });
   });
 }
 
