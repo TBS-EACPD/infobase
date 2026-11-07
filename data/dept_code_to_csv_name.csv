@@ -368,10 +368,8 @@ CTA,org_vote_stat_estimates
 CTAIB,org_vote_stat_estimates
 EA,org_vote_stat_estimates
 EC,org_vote_stat_estimates
-EDC,org_vote_stat_estimates
 ERC,org_vote_stat_estimates
 FBCL,org_vote_stat_estimates
-FCAC,org_vote_stat_estimates
 FEDNO,org_vote_stat_estimates
 FEDSO,org_vote_stat_estimates
 FFMC,org_vote_stat_estimates
@@ -500,6 +498,7 @@ CSEC,org_vote_stat_pa
 CSIS,org_vote_stat_pa
 CTA,org_vote_stat_pa
 CTAIB,org_vote_stat_pa
+DOWNS,org_vote_stat_pa
 EA,org_vote_stat_pa
 EC,org_vote_stat_pa
 EDC,org_vote_stat_pa
@@ -534,6 +533,7 @@ LAC,org_vote_stat_pa
 LCC,org_vote_stat_pa
 LDC,org_vote_stat_pa
 LP,org_vote_stat_pa
+MJRC,org_vote_stat_pa
 MPCC,org_vote_stat_pa
 NAC,org_vote_stat_pa
 NBC,org_vote_stat_pa
