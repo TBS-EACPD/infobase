@@ -518,7 +518,7 @@ const drr_docs = build_doc_info_objects("drr", [
       "https://www.canada.ca/en/treasury-board-secretariat/services/departmental-performance-reports.html",
     doc_url_fr:
       "https://www.canada.ca/fr/secretariat-conseil-tresor/services/rapports-ministeriels-rendement.html",
-    late_results_orgs: [],
+    late_results_orgs: ["278"],
     late_resources_orgs: [],
     late_planned_fte_orgs: [],
     temp_untabled_orgs: [],
