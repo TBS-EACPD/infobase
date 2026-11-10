@@ -92,9 +92,7 @@ const color_channels = (color) => {
     ];
   }
   const match = /rgb\((\d+),\s*(\d+),\s*(\d+)/.exec(color);
-  return match
-    ? [Number(match[1]), Number(match[2]), Number(match[3])]
-    : null;
+  return match ? [Number(match[1]), Number(match[2]), Number(match[3])] : null;
 };
 
 const scale_label_color = (cell) => {
@@ -159,9 +157,7 @@ export const IndicatorDistanceHeatmap = ({ rows, bins, variant }) => {
         data={heatmap_data(rows, bins, is_scale)}
         margin={layout.margin}
         axisTop={
-          is_scale
-            ? { tickSize: 5, tickPadding: 5, tickRotation: -90 }
-            : null
+          is_scale ? { tickSize: 5, tickPadding: 5, tickRotation: -90 } : null
         }
         axisRight={null}
         axisBottom={
@@ -184,16 +180,13 @@ export const IndicatorDistanceHeatmap = ({ rows, bins, variant }) => {
         emptyColor={is_scale ? "#f7fbff" : "#f3f3f3"}
         borderWidth={1}
         borderColor={
-          is_scale
-            ? { from: "color", modifiers: [["darker", 0.3]] }
-            : "#ffffff"
+          is_scale ? { from: "color", modifiers: [["darker", 0.3]] } : "#ffffff"
         }
         enableLabels
         labelTextColor={
           is_scale
             ? scale_label_color
-            : (cell) =>
-                cell.data.tone === "met" ? textLightColor : textColor
+            : (cell) => (cell.data.tone === "met" ? textLightColor : textColor)
         }
         inactiveOpacity={is_scale ? 0.15 : 1}
         hoverTarget={is_scale ? "rowColumn" : "cell"}
