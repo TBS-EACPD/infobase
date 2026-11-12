@@ -1,14 +1,23 @@
 org_standard_objects_dataset:
   en: Expenditures by Standard Object
   fr: Dépenses par article courant
+org_standard_objects_open_data_link:
+  en: https://open.canada.ca/data/en/dataset/a35cf382-690c-4221-a971-cf0fd189a46f/resource/27e54a33-3c39-42a9-8d58-46dd37c527e5
+  fr: https://ouvert.canada.ca/data/fr/dataset/a35cf382-690c-4221-a971-cf0fd189a46f/resource/f5622a6c-b623-43eb-a9d9-02901d10d901
 
 transfer_payments_dataset:
   en: Transfer Payments
   fr: Paiements de transfert
+transfer_payments_open_data_link:
+  en: https://open.canada.ca/data/en/dataset/a35cf382-690c-4221-a971-cf0fd189a46f/resource/b54512ea-1257-4eb6-b968-a5f8e700c53a
+  fr: https://ouvert.canada.ca/data/fr/dataset/a35cf382-690c-4221-a971-cf0fd189a46f/resource/b54512ea-1257-4eb6-b968-a5f8e700c53a
 
 org_vote_stat_dataset:
   en: Authorities and Expenditures
   fr: Autorisations et dépenses
+org_vote_stat_open_data_link:
+  en: https://open.canada.ca/data/en/dataset/a35cf382-690c-4221-a971-cf0fd189a46f/resource/3bafde71-8cb8-460e-93e2-691295221063
+  fr: https://ouvert.canada.ca/data/fr/dataset/a35cf382-690c-4221-a971-cf0fd189a46f/resource/98ab6386-5823-4551-b97a-97514640122f
 
 
 program_standard_objects_dataset:
@@ -23,9 +32,15 @@ program_vote_stat_objects_dataset:
 program_spending_dataset:
   en: Expenditures and Planned Spending by Program
   fr: Dépenses réelles et prévues par programme
+program_spending_open_data_link:
+  en: https://open.canada.ca/data/en/dataset/a35cf382-690c-4221-a971-cf0fd189a46f/resource/55934650-3380-44d5-82c1-bb68f8cc5abb
+  fr: https://ouvert.canada.ca/data/fr/dataset/a35cf382-690c-4221-a971-cf0fd189a46f/resource/55934650-3380-44d5-82c1-bb68f8cc5abb
 program_ftes_dataset:
   en: Actual and Planned Full-Time Equivalents (FTEs) by Program
   fr: Équivalents temps plein (ETP) actuels et prévus par programme
+program_ftes_open_data_link:
+  en: https://open.canada.ca/data/en/dataset/a35cf382-690c-4221-a971-cf0fd189a46f/resource/49569acc-b550-412e-b789-01d1ac96d879
+  fr: https://ouvert.canada.ca/data/fr/dataset/a35cf382-690c-4221-a971-cf0fd189a46f/resource/49569acc-b550-412e-b789-01d1ac96d879
 
 
 age_group_dataset:
@@ -89,3 +104,6 @@ actual_results_dataset:
 planned_results_dataset:
   en: Planned performance information (results and indicators) by Program and by Organization
   fr: Information sur le rendement prévu (résultats et indicateurs) par programme et par organisation
+performance_results_open_data_link:
+  en: https://open.canada.ca/data/en/dataset/a35cf382-690c-4221-a971-cf0fd189a46f/resource/fd22cfaf-8a37-41ee-98b5-2628faa03e80
+  fr: https://ouvert.canada.ca/data/fr/dataset/a35cf382-690c-4221-a971-cf0fd189a46f/resource/fd22cfaf-8a37-41ee-98b5-2628faa03e80

@@ -29,7 +29,9 @@ const source_definitions = LiteralKeyedRecordHelper<SourceDef>()({
     name: text_maker("inventory_of_government_organizations_name"),
     description: <TM k="inventory_of_government_organizations_desc" />,
     topic_key: "MACHINERY",
-    open_data_link: text_maker("common_infobase_open_data_link"),
+    open_data_link: text_maker(
+      "inventory_of_government_organizations_open_data_link"
+    ),
     frequency_key: "yearly",
   },
   public_accounts: {
@@ -37,7 +39,6 @@ const source_definitions = LiteralKeyedRecordHelper<SourceDef>()({
     description: <TM k="public_accounts_desc" />,
     topic_key: "PA",
     authoritative_link: text_maker("public_accounts_authoritative_link"),
-    open_data_link: text_maker("common_infobase_open_data_link"),
     frequency_key: "yearly",
   },
   central_financial_management_system: {
@@ -54,7 +55,7 @@ const source_definitions = LiteralKeyedRecordHelper<SourceDef>()({
     description: <TM k="estimates_desc" />,
     topic_key: "EST_PROC",
     authoritative_link: text_maker("estimates_authoritative_link"),
-    open_data_link: text_maker("common_infobase_open_data_link"),
+    open_data_link: text_maker("estimates_open_data_link"),
     frequency_key: "quarterly",
   },
   departmental_plans: {
@@ -62,7 +63,6 @@ const source_definitions = LiteralKeyedRecordHelper<SourceDef>()({
     description: <TM k="departmental_plans_desc" />,
     topic_key: "DP",
     authoritative_link: text_maker("departmental_plans_authoritative_link"),
-    open_data_link: text_maker("common_infobase_open_data_link"),
     frequency_key: "yearly",
   },
   departmental_results_reports: {
@@ -72,7 +72,6 @@ const source_definitions = LiteralKeyedRecordHelper<SourceDef>()({
     authoritative_link: text_maker(
       "departmental_results_reports_authoritative_link"
     ),
-    open_data_link: text_maker("common_infobase_open_data_link"),
     frequency_key: "yearly",
   },
   employee_pay_system: {

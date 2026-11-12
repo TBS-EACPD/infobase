@@ -63,6 +63,7 @@ const public_accounts = common_source_and_topic_data_set_defs(
       infobase_link: rpb_link({
         table: "orgSobjs",
       }),
+      open_data_link: text_maker("org_standard_objects_open_data_link"),
     },
     org_vote_stat: {
       name: text_maker("org_vote_stat_dataset"),
@@ -70,6 +71,7 @@ const public_accounts = common_source_and_topic_data_set_defs(
       infobase_link: rpb_link({
         table: "orgVoteStatPa",
       }),
+      open_data_link: text_maker("org_vote_stat_open_data_link"),
     },
     transfer_payments: {
       name: text_maker("transfer_payments_dataset"),
@@ -77,6 +79,7 @@ const public_accounts = common_source_and_topic_data_set_defs(
       infobase_link: rpb_link({
         table: "orgTransferPayments",
       }),
+      open_data_link: text_maker("transfer_payments_open_data_link"),
     },
   }
 );
@@ -116,6 +119,7 @@ const program_resources = common_source_and_topic_data_set_defs(
       infobase_link: rpb_link({
         table: "programSpending",
       }),
+      open_data_link: text_maker("program_spending_open_data_link"),
     },
     program_ftes: {
       name: text_maker("program_ftes_dataset"),
@@ -123,6 +127,7 @@ const program_resources = common_source_and_topic_data_set_defs(
       infobase_link: rpb_link({
         table: "programFtes",
       }),
+      open_data_link: text_maker("program_ftes_open_data_link"),
     },
   }
 );
@@ -216,12 +221,14 @@ const misc = LiteralKeyedRecordHelper<DatasetDef>()({
     source_keys: ["departmental_results_reports"],
     topic_keys: ["RESULTS"],
     infobase_link: "#infographic/gov/gov/results/.-.-(panel_key.-.-'gov_drr)",
+    open_data_link: text_maker("performance_results_open_data_link"),
   },
   planned_results: {
     name: text_maker("planned_results_dataset"),
     source_keys: ["departmental_plans"],
     topic_keys: ["RESULTS"],
     infobase_link: "#infographic/gov/gov/results/.-.-(panel_key.-.-'gov_dp)",
+    open_data_link: text_maker("performance_results_open_data_link"),
   },
   ...(services_feature_flag && {
     service_inventory: {

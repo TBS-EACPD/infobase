@@ -1,7 +1,3 @@
-common_infobase_open_data_link:
-  en: http://open.canada.ca/data/en/dataset/a35cf382-690c-4221-a971-cf0fd189a46f
-  fr: https://ouvert.canada.ca/data/fr/dataset/a35cf382-690c-4221-a971-cf0fd189a46f
-
 inventory_of_government_organizations_name:
   transform: [handlebars]
   en: | 
@@ -10,7 +6,10 @@ inventory_of_government_organizations_name:
     {{gt "igoc"}}
 inventory_of_government_organizations_desc:
   en: The Inventory of Federal Organizations and Interests provides a comprehensive listing of federal organizations and interests that can be grouped by various categories (e.g., by portfolio).
-  fr: Le Répertoire des organisations et intérêts fédéraux dresse la liste complète des organisations fédérales et des sociétés dans lesquelles le Canada détient des intérêts, que l'on peut regrouper en diverses catégories (p. ex. par portefeuille). 
+  fr: Le Répertoire des organisations et intérêts fédéraux dresse la liste complète des organisations fédérales et des sociétés dans lesquelles le Canada détient des intérêts, que l'on peut regrouper en diverses catégories (p. ex. par portefeuille).
+inventory_of_government_organizations_open_data_link:
+  en: https://open.canada.ca/data/en/dataset/a35cf382-690c-4221-a971-cf0fd189a46f/resource/d9f87f7f-62f9-4baf-a803-2d8743f38e76
+  fr: https://ouvert.canada.ca/data/fr/dataset/a35cf382-690c-4221-a971-cf0fd189a46f/resource/d9f87f7f-62f9-4baf-a803-2d8743f38e76 
 
 public_accounts_name:
   en: Public Accounts of Canada
@@ -79,6 +78,9 @@ estimates_desc:
 estimates_authoritative_link:
   en: https://www.canada.ca/en/treasury-board-secretariat/services/planned-government-spending/government-expenditure-plan-main-estimates.html
   fr: https://www.canada.ca/fr/secretariat-conseil-tresor/services/depenses-prevues/plan-depenses-budget-principal.html
+estimates_open_data_link:
+  en: https://open.canada.ca/data/en/dataset/a35cf382-690c-4221-a971-cf0fd189a46f/resource/3f7a7a82-86f8-4018-ad4e-33e7d9a2d1f0
+  fr: https://ouvert.canada.ca/data/fr/dataset/a35cf382-690c-4221-a971-cf0fd189a46f/resource/3f7a7a82-86f8-4018-ad4e-33e7d9a2d1f0
 
 central_financial_management_system_name:
   en: Central Financial Management Reporting System (CFMRS)
