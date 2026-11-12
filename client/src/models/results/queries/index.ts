@@ -1,4 +1,16 @@
 export {
+  promisedIndicatorHistory,
+  suspendedIndicatorHistory,
+  useIndicatorHistory,
+} from "./IndicatorHistory/IndicatorHistory";
+
+export {
+  promisedGovDrrIndicators,
+  suspendedGovDrrIndicators,
+  useGovDrrIndicators,
+} from "./GovDrrIndicators/GovDrrIndicators";
+
+export {
   promisedDeptResultsSummary,
   suspendedDeptResultsSummary,
   useDeptResultsSummary,
