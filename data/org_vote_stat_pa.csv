@@ -137,6 +137,7 @@ CI,S,999,Salary and Motor Car Allowance,Traitement et allocation pour automobile
 CI,S,999,Spending of proceeds from the disposal of surplus Crown assets,Dépenses des produits de la vente de biens excédentaires de l'État,32117.0,28762.0,3355.0,7779.0,5017.0,2762.0,43102.0,42565.0,537.0,12076.13,11294.38,781.75,30015.0,781.75,29233.25
 CICS,1,1,Operating/Program,Fonctionnement/Programme,5903542.0,4538500.0,0.0,5987133.0,5870746.0,0.0,7611290.0,7346651.0,0.0,7615487.0,7546071.0,0.0,7370466.0,6869701.0,0.0
 CICS,S,999,Contributions to employee benefit plans,Contributions aux régimes d'avantages sociaux des employés,355275.0,355275.0,0.0,429073.0,429073.0,0.0,576017.23,576017.23,0.0,578838.28,578838.28,0.0,613957.01,613957.01,0.0
+CICS,S,999,Refunds of amounts credited to revenues in previous years,Remboursements de montants portés aux revenus d'exercices antérieurs,,,,,,,,,,,,,32.41,32.41,0.0
 CIHR,1,1,Operating/Program,Fonctionnement/Programme,68220076.0,61439597.0,0.0,74441585.0,70194453.0,0.0,82969828.0,79891020.0,0.0,78863756.0,78253311.0,0.0,76497841.0,73223126.0,0.0
 CIHR,5,3,Grants & Contributions,Subventions et Contributions,1317018166.0,1315234184.0,0.0,1279597196.0,1258419241.0,0.0,1283479883.0,1258382393.0,0.0,1336871400.0,1336222895.0,0.0,1292339594.0,1291565234.0,0.0
 CIHR,S,999,Contributions to employee benefit plans,Contributions aux régimes d'avantages sociaux des employés,7625483.0,7625483.0,0.0,8298214.0,8298214.0,0.0,10182783.87,10182783.87,0.0,9896029.83,9896029.83,0.0,8474968.58,8474968.58,0.0
@@ -156,6 +157,7 @@ CPC,1,5,Payments to Crown Corps,Paiement aux sociétés d'État,22210000.0,22210
 CPC,5,5,Payments to Crown Corps,Paiement aux sociétés d'État,,,,,,,,,,,,,2042000000.0,1369000000.0,0.0
 CPCC,1,1,Operating/Program,Fonctionnement/Programme,30846899.0,26135762.0,0.0,34265682.0,32738001.0,0.0,37053275.0,35769003.0,0.0,38054585.0,34691452.0,0.0,34784578.0,34610236.0,0.0
 CPCC,S,999,Contributions to employee benefit plans,Contributions aux régimes d'avantages sociaux des employés,1199536.0,1199536.0,0.0,1396919.0,1396919.0,0.0,1662695.59,1662695.59,0.0,1775859.24,1775859.24,0.0,1645166.73,1645166.73,0.0
+CPCC,S,999,Spending of proceeds from the disposal of surplus Crown assets,Dépenses des produits de la vente de biens excédentaires de l'État,,,,,,,,,,,,,2137.5,0.0,2137.5
 CPCC,S,999,Spending of revenue pursuant to section 6(2) of the Canadian High Arctic Research Station Act,Dépense des recettes conformément au paragraphe 6(2) de la Loi sur la Station canadienne de recherche dans l'Extrême-Arctique,569532.0,0.0,569532.0,901311.0,0.0,901312.0,1286754.0,0.0,1286754.0,1720798.0,0.0,1720798.0,2274590.0,0.0,2274590.0
 CRRF,1,5,Payments to Crown Corps,Paiement aux sociétés d'État,6180001.0,6180001.0,0.0,5115542.0,5115542.0,0.0,9000000.0,9000000.0,0.0,12092410.0,12092410.0,0.0,11990800.0,11990800.0,0.0
 CRTC,1,1,Operating/Program,Fonctionnement/Programme,13083159.0,6142914.0,0.0,15286061.0,6734942.0,0.0,13117807.0,9994343.0,0.0,12355479.0,9717559.0,0.0,14302521.0,9504430.0,0.0
@@ -371,6 +373,7 @@ HRSD,S,999,"Wage Earner Protection Program payments to eligible applicants owed 
 IDRC,1,5,Payments to Crown Corps,Paiement aux sociétés d'État,155251325.0,155251325.0,0.0,159036540.0,159036540.0,0.0,164605641.0,164605641.0,0.0,160270169.0,160270169.0,0.0,167368400.0,167368400.0,0.0
 IJC,1,1,Operating/Program,Fonctionnement/Programme,12188333.0,7723488.0,0.0,9782066.0,8322564.0,0.0,10450521.0,8537225.0,0.0,10793920.0,8217765.0,0.0,11128789.0,8150032.0,0.0
 IJC,S,999,Contributions to employee benefit plans,Contributions aux régimes d'avantages sociaux des employés,595110.0,595110.0,0.0,630634.0,630634.0,0.0,654811.52,654811.52,0.0,657138.78,657138.78,0.0,659259.46,659259.46,0.0
+IJC,S,999,Spending of proceeds from the disposal of surplus Crown assets,Dépenses des produits de la vente de biens excédentaires de l'État,,,,,,,,,,,,,127.53,0.0,127.53
 INAC,1,1,Operating/Program,Fonctionnement/Programme,2811338015.0,1873249356.0,0.0,5124737923.0,1365907004.0,0.0,11547967094.0,10087209540.0,0.0,3972429901.0,2295945946.0,0.0,5273936374.0,2665016620.0,0.0
 INAC,10,3,Grants & Contributions,Subventions et Contributions,4223801797.0,2923086145.0,0.0,8617520348.0,7108082582.0,0.0,14918303165.0,6222241606.0,0.0,13918375007.0,11900129617.0,0.0,9271159393.0,6508757113.0,0.0
 INAC,25,4,Debt Forgiveness,Radiation de dettes,515307.0,505411.0,0.0,,,,,,,,,,,,
@@ -399,6 +402,7 @@ INDSC,S,999,Refunds of amounts credited to revenues in previous years,Remboursem
 INDSC,S,999,Salary and Motor Car Allowance,Traitement et allocation pour automobile,90700.0,90700.0,0.0,92400.0,92400.0,0.0,94800.0,94800.0,0.0,98800.08,98800.08,0.0,101900.04,101900.04,0.0
 INDSC,S,999,Spending of proceeds from the disposal of surplus Crown assets,Dépenses des produits de la vente de biens excédentaires de l'État,2863254.0,1473353.0,1389901.0,1775103.0,1389902.0,385201.0,1270557.0,825669.0,444888.0,1410729.36,1086756.88,323972.48,1305948.12,354822.95,951125.17
 INVIC,1,1,Operating/Program,Fonctionnement/Programme,35986134.0,34487041.0,0.0,35309034.0,33024123.0,0.0,35666724.0,34271743.0,0.0,34261536.0,32743554.0,0.0,34408914.0,31663324.0,0.0
+INVIC,S,999,Spending of proceeds from the disposal of surplus Crown assets,Dépenses des produits de la vente de biens excédentaires de l'État,,,,,,,,,,,,,2049.73,0.0,2049.73
 IPC,1,1,Operating/Program,Fonctionnement/Programme,16920934.0,16150614.0,0.0,15317856.0,14673725.0,0.0,16666404.0,16126325.0,0.0,16635783.0,16109571.0,0.0,16454723.0,15836424.0,0.0
 IPC,5,1,Operating/Program,Fonctionnement/Programme,28360957.0,27581381.0,0.0,28471898.0,27543531.0,0.0,32536518.0,31033231.0,0.0,33818431.0,32891325.0,0.0,35706194.0,32572734.0,0.0
 IPC,S,999,Contributions to employee benefit plans,Contributions aux régimes d'avantages sociaux des employés,4902242.0,4902242.0,0.0,5127958.0,5127958.0,0.0,5599885.94,5599885.94,0.0,6015756.76,6015756.76,0.0,6053356.66,6053356.66,0.0
@@ -622,6 +626,7 @@ TBC,25,6,Central Vote - Operating Budget Carry Forward,Credit Central - Report d
 TBC,30,6,Central Vote - Paylist Requirements,Credit Central - Besoins en matière de rémunération,597186052.0,0.0,0.0,469419058.0,0.0,0.0,281708822.0,0.0,0.0,20964202.0,0.0,0.0,345382727.0,0.0,0.0
 TBC,35,6,Central Vote - Capital Budget Carry Forward,Credit Central - Report du budget des dépenses en capital,114532482.0,0.0,0.0,2865841.0,0.0,0.0,42593647.0,0.0,0.0,177588897.0,0.0,0.0,93973121.0,0.0,0.0
 TBC,5,6,Central Vote - Government Contingencies,Credit Central - Dépenses éventuelles du gouvernement,662076848.0,0.0,0.0,691459102.0,0.0,0.0,630800000.0,0.0,0.0,705434038.0,0.0,0.0,1000000000.0,0.0,0.0
+TBC,50,6,Central Vote - Defence and Security Initiatives,Credit Central - Initiatives en matière de défense et de sécurité,,,,,,,,,,,,,55596531.0,0.0,0.0
 TBC,S,999,Contributions to employee benefit plans,Contributions aux régimes d'avantages sociaux des employés,35390017.0,35390017.0,0.0,39900575.0,39900575.0,0.0,45786225.28,45786225.28,0.0,42663517.23,42663517.23,0.0,41769863.69,41769863.69,0.0
 TBC,S,999,Employer contributions made under the Public Service Superannuation Act and other retirement acts and the Employment Insurance Act,Contributions de l'employeur en vertu de la Loi sur la pension de la fonction publique et d'autres lois sur la retraite et de la Loi sur l'assurance-emploi,7805000000.0,7805000000.0,0.0,,,,,,,6425000000.02,6425000000.02,0.0,,,
 TBC,S,999,Payments under the Public Service Pension Adjustment Act,Versements en vertu de la Loi sur la mise au point des pensions du service public,1458.0,1458.0,0.0,1430.0,1430.0,0.0,1514.49,1514.49,0.0,1578.96,1578.96,0.0,912.5,912.5,0.0
