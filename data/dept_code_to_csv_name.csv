@@ -300,7 +300,6 @@ JUS,org_transfer_payments
 LAC,org_transfer_payments
 ND,org_transfer_payments
 NEB,org_transfer_payments
-NPA,org_transfer_payments
 NR,org_transfer_payments
 NRC,org_transfer_payments
 NSERC,org_transfer_payments
@@ -312,7 +311,6 @@ PCO,org_transfer_payments
 PHAC,org_transfer_payments
 PSEP,org_transfer_payments
 RCMP,org_transfer_payments
-SC,org_transfer_payments
 SEN,org_transfer_payments
 SSHRC,org_transfer_payments
 SWC,org_transfer_payments
