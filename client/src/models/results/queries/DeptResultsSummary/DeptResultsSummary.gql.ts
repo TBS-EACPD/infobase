@@ -10,7 +10,7 @@ export type DeptResultsSummaryQueryVariables = Types.Exact<{
 }>;
 
 
-export type DeptResultsSummaryQuery = { __typename?: 'Query', root: { __typename?: 'Root', org?: { __typename?: 'Org', crsos?: Array<{ __typename?: 'Crso', name?: string | null, results?: Array<{ __typename?: 'Result', doc?: string | null, name?: string | null, indicators?: Array<{ __typename?: 'Indicator', id?: string | null, name?: string | null, doc?: string | null, target_month?: number | null, target_year?: number | null, target_min?: string | null, actual_result?: string | null, status_key?: string | null, result_explanation?: string | null, methodology?: string | null, previous_year_target_min?: string | null, previous_year_actual_result?: string | null } | null> | null } | null> | null, programs?: Array<{ __typename?: 'Program', name?: string | null, results?: Array<{ __typename?: 'Result', doc?: string | null, name?: string | null, indicators?: Array<{ __typename?: 'Indicator', id?: string | null, name?: string | null, doc?: string | null, target_month?: number | null, target_year?: number | null, target_min?: string | null, actual_result?: string | null, status_key?: string | null, result_explanation?: string | null, methodology?: string | null, previous_year_target_min?: string | null, previous_year_actual_result?: string | null } | null> | null } | null> | null } | null> | null } | null> | null } | null } };
+export type DeptResultsSummaryQuery = { __typename?: 'Query', root: { __typename?: 'Root', org?: { __typename?: 'Org', crsos?: Array<{ __typename?: 'Crso', id?: string | null, name?: string | null, results?: Array<{ __typename?: 'Result', id?: string | null, doc?: string | null, name?: string | null, indicators?: Array<{ __typename?: 'Indicator', id?: string | null, name?: string | null, doc?: string | null, target_month?: number | null, target_year?: number | null, target_type?: string | null, target_min?: string | null, target_max?: string | null, seeking_to?: string | null, actual_result?: string | null, status_key?: string | null, result_explanation?: string | null, methodology?: string | null, previous_year_target_type?: string | null, previous_year_target_min?: string | null, previous_year_actual_result?: string | null } | null> | null } | null> | null, programs?: Array<{ __typename?: 'Program', name?: string | null, results?: Array<{ __typename?: 'Result', id?: string | null, doc?: string | null, name?: string | null, indicators?: Array<{ __typename?: 'Indicator', id?: string | null, name?: string | null, doc?: string | null, target_month?: number | null, target_year?: number | null, target_type?: string | null, target_min?: string | null, target_max?: string | null, seeking_to?: string | null, actual_result?: string | null, status_key?: string | null, result_explanation?: string | null, methodology?: string | null, previous_year_target_type?: string | null, previous_year_target_min?: string | null, previous_year_actual_result?: string | null } | null> | null } | null> | null } | null> | null } | null> | null } | null } };
 
 
 export const DeptResultsSummaryDocument = gql`
@@ -18,8 +18,10 @@ export const DeptResultsSummaryDocument = gql`
   root(lang: $lang) {
     org(org_id: $orgId) {
       crsos {
+        id
         name
         results {
+          id
           doc
           name
           indicators {
@@ -29,6 +31,7 @@ export const DeptResultsSummaryDocument = gql`
         programs {
           name
           results {
+            id
             doc
             name
             indicators {

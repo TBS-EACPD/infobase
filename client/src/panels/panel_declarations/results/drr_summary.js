@@ -18,11 +18,13 @@ import {
 
 import { CommonDrrSummary } from "./CommonDrrSummary";
 
+import { build_departmental_result_distance_chart } from "./indicator_distance";
 import {
   ResultCounts,
   GranularResultCounts,
   get_year_for_doc_key,
   hierarchy_to_counts,
+  indicator_hierarchy,
 } from "./results_common";
 
 import text from "./drr_summary.yaml";
@@ -73,12 +75,23 @@ const DrrSummary = ({ subject, drr_keys, verbose_counts }) => {
 
   const counts = hierarchy_to_counts(data, drr_key);
 
+  const distance_chart =
+    subject.subject_type === "dept"
+      ? build_departmental_result_distance_chart(
+          _.filter(indicator_hierarchy(data), {
+            doc: drr_key,
+            type: "dept",
+          })
+        )
+      : null;
+
   const summary = (
     <CommonDrrSummary
       subject={subject}
       drr_key={drr_key}
       verbose_counts={verbose_counts}
       counts={counts}
+      distance_chart={distance_chart}
     />
   );
 

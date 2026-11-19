@@ -42,12 +42,18 @@ const results_hierarchy = (data) => {
         .map((result) => ({
           ...result,
           type: "program",
+          parent_id: data.id,
           parent_name: data.name,
         }))
         .value();
     case "Crso":
       return _.chain(data.results)
-        .map((result) => ({ ...result, type: "dept", parent_name: data.name }))
+        .map((result) => ({
+          ...result,
+          type: "dept",
+          parent_id: data.id,
+          parent_name: data.name,
+        }))
         .concat(
           _.flatMap(data.programs, (program) => results_hierarchy(program))
         )
@@ -67,7 +73,10 @@ const indicator_hierarchy = (data) => {
       _.map(result.indicators, (indicator) => ({
         ...indicator,
         type: result.type,
+        parent_id: result.parent_id,
         parent_name: result.parent_name,
+        result_id: result.id,
+        result_name: result.name,
       }))
     )
     .value();
@@ -354,4 +363,5 @@ export {
   filter_and_genericize_doc_counts,
   get_year_for_doc_key,
   hierarchy_to_counts,
+  indicator_hierarchy,
 };

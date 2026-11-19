@@ -8,6 +8,7 @@ import { drr_docs, dp_docs } from "./results_common.js";
 const schema = `
   extend type Root { 
     indicator(id: String): Indicator
+    indicators_by_stable_id(stable_id: String!): [Indicator]
   }
   
   extend type Gov {
@@ -18,6 +19,7 @@ const schema = `
     dr_target_counts_granular: [AllDocResultCount]
     pr_target_counts_summary: [AllDocResultCount]
     pr_target_counts_granular: [AllDocResultCount]
+    departmental_result_indicators(doc: String!): [Indicator]
   }
 
   extend type Org {
@@ -135,8 +137,15 @@ ${_.reduce(
 `;
 
 export default function ({ models, loaders }) {
-  const { Org, Crso, Program, ResultCount, ResultDrCount, ResultPrCount } =
-    models;
+  const {
+    Org,
+    Crso,
+    Program,
+    Indicator,
+    ResultCount,
+    ResultDrCount,
+    ResultPrCount,
+  } = models;
 
   const {
     prog_dept_code_loader,
@@ -265,11 +274,42 @@ export default function ({ models, loaders }) {
     }
   };
 
+  async function get_gov_departmental_result_indicators(doc) {
+    const orgs = await Org.find({});
+    const dept_codes = _.chain(orgs).map("dept_code").compact().uniq().value();
+    const crso_groups = await crso_from_deptcode_loader.loadMany(dept_codes);
+    const crso_ids = _.chain(crso_groups)
+      .flatten()
+      .map("crso_id")
+      .compact()
+      .uniq()
+      .value();
+    const result_groups = await result_by_subj_loader.loadMany(crso_ids);
+    const results = _.chain(result_groups)
+      .flatten()
+      .compact()
+      .filter({ doc })
+      .value();
+    const indicator_groups = await indicator_by_result_loader.loadMany(
+      _.map(results, "result_id")
+    );
+
+    return _.chain(indicator_groups)
+      .flatten()
+      .compact()
+      .filter({ doc })
+      .value();
+  }
+
   const resolvers = {
     Root: {
       indicator: (_x, { id }) => indicator_id_loader.load(id),
+      indicators_by_stable_id: async (_x, { stable_id }) =>
+        await Indicator.find({ stable_id }),
     },
     Gov: {
+      departmental_result_indicators: (_gov, { doc }) =>
+        get_gov_departmental_result_indicators(doc),
       all_target_counts_summary: () => get_all_target_counts(["all", "dept"]),
       all_target_counts_granular: () =>
         get_all_target_counts(["crso_or_program"]),
