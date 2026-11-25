@@ -103,6 +103,15 @@ export default function (model_singleton) {
     planning_year_2: number_type,
     planning_year_3: number_type,
   });
+  const OrgSobjsSchema = mongoose.Schema({
+    dept_code: parent_fkey_type(),
+    so_num: number_type,
+    pa_last_year_5: number_type,
+    pa_last_year_4: number_type,
+    pa_last_year_3: number_type,
+    pa_last_year_2: number_type,
+    pa_last_year_1: number_type,
+  });
 
   model_singleton.define_model("OrgVoteStatPa", OrgVoteStatPaSchema);
   model_singleton.define_model(
@@ -118,6 +127,7 @@ export default function (model_singleton) {
   model_singleton.define_model("ProgramVoteStat", ProgramVoteStatSchema);
   model_singleton.define_model("ProgramSpending", ProgramSpendingSchema);
   model_singleton.define_model("ProgramFte", ProgramFteSchema);
+  model_singleton.define_model("OrgSobjs", OrgSobjsSchema);
 
   const {
     OrgVoteStatPa,
@@ -127,6 +137,7 @@ export default function (model_singleton) {
     ProgramVoteStat,
     ProgramSpending,
     ProgramFte,
+    OrgSobjs,
   } = model_singleton.models;
 
   const loaders = {
@@ -157,6 +168,10 @@ export default function (model_singleton) {
     programFte_loader: create_resource_by_foreignkey_attr_dataloader(
       ProgramFte,
       "program_id"
+    ),
+    orgSobjs_loader: create_resource_by_foreignkey_attr_dataloader(
+      OrgSobjs,
+      "dept_code"
     ),
   };
   _.each(loaders, (val, key) => model_singleton.define_loader(key, val));

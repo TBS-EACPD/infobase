@@ -30,7 +30,7 @@ const crso_subject_type = "crso" as const;
 export class CRSO extends BaseSubjectFactory<CRSODef, typeof crso_subject_type>(
   crso_subject_type,
   trivial_text_maker("core_resps"),
-  ["results", "services"]
+  ["results", "services", "finance_data"]
 ) {
   static store = make_store((def: CRSODef) => new CRSO(def));
 

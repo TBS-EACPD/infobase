@@ -199,10 +199,15 @@ export const query_factory =
       return suspend(() => promiseQuery(variables), [key]);
     };
 
-    const useQueryHook = (variables: PartialVariables) => {
+    const useQueryHook = (
+      variables: PartialVariables,
+      options?: { skip?: boolean }
+    ) => {
+      const skipped = !!options?.skip;
       const { loading, error, data } = useQuery<Query, PartialVariables>(
         query,
         {
+          skip: skipped,
           variables: {
             lang,
             ...variables,
@@ -211,7 +216,13 @@ export const query_factory =
         }
       );
 
-      if (loading) {
+      if (skipped) {
+        return {
+          loading: false,
+          error: undefined,
+          data: undefined,
+        };
+      } else if (loading) {
         return {
           loading,
           error,

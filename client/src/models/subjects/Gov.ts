@@ -8,7 +8,8 @@ const gov_id = "gov";
 
 export class Gov extends BaseSubjectFactory(
   "gov" as const,
-  trivial_text_maker("goc")
+  trivial_text_maker("goc"),
+  ["finance_data"]
 ) {
   static store = (() => {
     const store = make_store((def: { id: string }) => new Gov(def));
