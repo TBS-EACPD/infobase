@@ -539,29 +539,6 @@ const drr_docs = build_doc_info_objects("drr", [
 
 const dp_docs = build_doc_info_objects("dp", [
   {
-    year_short: "2025",
-    // Labels use the 2025-26 DP planning horizon. Spending and FTEs come from the
-    // temporary planning_year_0 columns, which hold the 2025-26 Departmental Plan figures.
-    resource_years: [
-      "{{est_last_year}}",
-      "{{planning_year_1}}",
-      "{{planning_year_2}}",
-    ],
-    resource_data_years: [
-      "planning_year_0",
-      "{{planning_year_1}}",
-      "{{planning_year_2}}",
-    ],
-    doc_url_en:
-      "https://www.canada.ca/en/treasury-board-secretariat/services/planned-government-spending/reports-plans-priorities.html",
-    doc_url_fr:
-      "https://www.canada.ca/fr/secretariat-conseil-tresor/services/depenses-prevues/rapports-plans-priorites.html",
-    late_results_orgs: [],
-    late_resources_orgs: [],
-    late_planned_fte_orgs: [],
-    temp_untabled_orgs: [],
-  },
-  {
     year_short: "2026",
     resource_years: [
       "{{planning_year_1}}",
