@@ -27,7 +27,6 @@ import {
   ordered_status_keys,
   result_statuses,
   indicator_text_functions,
-  get_result_doc_keys,
   result_docs,
   result_color_scale,
   show_gba_plus_ui,
@@ -43,6 +42,14 @@ const {
 } = indicator_text_functions;
 
 const { sanitized_marked } = general_utils;
+
+const docs_in_time_order = _.chain(result_docs)
+  .values()
+  .sortBy(
+    ({ doc_type, year_short }) => +year_short + (doc_type === "dp" ? 0.5 : 0)
+  )
+  .map("doc_key")
+  .value();
 
 const IndicatorResultDisplay = (props) => {
   const { indicator, is_actual, is_previous } = props;
@@ -69,11 +76,8 @@ const IndicatorDisplay = ({ indicator, show_doc }) => {
   const has_previous_year_actual_result = !_.isNull(
     indicator.previous_year_actual_result
   );
-  const dp_docs = get_result_doc_keys("dp");
-  const drr_docs = get_result_doc_keys("drr");
   const should_display_new_status =
-    _.indexOf(dp_docs, indicator.doc) > 0 ||
-    _.indexOf(drr_docs, indicator.doc) > 0;
+    _.indexOf(docs_in_time_order, indicator.doc) > 0;
   return (
     <div className="indicator-item">
       <dl className="dl-horizontal indicator-item__dl">
